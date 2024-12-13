@@ -9,7 +9,7 @@ if (!variable_global_exists("state")) {
     state = player_state.idle;
 }
 
-var moveSpeed = 5; // Bewegungsgeschwindigkeit
+var moveSpeed = 2; // Bewegungsgeschwindigkeit
 
 // Bewegung prüfen
 if (keyboard_check(vk_left)) {
@@ -41,9 +41,7 @@ switch (state) {
     case player_state.idle:
         // Nur setzen, wenn nötig
         if (sprite_index != adventurer_idle) {
-            sprite_index = adventurer_idle; // Setze Idle-Animation
-           
-         
+            sprite_index = adventurer_idle; // Setze Idle-Animation		   
         }
         break;
 
@@ -51,7 +49,6 @@ switch (state) {
         // Nur setzen, wenn nötig
         if (sprite_index != adventurer_run) {
             sprite_index = adventurer_run; // Setze Lauf-Animation
-          
         }
         break;
 }
