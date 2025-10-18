@@ -1,4 +1,4 @@
-if (instance_exists(ObjectPlayer)) {
+ if (instance_exists(ObjectPlayer)) {
     // Spielerposition abrufen
     var target_x = ObjectPlayer.x;
     var target_y = ObjectPlayer.y;
@@ -17,3 +17,20 @@ if (hp <= 0) {
     instance_destroy();
 }
 
+// === Sanfte Abstoßung von anderen Monstern ===
+var separation_strength = 0.5;  // Stärke des Zurückstoßens (je kleiner, desto weicher)
+var min_distance = 40;          // Ab wann sie sich abstoßen (in Pixel)
+
+with (ObjectMonster) {
+    if (id != other.id) {
+        var dx = other.x - x;
+        var dy = other.y - y;
+        var dist = point_distance(other.x, other.y, x, y);
+
+        if (dist < min_distance && dist > 0) {
+            var push = (min_distance - dist) / min_distance * separation_strength;
+            other.x += dx / dist * push;
+            other.y += dy / dist * push;
+        }
+    }
+}

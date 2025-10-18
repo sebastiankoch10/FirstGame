@@ -1,4 +1,6 @@
 /// @description Initialisierung des Controllers
+// ObjectController: Create
+global._ui_hover_index = -1;
 
 // Startzeit initialisieren
 if (!variable_global_exists("start_time")) {

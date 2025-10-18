@@ -1,32 +1,45 @@
-/// @description Hier Beschreibung einfügen
-// Sie können Ihren Code in diesem Editor schreiben
-/// Draw GUI Event
+/// ObjectOverlay: Draw GUI
 
-// Setze Schrift und Ausrichtung
-draw_set_font(-1); // Standard-Schriftart
-draw_set_halign(fa_left); // Links ausrichten
-draw_set_color(c_white);  // Weiße Schriftfarbe
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);
 
-// GUI-Breite und -Höhe abrufen
-var gui_width = display_get_gui_width();
-var gui_height = display_get_gui_height();
+var x0 = 16;
+var y0 = 16;
+var gx = x0; // GUI-X (nicht "x")
+var gy = y0; // GUI-Y (nicht "y")
 
-// Zeit anzeigen
-var elapsed_time = (current_time - global.start_time) div 1000;
-draw_text(10, 10, "Time: " + string(elapsed_time) + "s");
+// HUD: Coins & Level
+var coins         = (variable_global_exists("coins"))         ? global.coins         : 0;
+var coins_needed  = (variable_global_exists("coins_needed"))  ? global.coins_needed  : 0;
+var current_level = (variable_global_exists("current_level")) ? global.current_level : 1;
 
-// Level anzeigen
-draw_text(10, 30, "Level: " + string(global.level));
+draw_text(gx, gy, "Level: " + string(current_level));     gy += 18;
+draw_text(gx, gy, "Coins: " + string(coins) + " / " + string(coins_needed)); gy += 24;
 
-// Münzen anzeigen
-draw_text(10, 50, "Coins: " + string(global.coins));
+// Aktive Spells
+draw_text(gx, gy, "Active Spells:"); gy += 18;
+if (is_undefined(global.active_spells)) global.active_spells = [];
 
-// Gesammelte Items anzeigen (Beispiel für eine Liste)
-var items_display = "Items: ";
-for (var i = 0; i < array_length(global.items); i++) {
-    items_display += global.items[i] + ", ";
+for (var i = 0; i < array_length(global.active_spells); i++) {
+    var spell_entry = global.active_spells[i];
+    if (!is_struct(spell_entry)) continue;
+
+    var lvl = (variable_struct_exists(spell_entry, "level")) ? spell_entry.level : 1;
+    draw_text(gx, gy, string(i+1) + ". " + string(spell_entry.name) + " (" + string(lvl) + "/9)");
+    gy += 16;
 }
-draw_text(10, 70, items_display);
 
-// Debugging
+gy += 10;
 
+// Passive Spells
+draw_text(gx, gy, "Passive Spells:"); gy += 18;
+if (is_undefined(global.passive_spells)) global.passive_spells = [];
+
+for (var j = 0; j < array_length(global.passive_spells); j++) {
+    var spell_entry_p = global.passive_spells[j];
+    if (!is_struct(spell_entry_p)) continue;
+
+    var lvlp = (variable_struct_exists(spell_entry_p, "level")) ? spell_entry_p.level : 1;
+    draw_text(gx, gy, string(j+1) + ". " + string(spell_entry_p.name) + " (" + string(lvlp) + "/9)");
+    gy += 16;
+}
