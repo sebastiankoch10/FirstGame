@@ -105,6 +105,7 @@ function boss_cleanup(_owner,_keep_actors=false) {
 function boss_reward_once(_b) {
     if(!instance_exists(_b) || _b.boss_completed) return false;
     _b.boss_completed=true;global.run_boss_kills++;
+    talent_on_boss_defeated(is_struct(_b.boss_data) && _b.boss_data.main);equipment_boss_drop(_b);
     fg_sfx("boss_defeated");
     if(global.round_active && !global.game_over) fg_music_set("level");
     boss_cleanup(_b.id);

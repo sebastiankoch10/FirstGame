@@ -67,6 +67,7 @@ function hud_draw() {
     draw_text(ui.slots_x+6*(ui.size+ui.gap)+4,ui.active_y+8,"AUTO");
     draw_text(ui.slots_x+6*(ui.size+ui.gap)+4,ui.passive_y+8,"PASSIV");
     boss_hud_draw(12,34,w-24);
+    talent_hud_draw();
     hud_minimap();
     if(is_struct(hovered)) spell_tooltip(name_to_spell_id(hovered.name),hovered.level,12,94,min(420,w-24),ui.passive_y-12,false);
     draw_set_alpha(1); draw_set_color(c_white); draw_set_halign(fa_left); draw_set_valign(fa_top);

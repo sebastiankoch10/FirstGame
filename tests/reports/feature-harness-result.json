@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "checks": 129.0,
+  "failures": [],
+  "metrics": {
+    "Ranger_particles_peak": 43.0,
+    "Sword_particles_peak": 35.0,
+    "Mage_particles_peak": 34.0
+  },
+  "exit_code": 0,
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\feature\\20261124-070316",
+  "exceptions": [],
+  "captures": [
+    "character-Mage.png",
+    "character-Ranger.png",
+    "character-Sword.png",
+    "world-loot-Mage.png",
+    "world-loot-Ranger.png",
+    "world-loot-Sword.png",
+    "world-vfx-Mage.png",
+    "world-vfx-Ranger.png",
+    "world-vfx-Sword.png"
+  ],
+  "test_type": "native Windows VM, injected input; not manual play"
+}

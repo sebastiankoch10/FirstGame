@@ -20,6 +20,7 @@ function spell_build_complete() {
 function progression_try_level() {
     if(global.game_paused || global.game_over || global.round_seconds<global.next_levelup_time || spell_build_complete() || global.coins<global.coins_needed)return false;
     global.coins-=global.coins_needed;global.current_level++;global.coins_needed=progression_cost(global.current_level);
+    talent_on_level(global.current_level);
     fg_sfx("level_up");handle_chest_selection("levelup");return true;
 }
 function spell_v2_init() {global.spell_fields=[];global.spell_bursts=[];global.spell_links=[];global.spell_trace_id=0;}
@@ -56,6 +57,7 @@ function spell_fx_burst(_x,_y,_radius,_element,_duration=.4) {
     if(array_length(global.spell_bursts)>=64)array_delete(global.spell_bursts,0,1);
     array_push(global.spell_bursts,{x:_x,y:_y,radius:_radius,element:_element,age:0,duration:_duration});
     light_pulse(_x,_y,min(280,_radius*1.7),spell_element_color(_element),.65,min(.3,_duration));
+    spell_vfx_burst(_x,_y,_radius,_element);
 }
 function spell_element_color(_element) {
     var colors=[make_color_rgb(242,213,145),make_color_rgb(255,137,44),make_color_rgb(108,225,255),make_color_rgb(143,197,255),make_color_rgb(206,118,255),make_color_rgb(213,174,101),make_color_rgb(116,239,153),make_color_rgb(255,218,108)];
@@ -201,6 +203,7 @@ function spell_v2_draw() {
     }
     for(var i=0;i<array_length(global.spell_bursts);i++){var e=global.spell_bursts[i];spell_fx_draw(e.x,e.y,e.radius,e.element,e.age/e.duration,1);}
     draw_set_alpha(1);draw_set_color(c_white);
+    spell_vfx_draw();
 }
 function spell_fx_draw(_x,_y,_radius,_element,_progress,_alpha) {
     var row=_element==0 || _element==7 ? 4 : clamp(_element-1,0,5),spr=asset_get_index("spr_v2_fx_"+string(row));

@@ -1,6 +1,7 @@
 fg_audio_tick(max(0,delta_time/1000000));
 boss_test_pending_start();
 boss_test_tick(max(0,delta_time/1000000));
+if(talent_menu_step()) return; // character screen (talents + equipment) owns the frame while open
 /// Step Event for ObjectController
 
 // Escape oeffnet/verlaesst die normale Pause; Auswahl-Menues haben Vorrang.
@@ -120,7 +121,7 @@ if(global.game_paused || global.game_over) return;
 hud_step(simulation_dt);
 effects_step();
 feedback_step(simulation_dt);weather_step(simulation_dt);
-spell_v2_step(simulation_dt);
+spell_v2_step(simulation_dt);equipment_step(simulation_dt);spell_vfx_step(simulation_dt);
 class_effects_step(simulation_dt);
 chain_visual_step(simulation_dt);
 

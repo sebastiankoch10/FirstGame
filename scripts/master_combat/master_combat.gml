@@ -3,7 +3,12 @@ function master_sword_start(_target) {
     sword_combo_active=true;sword_combo_clock=0;sword_combo_event=0;
     sword_combo_direction=point_direction(x,y,_target.x,_target.y);
     weapon_cooldown=max(24,ceil(68/(1+weapon_haste)));
-    global.sword_combo_metrics.chains++;master_sword_step();
+    global.sword_combo_metrics.chains++;
+    // Talent "Sturmangriff": a chain started shortly after a dodge roll is empowered once.
+    sword_charge_mult=1;
+    if(variable_instance_exists(id,"sword_charge_until") && global.round_seconds<=sword_charge_until && talent_stat("sword_charge")>0){sword_charge_mult=1+talent_stat("sword_charge");sword_charge_until=-1;}
+    sword_whirl_chain=talent_stat("sword_whirl")>0 && global.sword_combo_metrics.chains mod 4==0;
+    master_sword_step();
 }
 function master_sword_step() {
     var timings=[0,4,16,22,34,42,56];
@@ -23,6 +28,15 @@ function master_sword_step() {
             hit.owner=id;hit.direction=sword_combo_direction;hit.combo_stage=stage;
             hit.damage=max(1,floor(round(weapon.damage+player_power*weapon.power_scale)*multipliers[stage-1]+.5));
             hit.hit_radius=(stage==3 ? 130 : 116)*spell_area;hit.hit_half_angle=stage==3 ? 70 : 58;
+            // Talents and equipment (all neutral at rank 0 / without gear).
+            var gear=variable_instance_exists(id,"weapon_damage_mult") ? weapon_damage_mult : 1,charge=variable_instance_exists(id,"sword_charge_mult") ? sword_charge_mult : 1;
+            hit.damage=max(1,round(hit.damage*gear*(1+talent_stat("sword_dmg_pct"))*charge));
+            hit.hit_radius*=1+talent_stat("sword_reach_pct");
+            if(stage==3) {
+                if(variable_instance_exists(id,"sword_whirl_chain") && sword_whirl_chain){hit.hit_half_angle=180;hit.hit_radius*=1.08;light_pulse(x,y-12,220,make_color_rgb(255,214,140),.8,.25);}
+                if(talent_stat("sword_wave")>0)class_fx_add("sword_wave",x,y-10,hit.damage*talent_stat("sword_wave"),95*spell_area,.42);
+                if(talent_stat("sword_leech")>0 && array_length(spell_targets(x,y-10,hit.hit_radius))>0 && hp>0){var before=hp;hp=min(max_hp,hp+talent_stat("sword_leech"));if(hp>before)light_pulse(x,y-20,90,make_color_rgb(120,255,150),.5,.2);}
+            }
             hit.lifetime=10;hit.total_lifetime=10;
             global.sword_combo_metrics.swings++;if(stage==3)global.sword_combo_metrics.finishers++;
             fg_sfx("sword_swing");with(hit)event_perform(ev_step,0);

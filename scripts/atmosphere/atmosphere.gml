@@ -6,7 +6,7 @@ function atmosphere_init() {
 }
 function light_pulse(_x,_y,_radius,_color,_strength=1,_duration=0.22) {
     if(!variable_global_exists("light_pulses")) global.light_pulses=[];
-    if(array_length(global.light_pulses)>=24) array_delete(global.light_pulses,0,1);
+    if(array_length(global.light_pulses)>=40) array_delete(global.light_pulses,0,1);
     array_push(global.light_pulses,{x:_x,y:_y,radius:_radius,color:_color,strength:_strength,life:_duration,total:_duration});
 }
 function atmosphere_step(_dt) {
@@ -45,6 +45,7 @@ function atmosphere_draw() {
     atmosphere_source(ObjectPlayer.x,ObjectPlayer.y-18,180,make_color_rgb(167,181,183),0.60,r);
     if(room==Room1)master_scenery_lights(r);
     else level_world_lights(r);
+    equipment_lights(r);spell_vfx_lights(r);
     for(var i=0;i<array_length(global.light_pulses);i++) {
         var p=global.light_pulses[i];atmosphere_source(p.x,p.y,p.radius,p.color,p.strength*p.life/p.total,r);
     }

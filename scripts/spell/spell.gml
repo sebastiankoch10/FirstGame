@@ -133,6 +133,7 @@ function spell_projectile_step() {
         if(x<0 || y<0 || x>room_width || y>room_height){ds_list_destroy(hits);instance_destroy();return;}
     }
     ds_list_destroy(hits);lifetime--;if(lifetime<=0)instance_destroy();depth=-y;
+    spell_vfx_trail(x,y,direction,spell_id==SPELL.FIREBALL ? "fire" : (spell_id==SPELL.ICEBALL ? "ice" : (spell_id==0 ? projectile_kind : "arcane")));
 }
 
 function spell_ui_layout() {

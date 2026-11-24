@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"spell_vfx",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"spell_vfx",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -16,7 +16,8 @@ function movement_step(_pl,_dt,_moving,_direction,_move_amount,_jump_press,_dodg
     if(_pl.motion_state==player_motion_state.grounded && _pl.dodge_timer<=0 && _pl.mobility_cooldown<=0) {
         if(_dodge_press && _pl.dodge_cooldown<=0) {
             _pl.dodge_direction=_moving ? _direction : _pl.facing_direction;
-            _pl.dodge_timer=cfg.dodge_duration;_pl.dodge_elapsed=0;_pl.dodge_cooldown=cfg.dodge_cooldown;fg_sfx("dodge");
+            _pl.dodge_timer=cfg.dodge_duration;_pl.dodge_elapsed=0;_pl.dodge_cooldown=max(.6,cfg.dodge_cooldown-talent_stat("dodge_cd")-equipment_stat("dodge_cd"));fg_sfx("dodge");
+            _pl.sword_charge_until=global.round_seconds+1.5+cfg.dodge_duration;
         } else if(_jump_press) {
             _pl.jump_direction=_moving ? _direction : _pl.facing_direction;
             _pl.motion_state=player_motion_state.rising;_pl.jump_time=0;_pl.jump_second_used=false;started=true;fg_sfx("jump");
@@ -91,7 +92,8 @@ function format_round_time(_seconds) {
 
 function ui_modal_draw() {
  shader_reset();gpu_set_texfilter(false);gpu_set_blendmode(bm_normal);draw_set_alpha(1);draw_set_font(-1);draw_set_halign(fa_left);draw_set_valign(fa_top);
- if(!global.game_paused)return;
+ if(!global.game_paused){feedback_toast_draw();return;}
+ if(variable_global_exists("talent_menu_active") && global.talent_menu_active){talent_menu_draw();return;}
  if(global.game_over || global.normal_pause_active){round_menu_draw();return;}
  if(global.chest_collected || global.levelup_active)spell_choices_draw();
 }
@@ -165,6 +167,7 @@ function hud_minimap() {
     var size=100,xx=display_get_gui_width()-size-14,yy=display_get_gui_height()-size-36;
     draw_set_alpha(0.26);draw_set_color(make_color_rgb(18,30,33));draw_rectangle(xx,yy,xx+size,yy+size,false);
     if(level_generated())level_minimap_draw(xx,yy,size);
+    equipment_minimap_draw(xx,yy,size);
     draw_set_alpha(0.65);draw_set_color(make_color_rgb(164,183,171));draw_rectangle(xx,yy,xx+size,yy+size,true);
     var r=combat_view_rect();
     draw_set_alpha(0.45);draw_set_color(make_color_rgb(179,200,194));

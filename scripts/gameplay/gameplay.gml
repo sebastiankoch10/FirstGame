@@ -26,6 +26,7 @@ function player_combat_init() {
     mobility_cooldown=0; motion_protected=false;
     mouse_move_armed=false; menu_input_guard=1;
     weapon_haste=0; extra_projectiles=0; passive_hp_bonus=0;
+    weapon_damage_mult=1;weapon_range_mult=1;extra_hp_bonus=0;sword_charge_until=-1;sword_charge_mult=1;sword_whirl_chain=false;last_stand_until=-1;
     __base_max_hp=max_hp;
     health_visible_time=0;last_damage_taken=0;
     jump_time=0;jump_second_used=false;dive_time=0;dive_start_height=0;dodge_elapsed=0;
@@ -90,6 +91,7 @@ function player_receive_damage(_pl,_amount,_height="ground") {
     if(variable_global_exists("boss_test") && global.boss_test.active && global.boss_test.invulnerable)return false;
     if(global.game_paused || global.game_over || !instance_exists(_pl) || _pl.hp<=0 || _amount<=0) return false;
     if(player_protected_from(_pl,_height)) return false;
+    if(variable_instance_exists(_pl,"last_stand_until") && global.round_seconds<_pl.last_stand_until) return false;
     var original=_amount;_amount=max(1,_amount-_pl.armor_flat);
     run_stats_get(SPELL.ARMOR).blocked+=max(0,min(_pl.hp,original)-min(_pl.hp,_amount));
     if(!variable_instance_exists(_pl,"hud_hp_trail")) _pl.hud_hp_trail=_pl.hp;
@@ -101,6 +103,7 @@ function player_receive_damage(_pl,_amount,_height="ground") {
     fg_sfx("player_hit");
     _pl.hud_damage_hold=0.25; _pl.hud_hit_flash=0.2;
     // Ordinary hits do not grant global invulnerability; attackers own their cooldown.
+    if(_pl.hp<=0 && talent_last_stand(_pl)) return true;
     if(_pl.hp<=0) {_pl.death_time=current_time;fg_audio_stop_effects(); fg_sfx("game_over"); fg_music_set("none"); global.game_over=true; global.game_paused=true; global._pause_index=0;}
     return true;
 }
@@ -243,7 +246,7 @@ function menu_activate(_choice) {
 function round_menu_labels() {
     if (global.game_over) return ["Neustart","Zurueck zum Hauptmenue"];
     if (global.settings_active) return ["Vollbild: Ein/Aus","Gesamtlautstaerke","Musik","Effekte","Ton im Hintergrund abspielen","Zurueck zur Runde","Zurueck zum Titelbildschirm"];
-    return ["Weiter","Neues Spiel","Einstellungen","Zurueck zum Titelbildschirm","Beenden"];
+    return ["Weiter","Talente & Ausruestung","Neues Spiel","Einstellungen","Zurueck zum Titelbildschirm","Beenden"];
 }
 function round_menu_activate(_choice) {
     fg_sfx("ui_click");
@@ -260,6 +263,7 @@ function round_menu_activate(_choice) {
         instance_activate_all(); global.game_paused=false; global.normal_pause_active=false; global.pause_initialized=false;
         if (instance_exists(ObjectPlayer)) ObjectPlayer.mouse_move_armed=false; ObjectPlayer.menu_input_guard=1;
     } else if (action=="Einstellungen") {global.settings_active=true; global._pause_index=0;}
+    else if (string_pos("Talente",action)==1) {global.game_paused=false; global.normal_pause_active=false; global.pause_initialized=false; talent_menu_open();}
     else if (action=="Neustart" || action=="Neues Spiel") {fg_sfx("game_start"); instance_activate_all(); reset_round(); room_restart();}
     else if(action=="Beenden") game_end();
     else round_end_to_title();

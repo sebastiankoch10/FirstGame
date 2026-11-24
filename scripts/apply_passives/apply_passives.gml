@@ -22,6 +22,7 @@ function apply_passives(_pl) {
  var before=_pl.hp;_pl.hp=min(_pl.max_hp,_pl.hp+max(0,bonus-previous));
  if(_pl.hp>before){run_stats_heal(SPELL.VITALITY,_pl.hp-before);run_stats_cast(SPELL.VITALITY);}
  _pl.passive_hp_bonus=bonus;
+ talent_equipment_apply(_pl); // talent trees and equipment add on top of the rebuilt spell values
 }
 function spell_passive_step(_dt) {
  var pl=ObjectPlayer;pl.regen_clock+=_dt;

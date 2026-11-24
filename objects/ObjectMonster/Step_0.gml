@@ -30,6 +30,7 @@ if (hp <= 0) {
     global.run_kills++;
     fg_sfx("enemy_death");
     instance_create_layer(x, y, "Instances", ObjectCoin);
+    equipment_enemy_drop(x,y);
     // Magnet orbs are exclusively boss rewards.
     instance_destroy();
     exit;
