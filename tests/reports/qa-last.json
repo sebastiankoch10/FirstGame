@@ -1,0 +1,21 @@
+{
+ "date": "2026-11-24 19:31",
+ "commit": "de2f471d",
+ "tier": 1,
+ "dirty": true,
+ "results": [
+  {
+   "suite": "static",
+   "status": "PASS",
+   "seconds": 82,
+   "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-static.log"
+  },
+  {
+   "suite": "classes",
+   "status": "PASS",
+   "cached": true,
+   "checks": 150.0,
+   "detail": "wiederverwendet vom 2026-11-24 19:30 (Eingaben unveraendert)"
+  }
+ ]
+}

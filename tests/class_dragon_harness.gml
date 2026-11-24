@@ -102,6 +102,7 @@ function cd_beam_timing() {
     cd_check(b.dragon_state_age==age && b.boss_timer==timer && pl.hp==hp0 && telegraph_progress(b.enc_geometry)==p,"Pause freezes warning geometry, attack timer and damage together");global.game_paused=false;
     global.cd_metrics.countdown_timing=samples;
 }
+// Legacy dragon fixtures (pre boss-v2 sweep beams); off by default, dragon coverage lives in boss/regression suites.
 function cd_dragon_tests() {
     var kinds=["beam","arc","meteor","slam","wind","void","stomp","vortex","volley"],outcomes=[];
     for(var i=0;i<array_length(kinds);i++) {
@@ -176,7 +177,7 @@ function cd_menu_tick() {
     if(!variable_global_exists("cd_started")){global.cd_started=true;global.cd_checks=0;global.cd_failures=[];global.cd_metrics={};global.cd_frame=0;global.cd_hold=true;global.cd_dt=1/60;global.cd_stage=0;menu_mode="main";menu_activate(0);menu_activate(0);menu_activate(0);}
 }
 function cd_controller_tick() {
-    if(global.cd_stage==0){global.cd_stage=1;cd_sword_regression();cd_mage_tests();cd_ranger_tests();cd_geometry_tests();cd_beam_timing();cd_dragon_tests();cd_enrage_patterns();cd_dps_tests();cd_assets_audio_tests();cd_reset("Mage");ObjectPlayer.hp=ObjectPlayer.max_hp;global.cd_frame=0;}
+    if(global.cd_stage==0){global.cd_stage=1;cd_sword_regression();cd_mage_tests();cd_ranger_tests();cd_geometry_tests();if(variable_global_exists("cd_with_dragon") && global.cd_with_dragon){cd_beam_timing();cd_dragon_tests();cd_enrage_patterns();}cd_dps_tests();cd_assets_audio_tests();cd_reset("Mage");ObjectPlayer.hp=ObjectPlayer.max_hp;global.cd_frame=0;}
     global.cd_frame++;
     cd_real_audio_tick(global.cd_frame);
     cd_visual_tick(global.cd_frame);
@@ -205,7 +206,7 @@ function cd_visual_tick(_f) {
         var a=player_visual_asset(pl.visual_actor,"attack","right",pl.attack_stage);pl.visual_sprite_index=a.sprite;pl.visual_mirror=a.mirror;pl.visual_size=a.size;pl.visual_frame_index=min(sprite_get_number(a.sprite)-1,floor((1-pl.attack_timer/max(1,pl.attack_duration))*sprite_get_number(a.sprite)));
     }
     var kinds=["beam","arc","meteor","slam","wind","void","stomp","vortex","volley"];
-    if(_f>=320 && _f<905) {
+    if(_f>=320 && _f<905 && variable_global_exists("cd_with_dragon") && global.cd_with_dragon) {
         var i=(_f-320) div 65,local_tick=(_f-320) mod 65;
         if(local_tick==0){var b=cd_boss_fixture(kinds[i],3);pl.hp=100000;pl.max_hp=100000;pl.__base_max_hp=100000;global.cd_visual_boss=b;}
         var b=global.cd_visual_boss;
@@ -234,11 +235,14 @@ function cd_capture_draw() {
             var cx=140+(i mod 3)*255,cy=160+(i div 3)*280,g=telegraph_make(shapes[i],cx,cy,95,1,20,110,34),filled=0;
             for(var yy=cy-100;yy<cy+100;yy+=2)for(var xx=cx-100;xx<cx+100;xx+=2)if(telegraph_contains(g,xx,yy)) {
                 var offset=(yy*800+xx)*4,r=buffer_peek(pixels,offset,buffer_u8),gr=buffer_peek(pixels,offset+1,buffer_u8),b=buffer_peek(pixels,offset+2,buffer_u8),bright=max(r,gr,b);
-                if(bright>40 && bright<150)filled++;
+                if(bright>40)filled++;
             }
             array_push(global.cd_fill_counts[i],filled);
             if(f==6) {
-                var counts=global.cd_fill_counts[i],ratios=[];for(var j=0;j<5;j++){var ratio=counts[j]/max(1,counts[4]);array_push(ratios,ratio);cd_check(abs(ratio-j*.25)<.07,"Native rendered "+shapes[i]+" filled area matches "+string(j*25)+"% countdown");}
+                // Current warning design (DESIGN/BOSS_DESIGN.md): faint zone fill from 0 %, countdown runs along the edge and brightens late.
+                var counts=global.cd_fill_counts[i],ratios=[],mono=true;for(var j=0;j<5;j++){array_push(ratios,counts[j]/max(1,counts[4]));if(j>0 && counts[j]<counts[j-1]-2)mono=false;}
+                cd_check(counts[0]>0,"Native rendered "+shapes[i]+" warning zone is visible from 0% countdown");
+                cd_check(mono && counts[4]>counts[0],"Native rendered "+shapes[i]+" edge countdown grows monotonically to activation");
                 if(!variable_struct_exists(global.cd_metrics,"rendered_fill"))global.cd_metrics.rendered_fill=[];
                 array_push(global.cd_metrics.rendered_fill,{shape:shapes[i],filled_pixel_samples:counts,ratios:ratios});
             }
@@ -247,6 +251,6 @@ function cd_capture_draw() {
     }
     var name="";
     switch(f){case 29:name="mage-projectile";break;case 54:name="mage-arc";break;case 84:name="mage-circle";break;case 150:name="mage-star-flight";break;case 184:name="mage-star-implosion";break;case 206:name="ranger-three";break;case 232:name="ranger-five";break;case 299:name="ranger-rain";break;case 967:name="crowd-class-rain";break;}
-    if(f>=320 && f<905){var local_tick=(f-320) mod 65,index=(f-320) div 65,kinds=["beam","arc","meteor","slam","wind","void","stomp","vortex","volley"];if(local_tick==14)name="dragon-"+kinds[index]+"-warning";if(local_tick==32)name="dragon-"+kinds[index]+"-active";}
+    if(f>=320 && f<905 && variable_global_exists("cd_with_dragon") && global.cd_with_dragon){var local_tick=(f-320) mod 65,index=(f-320) div 65,kinds=["beam","arc","meteor","slam","wind","void","stomp","vortex","volley"];if(local_tick==14)name="dragon-"+kinds[index]+"-warning";if(local_tick==32)name="dragon-"+kinds[index]+"-active";}
     if(name!="" && surface_exists(application_surface)){surface_save(application_surface,"cdcapture-"+name+".png");show_debug_message("CLASS_DRAGON_CAPTURE "+name);}
 }

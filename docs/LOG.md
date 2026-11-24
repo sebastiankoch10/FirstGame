@@ -4,6 +4,11 @@ updated: 2026-11-24
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-24 · Claude · QA-Agent modernisiert (Meilenstein 1)
+- Neu `tests/tools/qa.py`: Stufen 0–4 aus dem Diff, Suiten-Auswahl je System, PASS-Cache über Eingabe-Hash, Einzeilen-Ausgabe.
+- `.codex/agents/qa.toml` aktualisiert, `.claude/agents/qa.md` neu. Suite `classes` repariert (baut außerhalb, Drachen-Altteil optional, Warnflächen-Check aktuell): PASS 150.
+- 6 Alias-Runner entfernt; `MCP_TIMEOUT=60000` in `.claude/settings.json`. Details: [[Tests & QA]].
+
 ### 2026-11-24 · Claude · Token-Regeln für Claude und Codex
 - `AGENTS.md`: neuer Abschnitt „Synchron bleiben und Token sparen“ (Lesereihenfolge, Lese-Sperrliste, Tests je Änderung, Schreibpflichten a–f, Commit pro Aufgabe).
 - Architekturteil auf einen Verweis auf `docs/Systeme/` gekürzt; der Levelindex steht jetzt in [[Level & Welten]]. Einstiegs-Prompt für Codex an den Nutzer übergeben.

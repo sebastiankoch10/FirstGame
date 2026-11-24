@@ -1,4 +1,5 @@
-"""Fresh isolated native VM tests for authored class cycles and countdown dragon encounters."""
+"""Fresh isolated native VM tests for authored class cycles and countdown dragon encounters.
+Builds outside the project in %LOCALAPPDATA%/FirstGame-Tests/classes/<stamp>; the copy and EXE are deleted afterwards."""
 from pathlib import Path
 import json,os,re,shutil,subprocess,sys,time
 ROOT=Path(__file__).resolve().parents[2]
@@ -8,7 +9,12 @@ from gms_helpers.runner import GameMakerRunner
 from gms_helpers.gamemaker_machine_lock import gamemaker_machine_operation
 def write(p,s):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(s,encoding='utf-8')
 def main():
- work=ROOT/'output/class-dragon-smoke'/time.strftime('%Y%m%d-%H%M%S');project=work/'project';project.mkdir(parents=True)
+ work=Path(os.environ['LOCALAPPDATA'])/'FirstGame-Tests'/'classes'/time.strftime('%Y%m%d-%H%M%S')
+ try:run(work)
+ finally:
+  for n in ('project','build','cache','temp'):shutil.rmtree(work/n,ignore_errors=True)
+def run(work):
+ _unused=Path(os.environ['LOCALAPPDATA'])/'FirstGame-Tests'/'classes'/time.strftime('%Y%m%d-%H%M%S');project=work/'project';project.mkdir(parents=True)
  for name in ('objects','scripts','sprites','sounds','tilesets','rooms','options'):shutil.copytree(ROOT/name,project/name)
  yyp=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'));yyp['name']=yyp['%Name']='FirstGameClassDragonSmoke';write(project/'FirstGameClassDragonSmoke.yyp',dumps(yyp))
  p=project/'options/main/options_main.yy';d=loads(p.read_text(encoding='utf-8'));d['option_gameguid']='8dab69de-9a58-4144-a259-78948fb4caf6';write(p,dumps(d))
@@ -47,7 +53,7 @@ def main():
   if save.is_dir():
    for p in save.rglob('cdcapture-*.png'):
     if p.stat().st_mtime>=started:shutil.copyfile(p,work/p.name.removeprefix('cdcapture-'))
- result.update(exit_code=code,logs=str(work.relative_to(ROOT)),artifact=str(exe.relative_to(ROOT)),rendered=[p.name for p in work.glob('*.png')]);result['passed']=result['passed'] and code==0
+ result.update(exit_code=code,logs=str(work),rendered=[p.name for p in work.glob('*.png')]);result['passed']=result['passed'] and code==0
  write(ROOT/'tests/reports/class-dragon-native.json',json.dumps(result,indent=2)+'\n')
  print(json.dumps({k:result[k] for k in ['passed','checks','failures','logs','rendered']},indent=2),flush=True)
  if not result['passed']:raise RuntimeError('Native class/dragon assertions failed')

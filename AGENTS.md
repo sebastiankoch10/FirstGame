@@ -48,13 +48,14 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 
 - **Starten (Nutzer):** `FirstGame.yyp` in GameMaker öffnen und F5 drücken. Keine EXE oder ZIP als Lieferung.
 - **Kompilieren:** `python tests/tools/levels/compile_check.py` (Igor, Windows VM). Ein erfolgreicher Build ist kein Gameplay-Nachweis.
-- **Native Tests** (bauen jeweils eine Kopie mit injiziertem Test-GML):
+- **Native Tests:** Jede Suite baut eine eigene Kopie mit injiziertem Test-GML. Normalerweise über `tests/tools/qa.py` starten, siehe unten.
   - `python QA/tools/run_qa_regression.py`: 811 Prüfungen aus der Codex-Zeit
   - `python tests/tools/run_level_smoke.py`: 3 Level, 166 Prüfungen
   - `python tests/tools/run_native_harness.py feature`: Talente, Ausrüstung und Effekte, 129 Prüfungen
   - `python tests/tools/run_native_harness.py boss`: Bossmuster, Ausweich-Orakel, Kiting und Aufholattacken, 141 Prüfungen
-  - `python QA/tools/validate_project.py`: statische Ressourcenprüfung
-  - `python QA/tools/audit_visual_preservation.py`: prüft, dass keine PNG verändert wurde
+  - `python tests/tools/run_class_dragon_smoke.py`: Startwaffen und Kombos, 150 Prüfungen
+  - `python QA/tools/validate_project.py`: statische Ressourcenprüfung, 1–3 min
+  - `python QA/tools/audit_visual_preservation.py`: prüft, dass keine PNG gegenüber der QA-Baseline verändert wurde
 - **Simulationen:**
   - Vollständige Runs: `QA/tools/run_cohort.py --reuse <Artefakt> …`
   - Isolierte Bosskämpfe: `QA/tools/run_boss_mc.py`
@@ -109,13 +110,16 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
   - Testläufe nur über die PASS/FAIL-Zahlen auswerten.
   - Gerade geschriebene Dateien nicht erneut lesen.
 
-### Testen: nur passend zur Änderung
-| Geändert | Test |
-|---|---|
-| Talente, Ausrüstung, Effekte | `run_native_harness.py feature` |
-| Bosse | `run_native_harness.py boss` und `run_qa_regression.py` |
-| Level, Gegner, Spawns | `run_level_smoke.py` |
-| Klassen, Zauber, übergreifend, vor einem Meilenstein | alle vier |
+### Testen: nur passend zur Änderung, über den Stufen-Runner
+- `python tests/tools/qa.py --plan` zeigt die Stufe und die passenden Suiten für den aktuellen Diff; `python tests/tools/qa.py` führt sie aus.
+- **Stufen:**
+  - 1: kleiner Fix, die eine passende Suite
+  - 2: Systemänderung, die betroffenen Suiten
+  - 3: Architektur, alle Suiten
+  - 4: Simulationen, **nur auf Auftrag**
+- **Cache:** Unveränderte Build-Eingaben nutzen das letzte PASS wieder.
+- **Suiten:** `regression`, `feature`, `boss`, `level`, `classes`, `visual`. Details in `docs/Systeme/Tests & QA.md`.
+- **QA-Prüfer** (nur lesend): `.codex/agents/qa.toml` (Codex) und `.claude/agents/qa.md` (Claude), mit demselben Inhalt.
 
 ### Schreiben: am Ende jeder abgeschlossenen Aufgabe, nicht nach jeder Nachricht
 - a) `docs/HANDOFF.md` **überschreiben**, höchstens 40 Zeilen:
