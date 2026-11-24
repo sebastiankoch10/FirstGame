@@ -155,6 +155,7 @@ Bossidentitäten respektieren:
 | Boss | Fähigkeit | Neue Choreografie |
 |---|---|---|
 | Drache | 1 Feuerstrahl | Schwenkstrahl 64° (ab Phase 2: 84°), Richtung wechselt. Ab Phase 3 zusätzlich 4 Meteore um den Spieler (Strahl plus Boden). |
+| Drache | 2 Feuerbogen | Ab Phase 3 zusätzlich wechselnde lange Feuerkegel (900 px): drei Kegel bei −70°/0°/+70°, danach die Lücken bei ±35°. |
 | Drache | 3 Magmaeruption | Ab Phase 2: Magma-Schachbrett, danach das invertierte Brett (1,2 s versetzt, überlappende Warnung). |
 | Drache | 4 Meteoritenregen | Ab Phase 2: Einschlagkette vom Drachen durch die Spielerposition hindurch (12 × 92 px). Ab Phase 3 zusätzlich außen/innen. |
 | Hexen | 3 Meteor-/Eisregen | Ab Phase 2: Feuer auf dem Schachbrett, danach Eis auf den zuvor sicheren Feldern. |

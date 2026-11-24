@@ -113,7 +113,10 @@ Arbeitsweise: Änderungen direkt im Projekt (F5 in GameMaker). Tests bauen isoli
 | `python tests/tools/run_native_harness.py feature` – Talente/Ausrüstung/VFX/Charakterbildschirm für alle 3 Klassen, nativ | **PASS 129/129** (24.11. 07:03, erneut nach Bossarbeit PASS 129/129) |
 | `python tests/tools/run_native_harness.py boss` – alle 9 Fähigkeiten × Phase 1/3 × 3 Bosse mit Orakel-Ausweich-Bot; Kiting 560 px je Boss mit der Rotation | **PASS 135/135**. Kein Frame ohne erreichbare sichere Position. Strahlreichweite 2.600 px, Schlammwelle 1.500 px. Kiter auf 560 px werden von 15–19 Gefahren je Boss erreicht. Natürliche Aufholattacken: Drache 2, Behemoth 2; die Hexen folgen per Formation (Ø 476 px). Ihre Aufholattacke lief erzwungen fehlerfrei. |
 | `python QA/tools/validate_project.py` (statisch) | PASS: 1.380 Ressourcen, keine neuen Fehler (3 bekannte alte verwaiste Kollisionsdateien) |
-| `python QA/tools/run_qa_regression.py` (811 Codex-Prüfungen) | 1. Lauf: 810/811. Fehlgeschlagen ist „Dragon beam causes real active HP loss“. Die Testvorlage stellte den Spieler auf die alte, starre Strahlrichtung. Sie wurde angepasst: Spieler auf der angekündigten Startkante des Schwenkstrahls, Treffer im ersten Aktivierungsframe. Ergebnis des 2. Laufs: siehe unten. |
+| `python QA/tools/run_qa_regression.py` (811 Codex-Prüfungen) | 1. Lauf: 810/811. Fehlgeschlagen ist „Dragon beam causes real active HP loss“. Die Testvorlage stellte den Spieler auf die alte, starre Strahlrichtung. Sie wurde angepasst: Spieler auf der angekündigten Startkante des Schwenkstrahls, Treffer im ersten Aktivierungsframe. **2. Lauf: PASS 811/811** (24.11. 07:53) |
+| `python tests/tools/run_level_smoke.py` (3 Level, Menü bis Neustart) | **PASS 166/166**. Framezeit bei 80 Gegnern: Ø 17,6 / 17,1 / 17,1 ms (vorher Ø ≈ 17 ms, also unverändert). Einzelne Spitzen bis 321 ms wie zuvor. |
+| QA-Validierungsprobe neues Artefakt (`run_native_mc.py --mode validation`) | PASS (600 Ticks, keine Fehler, Talent- und Ausrüstungsfelder im Export) |
+| Simulationskohorte `QA/data/v3-cohort-a`: 12 Worker × 30 Runs je Klasse = 1.080 Runs Ziel | gestartet 24.11. 08:02. Ergebnis: Abschnitt 5 und `QA/V3_SIMULATION_REPORT.md` |
 | Menschlicher Spieltest | NOT RUN |
 
 **Bekannte Grenzen der Bosstests:**
