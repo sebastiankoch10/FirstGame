@@ -48,10 +48,10 @@ function talent_definitions() {
         {id:"r_tips",tree:"Ranger",name:"Scharfe Spitzen",icon:"icon_v2_108",col:0,row:0,max:3,req:[],fx:{ranger_dmg_pct:.08},desc:"Pfeile +{ranger_dmg_pct}% Schaden."},
         {id:"r_string",tree:"Ranger",name:"Schnelle Sehne",icon:"icon_v2_204",col:1,row:0,max:3,req:[],fx:{haste:.04},desc:"+{haste}% Angriffstempo der Startwaffe."},
         {id:"r_eye",tree:"Ranger",name:"Falkenauge",icon:"icon_v2_208",col:2,row:0,max:2,req:[],fx:{range_pct:.1},desc:"+{range_pct}% Reichweite der Startwaffe."},
-        {id:"r_volley",tree:"Ranger",name:"Breite Salve",icon:"icon_v2_105",col:0,row:1,max:2,req:[["r_string",2]],fx:{ranger_volley:1},desc:"Drei- und Fuenf-Pfeil-Salven: +{ranger_volley} Pfeil."},
-        {id:"r_rain",tree:"Ranger",name:"Dichter Hagel",icon:"icon_v2_113",col:2,row:1,max:2,req:[["r_tips",2]],fx:{ranger_rain:1},desc:"Pfeilhagel: +{ranger_rain} Einschlagwelle."},
-        {id:"r_hunt",tree:"Ranger",name:"Jaegerinstinkt",icon:"icon_v2_203",col:1,row:1,max:3,req:[["r_eye",1]],fx:{move_pct:.03},desc:"+{move_pct}% Bewegungstempo."},
-        {id:"r_crit",tree:"Ranger",name:"Praezision",icon:"icon_v2_207",col:1,row:2,max:3,req:[["r_hunt",1]],fx:{crit:.03},desc:"+{crit}% kritische Trefferchance."},
+        {id:"r_volley",tree:"Ranger",name:"Breite Salve",icon:"icon_v2_105",col:1,row:1,max:2,req:[["r_string",2]],fx:{ranger_volley:1},desc:"Drei- und Fuenf-Pfeil-Salven: +{ranger_volley} Pfeil."},
+        {id:"r_rain",tree:"Ranger",name:"Dichter Hagel",icon:"icon_v2_113",col:0,row:1,max:2,req:[["r_tips",2]],fx:{ranger_rain:1},desc:"Pfeilhagel: +{ranger_rain} Einschlagwelle."},
+        {id:"r_hunt",tree:"Ranger",name:"Jaegerinstinkt",icon:"icon_v2_203",col:2,row:1,max:3,req:[["r_eye",1]],fx:{move_pct:.03},desc:"+{move_pct}% Bewegungstempo."},
+        {id:"r_crit",tree:"Ranger",name:"Praezision",icon:"icon_v2_207",col:2,row:2,max:3,req:[["r_hunt",1]],fx:{crit:.03},desc:"+{crit}% kritische Trefferchance."},
         {id:"r_quiver",tree:"Ranger",name:"Sturmkoecher",icon:"icon_v2_116",col:1,row:3,max:1,req:[["r_volley",1],["r_rain",1]],fx:{ranger_quiver:1},desc:"Jeder Pfeilhagel feuert zusaetzlich einen Faecher aus sieben Pfeilen."}
     ];
     return defs;

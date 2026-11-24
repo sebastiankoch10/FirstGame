@@ -1,5 +1,11 @@
 # Reproduzierbare FirstGame-QA
 
+> **Hinweis vom 24.11.2026:** Auf Wunsch des Projektinhabers liegen keine ausführbaren Test-Builds mehr im Projektordner.
+> - Die alten Artefakte unter `output/native-mc-*` und `output/production-build` wurden entfernt; ihre Logs und Daten bleiben erhalten.
+> - `run_native_mc.py` legt neue Artefakte unter `%LOCALAPPDATA%\FirstGame-Tests\native-mc-<phase>\<stamp>` an. Für `--reuse` den dort ausgegebenen Pfad verwenden.
+> - `run_qa_regression.py` löscht seine Projektkopie nach dem Lauf.
+> - Die neue Kohorte v3 (Talente, Ausrüstung, Boss-Choreografie) steht in `QA/data/v3-cohort-a` mit der Auswertung `QA/tools/analyze_v3.py` (→ `QA/V3_SIMULATION_REPORT.md`).
+
 `QA_SUMMARY.md` beantwortet die 22 Abschlussfragen. `data/dataset-manifest.json` benennt die tatsächlich gezählten Dateien mit SHA256. Die Tabellen und Diagramme werden aus diesen nativen Rohdaten erzeugt; Validierungsproben, Kalibrierungen und vollständige Runs besitzen getrennte Zähler.
 
 ## Voraussetzungen und unveränderter Ausgangsstand
