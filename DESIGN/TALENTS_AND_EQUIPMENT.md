@@ -149,7 +149,7 @@ Die 12er-Kombo des Waldläufers bleibt ohne Talente exakt: 1, 1, 3, 1, 1, 1, 1, 
   - Miniboss: 1 Gegenstand, mindestens magisch
   - normale Gegner: 0,3 % (75 % gewöhnlich, 20 % magisch, 5 % selten)
 - **Aufnahme:**
-  - Man läuft darüber (34 px). Ein leerer Slot wird angelegt, sonst geht der Gegenstand in den Rucksack (8 Plätze). Ist der Rucksack voll, bleibt er liegen und es erscheint ein Hinweis.
+  - Man läuft darüber (34 px). Ein leerer Slot wird angelegt. Ist der Fund **klar besser** als das Angelegte (höhere Seltenheit oder mindestens 20 % höhere Wertsumme), wird er direkt angelegt und das alte Teil kommt in den Rucksack. Ein gewöhnliches altes Teil wird bei vollem Rucksack verworfen. Alles andere geht in den Rucksack (8 Plätze). Ist der voll, bleibt der Gegenstand liegen und es erscheint ein Hinweis.
   - Im Charakterbildschirm legt Linksklick an oder tauscht, Rechtsklick wirft weg. Der Tooltip vergleicht Wert für Wert mit dem angelegten Gegenstand.
 - **Darstellung:**
   - Drops mit Lichtsäule in Rarity-Farbe, eigener Lichtquelle und Punkt auf der Minimap

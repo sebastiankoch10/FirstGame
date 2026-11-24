@@ -133,8 +133,15 @@ function equipment_equip(_item) {
 }
 /// Pickup rule: empty slot -> equip, otherwise backpack. Returns false only if the backpack is full.
 function equipment_receive(_item) {
-    var name_col=equipment_rarity_color(_item.rarity);
-    if(!is_struct(global.equipment[$ _item.slot])){equipment_equip(_item);feedback_toast_add("Angelegt: "+_item.name,name_col);}
+    var name_col=equipment_rarity_color(_item.rarity),cur=global.equipment[$ _item.slot];
+    if(!is_struct(cur)){equipment_equip(_item);feedback_toast_add("Angelegt: "+_item.name,name_col);}
+    else if((_item.rarity>cur.rarity || equipment_score(_item)>=equipment_score(cur)*1.2) && (array_length(global.equipment_backpack)<equipment_config().backpack_size || cur.rarity==0)) {
+        // Clearly better (higher rarity or >= 20 % stronger): equip directly; the old piece goes to the backpack
+        // (a common piece is dropped when the backpack is full). Manual choice stays possible in the character screen.
+        global.equipment[$ _item.slot]=undefined;equipment_rebuild_cache();
+        if(array_length(global.equipment_backpack)<equipment_config().backpack_size)array_push(global.equipment_backpack,cur);
+        equipment_equip(_item);feedback_toast_add("Besser - angelegt: "+_item.name,name_col);
+    }
     else if(array_length(global.equipment_backpack)<equipment_config().backpack_size){array_push(global.equipment_backpack,_item);feedback_toast_add("Gefunden: "+_item.name+" (Rucksack, [T])",name_col);}
     else return false;
     global.equipment_found++;fg_sfx("chest_open");
