@@ -36,6 +36,27 @@ def spell_names():
     return SPELL_NAMES
 
 
+def mann_whitney(a, b):
+    import math
+    allv = sorted([(v, 0) for v in a] + [(v, 1) for v in b])
+    ranks = [0.0] * len(allv); i = 0; ties = 0.0
+    while i < len(allv):
+        j = i
+        while j + 1 < len(allv) and allv[j + 1][0] == allv[i][0]:
+            j += 1
+        r = (i + j) / 2 + 1
+        for k in range(i, j + 1):
+            ranks[k] = r
+        t = j - i + 1; ties += t ** 3 - t; i = j + 1
+    n1, n2 = len(a), len(b); r1 = sum(r for r, (v, g) in zip(ranks, allv) if g == 0)
+    u = r1 - n1 * (n1 + 1) / 2; mu = n1 * n2 / 2; n = n1 + n2
+    sigma = math.sqrt(n1 * n2 / 12 * ((n + 1) - ties / (n * (n - 1)))) if n > 1 else 0
+    if sigma == 0:
+        return 1.0
+    z = (abs(u - mu) - 0.5) / sigma
+    return max(0.0, min(1.0, math.erfc(z / math.sqrt(2))))
+
+
 def fmt(v, d=1):
     return '–' if v is None else (f'{v:,.{d}f}'.replace(',', ' ').replace('.', ',') if isinstance(v, (int, float)) else str(v))
 
@@ -45,6 +66,7 @@ def main():
     ap.add_argument('--runs', nargs='+', required=True)
     ap.add_argument('--out', type=Path, default=ROOT / 'QA/data/v3-analysis.json')
     ap.add_argument('--report', type=Path, default=ROOT / 'QA/V3_SIMULATION_REPORT.md')
+    ap.add_argument('--compare', nargs='*', default=[], help='Codex-era cohort files for a baseline comparison of survival times')
     args = ap.parse_args()
     paths = [Path(p) for pat in args.runs for p in glob.glob(pat)]
     raw = read(paths)
@@ -129,6 +151,20 @@ def main():
             t['threatened'] += bool(a.get('threatened')); t['avoided'] += bool(a.get('avoided_while_threatened'))
     out['boss_abilities'] = {k: dict(v, hit_fraction_threatened=((v['threatened'] - v['avoided']) / v['threatened']) if v['threatened'] else None,
                                      wilson95=wilson(v['threatened'] - v['avoided'], v['threatened']) if v['threatened'] else None) for k, v in acts.items()}
+    # ---- baseline comparison (Mann-Whitney U, normal approximation with tie correction)
+    comparison = []
+    if args.compare:
+        cpaths = [Path(p) for pat in args.compare for p in glob.glob(pat)]
+        base = [r for r in read(cpaths) if r.get('completed') and r.get('end_reason') in ('death', 'survived_1800_seconds_censored')]
+        for klass in ('Sword', 'Mage', 'Ranger'):
+            for persona in ('beginner', 'average', 'experienced'):
+                a_ = [r['seconds'] for r in base if r['class_name'] == klass and r['persona'] == persona]
+                b_ = [r['seconds'] for r in runs if r['class_name'] == klass and r['persona'] == persona]
+                if len(a_) < 3 or len(b_) < 3:
+                    continue
+                comparison.append(dict(class_name=klass, persona=persona, n_before=len(a_), n_after=len(b_), median_before=statistics.median(a_),
+                                       median_after=statistics.median(b_), mean_before=statistics.mean(a_), mean_after=statistics.mean(b_), p_mann_whitney=mann_whitney(a_, b_)))
+    out['baseline_comparison'] = comparison
     args.out.write_text(json.dumps(out, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
     # ---- markdown report
     L = ['# FirstGame – Simulationen v3 (Talente, Ausrüstung, Boss-Choreografie)', '',
@@ -149,6 +185,12 @@ def main():
     L += ['', '## Bossfähigkeiten (Aktivierungen in den Runs)', '', '| Boss:Fähigkeit | Aktivierungen | bedroht | ausgewichen (bedroht) | Treffer | Schaden | tödlich |', '|---|---|---|---|---|---|---|']
     for k, v in sorted(acts.items()):
         L.append(f"| {k} | {v['activations']} | {v['threatened']} | {v['avoided']} | {v['hits']} | {fmt(v['damage'],0)} | {v['fatal']} |")
+    if comparison:
+        L += ['', '## Vergleich mit der Codex-Baseline (Überlebenszeit, Bots)', '',
+              'Mann-Whitney-U (zweiseitig, Normalapproximation). Andere Seeds und ein anderer Code-Stand: Ein p-Wert misst nur, ob sich die beobachteten Verteilungen unterscheiden, nicht die Ursache.', '',
+              '| Klasse/Persona | n vorher | n nachher | Median vorher s | Median nachher s | Mittel vorher | Mittel nachher | p |', '|---|---|---|---|---|---|---|---|']
+        for c in comparison:
+            L.append(f"| {c['class_name']}/{c['persona']} | {c['n_before']} | {c['n_after']} | {fmt(c['median_before'])} | {fmt(c['median_after'])} | {fmt(c['mean_before'])} | {fmt(c['mean_after'])} | {fmt(c['p_mann_whitney'],3)} |")
     L += ['', '## Todesursachen (letzte Schadensquelle)', '']
     for k, v in deaths.most_common():
         L.append(f'- {k}: {v}')

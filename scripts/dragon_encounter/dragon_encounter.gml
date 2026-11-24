@@ -67,8 +67,8 @@ function dragon_encounter_begin(_b,_kind) {
         if(_kind=="arc" && phase>=3) {
             // Alternating long fire cones: three cones first, then the gaps between them (reaches far kiters, 900 px).
             var base=_b.dragon_angle;
-            for(var k=-1;k<=1;k++)bv2_sector(_b,"dragon_cone",mouth.x,mouth.y,900,base+k*70,34,c.warning+.25,.45,c.damage,"ground");
-            for(var k=-1;k<=1;k+=2)bv2_sector(_b,"dragon_cone",mouth.x,mouth.y,900,base+k*35,34,c.warning+1.35,.45,c.damage,"ground");
+            for(var k=-1;k<=1;k++)bv2_sector(_b,"dragon_cone",mouth.x,mouth.y,900,base+k*70,34,c.warning+.5,.45,c.damage,"ground");
+            for(var k=-1;k<=1;k+=2)bv2_sector(_b,"dragon_cone",mouth.x,mouth.y,900,base+k*35,34,c.warning+1.6,.45,c.damage,"ground"); // ground: also jumpable
         }
         if(_kind=="stomp" && phase>=2) {
             // Magma checkerboard, then the inverted board: stand on the dark cells, then switch.
