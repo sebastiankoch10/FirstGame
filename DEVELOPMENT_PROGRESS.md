@@ -130,6 +130,7 @@ Arbeitsweise: Änderungen direkt im Projekt (F5 in GameMaker). Tests bauen isoli
 | `python tests/tools/run_level_smoke.py` (3 Level, Menü bis Neustart) | **PASS 166/166**. Framezeit bei 80 Gegnern: Ø 17,6 / 17,1 / 17,1 ms (vorher Ø ≈ 17 ms, also unverändert). Einzelne Spitzen bis 321 ms wie zuvor. |
 | QA-Validierungsprobe neues Artefakt (`run_native_mc.py --mode validation`) | PASS (600 Ticks, keine Fehler, Talent- und Ausrüstungsfelder im Export) |
 | Simulationskohorte `QA/data/v3-cohort-a`: 12 Worker × 30 Runs je Klasse = 1.080 Runs Ziel | gestartet 24.11. 08:02. Ergebnis: Abschnitt 5 und `QA/V3_SIMULATION_REPORT.md` |
+| **Abschlusstests auf dem endgültigen Code (24.11. abends)** | Regression **PASS 811/811**; Boss-Mechanik **PASS 141/141** (inkl. Eskalationsregel: Minute 5 ohne, Minute 15 mit Musterfeldern); Feature **PASS 129/129**; Level **PASS 166/166** im Einzellauf. Ein vorheriger Lauf parallel zu zwei anderen Echtzeit-Tests ergab 165/166 („L2 construct lands a telegraphed hit (0)“), ein Timing-Ausreißer unter Last, der im Einzellauf nicht auftrat. |
 | Menschlicher Spieltest | NOT RUN |
 
 **Bekannte Grenzen der Bosstests:**
