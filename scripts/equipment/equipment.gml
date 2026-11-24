@@ -312,3 +312,17 @@ function equipment_tooltip_draw(_L) {
     draw_text_transformed(xx+12,yy+32,equipment_rarity_name(item.rarity)+" | "+equipment_slot_label(item.slot)+" | Gegenstandsstufe "+string(item.ilvl),.8,.8,0);
     draw_set_color(c_white);draw_text_ext(xx+12,yy+56,body,18,tw);
 }
+/// Compact HUD strip above the spell slots: equipped items with rarity frames, empty slots dimmed.
+function equipment_hud_draw(_x,_y) {
+    if(!variable_global_exists("equipment"))return;
+    var s=equipment_slots(),cell=22,spr=asset_get_index("spr_eq_icons");
+    for(var i=0;i<6;i++) {
+        var it=global.equipment[$ s[i]],xx=_x+i*(cell+3);
+        draw_set_alpha(.7);draw_set_color(make_color_rgb(12,17,25));draw_rectangle(xx,_y,xx+cell,_y+cell,false);draw_set_alpha(1);
+        draw_set_color(is_struct(it) ? equipment_rarity_color(it.rarity) : make_color_rgb(52,62,76));draw_rectangle(xx,_y,xx+cell,_y+cell,true);
+        if(is_struct(it) && sprite_exists(spr))draw_sprite_stretched(spr,equipment_icon_frame(it.slot),xx+1,_y+1,cell-2,cell-2);
+        else if(sprite_exists(spr))draw_sprite_stretched_ext(spr,equipment_icon_frame(s[i]),xx+3,_y+3,cell-6,cell-6,c_black,.45);
+    }
+    if(array_length(global.equipment_backpack)>0){draw_set_color(make_color_rgb(200,214,226));draw_text_transformed(_x+6*(cell+3)+4,_y+4,"+"+string(array_length(global.equipment_backpack))+" [T]",.75,.75,0);}
+    draw_set_color(c_white);
+}

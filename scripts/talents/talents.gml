@@ -25,14 +25,14 @@ function talent_definitions() {
         {id:"g_focus",tree:"general",name:"Konzentration",icon:"icon_v2_210",col:2,row:1,max:3,req:[["g_scav",1]],fx:{cdr_pct:.02},desc:"Zauber-Abklingzeiten -{cdr_pct}%."},
         {id:"g_mend",tree:"general",name:"Lebenskraft",icon:"icon_v2_215",col:0,row:2,max:2,req:[["g_hide",1]],fx:{regen:.15},desc:"+{regen} Leben pro Sekunde."},
         {id:"g_luck",tree:"general",name:"Glueckstreffer",icon:"icon_v2_207",col:2,row:2,max:3,req:[["g_focus",2]],fx:{crit:.02},desc:"+{crit}% kritische Trefferchance."},
-        {id:"g_last",tree:"general",name:"Ueberlebenswille",icon:"icon_fg_heart",col:1,row:3,max:1,req:[["g_mend",1],["g_breath",2]],fx:{last_stand:1},desc:"Einmal pro Run: Ein toedlicher Treffer laesst dich mit 1 Leben zurueck, danach 1,5 s unverwundbar."},
+        {id:"g_last",tree:"general",name:"Ueberlebenswille",icon:"icon_v2_118",col:1,row:3,max:1,req:[["g_mend",1],["g_breath",2]],fx:{last_stand:1},desc:"Einmal pro Run: Ein toedlicher Treffer laesst dich mit 1 Leben zurueck, danach 1,5 s unverwundbar."},
         // ---------- Schwertkaempfer: Nahkampf, Bewegung, kontrollierte Flaechen ----------
-        {id:"s_edge",tree:"Sword",name:"Klingenschaerfe",icon:"icon_fg_sword",col:0,row:0,max:3,req:[],fx:{sword_dmg_pct:.06},desc:"Schwertkette +{sword_dmg_pct}% Schaden."},
+        {id:"s_edge",tree:"Sword",name:"Klingenschaerfe",icon:"icon_v2_116",col:0,row:0,max:3,req:[],fx:{sword_dmg_pct:.06},desc:"Schwertkette +{sword_dmg_pct}% Schaden."},
         {id:"s_reach",tree:"Sword",name:"Weiter Schwung",icon:"icon_v2_209",col:1,row:0,max:3,req:[],fx:{sword_reach_pct:.06},desc:"Schwerthiebe +{sword_reach_pct}% Reichweite."},
         {id:"s_rhythm",tree:"Sword",name:"Kampfrhythmus",icon:"icon_v2_204",col:2,row:0,max:3,req:[],fx:{haste:.04},desc:"+{haste}% Angriffstempo der Startwaffe."},
         {id:"s_wave",tree:"Sword",name:"Wellenfinale",icon:"icon_v2_104",col:0,row:1,max:2,req:[["s_edge",2]],fx:{sword_wave:.35},desc:"Der dritte Hieb loest eine Druckwelle (Radius 95) mit {sword_wave}% Schaden aus."},
         {id:"s_charge",tree:"Sword",name:"Sturmangriff",icon:"icon_v2_203",col:2,row:1,max:2,req:[["s_rhythm",2]],fx:{sword_charge:.2},desc:"Nach einer Ausweichrolle: naechste Schwertkette innerhalb 1,5 s +{sword_charge}% Schaden."},
-        {id:"s_stance",tree:"Sword",name:"Eiserne Haltung",icon:"icon_fg_defense",col:1,row:1,max:2,req:[["s_reach",1]],fx:{armor:.5},desc:"+{armor} flache Ruestung."},
+        {id:"s_stance",tree:"Sword",name:"Eiserne Haltung",icon:"icon_v2_201",col:1,row:1,max:2,req:[["s_reach",1]],fx:{armor:.5},desc:"+{armor} flache Ruestung."},
         {id:"s_blood",tree:"Sword",name:"Blutrausch",icon:"icon_v2_106",col:0,row:2,max:2,req:[["s_wave",1]],fx:{sword_leech:2},desc:"Ein Finale, das mindestens einen Gegner erreicht, heilt {sword_leech} Leben."},
         {id:"s_whirl",tree:"Sword",name:"Klingensturm",icon:"icon_v2_109",col:1,row:3,max:1,req:[["s_wave",2],["s_charge",1]],fx:{sword_whirl:1},desc:"Jede vierte Schwertkette endet in einem Rundumhieb (360 Grad)."},
         // ---------- Zaubermeisterin: langsame, starke Kombos, grosse Effekte ----------
@@ -343,12 +343,25 @@ function talent_tooltip_draw(_L,_d) {
     draw_text_transformed(xx+12,yy+32,"Rang "+string(rank)+" / "+string(_d.max)+(array_length(_d.req)>=2 ? "  |  Meistertalent" : ""),.82,.82,0);
     draw_set_color(c_white);draw_text_ext(xx+12,yy+54,body,18,tw);
 }
+/// Deterministic point spending for automated bots (QA simulations): class tree first, then the general tree,
+/// always the first affordable node in definition order. Players use the character screen instead.
+function talent_bot_invest() {
+    var defs=talent_definitions(),guard=0;
+    while(global.talent_points>0 && guard<64) {
+        guard++;var done=false;
+        for(var pass=0;pass<2 && !done;pass++)for(var i=0;i<array_length(defs) && !done;i++) {
+            var d=defs[i];if((pass==0)==(d.tree=="general"))continue;
+            if(talent_block_reason(d.id)=="")done=talent_invest(d.id);
+        }
+        if(!done)break;
+    }
+}
 /// HUD hint while talent points are unspent.
 function talent_hud_draw() {
     if(!variable_global_exists("talent_points") || global.talent_points<=0)return;
     var gh=display_get_gui_height(),pulse=.55+.45*sin(current_time/180);
     draw_set_halign(fa_left);draw_set_valign(fa_top);
     draw_set_color(merge_color(make_color_rgb(242,206,120),c_white,pulse*.3+(global.talent_flash>0 ? .3 : 0)));
-    draw_text(70,gh-31,"Talentpunkte: "+string(global.talent_points)+"  [T]");
+    draw_text(96,gh-31,"Talentpunkte: "+string(global.talent_points)+"  [T]");
     draw_set_color(c_white);
 }

@@ -115,7 +115,8 @@ function boss_navigation_step(_b,_dt) {
     }
     return false;
 }
-function boss_navigation_config() {static cfg={distance:850,delay:2.5,cooldown:12,arrival:210};return cfg;}
+// Technical fallback only: ordinary distances are handled by the bosses' own announced catch-up moves (boss_choreo).
+function boss_navigation_config() {static cfg={distance:850,delay:6,cooldown:12,arrival:210};return cfg;}
 function boss_direction_draw() {
     if(!instance_exists(global.active_boss) || !instance_exists(ObjectPlayer)) return;
     var b=global.active_boss,p=ObjectPlayer,desired=point_direction(p.x,p.y,b.x,b.y);

@@ -30,6 +30,21 @@ function telegraph_arc(_g,_from,_span,_fill,_alpha,_color) {
 }
 function telegraph_draw(_g,_color) {
     var p=telegraph_progress(_g);telegraph_paint(_g,_color,.045,.18);
+    // Radial countdown along the zone edge (same clock as the hit): it closes exactly when the attack activates,
+    // and the edge brightens during the last 15 % as the short "now" cue.
+    var late=clamp((p-.85)/.15,0,1),edge_col=merge_color(_color,c_white,.35+.4*late),edge_alpha=.42+.4*late;
+    if(_g.shape=="line" || _g.shape=="rectangle") {
+        var nx=lengthdir_x(_g.width*.5,_g.angle+90),ny=lengthdir_y(_g.width*.5,_g.angle+90),len=_g.radius*p;
+        var ex=_g.x+lengthdir_x(len,_g.angle),ey=_g.y+lengthdir_y(len,_g.angle);
+        draw_set_color(edge_col);draw_set_alpha(edge_alpha);
+        draw_line_width(_g.x+nx,_g.y+ny,ex+nx,ey+ny,2);draw_line_width(_g.x-nx,_g.y-ny,ex-nx,ey-ny,2);
+    } else {
+        var span=_g.shape=="sector" ? _g.span : 360,start=_g.shape=="sector" ? _g.angle+span*.5 : 90;
+        telegraph_arc(_g,start,span*p,false,edge_alpha,edge_col);
+        var inner_g={x:_g.x,y:_g.y,radius:max(2,_g.radius-2),shape:"circle",inner:0};
+        telegraph_arc(inner_g,start,span*p,false,edge_alpha*.7,edge_col);
+    }
+    draw_set_alpha(1);
     var xx=_g.x,yy=_g.y;
     if(_g.shape=="line" || _g.shape=="rectangle"){xx+=lengthdir_x(_g.radius*.5,_g.angle);yy+=lengthdir_y(_g.radius*.5,_g.angle);}
     if(_g.shape=="sector"){xx+=lengthdir_x(_g.radius*.35,_g.angle);yy+=lengthdir_y(_g.radius*.35,_g.angle);}

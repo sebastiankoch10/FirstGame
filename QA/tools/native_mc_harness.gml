@@ -183,6 +183,7 @@ function qa_bot_step(_policy) {
     qa_bot_apply_plan();
 }
 function qa_resolve_choice() {
+    if(variable_global_exists("talent_points") && global.talent_points>0 && !global.game_over)talent_bot_invest(); // bots spend talent points deterministically
     if(global.game_over || (!global.levelup_active && !global.chest_collected))return;
     var opts=global.spell_options,index=0,best=-1000000;
     for(var i=0;i<array_length(opts);i++) {
@@ -258,7 +259,8 @@ function qa_export(_complete,_reason) {
         completed:_complete,end_reason:_reason,simulation_version:"native-fixed60-v2",policy_version:global.qa_policy_version,ticks:global.qa_ticks,seconds:global.round_seconds,level:global.current_level,kills:global.run_kills,bosses_defeated:global.run_boss_kills,
         hp:ObjectPlayer.hp,max_hp:ObjectPlayer.max_hp,min_hp:global.qa_min_hp,xp_earned:global.coin_xp_earned,coins:global.coins,active:global.active_spells,passive:global.passive_spells,
         offers_choices:global.qa_choices,boss_encounters:global.qa_bosses,run_stats:global.run_spell_stats,progression_samples:global.progression_samples,timecourse:global.qa_timecourse,
-        metrics:qa_metrics_export(),state_hash:qa_state_hash(),batch_size:global.qa_batch,logical_hz:60,native_room_speed:room_speed,
+        metrics:qa_metrics_export(),state_hash:qa_state_hash(),talent_ranks:variable_global_exists("talent_ranks") ? global.talent_ranks : {},talent_earned:variable_global_exists("talent_earned") ? global.talent_earned : 0,
+        equipment_found:variable_global_exists("equipment_found") ? global.equipment_found : 0,equipment_stats:variable_global_exists("equipment_cache") ? global.equipment_cache : {},batch_size:global.qa_batch,logical_hz:60,native_room_speed:room_speed,
         physical_scenery_count:array_length(global.master_collision_props),wall_seconds:(get_timer()-global.qa_run_wall)/1000000};
     show_debug_message("QA_MC_ROW "+json_stringify(row));
     var f=file_text_open_append(global.qa_checkpoint_file);file_text_write_string(f,json_stringify(row));file_text_writeln(f);file_text_close(f);

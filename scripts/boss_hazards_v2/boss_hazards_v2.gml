@@ -35,8 +35,9 @@ function bv2_hazards_step(_dt) {
         if(h.age>=h.warning && h.age<h.warning+h.active) {
             var p=clamp((h.age-h.warning)/max(.001,h.active),0,1);
             if(h.expand_from>=0 && h.expand_to>=0){var width=variable_struct_exists(h,"ring_width") ? h.ring_width : 40;h.g.radius=lerp(h.expand_from,h.expand_to,p);h.g.inner=max(0,h.g.radius-width);}
+            bc_hazard_update(h,p);
             if(variable_struct_exists(h,"wave_from_x")){var dist=p*h.wave_length;h.g.x=h.wave_from_x+lengthdir_x(dist,h.wave_angle);h.g.y=h.wave_from_y+lengthdir_y(dist,h.wave_angle);h.g.radius=h.wave_thickness;h.g.width=h.wave_width;h.g.angle=h.wave_angle;}
-            if(!h.activated){h.activated=true;light_pulse(h.g.x,h.g.y,min(360,h.g.radius*2),bv2_element_color(h.kind),.8,.2);}
+            if(!h.activated){h.activated=true;light_pulse(h.g.x,h.g.y,min(360,h.g.radius*2),bv2_element_color(h.kind),.8,.2);bc_hazard_activated(h);}
             if(instance_exists(ObjectPlayer) && (!h.hit_once || !h.hit) && h.age>=h.next_hit && bv2_hazard_hit(h,ObjectPlayer)) {
                 if(player_receive_damage(ObjectPlayer,h.damage,h.height)){h.hit=true;h.next_hit=h.age+h.interval;bv2_player_status(ObjectPlayer,h);}
             }
@@ -54,14 +55,14 @@ function bv2_status_step(_pl,_dt) {
 function bv2_element_color(_kind) {
     if(string_pos("ice",_kind)>0)return make_color_rgb(126,218,255);
     if(string_pos("swamp",_kind)>0)return make_color_rgb(168,220,65);
-    if(string_pos("link",_kind)>0 || string_pos("nova",_kind)>0)return make_color_rgb(213,146,249);
+    if(string_pos("link",_kind)>0 || string_pos("nova",_kind)>0 || string_pos("void",_kind)>0)return make_color_rgb(213,146,249);
     return make_color_rgb(255,141,76);
 }
 function bv2_fx(_kind,_p,_x,_y,_radius,_angle=0) {
     var swamp=string_pos("swamp",_kind)>0,row=0;
     var kinds=swamp ? ["spit","acid","roots","mushroom","stomp","brood","breath","wave","bloom"] : ["fire","ring","rain","link","spiral","cross","blast","flood","nova"];
     for(var i=0;i<array_length(kinds);i++)if(string_pos(kinds[i],_kind)>0)row=i;
-    if(_kind=="swamp_spores")row=3;if(_kind=="twins_burning_frost")row=6;if(_kind=="twins_meteor")row=2;
+    if(_kind=="swamp_spores")row=3;if(string_pos("emerge",_kind)>0)row=4;if(string_pos("closing",_kind)>0)row=1;if(_kind=="twins_burning_frost")row=6;if(_kind=="twins_meteor")row=2;
     var spr=asset_get_index((swamp ? "spr_bv2_swamp_fx_" : "spr_bv2_twins_fx_")+string(row));
     if(!sprite_exists(spr))return;
     draw_sprite_ext(spr,min(sprite_get_number(spr)-1,floor(clamp(_p,0,.999)*sprite_get_number(spr))),_x,_y,_radius*2/256,_radius*2/256,_angle,string_pos("ice",_kind)>0 ? make_color_rgb(150,218,255) : c_white,1);
@@ -70,9 +71,10 @@ function bv2_hazards_draw() {
     if(!variable_global_exists("bv2_hazards"))return;
     for(var i=0;i<array_length(global.bv2_hazards);i++) {
         var h=global.bv2_hazards[i],g=h.g,col=bv2_element_color(h.kind);
-        if(h.age<h.warning) {telegraph_draw(g,col);continue;}
+        if(h.age<h.warning) {if(!bc_hazard_telegraph(h,col))telegraph_draw(g,col);continue;}
         var age=h.age-h.warning;if(age>h.active+.25)continue;
         if(age<.08)telegraph_flash(g,col);
+        if(bc_hazard_active_draw(h,age,col)){draw_set_alpha(1);continue;}
         draw_set_alpha(clamp((h.active+.3-age)*3,0,1));
         if(g.shape=="line" || g.shape=="rectangle") {
             var xx=g.x+lengthdir_x(g.radius*.5,g.angle),yy=g.y+lengthdir_y(g.radius*.5,g.angle);

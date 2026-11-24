@@ -137,6 +137,50 @@ Bossidentitäten respektieren:
 - verbleibende Unfairness und technische Probleme
 - nur dokumentierte Balancing-Punkte
 
+## Umsetzungsstand (24.11.2026)
+
+**Technik:** `scripts/boss_choreo/boss_choreo.gml`. Alle Musterteile sind normale Gefahren aus Boss System 2.0. Warnung, Countdown-Zeiger, Aufleuchten und Treffer laufen über dieselbe Uhr des Besitzers (`v2_clock`), sodass Anzeige und Hitbox nicht auseinanderlaufen können. Der Drache treibt jetzt ebenfalls eine `v2_clock`. Der Schaden der Muster ist immer der bestehende Schaden der jeweiligen Fähigkeit. Es gibt keine neuen HP- oder Schadenswerte.
+
+**Musterbibliothek:**
+- Schachbrett und invertiertes Schachbrett (5×5 Felder à 118 px)
+- Streifen mit wechselnden Lücken
+- Quadranten (diagonaler Positionswechsel)
+- Innen/außen
+- Explosionskette
+- sich schließender Giftring
+- Schwenkstrahl mit 2.600 px Länge: Der ganze Fächer wird angekündigt, mit Startkante, Richtungspfeilen und Countdown-Zeiger.
+
+**Einbau in die bestehenden neun Fähigkeiten.** Die Freischaltung 3/6/9 ist unverändert. Ab Phase 2 bzw. 3 kommen komplexere Varianten hinzu:
+
+| Boss | Fähigkeit | Neue Choreografie |
+|---|---|---|
+| Drache | 1 Feuerstrahl | Schwenkstrahl 64° (ab Phase 2: 84°), Richtung wechselt. Ab Phase 3 zusätzlich 4 Meteore um den Spieler (Strahl plus Boden). |
+| Drache | 3 Magmaeruption | Ab Phase 2: Magma-Schachbrett, danach das invertierte Brett (1,2 s versetzt, überlappende Warnung). |
+| Drache | 4 Meteoritenregen | Ab Phase 2: Einschlagkette vom Drachen durch die Spielerposition hindurch (12 × 92 px). Ab Phase 3 zusätzlich außen/innen. |
+| Hexen | 3 Meteor-/Eisregen | Ab Phase 2: Feuer auf dem Schachbrett, danach Eis auf den zuvor sicheren Feldern. |
+| Hexen | 4 Verbindungsstrahl | Die Hexen kreisen gegenläufig um die angekündigte Spielerposition. Der Strahl zwischen ihnen überstreicht sie fortlaufend (38°/s, ab Phase 3 46°/s). |
+| Hexen | 6 Kreuzschlag | Beide Strahlen reichen 2.600 px weit durch den Zielpunkt. Ab Phase 3 vereist zusätzlich der Boden in Streifen. |
+| Hexen | 8 Zonenflut | Ab Phase 2: Feuer auf zwei gegenüberliegenden Quadranten, danach Eis auf den anderen beiden. |
+| Behemoth | 2 Säurepfützen | Ab Phase 2: Säurestreifen, dann die versetzten Streifen. Zwischen beiden liegen 0,7 s Lücke zum Spurwechsel. |
+| Behemoth | 3 Packende Wurzeln | Ab Phase 2: Wurzeln brechen nacheinander vom Behemoth bis über den Spieler hinaus hervor (10 × 95 px). Ab Phase 3 sind es zwei Linien. |
+| Behemoth | 5 Sumpfstampfer | Ab Phase 2: zwei Schockwellen mit Lücken; die zweite Lücke ist um 120° versetzt. |
+| Behemoth | 6 Sumpfbrut | Ab Phase 3: Ein Giftring schließt sich um den Behemoth. Der sichere Radius schrumpft von 640 auf 320 px; das verkleinert den Raum gegen Kiting. |
+| Behemoth | 7 Giftatem | Ab Phase 2: Der Atem schwenkt um 64°. |
+| Behemoth | 8 Sumpfwelle | Die Welle rollt 1.500 px weit statt 650 px. Man kann sie überspringen oder ihre Bahn verlassen. |
+
+**Seltene Aufholattacken** statt des technischen Teleports. Bedingung: mehr als 520 px Abstand für 3,5 s zwischen zwei Angriffen; danach mindestens 20 s Abklingzeit.
+- **Drache:** Sturzflug mit „leap“-Animation und Flughöhe. Die Landezone (170 px) ist 1,6 s vorher angekündigt.
+- **Behemoth:** Er versinkt 0,8 s lang und bricht dann an der angekündigten Stelle (190 px) hervor.
+- **Hexen:** Sie lösen sich in Wirbeln auf und formieren sich an zwei angekündigten Flankenpunkten neu, nie auf dem Spieler.
+- **Der Teleport** bleibt nur als Notfall bei mehr als 850 px außerhalb des Bildes. Seine Verzögerung steigt von 2,5 auf 6 s.
+
+**Unverändert, weil schon passend:**
+- Hexen-Nova (außen → innen → außen)
+- rotierende Feuer-/Eisringe mit Lücke
+- Drachen-Bodeneinschlag (springbar)
+- Projektilangriffe ohne Bodenwarnung (Grundsatz D)
+- Der Waldwächter (Miniboss) hat bereits einen eigenen automatischen Grundangriff (Einzelgeschoss alle 1,6 s), getrennt von seinen Spezialangriffen.
+
 ## Analysestand (23.11.2026, vor Umsetzung)
 
 Statische Code-Analyse, noch kein Laufzeittest:

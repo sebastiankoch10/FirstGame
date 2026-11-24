@@ -62,6 +62,7 @@ function dragon_death_step(_b,_dt) {
 }
 function dragon_animation(_b) {
     var action="idle",frame=0,age=_b.dragon_state_age;
+    if(variable_instance_exists(_b,"bc_catch") && is_struct(_b.bc_catch) && !_b.dragon_dying)return {action:"leap",frame:clamp(floor(_b.bc_catch.age/max(.01,_b.bc_catch.warning)*4),0,3),sprite:asset_get_index("spr_fg_dragonextra_leap")};
     if(!_b.dragon_dying && (_b.boss_state=="windup" || _b.boss_state=="active")) {
         var extra="",progress=_b.boss_state=="windup" ? age/max(.001,_b.enc_cfg.warning) : age/max(.001,_b.enc_cfg.active);
         switch(_b.boss_cast) {
@@ -89,6 +90,7 @@ function dragon_draw(_b) {
     var a=dragon_animation(_b),breath=sin(_b.dragon_clock*3.4),size=_b.visual_height/430;
     var sx=size*(1+breath*0.008),sy=size*(1+breath*0.012),alpha=_b.dragon_dying ? clamp((1.4-_b.dragon_state_age)*2,0,1) : 1;
     var lift=0;if(_b.boss_cast=="slam" && _b.boss_state=="windup")lift=sin(pi*clamp(_b.dragon_state_age/_b.enc_cfg.warning,0,1))*140;
+    if(variable_instance_exists(_b,"bc_lift"))lift=max(lift,_b.bc_lift);
     if(level_world_room())master_shadow_draw(_b.x,_b.y,100-lift*.25,25-lift*.08,.3);
     draw_sprite_ext(a.sprite,a.frame,_b.x,_b.y-lift,sx*_b.dragon_facing,sy,0,_b.hurt_flash_timer>0 ? make_color_rgb(255,208,180) : element_tint(_b),alpha);
     _b.dragon_anim=a.action;_b.dragon_frame=a.frame;draw_set_color(c_white);draw_set_alpha(1);

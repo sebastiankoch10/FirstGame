@@ -76,9 +76,9 @@ function class_effects_step(_dt) {
             class_weapon_area(f.x,f.y,f.radius,f.damage);f.ticks++;class_fx_burst(f.x,f.y,f.radius,2);
             if(talent_stat("mage_slow")>0){var slowed=spell_targets(f.x,f.y,f.radius);for(var j=0;j<array_length(slowed);j++){var e=slowed[j];e.slow_factor=min(e.slow_time>0 ? e.slow_factor : 1,.7);e.slow_time=max(e.slow_time,round(60*talent_stat("mage_slow")));}}
         }
-        if(f.kind=="sword_wave" && f.age>=.06 && f.ticks==0) {class_weapon_area(f.x,f.y,f.radius,f.damage);f.ticks++;light_pulse(f.x,f.y,f.radius*2,make_color_rgb(255,196,120),.7,.25);}
+        if(f.kind=="sword_wave" && f.age>=.06 && f.ticks==0) {class_weapon_area(f.x,f.y,f.radius,f.damage+0);f.ticks++;light_pulse(f.x,f.y,f.radius*2,make_color_rgb(255,196,120),.7,.25);}
         if(f.kind=="mage_star_nova") {
-            if(f.age>=1 && f.ticks==0){class_weapon_area(f.x,f.y,f.radius,f.damage);f.ticks++;class_fx_burst(f.x,f.y,f.radius,3);fg_sfx("mage_implosion");}
+            if(f.age>=1 && f.ticks==0){class_weapon_area(f.x,f.y,f.radius,f.damage+0);f.ticks++;class_fx_burst(f.x,f.y,f.radius,3);fg_sfx("mage_implosion");}
             if(f.ticks==1 && f.age<1.32){var pulled=spell_targets(f.x,f.y,f.radius*1.4);for(var j=0;j<array_length(pulled);j++){var e=pulled[j];if(boss_is_actor(e))continue;var ox=e.x,oy=e.y,a=point_direction(e.x,e.y-10,f.x,f.y),pull=min(240*_dt,point_distance(e.x,e.y-10,f.x,f.y));e.x+=lengthdir_x(pull,a);e.y+=lengthdir_y(pull,a);scenery_resolve(e,ox,oy);}}
             if(f.age>=1.32 && f.ticks==1){class_weapon_area(f.x,f.y,f.radius*.85,f.damage*.5);f.ticks++;class_fx_burst(f.x,f.y,f.radius*.85,3);fg_sfx("mage_implosion");}
         }

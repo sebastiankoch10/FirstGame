@@ -1,200 +1,198 @@
-// Deterministic boss/HUD/automatic-spell fixtures, appended only in the isolated copy.
-function bh_clear_hazards() {global.hostile_bullets=[]; global.boss_zones=[];}
-function bh_capture(_name) {
-    var surf=surface_create(800,600); surface_set_target(surf); draw_clear(make_color_rgb(21,32,36));
-    with(ObjectPlayer) event_perform(ev_draw,0);
-    with(ObjectMonster) event_perform(ev_draw,0);
-    with(ObjectBossMonster) event_perform(ev_draw,0);
-    boss_hazards_draw(); hud_draw(); surface_reset_target();
-    gp_capture(surf,_name); surface_free(surf);
+/// Native boss-mechanics checks (DESIGN/BOSS_DESIGN.md): forced abilities per boss and phase with an oracle
+/// "dodger" bot (does a reachable safe position exist?), plus a max-range kiting bot (does kiting still meet
+/// the mechanics, do catch-up moves happen?). Injected only into the copy built by run_native_harness.py boss.
+function gp_key_down(_key) {return false;}
+function gp_key_pressed(_key) {return false;}
+function gp_mouse_down(_button) {return false;}
+function gp_mouse_pressed(_button) {return false;}
+function gp_mouse_x() {return instance_exists(ObjectPlayer) ? ObjectPlayer.x+200 : 0;}
+function gp_mouse_y() {return instance_exists(ObjectPlayer) ? ObjectPlayer.y : 0;}
+function gp_gui_x(_device) {return -100;}
+function gp_gui_y(_device) {return -100;}
+function bh_show_error(_msg,_abort=false) {show_debug_message("BOSSMECH_EXCEPTION show_error "+string(_msg));throw string(_msg);}
+function bh_check(_ok,_msg) {
+    global.bh_checks++;
+    if(!_ok){global.bh_failed=true;array_push(global.bh_failures,_msg);show_debug_message("BOSSMECH FAIL "+_msg);}
+    else show_debug_message("BOSSMECH PASS "+_msg);
 }
-function bh_fixture() {
-    gp_clear_enemies(); bh_clear_hazards();
-    var pl=global.player; pl.x=300; pl.y=320; pl.motion_state=0; pl.dodge_timer=0; pl.invulnerable_timer=0;
-    pl.hp=pl.max_hp;
-    // Every active ability is triggered without any input in every protected motion state.
-    var ids=[101,102,103,104,105,106];
-    for(var motion=0;motion<6;motion++) {
-        gp_clear_enemies();
-        var target=instance_create_layer(pl.x+55,pl.y,"Instances",ObjectMonster); target.hp=100000;
-        pl.motion_state=motion<5 ? motion : 0; pl.dodge_timer=motion==5 ? 5 : 0;
-        pl.hp=pl.max_hp/3;
-        for(var i=0;i<6;i++) global.active_spells[i].cooldown_timer=0;
-        auto_spells_step();
-        for(var i=0;i<6;i++) gp_check(global.active_spells[i].cooldown_timer>0,"automatic spell "+string(ids[i])+" during motion "+string(motion));
-        gp_check(target.hp<100000,"automatic nova deals actual damage");
+function bh_init() {
+    if(variable_global_exists("bh_ready"))return;
+    global.bh_ready=true;global.bh_checks=0;global.bh_failed=false;global.bh_failures=[];global.bh_metrics={};global.bh_rows=[];
+    // runs: [boss, class, mode]
+    global.bh_runs=[["storm_warden","Mage","patterns"],["twins","Mage","patterns"],["behemoth","Mage","patterns"],
+        ["storm_warden","Ranger","kite"],["twins","Ranger","kite"],["behemoth","Ranger","kite"]];
+    global.bh_run=0;global.bh_stage=0;global.bh_frame=0;global.bh_case=0;global.bh_done=false;global.bh_shot="";global.bh_world_shot="";
+}
+function bh_menu_tick() {
+    bh_init();
+    if(global.bh_done){show_debug_message("BOSSMECH_RESULT "+json_stringify({passed:!global.bh_failed,checks:global.bh_checks,failures:global.bh_failures,metrics:global.bh_metrics,rows:global.bh_rows}));game_end();return;}
+    if(global.bh_stage!=0)return;
+    var r=global.bh_runs[global.bh_run];
+    global.bh_stage=1;global.bh_frame=0;global.bh_case=0;
+    boss_test_start(r[0],15,r[1],4242+global.bh_run,-1,false,1);
+}
+function bh_boss() {return instance_exists(global.active_boss) ? global.active_boss : noone;}
+function bh_center(_b) {
+    if(variable_instance_exists(_b,"v2_kind") && _b.v2_kind=="twins" && instance_exists(_b.v2_child))return {x:(_b.x+_b.v2_child.x)*.5,y:(_b.y+_b.v2_child.y)*.5};
+    return {x:_b.x,y:_b.y};
+}
+/// Per-frame list of hazards that matter within _horizon seconds, each with a bounding circle (cheap prefilter).
+function bh_relevant(_horizon) {
+    var out=[];if(!variable_global_exists("bv2_hazards"))return out;
+    for(var i=0;i<array_length(global.bv2_hazards);i++) {
+        var h=global.bv2_hazards[i];
+        if(h.age>=h.warning+h.active || h.warning-h.age>_horizon)continue;
+        var g=h.g,cx=g.x,cy=g.y,r=g.radius+16;
+        if(g.shape=="line" || g.shape=="rectangle"){cx=g.x+lengthdir_x(g.radius*.5,g.angle);cy=g.y+lengthdir_y(g.radius*.5,g.angle);r=sqrt(sqr(g.radius*.5)+sqr(g.width*.5))+16;}
+        if(variable_struct_exists(h,"sweep_from")){cx=g.x;cy=g.y;r=g.radius+40;}
+        if(variable_struct_exists(h,"expand_from"))r=max(r,h.expand_from+16);
+        array_push(out,{h:h,cx:cx,cy:cy,r:r});
     }
-    pl.motion_state=0; pl.dodge_timer=0; pl.hp=pl.max_hp; pl.invulnerable_timer=0;
-    gp_clear_enemies();
-    for(var i=0;i<6;i++) global.active_spells[i].cooldown_timer=0;
-    auto_spells_step();
-    for(var i=0;i<6;i++) gp_check(global.active_spells[i].cooldown_timer==0,"no wasteful casts without target/full HP");
-    var isolated=instance_create_layer(340,320,"Instances",ObjectMonster); isolated.hp=1000;
-    var group_a=instance_create_layer(480,320,"Instances",ObjectMonster); group_a.hp=1000;
-    var group_b=instance_create_layer(500,320,"Instances",ObjectMonster); group_b.hp=1000;
-    var group_c=instance_create_layer(520,320,"Instances",ObjectMonster); group_c.hp=1000;
-    var chosen=auto_spell_target(101,spell_values(101,9),pl);
-    gp_check(chosen!=isolated,"fireball prioritizes reachable group");
-    global.game_paused=true; auto_spells_step();
-    gp_check(instance_number(ObjectFireball)==0,"pause blocks automatic spells");
-    global.game_paused=false;
-    global.game_over=true; auto_spells_step();
-    gp_check(instance_number(ObjectFireball)==0,"game over blocks automatic spells"); global.game_over=false;
-    auto_spells_step();
-    var fire=global.active_spells[0];
-    var cd=fire.cooldown_timer; hotbar_tick_cooldowns();
-    gp_check(fire.cooldown_timer==cd-1,"independent cooldown advances");
-    fire.cooldown_timer=1; hotbar_tick_cooldowns();
-    gp_check(fire.cooldown_timer==0 && fire.ready_flash==12,"readiness pulse follows real cooldown completion");
-    gp_clear_enemies();
-    var hp_before=pl.hp;
-    gp_check(player_receive_damage(pl,25),"actual incoming damage accepted");
-    gp_check(abs(pl.hp-(hp_before-25*(1-pl.damage_reduction)))<0.001,"live player HP and reduction");
-    gp_check(pl.hud_hp_trail>=hp_before && pl.hud_damage_hold>0,"health trail lags damage while live HP is immediate");
-    bh_capture("hud");
-    var fractions=[0,0.25,0.5,0.75,1,0];
-    for(var i=0;i<6;i++) global.active_spells[i].cooldown_timer=global.active_spells[i].cooldown*fractions[i];
-    bh_capture("cooldowns"); pl.invulnerable_timer=0; pl.hp=pl.max_hp;
-    // Approved sprite asset resolution is checked across all actions and directions.
-    var actions=["idle","walk","run","attack","jump","fall","dive","slide","hurt","death"];
-    var directions=["right","left","up","down"];
-    for(var a=0;a<10;a++) for(var d=0;d<4;d++) {
-        var v=player_visual_asset("warrior",actions[a],directions[d]);
-        gp_check(sprite_exists(v.sprite) && sprite_get_xoffset(v.sprite)==32 && sprite_get_yoffset(v.sprite)==51,"warrior approved sprite/origin "+actions[a]+" "+directions[d]);
-        if(d==1) gp_check(v.sprite==player_visual_asset("warrior",actions[a],"right").sprite && v.mirror==-1,"left uses canonical mirrored right "+actions[a]);
+    return out;
+}
+/// Oracle danger test of a world point against the prefiltered hazards (12 px player margin on circles/rings).
+function bh_point_unsafe_list(_list,_px,_py) {
+    var probe={x:_px,y:_py};
+    for(var i=0;i<array_length(_list);i++) {
+        var e=_list[i];if(point_distance(e.cx,e.cy,_px,_py-10)>e.r)continue;
+        var h=e.h;
+        if(variable_struct_exists(h,"sweep_from")) {
+            var d=point_distance(h.g.x,h.g.y,_px,_py-10);
+            var a=point_direction(h.g.x,h.g.y,_px,_py-10),lo=min(h.sweep_from,h.sweep_to),hi=max(h.sweep_from,h.sweep_to);
+            var halfspan=(hi-lo)*.5+(h.g.shape=="sector" ? h.g.span*.5 : 0)+radtodeg(arctan2(h.g.width*.5+14,max(30,d)));
+            if(abs(angle_difference(a,(lo+hi)*.5))<=halfspan)return true;
+            continue;
+        }
+        if(bv2_hazard_hit(h,probe))return true;
+        if(h.g.shape!="line" && h.g.shape!="rectangle")for(var k=0;k<4;k++)if(bv2_hazard_hit(h,{x:_px+lengthdir_x(12,k*90),y:_py+lengthdir_y(12,k*90)}))return true;
     }
-    var sheet=surface_create(800,600); surface_set_target(sheet); draw_clear(make_color_rgb(21,32,36));
-    draw_set_color(c_white); draw_set_halign(fa_center); draw_set_valign(fa_top);
-    for(var d=0;d<4;d++) draw_text(220+d*145,8,directions[d]);
-    for(var a=0;a<10;a++) {
-        draw_set_halign(fa_left); draw_text(12,38+a*55,actions[a]);
-        for(var d=0;d<4;d++) {
-            var v=player_visual_asset("warrior",actions[a],directions[d]);
-            draw_sprite_ext(v.sprite,0,220+d*145,80+a*55,1.4*v.size*v.mirror,1.4*v.size,0,c_white,1);
+    return false;
+}
+function bh_point_unsafe(_px,_py,_horizon) {return bh_point_unsafe_list(bh_relevant(_horizon),_px,_py);}
+function bh_move_toward(_pl,_tx,_ty,_speed,_dt) {
+    var d=point_distance(_pl.x,_pl.y,_tx,_ty);if(d<1)return;
+    var step=min(d,_speed*_dt),a=point_direction(_pl.x,_pl.y,_tx,_ty),ox=_pl.x,oy=_pl.y;
+    _pl.x=clamp(_pl.x+lengthdir_x(step,a),20,room_width-20);_pl.y=clamp(_pl.y+lengthdir_y(step,a),20,room_height-20);
+    scenery_resolve(_pl,ox,oy);
+}
+/// Counts every bv2 hazard that actually touches the (unprotected) player once.
+function bh_contacts(_pl,_rec) {
+    if(!variable_global_exists("bv2_hazards"))return;
+    for(var i=0;i<array_length(global.bv2_hazards);i++) {
+        var h=global.bv2_hazards[i];
+        if(!variable_struct_exists(h,"bh_seen")){h.bh_seen=true;_rec.hazards++;if(variable_struct_exists(h,"sweep_from"))_rec.max_beam=max(_rec.max_beam,h.g.radius);if(h.g.shape=="line" || h.g.shape=="rectangle")_rec.max_line=max(_rec.max_line,variable_struct_exists(h,"wave_length") ? h.wave_length : h.g.radius);
+            if(_rec.mode=="kite"){var b=bh_boss();if(instance_exists(b)){var c=bh_center(b),reach=false;for(var s=0;s<36 && !reach;s++){var px=c.x+lengthdir_x(560,s*10),py=c.y+lengthdir_y(560,s*10);if(variable_struct_exists(h,"sweep_from")){var a=point_direction(h.g.x,h.g.y,px,py-10),lo=min(h.sweep_from,h.sweep_to),hi=max(h.sweep_from,h.sweep_to);if(point_distance(h.g.x,h.g.y,px,py-10)<=h.g.radius && abs(angle_difference(a,(lo+hi)*.5))<=(hi-lo)*.5+5)reach=true;}else if(bv2_hazard_hit(h,{x:px,y:py}))reach=true;}if(reach){_rec.reach++;var ab=b.v2_enabled && b.dragon_enabled ? b.boss_cast : string(b.v2_attack);if(!array_contains(_rec.reach_abilities,ab))array_push(_rec.reach_abilities,ab);}}}}
+        if(h.age>=h.warning && h.age<h.warning+h.active && !variable_struct_exists(h,"bh_contact") && bv2_hazard_hit(h,_pl) && !player_protected_from(_pl,h.height)){h.bh_contact=true;_rec.contacts++;if(!array_contains(_rec.contact_kinds,h.kind))array_push(_rec.contact_kinds,h.kind);}
+    }
+}
+function bh_case_list(_boss) {
+    var out=[];
+    for(var a=1;a<=9;a++){array_push(out,[a,1]);array_push(out,[a,3]);}
+    return out;
+}
+function bh_new_rec(_mode,_label) {return {natural:0,forced_catchup:false,dist_sum:0,mode:_mode,label:_label,hazards:0,contacts:0,contact_kinds:[],unsafe_frames:0,frames:0,moved:0,max_beam:0,max_line:0,reach:0,reach_abilities:[],catchups:0,start_unsafe:false};}
+function bh_controller_tick() {
+    bh_init();
+    if(!instance_exists(ObjectPlayer) || global.bh_stage==0)return;
+    var pl=ObjectPlayer,dt=1/60,run=global.bh_runs[global.bh_run],b=bh_boss();
+    global.bh_frame++;
+    if(variable_global_exists("boss_test") && is_struct(global.boss_test))global.boss_test.invulnerable=true;
+    pl.hp=pl.max_hp;with(ObjectMonster)if(!variable_instance_exists(id,"boss_twin") && !variable_instance_exists(id,"boss_minion"))instance_destroy();
+    if(global.bh_stage==1) { // wait until the boss of this run exists
+        if(!instance_exists(b) || global.bh_frame<20)return;
+        bh_check(b.boss_id==run[0],run[0]+" spawned in boss test mode");
+        bh_check(b.v2_unlocked==9,run[0]+" minute 15 unlocks 9 abilities");
+        global.bh_stage=run[2]=="patterns" ? 2 : 5;global.bh_frame=0;global.bh_case=0;
+        global.bh_cases=bh_case_list(run[0]);
+        return;
+    }
+    if(!instance_exists(b)) {bh_check(false,run[0]+" boss vanished during "+run[2]);bh_next_run();return;}
+    b.hp=max(b.hp,b.max_hp*.3);
+    if(global.bh_stage==2) { // start a forced case
+        var c=global.bh_cases[global.bh_case],ab=c[0],ph=c[1];
+        bv2_clear_owner(b);global.hostile_bullets=[];
+        b.boss_phase=ph;b.hp=b.max_hp*(ph==1 ? .95 : .35);
+        if(variable_instance_exists(b,"bc_catch")){b.bc_catch=undefined;b.bc_far_time=0;b.bc_catch_cd=999;b.bc_alpha=1;b.bc_lift=0;}
+        // put the player in a neutral spot 330 px in front of the boss
+        var cen=bh_center(b);pl.x=clamp(cen.x+(cen.x>room_width/2 ? -330 : 330),200,room_width-200);pl.y=clamp(cen.y+60,250,room_height-200);
+        global.boss_test.ability=ab;
+        var ok=boss_v2_force_attack(b,ab);
+        global.bh_rec=bh_new_rec("patterns",run[0]+" A"+string(ab)+" P"+string(ph));
+        bh_check(ok,global.bh_rec.label+" can be forced");
+        global.bh_case_frame=0;global.bh_stage=3;global.bh_start_x=pl.x;global.bh_start_y=pl.y;
+        return;
+    }
+    if(global.bh_stage==3) { // oracle dodger: move to the nearest point that stays safe for the next 0.9 s
+        var rec=global.bh_rec;global.bh_case_frame++;rec.frames++;
+        var spd=pl.moveSpeed*60,best=-1,bx=pl.x,by=pl.y,any=false,soon=bh_relevant(1.3),now=bh_relevant(.35);
+        if(!bh_point_unsafe_list(soon,pl.x,pl.y)){best=0;}
+        else {
+            if(global.bh_case_frame<5)rec.start_unsafe=true;
+            for(var r=45;r<=450 && best<0;r+=45)for(var k=0;k<16;k++){var px=pl.x+lengthdir_x(r,k*22.5),py=pl.y+lengthdir_y(r,k*22.5);if(px<30 || py<30 || px>room_width-30 || py>room_height-30)continue;if(!bh_point_unsafe_list(soon,px,py)){best=r;bx=px;by=py;break;}}
+        }
+        if(bh_point_unsafe_list(now,pl.x,pl.y)) {
+            for(var r=45;r<=315 && !any;r+=45)for(var k=0;k<16;k++)if(!bh_point_unsafe_list(now,pl.x+lengthdir_x(r,k*22.5),pl.y+lengthdir_y(r,k*22.5))){any=true;break;}
+            if(!any)rec.unsafe_frames++;
+        }
+        if(best>0){bh_move_toward(pl,bx,by,spd,dt);rec.moved+=1;}
+        bh_contacts(pl,rec);
+        if(global.bh_case==4 && global.bh_case_frame==70 && run[0]=="storm_warden")global.bh_world_shot="dragon-beam-sweep";
+        if(global.bh_case_frame==72){var c=global.bh_cases[global.bh_case];if(c[1]==3 && ((run[0]=="storm_warden" && c[0]==3) || (run[0]=="twins" && (c[0]==3 || c[0]==4 || c[0]==8)) || (run[0]=="behemoth" && (c[0]==2 || c[0]==5 || c[0]==6))))global.bh_world_shot=string_replace_all(rec.label," ","-");}
+        if(global.bh_case_frame>=390) {
+            array_push(global.bh_rows,{label:rec.label,hazards:rec.hazards,contacts:rec.contacts,kinds:rec.contact_kinds,unsafe_frames:rec.unsafe_frames,frames:rec.frames,moved:rec.moved,start_unsafe:rec.start_unsafe,max_beam:rec.max_beam,max_line:rec.max_line});
+            global.bh_case++;global.bh_stage=global.bh_case<array_length(global.bh_cases) ? 2 : 4;
+        }
+        return;
+    }
+    if(global.bh_stage==4) {bh_pattern_checks(run[0]);bh_next_run();return;}
+    if(global.bh_stage==5) { // max-range kiting with the fastest class, normal rotation incl. catch-up moves
+        if(global.bh_frame==1){global.boss_test.ability=-1;bv2_clear_owner(b);b.boss_phase=3;b.hp=b.max_hp*.35;global.bh_rec=bh_new_rec("kite",run[0]+" kite 560px");global.bh_kite_a=point_direction(bh_center(b).x,bh_center(b).y,pl.x,pl.y);global.bh_was_catch=false;}
+        var rec=global.bh_rec,cen=bh_center(b),spd=pl.moveSpeed*60;rec.frames++;rec.dist_sum+=point_distance(cen.x,cen.y,pl.x,pl.y);
+        global.bh_kite_a+=spd*dt/560*57.2958*.8;
+        bh_move_toward(pl,cen.x+lengthdir_x(560,global.bh_kite_a),cen.y+lengthdir_y(560,global.bh_kite_a),spd,dt);
+        // Each catch-up code path must run at least once: from 25 s on, allow it like the F7 test key does.
+        if(global.bh_frame==60*25 && rec.catchups==0 && variable_instance_exists(b,"bc_far_time")){b.bc_far_time=99;b.bc_catch_cd=0;rec.forced_catchup=true;}
+        var catching=variable_instance_exists(b,"bc_catch") && is_struct(b.bc_catch);
+        if(catching && !global.bh_was_catch){rec.catchups++;if(!rec.forced_catchup)rec.natural++;global.bh_world_shot=run[0]+"-catchup";}
+        global.bh_was_catch=catching;
+        bh_contacts(pl,rec);
+        if(global.bh_frame>=60*45) {
+            array_push(global.bh_rows,{label:rec.label,hazards:rec.hazards,contacts:rec.contacts,kinds:rec.contact_kinds,reach:rec.reach,reach_abilities:rec.reach_abilities,catchups:rec.catchups,forced_catchup:rec.forced_catchup,frames:rec.frames});
+            var avg_dist=rec.dist_sum/max(1,rec.frames);global.bh_metrics[$ run[0]+"_kite_mean_distance"]=avg_dist;
+            bh_check(rec.natural>=1 || avg_dist<520,rec.label+": boss closes in by itself (natural catch-ups "+string(rec.natural)+", mean distance "+string(round(avg_dist))+")");
+            bh_check(rec.catchups>=1,rec.label+": catch-up move code path ran ("+string(rec.catchups)+")");
+            global.bh_metrics[$ run[0]+"_natural_catchups"]=rec.natural;
+            bh_check(rec.reach>=3,rec.label+": mechanics still reach the 560 px kiting ring ("+string(rec.reach)+" hazards)");
+            global.bh_metrics[$ run[0]+"_kite_contacts"]=rec.contacts;global.bh_metrics[$ run[0]+"_kite_reach"]=rec.reach;global.bh_metrics[$ run[0]+"_catchups"]=rec.catchups;
+            bh_next_run();
         }
     }
-    surface_reset_target(); gp_capture(sheet,"warrior"); surface_free(sheet);
-    // Real schedule, not real-time waits: advance the round clock directly in this fixture.
-    gp_check(!global.boss_dev_enabled && !instance_exists(boss_dev_start()),"development controls inert without opt-in");
-    global.round_seconds=59.99; boss_schedule_step(); gp_check(!instance_exists(ObjectBossMonster),"no miniboss before minute one");
-    global.round_seconds=60; boss_schedule_step();
-    gp_check(instance_exists(global.active_boss) && global.active_boss.boss_id=="mini_sentinel","minute-one miniboss has explicit ID");
-    var first=global.active_boss; boss_schedule_step(); gp_check(instance_number(ObjectBossMonster)==1 && global.active_boss==first,"schedule cannot duplicate boss");
-    first.hp=0; boss_step(first,1/60);
-    gp_check(!instance_exists(first) && array_length(global.hostile_bullets)==0,"miniboss death cleans encounter");
-    global.round_seconds=180; boss_schedule_step(); gp_check(global.active_boss.boss_id=="mini_warden","minute-three second miniboss");
-    first=global.active_boss; first.hp=0; boss_step(first,1/60);
-    global.round_seconds=300; boss_schedule_step();
-    var boss=global.active_boss;
-    gp_check(instance_exists(boss) && boss.boss_id=="storm_warden" && boss.boss_phase==1,"minute-five main boss starts in phase one");
-    gp_check(point_distance(pl.x,pl.y,boss.x,boss.y)>=180,"boss spawn has safe player spacing");
-    boss_attack_begin(boss,"lightning");
-    var mark=global.boss_zones[0],locked_x=mark.x,locked_y=mark.y;
-    hp_before=pl.hp; boss_hazards_step(1.14);
-    gp_check(pl.hp==hp_before,"lightning does no damage before warning finishes");
-    pl.x+=15; gp_check(mark.x==locked_x && mark.y==locked_y,"warning position stays locked instead of tracking");
-    pl.x=locked_x; pl.y=locked_y+10;
-    boss_hazards_step(0.02);
-    gp_check(abs(pl.hp-(hp_before-boss.boss_data.strike*global.monster_damage_multiplier*(1-pl.damage_reduction)))<0.001,"lightning deals exact real HP damage after telegraph");
-    var damaged=pl.hp; boss_hazards_step(0.02); gp_check(pl.hp==damaged,"one strike cannot damage twice");
-    bh_clear_hazards(); pl.invulnerable_timer=0; pl.hp=pl.max_hp;
-    boss_zone_add(boss,"lightning",pl.x+53,pl.y-10,52,1,86);
-    boss_hazards_step(1.01); gp_check(pl.hp==pl.max_hp,"no damage outside exact visible warning radius");
-    var clock_before=global.round_seconds,age_before=global.boss_zones[0].age;
-    global.game_paused=true; boss_world_step(5);
-    gp_check(global.round_seconds==clock_before && global.boss_zones[0].age==age_before,"pause freezes round schedule and attack time");
-    global.game_paused=false;
-    for(var motion=1;motion<=5;motion++) {
-        bh_clear_hazards(); pl.motion_state=motion<5 ? motion : 0; pl.dodge_timer=motion==5 ? 5 : 0;
-        pl.invulnerable_timer=0; hp_before=pl.hp;
-        boss_zone_add(boss,"lightning",pl.x,pl.y-10,52,1,86); boss_hazards_step(1.01);
-        gp_check(pl.hp==hp_before,"boss strike respects protected movement "+string(motion));
-    }
-    pl.motion_state=0; pl.dodge_timer=0; pl.invulnerable_timer=0;
-    for(var use=0;use<3;use++) {
-        bh_clear_hazards(); boss_attack_begin(boss,"fan");
-        gp_check(array_length(global.hostile_bullets)==0,"fan does not fire during initial telegraph");
-        boss_step(boss,0.76);
-        gp_check(array_length(global.hostile_bullets)==1+2*use,"fan escalation 1/3/5 emits actual projectiles");
-    }
-    boss.hp=boss.max_hp*0.49; boss_step(boss,0.01);
-    gp_check(boss.boss_phase==2 && boss.boss_state=="transition" && array_length(global.hostile_bullets)==0,"phase two announces transition and clears prior hazards");
-    boss_attack_begin(boss,"lightning"); gp_check(array_length(global.boss_zones)==3,"phase two expands lightning into three marked zones");
-    bh_clear_hazards(); boss_ring_pattern(boss,0);
-    var safe=true;
-    for(var i=0;i<array_length(global.hostile_bullets);i++) {
-        var bullet=global.hostile_bullets[i];
-        if(abs(angle_difference(point_direction(0,0,bullet.vx,bullet.vy),0))<36) safe=false;
-    }
-    gp_check(safe && array_length(global.hostile_bullets)>10,"ring pattern deliberately preserves safe wedge");
-    bh_clear_hazards(); boss_attack_begin(boss,"lob");
-    mark=global.boss_zones[0]; locked_x=mark.x; locked_y=mark.y;
-    boss_hazards_step(0.7);
-    gp_check(mark.kind=="lob" && mark.age<mark.warning && mark.x==locked_x,"ballistic attack has grounded target and airborne interval");
-    bh_capture("boss");
-    pl.x=locked_x;pl.y=locked_y+10;pl.hp=pl.max_hp;pl.invulnerable_timer=0;
-    hp_before=pl.hp;boss_hazards_step(0.71);
-    gp_check(abs(pl.hp-(hp_before-boss.boss_data.lob*global.monster_damage_multiplier*(1-pl.damage_reduction)))<0.001,"ballistic impact deals actual area damage at landing");
-    // Swept collision catches even a fast bullet crossing the player in one update.
-    bh_clear_hazards(); pl.x=300;pl.y=320;pl.hp=pl.max_hp;pl.invulnerable_timer=0;
-    boss_fan_pattern(boss,0,1,0,1000,12);
-    global.hostile_bullets[0].x=200;global.hostile_bullets[0].y=pl.y-10;
-    boss_hazards_step(0.2);
-    gp_check(abs(pl.hp-(pl.max_hp-12*(1-pl.damage_reduction)))<0.001 && array_length(global.hostile_bullets)==0,"swept hostile projectile collision cannot tunnel");
-    bh_clear_hazards(); boss_fan_pattern(boss,0,600,14,100,1);
-    gp_check(array_length(global.hostile_bullets)==512,"hostile projectile allocation is capped");
-    boss_hazards_step(7); gp_check(array_length(global.hostile_bullets)==0,"expired hostile projectiles are removed");
-    bh_clear_hazards();
-    // Bounded complete rotations in both phases; no five-minute gameplay wait is needed.
-    var seen_one=[],seen_two=[];
-    bh_clear_hazards();
-    for(var phase=1;phase<=2;phase++) {
-        boss.boss_phase=phase; boss.hp=phase==1 ? boss.max_hp : boss.max_hp*0.49;
-        boss.boss_state="intro"; boss.boss_timer=0.01; boss.boss_rotation=0;
-        var last_cast="";
-        for(var frame=0;frame<900;frame++) {
-            pl.x=boss.x+lengthdir_x(220,frame*0.72); pl.y=boss.y+lengthdir_y(220,frame*0.72);
-            pl.invulnerable_timer=max(0,pl.invulnerable_timer-1);
-            boss_step(boss,1/60); boss_hazards_step(1/60);
-            if(boss.boss_state=="windup" && boss.boss_cast!=last_cast) {
-                if(phase==1) array_push(seen_one,boss.boss_cast); else array_push(seen_two,boss.boss_cast);
-                last_cast=boss.boss_cast;
-            }
-        }
-        gp_check(pl.hp>0 && !global.game_over,"learnable rotation is survivable by ordinary continuous movement in fixture phase "+string(phase));
-    }
-    gp_check(array_contains(seen_one,"lightning") && array_contains(seen_one,"fan") && array_contains(seen_one,"lob"),"phase-one AI performs complete learned rotation");
-    gp_check(array_contains(seen_two,"lightning") && array_contains(seen_two,"fan") && array_contains(seen_two,"lob") && array_contains(seen_two,"ring"),"phase-two AI performs expanded learned rotation");
-    bh_clear_hazards();pl.x=300;pl.y=320;pl.hp=pl.max_hp;pl.invulnerable_timer=0;
-    var reward_before=global.coins,chests_before=instance_number(ObjectChest);
-    boss_fan_pattern(boss,0,5,14,130,12);
-    boss_zone_add(boss,"lightning",pl.x,pl.y-10,52,1,86);
-    boss.hp=0; boss_step(boss,1/60);
-    gp_check(!instance_exists(boss) && array_length(global.hostile_bullets)==0 && array_length(global.boss_zones)==0,"boss death cleans all owned threats");
-    gp_check(global.coins==reward_before+30 && instance_number(ObjectChest)==chests_before+1,"boss victory awards coins and chest");
-    // Later encounters exist as explicitly reusable prototypes, not claimed unique finished fights.
-    var defs=boss_definitions();
-    for(var i=3;i<8;i++) {
-        global.round_seconds=defs[i].at; boss_schedule_step();
-        gp_check(global.active_boss.boss_id==defs[i].id && !defs[i].individual,"later scheduled encounter identity "+defs[i].id);
-        var b=global.active_boss; b.hp=0; boss_step(b,1/60);
-    }
-    global.boss_dev_enabled=true;
-    var dev=boss_dev_start("storm_warden",2,0.4,0.35);
-    gp_check(instance_exists(dev) && dev.boss_phase==2 && abs(dev.hp/dev.max_hp-0.4)<0.001,"opt-in dev fixture supports ID phase HP and slowdown");
-    boss_cleanup(dev); with(dev) instance_destroy();
-    global.boss_dev_enabled=false;
-    reset_round();
-    gp_check(global.round_seconds==0 && array_length(global.hostile_bullets)==0 && array_length(global.boss_zones)==0,"new round resets clock and all boss threats");
-    gp_check(!global.start_choice_pending && array_length(global.active_spells)==0 && array_length(global.passive_spells)==0,"restart still has no initial selection or skills");
 }
-
-function bh_class_auto_check() {
-    var pl=global.player;gp_clear_enemies();
-    var e=instance_create_layer(pl.x+55,pl.y,"Instances",ObjectMonster);e.hp=10000;
-    for(var i=0;i<6;i++) global.active_spells[i].cooldown_timer=0;
-    pl.hp=pl.max_hp/3;
-    auto_spells_step();
-    for(var i=0;i<6;i++) gp_check(global.active_spells[i].cooldown_timer>0,global.selected_character+" automatic spell "+global.active_spells[i].name);
-    pl.hp=pl.max_hp;gp_clear_enemies();
+function bh_pattern_checks(_boss) {
+    var rows=global.bh_rows,total_unsafe=0,total_frames=0,total_contacts=0,moved_cases=0,n=0,hazard_cases=0;
+    for(var i=0;i<array_length(rows);i++) {
+        var r=rows[i];if(string_pos(_boss+" A",r.label)!=1)continue;n++;
+        total_unsafe+=r.unsafe_frames;total_frames+=r.frames;total_contacts+=r.contacts;if(r.moved>20)moved_cases++;if(r.hazards>0)hazard_cases++;
+        bh_check(r.unsafe_frames<=6,r.label+": a safe position stays reachable (unsafe frames "+string(r.unsafe_frames)+")");
+    }
+    global.bh_metrics[$ _boss+"_oracle_contacts"]=total_contacts;global.bh_metrics[$ _boss+"_cases"]=n;global.bh_metrics[$ _boss+"_cases_with_movement"]=moved_cases;
+    var beam=0,line=0;for(var i=0;i<array_length(rows);i++)if(string_pos(_boss+" A",rows[i].label)==1){beam=max(beam,rows[i].max_beam);line=max(line,rows[i].max_line);}
+    if(_boss=="storm_warden")bh_check(beam>=2000,"dragon fire beam reaches >= 2000 px ("+string(beam)+")");
+    if(_boss=="twins")bh_check(line>=2000,"twins cross beams reach >= 2000 px ("+string(line)+")");
+    if(_boss=="behemoth")bh_check(line>=1500,"behemoth mud wave lane reaches 1500 px ("+string(line)+")");
+    // Only cases with shared bv2 hazards are visible to the oracle (legacy dragon projectiles/rings are not).
+    bh_check(moved_cases*2>=hazard_cases,_boss+": patterns force repositioning in "+string(moved_cases)+" of "+string(hazard_cases)+" hazard cases");
+    global.bh_metrics[$ _boss+"_hazard_cases"]=hazard_cases;
+}
+function bh_next_run() {
+    global.bh_run++;global.bh_stage=0;global.bh_frame=0;
+    if(global.bh_run>=array_length(global.bh_runs))global.bh_done=true;
+    round_end_to_title();
+}
+function bh_gui_capture_begin() {}
+function bh_gui_capture_end() {}
+function bh_world_capture() {
+    if(!variable_global_exists("bh_world_shot") || global.bh_world_shot=="")return;
+    if(surface_exists(application_surface))surface_save(application_surface,"bhcapture-"+global.bh_world_shot+".png");
+    global.bh_world_shot="";
 }

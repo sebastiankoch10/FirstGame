@@ -71,6 +71,7 @@
     {"id":{"name":"atmosphere","path":"scripts/atmosphere/atmosphere.yy",},},
     {"id":{"name":"attack_telegraph","path":"scripts/attack_telegraph/attack_telegraph.yy",},},
     {"id":{"name":"audio_manager","path":"scripts/audio_manager/audio_manager.yy",},},
+    {"id":{"name":"boss_choreo","path":"scripts/boss_choreo/boss_choreo.yy",},},
     {"id":{"name":"boss_combat","path":"scripts/boss_combat/boss_combat.yy",},},
     {"id":{"name":"boss_encounters_v2","path":"scripts/boss_encounters_v2/boss_encounters_v2.yy",},},
     {"id":{"name":"boss_framework_v2","path":"scripts/boss_framework_v2/boss_framework_v2.yy",},},

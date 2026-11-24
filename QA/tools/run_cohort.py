@@ -9,6 +9,12 @@ import argparse, datetime, hashlib, json, subprocess, sys, time
 
 ROOT=Path(__file__).resolve().parents[2]
 
+def _rel(p):
+    try:
+        return str(Path(p).resolve().relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument('--reuse',type=Path,required=True)
@@ -20,7 +26,7 @@ def main():
     ap.add_argument('--timeout',type=int,default=3600)
     ap.add_argument('--label',required=True)
     args=ap.parse_args()
-    if args.workers<1 or args.workers>8:ap.error('Use1..8 independent workers')
+    if args.workers<1 or args.workers>12:ap.error('Use 1..12 independent workers')
     if args.runs_per_class_per_worker<3 or args.runs_per_class_per_worker%3:
         ap.error('Use a positive multiple of3 for equal beginner/average/experienced counts')
     directory=ROOT/'QA/data'/args.label
@@ -31,7 +37,7 @@ def main():
     manifest=dict(started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),phase=args.phase,
         workers=args.workers,runs_per_class_per_worker=args.runs_per_class_per_worker,
         requested_total=args.workers*args.runs_per_class_per_worker*3,seedstart=args.seedstart,
-        batchsize=args.batchsize,artifact=str(artifact.relative_to(ROOT)),
+        batchsize=args.batchsize,artifact=_rel(artifact),
         exe_sha256=hashlib.sha256(exe.read_bytes()).hexdigest(),children=[],completed=False)
     target=directory/'cohort.json'
     def save():target.write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')

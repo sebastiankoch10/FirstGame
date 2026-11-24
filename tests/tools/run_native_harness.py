@@ -26,7 +26,7 @@ from gms_helpers.runner import GameMakerRunner  # noqa: E402
 
 SUITES = {
     'feature': ('tests/feature_harness.gml', 'ft', 'FEATURE', 'FirstGameFeatureSmoke', 900),
-    'boss': ('tests/boss_harness.gml', 'bh', 'BOSSMECH', 'FirstGameBossMech', 1500),
+    'boss': ('tests/boss_harness.gml', 'bh', 'BOSSMECH', 'FirstGameBossMech', 3000),
 }
 
 
@@ -80,6 +80,8 @@ def main():
     if 'Final Compile finished.' not in blog or not exe.is_file():
         errs = [l for l in blog.splitlines() if 'error' in l.lower()][:30]
         print('\n'.join(errs))
+        for n in ('project', 'build', 'cache', 'temp'):
+            shutil.rmtree(work / n, ignore_errors=True)
         raise RuntimeError(f'Build failed: {work / "build.log"}')
     print('Running native harness...', flush=True)
     started = time.time()

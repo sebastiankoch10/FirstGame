@@ -63,7 +63,7 @@ function bv2_encounter_init(_b) {
     if(_b.v2_kind=="twins" && !instance_exists(_b.v2_child))boss_twin_create(_b);
     _b.v2_clock=0;_b.v2_attack_age=0;_b.v2_cycle=0;_b.v2_attack=0;_b.v2_launched=false;
     _b.v2_center_x=pl.x;_b.v2_center_y=pl.y-10;_b.v2_origin_x=_b.x;_b.v2_origin_y=_b.y;
-    _b.v2_formation="eight";_b.v2_formation_age=0;_b.v2_hover=60;_b.v2_other_hover=80;
+    _b.v2_formation="eight";_b.v2_formation_age=0;_b.v2_hover=60;_b.v2_other_hover=80;_b.v2_spin_a0=0;_b.v2_spin_speed=40;bc_catchup_init(_b);
     _b.v2_facing=pl.x<_b.x ? -1 : 1;_b.v2_other_facing=1;_b.v2_turn_time=0;_b.v2_other_turn_time=0;_b.v2_moving_lines=[];_b.v2_spiral_fields=[];
     _b.v2_chase_x=pl.x;_b.v2_chase_y=pl.y;_b.v2_last_x=_b.x;_b.v2_last_y=_b.y;_b.v2_move_speed=0;
     _b.boss_state="intro";_b.boss_timer=1.7;_b.v2_state_age=0;_b.v2_profile=bv2_attack_profile(_b.v2_kind,1);
@@ -83,6 +83,11 @@ function bv2_encounter_twins_positions(_b,_dt) {
         case "split":
             var angle=sin(_b.v2_formation_age*.55)*24;
             fx=cx+lengthdir_x(225,180+angle);fy=cy+lengthdir_y(150,180+angle);ix=cx+lengthdir_x(225,angle);iy=cy+lengthdir_y(150,angle);break;
+        case "spin":
+            // Both witches circle the announced centre on opposite sides: the connection beam sweeps across it.
+            // Centred on the announced player position: the beam keeps sweeping across it.
+            var sa=_b.v2_spin_a0+_b.v2_formation_age*_b.v2_spin_speed,scx=_b.v2_target_x,scy=_b.v2_target_y+10;
+            fx=scx+lengthdir_x(235,sa);fy=scy+lengthdir_y(160,sa);ix=scx+lengthdir_x(235,sa+180);iy=scy+lengthdir_y(160,sa+180);break;
         case "follow":
             fx=pl.x-180;fy=pl.y-65;ix=_b.v2_chase_x+180;iy=_b.v2_chase_y+65;
             _b.v2_chase_x=lerp(_b.v2_chase_x,pl.x,1-exp(-1.6*_dt));_b.v2_chase_y=lerp(_b.v2_chase_y,pl.y,1-exp(-1.6*_dt));break;
@@ -121,12 +126,20 @@ function bv2_encounter_attack_begin(_b,_index) {
                 if(is_struct(h)){h.gap_angle=90;h.gap_width=75;h.rotate_speed=35+phase*5;h.interval=.55;}
                 break;
             case 3:
+                if(phase>=2) {
+                    // Fire on one colour of the board, then ice on the cells that were safe a moment ago.
+                    var cfgc=bc_config();
+                    bc_checker(_b,"twins_meteor_cell",_b.v2_target_x,_b.v2_target_y,cfgc.cell,cfgc.grid,0,warning+.2,.45,damage,"all");
+                    bc_checker(_b,"twins_ice_cell",_b.v2_target_x,_b.v2_target_y,cfgc.cell,cfgc.grid,1,warning+1.35,.45,damage,"all");
+                    break;
+                }
                 for(var i=0;i<4+(phase>=3 ? 2 : 0);i++) {
                     var side=(i mod 2)==0 ? -1 : 1,xx=_b.v2_target_x+side*(i<2 ? 0 : 150),yy=_b.v2_target_y+(i div 2)*125-80;
                     bv2_zone(_b,(i mod 2)==0 ? "twins_meteor" : "twins_ice_rain",clamp(xx,85,room_width-85),clamp(yy,85,room_height-85),70,warning+i*.19,.35,damage,"all");
                 }
                 break;
             case 4:
+                _b.v2_formation="spin";_b.v2_spin_a0=point_direction(_b.v2_target_x,_b.v2_target_y,_b.x,_b.y);_b.v2_spin_speed=(_b.v2_cycle mod 2==0 ? 1 : -1)*(phase>=3 ? 46 : 38);
                 bv2_encounter_add_line(_b,"twins_link",fire_hand.x,fire_hand.y,ice_hand.x,ice_hand.y,32,warning,2.7,damage,"link");break;
             case 5:
                 for(var side=-1;side<=1;side+=2) {
@@ -136,12 +149,22 @@ function bv2_encounter_attack_begin(_b,_index) {
                 break;
             case 6:
                 bv2_encounter_add_line(_b,"twins_fire_cross",fire_hand.x,fire_hand.y,_b.v2_target_x+250,_b.v2_target_y+180,28,warning,2,damage,"fire_cross");
-                bv2_encounter_add_line(_b,"twins_ice_cross",ice_hand.x,ice_hand.y,_b.v2_target_x-250,_b.v2_target_y+180,28,warning,2,damage,"ice_cross");break;
+                bv2_encounter_add_line(_b,"twins_ice_cross",ice_hand.x,ice_hand.y,_b.v2_target_x-250,_b.v2_target_y+180,28,warning,2,damage,"ice_cross");
+                // Later phases: the long fire/ice beams cross while the floor freezes in alternating stripes.
+                if(phase>=3)bc_stripes(_b,"twins_ice_flood",_b.v2_target_x,_b.v2_target_y,(_b.v2_cycle mod 2)*90,105,7,1100,0,warning+.3,1.2,damage,"ground");
+                break;
             case 7:
                 bv2_zone(_b,"twins_blast",_b.v2_target_x,_b.v2_target_y,155,warning,.3,damage,"all");
                 h=bv2_zone(_b,"twins_burning_frost",_b.v2_target_x,_b.v2_target_y,125,warning+.3,2.1,8*_b.v2_scaling.damage,"ground");
                 if(is_struct(h)){h.hit_once=false;h.interval=.65;}break;
             case 8:
+                if(phase>=2) {
+                    // Opposite quadrants burn, then the other pair freezes: diagonal position changes.
+                    var q=(_b.v2_cycle mod 2)*90+45;
+                    bc_quadrants(_b,"twins_fire_flood",_b.v2_target_x,_b.v2_target_y,340,q,warning,.8,damage,"ground");
+                    bc_quadrants(_b,"twins_ice_flood",_b.v2_target_x,_b.v2_target_y,340,q+90,warning+1.25,.8,damage,"ground");
+                    break;
+                }
                 for(var row=-1;row<=1;row++)for(var side=-1;side<=1;side+=2) {
                     h=bv2_zone(_b,side<0 ? "twins_fire_flood" : "twins_ice_flood",clamp(cx+side*205,110,room_width-110),clamp(cy+row*225,110,room_height-110),95,warning+(row+1)*.18,2.5,damage,"ground");
                     if(is_struct(h)){h.hit_once=false;h.interval=.8;}
@@ -157,12 +180,29 @@ function bv2_encounter_attack_begin(_b,_index) {
         switch(_index) {
             case 1:break; // The spit is a readable ordinary projectile.
             case 2:
+                if(phase>=2) {
+                    // Acid stripes with alternating gaps: the safe lanes become dangerous and vice versa.
+                    var sa=(_b.v2_cycle mod 4)*45,first=bc_stripes(_b,"swamp_acid",_b.v2_target_x,_b.v2_target_y,sa,105,7,1050,0,warning,1.6,damage,"ground");
+                    var second=bc_stripes(_b,"swamp_acid",_b.v2_target_x,_b.v2_target_y,sa,105,7,1050,1,warning+2.3,1.6,damage,"ground"); // 0.7 s gap: switching lanes is always possible
+                    for(var k=0;k<array_length(first);k++){first[k].hit_once=false;first[k].interval=.65;first[k].poison=1.2;}
+                    for(var k=0;k<array_length(second);k++){second[k].hit_once=false;second[k].interval=.65;second[k].poison=1.2;}
+                    break;
+                }
                 for(var i=0;i<3;i++) {
                     var xx=_b.v2_target_x+lengthdir_x(i==0 ? 0 : 180,35+i*145),yy=_b.v2_target_y+lengthdir_y(i==0 ? 0 : 180,35+i*145);
                     h=bv2_zone(_b,"swamp_acid",clamp(xx,100,room_width-100),clamp(yy,100,room_height-100),78,warning+i*.12,4.5,damage,"ground");
                     if(is_struct(h)){h.hit_once=false;h.interval=.65;h.poison=1.2;}
                 }break;
             case 3:
+                if(phase>=2) {
+                    // Roots erupt one after another from the behemoth through and past the player (also reaches far kiters).
+                    var base=point_direction(_b.x,_b.y-10,_b.v2_target_x,_b.v2_target_y),lines=phase>=3 ? [-18,18] : [0];
+                    for(var l=0;l<array_length(lines);l++) {
+                        var roots=bc_line_burst(_b,"swamp_roots",_b.x+lengthdir_x(150,base+lines[l]),_b.y-10+lengthdir_y(150,base+lines[l]),base+lines[l],95,10,62,warning,.1,.55,damage,"ground");
+                        for(var k=0;k<array_length(roots);k++)roots[k].root_time=.55;
+                    }
+                    break;
+                }
                 for(var i=-1;i<=1;i++) {
                     h=bv2_zone(_b,"swamp_roots",clamp(_b.v2_target_x+i*155,80,room_width-80),clamp(_b.v2_target_y+abs(i)*75,80,room_height-80),65,warning+abs(i)*.15,.55,damage,"ground");
                     if(is_struct(h))h.root_time=.55;
@@ -176,15 +216,28 @@ function bv2_encounter_attack_begin(_b,_index) {
                 }break;
             case 5:
                 h=bv2_ring(_b,"swamp_stomp",_b.x,_b.y-10,350,0,warning,1.5,damage,"ground");
-                if(is_struct(h)){h.expand_from=80;h.expand_to=350;h.ring_width=36;h.push=55;h.interval=.7;}break;
-            case 6:break;
+                if(is_struct(h)){h.expand_from=80;h.expand_to=350;h.ring_width=36;h.push=55;h.interval=.7;}
+                if(phase>=2) {
+                    // Two shockwaves with limited safe gaps: first towards the player, then rotated by 120 degrees.
+                    var toward=point_direction(_b.x,_b.y-10,_b.v2_target_x,_b.v2_target_y);
+                    if(is_struct(h)){h.gap_angle=toward;h.gap_width=62;}
+                    var h2=bv2_ring(_b,"swamp_stomp",_b.x,_b.y-10,350,0,warning+.95,1.5,damage,"ground");
+                    if(is_struct(h2)){h2.expand_from=80;h2.expand_to=350;h2.ring_width=36;h2.push=55;h2.interval=.7;h2.gap_angle=toward+((_b.v2_cycle mod 2)==0 ? 120 : -120);h2.gap_width=62;}
+                }
+                break;
+            case 6:
+                // Later phases: while the brood hunts, poison closes in around the behemoth and shrinks the open area.
+                if(phase>=3)bc_closing_ring(_b,"swamp_closing",_b.x,_b.y-10,640,320,900,warning,4.2,bv2_attack_profile("behemoth",2).damage*_b.v2_scaling.damage);
+                break;
             case 7:
-                h=bv2_sector(_b,"swamp_breath",mouth.x,mouth.y,365,point_direction(mouth.x,mouth.y,_b.v2_target_x,_b.v2_target_y),80,warning,1.9,damage,"all");
-                if(is_struct(h)){h.poison=2.4;h.interval=.55;}break;
+                var breath_angle=point_direction(mouth.x,mouth.y,_b.v2_target_x,_b.v2_target_y);
+                h=bv2_sector(_b,"swamp_breath",mouth.x,mouth.y,365,breath_angle,80,warning,1.9,damage,"all");
+                if(is_struct(h)){h.poison=2.4;h.interval=.55;if(phase>=2){var sd=(_b.v2_cycle mod 2==0) ? 1 : -1;bc_sweep_sector(h,breath_angle-sd*32,breath_angle+sd*32);}}break;
             case 8:
-                var angle=point_direction(_b.x,_b.y-10,_b.v2_target_x,_b.v2_target_y);
-                h=bv2_line(_b,"swamp_wave",_b.x,_b.y-10,_b.x+lengthdir_x(650,angle),_b.y-10+lengthdir_y(650,angle),190,warning,2,damage,"ground");
-                if(is_struct(h)){h.wave_from_x=_b.x;h.wave_from_y=_b.y-10;h.wave_angle=angle;h.wave_length=650;h.wave_thickness=75;h.wave_width=190;h.push=100;h.hit_once=true;}
+                // The mud wave now rolls 1500 px: far kiters must jump it or step out of its announced lane.
+                var angle=point_direction(_b.x,_b.y-10,_b.v2_target_x,_b.v2_target_y),wave_len=1500;
+                h=bv2_line(_b,"swamp_wave",_b.x,_b.y-10,_b.x+lengthdir_x(wave_len,angle),_b.y-10+lengthdir_y(wave_len,angle),190,warning,3.6,damage,"ground");
+                if(is_struct(h)){h.wave_from_x=_b.x;h.wave_from_y=_b.y-10;h.wave_angle=angle;h.wave_length=wave_len;h.wave_thickness=75;h.wave_width=190;h.push=100;h.hit_once=true;}
                 break;
             case 9:
                 // Outer petals first; then the center, with a final patterned spore belt. Safe regions change deliberately.
@@ -232,8 +285,11 @@ function bv2_encounter_update_links(_b) {
     for(var i=0;i<array_length(_b.v2_moving_lines);i++) {
         var rec=_b.v2_moving_lines[i],h=rec.hazard,origin=bv2_twins_origin(_b,rec.mode=="ice_cross"),target=bv2_twins_origin(_b,true),ax=origin.x,ay=origin.y;
         var ex=target.x,ey=target.y;
-        if(rec.mode=="fire_cross"){ex=_b.v2_target_x+250;ey=_b.v2_target_y+180;}
-        if(rec.mode=="ice_cross"){ex=_b.v2_target_x-250;ey=_b.v2_target_y+180;}
+        if(rec.mode=="fire_cross" || rec.mode=="ice_cross") {
+            // Very long beams: aimed through the announced point and continuing far beyond it.
+            var aim=point_direction(ax,ay,_b.v2_target_x+(rec.mode=="fire_cross" ? 250 : -250),_b.v2_target_y+180);
+            ex=ax+lengthdir_x(bc_config().beam_length,aim);ey=ay+lengthdir_y(bc_config().beam_length,aim);
+        }
         h.g.x=ax;h.g.y=ay;h.g.radius=point_distance(ax,ay,ex,ey);h.g.angle=point_direction(ax,ay,ex,ey);
     }
     for(var i=0;i<array_length(_b.v2_spiral_fields);i++) {
@@ -250,6 +306,7 @@ function bv2_encounter_step(_b,_dt) {
         if(was_teleport && _b.teleport_warning<=0){_b.v2_center_x=ObjectPlayer.x;_b.v2_center_y=ObjectPlayer.y-10;_b.v2_origin_x=_b.x;_b.v2_origin_y=_b.y;_b.v2_formation="split";if(instance_exists(_b.v2_child)){_b.v2_child.x=clamp(_b.x+180,90,room_width-90);_b.v2_child.y=_b.y;}}
         return;
     }
+    if(bc_catchup_step(_b,_b.v2_kind=="twins" ? "twins" : "behemoth",_dt)){_b.v2_move_speed=0;return;} // rare announced repositioning
     _b.boss_timer=max(0,_b.boss_timer-_dt);
     if(_b.boss_state=="windup" || _b.boss_state=="active")_b.v2_attack_age+=_dt;
     if(_b.boss_state=="windup" && _b.v2_attack_age>=_b.v2_warning) {
@@ -304,6 +361,8 @@ function bv2_actor_draw(_b,_ice=false) {
     var draw_frame=(a.action=="hurt" || a.action=="death") ? clamp(a.frame,0,sprite_get_number(spr)-1) : a.frame;
     var hover=twin ? (_ice ? _b.v2_other_hover : _b.v2_hover) : 0,scale=twin ? 135/90 : 340/430;
     var face=_ice ? _b.v2_other_facing : _b.v2_facing,alpha=_b.hp<=0 ? clamp(1-_b.v2_state_age/1.5,0,1) : 1;
+    if(variable_instance_exists(_b,"bc_alpha"))alpha*=_b.bc_alpha;
+    if(alpha<=.01)return;
     if(level_world_room())master_shadow_draw(actor.x,actor.y,twin ? 30 : 120,twin ? 9 : 28,twin ? .22 : .38);
     draw_sprite_ext(spr,draw_frame,actor.x,actor.y-hover,scale*face,scale*(1+sin(_b.v2_clock*2.1)*.006),0,_b.hurt_flash_timer>0 ? make_color_rgb(255,205,196) : c_white,alpha);
     if(twin && _b.hp>0){var col=_ice ? make_color_rgb(118,210,255) : make_color_rgb(255,134,70);draw_set_color(col);draw_set_alpha(.55);for(var i=0;i<3;i++){var phase=frac(_b.v2_clock*.6+i*.33);draw_circle(actor.x+sin(_b.v2_clock*2+i)*15,actor.y-hover+10+phase*28,2*(1-phase),false);}}

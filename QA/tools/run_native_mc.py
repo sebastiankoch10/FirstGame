@@ -13,6 +13,13 @@ from gms_helpers.runner import GameMakerRunner
 from gms_helpers.gamemaker_machine_lock import gamemaker_machine_operation
 
 
+def _rel(p):
+    try:
+        return str(Path(p).resolve().relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
+
 def write(path, text):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding='utf-8')
@@ -145,7 +152,8 @@ def main():
     if min(args.runs_per_class, args.batchsize, args.probe_ticks) < 1: ap.error('Counts must be positive')
     if args.phase == 'holdout' and not args.reuse:
         ap.error('Holdout requires --reuse of an already reviewed baseline/after artifact')
-    work = args.reuse.resolve() if args.reuse else ROOT / ('output/native-mc-' + args.phase) / time.strftime('%Y%m%d-%H%M%S')
+    # Native artefacts live outside the project folder (the owner tests the real project with F5 in the IDE).
+    work = args.reuse.resolve() if args.reuse else Path(os.environ['LOCALAPPDATA']) / 'FirstGame-Tests' / ('native-mc-' + args.phase) / time.strftime('%Y%m%d-%H%M%S')
     exe = work / 'build/FirstGameNativeMC.exe' if args.reuse else build(work, args.phase)
     if not exe.is_file(): raise RuntimeError('Missing reusable native executable: ' + str(exe))
     manifest = json.loads((work / 'manifest.json').read_text(encoding='utf-8'))
@@ -181,7 +189,7 @@ def main():
             try: row = json.loads(line.split('QA_MC_ROW ', 1)[1])
             except json.JSONDecodeError as exc:
                 parse_errors.append(str(exc)); continue
-            row.update(native_artifact=str(work.relative_to(ROOT)), phase=args.phase, source_phase=manifest['phase'])
+            row.update(native_artifact=_rel(work), phase=args.phase, source_phase=manifest['phase'])
             row.setdefault('record_type', 'full_run' if args.mode == 'runs' else args.mode)
             rows.append(row)
             # Durable checkpoints survive a later slow run, timeout or interruption.
@@ -207,8 +215,8 @@ def main():
             for p in save.rglob('qa-mc-capture-*.png'):
                 if p.stat().st_mtime >= started:
                     dest = work / p.name
-                    shutil.copyfile(p, dest); captures.append(str(dest.relative_to(ROOT)))
-    result = {'work': str(work.relative_to(ROOT)), 'log': str(log_path.relative_to(ROOT)), 'rows': len(rows),
+                    shutil.copyfile(p, dest); captures.append(_rel(dest))
+    result = {'work': _rel(work), 'log': _rel(log_path), 'rows': len(rows),
               'completed_runs': sum(r.get('completed', False) for r in rows), 'elapsed_wall_seconds': time.time() - started,
               'exit_code': code, 'mode': args.mode, 'phase': args.phase, 'source_phase': manifest['phase'], 'captures': captures,
               'errors': [x for x in content.splitlines() if 'QA_MC_EXCEPTION' in x], 'parse_errors': parse_errors}

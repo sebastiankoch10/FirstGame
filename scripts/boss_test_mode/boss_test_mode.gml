@@ -112,14 +112,20 @@ function boss_test_tick(_dt) {
         if(keyboard_check_pressed(vk_f3)){var next=(boss.boss_phase mod 4)+1;boss.hp=boss.max_hp*(next==1 ? 1 : (next==2 ? .74 : (next==3 ? .49 : .24)));}
         if(keyboard_check_pressed(vk_f4))boss.hp=max(1,boss.max_hp*.25);
         if(keyboard_check_pressed(vk_f5) && state.ability!=-1)boss_v2_force_attack(boss,state.ability);
+        // F6: cycle the forced ability (Rotation -> 1 .. unlocked); F7: allow the announced catch-up move at the next pause.
+        if(keyboard_check_pressed(vk_f6) && variable_instance_exists(boss,"v2_unlocked")){state.ability=state.ability>=boss.v2_unlocked ? -1 : (state.ability==-1 ? 1 : state.ability+1);if(state.ability!=-1)boss_v2_force_attack(boss,state.ability);}
+        if(keyboard_check_pressed(vk_f7) && variable_instance_exists(boss,"bc_far_time")){boss.bc_far_time=99;boss.bc_catch_cd=0;}
     }
+    // F8: +5 talent points, F9: an epic test item next to the player (development only).
+    if(keyboard_check_pressed(vk_f8))talent_grant(5,"Bosstest");
+    if(keyboard_check_pressed(vk_f9) && instance_exists(ObjectPlayer))equipment_drop(ObjectPlayer.x+50,ObjectPlayer.y+20,equipment_generate(equipment_random_slot(),3,equipment_item_level()+2));
     if(keyboard_check_pressed(vk_f10))state.debug_hitboxes=!state.debug_hitboxes;
 }
 function boss_test_draw_gui() {
     if(!variable_global_exists("boss_test") || !is_struct(global.boss_test) || !global.boss_test.active)return;
     var state=global.boss_test;draw_set_font(-1);draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_color(make_color_rgb(167,222,220));
     draw_text_transformed(12,display_get_gui_height()-43,"BOSSTEST | "+state.boss+" | Min "+string(state.minute)+" | Seed "+string(state.seed)+" | "+(state.ability==-1 ? "Rotation" : "Attacke "+string(state.ability)),.7,.7,0);
-    draw_text_transformed(12,display_get_gui_height()-24,"F1 Schutz "+(state.invulnerable ? "EIN" : "AUS")+" | F2 Heilen | F3 Phase | F4 HP25% | F5 Attacke | F10 Koerperboxen",.65,.65,0);
+    draw_text_transformed(12,display_get_gui_height()-24,"F1 Schutz "+(state.invulnerable ? "EIN" : "AUS")+" | F2 Heilen | F3 Phase | F4 HP25% | F5 Attacke | F6 Attacke wechseln | F7 Aufholen | F8 Talente | F9 Gegenstand | F10 Koerperboxen",.65,.65,0);
     if(state.debug_hitboxes && instance_exists(ObjectPlayer)) {
         var camera=ObjectPlayer.camera,view_x=camera_get_view_x(camera),view_y=camera_get_view_y(camera),sx=display_get_gui_width()/camera_get_view_width(camera),sy=display_get_gui_height()/camera_get_view_height(camera);
         draw_set_color(make_color_rgb(255,111,149));
