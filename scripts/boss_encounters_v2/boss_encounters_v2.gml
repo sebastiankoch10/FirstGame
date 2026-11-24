@@ -133,8 +133,8 @@ function bv2_encounter_attack_begin(_b,_index) {
                 if(phase>=2) {
                     // Fire on one colour of the board, then ice on the cells that were safe a moment ago.
                     var cfgc=bc_config();
-                    bc_checker(_b,"twins_meteor_cell",_b.v2_target_x,_b.v2_target_y,cfgc.cell,cfgc.grid,0,warning+.2,.45,damage,"all");
-                    bc_checker(_b,"twins_ice_cell",_b.v2_target_x,_b.v2_target_y,cfgc.cell,cfgc.grid,1,warning+1.35,.45,damage,"all");
+                    bc_checker(_b,"twins_meteor_cell",_b.v2_target_x,_b.v2_target_y,cfgc.cell,cfgc.grid,0,warning+.45,.45,damage,"all");
+                    bc_checker(_b,"twins_ice_cell",_b.v2_target_x,_b.v2_target_y,cfgc.cell,cfgc.grid,1,warning+1.75,.45,damage,"all");
                     break;
                 }
                 for(var i=0;i<4+(phase>=3 ? 2 : 0);i++) {

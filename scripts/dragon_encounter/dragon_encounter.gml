@@ -73,15 +73,15 @@ function dragon_encounter_begin(_b,_kind) {
         if(_kind=="stomp" && phase>=2) {
             // Magma checkerboard, then the inverted board: stand on the dark cells, then switch.
             _b.enc_zones=[];_b.dragon_magma=[];
-            bc_checker(_b,"dragon_magma_cell",pl.x,pl.y-10,cfgc.cell,cfgc.grid,0,c.warning+.35,.5,c.damage,"all");
-            bc_checker(_b,"dragon_magma_cell",pl.x,pl.y-10,cfgc.cell,cfgc.grid,1,c.warning+1.55,.5,c.damage,"all");
+            bc_checker(_b,"dragon_magma_cell",pl.x,pl.y-10,cfgc.cell,cfgc.grid,0,c.warning+.6,.5,c.damage,"all");
+            bc_checker(_b,"dragon_magma_cell",pl.x,pl.y-10,cfgc.cell,cfgc.grid,1,c.warning+1.9,.5,c.damage,"all");
         }
         if(_kind=="meteor" && phase>=2) {
             // Consecutive explosions marching from the dragon through the player's position (reaches far kiters).
             _b.enc_zones=[];
             var a=point_direction(_b.x,_b.y-10,pl.x,pl.y-10);
             bc_line_burst(_b,"dragon_meteor",_b.x+lengthdir_x(140,a),_b.y-10+lengthdir_y(140,a),a,92,12,72,c.warning,.13,.35,c.damage,"all");
-            if(phase>=3)bc_in_out(_b,"dragon_meteor_ring",pl.x,pl.y-10,125,300,c.warning+.9,1.0,.35,c.damage,false,"all");
+            if(phase>=3)bc_in_out(_b,"dragon_meteor_ring",pl.x,pl.y-10,125,300,c.warning+1.2,1.15,.35,c.damage,false,"all");
         }
     }
     dragon_state(_b,"windup",c.warning);
