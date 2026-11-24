@@ -144,6 +144,8 @@ function qa_bot_step(_policy) {
             var h=global.bv2_hazards[i],g=h.g;
             if(!qa_visible_point(g.x,g.y,g.radius) || !qa_bot_observed(h,_policy.reaction))continue;
             if(h.age>=h.warning+h.active)continue;
+            // v3: a sweeping beam/breath is announced as its whole fan; bots avoid that fan like an attentive player.
+            if(variable_struct_exists(h,"sweep_from")){var lo=min(h.sweep_from,h.sweep_to),hi=max(h.sweep_from,h.sweep_to);g=telegraph_make("sector",g.x,g.y,min(g.radius,1400),1,(lo+hi)*.5,(hi-lo)+(g.shape=="sector" ? g.span : 8));g.elapsed=0;}
             candidate_score-=qa_mark_penalty(g,px,py-10)*_policy.avoid;
             if(telegraph_contains(g,pl.x,pl.y-10)){danger_here=max(danger_here,2);if(candidate==0)qa_bot_plan(g,max(0,h.warning-h.age),h.height,_policy);}
         }
