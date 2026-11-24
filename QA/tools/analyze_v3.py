@@ -67,6 +67,7 @@ def main():
     ap.add_argument('--out', type=Path, default=ROOT / 'QA/data/v3-analysis.json')
     ap.add_argument('--report', type=Path, default=ROOT / 'QA/V3_SIMULATION_REPORT.md')
     ap.add_argument('--compare', nargs='*', default=[], help='Codex-era cohort files for a baseline comparison of survival times')
+    ap.add_argument('--boss', nargs='*', default=[], help='isolated boss encounter JSONL (run_boss_mc.py)')
     args = ap.parse_args()
     paths = [Path(p) for pat in args.runs for p in glob.glob(pat)]
     raw = read(paths)
@@ -191,6 +192,26 @@ def main():
               '| Klasse/Persona | n vorher | n nachher | Median vorher s | Median nachher s | Mittel vorher | Mittel nachher | p |', '|---|---|---|---|---|---|---|---|']
         for c in comparison:
             L.append(f"| {c['class_name']}/{c['persona']} | {c['n_before']} | {c['n_after']} | {fmt(c['median_before'])} | {fmt(c['median_after'])} | {fmt(c['mean_before'])} | {fmt(c['mean_after'])} | {fmt(c['p_mann_whitney'],3)} |")
+    # ---- isolated boss fights
+    if args.boss:
+        from analyze_qa import summary_bosses, attack_totals
+        bpaths = [Path(p) for pat in args.boss for p in glob.glob(pat)]
+        brows = [r for r in read(bpaths) if r.get('record_type') == 'boss_encounter']
+        out['isolated_boss'] = {'encounters': len(brows), 'completed': sum(bool(r.get('completed')) for r in brows)}
+        groups = defaultdict(list)
+        for r in brows:
+            groups[(r.get('boss'), int(r.get('spawn_minute') or 0))].append(r)
+        L += ['', f'## Isolierte Bosskämpfe ({len(brows)} Kämpfe)', '', 'Bot-Spieler mit Entwicklungs-Preset je Minute (Boss-Testmodus). Keine menschlichen Siegquoten.', '',
+              '| Boss | Minute | Kämpfe | Siege | Siegquote (95 %-Wilson) | Dauer Median s |', '|---|---|---|---|---|---|']
+        for (boss, minute), rs in sorted(groups.items()):
+            w = sum(bool(r.get('won')) for r in rs); ci = wilson(w, len(rs))
+            L.append(f"| {boss} | {minute} | {len(rs)} | {w} | {fmt(w/len(rs)*100,0)} % ({fmt(ci[0]*100,0)}–{fmt(ci[1]*100,0)} %) | {fmt(describe([r['seconds'] for r in rs]).get('median'))} |")
+        at = attack_totals(brows)
+        out['isolated_boss_abilities'] = at
+        L += ['', '### Bossfähigkeiten in den isolierten Kämpfen', '', '„bedroht“ = der Bot stand in der angekündigten Gefahr; „getroffen“ = davon mit Treffer. Hohe Quoten bei Projektilen sind Bot-Grenzen (die Bots weichen Geschossen nur begrenzt aus).', '',
+              '| Boss:Fähigkeit | Aktivierungen | bedroht | getroffen | Trefferquote bedroht | tödlich | Warnzeit Median s |', '|---|---|---|---|---|---|---|']
+        for k, v in sorted(at.items()):
+            L.append(f"| {k} | {v['activations']} | {v['threatened']} | {v['activations_hit']} | {fmt((v['hit_fraction_threatened'] or 0)*100,0)} % | {v['fatal_hits']} | {fmt(v['warning_seconds'].get('median'),2)} |")
     L += ['', '## Todesursachen (letzte Schadensquelle)', '']
     for k, v in deaths.most_common():
         L.append(f'- {k}: {v}')

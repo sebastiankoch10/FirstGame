@@ -170,6 +170,8 @@ Bossidentitäten respektieren:
 | Behemoth | 7 Giftatem | Ab Phase 2: Der Atem schwenkt um 64°. |
 | Behemoth | 8 Sumpfwelle | Die Welle rollt 1.500 px weit statt 650 px. Man kann sie überspringen oder ihre Bahn verlassen. |
 
+**Fairness-Regel für Schwenks:** Ein schwenkender Strahl oder Atem trifft pro Überstreichen höchstens einmal. Grund: Die isolierten Boss-Simulationen vom 24.11. zeigten Mehrfachtreffer, wenn man nah am Drachen steht oder in Schwenkrichtung läuft. Der Schaden pro Treffer bleibt unverändert.
+
 **Seltene Aufholattacken** statt des technischen Teleports. Bedingung: mehr als 520 px Abstand für 3,5 s zwischen zwei Angriffen; danach mindestens 20 s Abklingzeit.
 - **Drache:** Sturzflug mit „leap“-Animation und Flughöhe. Die Landezone (170 px) ist 1,6 s vorher angekündigt.
 - **Behemoth:** Er versinkt 0,8 s lang und bricht dann an der angekündigten Stelle (190 px) hervor.

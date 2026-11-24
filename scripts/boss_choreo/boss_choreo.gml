@@ -66,11 +66,12 @@ function bc_line_burst(_b,_kind,_x,_y,_angle,_step,_count,_radius,_warning,_dela
 /// Long sweeping beam: telegraphed as the whole swept fan; the hitbox line turns from _from to _to during the active time.
 function bc_sweep(_b,_kind,_x,_y,_from,_to,_width,_warning,_active,_damage,_height="high") {
     var h=bv2_hazard(_b,_kind,telegraph_make("line",_x,_y,bc_config().beam_length,_warning,_from,0,_width),_active,_damage,_height,false,undefined);
-    if(is_struct(h)){h.sweep_from=_from;h.sweep_to=_from+angle_difference(_to,_from);h.interval=.4;}
+    // Fairness: a sweeping beam hits a player at most once per pass (no repeated ticks while it crosses the body).
+    if(is_struct(h)){h.sweep_from=_from;h.sweep_to=_from+angle_difference(_to,_from);h.interval=.4;h.hit_once=true;}
     return h;
 }
 /// Sweeping sector (breath): same rule for cones.
-function bc_sweep_sector(_h,_from,_to) {if(is_struct(_h)){_h.sweep_from=_from;_h.sweep_to=_from+angle_difference(_to,_from);_h.g.angle=_from;}return _h;}
+function bc_sweep_sector(_h,_from,_to) {if(is_struct(_h)){_h.sweep_from=_from;_h.sweep_to=_from+angle_difference(_to,_from);_h.g.angle=_from;_h.hit_once=true;}return _h;}
 /// Poison that closes in around (_cx,_cy): the safe inner radius shrinks from _from to _to during the active time.
 function bc_closing_ring(_b,_kind,_cx,_cy,_from,_to,_band,_warning,_active,_damage) {
     var h=bv2_ring(_b,_kind,_cx,_cy,_from+_band,_from,_warning,_active,_damage,"ground");
