@@ -100,6 +100,13 @@ Arbeitsweise: Änderungen direkt im Projekt (F5 in GameMaker). Tests bauen isoli
   - schließender Giftring
   - Schwenkstrahl mit 2.600 px
 - **16 der 27 Fähigkeiten** der drei Bosse haben phasenabhängige, komplexere Varianten: Drache 1, 2, 3, 4; Hexen 1, 3, 4, 6, 8; Behemoth 2, 3, 5, 6, 7, 8 (die Sumpfwelle reicht in allen Phasen 1.500 px). Es bleiben 9 Fähigkeiten je Boss, die Freischaltung 3/6/9 ist unverändert, und es gibt keine neuen HP- oder Schadenswerte.
+- **Fairness-Korrekturen auf Basis der Boss-Simulationen** (alle ohne HP- oder Schadensänderung):
+  1. Schwenkstrahl und schwenkender Atem treffen pro Überstreichen nur einmal.
+  2. Mehrwellen-Muster bekommen mehr Reaktionszeit.
+  3. Das Drachen-Schachbrett ist überspringbar (Bodenhöhe).
+  4. Komplexe Varianten der früh freigeschalteten Fähigkeiten 1–3 gibt es erst bei Bossen ab Minute 10.
+
+  Die Zwischenstände liegen unter `QA/data/v3-boss-prefix|intermediate|intermediate2|intermediate3.jsonl`.
 - **Seltene Aufholattacken:** Sturzflug (Drache), Untertauchen (Behemoth), Formationswechsel (Hexen). Der Teleport bleibt nur als Notfall bei mehr als 850 px außerhalb des Bildes, nach 6 s statt 2,5 s.
 - **Überlappende Wellen** sind lesbar: Die nächste Welle wird kräftig mit Countdown gezeigt, die spätere Welle nur blass mit Punktmarkierung.
 - **Warnungen allgemein (Priorität 9):** Zusätzlich zum Zeiger in der Mitte läuft ein radialer Countdown am Zonenrand. Kurz vor dem Einschlag leuchtet die Kante auf. Es gilt dieselbe Uhr wie für den Treffer.
