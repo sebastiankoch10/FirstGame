@@ -61,7 +61,7 @@ function dragon_encounter_begin(_b,_kind) {
             // Very long sweeping fire beam: the swept fan is announced, the hit line turns at a readable speed.
             var span=phase>=2 ? 84 : 64,dir=(_b.dragon_cycle mod 2==0) ? 1 : -1,from=_b.dragon_angle-dir*span*.5,to=_b.dragon_angle+dir*span*.5;
             c.active+=.7;_b.enc_sweep=bc_sweep(_b,"dragon_beam",mouth.x,mouth.y,from,to,48,c.warning,c.active,c.damage,"high");
-            _b.dragon_angle=from;_b.dragon_beam_length=cfgc.beam_length;
+            _b.dragon_angle=from; // dragon_beam_length stays the visible length (lights/art); the hitbox is the 2600 px hazard
             if(phase>=3)for(var k=0;k<4;k++){var a=k*90+45;bv2_zone(_b,"dragon_meteor",bc_clamp_x(pl.x+lengthdir_x(150,a)),bc_clamp_y(pl.y-10+lengthdir_y(110,a)),75,c.warning+c.active*.6,.35,c.damage,"all");}
         }
         if(_kind=="arc" && phase>=3) {

@@ -137,7 +137,12 @@ function bc_hazard_active_draw(_h,_age,_col) {
         else bv2_fx(_h.kind,clamp(_age/max(.35,_h.active),0,1),mx,my,min(g.width,g.radius)*.5);
         draw_set_alpha(1);return true;
     }
-    if(g.shape=="line" && string_pos("dragon_beam",_h.kind)==1) {dragon_fire_sprite(g,g.angle,g.radius,g.width,floor(current_time/80) mod 4,k);return true;}
+    if(g.shape=="line" && string_pos("dragon_beam",_h.kind)==1) {
+        // The hitbox stays 2600 px; the flame art is only stretched up to the visible screen edge (same look as the original beam).
+        var r=combat_view_rect(),vis=600,corners=[[r.left,r.top],[r.right,r.top],[r.left,r.bottom],[r.right,r.bottom]];
+        for(var i=0;i<4;i++)vis=max(vis,(corners[i][0]-g.x)*lengthdir_x(1,g.angle)+(corners[i][1]-g.y)*lengthdir_y(1,g.angle)+100);
+        dragon_fire_sprite(g,g.angle,min(g.radius,vis),g.width,floor(current_time/80) mod 4,k);return true;
+    }
     if(variable_struct_exists(_h,"closing")) {
         gpu_set_blendmode(bm_add);draw_set_color(_col);
         for(var n=0;n<5;n++){draw_set_alpha(.07*k);draw_circle(g.x,g.y,g.inner+18+n*26,true);}
