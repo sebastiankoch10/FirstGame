@@ -73,8 +73,8 @@ function dragon_encounter_begin(_b,_kind) {
         if(_kind=="stomp" && phase>=2) {
             // Magma checkerboard, then the inverted board: stand on the dark cells, then switch.
             _b.enc_zones=[];_b.dragon_magma=[];
-            bc_checker(_b,"dragon_magma_cell",pl.x,pl.y-10,cfgc.cell,cfgc.grid,0,c.warning+.6,.5,c.damage,"all");
-            bc_checker(_b,"dragon_magma_cell",pl.x,pl.y-10,cfgc.cell,cfgc.grid,1,c.warning+1.9,.5,c.damage,"all");
+            bc_checker(_b,"dragon_magma_cell",pl.x,pl.y-10,cfgc.cell,cfgc.grid,0,c.warning+.6,.5,c.damage,"ground"); // jumpable
+            bc_checker(_b,"dragon_magma_cell",pl.x,pl.y-10,cfgc.cell,cfgc.grid,1,c.warning+1.9,.5,c.damage,"ground");
         }
         if(_kind=="meteor" && phase>=2) {
             // Consecutive explosions marching from the dragon through the player's position (reaches far kiters).

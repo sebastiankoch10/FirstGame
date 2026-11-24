@@ -146,7 +146,9 @@ function qa_bot_step(_policy) {
             if(h.age>=h.warning+h.active)continue;
             // v3: a sweeping beam/breath is announced as its whole fan; bots avoid that fan like an attentive player.
             if(variable_struct_exists(h,"sweep_from")){var lo=min(h.sweep_from,h.sweep_to),hi=max(h.sweep_from,h.sweep_to);g=telegraph_make("sector",g.x,g.y,min(g.radius,1400),1,(lo+hi)*.5,(hi-lo)+(g.shape=="sector" ? g.span : 8));g.elapsed=0;}
-            candidate_score-=qa_mark_penalty(g,px,py-10)*_policy.avoid;
+            // v3: like a player reading "next wave strong, later wave faint", weight hazards by urgency.
+            var urgency=clamp(1-(h.warning-h.age-.4)/1.2,.15,1);
+            candidate_score-=qa_mark_penalty(g,px,py-10)*_policy.avoid*urgency;
             if(telegraph_contains(g,pl.x,pl.y-10)){danger_here=max(danger_here,2);if(candidate==0)qa_bot_plan(g,max(0,h.warning-h.age),h.height,_policy);}
         }
         for(var i=0;i<array_length(global.boss_zones);i++) {

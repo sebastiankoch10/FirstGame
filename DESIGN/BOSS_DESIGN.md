@@ -156,7 +156,7 @@ Bossidentitäten respektieren:
 |---|---|---|
 | Drache | 1 Feuerstrahl | Schwenkstrahl 64° (ab Phase 2: 84°), Richtung wechselt. Ab Phase 3 zusätzlich 4 Meteore um den Spieler (Strahl plus Boden). |
 | Drache | 2 Feuerbogen | Ab Phase 3 zusätzlich wechselnde lange Feuerkegel (900 px): drei Kegel bei −70°/0°/+70°, danach die Lücken bei ±35°. |
-| Drache | 3 Magmaeruption | Ab Phase 2: Magma-Schachbrett, danach das invertierte Brett (1,2 s versetzt, überlappende Warnung). |
+| Drache | 3 Magmaeruption | Ab Phase 2: Magma-Schachbrett, danach das invertierte Brett (1,3 s versetzt, überlappende Warnung). Die Felder sind überspringbar (Bodenhöhe), weil sie eine große Fläche abdecken. Die ursprünglichen Magmakreise in Phase 1 treffen weiterhin jede Höhe. |
 | Drache | 4 Meteoritenregen | Ab Phase 2: Einschlagkette vom Drachen durch die Spielerposition hindurch (12 × 92 px). Ab Phase 3 zusätzlich außen/innen. |
 | Hexen | 1 Doppelte Geschosssalve | Normale Projektile ohne Bodenwarnung. Ab Phase 3 zieht die Acht-Formation zusätzlich einen Verbindungsstrahl hinter sich her. |
 | Hexen | 3 Meteor-/Eisregen | Ab Phase 2: Feuer auf dem Schachbrett, danach Eis auf den zuvor sicheren Feldern. |
@@ -171,6 +171,8 @@ Bossidentitäten respektieren:
 | Behemoth | 8 Sumpfwelle | Die Welle rollt 1.500 px weit statt 650 px. Man kann sie überspringen oder ihre Bahn verlassen. |
 
 **Fairness-Regel für Schwenks:** Ein schwenkender Strahl oder Atem trifft pro Überstreichen höchstens einmal. Grund: Die isolierten Boss-Simulationen vom 24.11. zeigten Mehrfachtreffer, wenn man nah am Drachen steht oder in Schwenkrichtung läuft. Der Schaden pro Treffer bleibt unverändert.
+
+**Reaktionszeit bei Mehrwellen-Mustern:** Nach den ersten isolierten Boss-Simulationen bekamen die Muster mehr Zeit. Das Drachen-Schachbrett startet 0,6 s nach der Grundwarnung, das invertierte Brett 1,3 s später. Beim Drachen beginnt innen/außen 1,2 s nach der Grundwarnung, die zweite Stufe folgt 1,15 s später. Das Hexen-Schachbrett startet 0,45 s nach der Grundwarnung, die Eiswelle 1,3 s später. Schaden und HP sind unverändert.
 
 **Seltene Aufholattacken** statt des technischen Teleports. Bedingung: mehr als 520 px Abstand für 3,5 s zwischen zwei Angriffen; danach mindestens 20 s Abklingzeit.
 - **Drache:** Sturzflug mit „leap“-Animation und Flughöhe. Die Landezone (170 px) ist 1,6 s vorher angekündigt.
