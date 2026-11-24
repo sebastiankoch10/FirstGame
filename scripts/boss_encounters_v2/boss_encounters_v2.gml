@@ -123,14 +123,14 @@ function bv2_encounter_attack_begin(_b,_index) {
             case 1:
                 // Visible moving ordinary projectiles have no floor countdown. From phase 3 the figure-eight flight
                 // drags a connection beam between the witches across the area.
-                if(phase>=3)bv2_encounter_add_line(_b,"twins_link",fire_hand.x,fire_hand.y,ice_hand.x,ice_hand.y,26,warning,p.active+1.2,damage,"link");
+                if(bc_complex(_b,3))bv2_encounter_add_line(_b,"twins_link",fire_hand.x,fire_hand.y,ice_hand.x,ice_hand.y,26,warning,p.active+1.2,damage,"link");
                 break;
             case 2:
                 h=bv2_ring(_b,"twins_ring",cx,cy,255,205,warning,2.4,damage,"ground");
                 if(is_struct(h)){h.gap_angle=90;h.gap_width=75;h.rotate_speed=35+phase*5;h.interval=.55;}
                 break;
             case 3:
-                if(phase>=2) {
+                if(bc_complex(_b,2)) {
                     // Fire on one colour of the board, then ice on the cells that were safe a moment ago.
                     var cfgc=bc_config();
                     bc_checker(_b,"twins_meteor_cell",_b.v2_target_x,_b.v2_target_y,cfgc.cell,cfgc.grid,0,warning+.45,.45,damage,"all");
@@ -184,7 +184,7 @@ function bv2_encounter_attack_begin(_b,_index) {
         switch(_index) {
             case 1:break; // The spit is a readable ordinary projectile.
             case 2:
-                if(phase>=2) {
+                if(bc_complex(_b,2)) {
                     // Acid stripes with alternating gaps: the safe lanes become dangerous and vice versa.
                     var sa=(_b.v2_cycle mod 4)*45,first=bc_stripes(_b,"swamp_acid",_b.v2_target_x,_b.v2_target_y,sa,105,7,1050,0,warning,1.6,damage,"ground");
                     var second=bc_stripes(_b,"swamp_acid",_b.v2_target_x,_b.v2_target_y,sa,105,7,1050,1,warning+2.3,1.6,damage,"ground"); // 0.7 s gap: switching lanes is always possible
@@ -198,7 +198,7 @@ function bv2_encounter_attack_begin(_b,_index) {
                     if(is_struct(h)){h.hit_once=false;h.interval=.65;h.poison=1.2;}
                 }break;
             case 3:
-                if(phase>=2) {
+                if(bc_complex(_b,2)) {
                     // Roots erupt one after another from the behemoth through and past the player (also reaches far kiters).
                     var base=point_direction(_b.x,_b.y-10,_b.v2_target_x,_b.v2_target_y),lines=phase>=3 ? [-18,18] : [0];
                     for(var l=0;l<array_length(lines);l++) {

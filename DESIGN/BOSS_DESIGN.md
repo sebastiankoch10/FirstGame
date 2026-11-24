@@ -150,6 +150,8 @@ Bossidentitäten respektieren:
 - sich schließender Giftring
 - Schwenkstrahl mit 2.600 px Länge: Der ganze Fächer wird angekündigt, mit Startkante, Richtungspfeilen und Countdown-Zeiger.
 
+**Eskalation über die Spielzeit:** Die komplexen Varianten der früh freigeschalteten Fähigkeiten 1–3 erscheinen erst bei Bossen ab Minute 10, also ab 6 Fähigkeiten. Das betrifft Drachen-Schachbrett, -Kegel und Strahl plus Meteore, die Hexen-Acht mit Strahl und das Hexen-Schachbrett sowie Säurestreifen und Wurzellinie des Behemoth. Der erste Hauptboss in Minute 5 zeigt nur den Schwenkstrahl und die ursprünglichen Fähigkeiten. So steht es in Abschnitt H: „Früh freigeschaltete Fähigkeiten dürfen später komplexere Varianten bekommen.“ Anlass war die Boss-Simulation vom 24.11.: Gegen den Drachen in Minute 5 gewannen die Bots 0 von 12 Kämpfen, bei Codex waren es 12 von 24. Ursache war vor allem das Schachbrett.
+
 **Einbau in die bestehenden neun Fähigkeiten.** Die Freischaltung 3/6/9 ist unverändert. Ab Phase 2 bzw. 3 kommen komplexere Varianten hinzu:
 
 | Boss | Fähigkeit | Neue Choreografie |

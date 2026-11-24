@@ -62,15 +62,15 @@ function dragon_encounter_begin(_b,_kind) {
             var span=phase>=2 ? 84 : 64,dir=(_b.dragon_cycle mod 2==0) ? 1 : -1,from=_b.dragon_angle-dir*span*.5,to=_b.dragon_angle+dir*span*.5;
             c.active+=.7;_b.enc_sweep=bc_sweep(_b,"dragon_beam",mouth.x,mouth.y,from,to,48,c.warning,c.active,c.damage,"high");
             _b.dragon_angle=from; // dragon_beam_length stays the visible length (lights/art); the hitbox is the 2600 px hazard
-            if(phase>=3)for(var k=0;k<4;k++){var a=k*90+45;bv2_zone(_b,"dragon_meteor",bc_clamp_x(pl.x+lengthdir_x(150,a)),bc_clamp_y(pl.y-10+lengthdir_y(110,a)),75,c.warning+c.active*.6,.35,c.damage,"all");}
+            if(bc_complex(_b,3))for(var k=0;k<4;k++){var a=k*90+45;bv2_zone(_b,"dragon_meteor",bc_clamp_x(pl.x+lengthdir_x(150,a)),bc_clamp_y(pl.y-10+lengthdir_y(110,a)),75,c.warning+c.active*.6,.35,c.damage,"all");}
         }
-        if(_kind=="arc" && phase>=3) {
+        if(_kind=="arc" && bc_complex(_b,3)) {
             // Alternating long fire cones: three cones first, then the gaps between them (reaches far kiters, 900 px).
             var base=_b.dragon_angle;
             for(var k=-1;k<=1;k++)bv2_sector(_b,"dragon_cone",mouth.x,mouth.y,900,base+k*70,34,c.warning+.5,.45,c.damage,"ground");
             for(var k=-1;k<=1;k+=2)bv2_sector(_b,"dragon_cone",mouth.x,mouth.y,900,base+k*35,34,c.warning+1.6,.45,c.damage,"ground"); // ground: also jumpable
         }
-        if(_kind=="stomp" && phase>=2) {
+        if(_kind=="stomp" && bc_complex(_b,2)) {
             // Magma checkerboard, then the inverted board: stand on the dark cells, then switch.
             _b.enc_zones=[];_b.dragon_magma=[];
             bc_checker(_b,"dragon_magma_cell",pl.x,pl.y-10,cfgc.cell,cfgc.grid,0,c.warning+.6,.5,c.damage,"ground"); // jumpable

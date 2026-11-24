@@ -11,6 +11,9 @@ function bc_config() {
         cell:118,grid:5};
     return cfg;
 }
+/// Complex variants of the early abilities (1-3, unlocked at minute 5) only appear in later encounters
+/// ("Früh freigeschaltete Fähigkeiten dürfen später komplexere Varianten bekommen"): boss phase AND >= 6 unlocked abilities.
+function bc_complex(_b,_phase_min) {return _b.boss_phase>=_phase_min && variable_instance_exists(_b,"v2_unlocked") && _b.v2_unlocked>=6;}
 function bc_clamp_x(_x,_pad=60) {return clamp(_x,_pad,room_width-_pad);}
 function bc_clamp_y(_y,_pad=60) {return clamp(_y,_pad,room_height-_pad);}
 /// Axis-aligned or rotated rectangle starting at (_x,_y) and running _len pixels along _angle.
