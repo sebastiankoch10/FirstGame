@@ -29,8 +29,13 @@ function spell_vfx_trail(_x,_y,_dir,_kind) {
         case "fire":spell_particle(_x+lengthdir_x(6,back),_y+lengthdir_y(6,back),lengthdir_x(30,back)+random_range(-15,15),lengthdir_y(30,back)-random_range(10,40),random_range(.2,.38),random_range(2,3.4),choose(make_color_rgb(255,140,50),make_color_rgb(255,214,120)),0,-30);break;
         case "ice":if(irandom(1)==0)spell_particle(_x+lengthdir_x(6,back),_y+lengthdir_y(6,back),random_range(-20,20),random_range(-20,20),random_range(.25,.4),random_range(1.5,2.5),choose(make_color_rgb(140,226,255),c_white),2,15);break;
         case "arcane":if(irandom(1)==0)spell_particle(_x,_y,random_range(-25,25),random_range(-25,25),random_range(.2,.32),2,choose(make_color_rgb(206,118,255),make_color_rgb(240,200,255)),2,0);break;
-        case "wand":if(irandom(2)==0)spell_particle(_x,_y,random_range(-18,18),random_range(-18,18),.22,2,make_color_rgb(176,140,255),0,0);break;
-        case "bolt":if(irandom(3)==0)spell_particle(_x+lengthdir_x(8,back),_y+lengthdir_y(8,back),lengthdir_x(20,back),lengthdir_y(20,back),.14,1.5,make_color_rgb(190,255,160),1,0);break;
+        case "wand":case "bolt":
+            // An equipped weapon item tints the class-weapon trail in its rarity colour (visual only).
+            var gear=variable_global_exists("equipment") && is_struct(global.equipment[$ "weapon"]);
+            var tint=gear ? equipment_rarity_color(global.equipment[$ "weapon"].rarity) : (_kind=="wand" ? make_color_rgb(176,140,255) : make_color_rgb(190,255,160));
+            if(_kind=="wand"){if(irandom(gear ? 1 : 2)==0)spell_particle(_x,_y,random_range(-18,18),random_range(-18,18),.22,2,tint,0,0);}
+            else if(irandom(gear ? 2 : 3)==0)spell_particle(_x+lengthdir_x(8,back),_y+lengthdir_y(8,back),lengthdir_x(20,back),lengthdir_y(20,back),.14,1.5,tint,1,0);
+            break;
         default:if(irandom(2)==0)spell_particle(_x,_y,random_range(-20,20),random_range(-20,20),.25,2,make_color_rgb(160,200,255),0,0);break;
     }
 }

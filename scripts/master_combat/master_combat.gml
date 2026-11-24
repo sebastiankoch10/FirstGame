@@ -57,6 +57,8 @@ function master_slash_draw() {
     gpu_set_blendmode(bm_add);
     draw_sprite_ext(spr,frame,x,y,scale,scale,direction,c_white,alpha*(tier==1 ? .28 : (tier==2 ? .62 : .9)));
     if(tier==3)draw_sprite_ext(spr,frame,x,y,scale,scale,direction+4,make_color_rgb(255,212,116),alpha*.25);
+    // An equipped weapon item adds a sheen in its rarity colour (visual only).
+    if(variable_global_exists("equipment") && is_struct(global.equipment[$ "weapon"]))draw_sprite_ext(spr,frame,x,y,scale*1.04,scale*1.04,direction-3,equipment_rarity_color(global.equipment[$ "weapon"].rarity),alpha*.35);
     gpu_set_blendmode(bm_normal);
     draw_sprite_ext(spr,frame,x,y,scale,scale,direction,c_white,alpha*.72);
     draw_set_color(c_white);draw_set_alpha(1);
