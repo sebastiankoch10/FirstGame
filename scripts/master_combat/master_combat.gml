@@ -40,6 +40,8 @@ function master_sword_step() {
             hit.lifetime=10;hit.total_lifetime=10;
             global.sword_combo_metrics.swings++;if(stage==3)global.sword_combo_metrics.finishers++;
             fg_sfx("sword_swing");with(hit)event_perform(ev_step,0);
+            // Visual only: sparks along the swing arc (bounded spell particle pool).
+            for(var sp=0;sp<(stage==3 ? 10 : 6);sp++){var sa=hit.direction-hit.hit_half_angle+2*hit.hit_half_angle*(sp+.5)/(stage==3 ? 10 : 6),sr=hit.hit_radius*random_range(.55,.9);spell_particle(x+lengthdir_x(sr,sa),y-12+lengthdir_y(sr,sa),lengthdir_x(90,sa+90*(stage==2 ? -1 : 1)),lengthdir_y(90,sa+90*(stage==2 ? -1 : 1)),random_range(.12,.22),2,choose(make_color_rgb(255,214,140),c_white,make_color_rgb(255,170,90)),1,0);}
             light_pulse(x+lengthdir_x(70,attack_direction),y-12+lengthdir_y(70,attack_direction),stage==3 ? 160 : 105,make_color_rgb(255,190,83),stage==3 ? .55 : .25,.16);
         }
     }
