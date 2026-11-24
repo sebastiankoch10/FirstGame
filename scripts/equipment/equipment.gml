@@ -341,7 +341,8 @@ function equipment_player_aura_draw(_pl) {
     if(pieces==0)return;
     var col=equipment_rarity_color(best),t=current_time/1000,pulse=.5+.5*sin(t*2.2),lift=_pl.jump_height;
     gpu_set_blendmode(bm_add);draw_set_color(col);
-    for(var k=0;k<min(3,1+pieces div 2);k++){draw_set_alpha((.10+.05*pulse)*(1-k*.25)*(lift>0 ? .5 : 1));draw_ellipse(_pl.x-22-k*3,_pl.y-4-k,_pl.x+22+k*3,_pl.y+8+k,true);}
+    draw_set_alpha((.07+.04*pulse)*(lift>0 ? .5 : 1));draw_ellipse(_pl.x-24,_pl.y-5,_pl.x+24,_pl.y+9,false);
+    for(var k=0;k<min(3,1+pieces div 2);k++){draw_set_alpha((.30+.12*pulse)*(1-k*.25)*(lift>0 ? .5 : 1));draw_ellipse(_pl.x-22-k*3,_pl.y-4-k,_pl.x+22+k*3,_pl.y+8+k,true);}
     var sheen=frac(t/3.2);
     if(sheen<.18){var a=sheen/.18*360;draw_set_alpha(.35*(1-sheen/.18));draw_circle(_pl.x+lengthdir_x(22,a),_pl.y+2+lengthdir_y(6,a),2,false);}
     gpu_set_blendmode(bm_normal);draw_set_alpha(1);draw_set_color(c_white);

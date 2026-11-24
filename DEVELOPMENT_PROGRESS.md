@@ -63,14 +63,18 @@ Arbeitsweise: Änderungen direkt im Projekt (F5 in GameMaker). Tests bauen isoli
   - Miniboss: 1 Gegenstand, mindestens magisch
   - normale Gegner: 0,3 %
 - **Aufnahme durch Darüberlaufen:**
-  - Ein leerer Slot wird automatisch belegt, sonst geht der Gegenstand in den Rucksack (8 Plätze).
+  - Ein leerer Slot wird automatisch belegt. Ein klar besserer Fund (höhere Seltenheit oder mindestens 20 % stärker) ersetzt das Angelegte; das alte Teil kommt in den Rucksack. Sonst geht der Gegenstand in den Rucksack (8 Plätze).
   - Im Charakterbildschirm: Linksklick legt an oder tauscht, Rechtsklick wirft weg.
   - Der Tooltip vergleicht mit dem angelegten Gegenstand.
 - **Darstellung:**
   - Drops in der Welt mit Lichtsäule in Rarity-Farbe und eigener Lichtquelle
   - Punkte auf der Minimap
   - Einblendungen „Angelegt/Gefunden“
-- **Grenze:** Die Charaktersprites ändern sich durch Ausrüstung **nicht** optisch. Dafür bräuchte es Rüstungsvarianten aller Animationen in 8 Richtungen für 3 Klassen; das ist mit dem prozeduralen Werkzeug nicht in Produktionsqualität machbar.
+- **Sichtbar am Charakter**, ohne neue Animationsgrafiken:
+  - ein Bodenring in der Farbe der besten Seltenheit (dicker mit mehr Teilen) mit gelegentlichem Glanz
+  - mit angelegter Waffe: Schwerthiebe mit Schimmer in Seltenheitsfarbe, Stab- und Pfeilspuren in dieser Farbe
+  - HUD-Leiste mit den sechs Slots über den Zauberslots
+- **Grenze:** Die Charaktersprites selbst zeigen keine Rüstungsteile. Dafür bräuchte es Rüstungsvarianten aller Animationen in 8 Richtungen für 3 Klassen; das ist mit dem prozeduralen Werkzeug nicht in Produktionsqualität machbar.
 
 ### 2.3 Zauber-Licht und Partikel – FERTIG (visuell geprüft)
 - **Datei:** `scripts/spell_vfx/spell_vfx.gml`.
@@ -81,6 +85,8 @@ Arbeitsweise: Änderungen direkt im Projekt (F5 in GameMaker). Tests bauen isoli
   - Klasseneffekte: Magiekreis-Runen, Sternenorb-Funken, Pfeilhagel-Staub
 - **Dauerhafte Lichtquellen** für alle aktiven Felder und Klasseneffekte im bestehenden multiplikativen Lichtsystem.
 - Das Limit der Lichtimpulse steigt von 24 auf 40. Das Budget von 72 Lichtquellen bleibt bestehen.
+- Schwerthiebe sprühen Funken entlang des Hiebbogens. Heilpuls und Frostnova laufen über `spell_fx_burst` und erhalten so ebenfalls Partikel. Damit sind alle 18 aktiven Zauber und alle drei Startwaffen abgedeckt.
+- Bei einem Testlauf mit 80 Gegnern blieb die Framezeit unverändert (siehe Tests).
 
 ### 2.4 Bosskampf-Designphilosophie – UMGESETZT, nativ getestet
 - **Dateien:** `scripts/boss_choreo/boss_choreo.gml` ist neu; eingebaut in `boss_hazards_v2`, `dragon_encounter`, `dragon_boss` und `boss_encounters_v2`.
@@ -93,7 +99,7 @@ Arbeitsweise: Änderungen direkt im Projekt (F5 in GameMaker). Tests bauen isoli
   - Explosionskette
   - schließender Giftring
   - Schwenkstrahl mit 2.600 px
-- **13 Fähigkeiten** der drei Bosse haben phasenabhängige, komplexere Varianten. Es bleiben 9 Fähigkeiten je Boss, die Freischaltung 3/6/9 ist unverändert, und es gibt keine neuen HP- oder Schadenswerte.
+- **16 der 27 Fähigkeiten** der drei Bosse haben phasenabhängige, komplexere Varianten: Drache 1, 2, 3, 4; Hexen 1, 3, 4, 6, 8; Behemoth 2, 3, 5, 6, 7, 8 (die Sumpfwelle reicht in allen Phasen 1.500 px). Es bleiben 9 Fähigkeiten je Boss, die Freischaltung 3/6/9 ist unverändert, und es gibt keine neuen HP- oder Schadenswerte.
 - **Seltene Aufholattacken:** Sturzflug (Drache), Untertauchen (Behemoth), Formationswechsel (Hexen). Der Teleport bleibt nur als Notfall bei mehr als 850 px außerhalb des Bildes, nach 6 s statt 2,5 s.
 - **Überlappende Wellen** sind lesbar: Die nächste Welle wird kräftig mit Countdown gezeigt, die spätere Welle nur blass mit Punktmarkierung.
 - **Warnungen allgemein (Priorität 9):** Zusätzlich zum Zeiger in der Mitte läuft ein radialer Countdown am Zonenrand. Kurz vor dem Einschlag leuchtet die Kante auf. Es gilt dieselbe Uhr wie für den Treffer.
@@ -129,9 +135,16 @@ Arbeitsweise: Änderungen direkt im Projekt (F5 in GameMaker). Tests bauen isoli
 - **Zahlenwerte von Talenten und Gegenständen:** Es sind neue, bewusst moderate Werte. Sie sind ausdrücklich nicht durch Simulation ausbalanciert.
 - **Ausrüstungsoptik am Charakter:** nicht umgesetzt (siehe 2.2).
 
-## 5. Nächste Schritte
-1. Boss-Designphilosophie umsetzen: Choreografie-Muster, Schwenkstrahlen, Aufholattacken, Telegraph-Verbesserungen.
-2. Boss-Testmodus prüfen und ergänzen.
-3. Native Boss-Mechaniktests (Reichweite, Muster, sichere Zonen).
-4. Regression (811) und Level-Smoke erneut.
-5. Simulationen.
+## 5. Simulationen (Priorität 11)
+- **Kohorte v3-cohort-a:**
+  - Code-Stand: Commit `92855ef0` (Talente, Ausrüstung, Boss-Choreografie). Ohne Drachen-Feuerkegel, Hexen-Acht-Strahl und Feuerschwenk, Funken, automatisches Anlegen und Waffenschimmer; diese kamen danach.
+  - 12 Worker, Ziel 1.080 vollständige Runs (je Klasse 360, je Persona 120).
+  - Die Bots verteilen Talentpunkte deterministisch und legen Funde automatisch an.
+- **Isolierte Bosskämpfe v3-boss:** Code-Stand von Commit `dd5d79dd`, also mit allen Bossänderungen. Ziel 180 Fälle.
+- **Ergebnisse:** siehe `QA/V3_SIMULATION_REPORT.md` (wird nach Abschluss erzeugt) und den Abschlussbericht.
+
+## 6. Nächste Schritte
+1. Menschlicher Spieltest: Bosse in Phase 2 bis 4 (F3 im Boss-Testmodus), Charakterbildschirm (T), Ausrüstungsfunde.
+2. Designentscheidungen aus Abschnitt 4 treffen.
+3. Weitere Simulationen bis 3.000 Runs: `QA/tools/run_cohort.py` mit neuer Kennung und neuen Seeds; Auswertung mit `QA/tools/analyze_v3.py`.
+4. Ältere Drachenangriffe optional ins bv2-System überführen, damit das Orakel im Boss-Test sie sieht.
