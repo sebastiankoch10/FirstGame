@@ -144,7 +144,18 @@ function bh_controller_tick() {
         }
         return;
     }
-    if(global.bh_stage==4) {bh_pattern_checks(run[0]);bh_next_run();return;}
+    if(global.bh_stage==4) {
+        bh_pattern_checks(run[0]);
+        // Escalation rule: complex variants of abilities 1-3 only for bosses with >= 6 unlocked abilities (minute 10+).
+        var probe=run[0]=="storm_warden" ? 3 : (run[0]=="twins" ? 3 : 2),saved=b.v2_unlocked;
+        for(var tier=0;tier<2;tier++) {
+            bv2_clear_owner(b);b.v2_unlocked=tier==0 ? 3 : 9;b.boss_phase=3;b.hp=b.max_hp*.35;boss_v2_force_attack(b,probe);
+            var cells=0;for(var i=0;i<array_length(global.bv2_hazards);i++)if(global.bv2_hazards[i].owner==b && variable_struct_exists(global.bv2_hazards[i],"cell"))cells++;
+            bh_check(tier==0 ? cells==0 : cells>0,run[0]+" ability "+string(probe)+" phase 3 with "+string(b.v2_unlocked)+" unlocked: "+(tier==0 ? "no" : "has")+" pattern cells ("+string(cells)+")");
+        }
+        b.v2_unlocked=saved;bv2_clear_owner(b);
+        bh_next_run();return;
+    }
     if(global.bh_stage==5) { // max-range kiting with the fastest class, normal rotation incl. catch-up moves
         if(global.bh_frame==1){global.boss_test.ability=-1;bv2_clear_owner(b);b.boss_phase=3;b.hp=b.max_hp*.35;global.bh_rec=bh_new_rec("kite",run[0]+" kite 560px");global.bh_kite_a=point_direction(bh_center(b).x,bh_center(b).y,pl.x,pl.y);global.bh_was_catch=false;}
         var rec=global.bh_rec,cen=bh_center(b),spd=pl.moveSpeed*60;rec.frames++;rec.dist_sum+=point_distance(cen.x,cen.y,pl.x,pl.y);
