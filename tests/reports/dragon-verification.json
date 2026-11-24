@@ -1,0 +1,132 @@
+{
+  "statuses": {
+    "dragon_spawn_and_large_model": "PASS",
+    "breathing_and_state_animation": "PASS",
+    "horizontal_beam_warning_and_damage": "PASS",
+    "slow_sweeping_beam": "PASS",
+    "moving_fire_arc": "PASS",
+    "stomp_exactly_three_magma_zones": "PASS",
+    "magma_warning_and_once_per_zone_damage": "PASS",
+    "phase_and_death_animation": "PASS",
+    "one_chest_one_orb_at_hp_death": "PASS",
+    "ordinary_enemies_no_orbs": "PASS",
+    "orb_actual_step_contact": "PASS",
+    "native_chest_confirmation_then_orb_contact": "PASS",
+    "all_sixty_native_coins_delivered": "PASS",
+    "five_hundred_coin_logic_fixture": "PASS",
+    "actual_damage_heal_hit_cast_stats_and_reset": "PASS",
+    "native_pause_stats_render": "PASS",
+    "project_integrity": "PASS",
+    "production_build": "PASS",
+    "continuous_interpolated_head_angles": "PARTIAL",
+    "human_won_complete_boss_round": "NOT RUN",
+    "additional_os_window_capture": "BLOCKED"
+  },
+  "runtime": {
+    "passed": true,
+    "checks": 259.0,
+    "classes": [
+      "Sword",
+      "Mage",
+      "Ranger"
+    ],
+    "combinations": 9.0,
+    "metrics": {
+      "magnet": {
+        "coins": 500.0,
+        "simulation_ms": 24.438
+      },
+      "progression": [
+        {
+          "minute_thirty": 51.0,
+          "kills_per_minute": 60.0,
+          "minute_one": 10.0
+        },
+        {
+          "minute_thirty": 71.0,
+          "kills_per_minute": 120.0,
+          "minute_one": 14.0
+        },
+        {
+          "minute_thirty": 101.0,
+          "kills_per_minute": 240.0,
+          "minute_one": 19.0
+        }
+      ],
+      "native_ranger": {
+        "min_reported_fps": 296.47198486328125,
+        "mean_delivered_frame_ms": 16.66664999999999,
+        "frames": 480.0,
+        "peak_alive": 29.0,
+        "peak_visible": 29.0
+      },
+      "crowd": {
+        "monster_update_ms": 1.9816,
+        "counts": {
+          "alive": 150.0,
+          "visible": 63.0,
+          "nearby": 150.0
+        }
+      },
+      "early": {
+        "alive": 23.0,
+        "visible": 23.0,
+        "nearby": 23.0
+      }
+    },
+    "native_modal_frames": 66.0,
+    "rendered": [
+      "boss-800.png",
+      "chain-800.png",
+      "dragonarc-800.png",
+      "dragonbeam-800.png",
+      "dragondeath-800.png",
+      "dragonidle-800.png",
+      "dragonphase-800.png",
+      "dragonstats-800.png",
+      "dragonsweep-800.png",
+      "dragonwarning-800.png",
+      "emptypause-800.png",
+      "levelup-800.png",
+      "magmaeruption-800.png",
+      "magmazones-800.png",
+      "native-800.png",
+      "pause-800.png",
+      "tooltip-800.png"
+    ],
+    "assertions_passed": true,
+    "exit_code": 0,
+    "test_type": "native Windows VM: nine starts, dedicated dragon attacks/death/loot, coin magnet, actual run statistics and regressions; injected input, not manual gameplay E2E",
+    "artifact": "output\\dragon-smoke\\20261122-174424\\build\\FirstGameDragonSmoke.exe",
+    "logs": "output\\dragon-smoke\\20261122-174424",
+    "dragon_render_fixture": {
+      "frames": 1350,
+      "scripted_attack_phase_and_death_triggers": true,
+      "elevated_player_hp_for_visual_coverage": true,
+      "native_chest_confirmation_and_orb_pickup": true,
+      "native_magnet_coins": 60,
+      "manual_victory_test": "NOT RUN"
+    }
+  },
+  "production": {
+    "passed": true,
+    "compile_success": true,
+    "package_success": true,
+    "igor_exit_code": 0,
+    "artifact": "output\\production-build\\20261122-174903\\game\\FirstGame.exe",
+    "archive": "output\\production-build\\20261122-174903\\FirstGame.zip",
+    "log": "output\\production-build\\20261122-174903\\build.log",
+    "test_hooks": false
+  },
+  "project_integrity": {
+    "resources": 348,
+    "problems": 0,
+    "warnings": 0
+  },
+  "os_capture_error": "foreground window did not report a process id; recovery inventory found test window already closed",
+  "limits": [
+    "native render fixtures use elevated HP and scripted phase/death triggers",
+    "no manual victory/balance playthrough",
+    "24 individual body poses plus continuous body breathing, not skeletal interpolation"
+  ]
+}

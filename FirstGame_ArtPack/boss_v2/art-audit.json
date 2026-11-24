@@ -1,0 +1,4325 @@
+﻿{
+    "failures":  [
+
+                 ],
+    "passed":  true,
+    "prepared_frames":  196,
+    "generated_source_images":  8,
+    "native_expected_frame_files":  204,
+    "native_expected_sprite_resources":  54,
+    "frames":  [
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13467,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2917,
+                       "frame":  "0-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      27,
+                                      25,
+                                      100,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13422,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2962,
+                       "frame":  "0-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      29,
+                                      23,
+                                      97,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13341,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3043,
+                       "frame":  "0-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      27,
+                                      21,
+                                      99,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13445,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2939,
+                       "frame":  "0-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      26,
+                                      26,
+                                      101,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13350,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3034,
+                       "frame":  "1-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      27,
+                                      22,
+                                      99,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13213,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3171,
+                       "frame":  "1-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      23,
+                                      27,
+                                      103,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13274,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3110,
+                       "frame":  "1-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      29,
+                                      108,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13300,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3084,
+                       "frame":  "1-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      16,
+                                      30,
+                                      110,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13424,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2960,
+                       "frame":  "2-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      24,
+                                      26,
+                                      103,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13448,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2936,
+                       "frame":  "2-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      30,
+                                      106,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13603,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2781,
+                       "frame":  "2-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      15,
+                                      44,
+                                      112,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13803,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2581,
+                       "frame":  "2-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      13,
+                                      53,
+                                      114,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13511,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2873,
+                       "frame":  "3-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      28,
+                                      26,
+                                      99,
+                                      114
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13415,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2969,
+                       "frame":  "3-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      27,
+                                      25,
+                                      100,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13344,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3040,
+                       "frame":  "3-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      24,
+                                      25,
+                                      102,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13204,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3180,
+                       "frame":  "3-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      26,
+                                      105,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13462,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2922,
+                       "frame":  "4-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      28,
+                                      27,
+                                      99,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13396,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2988,
+                       "frame":  "4-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      26,
+                                      104,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13274,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3110,
+                       "frame":  "4-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      18,
+                                      25,
+                                      109,
+                                      114
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13195,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3189,
+                       "frame":  "4-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      10,
+                                      26,
+                                      116,
+                                      114
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13351,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3033,
+                       "frame":  "5-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      27,
+                                      26,
+                                      100,
+                                      114
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13145,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3239,
+                       "frame":  "5-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      24,
+                                      26,
+                                      103,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  12883,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3501,
+                       "frame":  "5-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      21,
+                                      26,
+                                      106,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  12952,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3432,
+                       "frame":  "5-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      26,
+                                      106,
+                                      114
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13635,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2749,
+                       "frame":  "6-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      28,
+                                      28,
+                                      98,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13384,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3000,
+                       "frame":  "6-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      27,
+                                      29,
+                                      100,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13011,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3373,
+                       "frame":  "6-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      22,
+                                      105,
+                                      114
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  12673,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3711,
+                       "frame":  "6-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      20,
+                                      107,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13760,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2624,
+                       "frame":  "7-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      30,
+                                      26,
+                                      96,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13690,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2694,
+                       "frame":  "7-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      26,
+                                      35,
+                                      101,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13972,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2412,
+                       "frame":  "7-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      49,
+                                      106,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  14966,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  1418,
+                       "frame":  "7-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      81,
+                                      107,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "fire"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13979,
+                       "partial_alpha_pixels":  2405,
+                       "visible_pixels":  2405,
+                       "frame":  "0-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      16,
+                                      37,
+                                      96,
+                                      91
+                                  ],
+                       "valid":  true,
+                       "family":  "projectiles"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13588,
+                       "partial_alpha_pixels":  2796,
+                       "visible_pixels":  2796,
+                       "frame":  "0-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      6,
+                                      38,
+                                      110,
+                                      90
+                                  ],
+                       "valid":  true,
+                       "family":  "projectiles"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13396,
+                       "partial_alpha_pixels":  2988,
+                       "visible_pixels":  2988,
+                       "frame":  "0-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      5,
+                                      37,
+                                      117,
+                                      91
+                                  ],
+                       "valid":  true,
+                       "family":  "projectiles"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13027,
+                       "partial_alpha_pixels":  3357,
+                       "visible_pixels":  3357,
+                       "frame":  "0-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      5,
+                                      38,
+                                      122,
+                                      91
+                                  ],
+                       "valid":  true,
+                       "family":  "projectiles"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  14669,
+                       "partial_alpha_pixels":  1715,
+                       "visible_pixels":  1715,
+                       "frame":  "1-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      14,
+                                      36,
+                                      102,
+                                      88
+                                  ],
+                       "valid":  true,
+                       "family":  "projectiles"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  14081,
+                       "partial_alpha_pixels":  2302,
+                       "visible_pixels":  2303,
+                       "frame":  "1-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      0,
+                                      36,
+                                      114,
+                                      90
+                                  ],
+                       "valid":  true,
+                       "family":  "projectiles"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13676,
+                       "partial_alpha_pixels":  2707,
+                       "visible_pixels":  2708,
+                       "frame":  "1-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      0,
+                                      36,
+                                      120,
+                                      89
+                                  ],
+                       "valid":  true,
+                       "family":  "projectiles"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13487,
+                       "partial_alpha_pixels":  2897,
+                       "visible_pixels":  2897,
+                       "frame":  "1-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      2,
+                                      34,
+                                      123,
+                                      89
+                                  ],
+                       "valid":  true,
+                       "family":  "projectiles"
+                   },
+                   {
+                       "width":  96,
+                       "height":  96,
+                       "transparent_pixels":  7236,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  1980,
+                       "frame":  "0-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      8,
+                                      38,
+                                      86,
+                                      87
+                                  ],
+                       "valid":  true,
+                       "family":  "brood"
+                   },
+                   {
+                       "width":  96,
+                       "height":  96,
+                       "transparent_pixels":  7284,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  1932,
+                       "frame":  "0-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      11,
+                                      39,
+                                      84,
+                                      87
+                                  ],
+                       "valid":  true,
+                       "family":  "brood"
+                   },
+                   {
+                       "width":  96,
+                       "height":  96,
+                       "transparent_pixels":  7234,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  1982,
+                       "frame":  "0-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      9,
+                                      37,
+                                      85,
+                                      87
+                                  ],
+                       "valid":  true,
+                       "family":  "brood"
+                   },
+                   {
+                       "width":  96,
+                       "height":  96,
+                       "transparent_pixels":  7278,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  1938,
+                       "frame":  "0-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      9,
+                                      38,
+                                      85,
+                                      87
+                                  ],
+                       "valid":  true,
+                       "family":  "brood"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  162391,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  99753,
+                       "frame":  "0-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      23,
+                                      143,
+                                      487,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  164810,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  97334,
+                       "frame":  "0-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      125,
+                                      488,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  165827,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  96317,
+                       "frame":  "0-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      25,
+                                      139,
+                                      486,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  169490,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  92654,
+                       "frame":  "0-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      23,
+                                      155,
+                                      487,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  168070,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  94074,
+                       "frame":  "1-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      23,
+                                      139,
+                                      487,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  164823,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  97321,
+                       "frame":  "1-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      21,
+                                      127,
+                                      489,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  163973,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  98171,
+                       "frame":  "1-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      111,
+                                      488,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  161157,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  100987,
+                       "frame":  "1-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      132,
+                                      491,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  171200,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  90944,
+                       "frame":  "2-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      25,
+                                      159,
+                                      486,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  156981,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  105163,
+                       "frame":  "2-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      109,
+                                      492,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  146556,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  115588,
+                       "frame":  "2-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      27,
+                                      29,
+                                      484,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  162346,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  99798,
+                       "frame":  "2-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      146,
+                                      491,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  167279,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  94865,
+                       "frame":  "3-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      137,
+                                      488,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  165765,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  96379,
+                       "frame":  "3-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      23,
+                                      116,
+                                      487,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  163438,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  98706,
+                       "frame":  "3-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      23,
+                                      111,
+                                      487,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  158861,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  103283,
+                       "frame":  "3-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      26,
+                                      100,
+                                      485,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  169101,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  93043,
+                       "frame":  "4-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      28,
+                                      141,
+                                      483,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  168732,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  93412,
+                       "frame":  "4-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      21,
+                                      121,
+                                      489,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  170675,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  91469,
+                       "frame":  "4-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      127,
+                                      492,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  163607,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  98537,
+                       "frame":  "4-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      3,
+                                      171,
+                                      508,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  173045,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  89099,
+                       "frame":  "5-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      21,
+                                      166,
+                                      489,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  171860,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  90284,
+                       "frame":  "5-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      28,
+                                      162,
+                                      483,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  175930,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  86214,
+                       "frame":  "5-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      33,
+                                      162,
+                                      478,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  163644,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  98500,
+                       "frame":  "5-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      16,
+                                      159,
+                                      494,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  172168,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  89976,
+                       "frame":  "6-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      44,
+                                      137,
+                                      467,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  160379,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  101765,
+                       "frame":  "6-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      37,
+                                      70,
+                                      473,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  161587,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  100557,
+                       "frame":  "6-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      42,
+                                      72,
+                                      469,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  150565,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  111579,
+                       "frame":  "6-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      35,
+                                      47,
+                                      476,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  184546,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  77598,
+                       "frame":  "7-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      38,
+                                      173,
+                                      472,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  187864,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  74280,
+                       "frame":  "7-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      54,
+                                      173,
+                                      456,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  168377,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  93767,
+                       "frame":  "7-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      26,
+                                      153,
+                                      485,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  160966,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  101178,
+                       "frame":  "7-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      127,
+                                      491,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_attacks"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13190,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3194,
+                       "frame":  "0-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      31,
+                                      23,
+                                      95,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13216,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3168,
+                       "frame":  "0-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      29,
+                                      23,
+                                      98,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13269,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3115,
+                       "frame":  "0-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      30,
+                                      22,
+                                      96,
+                                      114
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13353,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3031,
+                       "frame":  "0-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      29,
+                                      26,
+                                      98,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13344,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3040,
+                       "frame":  "1-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      28,
+                                      26,
+                                      98,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13445,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2939,
+                       "frame":  "1-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      26,
+                                      26,
+                                      100,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13349,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3035,
+                       "frame":  "1-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      26,
+                                      105,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13631,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2753,
+                       "frame":  "1-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      32,
+                                      108,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13892,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2492,
+                       "frame":  "2-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      36,
+                                      108,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13949,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2435,
+                       "frame":  "2-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      18,
+                                      44,
+                                      110,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  14052,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2332,
+                       "frame":  "2-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      16,
+                                      50,
+                                      110,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  14360,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2024,
+                       "frame":  "2-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      17,
+                                      61,
+                                      110,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13449,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2935,
+                       "frame":  "3-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      29,
+                                      23,
+                                      97,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13511,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2873,
+                       "frame":  "3-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      29,
+                                      26,
+                                      97,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13429,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2955,
+                       "frame":  "3-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      27,
+                                      26,
+                                      99,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13214,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3170,
+                       "frame":  "3-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      26,
+                                      25,
+                                      101,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13425,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2959,
+                       "frame":  "4-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      29,
+                                      24,
+                                      98,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13397,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2987,
+                       "frame":  "4-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      24,
+                                      24,
+                                      102,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13635,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2749,
+                       "frame":  "4-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      31,
+                                      107,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13666,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2718,
+                       "frame":  "4-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      16,
+                                      32,
+                                      111,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13447,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2937,
+                       "frame":  "5-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      27,
+                                      25,
+                                      99,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13400,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2984,
+                       "frame":  "5-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      25,
+                                      27,
+                                      102,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13062,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3322,
+                       "frame":  "5-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      18,
+                                      24,
+                                      109,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13012,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3372,
+                       "frame":  "5-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      17,
+                                      26,
+                                      109,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13457,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2927,
+                       "frame":  "6-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      27,
+                                      25,
+                                      99,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13812,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2572,
+                       "frame":  "6-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      28,
+                                      35,
+                                      99,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13290,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3094,
+                       "frame":  "6-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      26,
+                                      24,
+                                      101,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  12646,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  3738,
+                       "frame":  "6-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      23,
+                                      107,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13581,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2803,
+                       "frame":  "7-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      30,
+                                      26,
+                                      97,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  13758,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2626,
+                       "frame":  "7-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      25,
+                                      39,
+                                      102,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  14182,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  2202,
+                       "frame":  "7-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      56,
+                                      107,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  128,
+                       "height":  128,
+                       "transparent_pixels":  14553,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  1831,
+                       "frame":  "7-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      14,
+                                      73,
+                                      114,
+                                      115
+                                  ],
+                       "valid":  true,
+                       "family":  "ice"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  128726,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  133418,
+                       "frame":  "0-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      59,
+                                      491,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  127253,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  134891,
+                       "frame":  "0-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      18,
+                                      57,
+                                      492,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  126055,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  136089,
+                       "frame":  "0-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      52,
+                                      491,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  129909,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  132235,
+                       "frame":  "0-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      62,
+                                      491,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  135111,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  127033,
+                       "frame":  "1-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      17,
+                                      69,
+                                      493,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  139508,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  122636,
+                       "frame":  "1-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      17,
+                                      59,
+                                      494,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  131598,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  130546,
+                       "frame":  "1-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      62,
+                                      491,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  143078,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  119066,
+                       "frame":  "1-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      26,
+                                      77,
+                                      485,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  126099,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  136045,
+                       "frame":  "2-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      54,
+                                      491,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  131924,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  130220,
+                       "frame":  "2-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      59,
+                                      488,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  138926,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  123218,
+                       "frame":  "2-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      33,
+                                      61,
+                                      478,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  144837,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  117307,
+                       "frame":  "2-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      27,
+                                      87,
+                                      483,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  138300,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  123844,
+                       "frame":  "3-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      21,
+                                      64,
+                                      490,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  145600,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  116544,
+                       "frame":  "3-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      103,
+                                      491,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  153414,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  108730,
+                       "frame":  "3-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      4,
+                                      157,
+                                      506,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  512,
+                       "height":  512,
+                       "transparent_pixels":  165247,
+                       "partial_alpha_pixels":  0,
+                       "visible_pixels":  96897,
+                       "frame":  "3-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      3,
+                                      198,
+                                      508,
+                                      479
+                                  ],
+                       "valid":  true,
+                       "family":  "behemoth_life"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  55984,
+                       "partial_alpha_pixels":  9552,
+                       "visible_pixels":  9552,
+                       "frame":  "0-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      23,
+                                      66,
+                                      223,
+                                      202
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  54248,
+                       "partial_alpha_pixels":  11287,
+                       "visible_pixels":  11288,
+                       "frame":  "0-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      16,
+                                      75,
+                                      246,
+                                      210
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  50574,
+                       "partial_alpha_pixels":  14962,
+                       "visible_pixels":  14962,
+                       "frame":  "0-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      24,
+                                      26,
+                                      233,
+                                      238
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  58050,
+                       "partial_alpha_pixels":  7486,
+                       "visible_pixels":  7486,
+                       "frame":  "0-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      15,
+                                      121,
+                                      240,
+                                      236
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  58589,
+                       "partial_alpha_pixels":  6947,
+                       "visible_pixels":  6947,
+                       "frame":  "1-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      31,
+                                      87,
+                                      220,
+                                      194
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  53557,
+                       "partial_alpha_pixels":  11979,
+                       "visible_pixels":  11979,
+                       "frame":  "1-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      21,
+                                      62,
+                                      233,
+                                      202
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  50733,
+                       "partial_alpha_pixels":  14803,
+                       "visible_pixels":  14803,
+                       "frame":  "1-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      14,
+                                      69,
+                                      248,
+                                      208
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  59403,
+                       "partial_alpha_pixels":  6133,
+                       "visible_pixels":  6133,
+                       "frame":  "1-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      21,
+                                      99,
+                                      233,
+                                      203
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  54665,
+                       "partial_alpha_pixels":  10871,
+                       "visible_pixels":  10871,
+                       "frame":  "2-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      24,
+                                      75,
+                                      223,
+                                      219
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  43337,
+                       "partial_alpha_pixels":  22194,
+                       "visible_pixels":  22199,
+                       "frame":  "2-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      10,
+                                      26,
+                                      237,
+                                      232
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  33596,
+                       "partial_alpha_pixels":  31937,
+                       "visible_pixels":  31940,
+                       "frame":  "2-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      7,
+                                      12,
+                                      248,
+                                      238
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  53909,
+                       "partial_alpha_pixels":  11627,
+                       "visible_pixels":  11627,
+                       "frame":  "2-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      74,
+                                      238,
+                                      229
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  58720,
+                       "partial_alpha_pixels":  6816,
+                       "visible_pixels":  6816,
+                       "frame":  "3-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      37,
+                                      109,
+                                      210,
+                                      216
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  46609,
+                       "partial_alpha_pixels":  18927,
+                       "visible_pixels":  18927,
+                       "frame":  "3-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      15,
+                                      60,
+                                      225,
+                                      223
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  34812,
+                       "partial_alpha_pixels":  30722,
+                       "visible_pixels":  30724,
+                       "frame":  "3-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      16,
+                                      19,
+                                      236,
+                                      224
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  41318,
+                       "partial_alpha_pixels":  24218,
+                       "visible_pixels":  24218,
+                       "frame":  "3-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      14,
+                                      43,
+                                      235,
+                                      217
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  56081,
+                       "partial_alpha_pixels":  9455,
+                       "visible_pixels":  9455,
+                       "frame":  "4-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      23,
+                                      74,
+                                      227,
+                                      203
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  51316,
+                       "partial_alpha_pixels":  14220,
+                       "visible_pixels":  14220,
+                       "frame":  "4-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      16,
+                                      37,
+                                      234,
+                                      203
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  44540,
+                       "partial_alpha_pixels":  20996,
+                       "visible_pixels":  20996,
+                       "frame":  "4-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      8,
+                                      31,
+                                      246,
+                                      208
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  53509,
+                       "partial_alpha_pixels":  12027,
+                       "visible_pixels":  12027,
+                       "frame":  "4-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      15,
+                                      69,
+                                      241,
+                                      205
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  56765,
+                       "partial_alpha_pixels":  8771,
+                       "visible_pixels":  8771,
+                       "frame":  "5-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      73,
+                                      230,
+                                      185
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  48923,
+                       "partial_alpha_pixels":  16613,
+                       "visible_pixels":  16613,
+                       "frame":  "5-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      10,
+                                      43,
+                                      238,
+                                      194
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  40908,
+                       "partial_alpha_pixels":  24628,
+                       "visible_pixels":  24628,
+                       "frame":  "5-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      7,
+                                      27,
+                                      249,
+                                      200
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  54151,
+                       "partial_alpha_pixels":  11385,
+                       "visible_pixels":  11385,
+                       "frame":  "5-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      17,
+                                      56,
+                                      231,
+                                      186
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  56075,
+                       "partial_alpha_pixels":  9461,
+                       "visible_pixels":  9461,
+                       "frame":  "6-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      25,
+                                      84,
+                                      208,
+                                      214
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  48661,
+                       "partial_alpha_pixels":  16875,
+                       "visible_pixels":  16875,
+                       "frame":  "6-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      10,
+                                      47,
+                                      241,
+                                      210
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  38169,
+                       "partial_alpha_pixels":  27367,
+                       "visible_pixels":  27367,
+                       "frame":  "6-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      9,
+                                      19,
+                                      250,
+                                      216
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  55066,
+                       "partial_alpha_pixels":  10470,
+                       "visible_pixels":  10470,
+                       "frame":  "6-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      51,
+                                      234,
+                                      189
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  53636,
+                       "partial_alpha_pixels":  11900,
+                       "visible_pixels":  11900,
+                       "frame":  "7-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      20,
+                                      62,
+                                      228,
+                                      194
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  44548,
+                       "partial_alpha_pixels":  20988,
+                       "visible_pixels":  20988,
+                       "frame":  "7-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      7,
+                                      23,
+                                      237,
+                                      195
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  38720,
+                       "partial_alpha_pixels":  26816,
+                       "visible_pixels":  26816,
+                       "frame":  "7-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      7,
+                                      1,
+                                      243,
+                                      204
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  52668,
+                       "partial_alpha_pixels":  12868,
+                       "visible_pixels":  12868,
+                       "frame":  "7-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      15,
+                                      68,
+                                      240,
+                                      204
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  50079,
+                       "partial_alpha_pixels":  15456,
+                       "visible_pixels":  15457,
+                       "frame":  "8-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      32,
+                                      52,
+                                      224,
+                                      208
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  44610,
+                       "partial_alpha_pixels":  20925,
+                       "visible_pixels":  20926,
+                       "frame":  "8-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      15,
+                                      27,
+                                      226,
+                                      212
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  36124,
+                       "partial_alpha_pixels":  29412,
+                       "visible_pixels":  29412,
+                       "frame":  "8-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      2,
+                                      1,
+                                      243,
+                                      217
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  49097,
+                       "partial_alpha_pixels":  16439,
+                       "visible_pixels":  16439,
+                       "frame":  "8-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      18,
+                                      55,
+                                      230,
+                                      214
+                                  ],
+                       "valid":  true,
+                       "family":  "swamp_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  59446,
+                       "partial_alpha_pixels":  6088,
+                       "visible_pixels":  6090,
+                       "frame":  "0-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      39,
+                                      106,
+                                      229,
+                                      208
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  53898,
+                       "partial_alpha_pixels":  11638,
+                       "visible_pixels":  11638,
+                       "frame":  "0-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      14,
+                                      78,
+                                      232,
+                                      213
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  50652,
+                       "partial_alpha_pixels":  14883,
+                       "visible_pixels":  14884,
+                       "frame":  "0-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      37,
+                                      226,
+                                      232
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  62730,
+                       "partial_alpha_pixels":  2806,
+                       "visible_pixels":  2806,
+                       "frame":  "0-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      19,
+                                      73,
+                                      223,
+                                      222
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  55334,
+                       "partial_alpha_pixels":  10202,
+                       "visible_pixels":  10202,
+                       "frame":  "1-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      63,
+                                      41,
+                                      206,
+                                      240
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  47449,
+                       "partial_alpha_pixels":  18086,
+                       "visible_pixels":  18087,
+                       "frame":  "1-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      45,
+                                      26,
+                                      214,
+                                      250
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  42969,
+                       "partial_alpha_pixels":  22565,
+                       "visible_pixels":  22567,
+                       "frame":  "1-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      18,
+                                      15,
+                                      220,
+                                      255
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  58660,
+                       "partial_alpha_pixels":  6876,
+                       "visible_pixels":  6876,
+                       "frame":  "1-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      37,
+                                      31,
+                                      203,
+                                      238
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  61564,
+                       "partial_alpha_pixels":  3972,
+                       "visible_pixels":  3972,
+                       "frame":  "2-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      65,
+                                      24,
+                                      192,
+                                      239
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  56907,
+                       "partial_alpha_pixels":  8629,
+                       "visible_pixels":  8629,
+                       "frame":  "2-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      44,
+                                      16,
+                                      203,
+                                      253
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  51943,
+                       "partial_alpha_pixels":  13593,
+                       "visible_pixels":  13593,
+                       "frame":  "2-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      13,
+                                      22,
+                                      220,
+                                      251
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  61115,
+                       "partial_alpha_pixels":  4421,
+                       "visible_pixels":  4421,
+                       "frame":  "2-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      26,
+                                      24,
+                                      215,
+                                      250
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  56872,
+                       "partial_alpha_pixels":  8664,
+                       "visible_pixels":  8664,
+                       "frame":  "3-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      75,
+                                      234,
+                                      207
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  50584,
+                       "partial_alpha_pixels":  14952,
+                       "visible_pixels":  14952,
+                       "frame":  "3-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      5,
+                                      57,
+                                      243,
+                                      220
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  46151,
+                       "partial_alpha_pixels":  19383,
+                       "visible_pixels":  19385,
+                       "frame":  "3-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      3,
+                                      51,
+                                      245,
+                                      222
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  58936,
+                       "partial_alpha_pixels":  6600,
+                       "visible_pixels":  6600,
+                       "frame":  "3-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      7,
+                                      75,
+                                      234,
+                                      202
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  52374,
+                       "partial_alpha_pixels":  13160,
+                       "visible_pixels":  13162,
+                       "frame":  "4-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      35,
+                                      23,
+                                      226,
+                                      221
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  42330,
+                       "partial_alpha_pixels":  23201,
+                       "visible_pixels":  23206,
+                       "frame":  "4-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      25,
+                                      7,
+                                      227,
+                                      228
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  33677,
+                       "partial_alpha_pixels":  31859,
+                       "visible_pixels":  31859,
+                       "frame":  "4-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      10,
+                                      2,
+                                      232,
+                                      234
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  57112,
+                       "partial_alpha_pixels":  8424,
+                       "visible_pixels":  8424,
+                       "frame":  "4-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      23,
+                                      9,
+                                      224,
+                                      226
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  63225,
+                       "partial_alpha_pixels":  2311,
+                       "visible_pixels":  2311,
+                       "frame":  "5-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      62,
+                                      21,
+                                      192,
+                                      223
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  56100,
+                       "partial_alpha_pixels":  9436,
+                       "visible_pixels":  9436,
+                       "frame":  "5-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      42,
+                                      9,
+                                      213,
+                                      242
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  48506,
+                       "partial_alpha_pixels":  17030,
+                       "visible_pixels":  17030,
+                       "frame":  "5-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      28,
+                                      2,
+                                      220,
+                                      244
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  62568,
+                       "partial_alpha_pixels":  2968,
+                       "visible_pixels":  2968,
+                       "frame":  "5-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      52,
+                                      15,
+                                      204,
+                                      227
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  55022,
+                       "partial_alpha_pixels":  10514,
+                       "visible_pixels":  10514,
+                       "frame":  "6-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      24,
+                                      26,
+                                      225,
+                                      208
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  48337,
+                       "partial_alpha_pixels":  17199,
+                       "visible_pixels":  17199,
+                       "frame":  "6-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      14,
+                                      5,
+                                      231,
+                                      255
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  40280,
+                       "partial_alpha_pixels":  25256,
+                       "visible_pixels":  25256,
+                       "frame":  "6-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      6,
+                                      2,
+                                      237,
+                                      255
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  57926,
+                       "partial_alpha_pixels":  7610,
+                       "visible_pixels":  7610,
+                       "frame":  "6-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      16,
+                                      18,
+                                      229,
+                                      208
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  52286,
+                       "partial_alpha_pixels":  13248,
+                       "visible_pixels":  13250,
+                       "frame":  "7-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      16,
+                                      233,
+                                      255
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  45758,
+                       "partial_alpha_pixels":  19774,
+                       "visible_pixels":  19778,
+                       "frame":  "7-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      16,
+                                      0,
+                                      234,
+                                      255
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  39399,
+                       "partial_alpha_pixels":  26135,
+                       "visible_pixels":  26137,
+                       "frame":  "7-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      5,
+                                      0,
+                                      240,
+                                      255
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  54376,
+                       "partial_alpha_pixels":  11160,
+                       "visible_pixels":  11160,
+                       "frame":  "7-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      14,
+                                      12,
+                                      226,
+                                      255
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  50887,
+                       "partial_alpha_pixels":  14649,
+                       "visible_pixels":  14649,
+                       "frame":  "8-0.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      51,
+                                      0,
+                                      206,
+                                      231
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  44559,
+                       "partial_alpha_pixels":  20977,
+                       "visible_pixels":  20977,
+                       "frame":  "8-1.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      33,
+                                      0,
+                                      215,
+                                      231
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  35463,
+                       "partial_alpha_pixels":  30073,
+                       "visible_pixels":  30073,
+                       "frame":  "8-2.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      6,
+                                      0,
+                                      236,
+                                      240
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   },
+                   {
+                       "width":  256,
+                       "height":  256,
+                       "transparent_pixels":  59478,
+                       "partial_alpha_pixels":  6058,
+                       "visible_pixels":  6058,
+                       "frame":  "8-3.png",
+                       "corner_alpha":  [
+                                            0,
+                                            0,
+                                            0,
+                                            0
+                                        ],
+                       "bounds":  [
+                                      22,
+                                      0,
+                                      223,
+                                      231
+                                  ],
+                       "valid":  true,
+                       "family":  "twins_fx"
+                   }
+               ],
+    "status":  "PASS"
+}

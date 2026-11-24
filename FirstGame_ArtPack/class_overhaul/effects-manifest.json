@@ -1,0 +1,200 @@
+[
+  {
+    "name": "spr_class_fx_0",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_class_fx_1",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_class_fx_2",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_class_fx_3",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_class_fx_4",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_class_fx_5",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_class_fx_6",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_class_fx_7",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_dragon_fx_0",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_dragon_fx_1",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_dragon_fx_2",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_dragon_fx_3",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_dragon_fx_4",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_dragon_fx_5",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_dragon_fx_6",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_dragon_fx_7",
+    "frames": 8,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_fg_dragonextra_wingbeat",
+    "frames": 4,
+    "size": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_fg_dragonextra_leap",
+    "frames": 4,
+    "size": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_fg_dragonextra_channel",
+    "frames": 4,
+    "size": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_fg_dragonextra_summon",
+    "frames": 4,
+    "size": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_mage_star_orb",
+    "frames": 4,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_mage_star_implosion",
+    "frames": 4,
+    "size": 256,
+    "origin": [
+      128,
+      128
+    ]
+  }
+]

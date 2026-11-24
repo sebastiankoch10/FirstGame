@@ -1,0 +1,90 @@
+{
+  "created_utc": "2026-11-23T21:42:17.576393+00:00",
+  "resources": 973,
+  "resource_types": {
+    "objects": 19,
+    "rooms": 4,
+    "scripts": 35,
+    "sounds": 88,
+    "sprites": 826,
+    "tilesets": 1
+  },
+  "resource_order_unchanged": false,
+  "resource_entries_unchanged": true,
+  "resources_added": [],
+  "resources_removed": [],
+  "resources_modified": [],
+  "changed_sources": [
+    "FirstGame.yyp",
+    "scripts\\boss_encounters_v2\\boss_encounters_v2.gml",
+    "scripts\\combat_feedback\\combat_feedback.gml"
+  ],
+  "native_pngs_checked": 5102,
+  "native_pngs_changed": [],
+  "dragon_pngs_checked": 258,
+  "dragon_pngs_changed": [],
+  "frame_content_counts": {
+    "behemoth": {
+      "registered_frames": 48,
+      "unique_png_contents": 48
+    },
+    "boss_fx": {
+      "registered_frames": 76,
+      "unique_png_contents": 76
+    },
+    "class_fx": {
+      "registered_frames": 72,
+      "unique_png_contents": 72
+    },
+    "dragon": {
+      "registered_frames": 48,
+      "unique_png_contents": 48
+    },
+    "dragon_fx": {
+      "registered_frames": 64,
+      "unique_png_contents": 64
+    },
+    "icons": {
+      "registered_frames": 44,
+      "unique_png_contents": 44
+    },
+    "items_projectiles": {
+      "registered_frames": 5,
+      "unique_png_contents": 5
+    },
+    "mage": {
+      "registered_frames": 432,
+      "unique_png_contents": 256
+    },
+    "other_registered": {
+      "registered_frames": 693,
+      "unique_png_contents": 237
+    },
+    "ranger": {
+      "registered_frames": 424,
+      "unique_png_contents": 256
+    },
+    "skeleton": {
+      "registered_frames": 128,
+      "unique_png_contents": 128
+    },
+    "spell_fx": {
+      "registered_frames": 24,
+      "unique_png_contents": 24
+    },
+    "swordsman": {
+      "registered_frames": 384,
+      "unique_png_contents": 256
+    },
+    "twins": {
+      "registered_frames": 80,
+      "unique_png_contents": 72
+    },
+    "world": {
+      "registered_frames": 29,
+      "unique_png_contents": 29
+    }
+  },
+  "sprite_edge_filtering_enabled": 0,
+  "status": "PASS"
+}

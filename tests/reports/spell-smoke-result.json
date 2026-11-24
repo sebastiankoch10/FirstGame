@@ -1,0 +1,15 @@
+{
+  "classes": [
+    "Sword",
+    "Mage",
+    "Ranger"
+  ],
+  "passed": true,
+  "checks": 744.0,
+  "tooltip_rendered": true,
+  "assertions_passed": true,
+  "exit_code": 0,
+  "test_type": "technical runtime start; not menu E2E",
+  "artifact": "output\\spell-smoke\\20261122-132702\\build\\FirstGameSpellSmoke.exe",
+  "logs": "output\\spell-smoke\\20261122-132702"
+}

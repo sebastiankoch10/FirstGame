@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"boss_hazards_v2",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"boss_hazards_v2",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

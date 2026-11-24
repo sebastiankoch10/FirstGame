@@ -1,0 +1,1442 @@
+[
+  {
+    "name": "spr_fg_swordsmanv3_idle_right",
+    "action": "idle",
+    "direction": "right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_idle_up_right",
+    "action": "idle",
+    "direction": "up_right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_idle_up",
+    "action": "idle",
+    "direction": "up",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_idle_up_left",
+    "action": "idle",
+    "direction": "up_left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_idle_left",
+    "action": "idle",
+    "direction": "left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_idle_down_left",
+    "action": "idle",
+    "direction": "down_left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_idle_down",
+    "action": "idle",
+    "direction": "down",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_idle_down_right",
+    "action": "idle",
+    "direction": "down_right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_turn_right",
+    "action": "turn",
+    "direction": "right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_turn_up_right",
+    "action": "turn",
+    "direction": "up_right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_turn_up",
+    "action": "turn",
+    "direction": "up",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_turn_up_left",
+    "action": "turn",
+    "direction": "up_left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_turn_left",
+    "action": "turn",
+    "direction": "left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_turn_down_left",
+    "action": "turn",
+    "direction": "down_left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_turn_down",
+    "action": "turn",
+    "direction": "down",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_turn_down_right",
+    "action": "turn",
+    "direction": "down_right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_walk_right",
+    "action": "walk",
+    "direction": "right",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_walk_up_right",
+    "action": "walk",
+    "direction": "up_right",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_walk_up",
+    "action": "walk",
+    "direction": "up",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_walk_up_left",
+    "action": "walk",
+    "direction": "up_left",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_walk_left",
+    "action": "walk",
+    "direction": "left",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_walk_down_left",
+    "action": "walk",
+    "direction": "down_left",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_walk_down",
+    "action": "walk",
+    "direction": "down",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_walk_down_right",
+    "action": "walk",
+    "direction": "down_right",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_run_right",
+    "action": "run",
+    "direction": "right",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_run_up_right",
+    "action": "run",
+    "direction": "up_right",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_run_up",
+    "action": "run",
+    "direction": "up",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_run_up_left",
+    "action": "run",
+    "direction": "up_left",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_run_left",
+    "action": "run",
+    "direction": "left",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_run_down_left",
+    "action": "run",
+    "direction": "down_left",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_run_down",
+    "action": "run",
+    "direction": "down",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_run_down_right",
+    "action": "run",
+    "direction": "down_right",
+    "frames": 8,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack1_right",
+    "action": "attack1",
+    "direction": "right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack1_up_right",
+    "action": "attack1",
+    "direction": "up_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack1_up",
+    "action": "attack1",
+    "direction": "up",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack1_up_left",
+    "action": "attack1",
+    "direction": "up_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack1_left",
+    "action": "attack1",
+    "direction": "left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack1_down_left",
+    "action": "attack1",
+    "direction": "down_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack1_down",
+    "action": "attack1",
+    "direction": "down",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack1_down_right",
+    "action": "attack1",
+    "direction": "down_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack2_right",
+    "action": "attack2",
+    "direction": "right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack2_up_right",
+    "action": "attack2",
+    "direction": "up_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack2_up",
+    "action": "attack2",
+    "direction": "up",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack2_up_left",
+    "action": "attack2",
+    "direction": "up_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack2_left",
+    "action": "attack2",
+    "direction": "left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack2_down_left",
+    "action": "attack2",
+    "direction": "down_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack2_down",
+    "action": "attack2",
+    "direction": "down",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack2_down_right",
+    "action": "attack2",
+    "direction": "down_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack3_right",
+    "action": "attack3",
+    "direction": "right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack3_up_right",
+    "action": "attack3",
+    "direction": "up_right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack3_up",
+    "action": "attack3",
+    "direction": "up",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack3_up_left",
+    "action": "attack3",
+    "direction": "up_left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack3_left",
+    "action": "attack3",
+    "direction": "left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack3_down_left",
+    "action": "attack3",
+    "direction": "down_left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack3_down",
+    "action": "attack3",
+    "direction": "down",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_attack3_down_right",
+    "action": "attack3",
+    "direction": "down_right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_jump_right",
+    "action": "jump",
+    "direction": "right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_jump_up_right",
+    "action": "jump",
+    "direction": "up_right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_jump_up",
+    "action": "jump",
+    "direction": "up",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_jump_up_left",
+    "action": "jump",
+    "direction": "up_left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_jump_left",
+    "action": "jump",
+    "direction": "left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_jump_down_left",
+    "action": "jump",
+    "direction": "down_left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_jump_down",
+    "action": "jump",
+    "direction": "down",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_jump_down_right",
+    "action": "jump",
+    "direction": "down_right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_fall_right",
+    "action": "fall",
+    "direction": "right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_fall_up_right",
+    "action": "fall",
+    "direction": "up_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_fall_up",
+    "action": "fall",
+    "direction": "up",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_fall_up_left",
+    "action": "fall",
+    "direction": "up_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_fall_left",
+    "action": "fall",
+    "direction": "left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_fall_down_left",
+    "action": "fall",
+    "direction": "down_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_fall_down",
+    "action": "fall",
+    "direction": "down",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_fall_down_right",
+    "action": "fall",
+    "direction": "down_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dive_right",
+    "action": "dive",
+    "direction": "right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dive_up_right",
+    "action": "dive",
+    "direction": "up_right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dive_up",
+    "action": "dive",
+    "direction": "up",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dive_up_left",
+    "action": "dive",
+    "direction": "up_left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dive_left",
+    "action": "dive",
+    "direction": "left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dive_down_left",
+    "action": "dive",
+    "direction": "down_left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dive_down",
+    "action": "dive",
+    "direction": "down",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dive_down_right",
+    "action": "dive",
+    "direction": "down_right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_landing_right",
+    "action": "landing",
+    "direction": "right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_landing_up_right",
+    "action": "landing",
+    "direction": "up_right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_landing_up",
+    "action": "landing",
+    "direction": "up",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_landing_up_left",
+    "action": "landing",
+    "direction": "up_left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_landing_left",
+    "action": "landing",
+    "direction": "left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_landing_down_left",
+    "action": "landing",
+    "direction": "down_left",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_landing_down",
+    "action": "landing",
+    "direction": "down",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_landing_down_right",
+    "action": "landing",
+    "direction": "down_right",
+    "frames": 1,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dodge_right",
+    "action": "dodge",
+    "direction": "right",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dodge_up_right",
+    "action": "dodge",
+    "direction": "up_right",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dodge_up",
+    "action": "dodge",
+    "direction": "up",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dodge_up_left",
+    "action": "dodge",
+    "direction": "up_left",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dodge_left",
+    "action": "dodge",
+    "direction": "left",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dodge_down_left",
+    "action": "dodge",
+    "direction": "down_left",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dodge_down",
+    "action": "dodge",
+    "direction": "down",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_dodge_down_right",
+    "action": "dodge",
+    "direction": "down_right",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_slide_right",
+    "action": "slide",
+    "direction": "right",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_slide_up_right",
+    "action": "slide",
+    "direction": "up_right",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_slide_up",
+    "action": "slide",
+    "direction": "up",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_slide_up_left",
+    "action": "slide",
+    "direction": "up_left",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_slide_left",
+    "action": "slide",
+    "direction": "left",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_slide_down_left",
+    "action": "slide",
+    "direction": "down_left",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_slide_down",
+    "action": "slide",
+    "direction": "down",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_slide_down_right",
+    "action": "slide",
+    "direction": "down_right",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_hurt_right",
+    "action": "hurt",
+    "direction": "right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_hurt_up_right",
+    "action": "hurt",
+    "direction": "up_right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_hurt_up",
+    "action": "hurt",
+    "direction": "up",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_hurt_up_left",
+    "action": "hurt",
+    "direction": "up_left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_hurt_left",
+    "action": "hurt",
+    "direction": "left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_hurt_down_left",
+    "action": "hurt",
+    "direction": "down_left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_hurt_down",
+    "action": "hurt",
+    "direction": "down",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_hurt_down_right",
+    "action": "hurt",
+    "direction": "down_right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_death_right",
+    "action": "death",
+    "direction": "right",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_death_up_right",
+    "action": "death",
+    "direction": "up_right",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_death_up",
+    "action": "death",
+    "direction": "up",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_death_up_left",
+    "action": "death",
+    "direction": "up_left",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_death_left",
+    "action": "death",
+    "direction": "left",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_death_down_left",
+    "action": "death",
+    "direction": "down_left",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_death_down",
+    "action": "death",
+    "direction": "down",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_swordsmanv3_death_down_right",
+    "action": "death",
+    "direction": "down_right",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  }
+]

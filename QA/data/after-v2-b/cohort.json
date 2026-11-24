@@ -1,0 +1,56 @@
+{
+  "started_utc": "2026-11-23T21:30:56.210113+00:00",
+  "phase": "after",
+  "workers": 4,
+  "runs_per_class_per_worker": 3,
+  "requested_total": 36,
+  "seedstart": 750113,
+  "batchsize": 600,
+  "artifact": "output\\native-mc-after\\20261123-175857",
+  "exe_sha256": "8f5d5c443666a69dc950f2fb50045a722d6d4391e4d2df1bc6825c4c4cfb7f78",
+  "children": [
+    {
+      "worker": 0,
+      "seedstart": 750113,
+      "exit_code": 0,
+      "wall_seconds": 432.3179292678833,
+      "rows": 9,
+      "completed_runs": 9,
+      "data": "QA\\data\\after-v2-b\\worker-0.jsonl",
+      "log": "QA\\data\\after-v2-b\\worker-0.log"
+    },
+    {
+      "worker": 3,
+      "seedstart": 750122,
+      "exit_code": 0,
+      "wall_seconds": 683.5360791683197,
+      "rows": 9,
+      "completed_runs": 9,
+      "data": "QA\\data\\after-v2-b\\worker-3.jsonl",
+      "log": "QA\\data\\after-v2-b\\worker-3.log"
+    },
+    {
+      "worker": 1,
+      "seedstart": 750116,
+      "exit_code": 0,
+      "wall_seconds": 1163.905203819275,
+      "rows": 9,
+      "completed_runs": 9,
+      "data": "QA\\data\\after-v2-b\\worker-1.jsonl",
+      "log": "QA\\data\\after-v2-b\\worker-1.log"
+    },
+    {
+      "worker": 2,
+      "seedstart": 750119,
+      "exit_code": 0,
+      "wall_seconds": 1455.1324710845947,
+      "rows": 9,
+      "completed_runs": 9,
+      "data": "QA\\data\\after-v2-b\\worker-2.jsonl",
+      "log": "QA\\data\\after-v2-b\\worker-2.log"
+    }
+  ],
+  "completed": true,
+  "elapsed_wall_seconds": 1455.1389915943146,
+  "completed_runs": 36
+}

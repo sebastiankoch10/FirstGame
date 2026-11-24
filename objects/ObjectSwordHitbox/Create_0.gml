@@ -1,2 +1,7 @@
-lifetime = 10; // Lebensdauer der Hitbox in Frames
-image_xscale = ObjectPlayer.image_xscale; // Richtung der Hitbox an den Spieler anpassen
+owner = noone;
+direction = 0;
+damage = 20;
+lifetime = 12;
+hit_targets = [];
+combo_stage = 1;
+hit_radius=116;hit_half_angle=58;total_lifetime=12;

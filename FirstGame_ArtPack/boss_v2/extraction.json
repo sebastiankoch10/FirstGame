@@ -1,0 +1,74 @@
+﻿[
+    {
+        "extraction":  "source=887x1774;columns=0,222,434,651,887;rows=0,222,444,665,887,1109,1330,1552,1774;scale=0,466321243523316",
+        "source":  "fire",
+        "actor":  true,
+        "frames":  32,
+        "canvas":  128,
+        "columns":  4,
+        "rows":  8
+    },
+    {
+        "extraction":  "source=887x1774;columns=0,221,433,660,887;rows=0,222,444,665,887,1109,1330,1552,1774;scale=0,461538461538462",
+        "source":  "ice",
+        "actor":  true,
+        "frames":  32,
+        "canvas":  128,
+        "columns":  4,
+        "rows":  8
+    },
+    {
+        "extraction":  "source=1254x1254;columns=0,314,621,933,1254;rows=0,314,627,940,1254;scale=1,63225806451613",
+        "source":  "behemoth_life",
+        "actor":  true,
+        "frames":  16,
+        "canvas":  512,
+        "columns":  4,
+        "rows":  4
+    },
+    {
+        "extraction":  "source=887x1774;columns=0,222,443,660,887;rows=0,222,444,665,887,1109,1330,1552,1774;scale=2,289592760181",
+        "source":  "behemoth_attacks",
+        "actor":  true,
+        "frames":  32,
+        "canvas":  512,
+        "columns":  4,
+        "rows":  8
+    },
+    {
+        "extraction":  "source=1186x1327;columns=0,296,593,890,1186;rows=0,147,302,442,582,725,860,1006,1154,1327;scale=1",
+        "source":  "twins_fx",
+        "actor":  false,
+        "frames":  36,
+        "canvas":  256,
+        "columns":  4,
+        "rows":  9
+    },
+    {
+        "extraction":  "source=887x1774;columns=0,222,444,665,887;rows=0,197,394,591,788,986,1183,1369,1558,1774;scale=1",
+        "source":  "swamp_fx",
+        "actor":  false,
+        "frames":  36,
+        "canvas":  256,
+        "columns":  4,
+        "rows":  9
+    },
+    {
+        "extraction":  "source=2172x724;columns=0,543,1086,1629,2172;rows=0,724;scale=0,179856115107914",
+        "source":  "brood",
+        "actor":  true,
+        "frames":  4,
+        "canvas":  96,
+        "columns":  4,
+        "rows":  1
+    },
+    {
+        "extraction":  "source=1774x887;columns=0,444,884,1330,1774;rows=0,444,887;scale=1",
+        "source":  "projectiles",
+        "actor":  false,
+        "frames":  8,
+        "canvas":  128,
+        "columns":  4,
+        "rows":  2
+    }
+]

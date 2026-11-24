@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"run_spell_stats",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"run_spell_stats",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

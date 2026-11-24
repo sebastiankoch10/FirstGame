@@ -1,0 +1,146 @@
+{
+  "body_poses": 24,
+  "vfx_frames": 8,
+  "resources": [
+    {
+      "name": "spr_fg_dragonboss_breath",
+      "frames": 2,
+      "width": 512,
+      "height": 512,
+      "origin": [
+        256,
+        480
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_breath_down",
+      "frames": 1,
+      "width": 512,
+      "height": 512,
+      "origin": [
+        256,
+        480
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_breath_up",
+      "frames": 1,
+      "width": 512,
+      "height": 512,
+      "origin": [
+        256,
+        480
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_charge",
+      "frames": 2,
+      "width": 512,
+      "height": 512,
+      "origin": [
+        256,
+        480
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_death",
+      "frames": 3,
+      "width": 512,
+      "height": 512,
+      "origin": [
+        256,
+        480
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_flame",
+      "frames": 4,
+      "width": 128,
+      "height": 64,
+      "origin": [
+        64,
+        32
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_hurt",
+      "frames": 1,
+      "width": 512,
+      "height": 512,
+      "origin": [
+        256,
+        480
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_idle",
+      "frames": 4,
+      "width": 512,
+      "height": 512,
+      "origin": [
+        256,
+        480
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_magma",
+      "frames": 2,
+      "width": 96,
+      "height": 160,
+      "origin": [
+        48,
+        150
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_muzzle",
+      "frames": 2,
+      "width": 96,
+      "height": 96,
+      "origin": [
+        48,
+        48
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_phase",
+      "frames": 2,
+      "width": 512,
+      "height": 512,
+      "origin": [
+        256,
+        480
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_stomp",
+      "frames": 2,
+      "width": 512,
+      "height": 512,
+      "origin": [
+        256,
+        480
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_turn",
+      "frames": 2,
+      "width": 512,
+      "height": 512,
+      "origin": [
+        256,
+        480
+      ]
+    },
+    {
+      "name": "spr_fg_dragonboss_walk",
+      "frames": 4,
+      "width": 512,
+      "height": 512,
+      "origin": [
+        256,
+        480
+      ]
+    }
+  ]
+}

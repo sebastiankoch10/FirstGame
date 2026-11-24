@@ -1,0 +1,602 @@
+[
+  {
+    "name": "spr_master_ground",
+    "frames": 1,
+    "width": 512,
+    "height": 512,
+    "origin": [
+      0,
+      0
+    ]
+  },
+  {
+    "name": "spr_master_oak",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_maple",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_pine",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_ancient",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_ferns",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_redshrub",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_blueflowers",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_goldbush",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_pillar",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_arch",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_wall",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_brazier",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_rocks",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_stump",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_paving",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_leaves",
+    "frames": 1,
+    "width": 256,
+    "height": 320,
+    "origin": [
+      128,
+      304
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_idle_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_idle_up_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_idle_up",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_idle_up_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_idle_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_idle_down_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_idle_down",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_idle_down_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_walk_right",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_walk_up_right",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_walk_up",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_walk_up_left",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_walk_left",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_walk_down_left",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_walk_down",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_walk_down_right",
+    "frames": 4,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_attack_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_attack_up_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_attack_up",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_attack_up_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_attack_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_attack_down_left",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_attack_down",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_attack_down_right",
+    "frames": 2,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_hurt_right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_hurt_up_right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_hurt_up",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_hurt_up_left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_hurt_left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_hurt_down_left",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_hurt_down",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_hurt_down_right",
+    "frames": 3,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_death_right",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_death_up_right",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_death_up",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_death_up_left",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_death_left",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_death_down_left",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_death_down",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_skeleton_death_down_right",
+    "frames": 5,
+    "width": 96,
+    "height": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_master_slash_1",
+    "frames": 4,
+    "width": 256,
+    "height": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_master_slash_2",
+    "frames": 4,
+    "width": 256,
+    "height": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_master_slash_3",
+    "frames": 4,
+    "width": 256,
+    "height": 256,
+    "origin": [
+      128,
+      128
+    ]
+  }
+]

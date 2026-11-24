@@ -1,0 +1,20 @@
+{
+  "failures": [],
+  "metrics": {
+    "performance": {
+      "frames": 60.0,
+      "enemies": 150.0,
+      "mean_frame_ms": 16.667150000000003,
+      "max_frame_ms": 17.044,
+      "measurement": "Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement."
+    }
+  },
+  "scope": "Short native rendered150-enemy heavy-rain/boss-hazard fixture. Elevated fixture HP; not a full run, sustained frame-rate guarantee or memory soak test.",
+  "passed": true,
+  "checks": 3.0,
+  "exit_code": 0,
+  "logs": "QA\\logs\\regression-20261123-225909",
+  "screenshots": [
+    "qacapture-crowd150-heavy-rain.png"
+  ]
+}

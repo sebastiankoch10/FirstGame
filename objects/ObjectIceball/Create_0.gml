@@ -1,11 +1,20 @@
-/// ObjectIceBall: Create
-// Wird vom Cast/Spawner mit direction/speed/lifetime/damage bestückt
-if (!variable_instance_exists(self, "direction")) direction = 0;
-if (!variable_instance_exists(self, "speed"))     speed = 10;
-if (!variable_instance_exists(self, "lifetime"))  lifetime = 65;
-if (!variable_instance_exists(self, "damage"))    damage = 5;
-
+direction = 0;
+projectile_speed = 10;
+speed = 0;
+hit_done = false;
+lifetime = 65;
+damage = 15;
+owner = noone;
+slow_on_hit = true;
+slow_factor = 0.5;
+slow_time = 60;
 image_angle = direction;
-alarm[0] = lifetime;
 
-// optionale Felder (falls vom Cast gesetzt): slow_on_hit, slow_factor, slow_time
+image_xscale = 0.65;
+image_yscale = 0.65;
+
+spell_id=102;
+projectile_kind="lightning";
+explosion_radius=64;
+
+projectile_setup();

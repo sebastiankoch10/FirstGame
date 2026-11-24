@@ -1,0 +1,56 @@
+{
+  "started_utc": "2026-11-23T21:32:53.128492+00:00",
+  "phase": "holdout",
+  "workers": 4,
+  "runs_per_class_per_worker": 3,
+  "requested_total": 36,
+  "seedstart": 760101,
+  "batchsize": 600,
+  "artifact": "output\\native-mc-after\\20261123-175857",
+  "exe_sha256": "8f5d5c443666a69dc950f2fb50045a722d6d4391e4d2df1bc6825c4c4cfb7f78",
+  "children": [
+    {
+      "worker": 3,
+      "seedstart": 760110,
+      "exit_code": 0,
+      "wall_seconds": 386.7891306877136,
+      "rows": 9,
+      "completed_runs": 9,
+      "data": "QA\\data\\holdout-v2\\worker-3.jsonl",
+      "log": "QA\\data\\holdout-v2\\worker-3.log"
+    },
+    {
+      "worker": 1,
+      "seedstart": 760104,
+      "exit_code": 0,
+      "wall_seconds": 593.3525395393372,
+      "rows": 9,
+      "completed_runs": 9,
+      "data": "QA\\data\\holdout-v2\\worker-1.jsonl",
+      "log": "QA\\data\\holdout-v2\\worker-1.log"
+    },
+    {
+      "worker": 2,
+      "seedstart": 760107,
+      "exit_code": 0,
+      "wall_seconds": 891.9214496612549,
+      "rows": 9,
+      "completed_runs": 9,
+      "data": "QA\\data\\holdout-v2\\worker-2.jsonl",
+      "log": "QA\\data\\holdout-v2\\worker-2.log"
+    },
+    {
+      "worker": 0,
+      "seedstart": 760101,
+      "exit_code": 0,
+      "wall_seconds": 1392.5793142318726,
+      "rows": 9,
+      "completed_runs": 9,
+      "data": "QA\\data\\holdout-v2\\worker-0.jsonl",
+      "log": "QA\\data\\holdout-v2\\worker-0.log"
+    }
+  ],
+  "completed": true,
+  "elapsed_wall_seconds": 1392.5881628990173,
+  "completed_runs": 36
+}

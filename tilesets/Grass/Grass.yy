@@ -18,8 +18,8 @@
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",
   "spriteId":{
-    "name":"TX_Tileset_Grass",
-    "path":"sprites/TX_Tileset_Grass/TX_Tileset_Grass.yy",
+    "name":"spr_fg_ground_v2",
+    "path":"sprites/spr_fg_ground_v2/spr_fg_ground_v2.yy",
   },
   "spriteNoExport":false,
   "textureGroupId":{

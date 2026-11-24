@@ -1,0 +1,15 @@
+Launching holdout-runs-Sword-cycle-b600-s760107-223253-31976 from C:\Users\sebas\Dokumente\FirstGame\output\native-mc-after\20261123-175857
+{
+  "work": "output\\native-mc-after\\20261123-175857",
+  "log": "output\\native-mc-after\\20261123-175857\\holdout-runs-Sword-cycle-b600-s760107-223253-31976.log",
+  "rows": 9,
+  "completed_runs": 9,
+  "elapsed_wall_seconds": 891.0181667804718,
+  "exit_code": 0,
+  "mode": "runs",
+  "phase": "holdout",
+  "source_phase": "after",
+  "captures": [],
+  "errors": [],
+  "parse_errors": []
+}

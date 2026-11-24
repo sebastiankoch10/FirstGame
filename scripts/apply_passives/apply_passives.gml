@@ -1,96 +1,29 @@
-/// @func apply_passives(player)
-/// @desc Passive anwenden/aktualisieren (idempotent)
-function apply_passives(_player)
-{
-    if (!instance_exists(_player)) return;
-    if (is_undefined(_player.learned_passives)) return;
-    var list = _player.learned_passives;
-
-    if (is_undefined(_player._passive_applied)) {
-        _player._passive_applied = ds_map_create();
-    }
-
-    var need_shield   = false;
-    var shield_cfg    = undefined; // Runtime-Struct des Schild-Passivs
-    var add_power_sum = 0;
-    var add_spd_sum   = 0;
-
-    var n = array_length(list);
-    for (var i = 0; i < n; i++) {
-        var spell_id = list[i];
-        var data = GetSpellData(spell_id);
-        if (!is_struct(data)) continue;
-        if (data.type != SPELL_TYPE.PASSIVE) continue;
-
-        switch (spell_id) {
-            case SPELL.SHIELD:
-                need_shield = true;
-                shield_cfg  = data;
-                break;
-
-            case SPELL.POWER_UP:
-                add_power_sum += data.add_power;
-                break;
-
-            case SPELL.MOVE_SPEED:
-                add_spd_sum += data.add_move_speed;
-                break;
-        }
-    }
-
-    // Einmalige Additionen
-    if (add_power_sum != 0 && !ds_map_exists(_player._passive_applied, "POWER_UP")) {
-        _player.power = (variable_instance_exists(_player, "power") ? _player.power : 0) + add_power_sum;
-        ds_map_set(_player._passive_applied, "POWER_UP", true);
-    }
-    if (add_spd_sum != 0 && !ds_map_exists(_player._passive_applied, "MOVE_SPEED")) {
-        _player.moveSpeed = (variable_instance_exists(_player, "moveSpeed") ? _player.moveSpeed : 0) + add_spd_sum;
-        ds_map_set(_player._passive_applied, "MOVE_SPEED", true);
-    }
-
-    // ---- Schild(e) managen ----
-    // Ziel-Objekt per Name (oder direkter Referenz) ermitteln
-    var sh_obj = noone;
-    if (is_struct(shield_cfg)) {
-        if (!is_undefined(shield_cfg.shield_object) && shield_cfg.shield_object != noone) {
-            // Falls du irgendwo direkt eine Objekt-Referenz setzen willst
-            sh_obj = shield_cfg.shield_object;
-        } else if (!is_undefined(shield_cfg.shield_object_name)) {
-            var idx = asset_get_index(shield_cfg.shield_object_name);
-            if (idx != -1) sh_obj = idx;
-        }
-    }
-
-    if (need_shield && sh_obj != noone) {
-        // existierende Schilde dieses Typs zählen (die diesem Player gehören)
-        var existing = 0;
-        var cnt = instance_number(sh_obj);
-        for (var ii = 0; ii < cnt; ii++) {
-            var inst = instance_find(sh_obj, ii);
-            if (instance_exists(inst) && inst.owner == _player) {
-                existing += 1;
-            }
-        }
-
-        var want = shield_cfg.shield_count;
-        for (var s = existing; s < want; s++) {
-            var sh = instance_create_layer(_player.x, _player.y, "Instances", sh_obj);
-            sh.owner       = _player;
-            sh.radius      = shield_cfg.shield_radius;
-            sh.orbit_speed = shield_cfg.shield_speed;
-            sh.damage      = shield_cfg.shield_damage;
-            sh.orbit_angle = (360 / max(1, want)) * s;
-        }
-    } else {
-        // alle Schilde dieses Typs, die dem Player gehören, entfernen
-        if (sh_obj != noone) {
-            var cnt2 = instance_number(sh_obj);
-            for (var jj = cnt2 - 1; jj >= 0; jj--) {
-                var inst2 = instance_find(sh_obj, jj);
-                if (instance_exists(inst2) && inst2.owner == _player) {
-                    with (inst2) instance_destroy();
-                }
-            }
-        }
-    }
+/// Rebuild modifiers from baselines every time; no stacking through repeated application.
+function apply_passives(_pl) {
+ if(!instance_exists(_pl))return;
+ _pl.player_power=_pl.__base_player_power+spell_bonus(SPELL.POWER_UP);
+ _pl.moveSpeed=_pl.__base_moveSpeed+spell_bonus(SPELL.MOVE_SPEED);
+ _pl.damage_reduction=min(GetSpellData(SPELL.SHIELD).max_reduction,spell_bonus(SPELL.SHIELD));
+ _pl.weapon_haste=spell_bonus(SPELL.HASTE);
+ _pl.extra_projectiles=ceil(spell_level(SPELL.MULTISHOT)/GetSpellData(SPELL.MULTISHOT).projectile_interval);
+ _pl.split_bonus=spell_bonus(SPELL.MULTISHOT);
+ _pl.crit_chance=spell_bonus(SPELL.CRIT);_pl.crit_damage=GetSpellData(SPELL.CRIT).crit_multiplier;
+ _pl.projectile_factor=1+spell_bonus(SPELL.PROJECTILE_SPEED);
+ _pl.spell_area=1+spell_bonus(SPELL.AREA);
+ _pl.spell_cdr=max(GetSpellData(SPELL.COOLDOWN).min_cooldown_factor,1-spell_bonus(SPELL.COOLDOWN));
+ _pl.fire_bonus=spell_bonus(SPELL.EMBER);_pl.storm_bonus=spell_bonus(SPELL.CONDUCTOR);_pl.cold_bonus=spell_bonus(SPELL.WINTER);
+ _pl.armor_flat=spell_bonus(SPELL.ARMOR);
+ _pl.regen_rate=spell_bonus(SPELL.REGEN);
+ _pl.pickup_radius=GetSpellData(SPELL.PICKUP).base_radius+spell_bonus(SPELL.PICKUP);
+ _pl.status_factor=1+spell_bonus(SPELL.LINGER);
+ _pl.resonance=spell_bonus(SPELL.RESONANCE);
+ var bonus=spell_bonus(SPELL.VITALITY),previous=_pl.passive_hp_bonus;
+ _pl.max_hp=_pl.__base_max_hp+bonus;
+ var before=_pl.hp;_pl.hp=min(_pl.max_hp,_pl.hp+max(0,bonus-previous));
+ if(_pl.hp>before){run_stats_heal(SPELL.VITALITY,_pl.hp-before);run_stats_cast(SPELL.VITALITY);}
+ _pl.passive_hp_bonus=bonus;
+}
+function spell_passive_step(_dt) {
+ var pl=ObjectPlayer;pl.regen_clock+=_dt;
+ if(pl.regen_clock>=1){pl.regen_clock-=1;if(pl.regen_rate>0 && pl.hp<pl.max_hp){var before=pl.hp;pl.hp=min(pl.max_hp,pl.hp+pl.regen_rate);run_stats_heal(SPELL.REGEN,pl.hp-before);run_stats_cast(SPELL.REGEN);}}
 }

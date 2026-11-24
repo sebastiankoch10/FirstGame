@@ -1,0 +1,27 @@
+{
+  "tool": "built-in image_gen",
+  "transparent_background": true,
+  "assets": [
+    {
+      "output": "sources/knight-sheet.png",
+      "steps": [
+        "Use case: stylized-concept. Asset type: production game sprite sheet for original 16-bit fantasy top-down action RPG. Create a NEW coherent swordsman with auburn short hair, teal tunic, brown boots, steel sword, small gold shoulder armor. Chibi 3-head-tall proportions like polished SNES RPG sprites. Transparent background. STRICT regular grid: 8 columns by 3 rows, equal square cells, one full character centered each cell, identical scale and foot baseline. Row 1 faces right, row 2 faces down, row 3 faces up/back. Columns are 1 idle, 2 walk left foot, 3 walk right foot, 4 sword attack anticipation, 5 sword attack followthrough, 6 jump knees raised, 7 low forward slide/dodge, 8 hurt leaning back. All 24 poses same person, hair, armor, sword, proportions, no cutoffs and no overlap between cells. Crisp pixel art, no soft painting, no grid lines, no text, no shadows outside sprite. These are directly sliced animation frames, not a concept poster. Canvas square cells in landscape 8:3 composition. Original art only. Save the generated image as an actual file and include the local path in the output hint.",
+        "Use case: background-extraction. Remove ALL dark brown/gray background from this sprite sheet, leaving genuine zero-alpha transparent space around all 24 characters. Remove floor shadows. Preserve every character pixel, identical 2048x768 canvas, positions, grid, proportions and colors. Do not change the art. Output actual RGBA transparent PNG. Critical clean separation, no background gradients."
+      ]
+    },
+    {
+      "output": "sources/boss-sheet.png",
+      "prompt": "Use case: stylized-concept. Asset type: original large boss game sprite sheet for polished SNES fantasy top-down action RPG. Genuine transparent RGBA background, no scenery, no gradients, no floor shadows. Exactly 3 columns x 2 rows of equal square cells, full monsters centered with consistent feet baseline, generous empty margins. Top row: enormous ancient forest stone-and-root golem with moss shoulder armor, cyan rune core, gnarled crown and heavy stone fists: column1 idle, column2 lumbering step, column3 both arms raised for magic attack. Bottom row: enormous midnight-blue storm dragon with folded/spread teal wings, silver horns, glowing electric throat and gold eyes, three-quarter front facing right: col1 idle with wings half open, col2 step wings lower, col3 casting roaring wings fully open. All three golem poses SAME character and scale, all three dragon poses SAME character and scale. Rich crisp pixel art, meaningful pixels at native 256px creature size, strong readable silhouettes. No tiny normal enemies, no labels, no text, no grid. Canvas 1536x1024 for 512x512 cells if possible. Designed as sliced in-game sprites, not painted concept art. Fully original designs."
+    },
+    {
+      "output": "sources/knight-death-sheet.png",
+      "reference": "sources/knight-sheet.png",
+      "prompt": "Use case: identity-preserve. Create supplemental DEATH animation sheet matching EXACT auburn-haired teal-tunic gold-shoulder swordsman from reference, SNES pixel art. Actual transparent RGBA background. 2 columns x 3 rows equal square cells. Row1 facing right; Row2 facing down/front; Row3 facing up/back. Column1 collapsing onto knees, column2 completely fallen on ground dead, sword resting beside body. Same outfit, hair, body size and pixel density as reference. Full body inside every cell, centered with common feet baseline. Six sprites total only. No backgrounds, no shadows, no text, no grid lines. Canvas 1024x1536. Must be clearly death poses, not standing hurt."
+    },
+    {
+      "output": "sources/magnet-orb.png",
+      "reference": "../icons/icon_fg_magic_arcane.png",
+      "prompt": "Use case: style-transfer. Asset type: new collectible MAGNET ORB sprite for this ArtPack fantasy pixel game. Match reference’s crisp blue and silver 16-bit fantasy pixel-art palette, but create a DISTINCT new item: luminous turquoise glass sphere with a clear silver horseshoe U-shaped magnet inside, gold tiny tips, pale cyan rim. One item centered, entire silhouette visible with generous transparent margins. No UI square frame, no text, no floating background. Genuine transparent RGBA. Native pixel-style simple readable shape suitable for reducing to 40x40 pixels, not an illustration. Original art. Canvas square."
+    }
+  ]
+}

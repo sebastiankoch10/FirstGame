@@ -1,0 +1,85 @@
+{
+  "classes": [
+    "Sword",
+    "Mage",
+    "Ranger"
+  ],
+  "combinations": 9.0,
+  "metrics": {
+    "progression": [
+      {
+        "kills_per_minute": 60.0,
+        "minute_one": 10.0,
+        "minute_thirty": 51.0
+      },
+      {
+        "kills_per_minute": 120.0,
+        "minute_one": 14.0,
+        "minute_thirty": 71.0
+      },
+      {
+        "kills_per_minute": 240.0,
+        "minute_one": 19.0,
+        "minute_thirty": 101.0
+      }
+    ],
+    "lighting": {
+      "sources": 5.0,
+      "submission_ms": 0.087,
+      "base": 8219222.0,
+      "lit": 16777215.0
+    },
+    "crowd": {
+      "monster_update_ms": 1.9491,
+      "counts": {
+        "visible": 70.0,
+        "nearby": 150.0,
+        "alive": 150.0
+      }
+    },
+    "early": {
+      "visible": 23.0,
+      "nearby": 23.0,
+      "alive": 23.0
+    },
+    "magnet": {
+      "coins": 500.0,
+      "simulation_ms": 31.815
+    },
+    "native_ranger": {
+      "mean_delivered_frame_ms": 16.665580555555557,
+      "frames": 480.0,
+      "peak_alive": 28.0,
+      "peak_visible": 28.0,
+      "min_reported_fps": 283.7684326171875
+    },
+    "lit_crowd": {
+      "median_frame_ms": 16.661,
+      "max_frame_ms": 54.776,
+      "light_sources": 72.0,
+      "mean_delivered_frame_ms": 17.36008888888889,
+      "light_submission_ms": 0.259,
+      "enemies": 153.0
+    }
+  },
+  "native_modal_frames": 45.0,
+  "passed": true,
+  "checks": 221.0,
+  "rendered": [
+    "boss-800.png",
+    "chain-800.png",
+    "darkforest-800.png",
+    "emptypause-800.png",
+    "levelup-800.png",
+    "litcrowd-800.png",
+    "native-800.png",
+    "pause-800.png",
+    "stormlight-800.png",
+    "tooltip-800.png"
+  ],
+  "assertions_passed": true,
+  "exit_code": 0,
+  "test_type": "native Windows VM: nine starts, pause/resume/coin level-up, measured population/performance, chain and UI fixtures; injected input, not OS input E2E",
+  "artifact": "output\\atmosphere-smoke\\20261122-165353\\build\\FirstGameAtmosphereSmoke.exe",
+  "logs": "output\\atmosphere-smoke\\20261122-165353"
+}

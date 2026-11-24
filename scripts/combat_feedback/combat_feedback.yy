@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"combat_feedback",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"combat_feedback",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

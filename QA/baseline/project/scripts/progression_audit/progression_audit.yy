@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"progression_audit",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"progression_audit",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

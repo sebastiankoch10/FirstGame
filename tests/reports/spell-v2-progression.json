@@ -1,0 +1,169 @@
+{
+  "status": "PASS_MODEL_NOT_PLAY_MEASUREMENT",
+  "config": {
+    "first": [
+      1,
+      16,
+      24
+    ],
+    "early_end": 14,
+    "early_base": 36,
+    "early_step": 10,
+    "late_base": 146,
+    "late_step": 2.3,
+    "late_curve": 0.012,
+    "min_gap": 6
+  },
+  "observed_user_anchor": {
+    "minute": 5,
+    "level_old": 47,
+    "minimum_old_spent_xp": 1507,
+    "new_level_at_same_xp": 18
+  },
+  "xp_to_level102": 24922,
+  "models": {
+    "slower_45_plus_18_per_minute": {
+      "samples": {
+        "1": {
+          "level": 4,
+          "ability_decisions": 4,
+          "coins_per_minute": 63.0
+        },
+        "3": {
+          "level": 7,
+          "ability_decisions": 8,
+          "coins_per_minute": 99.0
+        },
+        "5": {
+          "level": 10,
+          "ability_decisions": 12,
+          "coins_per_minute": 135.0
+        },
+        "10": {
+          "level": 17,
+          "ability_decisions": 20,
+          "coins_per_minute": 225.0
+        },
+        "15": {
+          "level": 25,
+          "ability_decisions": 29,
+          "coins_per_minute": 315.0
+        },
+        "20": {
+          "level": 35,
+          "ability_decisions": 40,
+          "coins_per_minute": 405.0
+        },
+        "25": {
+          "level": 46,
+          "ability_decisions": 52,
+          "coins_per_minute": 495.0
+        },
+        "29": {
+          "level": 55,
+          "ability_decisions": 61,
+          "coins_per_minute": 567.0
+        }
+      },
+      "full_build_minute": null
+    },
+    "ordinary_80_plus_30_per_minute": {
+      "samples": {
+        "1": {
+          "level": 5,
+          "ability_decisions": 5,
+          "coins_per_minute": 110.0
+        },
+        "3": {
+          "level": 9,
+          "ability_decisions": 10,
+          "coins_per_minute": 170.0
+        },
+        "5": {
+          "level": 13,
+          "ability_decisions": 15,
+          "coins_per_minute": 230.0
+        },
+        "10": {
+          "level": 23,
+          "ability_decisions": 26,
+          "coins_per_minute": 380.0
+        },
+        "15": {
+          "level": 36,
+          "ability_decisions": 40,
+          "coins_per_minute": 530.0
+        },
+        "20": {
+          "level": 49,
+          "ability_decisions": 54,
+          "coins_per_minute": 680.0
+        },
+        "25": {
+          "level": 64,
+          "ability_decisions": 70,
+          "coins_per_minute": 830.0
+        },
+        "29": {
+          "level": 75,
+          "ability_decisions": 81,
+          "coins_per_minute": 950.0
+        }
+      },
+      "full_build_minute": null
+    },
+    "very_successful_70_plus_55_per_minute": {
+      "samples": {
+        "1": {
+          "level": 5,
+          "ability_decisions": 5,
+          "coins_per_minute": 125.0
+        },
+        "3": {
+          "level": 10,
+          "ability_decisions": 11,
+          "coins_per_minute": 235.0
+        },
+        "5": {
+          "level": 15,
+          "ability_decisions": 17,
+          "coins_per_minute": 345.0
+        },
+        "10": {
+          "level": 30,
+          "ability_decisions": 33,
+          "coins_per_minute": 620.0
+        },
+        "15": {
+          "level": 48,
+          "ability_decisions": 52,
+          "coins_per_minute": 895.0
+        },
+        "20": {
+          "level": 67,
+          "ability_decisions": 72,
+          "coins_per_minute": 1170.0
+        },
+        "25": {
+          "level": 87,
+          "ability_decisions": 93,
+          "coins_per_minute": 1445.0
+        },
+        "29": {
+          "level": 102,
+          "ability_decisions": 108,
+          "coins_per_minute": 1665.0
+        }
+      },
+      "full_build_minute": 28.833333333333332
+    }
+  },
+  "assumptions": [
+    "One XP coin per regular kill, all coins collected.",
+    "Kill rate ramps linearly; these are explicit model inputs, not measured rates.",
+    "First seven bosses defeated and each chest collected.",
+    "Upgrades chosen toward twelve nine-level abilities; no wasted picks.",
+    "Minimum six gameplay seconds between XP choices; pause time excluded.",
+    "Successful late rate stays below the spawner refill ceiling of 1800 kills/minute."
+  ]
+}

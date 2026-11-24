@@ -32,9 +32,12 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_coin",
-    "path":"sprites/spr_coin/spr_coin.yy",
+    "name":"spr_fg_coin_idle",
+    "path":"sprites/spr_fg_coin_idle/spr_fg_coin_idle.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"spr_fg_coin_idle",
+    "path":"sprites/spr_fg_coin_idle/spr_fg_coin_idle.yy",
+  },
   "visible":true,
 }

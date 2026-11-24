@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "checks": 186.0,
+  "classes": [
+    "Sword",
+    "Mage",
+    "Ranger"
+  ],
+  "combinations": 9.0,
+  "metrics": {
+    "crowd": {
+      "monster_update_ms": 2.0900000000000003,
+      "counts": {
+        "nearby": 150.0,
+        "alive": 150.0,
+        "visible": 63.0
+      }
+    },
+    "progression": [
+      {
+        "kills_per_minute": 60.0,
+        "minute_one": 9.0,
+        "minute_thirty": 26.0
+      },
+      {
+        "kills_per_minute": 120.0,
+        "minute_one": 11.0,
+        "minute_thirty": 32.0
+      },
+      {
+        "kills_per_minute": 240.0,
+        "minute_one": 14.0,
+        "minute_thirty": 39.0
+      }
+    ],
+    "early": {
+      "nearby": 23.0,
+      "alive": 23.0,
+      "visible": 23.0
+    },
+    "native_ranger": {
+      "frames": 480.0,
+      "peak_alive": 26.0,
+      "peak_visible": 26.0,
+      "min_reported_fps": 432.52593994140625,
+      "mean_delivered_frame_ms": 16.66644166666665
+    }
+  },
+  "native_modal_frames": 2746.0,
+  "rendered": [
+    "boss-800.png",
+    "chain-800.png",
+    "emptypause-800.png",
+    "levelup-800.png",
+    "native-800.png",
+    "pause-800.png",
+    "tooltip-800.png"
+  ],
+  "assertions_passed": true,
+  "exit_code": 0,
+  "test_type": "native Windows VM: nine starts, pause/resume/coin level-up, measured population/performance, chain and UI fixtures; injected input, not OS input E2E",
+  "artifact": "output\\survivor-smoke\\20261122-160010\\build\\FirstGameSurvivorSmoke.exe",
+  "logs": "output\\survivor-smoke\\20261122-160010"
+}

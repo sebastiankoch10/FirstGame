@@ -1,0 +1,5154 @@
+{
+  "passed": true,
+  "status": "PASS",
+  "checks": [
+    {
+      "label": "Original reference byte identity Zaubermeisterin_Referenz.png",
+      "passed": true
+    },
+    {
+      "label": "Original reference byte identity Waldlaeufer_Referenz.png",
+      "passed": true
+    },
+    {
+      "label": "Original reference byte identity Drache_Attacken_Referenz.png",
+      "passed": true
+    },
+    {
+      "label": "All 67 approved dragon PNGs byte-identical",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_class_fx_0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_0/6e16a804-65a7-5883-bfe2-cd0a1221fe36",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_0/95bb0df7-d65b-5248-a3ad-b5dd3cefc100",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_0/2ac1741b-931c-5e88-bc63-2c8e506557d6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_0/b8506080-fd7f-5b19-93b4-6ab82054db16",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_0/c55ad394-0cbf-57e1-a414-34d1c0ebec7a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_0/eb4e2d40-6241-56f9-a971-a0fd3f291d04",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_0/8dc1a47b-3da4-5b70-a298-c44f1b485450",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_0/7c485783-af44-5a0a-997b-151448852c00",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_class_fx_1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_1/c834a5c4-07c9-5f15-bc14-0bacfaa97bdc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_1/88b1bb1c-760b-5b6b-be13-197cbe74fb06",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_1/109289bb-e9b7-5076-a079-f721379ff297",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_1/bfed43db-05fd-583d-a5bc-073b1c6b5b6b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_1/6d0f8b61-a32f-547f-b4aa-8acfb4c3c2b9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_1/0e9e1c82-c516-56ae-b8c1-547246914131",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_1/afbc3061-a4bd-567e-ae7a-d8425cc8bba9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_1/d9d2e461-284a-5e85-9db8-c7a3ce5e6434",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_class_fx_2",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_2/ddb7e9f4-9430-5d5b-af33-6f350e0a20bc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_2/ec71f15e-e7c8-58a0-88b8-7ca0d268deab",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_2/87b6773f-10ac-5bc7-b763-35cae7fff440",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_2/c7176dd2-ab6b-5817-ad49-bf108d99d458",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_2/542257bf-9391-5fbc-8cd1-d8563374c96a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_2/8b96c22b-6fba-5f71-a483-6ac4ebecf8f3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_2/538d6439-ef4f-5f4c-b886-98c46933c6c1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_2/541e7768-8eb6-5cdb-87d1-b1730524dfb9",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_class_fx_3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_3/b94c2f59-9b78-5fc8-88e9-527cb1b93344",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_3/f32e5273-ca8d-5135-99d8-9239b0306e49",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_3/60b77553-0b58-5a89-ae61-b147ba90c522",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_3/01a60cd5-35d3-548c-acf2-d4c4969f37e1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_3/2a97ac45-1fee-5052-a28f-590e50cdd84b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_3/95f080e0-84c3-5adf-a4f5-3acb68bff003",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_3/00dd93ca-701d-5b42-98c8-f2c8320c2fae",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_3/6aba6187-f887-54d2-8691-1c83908b3ea1",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_class_fx_4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_4/76bde852-65e4-549b-9459-f1fbfbbfefd0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_4/abddba6b-1176-52c7-acb9-2c464ad382ab",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_4/5341e121-724e-5c21-8630-01ceae871286",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_4/d92ba0ca-facd-52e9-a5da-4b5f3e773b5e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_4/57d76e68-b6ff-5dbe-a39d-85794ddb6ebe",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_4/27443225-1f06-5085-baf9-4f7399a2596a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_4/3b7ecc2c-34b4-5ee1-9aa2-37087c60bcd0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_4/1826e921-2676-5054-b2ed-7c854b7c4f43",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_class_fx_5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_5/2361d2d6-1451-5afd-a34e-7a7b25e70edb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_5/f6040494-6927-5c11-a74c-b5002aeaa50c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_5/4ae033d8-adb1-55b8-8fe9-5d4b2a1fd96b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_5/1232ce2c-6584-5b17-9c9d-0781c8033c0e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_5/8efc3b7b-c6ad-57d1-91f6-d08de34e9644",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_5/4f33d9a9-dd15-56b0-94c5-bbba2a7237d4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_5/40c251f5-943e-5420-8df6-3810dddcecd3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_5/d2bba635-ebd4-58fd-b6df-d0215f4595f7",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_class_fx_6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_6/790822db-7a49-5685-96da-cc99c255ebfa",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_6/68ea26cf-2c2d-563c-8ce6-fc349a779400",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_6/17c0471f-2663-5f74-83df-662d7dfb958a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_6/7aa44e8d-2397-51f5-bb9e-99c7f74c8522",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_6/fbe6c6c1-805f-5504-a615-941cde7fa430",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_6/5e8caac6-d7d1-5239-9f82-aab1a20d0303",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_6/fd77cf05-6e9b-5b3e-8b92-c4df7bcb52f6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_6/169865d5-3668-5885-97aa-0e4315a40fdd",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_class_fx_7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_7/2bdca8db-d7ce-515c-92bc-4986451bdd61",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_7/43816caf-dd8b-5bae-b8a9-72a3e093b955",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_7/fd82263f-d476-5039-97b0-47b6b8a34689",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_7/f4003b16-76a4-5afc-b2c4-386285afbcc3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_7/2cd04a2c-2402-5163-92dd-858b9e1010bd",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_7/5a583d0e-174c-5f23-9ad6-07b6a7bc7aba",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_7/017148f2-3bc7-543d-a5ea-b9d0d1bab169",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_class_fx_7/e2a86d63-3d9b-5f9a-9d10-656d1ed943db",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_dragon_fx_0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_0/233157aa-0fe5-5be2-a158-4b9a9ca06f14",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_0/0f0a3974-35ce-5759-b221-5e1aa57226b4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_0/c9a2752b-26c6-5083-99ae-48c65689557b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_0/88c51c32-b23a-5af3-af72-8ef164192637",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_0/724d6e48-c2ab-5a1e-b50b-841c4f0b9f00",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_0/4192dd1f-a293-5318-9345-1bc0a0ab5092",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_0/d725fc13-2f8e-5ac1-9760-790f9e26aa16",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_0/f67e6364-339c-5934-9d9e-50f200ba7917",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_dragon_fx_1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_1/6b38316c-d71e-5ad2-a81d-640586f12673",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_1/2c2f57d3-4fe8-5d76-9dbb-413bffc081bf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_1/a2380ac4-d5d2-5f82-8220-782cdbfcc759",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_1/eceebdac-409a-51db-ad05-43bb2c1813e5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_1/2094dcd9-91bb-5f47-8b54-9b78701eb908",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_1/18592509-d923-5a52-a394-c226a149e7dd",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_1/df7a3545-cf6b-5c67-9ca5-58f6b2b1989c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_1/4d594d3d-6807-5e28-95db-be7461b87b3a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_dragon_fx_2",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_2/020c1cd9-bf80-5ce7-94b7-544e24421b27",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_2/fa38de73-9f27-5a3e-a4f9-0ff86e10152f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_2/413fbf8a-96d4-5c9c-971c-ba29d0c3aa84",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_2/c5cd2a8a-d49c-5b5d-86a4-5b561fb9167a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_2/0fb151a3-5140-5309-b613-8c5615659076",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_2/9c20b17b-b1a3-507a-9226-e06b49f44bc0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_2/cf9bb522-3c1a-5e4e-ac23-23bbc7a8f5d7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_2/c07a4093-7663-5073-beb5-a46f903bc496",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_dragon_fx_3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_3/78ef30b7-d8ae-571d-abdf-94e23380cef8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_3/6361a36b-b091-5d4d-821d-369ee75fcb37",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_3/b7cda6b5-ca0e-5a31-9da3-dbfd8e59f6d6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_3/df02addc-a2e2-5476-ae2d-74fd4b8d5cc1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_3/210be751-ab42-5e3e-bdf8-3bd191ec5f6e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_3/a13e0c5d-c553-5e47-9fae-22a700146161",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_3/b9ee136f-1960-5df1-9b6f-2dbab1e64721",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_3/db4d64f2-6043-54af-aeb2-1479dcbff8d6",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_dragon_fx_4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_4/e867f21b-7a34-5cb9-b3a1-a6eae14ffa0b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_4/7729ac5f-2d7f-53a4-b46f-6281c2d1e7aa",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_4/2d5558da-e550-525e-b6a8-5f47e539311c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_4/0e90800f-22db-5793-854e-2d0c8c623d1b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_4/69e8b7f4-0fb2-5a41-85a1-1728c13b7e62",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_4/f1b3260d-dfa2-540d-a6d6-518672b6f902",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_4/51f6feae-0e98-58f8-be00-49b0b7ad3d3a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_4/49122682-5e7f-5e28-b3cd-1eb7c315d5c5",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_dragon_fx_5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_5/0e797ec1-0348-53ac-8733-38d4e36f8d48",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_5/aaed8e30-adea-5351-b350-5f34825486d5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_5/ffa6d045-92ef-586c-8826-164ec27988f4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_5/c34646ab-82b5-5a7c-a121-b43ffb8835ec",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_5/d1932603-0375-5b1d-a258-a8f905d0b84a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_5/f98e5d7f-43ae-5e87-a33b-5c6da1d3e400",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_5/b1718cce-98da-5775-b84b-079feb5d6b7b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_5/2f9f1dd1-9c3a-53aa-a252-703352426dd5",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_dragon_fx_6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_6/f8161c4c-902e-5f32-8d94-2c795f6a30c1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_6/da116c33-0e58-534b-accc-a23a067bebf6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_6/c2c7de31-5bd4-5159-b4f2-6bedb26267f1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_6/de25ffa1-404d-5a8b-8d29-83745cc7f35c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_6/2553c7dd-e50c-539f-b5f1-f347b04ff215",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_6/831e4201-fbe9-5518-b035-398665a15e8b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_6/ebde3d3b-691a-5366-b012-180784463fea",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_6/577df499-b98e-5361-b9df-6b8037a266c6",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_dragon_fx_7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_7/af1e8740-4877-544d-910b-768e92ce8dec",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_7/9ebc943b-a182-53fb-ac42-d07e713f0bdc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_7/b950d90f-5e46-521c-977f-c27b387a0a52",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_7/c2b46238-a2e6-51cf-95ae-f3760630a066",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_7/eeacb778-4c93-52d8-a9ac-91853ced7492",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_7/b31decd7-b71f-5b01-9d7c-ced90ae8abda",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_7/28e5c60a-9d22-570a-9b44-8c4bdad9ca22",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_dragon_fx_7/78ec6697-113e-5aa9-9d58-42ce69e49116",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_dragonextra_channel",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_channel/d34cb3b2-b455-59ad-a57a-4699595c7aaf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_channel/e715ec60-c67c-59dd-9a60-5dfe4a098dd6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_channel/3a139bf5-8267-57e1-9fc0-fd676d6673c3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_channel/a88c431e-526b-5dc4-84ad-9a1d52b404de",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_dragonextra_leap",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_leap/e4762d3e-0368-5709-aeb1-090bb439e33d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_leap/7038efec-5c4e-56b6-b591-8b6b899b31ef",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_leap/536c420c-c076-5c04-ae31-01612bda1163",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_leap/094669bc-b435-5af1-9bc7-8f2e96af8767",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_dragonextra_summon",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_summon/7939d010-af2a-5b9c-a1b7-dda94aac8fd7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_summon/826194c2-abca-5047-a069-5c0b1a41c7e4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_summon/6f746517-8075-545d-b643-fbff08b2f1df",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_summon/ae4d2a39-e4a8-5cbd-8f16-60f0df30e0d3",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_dragonextra_wingbeat",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_wingbeat/93e4d78e-7a8b-5a7d-9a77-92b0caca5a7f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_wingbeat/e81f460a-170c-5dac-bb7d-d29f1475986f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_wingbeat/67d498c4-502a-58c9-ba73-74b8ce9da128",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_dragonextra_wingbeat/74135ebb-2275-597b-80dc-2b55a1ef6545",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack1_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_down/4b619dfc-809b-5a3c-9d79-15791b91528d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_down/853836f5-5629-5a65-b398-f9cdcbe1ac7c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_down/4bdd4c80-440b-5278-9ede-1a827d98db62",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack1_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_down_left/230efe3c-bdd6-57c9-a99f-1af92a95e5e9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_down_left/aac9f4be-d65b-59cc-a707-2418c6509dfc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_down_left/d35dc3e5-d1e4-59a8-a940-7558bdc9b4b5",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack1_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_down_right/d1f958b7-55b2-5557-82c6-7d021cab7e70",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_down_right/4a7830ac-d521-5e50-97d7-5776027962a4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_down_right/a22dfd06-8ffc-5432-b763-8b9d2081e7ec",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack1_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_left/aef5e41e-da2f-5b33-afc5-4bc1ef2e2e46",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_left/1dda4a66-04a3-55a7-9ccf-85da842b0985",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_left/94f27081-050f-5e43-ae2e-e2819631c314",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack1_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_right/7f49bc00-a443-5fb3-bfcd-271ef236f42f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_right/e513cbf8-5a34-520a-b9bb-347cb256c59a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_right/19d2e2bf-7c8a-5590-a375-311e017be475",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack1_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_up/0236c35c-af42-5840-bfc9-8b348711f7fb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_up/d44c19b4-f014-560f-8fc8-fdb58ec64bba",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_up/db85d887-4961-537f-9578-6b7ffd3e6465",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack1_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_up_left/1dac0d26-a4fb-5855-a580-f598487bf969",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_up_left/183c38a7-d7f8-5521-bf5a-132bbcd69812",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_up_left/f33b30a7-71e4-504c-a2fe-076fd1a5723e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack1_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_up_right/045323f2-f3f5-516a-82b3-70ab6ef77014",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_up_right/568a61df-3d7f-5eb4-a004-62585f4b5bb6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack1_up_right/b637de6e-78c7-5bf9-9c6e-102cb762b477",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack2_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_down/2a9da142-08e8-5a8d-b574-fed809bd305d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_down/a0219fc4-4773-5b50-b61b-f453b7a2c8fb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_down/40a56018-4f13-52fc-a48f-67b8175ca5d5",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack2_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_down_left/b0e635df-a485-5bd5-ade0-6c81b6ece5a1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_down_left/381d3961-f29f-5efb-91c5-e96c8a60de98",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_down_left/e81d8413-4c57-592a-8799-8a553d9ced4c",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack2_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_down_right/3145cff9-5628-592f-96ae-860f4a8061b6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_down_right/afe28e96-f300-5f10-b9cf-7249e2e93dcf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_down_right/4a6c89bf-e8b5-5de6-a84b-04516c2413ce",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack2_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_left/6d79f442-09fd-53de-9d84-e60fe289cad4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_left/094d7d1c-55d6-5157-a08d-81e5ddb2ad37",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_left/886af750-dc30-53de-80ac-3f5e7f953a6e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack2_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_right/b9853701-1cb7-5775-b073-7fe281520196",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_right/242b2395-6960-5d54-bdb0-c78de392fd6c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_right/ad505a49-6ddc-5dc6-9a69-46baeacc7ad8",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack2_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_up/f6910629-14b3-5194-95af-6938c6000e5e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_up/bddfdb39-1c85-5f9b-9c06-818299198e2e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_up/52d78bdd-5db6-5f7c-9819-96b0bf1a059d",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack2_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_up_left/4f56cef1-5ef5-53bb-b312-98d9e74f2d80",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_up_left/eac50127-959b-58ea-8132-57969995cd27",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_up_left/48df335b-845b-556e-8e47-d7b52fc0027f",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack2_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_up_right/1ef5c89e-4a3c-5b3a-ae7d-6cfdb772a493",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_up_right/b5731cc0-1223-5170-9c65-8a40523e0b0e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack2_up_right/177601fb-0cb2-58cb-b273-0e54020ac2d5",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack3_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_down/0953abfb-5f91-54dc-8145-e4585cf9cdf0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_down/0c6197ac-e5a1-5941-8825-43e451a931e1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_down/593b3445-6f11-5187-8c1a-eec1a86f2ba3",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack3_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_down_left/97a6f91e-87a8-53b2-9daa-abcff09a500b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_down_left/29521ca8-467a-577a-a10e-55db35509302",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_down_left/fb9756ac-5e4e-5e7b-95cc-313281a73876",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack3_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_down_right/60409cff-455f-5c07-8ae9-24be2e82eb66",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_down_right/26405089-dfa4-5e05-98c2-38993c01970c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_down_right/9f9eac89-365b-52bf-b7ad-1f9d561a5c04",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack3_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_left/3d595bb7-ca32-5737-a026-6bbe7454bdfa",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_left/85f3ddc3-c29c-565d-ba33-10cbc26f26bb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_left/47888550-a898-533a-ac88-fbadb14e90f2",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack3_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_right/a15215b7-6b2c-57c6-97e0-1ab20c8703c1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_right/5638b061-e2bc-5643-88cf-0f0188ac825f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_right/f7bfd173-c766-5be3-bd81-d42c9c75bdcd",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack3_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_up/6666f3cd-d183-5750-b754-e834050edf4d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_up/a96e2cb1-d6bf-5138-889f-2af4fd830846",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_up/f82d44d6-fbb4-5c49-8cad-4314caafd799",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack3_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_up_left/28b3a552-0fb1-550c-80f8-b5d9732e78be",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_up_left/25a0210d-c253-5848-b45b-077b0c910ee6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_up_left/c8184b8a-315a-54ad-a8d6-b3199ec5273f",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack3_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_up_right/7e141b96-79de-55a4-ad83-e096d9c63830",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_up_right/301ef844-0b87-5dbc-9575-0259c284ff7e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack3_up_right/34fd93ba-b310-5223-be9b-0c2d9273953c",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack4_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_down/c29afa7a-c0ee-5337-9764-2edc52cf736b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_down/8e8c1680-b25f-571d-a95b-d4508fc8b11d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_down/857412a7-3cba-5918-81c7-5841d394ec4c",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack4_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_down_left/fb0d2f53-56cd-59a3-9851-235ed37c5a22",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_down_left/4aa0b029-de5a-5d1c-8d1f-d12778852baf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_down_left/8cfef2ae-ba55-53d2-b06e-9708ca686746",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack4_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_down_right/ad39e37f-3d4d-5622-9e11-802048963f61",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_down_right/b0cd042b-791d-5e1b-aa53-455108b8bb7c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_down_right/87dec2e2-5c06-548a-acc3-fc322f594689",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack4_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_left/0feb9a17-a760-5983-a6da-f7265be02455",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_left/df561367-23b3-5446-aba6-e80c54c65f20",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_left/a7e7c3bc-079a-5263-9bb6-870599aa02a7",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack4_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_right/40fb9533-314f-5379-a315-5ca794a35833",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_right/0934a2a4-a406-528f-8772-88f22cac9083",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_right/7d850338-5a7f-5d84-9593-e0fa77365a3a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack4_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_up/9ea92752-5e25-5dd6-ac54-d306f9253166",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_up/2474800f-ade0-5831-a767-f594dc0a1b83",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_up/19179c76-9adc-539c-b4b5-f6d18935ee85",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack4_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_up_left/61671be5-9140-593a-bc23-c80534ed9138",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_up_left/d945fba0-ee31-5863-879c-0aafa2af3c4c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_up_left/c5c4acfa-f2a0-5752-9d55-e8ef7ad9effb",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_attack4_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_up_right/7c9c77ed-f842-5243-96da-afe14e4beb2a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_up_right/91db3cb7-cc1f-542b-9062-e0a9d09a55d8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_attack4_up_right/8f626780-0460-5c71-a5fa-48a25dd2e45b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_death_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down/7c7a2cf6-d4b0-5d99-ba50-ad4c9072793b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down/84362882-f12e-5d8e-88f2-cc585a3c404a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down/b6d0370d-8eec-5233-adf5-72116c1f332c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down/41b8ccc7-3c67-51d3-acb6-6654fe529c25",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down/01e024dd-4693-57bb-9370-2e45cc0b0e38",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_death_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down_left/986f8435-c53f-535f-854c-6dc2d6c6f85c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down_left/0f579ff4-baf4-54a1-98ad-0412194853c8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down_left/ed6eb5ea-6ae9-58f0-a03e-c6605c58427c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down_left/625f2041-b0a4-52ae-bb39-50742e96a9cb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down_left/d91f8161-b1bd-5d5b-b1f8-592967196f12",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_death_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down_right/82668508-2d27-5253-8382-948608a09602",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down_right/fa1e894e-5f1c-519f-bf49-9cfecbd2ace2",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down_right/f59a081f-df01-5f25-97a8-9d1609b20022",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down_right/61bbde15-f582-50f8-97fa-8dd10ec4079f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_down_right/80a0deb6-c526-5ad7-90f1-8828031b9cb7",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_death_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_left/9d351070-fd54-5347-a35c-dea7613efaeb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_left/efac6c77-cc9f-5c5c-ab4a-2eaa86ffe4b5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_left/f8030c5b-377f-53c4-a976-4f6b8323c7cd",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_left/23bf51e1-0ac2-50e2-99c1-958ed3b0c409",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_left/0beee0e1-40d0-58b1-b578-4d27412ed307",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_death_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_right/25767bb5-affa-5e57-b3f6-cc17c38c8aa0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_right/ef8adcd2-65b5-53fe-8687-246651b62c1b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_right/d8de7c03-ce5a-51b2-b892-454095a40ab2",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_right/6c81931e-be05-506a-a44d-9deb431f11b9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_right/cd061728-ceb8-51b7-ab47-3654044f695c",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_death_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up/81b9b9f3-0377-5480-b152-8ded93132dd8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up/f137d95c-316a-5cf2-b6b2-99ed2e076bb1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up/be92daa5-e257-5bf4-886c-81874b738660",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up/0af00f95-0f40-5c7f-81f9-411a8b409e0b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up/7c5801cc-e2eb-570f-b923-01d8f3aee600",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_death_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up_left/a4c477b6-4ec6-558a-b6d3-536620f4a288",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up_left/ad4e9b27-52c2-5533-9d74-65eddfe824ff",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up_left/43adbb90-32bf-5f84-ace5-a3d5a6240d2c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up_left/bb9d88a0-7b38-56ab-9c8f-58c4ce9868c2",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up_left/3d811f3a-c32d-5aa0-a2ae-c0a7558d57f8",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_death_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up_right/5b0b26ad-63b4-5e59-910d-d13820c31c28",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up_right/c0cab747-2d4b-5a55-bba6-c20d728ecdb0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up_right/6dc038ee-230b-5948-a4d3-c6ace8252b1f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up_right/a2cfc413-e853-5e26-92ed-fc650d0105ea",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_death_up_right/475306f1-5e80-51d8-84af-70652911a9e2",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dive_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_down/802164a2-5c95-59bc-a11f-9309960ddabd",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_down/9e2e413e-5e40-5337-af6f-d3548b5b10c6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_down/e0112097-96ca-52ca-a0b0-16eea4cc7be4",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dive_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_down_left/b9b61448-0d10-5c2c-86d9-59762e351b60",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_down_left/a39aa25f-315b-5ed7-8aa4-f3dd3dd2e8ce",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_down_left/f3d412bf-beb3-5a3f-a0cd-f80f90acafb9",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dive_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_down_right/cc42088a-318e-5b74-879d-3699834c71b3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_down_right/68364d86-bedd-56c5-a231-5cb24c0a4288",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_down_right/430541a1-9d3d-5a19-b3a3-d1d648e2582d",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dive_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_left/ab979391-168f-5f8d-894a-d0b43411a6f5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_left/d003b9eb-5ddd-5fc1-80d5-3bf05803bf05",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_left/03f18357-c6de-57c0-82e9-d68935716cd8",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dive_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_right/5cf82772-f3ed-538e-b25c-8dc5518d01bc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_right/a6062f96-6b0b-5bba-aa03-830d7ea8fa8e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_right/4f0e9dca-d8e7-5ff6-a0ab-7f27462683e1",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dive_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_up/a29e61c0-bc92-5b48-a0b7-88fd7c94e541",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_up/d2d6e83c-9834-5578-a646-6d7a7890f9c1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_up/fb46ecec-13c3-56fd-9efb-f4cd5c276639",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dive_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_up_left/ae4fe650-8e2d-50a3-9d0f-89b193b7d55a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_up_left/267ceda8-459d-5adf-90c0-fa1c0c6925e4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_up_left/144d1bce-98a9-5c67-9ad8-345d24f997ee",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dive_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_up_right/3e5fb571-7f2f-53cd-9790-d6d24456b41e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_up_right/e5f10bc0-e63a-58ac-9802-e8884f998345",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dive_up_right/d50a9d2f-e08b-59f7-890c-8cb94cda871e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dodge_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_down/4b28864f-3865-567a-ab95-52aa24dc9461",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_down/4a7b95dd-6d46-5213-8363-c53e8854ca52",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_down/344d06ca-8897-5f46-ba8c-385bacd7c8e4",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dodge_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_down_left/83259494-bb0b-5edb-92f7-853838fe647b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_down_left/b500d1ef-2d1a-52ec-a857-ce99181eda8e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_down_left/5795eb07-6bf2-5db2-90b7-e06af3d54f0b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dodge_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_down_right/7a4e2cc5-303f-55a5-8edc-0aff83891d16",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_down_right/6f71ef93-8f86-544f-ab4d-7bc040118dd0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_down_right/8f01efab-ef28-5e58-bb74-cb7e2fb9c630",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dodge_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_left/e7fc2f72-a0d4-5051-a3c5-b5ced01e813a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_left/0858fd01-9133-54bb-872f-8de3f5d3dbbe",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_left/4ecb61d5-f00a-5409-9c06-80ce024d0fed",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dodge_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_right/f7abcb59-4146-5ad5-afc9-7d7de04bb08e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_right/bf971956-976a-578e-80c1-b6011fbf97d3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_right/41ebf14a-49a5-5f4d-ab30-c86ee67ad858",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dodge_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_up/f14886cc-9ebb-537f-abaa-6fc5903b1158",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_up/339cc072-e87b-5cda-9407-ec6296ed977d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_up/688f9113-edf0-5012-a72b-98a451ada78e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dodge_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_up_left/f22e7074-a4fc-555f-90d8-941070dc87c3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_up_left/790d6ddb-a9fd-5ef9-8671-861773959294",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_up_left/4e9abc3b-272b-5cb1-ba5c-261de17a0490",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_dodge_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_up_right/5aea1c2a-bf09-5b73-8ca6-b00b477e0898",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_up_right/efb1e630-0e35-5eea-abdb-88c4cf291172",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_dodge_up_right/bfddae48-7f70-5460-b243-89e697145e93",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_fall_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_down/21d5f05c-4a32-5218-a990-50078fb8a2f1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_down/85b7d6d7-80da-5ff2-a9de-9d9e3ec481f2",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_fall_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_down_left/049a59f3-7de8-5825-bf41-4e9fb0a764fa",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_down_left/33ed9e8b-df87-57b9-88eb-ab0aab2660a8",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_fall_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_down_right/9f5fe622-a01a-59cc-94b7-663154a45123",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_down_right/93dfb776-4c7d-5263-9d8e-61056bda5475",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_fall_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_left/f7b51aa4-1d96-5df7-9463-738b79e9aae8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_left/b04f1eb3-1aa4-5122-a1bf-773e955a4249",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_fall_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_right/e2e6f6a5-6cb9-5c16-86cf-1daa358126dc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_right/8dca849d-5f1a-5e09-aaae-975ec36be99e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_fall_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_up/df688c29-f1e6-558c-9182-30e34cbbe484",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_up/229d1ebf-ab32-5485-b6da-f4103677cbc6",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_fall_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_up_left/6057c64a-18a1-582d-9e3d-92666a0ebc53",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_up_left/4b3f87b2-490d-517a-ad31-f4740983e641",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_fall_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_up_right/3f0d4253-36c6-598f-bfa1-15bae70ce8cf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_fall_up_right/57a5c939-10ce-5129-b992-407e1e0bc60b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_hurt_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_down/fe6f652d-c372-51cc-8a9a-86b6c104f5dc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_down/1c20d531-aa79-5bb9-a03f-fb47e7889fdc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_down/cffc9c6e-dcae-52ac-9296-8b4f2813df86",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_hurt_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_down_left/086d7052-7a0a-5622-a5fa-484d71ab09ef",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_down_left/16fd2674-cc26-5f38-8ea2-a12667a25235",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_down_left/1eb1df48-874a-57ef-8008-85b32464c071",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_hurt_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_down_right/2c4e833f-8ec2-5972-9d70-cb9df21ce42e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_down_right/bcd97a56-e1f9-5f0d-af08-e5fb419c774c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_down_right/8ec5fe5e-a4d8-54c7-b881-e63d6c621bbc",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_hurt_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_left/8cb57531-7aa8-5992-b43d-1b2542cbca6d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_left/01dd8fe0-0424-5688-9d87-3713eb6e3984",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_left/2aa87e40-ee46-5670-baa1-9f720893859c",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_hurt_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_right/d40aa984-57c0-5875-88ce-88d35878aa4c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_right/4f140b11-6682-5667-af18-fefb2b38efe3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_right/b33b7f56-54fa-58a9-a12d-30e51f7b8bbc",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_hurt_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_up/e3115a04-c16e-5382-ad8e-46bdec5921a4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_up/bdf9e8ea-406a-5909-86dd-fcddca164eed",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_up/63157413-d7c7-5702-99f6-1fb17ac59de2",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_hurt_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_up_left/06b8722e-d5a6-53ea-8bf1-9cf38a7314be",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_up_left/d0e5d82d-54d7-5d56-a77b-d07bfd4c7840",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_up_left/a7a0214b-db15-594f-91ef-91ae6a836d5e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_hurt_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_up_right/6fe4cc8c-a194-5b3b-a75c-3969e6c58ada",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_up_right/d973c163-127b-5a2c-aacc-a2610407bf7e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_hurt_up_right/8990b2c4-cce8-52a7-96f4-eb42d1bd170c",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_idle_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_idle_down/672fe793-e12b-53b9-9d50-7e6aef1ad96e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_idle_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_idle_down_left/38177768-b2fd-5c7e-b26b-34dbda10e5d2",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_idle_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_idle_down_right/e0bad9b0-76f9-560b-b606-573df7be63f8",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_idle_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_idle_left/a4aca72d-e237-53ad-82fd-46c6ecf60b4b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_idle_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_idle_right/1ca0eb3c-bcb7-5964-8e3a-add9220d8022",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_idle_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_idle_up/cdce41b4-860b-5177-870c-20e8f045a209",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_idle_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_idle_up_left/303e001f-c5b5-5479-94dd-dce626baa827",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_idle_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_idle_up_right/c7abfe3d-c0a1-5557-a025-5f75da19be0b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_jump_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_down/0a7b38fd-0386-5dff-be40-6a1b6d3cc934",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_down/2ddd14cb-753f-50ee-8f40-13f765c48728",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_down/66b0bd71-eda8-5c8e-b2ea-4a6c8e6ff25e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_jump_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_down_left/f020d921-5484-57b6-ad8f-166362bfdf92",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_down_left/dd474e4d-c990-55c4-9ca4-fcb4f4f8c028",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_down_left/cfbf3091-3be6-5e97-a8da-82363e66fe45",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_jump_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_down_right/d3da9cf2-913b-5980-bc5d-4cba58a135af",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_down_right/fde5458e-29b0-57b6-976c-7b7f6c630e14",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_down_right/ff783b59-f837-5020-8c75-ca1c20fbbb2a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_jump_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_left/6ed41c4a-0bb9-548a-88c3-0cf61935d16e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_left/cdaaa6a4-3d5f-5209-be3c-61638eb2c23b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_left/ee0ab4d4-0517-5ec1-ac96-257e685ed6a6",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_jump_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_right/2b5cf01d-3469-542d-aaca-a9bb00d9cca7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_right/9da2c158-adb4-50d4-9170-9c4963bd2137",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_right/0a9096d7-d670-5cf6-9d57-a30accb4554a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_jump_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_up/76e30359-381c-5e53-98ef-d79b2c6602d7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_up/2a3b0411-d7d2-5cee-b09b-3b98c71a8b84",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_up/ebfce5fd-04ab-5468-805a-59447489daf1",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_jump_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_up_left/a2d70894-8e76-5219-92b0-33853d58bc4e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_up_left/ca80a9b0-eee1-5452-a111-db7eea74aacb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_up_left/eeb7bb51-ae7b-58ca-99f0-a105469637b0",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_jump_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_up_right/83c983c6-5450-5f3e-a202-4393650c3c77",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_up_right/7de89b15-e359-5386-943d-8277d78993ad",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_jump_up_right/4c3cdd02-3f14-5fdd-ae14-c7272d435ce3",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_landing_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_down/5df80630-bbaa-50dd-b4ca-c1b1cf9bb926",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_down/650df67e-1040-5eed-8ea5-003829732863",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_landing_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_down_left/2949059a-99b3-502e-870a-954786a4539b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_down_left/c240e94e-74c9-5835-a9bf-0f54670a2da6",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_landing_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_down_right/3793f4d7-2928-54f5-8fea-0f64bba68c60",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_down_right/f680c70e-fb05-532f-930c-48c970512058",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_landing_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_left/4750caa1-ff53-5b49-9875-da64c67ef956",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_left/7bbdeba5-66b6-5be9-9538-c43a0149a1e4",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_landing_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_right/909f300a-c3c4-538a-bdd9-7bb32f317f9d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_right/acfde11c-5a44-5d53-9a4a-4f9a4231f80d",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_landing_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_up/9bf62deb-25b3-5277-afe0-c2d00467662c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_up/2f82642d-a569-5556-801a-15d3b6e2fce4",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_landing_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_up_left/151b1688-7a17-52b6-9208-ab20065ed861",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_up_left/5cf36101-4c93-5ef0-ad30-71c7d7de6760",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_landing_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_up_right/1602dba8-e01e-53f9-ad5f-3a8268c6689c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_landing_up_right/9d381370-8dad-5ba0-b2ab-7d27476537f0",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_run_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down/2ec9d870-75f7-5678-a31e-0a5b51b77d56",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down/a96bb52e-5b40-5ba5-9a65-c451329e1171",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down/d9361270-45b2-5b98-b1e6-cc9034e75189",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down/d907b5dd-9523-5937-ad86-f465d60bd64d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down/255db6bf-dea1-569a-a396-7d3307d1971d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down/41a2fea7-a0dc-5b58-ba72-449a316da269",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down/c50e1f13-3ea7-5988-947b-00eddd00ea03",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down/229696d4-2a0a-5f46-9fb1-d530e6797def",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_run_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_left/061b42aa-f17c-5869-bf62-3a0ae588358f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_left/59c4d76f-9171-589b-a2c6-4de5592b75e0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_left/7dfd4fa6-cf13-5e30-bac0-03cf6c016c22",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_left/f189678a-ca04-5c68-92e2-90a636391e6c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_left/ce7ff4e3-f343-5b75-9549-e91bca37d6e8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_left/197dbc9a-19a2-5729-8716-2a47d8796889",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_left/4c5abb48-4565-5d9f-a72d-05ac44cb21cf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_left/2f4939ac-3ba9-5b32-bedf-942c61686759",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_run_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_right/4f954b51-7f64-5b6f-b13b-1810aec9c0c0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_right/18ab4d5f-0e93-57e1-8fdb-a1387c21842e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_right/88cd4402-308a-5b2d-9a8a-b67312f30c3a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_right/6bb7064a-7931-532b-817a-cae1589c68ea",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_right/afb4723b-2bb1-5fdb-b686-8c26d45aedd1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_right/ed061a6b-3d20-5476-80ca-e32d482db38a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_right/1e12b5a0-fb20-5e62-ade6-eb0501df6f1f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_down_right/31281905-c621-571c-b5e8-7deb87bb8049",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_run_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_left/33f6bebb-34fa-56b2-ae14-0c31ab0be740",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_left/e9600d1f-4a9b-5dde-b83b-10f15a6f50a6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_left/0446432a-b32d-55e3-99bf-80df63238e8f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_left/5654db92-9efb-5027-9275-f9850d98337a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_left/12f3b8ff-1107-500b-80e4-a90f25a34555",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_left/cdef9c24-6ce3-508b-b312-fc89645e1444",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_left/ceb5e0b7-fd9d-5fc7-8d93-1a304d39860a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_left/e0556e61-04a4-5693-b4ba-c1b7e2aa9b45",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_run_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_right/5fd06757-7065-5510-916d-3b1e0adffe05",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_right/3a7302e0-d47b-5fa1-ac18-8bf840395151",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_right/f89aa1eb-a737-5737-ac67-35a0531845a0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_right/fa7e977c-7918-59bf-a92f-9fd850cd93ff",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_right/f550117f-c90a-522c-86e3-395737d6d978",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_right/8af928ba-ca53-5c1b-8a32-fa7793b0a565",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_right/66d8f9ae-6a77-5e65-8133-a3b7d650f68f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_right/82c62fdf-f33a-5126-9a99-85ae56afa63e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_run_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up/746053d8-7f84-5c4c-becd-014bbe7085c1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up/c0609a98-91fd-5f39-b105-d02b868b5f7b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up/604555da-fe98-55b3-ad9f-cedd4a767eff",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up/768df310-550c-58bb-9163-9d531824d87b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up/a50d5b47-1176-5c6b-924a-41833129f419",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up/dadb10b8-2905-5ac8-a268-a0d886f168bf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up/2a5353a7-1b52-5bfd-8c6b-880a99cd4a36",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up/db33de8b-a03b-5ab8-aa38-805bb66e6bf6",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_run_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_left/45804957-f971-54ed-a310-9f8cdd382e58",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_left/4a46be7d-e054-5076-9a93-01828ff452a2",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_left/388a80bf-ecfa-513c-8317-864d96b4eec9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_left/fe29ccab-fe23-58b8-8c3c-c7f4475e271c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_left/62b7ba32-2301-5e20-83c3-122a0381c5bc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_left/eff25d5b-4223-56a6-88eb-a77ee93e62e4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_left/610da349-8de7-59a5-a107-667129d23434",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_left/0b56020b-1b06-5d56-a60d-8281f67ba912",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_run_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_right/17190144-1975-5b6d-83a4-3f31b4c1bdad",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_right/c16fac9f-bfab-5479-aec7-17b7260f3064",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_right/413f15a2-83b2-57f7-9ffc-fd7224df455c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_right/b3ec14b9-0dec-5253-b23f-29f48ec785c9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_right/9f535eda-a760-56c2-b68e-545db4f55177",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_right/41d871a5-84bc-52ca-810f-bfb42d6a0e65",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_right/dd24b2c9-a55b-59d2-94a4-9049e83158be",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_run_up_right/edebe8f2-9c3e-5b0e-899d-322b9c7fb370",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_slide_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_down/635c2aa3-6512-5996-b98d-b085cf1009e8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_down/55a5df2b-472d-5bd6-9e87-6dc562c88a47",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_down/cbfbe74d-157e-552e-af52-e8f16ebd873d",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_slide_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_down_left/a6a1f021-5e89-52d4-b229-f6dcae0023d1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_down_left/1e5179db-b9b1-56cf-b3ca-c4ce7a9b3553",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_down_left/f5ea8a2b-9575-538d-b3d3-d1acf168d4d6",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_slide_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_down_right/f2f843f8-81a2-52bd-94fe-3291032d364b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_down_right/e409e402-9aeb-5918-a958-d7e9c459c5bf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_down_right/eb7fe590-eebd-570e-9999-ced9df8e8fef",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_slide_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_left/23d7c0a1-c486-56ed-9229-a5037acefd57",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_left/0a8561d9-daf8-5570-8472-09e9f0802be7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_left/d9801015-e888-5828-aa9f-25644f4e7960",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_slide_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_right/1500de85-c0c5-5b33-9d99-c1ad58480dbd",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_right/d9536a8d-fe89-5f56-b788-1fbad6a29576",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_right/4b925095-3c5c-535a-8cc1-adbf1d132737",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_slide_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_up/1f49e51e-a341-58d9-86dc-3140e8e9b9bb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_up/fd1c07f2-eb2a-59fe-ad9b-cb0be787c548",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_up/f21e356b-7a13-5eca-9bf3-d620e1c7fda9",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_slide_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_up_left/f429b895-7ce3-5e38-ab41-93041578c537",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_up_left/868808b0-22d2-5069-9863-f43372042d32",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_up_left/06291daa-4994-5bd4-8759-92ecf8d662fd",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_slide_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_up_right/a0975aa3-afd7-585e-9489-c84386c237e3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_up_right/5ad3240f-6753-5997-95b9-1fda1504aabf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_slide_up_right/69a3e938-68df-52c2-8d2f-c88873c01a77",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_turn_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_turn_down/38485416-2b2d-5f7d-a287-bb54797483f1",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_turn_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_turn_down_left/00975a1a-07b3-5a07-a7c6-77e2bceb19c6",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_turn_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_turn_down_right/c86d6005-fc05-5926-a820-6e93fdaf623c",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_turn_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_turn_left/72904cd5-b5b8-5b35-b135-5ffe11710043",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_turn_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_turn_right/e6300549-49c1-5064-b9dc-40d025bc1766",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_turn_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_turn_up/49120c7a-4de8-5b25-8af6-81aaa31c38fb",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_turn_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_turn_up_left/eb4213e4-b15f-5902-aed3-90e5bc71394f",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_turn_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_turn_up_right/57c794b3-3952-5859-9c47-c2d6def8bd4b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_walk_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down/db9d9bfe-0d89-5b33-8470-0744db781917",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down/21f7f3f7-18dc-56c7-9c35-41bc972bad67",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down/6ae22916-3545-549f-96cf-aae6e958c3c9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down/7db4623d-aa60-59db-907e-af75d130e272",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down/207ddee8-aa67-5a20-a15b-48a196e992df",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down/44574bf1-d127-5888-89c0-ced3a9fd1bca",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down/ca4bcf22-c1d9-5deb-8c70-7bb338fe81f2",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down/bd6d5e89-5dd5-5185-a1b6-064e6e6a09fc",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_walk_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_left/53f38009-ad50-55ff-83fe-7410d950302c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_left/13311559-4d04-5ec1-9c61-4201ed6f4490",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_left/77fe75e4-4d08-5c6d-8e53-a5232bf7bf43",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_left/31b5b1fa-abf0-54a0-bbf5-ed7505c48b12",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_left/5b604f05-3af6-5e31-bddc-9954987f1c33",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_left/24e69d19-1052-5158-aa54-4b86ac85b768",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_left/781cb769-b92f-5e3f-8936-3a2361b9bf2f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_left/14d4ec24-b9f2-5132-99a5-5fa88d2fdb86",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_walk_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_right/34f0e05a-c0c5-58c9-8795-a5119e175076",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_right/c08106d8-903d-52c1-9528-3225bc06bbaf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_right/71132b2c-dcd0-5857-8f39-876234c29bf7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_right/6db21fcc-d629-58cd-806f-8feb9e05af76",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_right/8938d0d9-e394-5e09-b8ea-f15d57a81f7d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_right/62c7d2bb-dc81-57cb-9ea9-a1a95b0f0de3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_right/db4d34d4-0188-56e2-bf48-562f176cb06d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_down_right/1dd907e2-35c1-5230-927e-4b101436d098",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_walk_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_left/65ad9530-d397-5333-a7cc-d04609bbde45",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_left/18c82c3e-4daa-5040-935d-857c1c2df3c1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_left/3ef1dffb-c87f-5d4a-a106-f09960189e5f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_left/bc7efaa9-d4fb-5a64-be41-7bd3cdc7dada",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_left/80921e2c-a6f7-5474-b4fd-12a11785fe34",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_left/f87d839c-60d8-56ab-ba50-1f4f9011a8ce",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_left/77705f22-38f4-51bf-a78a-21f843ba035f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_left/a2ea0b53-c20c-588a-a266-647e7c0aa45b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_walk_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_right/c13144ee-460a-546b-9991-fad43f186ec1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_right/d7854aad-1801-556f-8403-81bfd7409378",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_right/d41fd6d5-b994-5ca5-8ae9-0e6b79704f27",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_right/b72406cd-65bf-5830-ad9b-fecc7f00c24e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_right/d9de7cf4-46fb-59f4-bf17-42979a20d1c0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_right/663c2dad-eff7-5c77-b4bf-9c4e78af879c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_right/fd77bc02-b38d-5f44-a517-38814eefdfe7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_right/61f5bbc1-f7c5-55f2-b6f2-2b6449e34a27",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_walk_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up/ce6c4c26-bd74-56f0-bdb1-7f00e2f16cd3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up/a7d4697d-e663-55fe-bec9-b4b2e8b6f496",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up/d5e3bcc0-8622-541c-80fe-43f968931803",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up/5d9b12cf-7576-5e8e-9a97-7ebca3e59d87",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up/b7e4aea0-ea42-53d0-bf5e-74379d926c0e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up/724d23f5-5d9a-5865-8539-a0fdee250333",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up/1e05ea6a-4f69-534c-95c9-4d6ad1fb4362",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up/c90c5ec4-d717-5643-81f5-0401ac48089e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_walk_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_left/81af7845-1a61-5f2b-86c8-e85ce684af82",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_left/57580c0c-3fae-5401-8e67-6b45bb6b3350",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_left/4cea06cb-a61d-521c-a0f0-35c2aa642787",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_left/9f26b42c-8bcc-5741-93c2-46bc11651ce3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_left/4d7c5246-d39c-5f67-b7b0-110e314cfafd",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_left/adaf6cf2-20cb-5976-b85c-ba8f7bac8cec",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_left/7a7eca14-bd45-566d-a74a-ca489fb6199e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_left/ea62eedd-14ba-5b01-bb67-f203e601fb78",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_magev3_walk_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_right/01a62ab8-7bae-5d39-a016-b0e1a786a372",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_right/15c50e8a-0a54-5726-933b-eb1a25d3014e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_right/68e50f7b-1aab-5d7e-8aa7-c5134fa0831e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_right/5327fb4e-569a-5273-8b68-9a77a321aa02",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_right/3d971baa-1ce9-5d43-8897-e74d21af863c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_right/8fcfcd75-a470-5158-ac51-d4a617f4b77d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_right/86241d7d-a36e-50d7-bd5c-2495e216129a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_magev3_walk_up_right/53e0b605-66a6-5933-90fa-8d53bc9e0ff8",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack1_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down/be5615b4-49e5-5dbb-acd2-d9ff0629b052",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down/7d485281-ff94-5685-a4da-5ecd37663dbf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down/f1c031f5-70c7-5585-b26f-66d40e8e1db6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down/86a34a07-4cd2-5692-870d-880d726c244f",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack1_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down_left/78b51a00-45a1-53ad-afbf-5cea907cc84d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down_left/573b64b4-cfcc-51e8-847e-3a5358165c41",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down_left/733c4b2e-2c2a-5cec-bfce-d3ad17563e0c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down_left/5f86b974-7dc1-5bbd-bb2e-a9775453c1d0",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack1_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down_right/8b3ee971-d36b-5518-8d7f-a0544d45d311",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down_right/fa71576b-7897-5c39-86f6-d2c86976214f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down_right/18fe1f42-9a44-5ef9-8a7d-5ae61e44a20e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_down_right/48adedb8-712c-5bbd-8948-d4a4be47de17",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack1_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_left/976f1a3c-8e9f-5d0c-9f30-ba2258fabd3a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_left/fd8b5478-1c35-5be7-8f15-a5f49e9cbd77",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_left/8f84bb87-0e32-5436-b6b5-1f5b5f5251d9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_left/0788653e-3877-5e3e-980d-359e9d3c02cf",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack1_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_right/562a2f33-4a71-5273-a084-136185fd8dc4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_right/0880fe54-24c4-5c93-a402-135b2140e246",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_right/41710a63-d988-565a-b4bc-c85bc2b6ff1b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_right/39077bd7-ecef-5dbe-802f-c76556c56451",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack1_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up/8672a589-431d-5c7d-847d-762f085e179c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up/601db06a-fb94-5d37-90fb-8a31970a2a85",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up/427fd78f-cff1-5dc1-b74d-5c4ea7f85dc0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up/ba878672-c2a9-5057-805d-c8ca578c7016",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack1_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up_left/24a29c07-7084-580c-b42f-1bc6d39623bd",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up_left/4b22b3a0-ab42-529d-8b56-31d57354ca75",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up_left/65496ddd-b246-5efd-8832-d50504c5ae3e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up_left/573a71d5-d0cc-5df1-9ed6-b21e6ebcb44b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack1_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up_right/c8bcc48e-b530-5983-9691-89730c84fd3d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up_right/303cdab0-2284-551c-8e4a-6a56110c600b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up_right/7cfcfc80-3274-5afc-ada4-130ba702192d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack1_up_right/a125b106-e872-5792-a4ad-bdadcd60d44d",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack2_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down/aaaad505-888b-5e12-a5ee-1524b3741ba8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down/fbbcd3ac-486c-5d1b-a5b2-199d39abdbc5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down/9b4ec9eb-ce04-50a7-baf1-5e5a0e89b510",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down/7674caf4-fb25-5076-9869-145cc387995e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack2_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down_left/dfecc243-b621-51bd-84e9-075c1f3f67b5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down_left/39d24245-3fe2-5308-bd25-51b4b2435a4b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down_left/f541d19b-670e-5f30-ad10-f55d418b716f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down_left/a9195065-29b7-542c-afcf-d5b2da39295a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack2_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down_right/e183455d-9c3a-5692-a862-b0b85adc1838",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down_right/a086cc11-d5d3-524f-aab7-e764bc29ac2f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down_right/c2cbc807-b294-598f-9e7d-beee4e62eb73",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_down_right/0cb957c8-60de-5764-9753-b41d304fcc69",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack2_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_left/30e99d33-1890-5ff4-9174-143467221c89",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_left/80a56013-379c-5939-bd9b-865aca207365",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_left/bf2109e2-7fe0-5568-add9-2bdb9ae9531b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_left/c9ec8c03-fb5c-5663-93a5-38ce722eb448",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack2_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_right/da0c70dc-a3ea-5066-990f-14f60e15d761",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_right/1a0cf378-0fbd-5393-97e8-784dc9117a72",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_right/995a88ed-e1d1-5ebb-ba64-ae1396cfb470",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_right/116e7283-c21f-5ecc-9440-f3deae1d9f78",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack2_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up/744afed2-f84a-5e79-9f02-fcc84b9012e7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up/5c145471-3f23-5c53-83d8-39fa6ccd8405",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up/a9b36622-e4b4-5d8f-bb59-06d1b6ca9d15",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up/bd6200b1-41cc-549f-945f-0d4e66ed0c7e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack2_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up_left/f7ae50a1-212a-52f9-b649-531999cb929e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up_left/93c5eb46-2346-544b-be7b-bd22b2c19996",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up_left/243e7c9e-a493-5835-958f-3a2bf3789923",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up_left/577b2c15-d16a-5041-ad4a-824f0474d858",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack2_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up_right/751815d7-59a7-5014-ab9f-a5fa3b6e3ec4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up_right/671c7ec8-a41c-5907-85d2-75e3fc825a38",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up_right/6e201980-6ea5-5c11-82eb-f2e461a5f9e2",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack2_up_right/54b46c70-6fc5-5053-a02f-6af2ca25be34",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack3_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_down/4c4f6405-8bac-5a41-90b1-5ad5ca5e79d9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_down/9252b5c5-d7e0-525d-92bc-ad9f2f50e2e8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_down/5316b69d-9cd9-57cf-ba25-c539f52e89d7",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack3_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_down_left/362cad7e-cace-57d2-981f-a675ebcd4a3b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_down_left/33006b01-22b7-5e6f-94ad-2327fd252e31",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_down_left/2a6f41ea-89d6-5fc3-aa59-8b5bda340c5a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack3_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_down_right/5c05a31d-fc8c-585a-8ead-7fd9d48ac4a9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_down_right/303eec9d-08e6-570a-88a0-3ade9eb334c3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_down_right/57efe6d4-fabc-500f-a435-9de86c99f97e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack3_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_left/83e53b01-c2e7-5d98-b212-75bff3783dad",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_left/2ae441e0-a0b6-5f28-84fd-15aa19cf4878",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_left/fa2995be-35e3-5c7b-b90b-2af700db6b9c",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack3_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_right/3ca1ceb2-e12c-5a2b-bdd3-1ab1a6f1038f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_right/1663507e-b5cf-5a18-8e9e-5bb192b08178",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_right/3abf3c7f-3c76-5863-9203-db4a622217e0",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack3_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_up/312173e1-eb50-5d57-8f2b-9019664aeb8d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_up/5b30d871-c817-598f-aef3-6d93eaf62eb4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_up/9723895d-65bb-5d6e-986c-fee219c6f139",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack3_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_up_left/9288428a-544c-5f6d-a957-7b1d00f71e62",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_up_left/b0377d85-465f-52cd-b52b-b4b5c22e77c7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_up_left/d4875ccb-3938-5894-a6b8-28c0853900ca",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_attack3_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_up_right/aee90788-cff6-5be8-97d9-45a9d5ce55cf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_up_right/73429dd3-b904-54fb-9048-295e1eef504b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_attack3_up_right/7834aafd-e179-54a2-9591-4d71e3d6ebcd",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_death_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down/b37e5370-d071-5263-8028-50c18f9eb9a7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down/81ee515b-2b7c-51bb-9400-c4ec11438ed4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down/d5ed20bc-2d55-56ee-8749-26df870248ef",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down/1ec47861-2281-59b6-8645-a27beaff3672",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down/a270b07e-f3e3-5458-a012-bd5c3b14fa09",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_death_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down_left/d69bbb3e-c36c-5834-8fe8-d3052b8cc586",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down_left/303015a0-07a4-5dca-beb5-860a568e9911",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down_left/89a873a9-18e5-5b20-b3e4-14188f16258e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down_left/37cd58b1-29d8-5752-a4cf-bb391752be1c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down_left/b34100eb-6dd4-5b6b-96f6-39cae1ae9422",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_death_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down_right/97c33d0a-0236-5794-8df1-67335c03eaf3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down_right/0437a081-347a-57cc-be45-34558e94d4d8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down_right/0d9e890a-cbdd-5632-92cd-2487ab84d400",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down_right/1004d091-61f0-5882-8987-0ea632d39bb2",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_down_right/f2ee1a01-90c3-5cc7-bbd2-5a40e4b4307d",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_death_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_left/7f0284af-a6d7-5896-8af2-c6e0d2d1f80a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_left/f20efd3a-ca05-5ae5-b803-b8cb5889d76f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_left/981b6a3a-f574-5850-b06a-17ea034d0f2e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_left/ebfac79e-ce78-55c7-8790-dfdf82ce021e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_left/a56c1019-f79c-5c29-82dd-232af9d630ca",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_death_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_right/3368a2f8-2819-511b-8b3b-98717e9b319e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_right/08f88887-f4a8-5bc7-8a28-4f76a135a149",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_right/b9252561-c545-5f66-b471-308b7838268a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_right/0c6481cd-8cdd-51bb-bc30-1b41c9d6e17d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_right/c45aedd7-d9bd-59a7-a3cf-a8ea539f7a7b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_death_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up/cf2093a3-5d2e-5268-9044-31167ce5af05",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up/2c1d8dfb-8853-5817-9b08-1d7c6fdf42ec",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up/77bce994-a6a9-585a-b224-57a30436e583",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up/ed21f14d-55f2-566d-8f7f-02e8e90c27c4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up/9368ed18-c93f-5ec2-80ba-d8b21d119fd2",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_death_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up_left/ed01db53-dc14-5532-85b1-19c16119f07f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up_left/416b6d01-b1e6-56bc-af57-56729ea16737",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up_left/95db30c5-a63b-55d1-a013-76a0b236c77f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up_left/342be4f8-38d9-536b-a842-890a4d8d2980",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up_left/8e745cfc-51e7-5d64-b8f5-85f6defdaa3e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_death_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up_right/b556ab2e-fcee-5465-a349-c944a61f6432",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up_right/5728a391-e5fd-5874-bbf0-4153c0311c3f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up_right/ac702324-bedd-59bf-a7f1-0e4734eecf19",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up_right/4b5ae502-74ba-5172-b5c4-66173fc78d6b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_death_up_right/95f3d9c5-6323-5e44-a352-1194a533a8ce",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dive_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_down/0c2c696c-4e24-5e99-a3d3-8847823827d5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_down/42133e36-dd6a-5652-aa26-c09b28efe66f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_down/df004b2c-e0ab-551f-b84a-4ae2511a98d2",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dive_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_down_left/587efdff-01a0-5051-bbdb-0ae41f8c8fd3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_down_left/427083c6-3a7d-58f6-b9ef-8d33e897fab0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_down_left/1adbb5f5-f139-5f14-a997-b6dba2b01807",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dive_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_down_right/1821022b-b5e3-5e6a-8252-48907f5757c4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_down_right/30209632-224d-553e-a8e9-d09f28fa7d15",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_down_right/b8b57ac4-bc67-5957-9d93-2e2e188cd87e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dive_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_left/feec9189-fca0-5dff-9a09-a25c1bb244f3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_left/124da29a-2162-5d26-bb3a-59c99ba30c8b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_left/c2516922-7521-5832-8fa4-c9332356753a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dive_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_right/1ebf7ea3-2104-535c-9661-4a4582e3e4a4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_right/845c4f0f-b375-5089-ad6e-11ec875cd280",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_right/4657dd26-280f-58e1-8779-02a43338c5b4",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dive_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_up/94e154c9-23cf-5ff7-9f49-23a4ae9ebeac",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_up/421eb3a3-c5fa-5c9b-816e-0107b0a9906f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_up/d8740306-a382-5416-8b83-abaada0eadb1",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dive_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_up_left/6fcfc005-8a70-56f6-beff-adf111bc633a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_up_left/bdbcfc87-a643-5fa0-b725-18a01baf36de",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_up_left/2aba331e-d0fb-55e1-b0d6-f986caa3d461",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dive_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_up_right/cdc5a10a-8912-5fa1-821d-477d7917c69b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_up_right/7f0484f3-05cb-58ab-a4ed-24ddef6cf301",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dive_up_right/5838c21d-581b-5d49-9d7d-8c333935c257",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dodge_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_down/35024b17-46db-5f39-8004-63fb5a0183dc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_down/71398b9d-a19f-5e60-abb4-7ea12a80d5d1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_down/445486b9-2f59-54eb-bdac-8946ec5e35ab",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dodge_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_down_left/efa3245e-c297-5ff4-9c4e-a7b68f1f2a93",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_down_left/a6221331-79f1-5bba-b507-f302660e691d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_down_left/14c8c3f6-3587-562b-a26b-8f7ea8313896",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dodge_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_down_right/4ecc9a08-d0d7-5a6d-9c5d-ccd48d9585fe",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_down_right/30fa2164-fbac-5a46-acda-a5cead3d4c50",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_down_right/145465ab-5229-5996-84de-9c7e78181f84",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dodge_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_left/2f4e47c3-4f65-5d95-a61e-624d6e935bc8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_left/a876cfc0-2f31-5c8e-9eea-9e2fe6f2db8b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_left/8b155b14-3687-5603-b889-cc8ff26a31f3",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dodge_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_right/08f0a1ef-92c2-5153-9a1c-380c576d7790",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_right/81188300-8cf1-5be0-8c84-74e8d7b70a69",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_right/afa7f0e8-99fa-516c-9365-1ac945661ba0",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dodge_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_up/5c4a830e-4b67-50ef-a2f3-c533f21e391b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_up/3d4e2844-12f0-5c8d-b6fc-272bc1280ce5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_up/663f6aa1-3bde-5bb2-84da-a8b5bc0d3827",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dodge_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_up_left/b9fa6e6e-b032-592e-9d1f-c61a061de164",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_up_left/272c76f5-b8b5-540a-8e5c-99c4a9b88d4c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_up_left/5bcd63da-4b50-5b89-9f86-44f78cead012",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_dodge_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_up_right/dcb49ff0-f341-58be-ad4f-15cbc143b9bf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_up_right/7318e5a0-8ef1-534f-91ea-fe137a23e079",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_dodge_up_right/d101e50d-59ff-5635-ac26-26c35641adbe",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_fall_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_down/90d82da1-e692-5f33-a1b5-9e51aedd6484",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_down/e4d73ac0-164c-5833-bdab-23d04a6c0882",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_fall_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_down_left/9062f717-81a2-5de1-b9ca-f2d205b16a81",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_down_left/981d0d77-9904-5ef2-9d77-86686da57bb2",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_fall_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_down_right/f6743ba9-6dba-5528-9f15-f97f29f0d000",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_down_right/d8037d0c-7a9b-5ad1-a262-54f3dfed2e3a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_fall_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_left/a2171d2b-9937-554b-a09e-d330f187f56e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_left/f56ab8f6-428e-502a-bd0e-6a07e97eac1a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_fall_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_right/8bfd45cd-6335-5314-a200-ba10e19bda1d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_right/a2628526-e843-5bb2-9c22-740720d95d02",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_fall_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_up/662be44c-e445-5287-974f-5f0b6dc82a98",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_up/3eeef69e-1e6b-5fca-8f3a-704c1492a48d",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_fall_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_up_left/6fc010f7-9661-591b-ac7c-cb9446246477",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_up_left/5f340b0a-9a14-534b-9ce7-37cc8f33cc9f",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_fall_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_up_right/ca923924-8096-5aa3-8d57-1bbb0f0ffdcc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_fall_up_right/567419c3-a237-584b-baf4-e5347fec605d",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_hurt_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_down/8ce556b5-7058-596f-9126-96bc2cb821f8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_down/351a0c38-12b4-5649-8314-36cc84a5c536",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_down/bb62033f-c3bf-5cee-868b-39ed2e7b3ff3",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_hurt_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_down_left/a06e7f20-94ae-5d7f-89ba-b4583ade5059",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_down_left/b40a391d-f778-58f7-bd6b-d1cf178efb96",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_down_left/649e7dec-5a73-52bf-a69a-05390d38246b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_hurt_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_down_right/60411842-1a18-5a40-ad87-50a15231ebe8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_down_right/4cb8004c-5c2a-53b8-8722-83a770396e98",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_down_right/d67b4ed3-7393-53b3-98fb-a6691ac8dca9",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_hurt_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_left/95191c70-6fcf-5b40-9cb2-06e31374385a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_left/727b91e2-993c-5aa9-93de-ed4ad26b8f85",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_left/58e6d2c1-be57-5081-a7d0-9bee9e2a4f20",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_hurt_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_right/5384ec1f-3ac3-5d44-b19f-8f900e56b8e0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_right/bedf6fe6-9910-508c-a430-085ce1e84820",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_right/9aa58646-bbdb-559e-b939-cfbf7af97d52",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_hurt_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_up/6625869a-b89c-5763-aed1-be7adb303739",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_up/a394e56b-5d8d-52a2-996e-66748380962e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_up/1c10d65f-3b63-524b-9818-4247e64bb1dd",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_hurt_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_up_left/b3b90791-a036-5c12-8c63-6686d9fd0490",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_up_left/1f2cb766-1ca3-547a-a059-511b7ef174a1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_up_left/573ceeac-b9b2-5083-bab6-49f5dbb19df5",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_hurt_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_up_right/2364315c-a155-56a8-a135-074648c73c62",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_up_right/de4c6080-7e3b-53c0-a210-08a9f1d69103",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_hurt_up_right/117d1f29-054c-5922-8d6e-a78358a3c9db",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_idle_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_idle_down/5e900b5c-1395-50ed-b930-21ec32e58929",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_idle_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_idle_down_left/7ef22316-8fc7-5028-9ec8-69808baabd87",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_idle_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_idle_down_right/102a89c0-0d79-5d70-86ab-3e64d7382949",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_idle_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_idle_left/d50abb87-c987-55c6-b5c7-c7503743b7ab",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_idle_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_idle_right/1c68422c-c9d0-5c84-b6a3-5dccdfe083cc",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_idle_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_idle_up/12b7d6be-79b6-5c69-990d-cc5edc5e2cc4",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_idle_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_idle_up_left/2361efb4-94cc-538e-bcf2-a6c546cc9ff3",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_idle_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_idle_up_right/f1d5a7c7-724f-553c-8df7-7dd262661828",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_jump_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_down/6057a22a-aa28-5554-b480-f06f6ec59a8b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_down/67bfbc02-b3ea-567a-80aa-1d67e8182f52",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_down/a49e233d-2a61-59b0-a93b-31f28edeb109",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_jump_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_down_left/c8ee5e31-6586-5ae7-baaf-9bc747b289fa",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_down_left/0e946b90-a1da-5392-b472-e14311e4b73b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_down_left/5e6b87e8-bea9-5cab-ad00-45aa7dc1b281",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_jump_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_down_right/12a8d0a0-9bf8-5ea3-8ef9-d220fc775f6d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_down_right/9cc03c5e-35fd-5927-9dbf-5c6f476406dd",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_down_right/79219462-6cce-5fd8-9076-7f3f98a3ed88",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_jump_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_left/f5e7ab11-86c6-5f93-acf0-d216fb54279b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_left/1aee220c-bc36-5cba-91ca-2941f272965b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_left/48077f28-c635-57d8-aa3e-8dd78e8dc2e6",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_jump_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_right/81d7065e-d863-5e5e-8c01-7757aab24a7c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_right/6aa8d184-434d-5f92-88cd-c138908a65cf",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_right/bb57a6af-2b79-5235-a03f-b2a48f2f2fac",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_jump_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_up/942ac72b-3864-5114-88aa-8ac5ac9b4986",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_up/8f68ced3-03b5-5fef-be5f-d1398f9ad954",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_up/2e4c8d30-10af-5eed-8d12-879bc0e10d87",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_jump_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_up_left/7aae1394-195c-5056-8036-37c92c544d8f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_up_left/ae2a79ef-db99-5883-b7ae-8ebde93343cc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_up_left/c4dbb774-2903-57cb-8a0e-bfc800ef3ec5",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_jump_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_up_right/a777c138-d0bd-5a11-bbfd-95ef50c917da",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_up_right/d7265884-4fd4-56c8-a58e-ff6ef463c2f5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_jump_up_right/45146cb1-644f-5883-96f1-295a02f5a072",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_landing_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_down/82753875-c0a6-5951-b8a0-8ecce98da352",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_down/6820647a-8987-5c6b-b65b-dd0b7732bb35",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_landing_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_down_left/bbdd5aed-9510-5ad2-94e3-dcd9767cb673",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_down_left/60f14eb3-272a-5b83-ae25-eb38085ebe97",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_landing_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_down_right/2abd26fe-c629-51fb-9214-eaa31aab83d6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_down_right/3bf42928-2c31-5d27-9ed6-e5e03c8225ba",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_landing_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_left/8b4a5a65-7a74-55c8-95a0-6d1fe5f5ff11",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_left/a4f6439a-9d6c-5025-9a19-3a9f064eafff",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_landing_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_right/a165cee7-77aa-5ba6-84a3-26edf9610de5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_right/8f8ceecc-3570-5869-bc79-0755973b12a3",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_landing_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_up/38aca4dd-0148-54aa-951f-62372082b8cc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_up/eba4968f-bda4-5470-b7ed-cb63e932da65",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_landing_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_up_left/1a106a2a-b7d4-58b7-9903-3eae937636b6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_up_left/80c60503-9782-543b-82e6-3c978af6215d",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_landing_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_up_right/f490cf6f-3716-5041-8909-5284f144c368",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_landing_up_right/7a62fdbf-85ab-5b66-bd59-2d795fa1877b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_run_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down/e1bd07fd-f60a-5bc0-a0c4-c248a3fc9c15",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down/5817c9ff-64f5-5f3a-b33f-f12a37737663",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down/50cf8f22-299b-50b4-afe9-1bbc9d17fa3c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down/5a5e65ce-1606-5187-ab0e-91f37f42aef7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down/cbae0eba-b0a9-5919-beaa-3e71a6279062",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down/c41a6ec9-87d5-5e73-bdf5-c63143d1fe41",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down/8387e5ca-6d4f-5f37-a2c3-1f6aafa521e6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down/c2883058-8f83-5590-8c22-b9111520ba2c",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_run_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_left/5b029176-2bb7-586c-be33-5e511e116a1f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_left/bd5a9f2e-0e1c-5ae2-8def-16d884ba93a6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_left/c9504a70-c0a7-5c96-87c3-f3d7b2e5417d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_left/1da7c4fe-ee45-5ce0-aac7-69cbafaaab58",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_left/42baf498-ff27-5aba-bf26-a26a3dd8de2c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_left/a225c439-0fad-53b5-b6b4-98ecee877b98",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_left/76278113-6dbf-5278-8263-b1c46768b7cc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_left/f9dc721e-7e08-57dc-aa6e-f6249f1a4ef9",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_run_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_right/2dd162c2-0353-505e-9fd9-2badca0fead8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_right/3a644d49-a372-5f10-9a95-d3c9a646ee9a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_right/fb25efd7-5ed7-5b03-a055-ca72e2e44f9f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_right/6bc66527-6bfa-5924-a3f9-e5fa46df47dc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_right/7d7eae34-9fb8-5b1e-8856-7c89f543d9cb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_right/5b396a99-f912-54a0-aec2-6223791b8150",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_right/e39ab4c3-2870-5dc7-8f03-a1b586625712",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_down_right/41bc428e-162c-5692-afc5-19b664b5ef26",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_run_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_left/c1abb614-0d55-52c0-94aa-a109b3986499",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_left/03bd24b6-6281-58f5-971d-2b431690d771",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_left/67a32350-c5ca-50d3-a1dc-18c7f34ba7eb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_left/2cedf1b7-ed5e-5adb-bb3a-576131824386",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_left/17350941-aae2-5799-9838-8d554394e5e4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_left/cdcd9595-c1ad-56da-a2b5-aa283c366446",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_left/1533c996-7e00-50a4-bad8-fd1d51f75bc9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_left/1372cda8-0b2f-5c9e-a88c-00f69da2c474",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_run_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_right/40e888d4-ae54-53f4-8783-3c09226515a9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_right/a0e82bd5-0e00-5513-a4e3-a16a8d94dd79",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_right/04d42121-cff7-5e1b-b272-4443b6fb0b7a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_right/7a260252-d6f6-5bc0-b1b0-396d196d85d4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_right/01046f70-9b77-51a8-824f-b86c80d15fd0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_right/bef8542a-257e-5723-9455-55f409f5601d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_right/b7b8cd52-e9f6-5609-b8ac-2372bc5dd2f8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_right/db8e3c61-10d6-51f4-8f49-916de23358d4",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_run_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up/7ca04e6f-9434-5ab8-ad35-b8bac0488c17",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up/72ebb990-9744-57d3-91db-62c5355bdeae",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up/9aa8f633-b16c-5bbe-83fc-28f1a8eaef80",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up/414ac9d7-7bb3-5121-9261-bfc56c8f3ef5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up/6900bd3b-75d8-5421-a968-68323148fc67",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up/3ca1e13c-9753-5dd2-ae17-c38646fec5ed",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up/491f31a6-37df-54d7-b0cf-13d49d1a19d5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up/aab2bd39-ce97-5d2b-8979-ccccc1828034",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_run_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_left/37eba7e7-156d-54fc-9305-1aca53f63504",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_left/9674dad1-9fe7-526c-9976-930b14a8ae33",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_left/e00b7d9d-c87e-5aee-b8bf-9aa9d35da625",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_left/1536f73c-462f-5540-827a-f75eaa4bef71",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_left/7772f5fa-3e61-5475-b343-3fc685e3d095",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_left/a7a9ec00-fe20-5d1b-8332-4baf58c637a6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_left/d55da432-531b-5188-8329-079f0a2684bd",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_left/49963536-0e8c-54c8-b64a-09d1a147466a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_run_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_right/163d542b-8f4a-566e-8380-c29fc51f13e2",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_right/2a9146d3-e0ef-54c7-8f46-13bd7a2ed12d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_right/4181bc62-ae3d-5868-8a24-b1a47aaac37e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_right/b96e23b8-8082-5ab6-8cbc-81331ffa550d",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_right/fd3de49f-32f4-53e5-af63-afa454b96fdc",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_right/fb0b5425-39fe-5724-8698-d6a6cd0622f9",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_right/23dbfa99-b68d-55ff-af71-0e05990fb155",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_run_up_right/9d5cfe9f-555d-5f29-8e62-87163497ae6b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_slide_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_down/0db1b3f1-e8d5-585e-8f56-460cf5996bd5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_down/601677a6-aa92-5dbe-8c50-5d0093a07690",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_down/c309ed07-3441-58c5-a04e-b2eb719a6102",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_slide_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_down_left/09deb6f8-7120-5d20-986f-eb17f6149b77",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_down_left/a0743756-c067-50b9-bdbf-42dd91e62efb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_down_left/4c2db51e-a3f2-5e6d-8346-fd5ae35ad94d",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_slide_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_down_right/47902ecf-0db5-5443-b1be-3b7a843d6322",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_down_right/f6640322-337b-59f1-ba0c-a17faf395e75",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_down_right/e25d1089-89eb-562a-a55f-73715dd28149",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_slide_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_left/f9ac5dc7-c423-5b4a-8c31-69a323aadfc6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_left/8bf9e3d9-e710-5241-8afd-f7bf73913c42",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_left/09fd92d7-5ea4-55ba-87df-b94849038a7e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_slide_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_right/fcf6e54d-7da7-5696-93cd-933af3941527",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_right/dba43fe7-0058-5598-ba24-f403885ab73e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_right/5873bd1c-e1b7-5fef-8388-16294f457512",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_slide_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_up/e0af8606-fc53-5f24-9056-c38de19b6a6e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_up/9fea6916-1ed9-58c3-81bd-0ee65fe263d8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_up/c517ca0f-5dfe-5ec6-ad32-9436fcf25d2f",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_slide_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_up_left/ad6d5f68-0e11-516e-a1e4-7cf8070849b3",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_up_left/5093ec46-1a1e-553f-8f9d-73311ccd30c7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_up_left/99e192d6-f0e6-5d02-b8aa-6b8db2397094",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_slide_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_up_right/ff7d60e7-38dd-56e2-85b5-91faa40678a1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_up_right/677e1d99-82a8-5719-8801-d844bc72ce9c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_slide_up_right/97df9343-0694-5ccc-9c52-2924d095bb13",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_turn_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_turn_down/178a2017-5ebf-5ebd-ba1e-b0db00171ce0",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_turn_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_turn_down_left/ef9a701a-2584-5daf-bd0a-aee87bd7710e",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_turn_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_turn_down_right/866d2276-d1aa-567b-8ac2-74c9960f3c8b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_turn_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_turn_left/5012750a-82a6-5c94-b101-18f77955b69a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_turn_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_turn_right/0858bee2-2e93-5f74-b6b2-90ff1917a03a",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_turn_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_turn_up/4aac647d-acf4-5881-800e-735a5c6b18dd",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_turn_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_turn_up_left/c620e836-1191-58ce-bd4a-dc60dcbba7c9",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_turn_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_turn_up_right/d3a2920e-b99c-5133-9f94-5ebbbd60aeef",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_walk_down",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down/53c0ae1f-d359-5c66-906d-c63d6fc89a3f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down/e6e7c980-22b2-5fa5-962b-cd2c30e28d7f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down/4e1474a9-6f1c-53eb-8719-0306f5c9594b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down/4f388d58-996c-5465-ad9b-88979b9becc0",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down/27052dc2-cc98-53b0-8c72-614fa1797a62",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down/2abc30bf-6472-5b36-9ec1-800f3467a868",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down/de708b59-4693-5440-bb24-e8cca1bdf7ec",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down/de2e445c-995e-5844-91c5-9e762c4a3d2d",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_walk_down_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_left/30b15ca0-7802-52bd-90c4-18bc8b7eaa42",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_left/355e5b5f-3153-5b7c-bca5-ac2ac7eb0e65",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_left/b57e04fe-b6b0-5193-a40d-242be13c8a2c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_left/4e8a5ba0-6087-5d4d-a394-1c7bb95ddda4",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_left/533676cc-b564-54a3-bbae-14e915ec4a81",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_left/432871d5-5fd2-5307-b31e-4f4f6ef3ea43",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_left/842a80c8-3474-59b7-bb8d-50431457b00b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_left/0aa1d15a-1eb9-5109-855c-0a092ab8de06",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_walk_down_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_right/ab5e36bb-da9c-5235-8e90-7a62bd209edb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_right/6b0a3e85-65d0-53c4-8e6f-1eeec784e8af",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_right/b98e37bc-8228-5493-aac6-0c55b626aa26",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_right/dce3a301-60eb-55e2-a941-48c6d1d19863",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_right/bfaec921-f5d0-5f7a-ba0b-299e55beec19",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_right/b38d0cea-6b93-54c2-bc68-2bd9c60d3cce",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_right/95441d79-a989-5269-9d91-b33f035a0f16",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_down_right/6abbee49-ff13-5214-a684-e34336a1dc99",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_walk_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_left/03434bee-3296-54cc-b3ba-4d673f879912",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_left/48a615ca-1b9f-5327-a094-10a367498d0a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_left/99278a21-3a0b-5feb-850c-d772276ce2ff",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_left/6cc1f75b-7286-5c30-8216-d476ea239222",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_left/d929d231-098f-5b9c-9db2-c3bffbdb170a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_left/9486b9f9-d3e9-586f-ab84-ff2d172495a7",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_left/80cabcb0-ad0f-5ed3-a169-9410dff96eae",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_left/2e3d53f2-0d39-56f8-b0ea-b7a9ed72511b",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_walk_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_right/01c66238-117a-58fd-9011-790635db021b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_right/7e310ae1-4704-57a0-9d3b-e15e4d2f0c0b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_right/8abb5e73-e17d-5a15-82cb-95eb80c5d075",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_right/001f52c1-3c5c-53cb-a876-5ca94664a9c6",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_right/8df80a8b-f75c-5732-aba7-c9c4842b1475",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_right/d087fada-93a0-5a6e-927f-8dff224fb6e5",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_right/a6ee2ef0-6088-51c3-a5c0-1b2db67f2323",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_right/8af9d6c7-ada0-5d30-b0cd-aae80774ae04",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_walk_up",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up/47b75be4-5b0e-53fd-a667-32785fd4482f",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up/25090559-f47a-52ee-91e5-4488c3ae7339",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up/6a191792-2276-5172-a731-701eb56ee97b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up/d8edda74-cf6a-5d50-b3f8-9c46d8649346",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up/d218d555-fadf-50fc-8dc4-2a3d9eedb62e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up/4afea4bd-be1f-5ce6-95e7-d56d229b4540",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up/61523f1c-8a33-5d4a-bbfb-726ccb88688a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up/1108b412-2e64-54fc-a9ce-593c6588b157",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_walk_up_left",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_left/f04305ee-6b28-5da1-9965-7c67d7084b53",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_left/77da9c07-b37d-539d-a69f-8fbb23311e7e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_left/383de737-fa50-5d39-b614-3a942019362a",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_left/6f1296ed-179f-56f5-b356-9b4280f9afda",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_left/cb745bd5-9880-5696-8be4-94c94bf05a16",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_left/1b5f4ecc-3944-5690-b8ca-bc39f5d9b2f1",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_left/f983b344-8193-5332-a353-e7682cb6103e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_left/482a22d8-8f8b-57d1-8b72-f87b9f879d69",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_fg_rangerv3_walk_up_right",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_right/62ec03eb-03b8-5f55-ba54-e987c53b5f36",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_right/7b698969-1a1f-5149-965a-76ecea09cb89",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_right/00f501f9-c9a8-5145-b24b-dd68335b2c8c",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_right/e171d1e7-a08a-5861-b041-cd43b9779641",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_right/a24b33e8-748a-5b67-81ad-66126bf03d1b",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_right/ced871f0-db57-551e-ab81-5f1fbe8cec58",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_right/5d983214-9d26-55f6-80e1-dab30283e2a8",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_fg_rangerv3_walk_up_right/9524252a-c9ec-5edd-8cbc-e02f135b0b58",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_mage_star_implosion",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_mage_star_implosion/7f55c3d2-c976-52fa-810b-9e5c3ccf933e",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_mage_star_implosion/0ed7fc4c-1db1-5bae-8270-1e73a1133c94",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_mage_star_implosion/a3cb0290-9f8a-52fb-867f-59f40863e1de",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_mage_star_implosion/fa2aa566-1e14-5dc2-97e5-55ea43c1a655",
+      "passed": true
+    },
+    {
+      "label": "Registered nonempty sprite spr_mage_star_orb",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_mage_star_orb/7e782b41-a26b-598f-a5c5-87c6a5958024",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_mage_star_orb/590ed113-6875-52dc-b960-4897f268aabe",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_mage_star_orb/1ed433c3-4dfd-5638-ba97-54ca2ba1e9fe",
+      "passed": true
+    },
+    {
+      "label": "Valid PNG dimensions spr_mage_star_orb/7ba30ea6-cd02-51d7-9b5a-1e0e64538d11",
+      "passed": true
+    },
+    {
+      "label": "Runtime module attack_telegraph",
+      "passed": true
+    },
+    {
+      "label": "Runtime module class_weapons",
+      "passed": true
+    },
+    {
+      "label": "Runtime module dragon_encounter",
+      "passed": true
+    },
+    {
+      "label": "16 actual new audio cues",
+      "passed": true
+    }
+  ],
+  "new_native_sprite_frames": 1008,
+  "approved_dragon_pngs_preserved": 67,
+  "new_cues": 16,
+  "project_resources": 897
+}

@@ -1,0 +1,858 @@
+
+***************************************
+ *     GameMaker v2024.14.4.268    *
+***************************************
+Setting scheduler resolution to 1
+Attempting to use high process priority settings
+Set process priority to HIGH_PRIORITY_CLASS
+Set main thread priority to HIGHEST
+Registered with MMCSS 'Games' task
+Set MMCSS thread priority to CRITICAL
+Reading File C:\Users\sebas\Dokumente\FirstGame\QA\logs\regression-20261124-005922\build\data.win took 27 ms
+DirectX11: Using hardware device
+Collision Event time(microsecs)=3
+Variable_Global_Init()
+PrepareGame()
+Audio_Init()
+Audio group 0 -> Loaded
+Attempting to set gamepadcount to 12
+Game_Prepare()
+Script_Prepare() 
+TimeLine_Prepare() 
+Object_Prepare() 
+Room_Prepare() 
+Finished PrepareGame() 
+Run_Start
+Done g_EffectsManager.Init()
+Done RenderStateManager
+CreateColPairs took 0.000000s 2 usecs for 22 object types obj_col_numb=0 physobjcount=4 resizes 0 final size 6
+Done ObjectLists
+Done Extension_Initialize
+About to startroom
+Setting audio channel count to 24
+Total memory used = 108824458 (0x067c878a) bytes 103.78MB
+Free memory = 5263880 (0x00505208) bytes 5.02MB
+Peak memory used = 108824458 (0x067c878a) bytes 103.78MB
+**********************************.
+Entering main loop.
+**********************************.
+BOSS2 PASS Main menu exposes the actual Boss testen entry
+BOSS2 PASS Boss testen opens the production development menu
+ObjectController: Initialisierung abgeschlossen.
+RUNTIME room=Room1 player_instances=1 spawner_instances=1
+BOSS2 PASS Sword actual Player Step D moves at class speed
+BOSS2 PASS Sword actual Player Step A reverses direction
+BOSS2 PASS Sword actual Player Step W moves up
+BOSS2 PASS Sword actual Player Step S moves down
+BOSS2 PASS Sword diagonal movement is normalized
+BOSS2 PASS Sword held menu click cannot leak into movement
+BOSS2 PASS Sword mouse movement arms after release
+BOSS2 PASS Sword one jump lands without automatic slide
+BOSS2 PASS Sword second jump press in apex window initiates dive
+BOSS2 PASS Sword dive reaches slide then finite recovery
+BOSS2 PASS Sword Control starts actual dodge
+BOSS2 PASS Sword dodge protects against all-height damage
+BOSS2 PASS Sword dodge ends while cooldown remains
+BOSS2 PASS Sword jump clears ground damage
+BOSS2 PASS Sword airborne player still takes all-height damage
+BOSS2 PASS Mage actual Player Step D moves at class speed
+BOSS2 PASS Mage actual Player Step A reverses direction
+BOSS2 PASS Mage actual Player Step W moves up
+BOSS2 PASS Mage actual Player Step S moves down
+BOSS2 PASS Mage diagonal movement is normalized
+BOSS2 PASS Mage held menu click cannot leak into movement
+BOSS2 PASS Mage mouse movement arms after release
+BOSS2 PASS Mage one jump lands without automatic slide
+BOSS2 PASS Mage second jump press in apex window initiates dive
+BOSS2 PASS Mage dive reaches slide then finite recovery
+BOSS2 PASS Mage Control starts actual dodge
+BOSS2 PASS Mage dodge protects against all-height damage
+BOSS2 PASS Mage dodge ends while cooldown remains
+BOSS2 PASS Mage jump clears ground damage
+BOSS2 PASS Mage airborne player still takes all-height damage
+BOSS2 PASS Ranger actual Player Step D moves at class speed
+BOSS2 PASS Ranger actual Player Step A reverses direction
+BOSS2 PASS Ranger actual Player Step W moves up
+BOSS2 PASS Ranger actual Player Step S moves down
+BOSS2 PASS Ranger diagonal movement is normalized
+BOSS2 PASS Ranger held menu click cannot leak into movement
+BOSS2 PASS Ranger mouse movement arms after release
+BOSS2 PASS Ranger one jump lands without automatic slide
+BOSS2 PASS Ranger second jump press in apex window initiates dive
+BOSS2 PASS Ranger dive reaches slide then finite recovery
+BOSS2 PASS Ranger Control starts actual dodge
+BOSS2 PASS Ranger dodge protects against all-height damage
+BOSS2 PASS Ranger dodge ends while cooldown remains
+BOSS2 PASS Ranger jump clears ground damage
+BOSS2 PASS Ranger airborne player still takes all-height damage
+BOSS2 PASS Actual skeleton strike contact deals configured damage
+BOSS2 PASS Same attacker cannot bypass its contact cooldown
+BOSS2 PASS Independent simultaneous attackers retain independent contact cooldowns
+BOSS2 PASS Skeleton outside strike frames has harmless body contact
+BOSS2 PASS Stunned skeleton cannot contact-hit
+BOSS2 PASS Actual enemy death creates one coin and one kill
+BOSS2 PASS Real boss orb marks nearby and distant coins once
+BOSS2 PASS Every existing coin is magnetized
+BOSS2 PASS Magnetized coins converge and award XP exactly once
+Zauberoptionen durch Truhe generiert: [ { id : 115, name : "Ice Prison", level : 0, type : "active" },{ id : 202, name : "Power Up", level : 0, type : "passive" },{ id : 116, name : "Returning Glaive", level : 0, type : "active" } ]
+BOSS2 PASS Actual chest overlap opens three valid choices and pauses
+BOSS2 PASS Production Escape opens normal pause
+BOSS2 PASS Production Escape resumes simulation
+BOSS2 PASS Actual earned XP triggers level-up and pauses
+BOSS2 PASS Actual choice-card click learns only the selected offered skill and resumes
+BOSS2 PASS Choice confirmation restores movement input guard
+BOSS2 PASS Sequential reset 0 clears progression and counters
+BOSS2 PASS Sequential reset 0 clears builds and hazards
+BOSS2 PASS Sequential reset 0 restores class HP and active state
+BOSS2 PASS Sequential reset 1 clears progression and counters
+BOSS2 PASS Sequential reset 1 clears builds and hazards
+BOSS2 PASS Sequential reset 1 restores class HP and active state
+BOSS2 PASS Sequential reset 2 clears progression and counters
+BOSS2 PASS Sequential reset 2 clears builds and hazards
+BOSS2 PASS Sequential reset 2 restores class HP and active state
+BOSS2 PASS Lethal actual damage enters paused Game Over
+BOSS2 PASS Restart clears Game Over and restores original Sword HP
+BOSS2 PASS Exactly three implemented main boss definitions
+BOSS2 PASS storm_warden has nine real available abilities and imported actor art
+BOSS2 PASS storm_warden spawns at minute 5
+BOSS2 PASS storm_warden captures 3 unlocked abilities at spawn
+BOSS2 PASS storm_warden spawn difficulty stays frozen across time and HP phase
+BOSS2 PASS storm_warden phase four cannot bypass minute 5 unlocks
+BOSS2 PASS storm_warden refuses a locked forced ability
+BOSS2 PASS storm_warden spawns at minute 10
+BOSS2 PASS storm_warden captures 6 unlocked abilities at spawn
+BOSS2 PASS storm_warden spawn difficulty stays frozen across time and HP phase
+BOSS2 PASS storm_warden phase four cannot bypass minute 10 unlocks
+BOSS2 PASS storm_warden refuses a locked forced ability
+BOSS2 PASS storm_warden spawns at minute 15
+BOSS2 PASS storm_warden captures 9 unlocked abilities at spawn
+BOSS2 PASS storm_warden spawn difficulty stays frozen across time and HP phase
+BOSS2 PASS storm_warden phase four cannot bypass minute 15 unlocks
+BOSS2 PASS twins has nine real available abilities and imported actor art
+BOSS2 PASS twins spawns at minute 5
+BOSS2 PASS twins captures 3 unlocked abilities at spawn
+BOSS2 PASS twins spawn difficulty stays frozen across time and HP phase
+BOSS2 PASS twins phase four cannot bypass minute 5 unlocks
+BOSS2 PASS twins refuses a locked forced ability
+BOSS2 PASS twins spawns at minute 10
+BOSS2 PASS twins captures 6 unlocked abilities at spawn
+BOSS2 PASS twins spawn difficulty stays frozen across time and HP phase
+BOSS2 PASS twins phase four cannot bypass minute 10 unlocks
+BOSS2 PASS twins refuses a locked forced ability
+BOSS2 PASS twins spawns at minute 15
+BOSS2 PASS twins captures 9 unlocked abilities at spawn
+BOSS2 PASS twins spawn difficulty stays frozen across time and HP phase
+BOSS2 PASS twins phase four cannot bypass minute 15 unlocks
+BOSS2 PASS behemoth has nine real available abilities and imported actor art
+BOSS2 PASS behemoth spawns at minute 5
+BOSS2 PASS behemoth captures 3 unlocked abilities at spawn
+BOSS2 PASS behemoth spawn difficulty stays frozen across time and HP phase
+BOSS2 PASS behemoth phase four cannot bypass minute 5 unlocks
+BOSS2 PASS behemoth refuses a locked forced ability
+BOSS2 PASS behemoth spawns at minute 10
+BOSS2 PASS behemoth captures 6 unlocked abilities at spawn
+BOSS2 PASS behemoth spawn difficulty stays frozen across time and HP phase
+BOSS2 PASS behemoth phase four cannot bypass minute 10 unlocks
+BOSS2 PASS behemoth refuses a locked forced ability
+BOSS2 PASS behemoth spawns at minute 15
+BOSS2 PASS behemoth captures 9 unlocked abilities at spawn
+BOSS2 PASS behemoth spawn difficulty stays frozen across time and HP phase
+BOSS2 PASS behemoth phase four cannot bypass minute 15 unlocks
+BOSS2 PASS Incomplete definitions cannot enter the live random pool
+BOSS2 PASS Seeded regular boss selection is reproducible
+BOSS2 PASS Random choice is an available implemented encounter 0
+BOSS2 PASS Random choice is an available implemented encounter 1
+BOSS2 PASS Random choice is an available implemented encounter 2
+BOSS2 PASS Random choice is an available implemented encounter 3
+BOSS2 PASS Random choice is an available implemented encounter 4
+BOSS2 PASS Random choice is an available implemented encounter 5
+BOSS2 PASS Random choice is an available implemented encounter 6
+BOSS2 PASS Random choice is an available implemented encounter 7
+BOSS2 PASS Random choice is an available implemented encounter 8
+BOSS2 PASS Random choice is an available implemented encounter 9
+BOSS2 PASS Random choice is an available implemented encounter 10
+BOSS2 PASS Random choice is an available implemented encounter 11
+BOSS2 PASS Random choice is an available implemented encounter 12
+BOSS2 PASS Random choice is an available implemented encounter 13
+BOSS2 PASS Random choice is an available implemented encounter 14
+BOSS2 PASS Random choice is an available implemented encounter 15
+BOSS2 PASS Random choice is an available implemented encounter 16
+BOSS2 PASS Random choice is an available implemented encounter 17
+BOSS2 PASS Random choice is an available implemented encounter 18
+BOSS2 PASS Random choice is an available implemented encounter 19
+BOSS2 PASS Random choice is an available implemented encounter 20
+BOSS2 PASS Random choice is an available implemented encounter 21
+BOSS2 PASS Random choice is an available implemented encounter 22
+BOSS2 PASS Random choice is an available implemented encounter 23
+BOSS2 PASS Random choice is an available implemented encounter 24
+BOSS2 PASS Random choice is an available implemented encounter 25
+BOSS2 PASS Random choice is an available implemented encounter 26
+BOSS2 PASS Random choice is an available implemented encounter 27
+BOSS2 PASS Random choice is an available implemented encounter 28
+BOSS2 PASS Random choice is an available implemented encounter 29
+BOSS2 PASS Seeded random sample can select all three main bosses
+BOSS2 PASS Dragon accepts unlocked ability 1
+BOSS2 PASS Dragon beam does not damage during preparation
+BOSS2 PASS Dragon beam causes real active HP loss
+BOSS2 PASS Dragon accepts unlocked ability 2
+BOSS2 PASS Dragon arc does not damage during preparation
+BOSS2 PASS Dragon arc causes real active HP loss
+BOSS2 PASS Dragon accepts unlocked ability 3
+BOSS2 PASS Dragon stomp does not damage during preparation
+BOSS2 PASS Dragon stomp causes real active HP loss
+BOSS2 PASS Dragon accepts unlocked ability 4
+BOSS2 PASS Dragon meteor does not damage during preparation
+BOSS2 PASS Dragon meteor causes real active HP loss
+BOSS2 PASS Dragon accepts unlocked ability 5
+BOSS2 PASS Dragon slam does not damage during preparation
+BOSS2 PASS Dragon slam causes real active HP loss
+BOSS2 PASS Dragon accepts unlocked ability 6
+BOSS2 PASS Dragon wind does not damage during preparation
+BOSS2 PASS Dragon wind releases visible actual projectiles
+BOSS2 PASS Dragon wind causes real active HP loss
+BOSS2 PASS Dragon accepts unlocked ability 7
+BOSS2 PASS Dragon void does not damage during preparation
+BOSS2 PASS Dragon void releases visible actual projectiles
+BOSS2 PASS Dragon void causes real active HP loss
+BOSS2 PASS Dragon accepts unlocked ability 8
+BOSS2 PASS Dragon vortex does not damage during preparation
+BOSS2 PASS Dragon vortex causes real active HP loss
+BOSS2 PASS Dragon accepts unlocked ability 9
+BOSS2 PASS Dragon volley does not damage during preparation
+BOSS2 PASS Dragon volley releases visible actual projectiles
+BOSS2 PASS Dragon volley causes real active HP loss
+BOSS2 PASS twins accepts ability 1
+BOSS2 PASS twins ordinary projectile has no floor warning
+BOSS2 PASS twins ordinary attack releases a real projectile
+BOSS2 PASS twins ability 1 causes actual HP loss
+BOSS2 PASS twins accepts ability 2
+BOSS2 PASS twins ability 2 creates a real hazard
+BOSS2 PASS twins ability 2 is harmless before countdown completion
+BOSS2 PASS twins ability 2 activates on the completing update
+BOSS2 PASS twins ability 2 causes actual HP loss
+BOSS2 PASS twins accepts ability 3
+BOSS2 PASS twins ability 3 creates a real hazard
+BOSS2 PASS twins ability 3 is harmless before countdown completion
+BOSS2 PASS twins ability 3 activates on the completing update
+BOSS2 PASS twins ability 3 causes actual HP loss
+BOSS2 PASS twins accepts ability 4
+BOSS2 PASS twins ability 4 creates a real hazard
+BOSS2 PASS twins ability 4 is harmless before countdown completion
+BOSS2 PASS twins ability 4 activates on the completing update
+BOSS2 PASS twins ability 4 causes actual HP loss
+BOSS2 PASS twins accepts ability 5
+BOSS2 PASS twins ability 5 creates a real hazard
+BOSS2 PASS twins ability 5 is harmless before countdown completion
+BOSS2 PASS twins ability 5 activates on the completing update
+BOSS2 PASS twins ability 5 causes actual HP loss
+BOSS2 PASS twins accepts ability 6
+BOSS2 PASS twins ability 6 creates a real hazard
+BOSS2 PASS twins ability 6 is harmless before countdown completion
+BOSS2 PASS twins ability 6 activates on the completing update
+BOSS2 PASS twins ability 6 causes actual HP loss
+BOSS2 PASS twins accepts ability 7
+BOSS2 PASS twins ability 7 creates a real hazard
+BOSS2 PASS twins ability 7 is harmless before countdown completion
+BOSS2 PASS twins ability 7 activates on the completing update
+BOSS2 PASS twins ability 7 causes actual HP loss
+BOSS2 PASS twins accepts ability 8
+BOSS2 PASS twins ability 8 creates a real hazard
+BOSS2 PASS twins ability 8 is harmless before countdown completion
+BOSS2 PASS twins ability 8 activates on the completing update
+BOSS2 PASS twins ability 8 causes actual HP loss
+BOSS2 PASS twins accepts ability 9
+BOSS2 PASS twins ability 9 creates a real hazard
+BOSS2 PASS twins ability 9 is harmless before countdown completion
+BOSS2 PASS twins ability 9 activates on the completing update
+BOSS2 PASS twins ability 9 causes actual HP loss
+BOSS2 PASS behemoth accepts ability 1
+BOSS2 PASS behemoth ordinary projectile has no floor warning
+BOSS2 PASS behemoth ordinary attack releases a real projectile
+BOSS2 PASS Poison spit collision immediately activates its zero-warning splash and poison status
+BOSS2 PASS behemoth ability 1 causes actual HP loss
+BOSS2 PASS behemoth accepts ability 2
+BOSS2 PASS behemoth ability 2 creates a real hazard
+BOSS2 PASS behemoth ability 2 is harmless before countdown completion
+BOSS2 PASS behemoth ability 2 activates on the completing update
+BOSS2 PASS behemoth ability 2 causes actual HP loss
+BOSS2 PASS behemoth accepts ability 3
+BOSS2 PASS behemoth ability 3 creates a real hazard
+BOSS2 PASS behemoth ability 3 is harmless before countdown completion
+BOSS2 PASS behemoth ability 3 activates on the completing update
+BOSS2 PASS behemoth ability 3 causes actual HP loss
+BOSS2 PASS behemoth accepts ability 4
+BOSS2 PASS behemoth ability 4 creates a real hazard
+BOSS2 PASS behemoth ability 4 is harmless before countdown completion
+BOSS2 PASS behemoth ability 4 activates on the completing update
+BOSS2 PASS behemoth ability 4 causes actual HP loss
+BOSS2 PASS behemoth accepts ability 5
+BOSS2 PASS behemoth ability 5 creates a real hazard
+BOSS2 PASS behemoth ability 5 is harmless before countdown completion
+BOSS2 PASS behemoth ability 5 activates on the completing update
+BOSS2 PASS behemoth ability 5 causes actual HP loss
+BOSS2 PASS behemoth accepts ability 6
+BOSS2 PASS Sumpfbrut releases bounded actual minions
+BOSS2 PASS behemoth ability 6 causes actual HP loss
+BOSS2 PASS behemoth accepts ability 7
+BOSS2 PASS behemoth ability 7 creates a real hazard
+BOSS2 PASS behemoth ability 7 is harmless before countdown completion
+BOSS2 PASS behemoth ability 7 activates on the completing update
+BOSS2 PASS behemoth ability 7 causes actual HP loss
+BOSS2 PASS behemoth accepts ability 8
+BOSS2 PASS behemoth ability 8 creates a real hazard
+BOSS2 PASS behemoth ability 8 is harmless before countdown completion
+BOSS2 PASS behemoth ability 8 activates on the completing update
+BOSS2 PASS behemoth ability 8 causes actual HP loss
+BOSS2 PASS behemoth accepts ability 9
+BOSS2 PASS behemoth ability 9 creates a real hazard
+BOSS2 PASS behemoth ability 9 is harmless before countdown completion
+BOSS2 PASS behemoth ability 9 activates on the completing update
+BOSS2 PASS behemoth ability 9 causes actual HP loss
+BOSS2 PASS Twin encounter has two actual targetable actors
+BOSS2 PASS Ice witch damage forwards to the shared boss HP
+BOSS2 PASS Fire witch and ice witch display one shared life pool
+BOSS2 PASS Coordinated airborne formation eight actually moves both actors
+BOSS2 PASS Coordinated airborne formation circle actually moves both actors
+BOSS2 PASS Coordinated airborne formation cross actually moves both actors
+BOSS2 PASS Coordinated airborne formation dive actually moves both actors
+BOSS2 PASS Coordinated airborne formation split actually moves both actors
+BOSS2 PASS Coordinated airborne formation follow actually moves both actors
+BOSS2 PASS Moving pact beam geometry uses the two actual hand positions
+BOSS2 PASS Beam warning follows changed flight positions and true segment length
+BOSS2 PASS Shared twin death produces exactly one chest and one orb
+BOSS2 PASS Shared death animation cleans the secondary witch without an independent reward
+BOSS2 PASS Acid puddle applies repeated actual damage over its finite lifetime
+BOSS2 PASS Pause stops the boss hazard clock as well as hits
+BOSS2 PASS Root contact creates an actual finite movement constraint
+BOSS2 PASS Root status reduces actual movement distance without permanent immobilization
+BOSS2 PASS Summoning cannot exceed six supporting swamp creatures
+BOSS2 PASS Boss cleanup removes minions and persistent hazard ownership
+BOSS2 PASS A correctly timed jump clears the ground shockwave
+BOSS2 PASS Dependent passive 206 requires an equipped matching active
+BOSS2 PASS Dependent passive 211 requires an equipped matching active
+BOSS2 PASS Dependent passive 212 requires an equipped matching active
+BOSS2 PASS Dependent passive 213 requires an equipped matching active
+BOSS2 PASS Dependent passive 217 requires an equipped matching active
+BOSS2 PASS Dependent passive 218 requires an equipped matching active
+BOSS2 PASS General passive Orbit Shield remains eligible
+BOSS2 PASS General passive Power Up remains eligible
+BOSS2 PASS General passive Fleet Footed remains eligible
+BOSS2 PASS General passive Quick Hands remains eligible
+BOSS2 PASS General passive Vitality remains eligible
+BOSS2 PASS General passive Keen Focus remains eligible
+BOSS2 PASS General passive Swift Sigils remains eligible
+BOSS2 PASS General passive Wide Glyphs remains eligible
+BOSS2 PASS General passive Deep Rhythm remains eligible
+BOSS2 PASS General passive Iron Ward remains eligible
+BOSS2 PASS General passive Renewal remains eligible
+BOSS2 PASS General passive Scavenger remains eligible
+BOSS2 PASS Split Runes accepts Fireball
+BOSS2 PASS Split Runes accepts Iceball
+BOSS2 PASS Split Runes accepts Arcane Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Split Runes never appears without Fireball/Iceball/Barrage
+BOSS2 PASS Combined any/all requirements reject a missing mandatory active
+BOSS2 PASS Combined any/all requirements accept the complete equipped set
+BOSS2 PASS Dependency tooltip lists actual existing active names
+BOSS2 PASS Same test seed resolves the same random boss and class
+BOSS2 PASS Random development build is valid and reproducible from its seed
+BOSS2 PASS Test random build respects passive prerequisites and slot limits
+BOSS2 PASS Test mode rejects a locked minute-five attack
+BOSS_TEST_START {"boss":"storm_warden","class_name":"Mage","seed":1337.0,"ability":-1.0,"minute":15.0,"difficulty_multiplier":1.0}
+BOSS2 PASS Direct Drache / minute15 / all-nine test starts through production API
+BOSS2 PASS Boss test supplies an evolved player and the correct unlocked dragon pool
+BOSS2 PASS Development invulnerability is scoped to the active test
+BOSS2 PASS Ending boss test restores normal round progression
+BOSS2 PASS Test invulnerability cannot leak into a normal round
+BOSS2 PASS Waldwaechter uses one ordinary automatic projectile without a floor warning
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Warning has no premature damage at 30 Hz
+BOSS2 PASS Hazard activation and contact share the completing update at 30 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Warning has no premature damage at 60 Hz
+BOSS2 PASS Hazard activation and contact share the completing update at 60 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Warning has no premature damage at 144 Hz
+BOSS2 PASS Hazard activation and contact share the completing update at 144 Hz
+BOSS2 PASS Original sword still has harmless preparation
+BOSS2 PASS Normal sword retains its actual eleven/thirteen/nineteen damage combo
+BOSS2 PASS Native performance sample covers60 actual frames with150 AI enemies and new boss hazards
+QA_REGRESSION_RESULT {"passed":true,"checks":811.0,"failures":[],"metrics":{"performance":{"enemies":150.0,"frames":60.0,"mean_frame_ms":16.667400000000001,"max_frame_ms":16.991,"measurement":"Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement."},"random_selection":["twins","storm_warden","storm_warden","storm_warden","behemoth","storm_warden","twins","behemoth","storm_warden","storm_warden","twins","behemoth","twins","storm_warden","storm_warden","behemoth","behemoth","twins","storm_warden","behemoth","twins","storm_warden","storm_warden","storm_warden","twins","behemoth","storm_warden","storm_warden","storm_warden","behemoth"],"sword_combo":[11.0,13.0,19.0],"dragon_abilities":[{"key":"beam","damage":68.399999999994179,"ability":1.0,"warning":1.0526315789473684},{"key":"arc","damage":60.80000000000291,"ability":2.0,"warning":0.8771929824561403},{"key":"stomp","damage":121.60000000000582,"ability":3.0,"warning":0.92105263157894735},{"key":"meteor","damage":72.19999999999709,"ability":4.0,"warning":1.5789473684210524},{"key":"slam","damage":79.80000000000291,"ability":5.0,"warning":1.3157894736842104},{"key":"wind","damage":26.600000000005821,"ability":6.0,"warning":0.78947368421052622},{"key":"void","damage":182.40000000002328,"ability":7.0,"warning":0.70175438596491224},{"key":"vortex","damage":60.80000000000291,"ability":8.0,"warning":1.4912280701754383},{"key":"volley","damage":38.0,"ability":9.0,"warning":0.57017543859649122}],"countdown_fps":[{"hz":30.0,"first_hit":1.3000000000000007,"warning":1.3},{"hz":60.0,"first_hit":1.3000000000000003,"warning":1.3},{"hz":144.0,"first_hit":1.305555555555552,"warning":1.3}],"snapshots":[{"scaling":{"projectiles":0.0,"hp":1.3500000000000001,"projectile_speed":1.0,"damage":1.3,"speed":1.0,"tier":0.0,"minute":5.0},"hp":12420.0,"boss":"storm_warden","minute":5.0,"unlocked":3.0},{"scaling":{"projectiles":0.0,"hp":1.8999999999999999,"projectile_speed":1.0800000000000001,"damage":1.6000000000000001,"speed":1.0700000000000001,"tier":1.0,"minute":10.0},"hp":17480.0,"boss":"storm_warden","minute":10.0,"unlocked":6.0},{"scaling":{"projectiles":1.0,"hp":2.5,"projectile_speed":1.1599999999999999,"damage":1.8999999999999999,"speed":1.1400000000000001,"tier":2.0,"minute":15.0},"hp":23000.0,"boss":"storm_warden","minute":15.0,"unlocked":9.0},{"scaling":{"projectiles":0.0,"hp":1.3500000000000001,"projectile_speed":1.0,"damage":1.3,"speed":1.0,"tier":0.0,"minute":5.0},"hp":17550.0,"boss":"twins","minute":5.0,"unlocked":3.0},{"scaling":{"projectiles":0.0,"hp":1.8999999999999999,"projectile_speed":1.0800000000000001,"damage":1.6000000000000001,"speed":1.0700000000000001,"tier":1.0,"minute":10.0},"hp":24700.0,"boss":"twins","minute":10.0,"unlocked":6.0},{"scaling":{"projectiles":1.0,"hp":2.5,"projectile_speed":1.1599999999999999,"damage":1.8999999999999999,"speed":1.1400000000000001,"tier":2.0,"minute":15.0},"hp":32500.0,"boss":"twins","minute":15.0,"unlocked":9.0},{"scaling":{"projectiles":0.0,"hp":1.3500000000000001,"projectile_speed":1.0,"damage":1.3,"speed":1.0,"tier":0.0,"minute":5.0},"hp":12420.0,"boss":"behemoth","minute":5.0,"unlocked":3.0},{"scaling":{"projectiles":0.0,"hp":1.8999999999999999,"projectile_speed":1.0800000000000001,"damage":1.6000000000000001,"speed":1.0700000000000001,"tier":1.0,"minute":10.0},"hp":17480.0,"boss":"behemoth","minute":10.0,"unlocked":6.0},{"scaling":{"projectiles":1.0,"hp":2.5,"projectile_speed":1.1599999999999999,"damage":1.8999999999999999,"speed":1.1400000000000001,"tier":2.0,"minute":15.0},"hp":23000.0,"boss":"behemoth","minute":15.0,"unlocked":9.0}],"formations":[{"formation":"eight","combined_distance":757.78086090087891},{"formation":"circle","combined_distance":176.68341445922852},{"formation":"cross","combined_distance":239.20619201660156},{"formation":"dive","combined_distance":635.64736938476562},{"formation":"split","combined_distance":183.14382171630859},{"formation":"follow","combined_distance":187.37813568115234}],"twins_abilities":[{"damage":26.600000000005821,"ability":1.0},{"damage":41.80000000000291,"ability":2.0},{"damage":47.5,"ability":3.0},{"damage":41.80000000000291,"ability":4.0},{"damage":91.200000000011642,"ability":5.0},{"damage":53.19999999999709,"ability":6.0},{"damage":68.399999999994179,"ability":7.0},{"damage":41.80000000000291,"ability":8.0},{"damage":76.0,"ability":9.0}],"behemoth_abilities":[{"damage":34.19999999999709,"ability":1.0},{"damage":15.19999999999709,"ability":2.0},{"damage":32.30000000000291,"ability":3.0},{"damage":51.30000000000291,"ability":4.0},{"damage":64.600000000005821,"ability":5.0},{"damage":13.30000000000291,"ability":6.0},{"damage":34.19999999999709,"ability":7.0},{"damage":53.19999999999709,"ability":8.0},{"damage":57.0,"ability":9.0}]},"scope":"Current production functions and input-injected actual Player\/Controller Steps in isolated native runner. Targeted regressions and short rendered150-enemy stress fixture; not full runs or human playtests."}
+###game_end###0
+Attempting to set gamepadcount to 0
+Script_Free called with 687 and global 39
+Unsetting previous scheduler resolution of 1

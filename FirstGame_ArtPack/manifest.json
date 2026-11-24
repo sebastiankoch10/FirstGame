@@ -1,0 +1,3782 @@
+{
+  "version": "0.1-prototype",
+  "source": "AI concept sheets plus newly generated hero and monster pose grids",
+  "hero_directions": [
+    "down",
+    "right",
+    "up",
+    "left"
+  ],
+  "frame_order": "left to right; zero-based",
+  "assets": [
+    {
+      "file": "heroes/warrior/spr_fg_warrior_idle_down.png",
+      "resource": "spr_fg_warrior_idle_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_walk_down.png",
+      "resource": "spr_fg_warrior_walk_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_run_down.png",
+      "resource": "spr_fg_warrior_run_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_attack_down.png",
+      "resource": "spr_fg_warrior_attack_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_jump_down.png",
+      "resource": "spr_fg_warrior_jump_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_fall_down.png",
+      "resource": "spr_fg_warrior_fall_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_dive_down.png",
+      "resource": "spr_fg_warrior_dive_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_slide_down.png",
+      "resource": "spr_fg_warrior_slide_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_hurt_down.png",
+      "resource": "spr_fg_warrior_hurt_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_death_down.png",
+      "resource": "spr_fg_warrior_death_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_idle_right.png",
+      "resource": "spr_fg_warrior_idle_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_walk_right.png",
+      "resource": "spr_fg_warrior_walk_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_run_right.png",
+      "resource": "spr_fg_warrior_run_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_attack_right.png",
+      "resource": "spr_fg_warrior_attack_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_jump_right.png",
+      "resource": "spr_fg_warrior_jump_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_fall_right.png",
+      "resource": "spr_fg_warrior_fall_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_dive_right.png",
+      "resource": "spr_fg_warrior_dive_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_slide_right.png",
+      "resource": "spr_fg_warrior_slide_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_hurt_right.png",
+      "resource": "spr_fg_warrior_hurt_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_death_right.png",
+      "resource": "spr_fg_warrior_death_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_idle_up.png",
+      "resource": "spr_fg_warrior_idle_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_walk_up.png",
+      "resource": "spr_fg_warrior_walk_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_run_up.png",
+      "resource": "spr_fg_warrior_run_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_attack_up.png",
+      "resource": "spr_fg_warrior_attack_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_jump_up.png",
+      "resource": "spr_fg_warrior_jump_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_fall_up.png",
+      "resource": "spr_fg_warrior_fall_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_dive_up.png",
+      "resource": "spr_fg_warrior_dive_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_slide_up.png",
+      "resource": "spr_fg_warrior_slide_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_hurt_up.png",
+      "resource": "spr_fg_warrior_hurt_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_death_up.png",
+      "resource": "spr_fg_warrior_death_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_idle_left.png",
+      "resource": "spr_fg_warrior_idle_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_walk_left.png",
+      "resource": "spr_fg_warrior_walk_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_run_left.png",
+      "resource": "spr_fg_warrior_run_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_attack_left.png",
+      "resource": "spr_fg_warrior_attack_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_jump_left.png",
+      "resource": "spr_fg_warrior_jump_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_fall_left.png",
+      "resource": "spr_fg_warrior_fall_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_dive_left.png",
+      "resource": "spr_fg_warrior_dive_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_slide_left.png",
+      "resource": "spr_fg_warrior_slide_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_hurt_left.png",
+      "resource": "spr_fg_warrior_hurt_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/warrior/spr_fg_warrior_death_left.png",
+      "resource": "spr_fg_warrior_death_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_idle_down.png",
+      "resource": "spr_fg_mage_idle_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_walk_down.png",
+      "resource": "spr_fg_mage_walk_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_run_down.png",
+      "resource": "spr_fg_mage_run_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_attack_down.png",
+      "resource": "spr_fg_mage_attack_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_jump_down.png",
+      "resource": "spr_fg_mage_jump_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_fall_down.png",
+      "resource": "spr_fg_mage_fall_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_dive_down.png",
+      "resource": "spr_fg_mage_dive_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_slide_down.png",
+      "resource": "spr_fg_mage_slide_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_hurt_down.png",
+      "resource": "spr_fg_mage_hurt_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_death_down.png",
+      "resource": "spr_fg_mage_death_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_idle_right.png",
+      "resource": "spr_fg_mage_idle_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_walk_right.png",
+      "resource": "spr_fg_mage_walk_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_run_right.png",
+      "resource": "spr_fg_mage_run_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_attack_right.png",
+      "resource": "spr_fg_mage_attack_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_jump_right.png",
+      "resource": "spr_fg_mage_jump_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_fall_right.png",
+      "resource": "spr_fg_mage_fall_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_dive_right.png",
+      "resource": "spr_fg_mage_dive_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_slide_right.png",
+      "resource": "spr_fg_mage_slide_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_hurt_right.png",
+      "resource": "spr_fg_mage_hurt_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_death_right.png",
+      "resource": "spr_fg_mage_death_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_idle_up.png",
+      "resource": "spr_fg_mage_idle_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_walk_up.png",
+      "resource": "spr_fg_mage_walk_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_run_up.png",
+      "resource": "spr_fg_mage_run_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_attack_up.png",
+      "resource": "spr_fg_mage_attack_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_jump_up.png",
+      "resource": "spr_fg_mage_jump_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_fall_up.png",
+      "resource": "spr_fg_mage_fall_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_dive_up.png",
+      "resource": "spr_fg_mage_dive_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_slide_up.png",
+      "resource": "spr_fg_mage_slide_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_hurt_up.png",
+      "resource": "spr_fg_mage_hurt_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_death_up.png",
+      "resource": "spr_fg_mage_death_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_idle_left.png",
+      "resource": "spr_fg_mage_idle_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_walk_left.png",
+      "resource": "spr_fg_mage_walk_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_run_left.png",
+      "resource": "spr_fg_mage_run_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_attack_left.png",
+      "resource": "spr_fg_mage_attack_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_jump_left.png",
+      "resource": "spr_fg_mage_jump_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_fall_left.png",
+      "resource": "spr_fg_mage_fall_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_dive_left.png",
+      "resource": "spr_fg_mage_dive_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_slide_left.png",
+      "resource": "spr_fg_mage_slide_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_hurt_left.png",
+      "resource": "spr_fg_mage_hurt_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/mage/spr_fg_mage_death_left.png",
+      "resource": "spr_fg_mage_death_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_idle_down.png",
+      "resource": "spr_fg_ranger_idle_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_walk_down.png",
+      "resource": "spr_fg_ranger_walk_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_run_down.png",
+      "resource": "spr_fg_ranger_run_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_attack_down.png",
+      "resource": "spr_fg_ranger_attack_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_jump_down.png",
+      "resource": "spr_fg_ranger_jump_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_fall_down.png",
+      "resource": "spr_fg_ranger_fall_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_dive_down.png",
+      "resource": "spr_fg_ranger_dive_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_slide_down.png",
+      "resource": "spr_fg_ranger_slide_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_hurt_down.png",
+      "resource": "spr_fg_ranger_hurt_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_death_down.png",
+      "resource": "spr_fg_ranger_death_down",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_idle_right.png",
+      "resource": "spr_fg_ranger_idle_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_walk_right.png",
+      "resource": "spr_fg_ranger_walk_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_run_right.png",
+      "resource": "spr_fg_ranger_run_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_attack_right.png",
+      "resource": "spr_fg_ranger_attack_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_jump_right.png",
+      "resource": "spr_fg_ranger_jump_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_fall_right.png",
+      "resource": "spr_fg_ranger_fall_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_dive_right.png",
+      "resource": "spr_fg_ranger_dive_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_slide_right.png",
+      "resource": "spr_fg_ranger_slide_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_hurt_right.png",
+      "resource": "spr_fg_ranger_hurt_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_death_right.png",
+      "resource": "spr_fg_ranger_death_right",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_idle_up.png",
+      "resource": "spr_fg_ranger_idle_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_walk_up.png",
+      "resource": "spr_fg_ranger_walk_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_run_up.png",
+      "resource": "spr_fg_ranger_run_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_attack_up.png",
+      "resource": "spr_fg_ranger_attack_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_jump_up.png",
+      "resource": "spr_fg_ranger_jump_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_fall_up.png",
+      "resource": "spr_fg_ranger_fall_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_dive_up.png",
+      "resource": "spr_fg_ranger_dive_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_slide_up.png",
+      "resource": "spr_fg_ranger_slide_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_hurt_up.png",
+      "resource": "spr_fg_ranger_hurt_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_death_up.png",
+      "resource": "spr_fg_ranger_death_up",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_idle_left.png",
+      "resource": "spr_fg_ranger_idle_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "generated_pose",
+      "notes": "Single authored idle pose; no breathing cycle.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_walk_left.png",
+      "resource": "spr_fg_ranger_walk_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Two generated walking poses plus idle transitions.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_run_left.png",
+      "resource": "spr_fg_ranger_run_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Same source as walk at higher playback speed.",
+      "loop": true
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_attack_left.png",
+      "resource": "spr_fg_ranger_attack_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 5,
+      "columns": 5,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Windup, release, recovery (reused idle). Hit window suggested frames 2–3, zero-based.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_jump_left.png",
+      "resource": "spr_fg_ranger_jump_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Takeoff and airborne pose; game code controls actual z and duration.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_fall_left.png",
+      "resource": "spr_fg_ranger_fall_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reuses jump pose; no distinct descent pose.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_dive_left.png",
+      "resource": "spr_fg_ranger_dive_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Uses jump and low pose; no distinct mid-dive art.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_slide_left.png",
+      "resource": "spr_fg_ranger_slide_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 12,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Low pose with dust, then idle; no unique intermediate frames.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_hurt_left.png",
+      "resource": "spr_fg_ranger_hurt_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 10,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "assembled",
+      "notes": "Generated recoil then idle.",
+      "loop": false
+    },
+    {
+      "file": "heroes/ranger/spr_fg_ranger_death_left.png",
+      "resource": "spr_fg_ranger_death_left",
+      "kind": "hero",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional",
+      "notes": "Reused hurt/slide poses; replace with a dedicated death animation.",
+      "loop": false
+    },
+    {
+      "file": "monsters/slime/spr_fg_slime_idle.png",
+      "resource": "spr_fg_slime_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/slime/spr_fg_slime_walk.png",
+      "resource": "spr_fg_slime_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/slime/spr_fg_slime_attack.png",
+      "resource": "spr_fg_slime_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/slime/spr_fg_slime_hurt.png",
+      "resource": "spr_fg_slime_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/slime/spr_fg_slime_death.png",
+      "resource": "spr_fg_slime_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/mushroom/spr_fg_mushroom_idle.png",
+      "resource": "spr_fg_mushroom_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/mushroom/spr_fg_mushroom_walk.png",
+      "resource": "spr_fg_mushroom_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/mushroom/spr_fg_mushroom_attack.png",
+      "resource": "spr_fg_mushroom_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/mushroom/spr_fg_mushroom_hurt.png",
+      "resource": "spr_fg_mushroom_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/mushroom/spr_fg_mushroom_death.png",
+      "resource": "spr_fg_mushroom_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/boar/spr_fg_boar_idle.png",
+      "resource": "spr_fg_boar_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/boar/spr_fg_boar_walk.png",
+      "resource": "spr_fg_boar_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/boar/spr_fg_boar_attack.png",
+      "resource": "spr_fg_boar_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/boar/spr_fg_boar_hurt.png",
+      "resource": "spr_fg_boar_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/boar/spr_fg_boar_death.png",
+      "resource": "spr_fg_boar_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/goblin/spr_fg_goblin_idle.png",
+      "resource": "spr_fg_goblin_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/goblin/spr_fg_goblin_walk.png",
+      "resource": "spr_fg_goblin_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/goblin/spr_fg_goblin_attack.png",
+      "resource": "spr_fg_goblin_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/goblin/spr_fg_goblin_hurt.png",
+      "resource": "spr_fg_goblin_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/goblin/spr_fg_goblin_death.png",
+      "resource": "spr_fg_goblin_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/bat/spr_fg_bat_idle.png",
+      "resource": "spr_fg_bat_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/bat/spr_fg_bat_walk.png",
+      "resource": "spr_fg_bat_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/bat/spr_fg_bat_attack.png",
+      "resource": "spr_fg_bat_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/bat/spr_fg_bat_hurt.png",
+      "resource": "spr_fg_bat_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/bat/spr_fg_bat_death.png",
+      "resource": "spr_fg_bat_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/wisp/spr_fg_wisp_idle.png",
+      "resource": "spr_fg_wisp_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/wisp/spr_fg_wisp_walk.png",
+      "resource": "spr_fg_wisp_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/wisp/spr_fg_wisp_attack.png",
+      "resource": "spr_fg_wisp_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/wisp/spr_fg_wisp_hurt.png",
+      "resource": "spr_fg_wisp_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/wisp/spr_fg_wisp_death.png",
+      "resource": "spr_fg_wisp_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/lizard/spr_fg_lizard_idle.png",
+      "resource": "spr_fg_lizard_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/lizard/spr_fg_lizard_walk.png",
+      "resource": "spr_fg_lizard_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/lizard/spr_fg_lizard_attack.png",
+      "resource": "spr_fg_lizard_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/lizard/spr_fg_lizard_hurt.png",
+      "resource": "spr_fg_lizard_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/lizard/spr_fg_lizard_death.png",
+      "resource": "spr_fg_lizard_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/spider/spr_fg_spider_idle.png",
+      "resource": "spr_fg_spider_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/spider/spr_fg_spider_walk.png",
+      "resource": "spr_fg_spider_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/spider/spr_fg_spider_attack.png",
+      "resource": "spr_fg_spider_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/spider/spr_fg_spider_hurt.png",
+      "resource": "spr_fg_spider_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/spider/spr_fg_spider_death.png",
+      "resource": "spr_fg_spider_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/skeleton/spr_fg_skeleton_idle.png",
+      "resource": "spr_fg_skeleton_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/skeleton/spr_fg_skeleton_walk.png",
+      "resource": "spr_fg_skeleton_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/skeleton/spr_fg_skeleton_attack.png",
+      "resource": "spr_fg_skeleton_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/skeleton/spr_fg_skeleton_hurt.png",
+      "resource": "spr_fg_skeleton_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/skeleton/spr_fg_skeleton_death.png",
+      "resource": "spr_fg_skeleton_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/plant/spr_fg_plant_idle.png",
+      "resource": "spr_fg_plant_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/plant/spr_fg_plant_walk.png",
+      "resource": "spr_fg_plant_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/plant/spr_fg_plant_attack.png",
+      "resource": "spr_fg_plant_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/plant/spr_fg_plant_hurt.png",
+      "resource": "spr_fg_plant_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/plant/spr_fg_plant_death.png",
+      "resource": "spr_fg_plant_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/beetle/spr_fg_beetle_idle.png",
+      "resource": "spr_fg_beetle_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/beetle/spr_fg_beetle_walk.png",
+      "resource": "spr_fg_beetle_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/beetle/spr_fg_beetle_attack.png",
+      "resource": "spr_fg_beetle_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/beetle/spr_fg_beetle_hurt.png",
+      "resource": "spr_fg_beetle_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/beetle/spr_fg_beetle_death.png",
+      "resource": "spr_fg_beetle_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/imp/spr_fg_imp_idle.png",
+      "resource": "spr_fg_imp_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/imp/spr_fg_imp_walk.png",
+      "resource": "spr_fg_imp_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/imp/spr_fg_imp_attack.png",
+      "resource": "spr_fg_imp_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/imp/spr_fg_imp_hurt.png",
+      "resource": "spr_fg_imp_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/imp/spr_fg_imp_death.png",
+      "resource": "spr_fg_imp_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/golem/spr_fg_golem_idle.png",
+      "resource": "spr_fg_golem_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/golem/spr_fg_golem_walk.png",
+      "resource": "spr_fg_golem_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/golem/spr_fg_golem_attack.png",
+      "resource": "spr_fg_golem_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/golem/spr_fg_golem_hurt.png",
+      "resource": "spr_fg_golem_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/golem/spr_fg_golem_death.png",
+      "resource": "spr_fg_golem_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/blob/spr_fg_blob_idle.png",
+      "resource": "spr_fg_blob_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/blob/spr_fg_blob_walk.png",
+      "resource": "spr_fg_blob_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/blob/spr_fg_blob_attack.png",
+      "resource": "spr_fg_blob_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/blob/spr_fg_blob_hurt.png",
+      "resource": "spr_fg_blob_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/blob/spr_fg_blob_death.png",
+      "resource": "spr_fg_blob_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/bandit/spr_fg_bandit_idle.png",
+      "resource": "spr_fg_bandit_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/bandit/spr_fg_bandit_walk.png",
+      "resource": "spr_fg_bandit_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/bandit/spr_fg_bandit_attack.png",
+      "resource": "spr_fg_bandit_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/bandit/spr_fg_bandit_hurt.png",
+      "resource": "spr_fg_bandit_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/bandit/spr_fg_bandit_death.png",
+      "resource": "spr_fg_bandit_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/dragon/spr_fg_dragon_idle.png",
+      "resource": "spr_fg_dragon_idle",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 4,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "One source pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/dragon/spr_fg_dragon_walk.png",
+      "resource": "spr_fg_dragon_walk",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Reuses two intermediate poses as locomotion; verify actual motion. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": true
+    },
+    {
+      "file": "monsters/dragon/spr_fg_dragon_attack.png",
+      "resource": "spr_fg_dragon_attack",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 9,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Attack inferred from intermediate concept poses; may not express unique attack. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/dragon/spr_fg_dragon_hurt.png",
+      "resource": "spr_fg_dragon_hurt",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "fps": 8,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Provisional reuse of intermediate pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "monsters/dragon/spr_fg_dragon_death.png",
+      "resource": "spr_fg_dragon_death",
+      "kind": "monster",
+      "frame_width": 64,
+      "frame_height": 64,
+      "frames": 3,
+      "columns": 3,
+      "rows": 1,
+      "fps": 7,
+      "origin": [
+        32,
+        51
+      ],
+      "status": "provisional_reinterpretation",
+      "notes": "Last concept pose; not all designs have an unambiguous death pose. New atlas reinterpretation; compare original concept in monster_originals. No four-direction atlas.",
+      "loop": false
+    },
+    {
+      "file": "effects/spr_fg_coin_idle.png",
+      "resource": "spr_fg_coin_idle",
+      "kind": "effect",
+      "frame_width": 32,
+      "frame_height": 32,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 6,
+      "origin": [
+        16,
+        16
+      ],
+      "status": "generated_pose",
+      "notes": "Single coin pose from atlas.",
+      "loop": true
+    },
+    {
+      "file": "icons/icon_fg_magic_arcane.png",
+      "resource": "icon_fg_magic_arcane",
+      "kind": "icon",
+      "frame_width": 48,
+      "frame_height": 48,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 1,
+      "origin": [
+        24,
+        24
+      ],
+      "status": "concept_crop",
+      "notes": "UI icon with its original background/frame; check assignment against live spell list.",
+      "loop": false
+    },
+    {
+      "file": "icons/icon_fg_fire.png",
+      "resource": "icon_fg_fire",
+      "kind": "icon",
+      "frame_width": 48,
+      "frame_height": 48,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 1,
+      "origin": [
+        24,
+        24
+      ],
+      "status": "concept_crop",
+      "notes": "UI icon with its original background/frame; check assignment against live spell list.",
+      "loop": false
+    },
+    {
+      "file": "icons/icon_fg_ice.png",
+      "resource": "icon_fg_ice",
+      "kind": "icon",
+      "frame_width": 48,
+      "frame_height": 48,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 1,
+      "origin": [
+        24,
+        24
+      ],
+      "status": "concept_crop",
+      "notes": "UI icon with its original background/frame; check assignment against live spell list.",
+      "loop": false
+    },
+    {
+      "file": "icons/icon_fg_lightning.png",
+      "resource": "icon_fg_lightning",
+      "kind": "icon",
+      "frame_width": 48,
+      "frame_height": 48,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 1,
+      "origin": [
+        24,
+        24
+      ],
+      "status": "concept_crop",
+      "notes": "UI icon with its original background/frame; check assignment against live spell list.",
+      "loop": false
+    },
+    {
+      "file": "icons/icon_fg_nature.png",
+      "resource": "icon_fg_nature",
+      "kind": "icon",
+      "frame_width": 48,
+      "frame_height": 48,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 1,
+      "origin": [
+        24,
+        24
+      ],
+      "status": "concept_crop",
+      "notes": "UI icon with its original background/frame; check assignment against live spell list.",
+      "loop": false
+    },
+    {
+      "file": "icons/icon_fg_defense.png",
+      "resource": "icon_fg_defense",
+      "kind": "icon",
+      "frame_width": 48,
+      "frame_height": 48,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 1,
+      "origin": [
+        24,
+        24
+      ],
+      "status": "concept_crop",
+      "notes": "UI icon with its original background/frame; check assignment against live spell list.",
+      "loop": false
+    },
+    {
+      "file": "icons/icon_fg_sword.png",
+      "resource": "icon_fg_sword",
+      "kind": "icon",
+      "frame_width": 48,
+      "frame_height": 48,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 1,
+      "origin": [
+        24,
+        24
+      ],
+      "status": "concept_crop",
+      "notes": "UI icon with its original background/frame; check assignment against live spell list.",
+      "loop": false
+    },
+    {
+      "file": "icons/icon_fg_heart.png",
+      "resource": "icon_fg_heart",
+      "kind": "icon",
+      "frame_width": 48,
+      "frame_height": 48,
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "fps": 1,
+      "origin": [
+        24,
+        24
+      ],
+      "status": "concept_crop",
+      "notes": "UI icon with its original background/frame; check assignment against live spell list.",
+      "loop": false
+    }
+  ],
+  "limitations": [
+    "The uploaded FirstGame.zip predates the latest Codex changes. Current local project must be inspected at import.",
+    "The three hero designs and all sixteen monster concepts are provided, but generated animation poses are reinterpretations, not pixel-identical to original artwork.",
+    "Hero fall, dive, death and several repeated frames are provisional. Monster movement, attack, hurt and death sequences are provisional and not directional.",
+    "Attack combo variants and individual spell effects in the live project are not exhaustively covered. Keep existing assets for these until dedicated animations exist.",
+    "Frame geometry and RGBA checked; no GameMaker runtime import or gameplay test performed."
+  ]
+}

@@ -1,0 +1,63 @@
+"""Fresh isolated native VM checks for Boss System2.0; never injects normal project files."""
+from pathlib import Path
+import json,os,re,shutil,subprocess,sys,time
+ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/site-packages'))
+from gms_helpers.gm_json import loads,dumps
+from gms_helpers.runner import GameMakerRunner
+from gms_helpers.gamemaker_machine_lock import gamemaker_machine_operation
+def write(p,s):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(s,encoding='utf-8')
+def main():
+ capture_only='--capture-only' in sys.argv
+ work=ROOT/('output/boss-v2-captures' if capture_only else 'output/boss-v2-smoke')/time.strftime('%Y%m%d-%H%M%S');project=work/'project';project.mkdir(parents=True)
+ for name in ('objects','scripts','sprites','sounds','tilesets','rooms','options'):shutil.copytree(ROOT/name,project/name)
+ yyp=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'));yyp['name']=yyp['%Name']='FirstGameBossV2Smoke';write(project/'FirstGameBossV2Smoke.yyp',dumps(yyp))
+ p=project/'options/main/options_main.yy';d=loads(p.read_text(encoding='utf-8'));d['option_gameguid']='0a2d5a50-86c6-481f-a26a-8351850c70bb';write(p,dumps(d))
+ p=project/'options/windows/options_windows.yy';d=loads(p.read_text(encoding='utf-8'));d['option_windows_display_name']='FirstGame Boss2 Native Check';write(p,dumps(d))
+ p=project/'scripts/gameplay/gameplay.gml';write(p,p.read_text(encoding='utf-8-sig')+'\n'+(ROOT/'tests/boss_v2_harness.gml').read_text(encoding='utf-8-sig'))
+ p=project/'objects/ObjectMainMenu/Create_0.gml';write(p,'global.bt_capture_only='+('true' if capture_only else 'false')+';global.master_volume=0;global.music_volume=0;global.effects_volume=0;\n'+p.read_text(encoding='utf-8-sig')+'\nexception_unhandled_handler(function(ex){show_debug_message("BOSS2_EXCEPTION "+json_stringify(ex));game_end();return true;});\n')
+ write(project/'objects/ObjectMainMenu/Step_0.gml','bt_menu_tick();')
+ # Capture is prefixed because the real boss menu renderer intentionally exits its Draw event.
+ p=project/'objects/ObjectMainMenu/Draw_64.gml';write(p,'bt_capture_menu();\n'+p.read_text(encoding='utf-8-sig'))
+ write(project/'objects/ObjectController/Step_0.gml','bt_controller_tick();')
+ p=project/'objects/ObjectController/Draw_64.gml';write(p,p.read_text(encoding='utf-8-sig')+'\nbt_capture_draw();\n')
+ for obj in ['ObjectPlayer','ObjectSpawner','ObjectMonster','ObjectBossMonster','ObjectFireball','ObjectIceball','ObjectLightningball']:
+  p=project/f'objects/{obj}/Step_0.gml';write(p,'if(variable_global_exists("bt_hold") && global.bt_hold)exit;\n'+p.read_text(encoding='utf-8-sig'))
+ # Keep production DOT/status execution; freeze only the hostile AI dispatch during damage windows.
+ p=project/'scripts/boss_combat/boss_combat.gml';s=p.read_text(encoding='utf-8-sig');needle='    if(_b.dragon_enabled) {dragon_step(_b,_dt);return;}'
+ if s.count(needle)!=1:raise RuntimeError('Boss DPS freeze insertion point changed; inspect production boss_step')
+ write(p,s.replace(needle,'    if(variable_global_exists("bt_bench_freeze") && global.bt_bench_freeze)return;\n'+needle))
+ for p in project.rglob('*.gml'):
+  s=p.read_text(encoding='utf-8-sig');s=re.sub(r'\bdelta_time\s*/\s*1000000(?:\.0)?\b','bt_sim_dt()',s);write(p,s)
+ p=project/'scripts/gameplay/gameplay.gml';write(p,p.read_text(encoding='utf-8')+'\nfunction bt_sim_dt(){return variable_global_exists("bt_dt") ? global.bt_dt : delta_time/1000000;}\n')
+ runner=GameMakerRunner(project,runtime_version='2024.14.4.268');igor=runner.find_gamemaker_runtime();license_file=runner.find_license_file()
+ if not igor or not license_file:raise RuntimeError('Installed Igor/runtime/license unavailable')
+ for name in ('build','cache','temp'):(work/name).mkdir()
+ cmd=[str(igor),f'/lf={license_file}',f'/uf={license_file.parent}',f'/rp={runner.runtime_path}',f'/project={project/"FirstGameBossV2Smoke.yyp"}',f'/cache={work/"cache"}',f'/temp={work/"temp"}',f'/of={work/"build/FirstGameBossV2Smoke"}',f'--tf={work/"build/FirstGameBossV2Smoke.zip"}','--','Windows','PackageZip']
+ print('Building Boss2 native test copy...',flush=True)
+ with gamemaker_machine_operation('boss-v2-smoke-build',project):
+  with (work/'build.log').open('w',encoding='utf-8') as log:subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT,cwd=project,timeout=180)
+ exe=work/'build/FirstGameBossV2Smoke.exe'
+ if 'Final Compile finished.' not in (work/'build.log').read_text(encoding='utf-8',errors='replace') or not exe.is_file():raise RuntimeError(f'Fresh build failed: {work}/build.log')
+ started=time.time();startup=subprocess.STARTUPINFO();startup.dwFlags|=subprocess.STARTF_USESHOWWINDOW;startup.wShowWindow=4
+ with (work/'runtime.log').open('w',encoding='utf-8') as log:
+  process=subprocess.Popen([str(exe),'-output',str(work/'runner.log')],cwd=exe.parent,stdout=log,stderr=subprocess.STDOUT,startupinfo=startup)
+  try:code=process.wait(timeout=180)
+  except subprocess.TimeoutExpired:process.kill();process.wait();raise RuntimeError(f'Runtime timeout: {work}/runtime.log')
+ result=None
+ for p in [work/'runtime.log',work/'runner.log']:
+  if p.exists():
+   match=re.search(r'BOSS2_RESULT (\{[^\r\n]+\})',p.read_text(encoding='utf-8',errors='replace'))
+   if match:result=json.loads(match.group(1));break
+ if result is None:raise RuntimeError(f'No explicit runtime result: {work}/runtime.log')
+ for save in Path(os.environ['LOCALAPPDATA']).glob('FirstGame*'):
+  if save.is_dir():
+   for p in save.rglob('bt2capture-*.png'):
+    if p.stat().st_mtime>=started:shutil.copyfile(p,work/p.name.removeprefix('bt2capture-'))
+ result.update(exit_code=code,logs=str(work.relative_to(ROOT)),artifact=str(exe.relative_to(ROOT)),rendered=[p.name for p in work.glob('*.png')]);result['passed']=result['passed'] and code==0
+ write(ROOT/('tests/reports/boss-v2-captures.json' if capture_only else 'tests/reports/boss-v2-native.json'),json.dumps(result,indent=2)+'\n')
+ print(json.dumps({k:result[k] for k in ['passed','checks','failures','logs','rendered']},indent=2),flush=True)
+ if not result['passed']:raise RuntimeError('Boss2 native assertions failed')
+if __name__=='__main__':
+ try:main()
+ except Exception as e:print('FAIL:',e,file=sys.stderr,flush=True);raise SystemExit(1)

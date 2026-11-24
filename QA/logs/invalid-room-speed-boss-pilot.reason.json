@@ -1,0 +1,6 @@
+{
+  "status": "INVALID_NOT_STATISTICAL_EVIDENCE",
+  "rows": 15,
+  "reason": "Provisional nativeartifact setgame_set_speed10000; room_speeddependent burn/status rates differed fromnormal60Hz. ExcludedfromallQAdataandcounts.",
+  "log": "output/native-mc-baseline/20261123-173501/boss-b60-s810101-173559.log"
+}

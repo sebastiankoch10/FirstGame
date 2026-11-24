@@ -1,0 +1,17 @@
+Launching baseline-runs-Sword-cycle-b600-s750110-175131-22172 from C:\Users\sebas\Dokumente\FirstGame\output\native-mc-baseline\20261123-174801
+{
+  "work": "output\\native-mc-baseline\\20261123-174801",
+  "log": "output\\native-mc-baseline\\20261123-174801\\baseline-runs-Sword-cycle-b600-s750110-175131-22172.log",
+  "rows": 9,
+  "completed_runs": 9,
+  "elapsed_wall_seconds": 319.46015429496765,
+  "exit_code": 0,
+  "mode": "runs",
+  "phase": "baseline",
+  "source_phase": "baseline",
+  "captures": [
+    "output\\native-mc-baseline\\20261123-174801\\qa-mc-capture-collision-fixture.png"
+  ],
+  "errors": [],
+  "parse_errors": []
+}

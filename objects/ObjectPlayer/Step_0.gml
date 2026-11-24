@@ -1,268 +1,113 @@
-// ===================================================================
-// OBJECT: Player  |  EVENT: Step
-// Steuerung, Angriff, Bewegung, Blickrichtung (Maus) – mit WASD + Pfeilen
-// Angriff/Hitbox via LINKER MAUSKLICK (mb_left)
-// ===================================================================
+depth=-y;
+if(global.game_paused) exit;
+pickup_prev_x=x;pickup_prev_y=y;
+if(menu_input_guard>0) {menu_input_guard--; exit;}
+var input_x=(keyboard_check(vk_right)||keyboard_check(ord("D")) ? 1 : 0)-(keyboard_check(vk_left)||keyboard_check(ord("A")) ? 1 : 0);
+var input_y=(keyboard_check(vk_down)||keyboard_check(ord("S")) ? 1 : 0)-(keyboard_check(vk_up)||keyboard_check(ord("W")) ? 1 : 0);
+var mouse_distance=point_distance(x,y,mouse_x,mouse_y);
+if(!mouse_check_button(mb_left)) mouse_move_armed=true;
+var keyboard_input=input_x!=0 || input_y!=0;
+var mouse_input=!keyboard_input && mouse_move_armed && mouse_check_button(mb_left) && mouse_distance>12;
+var has_input=keyboard_input || mouse_input;
+var input_direction=keyboard_input ? point_direction(0,0,input_x,input_y) : point_direction(x,y,mouse_x,mouse_y);
+var move_amount=mouse_input ? min(moveSpeed,max(0,mouse_distance-12)) : moveSpeed;
+aim_angle=point_direction(x,y,mouse_x,mouse_y);
+if(has_input) facing_direction=input_direction;
+image_angle=0; image_xscale=1;
+var previous_motion=motion_state;
+visual_land_timer=max(0,visual_land_timer-1);
+movement_step(id,max(0,delta_time/1000000),has_input,input_direction,move_amount,keyboard_check_pressed(vk_space),keyboard_check_pressed(vk_control));
+if(previous_motion!=player_motion_state.grounded && previous_motion!=player_motion_state.sliding && motion_state==player_motion_state.grounded)visual_land_timer=6;
+state=has_input ? player_state.running : player_state.idle;
+weapon_auto_step();
+if(attack_timer>0) facing_direction=attack_direction;
+motion_protected=player_is_protected(id);
+var visual_actor = "swordsmanv3";
+if (global.selected_character == "Mage") visual_actor = "magev3";
+else if (global.selected_character == "Ranger") visual_actor = "rangerv3";
 
-// --- 1) Blickrichtung & Aim-Winkel (Sprite NICHT drehen, nur flippen)
-var mx = mouse_x;
-var my = mouse_y;
-aim_angle   = point_direction(x, y, mx, my); // Für Skills & Hitboxen
-image_angle = 0;                             // Sprite bleibt gerade
-image_xscale = (mx >= x) ? 1 : -1;           // nur L/R-Flip nach Mausseite
+var visual_action = "idle";
+var visual_direction_angle = facing_direction;
+if (motion_state == player_motion_state.rising) {
+    visual_action = "jump";
+    visual_direction_angle = jump_direction;
+} else if (motion_state == player_motion_state.falling) {
+    visual_action = "fall";
+    visual_direction_angle = jump_direction;
+} else if (motion_state == player_motion_state.diving) {
+    visual_action = "dive";
+    visual_direction_angle = dive_direction;
+} else if (motion_state == player_motion_state.sliding || dodge_timer>0) {
+    visual_action = dodge_timer>0 && player_authored_actor(visual_actor) ? "dodge" : "slide";
+    visual_direction_angle = dodge_timer>0 ? dodge_direction : slide_direction;
+} else if (hud_hit_flash>0) {
+    visual_action="hurt";
+} else if (player_authored_actor(visual_actor) && visual_land_timer>0) {
+    visual_action="landing";
+} else if (attack_timer > 0) {
+    visual_action = "attack";
+    visual_direction_angle = attack_direction;
 
-// --- 2) Input sammeln (WASD + Pfeile)
-var left_down  = keyboard_check(vk_left)  || keyboard_check(ord("A"));
-var right_down = keyboard_check(vk_right) || keyboard_check(ord("D"));
-var up_down    = keyboard_check(vk_up)    || keyboard_check(ord("W"));
-var down_down  = keyboard_check(vk_down)  || keyboard_check(ord("S"));
+} else if (state == player_state.running) {
+    visual_action = "walk";
+}
 
-// --- 3) Angriff prüfen (LINKER MAUSKLICK)
-if (mouse_check_button_pressed(mb_left)) {
-    if (state == player_state.attacking) {
-        buffered_attack = true;
+if(visual_actor!="swordsmanv3") {
+    visual_move_time=has_input ? visual_move_time+max(0,delta_time/1000000) : 0;
+    if(visual_action=="walk" && visual_move_time>.45)visual_action="run";
+    // Follow the shortest turn through authored octants; hair and cloth retain their preceding pose briefly.
+    if(visual_action=="idle" || visual_action=="walk" || visual_action=="run") {
+        var turn_blend=1-exp(-18*max(0,delta_time/1000000));
+        visual_facing_angle-=angle_difference(visual_facing_angle,visual_direction_angle)*turn_blend;
+        visual_direction_angle=visual_facing_angle;
+    } else visual_facing_angle=visual_direction_angle;
+}
+
+var visual_direction = player_visual_direction(visual_actor,visual_direction_angle);
+
+var visual_name = "spr_fg_" + visual_actor + "_" + visual_action + "_" + visual_direction;
+var visual_key = visual_name;
+if (visual_action == "attack") visual_key += "_" + string(attack_stage);
+
+if (visual_animation_key != visual_key) {
+    var visual_asset=player_visual_asset(visual_actor,visual_action,visual_direction,attack_stage);
+    visual_sprite_index=visual_asset.sprite; visual_mirror=visual_asset.mirror; visual_size=visual_asset.size;
+    visual_animation_key = visual_key;
+    visual_frame_index = 0;
+}
+
+if (sprite_exists(visual_sprite_index)) {
+    sprite_index = visual_sprite_index;
+    image_speed = 0;
+    var visual_frame_count = sprite_get_number(visual_sprite_index);
+    var visual_fps = 8;
+    if (visual_action == "idle") visual_fps = 4;
+    else if(visual_action=="run")visual_fps=11;
+    else if (visual_action == "attack" || visual_action == "jump" || visual_action == "fall" || visual_action == "hurt") visual_fps = 10;
+    else if (visual_action == "dive" || visual_action == "slide") visual_fps = 12;
+    if(visual_actor=="swordsmanv3" && visual_action=="hurt")visual_fps=18;
+
+    if (visual_action == "attack") {
+        var attack_progress = 1 - clamp(attack_timer / max(1,attack_duration), 0, 1);
+        visual_frame_index = visual_actor=="swordsmanv3" && sword_combo_active ? master_sword_frame(attack_stage,sword_combo_clock-1) : clamp(floor(attack_progress * visual_frame_count), 0, visual_frame_count - 1);
+        if(visual_actor=="magev3" || visual_actor=="rangerv3")visual_frame_index=clamp(floor(attack_progress*visual_frame_count*(visual_actor=="magev3" ? 1.7 : 2)),0,visual_frame_count-1);
+    } else if (player_authored_actor(visual_actor) && visual_action=="dodge") {
+        visual_frame_index=min(visual_frame_count-1,floor(dodge_elapsed/movement_config().dodge_duration*visual_frame_count));
+    } else if (player_authored_actor(visual_actor) && visual_action=="slide") {
+        visual_frame_index=min(visual_frame_count-1,floor(slide_timer/movement_config().slide_duration*visual_frame_count));
+    } else if (player_authored_actor(visual_actor) && (visual_action=="jump" || visual_action=="fall")) {
+        var jump_progress=jump_time/movement_config().jump_duration;
+        var phase_progress=visual_action=="jump" ? jump_progress*2 : (jump_progress-0.5)*2;
+        visual_frame_index=clamp(floor(phase_progress*visual_frame_count),0,visual_frame_count-1);
+    } else if (visual_action == "idle" || visual_action == "walk" || visual_action=="run") {
+        visual_frame_index = (visual_frame_index + visual_fps / max(1, room_speed)) mod visual_frame_count;
     } else {
-        switch (attack_stage) {
-            case 1: sprite_index = attack_sprite_1; break;
-            case 2: sprite_index = attack_sprite_2; break;
-            case 3: sprite_index = attack_sprite_3; break;
-        }
-        image_index  = 0;
-        image_speed  = 1;
-        state        = player_state.attacking;
-        attack_timer = attack_delay;
-    }
-}
-
-// --- 4) Angriffszustand überwachen + Bewegung während Angriff (halbe Speed)
-if (state == player_state.attacking) {
-    // Animation fertig?
-    if (image_index >= sprite_get_number(sprite_index) - 1) {
-        if (buffered_attack) {
-            attack_stage += 1;
-            if (attack_stage > 3) attack_stage = 1;
-            buffered_attack = false;
-
-            switch (attack_stage) {
-                case 1: sprite_index = attack_sprite_1; break;
-                case 2: sprite_index = attack_sprite_2; break;
-                case 3: sprite_index = attack_sprite_3; break;
-            }
-            image_index = 0;
-            image_speed = 1;
-        } else {
-            state = player_state.idle;
-            attack_stage = 1;
-        }
-    }
-
-    // Bewegung bei Angriff (WASD + Pfeile) – halbe Geschwindigkeit
-    var reducedSpeed = moveSpeed / 2;
-    if (left_down)  x -= reducedSpeed;
-    if (right_down) x += reducedSpeed;
-    if (up_down)    y -= reducedSpeed;
-    if (down_down)  y += reducedSpeed;
-}
-
-// --- 5) Bewegung wenn NICHT im Angriff
-if (state != player_state.attacking) {
-    var moving = false;
-
-    if (left_down)  { x -= moveSpeed; moving = true; }
-    if (right_down) { x += moveSpeed; moving = true; }
-    if (up_down)    { y -= moveSpeed; moving = true; }
-    if (down_down)  { y += moveSpeed; moving = true; }
-
-    state = moving ? player_state.running : player_state.idle;
-
-    // Raumgrenzen
-    if (x < 0) x = 0;
-    if (x > room_width  - sprite_width)  x = room_width  - sprite_width;
-    if (y < 0) y = 0;
-    if (y > room_height - sprite_height) y = room_height - sprite_height;
-}
-
-// --- 6) Angriffstimer
-if (attack_timer > 0) attack_timer -= 1;
-
-// --- 7) Animations-Zustände
-switch (state) {
-    case player_state.idle:
-        if (sprite_index != spr_adventurer_idle) sprite_index = spr_adventurer_idle;
-        break;
-    case player_state.running:
-        if (sprite_index != spr_adventurer_run) sprite_index = spr_adventurer_run;
-        break;
-    case player_state.attacking:
-        // Sprite wird im Angriffsblock gesetzt
-        break;
-}
-
-// --- 8) Kamera folgt Spieler
-var cam_x = x - 400; // halbe Kamerabreite
-var cam_y = y - 300; // halbe Kamerahöhe
-camera_set_view_pos(camera, cam_x, cam_y);
-
-// --- 9) Hitbox-Handling (immer in Aim-Richtung, nicht über image_xscale)
-// Sofort-Hitbox, wenn linker Mausklick und NICHT im Angriff
-if (mouse_check_button_pressed(mb_left) && state != player_state.attacking) {
-    var dist = 20;
-    var hx = x + lengthdir_x(dist, aim_angle);
-    var hy = y + lengthdir_y(dist, aim_angle);
-    var hitbox = instance_create_layer(hx, hy, "Instances", ObjectSwordHitbox);
-    hitbox.image_angle = aim_angle;
-    hitbox.lifetime = 10;
-}
-
-// Im Angriff: Hitbox erzeugen (falls noch nicht vorhanden)
-if (state == player_state.attacking) {
-    if (!instance_exists(ObjectSwordHitbox)) {
-        var distA = 20;
-        var hxA = x + lengthdir_x(distA, aim_angle);
-        var hyA = y + lengthdir_y(distA, aim_angle);
-        var hitboxA = instance_create_layer(hxA, hyA, "Instances", ObjectSwordHitbox);
-        hitboxA.image_angle = aim_angle;
+        visual_frame_index = min(visual_frame_count - 1, visual_frame_index + visual_fps / max(1, room_speed));
     }
 } else {
-    with (ObjectSwordHitbox) instance_destroy();
+    visual_animation_key = visual_key;
 }
 
-// --- 10) Pause
-if (global.game_paused) {
-    show_debug_message("Spiel pausiert in ObjectPlayer");
-    return;
-}
-// ===================================================================
-// OBJECT: Player  |  EVENT: Step
-// Steuerung, Angriff, Bewegung, Blickrichtung (Maus) – mit WASD + Pfeilen
-// Angriff/Hitbox via LINKER MAUSKLICK (mb_left)
-// ===================================================================
-
-// --- 1) Blickrichtung & Aim-Winkel (Sprite NICHT drehen, nur flippen)
-var mx = mouse_x;
-var my = mouse_y;
-aim_angle   = point_direction(x, y, mx, my); // Für Skills & Hitboxen
-image_angle = 0;                             // Sprite bleibt gerade
-image_xscale = (mx >= x) ? 1 : -1;           // nur L/R-Flip nach Mausseite
-
-// --- 2) Input sammeln (WASD + Pfeile)
-var left_down  = keyboard_check(vk_left)  || keyboard_check(ord("A"));
-var right_down = keyboard_check(vk_right) || keyboard_check(ord("D"));
-var up_down    = keyboard_check(vk_up)    || keyboard_check(ord("W"));
-var down_down  = keyboard_check(vk_down)  || keyboard_check(ord("S"));
-
-// --- 3) Angriff prüfen (LINKER MAUSKLICK)
-if (mouse_check_button_pressed(mb_left)) {
-    if (state == player_state.attacking) {
-        buffered_attack = true;
-    } else {
-        switch (attack_stage) {
-            case 1: sprite_index = attack_sprite_1; break;
-            case 2: sprite_index = attack_sprite_2; break;
-            case 3: sprite_index = attack_sprite_3; break;
-        }
-        image_index  = 0;
-        image_speed  = 1;
-        state        = player_state.attacking;
-        attack_timer = attack_delay;
-    }
-}
-
-// --- 4) Angriffszustand überwachen + Bewegung während Angriff (halbe Speed)
-if (state == player_state.attacking) {
-    // Animation fertig?
-    if (image_index >= sprite_get_number(sprite_index) - 1) {
-        if (buffered_attack) {
-            attack_stage += 1;
-            if (attack_stage > 3) attack_stage = 1;
-            buffered_attack = false;
-
-            switch (attack_stage) {
-                case 1: sprite_index = attack_sprite_1; break;
-                case 2: sprite_index = attack_sprite_2; break;
-                case 3: sprite_index = attack_sprite_3; break;
-            }
-            image_index = 0;
-            image_speed = 1;
-        } else {
-            state = player_state.idle;
-            attack_stage = 1;
-        }
-    }
-
-    // Bewegung bei Angriff (WASD + Pfeile) – halbe Geschwindigkeit
-    var reducedSpeed = moveSpeed / 2;
-    if (left_down)  x -= reducedSpeed;
-    if (right_down) x += reducedSpeed;
-    if (up_down)    y -= reducedSpeed;
-    if (down_down)  y += reducedSpeed;
-}
-
-// --- 5) Bewegung wenn NICHT im Angriff
-if (state != player_state.attacking) {
-    var moving = false;
-
-    if (left_down)  { x -= moveSpeed; moving = true; }
-    if (right_down) { x += moveSpeed; moving = true; }
-    if (up_down)    { y -= moveSpeed; moving = true; }
-    if (down_down)  { y += moveSpeed; moving = true; }
-
-    state = moving ? player_state.running : player_state.idle;
-
-    // Raumgrenzen
-    if (x < 0) x = 0;
-    if (x > room_width  - sprite_width)  x = room_width  - sprite_width;
-    if (y < 0) y = 0;
-    if (y > room_height - sprite_height) y = room_height - sprite_height;
-}
-
-// --- 6) Angriffstimer
-if (attack_timer > 0) attack_timer -= 1;
-
-// --- 7) Animations-Zustände
-switch (state) {
-    case player_state.idle:
-        if (sprite_index != spr_adventurer_idle) sprite_index = spr_adventurer_idle;
-        break;
-    case player_state.running:
-        if (sprite_index != spr_adventurer_run) sprite_index = spr_adventurer_run;
-        break;
-    case player_state.attacking:
-        // Sprite wird im Angriffsblock gesetzt
-        break;
-}
-
-// --- 8) Kamera folgt Spieler
-var cam_x = x - 400; // halbe Kamerabreite
-var cam_y = y - 300; // halbe Kamerahöhe
-camera_set_view_pos(camera, cam_x, cam_y);
-
-// --- 9) Hitbox-Handling (immer in Aim-Richtung, nicht über image_xscale)
-// Sofort-Hitbox, wenn linker Mausklick und NICHT im Angriff
-if (mouse_check_button_pressed(mb_left) && state != player_state.attacking) {
-    var dist = 20;
-    var hx = x + lengthdir_x(dist, aim_angle);
-    var hy = y + lengthdir_y(dist, aim_angle);
-    var hitbox = instance_create_layer(hx, hy, "Instances", ObjectSwordHitbox);
-    hitbox.image_angle = aim_angle;
-    hitbox.lifetime = 10;
-}
-
-// Im Angriff: Hitbox erzeugen (falls noch nicht vorhanden)
-if (state == player_state.attacking) {
-    if (!instance_exists(ObjectSwordHitbox)) {
-        var distA = 20;
-        var hxA = x + lengthdir_x(distA, aim_angle);
-        var hyA = y + lengthdir_y(distA, aim_angle);
-        var hitboxA = instance_create_layer(hxA, hyA, "Instances", ObjectSwordHitbox);
-        hitboxA.image_angle = aim_angle;
-    }
-} else {
-    with (ObjectSwordHitbox) instance_destroy();
-}
-
-// --- 10) Pause
-if (global.game_paused) {
-    show_debug_message("Spiel pausiert in ObjectPlayer");
-    return;
-}
+var camera_x = clamp(x - 400, 0, max(0, room_width - 800));
+var camera_y = clamp(y - 300, 0, max(0, room_height - 600));
+camera_set_view_pos(camera, camera_x, camera_y);

@@ -57,3 +57,32 @@ Temporary Items
 # GameMaker temporary files
 *.resource_order
 *.old
+.gms_mcp/
+output/art-build/
+output/player-smoke/
+output/art-migration-backup.zip
+
+output/spell-smoke/
+
+output/gameplay-smoke/
+output/production-build/
+output/survivor-smoke/
+
+output/atmosphere-smoke/
+
+output/dragon-smoke/
+
+output/combat-smoke/
+
+# Re-creatable native QA environments; retain source snapshots, data, logs and charts.
+QA/.venv/
+QA/.matplotlib/
+QA/tools/__pycache__/
+QA/logs/**/project/
+QA/logs/**/cache/
+QA/logs/**/temp/
+QA/logs/**/build/
+output/native-mc-*/
+
+# Testkopien, Builds und Backups (jederzeit neu erzeugbar)
+output/

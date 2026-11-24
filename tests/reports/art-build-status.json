@@ -1,0 +1,7 @@
+{
+  "igor_exit_code": 1,
+  "compile_success": false,
+  "launchable_fresh_build": false,
+  "package_success": false,
+  "log": "tests/reports/art-build.log"
+}

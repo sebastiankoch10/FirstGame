@@ -1,0 +1,9 @@
+{
+  "status": "VALID_NATIVE_CALIBRATION_POLICY_V1",
+  "distinct_grid_encounters": 180,
+  "pilot_replay_encounters": 15,
+  "physics_valid": true,
+  "balancing_primary_sample": false,
+  "policy_version": "visible-greedy-v1",
+  "reason": "V1 legalbots reacted toground/allheightwarningswithprematuremobilityandbinaryescapegradient. Replacedbypolicyv2beforebalancetuning. Fifteenpilotrowsarereplaysoffirst15gridconditions, notindependentseeds."
+}

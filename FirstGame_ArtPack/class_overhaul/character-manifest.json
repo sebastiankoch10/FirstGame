@@ -1,0 +1,3722 @@
+[
+  {
+    "name": "spr_fg_magev3_idle_right",
+    "actor": "magev3",
+    "action": "idle",
+    "direction": "right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_idle_up_right",
+    "actor": "magev3",
+    "action": "idle",
+    "direction": "up_right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_idle_up",
+    "actor": "magev3",
+    "action": "idle",
+    "direction": "up",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_idle_up_left",
+    "actor": "magev3",
+    "action": "idle",
+    "direction": "up_left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_idle_left",
+    "actor": "magev3",
+    "action": "idle",
+    "direction": "left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_idle_down_left",
+    "actor": "magev3",
+    "action": "idle",
+    "direction": "down_left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_idle_down",
+    "actor": "magev3",
+    "action": "idle",
+    "direction": "down",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_idle_down_right",
+    "actor": "magev3",
+    "action": "idle",
+    "direction": "down_right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_turn_right",
+    "actor": "magev3",
+    "action": "turn",
+    "direction": "right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_turn_up_right",
+    "actor": "magev3",
+    "action": "turn",
+    "direction": "up_right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_turn_up",
+    "actor": "magev3",
+    "action": "turn",
+    "direction": "up",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_turn_up_left",
+    "actor": "magev3",
+    "action": "turn",
+    "direction": "up_left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_turn_left",
+    "actor": "magev3",
+    "action": "turn",
+    "direction": "left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_turn_down_left",
+    "actor": "magev3",
+    "action": "turn",
+    "direction": "down_left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_turn_down",
+    "actor": "magev3",
+    "action": "turn",
+    "direction": "down",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_turn_down_right",
+    "actor": "magev3",
+    "action": "turn",
+    "direction": "down_right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_walk_right",
+    "actor": "magev3",
+    "action": "walk",
+    "direction": "right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_walk_up_right",
+    "actor": "magev3",
+    "action": "walk",
+    "direction": "up_right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_walk_up",
+    "actor": "magev3",
+    "action": "walk",
+    "direction": "up",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_walk_up_left",
+    "actor": "magev3",
+    "action": "walk",
+    "direction": "up_left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_walk_left",
+    "actor": "magev3",
+    "action": "walk",
+    "direction": "left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_walk_down_left",
+    "actor": "magev3",
+    "action": "walk",
+    "direction": "down_left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_walk_down",
+    "actor": "magev3",
+    "action": "walk",
+    "direction": "down",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_walk_down_right",
+    "actor": "magev3",
+    "action": "walk",
+    "direction": "down_right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_run_right",
+    "actor": "magev3",
+    "action": "run",
+    "direction": "right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_run_up_right",
+    "actor": "magev3",
+    "action": "run",
+    "direction": "up_right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_run_up",
+    "actor": "magev3",
+    "action": "run",
+    "direction": "up",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_run_up_left",
+    "actor": "magev3",
+    "action": "run",
+    "direction": "up_left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_run_left",
+    "actor": "magev3",
+    "action": "run",
+    "direction": "left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_run_down_left",
+    "actor": "magev3",
+    "action": "run",
+    "direction": "down_left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_run_down",
+    "actor": "magev3",
+    "action": "run",
+    "direction": "down",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_run_down_right",
+    "actor": "magev3",
+    "action": "run",
+    "direction": "down_right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack1_right",
+    "actor": "magev3",
+    "action": "attack1",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack1_up_right",
+    "actor": "magev3",
+    "action": "attack1",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack1_up",
+    "actor": "magev3",
+    "action": "attack1",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack1_up_left",
+    "actor": "magev3",
+    "action": "attack1",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack1_left",
+    "actor": "magev3",
+    "action": "attack1",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack1_down_left",
+    "actor": "magev3",
+    "action": "attack1",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack1_down",
+    "actor": "magev3",
+    "action": "attack1",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack1_down_right",
+    "actor": "magev3",
+    "action": "attack1",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack2_right",
+    "actor": "magev3",
+    "action": "attack2",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack2_up_right",
+    "actor": "magev3",
+    "action": "attack2",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack2_up",
+    "actor": "magev3",
+    "action": "attack2",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack2_up_left",
+    "actor": "magev3",
+    "action": "attack2",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack2_left",
+    "actor": "magev3",
+    "action": "attack2",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack2_down_left",
+    "actor": "magev3",
+    "action": "attack2",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack2_down",
+    "actor": "magev3",
+    "action": "attack2",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack2_down_right",
+    "actor": "magev3",
+    "action": "attack2",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack3_right",
+    "actor": "magev3",
+    "action": "attack3",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack3_up_right",
+    "actor": "magev3",
+    "action": "attack3",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack3_up",
+    "actor": "magev3",
+    "action": "attack3",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack3_up_left",
+    "actor": "magev3",
+    "action": "attack3",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack3_left",
+    "actor": "magev3",
+    "action": "attack3",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack3_down_left",
+    "actor": "magev3",
+    "action": "attack3",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack3_down",
+    "actor": "magev3",
+    "action": "attack3",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack3_down_right",
+    "actor": "magev3",
+    "action": "attack3",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_jump_right",
+    "actor": "magev3",
+    "action": "jump",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_jump_up_right",
+    "actor": "magev3",
+    "action": "jump",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_jump_up",
+    "actor": "magev3",
+    "action": "jump",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_jump_up_left",
+    "actor": "magev3",
+    "action": "jump",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_jump_left",
+    "actor": "magev3",
+    "action": "jump",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_jump_down_left",
+    "actor": "magev3",
+    "action": "jump",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_jump_down",
+    "actor": "magev3",
+    "action": "jump",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_jump_down_right",
+    "actor": "magev3",
+    "action": "jump",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_fall_right",
+    "actor": "magev3",
+    "action": "fall",
+    "direction": "right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_fall_up_right",
+    "actor": "magev3",
+    "action": "fall",
+    "direction": "up_right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_fall_up",
+    "actor": "magev3",
+    "action": "fall",
+    "direction": "up",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_fall_up_left",
+    "actor": "magev3",
+    "action": "fall",
+    "direction": "up_left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_fall_left",
+    "actor": "magev3",
+    "action": "fall",
+    "direction": "left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_fall_down_left",
+    "actor": "magev3",
+    "action": "fall",
+    "direction": "down_left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_fall_down",
+    "actor": "magev3",
+    "action": "fall",
+    "direction": "down",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_fall_down_right",
+    "actor": "magev3",
+    "action": "fall",
+    "direction": "down_right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dive_right",
+    "actor": "magev3",
+    "action": "dive",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dive_up_right",
+    "actor": "magev3",
+    "action": "dive",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dive_up",
+    "actor": "magev3",
+    "action": "dive",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dive_up_left",
+    "actor": "magev3",
+    "action": "dive",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dive_left",
+    "actor": "magev3",
+    "action": "dive",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dive_down_left",
+    "actor": "magev3",
+    "action": "dive",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dive_down",
+    "actor": "magev3",
+    "action": "dive",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dive_down_right",
+    "actor": "magev3",
+    "action": "dive",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_landing_right",
+    "actor": "magev3",
+    "action": "landing",
+    "direction": "right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_landing_up_right",
+    "actor": "magev3",
+    "action": "landing",
+    "direction": "up_right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_landing_up",
+    "actor": "magev3",
+    "action": "landing",
+    "direction": "up",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_landing_up_left",
+    "actor": "magev3",
+    "action": "landing",
+    "direction": "up_left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_landing_left",
+    "actor": "magev3",
+    "action": "landing",
+    "direction": "left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_landing_down_left",
+    "actor": "magev3",
+    "action": "landing",
+    "direction": "down_left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_landing_down",
+    "actor": "magev3",
+    "action": "landing",
+    "direction": "down",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_landing_down_right",
+    "actor": "magev3",
+    "action": "landing",
+    "direction": "down_right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_slide_right",
+    "actor": "magev3",
+    "action": "slide",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_slide_up_right",
+    "actor": "magev3",
+    "action": "slide",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_slide_up",
+    "actor": "magev3",
+    "action": "slide",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_slide_up_left",
+    "actor": "magev3",
+    "action": "slide",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_slide_left",
+    "actor": "magev3",
+    "action": "slide",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_slide_down_left",
+    "actor": "magev3",
+    "action": "slide",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_slide_down",
+    "actor": "magev3",
+    "action": "slide",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_slide_down_right",
+    "actor": "magev3",
+    "action": "slide",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dodge_right",
+    "actor": "magev3",
+    "action": "dodge",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dodge_up_right",
+    "actor": "magev3",
+    "action": "dodge",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dodge_up",
+    "actor": "magev3",
+    "action": "dodge",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dodge_up_left",
+    "actor": "magev3",
+    "action": "dodge",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dodge_left",
+    "actor": "magev3",
+    "action": "dodge",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dodge_down_left",
+    "actor": "magev3",
+    "action": "dodge",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dodge_down",
+    "actor": "magev3",
+    "action": "dodge",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_dodge_down_right",
+    "actor": "magev3",
+    "action": "dodge",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_hurt_right",
+    "actor": "magev3",
+    "action": "hurt",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_hurt_up_right",
+    "actor": "magev3",
+    "action": "hurt",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_hurt_up",
+    "actor": "magev3",
+    "action": "hurt",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_hurt_up_left",
+    "actor": "magev3",
+    "action": "hurt",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_hurt_left",
+    "actor": "magev3",
+    "action": "hurt",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_hurt_down_left",
+    "actor": "magev3",
+    "action": "hurt",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_hurt_down",
+    "actor": "magev3",
+    "action": "hurt",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_hurt_down_right",
+    "actor": "magev3",
+    "action": "hurt",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_death_right",
+    "actor": "magev3",
+    "action": "death",
+    "direction": "right",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_death_up_right",
+    "actor": "magev3",
+    "action": "death",
+    "direction": "up_right",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_death_up",
+    "actor": "magev3",
+    "action": "death",
+    "direction": "up",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_death_up_left",
+    "actor": "magev3",
+    "action": "death",
+    "direction": "up_left",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_death_left",
+    "actor": "magev3",
+    "action": "death",
+    "direction": "left",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_death_down_left",
+    "actor": "magev3",
+    "action": "death",
+    "direction": "down_left",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_death_down",
+    "actor": "magev3",
+    "action": "death",
+    "direction": "down",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_death_down_right",
+    "actor": "magev3",
+    "action": "death",
+    "direction": "down_right",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack4_right",
+    "actor": "magev3",
+    "action": "attack4",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack4_up_right",
+    "actor": "magev3",
+    "action": "attack4",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack4_up",
+    "actor": "magev3",
+    "action": "attack4",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack4_up_left",
+    "actor": "magev3",
+    "action": "attack4",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack4_left",
+    "actor": "magev3",
+    "action": "attack4",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack4_down_left",
+    "actor": "magev3",
+    "action": "attack4",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack4_down",
+    "actor": "magev3",
+    "action": "attack4",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_magev3_attack4_down_right",
+    "actor": "magev3",
+    "action": "attack4",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_idle_right",
+    "actor": "rangerv3",
+    "action": "idle",
+    "direction": "right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_idle_up_right",
+    "actor": "rangerv3",
+    "action": "idle",
+    "direction": "up_right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_idle_up",
+    "actor": "rangerv3",
+    "action": "idle",
+    "direction": "up",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_idle_up_left",
+    "actor": "rangerv3",
+    "action": "idle",
+    "direction": "up_left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_idle_left",
+    "actor": "rangerv3",
+    "action": "idle",
+    "direction": "left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_idle_down_left",
+    "actor": "rangerv3",
+    "action": "idle",
+    "direction": "down_left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_idle_down",
+    "actor": "rangerv3",
+    "action": "idle",
+    "direction": "down",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_idle_down_right",
+    "actor": "rangerv3",
+    "action": "idle",
+    "direction": "down_right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_turn_right",
+    "actor": "rangerv3",
+    "action": "turn",
+    "direction": "right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_turn_up_right",
+    "actor": "rangerv3",
+    "action": "turn",
+    "direction": "up_right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_turn_up",
+    "actor": "rangerv3",
+    "action": "turn",
+    "direction": "up",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_turn_up_left",
+    "actor": "rangerv3",
+    "action": "turn",
+    "direction": "up_left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_turn_left",
+    "actor": "rangerv3",
+    "action": "turn",
+    "direction": "left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_turn_down_left",
+    "actor": "rangerv3",
+    "action": "turn",
+    "direction": "down_left",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_turn_down",
+    "actor": "rangerv3",
+    "action": "turn",
+    "direction": "down",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_turn_down_right",
+    "actor": "rangerv3",
+    "action": "turn",
+    "direction": "down_right",
+    "frames": 1,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_walk_right",
+    "actor": "rangerv3",
+    "action": "walk",
+    "direction": "right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_walk_up_right",
+    "actor": "rangerv3",
+    "action": "walk",
+    "direction": "up_right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_walk_up",
+    "actor": "rangerv3",
+    "action": "walk",
+    "direction": "up",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_walk_up_left",
+    "actor": "rangerv3",
+    "action": "walk",
+    "direction": "up_left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_walk_left",
+    "actor": "rangerv3",
+    "action": "walk",
+    "direction": "left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_walk_down_left",
+    "actor": "rangerv3",
+    "action": "walk",
+    "direction": "down_left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_walk_down",
+    "actor": "rangerv3",
+    "action": "walk",
+    "direction": "down",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_walk_down_right",
+    "actor": "rangerv3",
+    "action": "walk",
+    "direction": "down_right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_run_right",
+    "actor": "rangerv3",
+    "action": "run",
+    "direction": "right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_run_up_right",
+    "actor": "rangerv3",
+    "action": "run",
+    "direction": "up_right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_run_up",
+    "actor": "rangerv3",
+    "action": "run",
+    "direction": "up",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_run_up_left",
+    "actor": "rangerv3",
+    "action": "run",
+    "direction": "up_left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_run_left",
+    "actor": "rangerv3",
+    "action": "run",
+    "direction": "left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_run_down_left",
+    "actor": "rangerv3",
+    "action": "run",
+    "direction": "down_left",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_run_down",
+    "actor": "rangerv3",
+    "action": "run",
+    "direction": "down",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_run_down_right",
+    "actor": "rangerv3",
+    "action": "run",
+    "direction": "down_right",
+    "frames": 8,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack1_right",
+    "actor": "rangerv3",
+    "action": "attack1",
+    "direction": "right",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack1_up_right",
+    "actor": "rangerv3",
+    "action": "attack1",
+    "direction": "up_right",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack1_up",
+    "actor": "rangerv3",
+    "action": "attack1",
+    "direction": "up",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack1_up_left",
+    "actor": "rangerv3",
+    "action": "attack1",
+    "direction": "up_left",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack1_left",
+    "actor": "rangerv3",
+    "action": "attack1",
+    "direction": "left",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack1_down_left",
+    "actor": "rangerv3",
+    "action": "attack1",
+    "direction": "down_left",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack1_down",
+    "actor": "rangerv3",
+    "action": "attack1",
+    "direction": "down",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack1_down_right",
+    "actor": "rangerv3",
+    "action": "attack1",
+    "direction": "down_right",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack2_right",
+    "actor": "rangerv3",
+    "action": "attack2",
+    "direction": "right",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack2_up_right",
+    "actor": "rangerv3",
+    "action": "attack2",
+    "direction": "up_right",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack2_up",
+    "actor": "rangerv3",
+    "action": "attack2",
+    "direction": "up",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack2_up_left",
+    "actor": "rangerv3",
+    "action": "attack2",
+    "direction": "up_left",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack2_left",
+    "actor": "rangerv3",
+    "action": "attack2",
+    "direction": "left",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack2_down_left",
+    "actor": "rangerv3",
+    "action": "attack2",
+    "direction": "down_left",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack2_down",
+    "actor": "rangerv3",
+    "action": "attack2",
+    "direction": "down",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack2_down_right",
+    "actor": "rangerv3",
+    "action": "attack2",
+    "direction": "down_right",
+    "frames": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack3_right",
+    "actor": "rangerv3",
+    "action": "attack3",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack3_up_right",
+    "actor": "rangerv3",
+    "action": "attack3",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack3_up",
+    "actor": "rangerv3",
+    "action": "attack3",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack3_up_left",
+    "actor": "rangerv3",
+    "action": "attack3",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack3_left",
+    "actor": "rangerv3",
+    "action": "attack3",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack3_down_left",
+    "actor": "rangerv3",
+    "action": "attack3",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack3_down",
+    "actor": "rangerv3",
+    "action": "attack3",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_attack3_down_right",
+    "actor": "rangerv3",
+    "action": "attack3",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_jump_right",
+    "actor": "rangerv3",
+    "action": "jump",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_jump_up_right",
+    "actor": "rangerv3",
+    "action": "jump",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_jump_up",
+    "actor": "rangerv3",
+    "action": "jump",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_jump_up_left",
+    "actor": "rangerv3",
+    "action": "jump",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_jump_left",
+    "actor": "rangerv3",
+    "action": "jump",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_jump_down_left",
+    "actor": "rangerv3",
+    "action": "jump",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_jump_down",
+    "actor": "rangerv3",
+    "action": "jump",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_jump_down_right",
+    "actor": "rangerv3",
+    "action": "jump",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_fall_right",
+    "actor": "rangerv3",
+    "action": "fall",
+    "direction": "right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_fall_up_right",
+    "actor": "rangerv3",
+    "action": "fall",
+    "direction": "up_right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_fall_up",
+    "actor": "rangerv3",
+    "action": "fall",
+    "direction": "up",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_fall_up_left",
+    "actor": "rangerv3",
+    "action": "fall",
+    "direction": "up_left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_fall_left",
+    "actor": "rangerv3",
+    "action": "fall",
+    "direction": "left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_fall_down_left",
+    "actor": "rangerv3",
+    "action": "fall",
+    "direction": "down_left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_fall_down",
+    "actor": "rangerv3",
+    "action": "fall",
+    "direction": "down",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_fall_down_right",
+    "actor": "rangerv3",
+    "action": "fall",
+    "direction": "down_right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dive_right",
+    "actor": "rangerv3",
+    "action": "dive",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dive_up_right",
+    "actor": "rangerv3",
+    "action": "dive",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dive_up",
+    "actor": "rangerv3",
+    "action": "dive",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dive_up_left",
+    "actor": "rangerv3",
+    "action": "dive",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dive_left",
+    "actor": "rangerv3",
+    "action": "dive",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dive_down_left",
+    "actor": "rangerv3",
+    "action": "dive",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dive_down",
+    "actor": "rangerv3",
+    "action": "dive",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dive_down_right",
+    "actor": "rangerv3",
+    "action": "dive",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_landing_right",
+    "actor": "rangerv3",
+    "action": "landing",
+    "direction": "right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_landing_up_right",
+    "actor": "rangerv3",
+    "action": "landing",
+    "direction": "up_right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_landing_up",
+    "actor": "rangerv3",
+    "action": "landing",
+    "direction": "up",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_landing_up_left",
+    "actor": "rangerv3",
+    "action": "landing",
+    "direction": "up_left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_landing_left",
+    "actor": "rangerv3",
+    "action": "landing",
+    "direction": "left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_landing_down_left",
+    "actor": "rangerv3",
+    "action": "landing",
+    "direction": "down_left",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_landing_down",
+    "actor": "rangerv3",
+    "action": "landing",
+    "direction": "down",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_landing_down_right",
+    "actor": "rangerv3",
+    "action": "landing",
+    "direction": "down_right",
+    "frames": 2,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_slide_right",
+    "actor": "rangerv3",
+    "action": "slide",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_slide_up_right",
+    "actor": "rangerv3",
+    "action": "slide",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_slide_up",
+    "actor": "rangerv3",
+    "action": "slide",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_slide_up_left",
+    "actor": "rangerv3",
+    "action": "slide",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_slide_left",
+    "actor": "rangerv3",
+    "action": "slide",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_slide_down_left",
+    "actor": "rangerv3",
+    "action": "slide",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_slide_down",
+    "actor": "rangerv3",
+    "action": "slide",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_slide_down_right",
+    "actor": "rangerv3",
+    "action": "slide",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dodge_right",
+    "actor": "rangerv3",
+    "action": "dodge",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dodge_up_right",
+    "actor": "rangerv3",
+    "action": "dodge",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dodge_up",
+    "actor": "rangerv3",
+    "action": "dodge",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dodge_up_left",
+    "actor": "rangerv3",
+    "action": "dodge",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dodge_left",
+    "actor": "rangerv3",
+    "action": "dodge",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dodge_down_left",
+    "actor": "rangerv3",
+    "action": "dodge",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dodge_down",
+    "actor": "rangerv3",
+    "action": "dodge",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_dodge_down_right",
+    "actor": "rangerv3",
+    "action": "dodge",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_hurt_right",
+    "actor": "rangerv3",
+    "action": "hurt",
+    "direction": "right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_hurt_up_right",
+    "actor": "rangerv3",
+    "action": "hurt",
+    "direction": "up_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_hurt_up",
+    "actor": "rangerv3",
+    "action": "hurt",
+    "direction": "up",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_hurt_up_left",
+    "actor": "rangerv3",
+    "action": "hurt",
+    "direction": "up_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_hurt_left",
+    "actor": "rangerv3",
+    "action": "hurt",
+    "direction": "left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_hurt_down_left",
+    "actor": "rangerv3",
+    "action": "hurt",
+    "direction": "down_left",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_hurt_down",
+    "actor": "rangerv3",
+    "action": "hurt",
+    "direction": "down",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_hurt_down_right",
+    "actor": "rangerv3",
+    "action": "hurt",
+    "direction": "down_right",
+    "frames": 3,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_death_right",
+    "actor": "rangerv3",
+    "action": "death",
+    "direction": "right",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_death_up_right",
+    "actor": "rangerv3",
+    "action": "death",
+    "direction": "up_right",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_death_up",
+    "actor": "rangerv3",
+    "action": "death",
+    "direction": "up",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_death_up_left",
+    "actor": "rangerv3",
+    "action": "death",
+    "direction": "up_left",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_death_left",
+    "actor": "rangerv3",
+    "action": "death",
+    "direction": "left",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_death_down_left",
+    "actor": "rangerv3",
+    "action": "death",
+    "direction": "down_left",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_death_down",
+    "actor": "rangerv3",
+    "action": "death",
+    "direction": "down",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_fg_rangerv3_death_down_right",
+    "actor": "rangerv3",
+    "action": "death",
+    "direction": "down_right",
+    "frames": 5,
+    "canvas": [
+      96,
+      96
+    ],
+    "origin": [
+      48,
+      88
+    ]
+  }
+]

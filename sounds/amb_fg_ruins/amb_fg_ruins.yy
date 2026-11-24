@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"amb_fg_ruins",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":24.0,
+  "exportDir":"",
+  "name":"amb_fg_ruins",
+  "parent":{
+    "name":"Audio",
+    "path":"folders/Audio.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":22050,
+  "soundFile":"amb_fg_ruins.wav",
+  "volume":1.0,
+}

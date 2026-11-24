@@ -1,0 +1,69 @@
+{
+  "passed": true,
+  "failure": "",
+  "classes": [
+    {
+      "character": "Sword",
+      "frames": 720.0,
+      "movement_distance": 2059.362548828125,
+      "attack_frames": 200.0,
+      "attack_effect": true,
+      "elapsed_ms": 12679.0,
+      "actions": {
+        "walk": true,
+        "attack": true,
+        "idle": true,
+        "jump": true,
+        "dive": true,
+        "slide": true,
+        "hurt": true,
+        "fall": true
+      },
+      "room": "Room1"
+    },
+    {
+      "character": "Mage",
+      "frames": 720.0,
+      "movement_distance": 1820.439697265625,
+      "attack_frames": 200.0,
+      "attack_effect": true,
+      "elapsed_ms": 11967.0,
+      "actions": {
+        "walk": true,
+        "attack": true,
+        "idle": true,
+        "jump": true,
+        "dive": true,
+        "slide": true,
+        "hurt": true,
+        "fall": true
+      },
+      "room": "Room1"
+    },
+    {
+      "character": "Ranger",
+      "frames": 720.0,
+      "movement_distance": 2656.653564453125,
+      "attack_frames": 200.0,
+      "attack_effect": true,
+      "elapsed_ms": 11967.0,
+      "actions": {
+        "walk": true,
+        "attack": true,
+        "idle": true,
+        "jump": true,
+        "dive": true,
+        "slide": true,
+        "hurt": true,
+        "fall": true
+      },
+      "room": "Room1"
+    }
+  ],
+  "elapsed_ms": 36767.0,
+  "assertions_passed": true,
+  "exit_code": 0,
+  "test_type": "technical runtime start; not menu E2E",
+  "artifact": "output\\player-smoke\\20261122-124938\\build\\FirstGamePlayerSmoke.exe",
+  "logs": "output\\player-smoke\\20261122-124938"
+}

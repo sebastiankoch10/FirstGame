@@ -1,0 +1,2 @@
+# Only needed for plots. Native runners and analysis without --charts use Python's standard library.
+matplotlib==3.10.9

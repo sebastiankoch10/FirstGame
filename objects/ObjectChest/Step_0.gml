@@ -1,3 +1,4 @@
+if(global.game_paused || !instance_exists(ObjectPlayer)) exit;
 // Prüfen, ob der Spieler die Truhe berührt
 if (place_meeting(x, y, ObjectPlayer)) {
     // Spiel pausieren

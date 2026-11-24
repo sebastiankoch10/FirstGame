@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "native_telemetry_checks": 10,
+  "controlled_rows": 654,
+  "counts": {
+    "active": 324,
+    "passive_ab": 324,
+    "base_weapon": 6
+  },
+  "errors": [],
+  "scope": "Data integrity only; controlled targets do not establish complete-run balance or human fairness."
+}

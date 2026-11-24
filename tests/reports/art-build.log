@@ -1,0 +1,74 @@
+Options: C:\ProgramData\GameMakerStudio2\Cache\runtimes\runtime-2024.14.4.268\bin\platform_setting_defaults.json
+Options: C:\Users\sebas\AppData\Roaming\GameMakerStudio2\sebastiank2892_5145957\local_settings.json
+Setting up the Asset compiler
+Found Project Format 2
++++ GMSC serialisation:  SUCCESSFUL LOAD AND LINK TIME: 550.3384ms
+Success
+finished adding assets from C:/Users/sebas/Dokumente/FirstGame/FirstGame.yyp.
+Release build
+Options: C:\Users\sebas\Dokumente\FirstGame\output\art-build\cache\ExtensionOptions.json
+OptionsIni
+Options: C:\Users\sebas\Dokumente\FirstGame\output\art-build\cache\PlatformOptions.json
+[Compile] Run asset compiler
+Looking for built-in fallback image in C:\ProgramData\GameMakerStudio2\Cache\runtimes\runtime-2024.14.4.268\bin\BuiltinImages
+Compile Constants...finished.
+Remove DnD...finished.
+Compile Scripts...
+Error : gml_GlobalScript_boss_combat(235) : cannot redeclare a builtin variable
+
+Error : gml_GlobalScript_hotbar_assign(86) : cannot redeclare a builtin variable
+finished.
+Compile Rooms...finished..... 0 CC empty
+finished..... 0 CC empty
+Compile Objects...finished.... 4 empty events
+Compile Timelines...finished.
+Compile Triggers...finished.
+Compile Extensions...Compile UI Layers...finished.
+Global scripts...finished.
+collapsing enums.
+Final Compile...Error : gml_GlobalScript_boss_combat(235) : malformed assignment statement
+Error : gml_GlobalScript_hotbar_assign(86) : malformed assignment statement
+Final Compile finished.
+Saving IFF file... C:\Users\sebas\Dokumente\FirstGame\output\art-build\FirstGame.win
+Writing Chunk... GEN8 size ... -0.00 MB
+option_game_speed=60
+Writing Chunk... OPTN size ... 0.00 MB
+Writing Chunk... LANG size ... 0.00 MB
+Writing Chunk... EXTN size ... 0.00 MB
+Writing Chunk... SOND size ... 0.00 MB
+Writing Chunk... AGRP size ... 0.00 MB
+Writing Chunk... SPRT size ... 0.00 MB
+Writing Chunk... BGND size ... 0.02 MB
+Writing Chunk... PATH size ... 0.00 MB
+Writing Chunk... SCPT size ... 0.00 MB
+Writing Chunk... GLOB size ... 0.00 MB
+Writing Chunk... SHDR size ... 0.00 MB
+Writing Chunk... FONT size ... 0.00 MB
+Writing Chunk... TMLN size ... 0.00 MB
+Writing Chunk... OBJT size ... 0.00 MB
+Writing Chunk... FEDS size ... 0.01 MB
+Writing Chunk... ACRV size ... 0.00 MB
+Writing Chunk... SEQN size ... 0.00 MB
+Writing Chunk... TAGS size ... 0.00 MB
+Writing Chunk... ROOM size ... 0.00 MB
+Writing Chunk... UILR size ... 0.30 MB
+Writing Chunk... DAFL size ... 0.00 MB
+Writing Chunk... EMBI size ... 0.00 MB
+Writing Chunk... PSEM size ... 0.00 MB
+Writing Chunk... PSYS size ... 0.00 MB
+Writing Chunk... TPAGE size ... 0.00 MB
+Texture Group - Default
+Texture Group - __YY__0fallbacktexture.png_YYG_AUTO_GEN_TEX_GROUP_NAME_
+Writing Chunk... TGIN size ... 0.02 MB
+Writing Chunk... CODE size ... 0.00 MB
+Writing Chunk... VARI size ... 0.10 MB
+Writing Chunk... FUNC size ... 0.02 MB
+Writing Chunk... FEAT size ... 0.00 MB
+Writing Chunk... STRG size ... 0.00 MB
+Writing Chunk... TXTR size ... 0.04 MB
+0 Compressing texture... writing texture __yy__0fallbacktexture.png_yyg_auto_gen_tex_group_name__0.yytex... 
+1 Compressing texture... writing texture default_0.yytex... 
+Writing Chunk... AUDO size ... 2.61 MB
+Stats : GMA : Elapsed=6906.6401
+Stats : GMA : sp=219,au=0,bk=1,pt=0,sc=137,sh=0,fo=0,tl=0,ob=15,ro=4,da=0,ex=0,ma=6,fm=0xB21C6FFC4220
+C:\ProgramData\GameMakerStudio2\Cache\runtimes\runtime-2024.14.4.268/bin/assetcompiler/windows/x64/GMAssetCompiler.dll exited with non-zero status (1)

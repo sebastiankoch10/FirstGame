@@ -1,0 +1,73 @@
+{
+  "levels": [
+    {
+      "room": "Room1",
+      "seed": 20261122,
+      "decorations": 722,
+      "tiles": 16384
+    },
+    {
+      "room": "RoomCrypt",
+      "seed": 20269041,
+      "decorations": 662,
+      "tiles": 16384
+    },
+    {
+      "room": "RoomRuins",
+      "seed": 20276960,
+      "decorations": 650,
+      "tiles": 16384
+    }
+  ],
+  "deleted_sprites": [
+    "Sprite15_1",
+    "Sprite15_2",
+    "spr_Bossblob_down",
+    "spr_Cast",
+    "spr_adventurer_attack1",
+    "spr_adventurer_attack2",
+    "spr_adventurer_attack3",
+    "spr_adventurer_idle",
+    "spr_adventurer_run",
+    "spr_blob_down",
+    "spr_chest",
+    "spr_coin",
+    "spr_fg_environment_decorations",
+    "spr_fg_environment_tiles",
+    "spr_fireball_1",
+    "spr_fireball_10",
+    "spr_fireball_11",
+    "spr_fireball_12",
+    "spr_fireball_13",
+    "spr_fireball_14",
+    "spr_fireball_15",
+    "spr_fireball_16",
+    "spr_fireball_17",
+    "spr_fireball_18",
+    "spr_fireball_19",
+    "spr_fireball_2",
+    "spr_fireball_20",
+    "spr_fireball_21",
+    "spr_fireball_22",
+    "spr_fireball_23",
+    "spr_fireball_24",
+    "spr_fireball_25",
+    "spr_fireball_26",
+    "spr_fireball_27",
+    "spr_fireball_28",
+    "spr_fireball_29",
+    "spr_fireball_3",
+    "spr_fireball_30",
+    "spr_fireball_31",
+    "spr_fireball_32",
+    "spr_fireball_33",
+    "spr_fireball_34",
+    "spr_fireball_4",
+    "spr_fireball_5",
+    "spr_fireball_6",
+    "spr_fireball_7",
+    "spr_fireball_8",
+    "spr_fireball_9",
+    "spr_sword_attack1"
+  ]
+}

@@ -1,0 +1,378 @@
+{
+  "passed": true,
+  "checks": 811.0,
+  "failures": [],
+  "metrics": {
+    "performance": {
+      "enemies": 150.0,
+      "frames": 60.0,
+      "mean_frame_ms": 16.6674,
+      "max_frame_ms": 16.991,
+      "measurement": "Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement."
+    },
+    "random_selection": [
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "behemoth",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "storm_warden",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "behemoth",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "behemoth"
+    ],
+    "sword_combo": [
+      11.0,
+      13.0,
+      19.0
+    ],
+    "dragon_abilities": [
+      {
+        "key": "beam",
+        "damage": 68.39999999999418,
+        "ability": 1.0,
+        "warning": 1.0526315789473684
+      },
+      {
+        "key": "arc",
+        "damage": 60.80000000000291,
+        "ability": 2.0,
+        "warning": 0.8771929824561403
+      },
+      {
+        "key": "stomp",
+        "damage": 121.60000000000582,
+        "ability": 3.0,
+        "warning": 0.9210526315789473
+      },
+      {
+        "key": "meteor",
+        "damage": 72.19999999999709,
+        "ability": 4.0,
+        "warning": 1.5789473684210524
+      },
+      {
+        "key": "slam",
+        "damage": 79.80000000000291,
+        "ability": 5.0,
+        "warning": 1.3157894736842104
+      },
+      {
+        "key": "wind",
+        "damage": 26.60000000000582,
+        "ability": 6.0,
+        "warning": 0.7894736842105262
+      },
+      {
+        "key": "void",
+        "damage": 182.40000000002328,
+        "ability": 7.0,
+        "warning": 0.7017543859649122
+      },
+      {
+        "key": "vortex",
+        "damage": 60.80000000000291,
+        "ability": 8.0,
+        "warning": 1.4912280701754383
+      },
+      {
+        "key": "volley",
+        "damage": 38.0,
+        "ability": 9.0,
+        "warning": 0.5701754385964912
+      }
+    ],
+    "countdown_fps": [
+      {
+        "hz": 30.0,
+        "first_hit": 1.3000000000000007,
+        "warning": 1.3
+      },
+      {
+        "hz": 60.0,
+        "first_hit": 1.3000000000000003,
+        "warning": 1.3
+      },
+      {
+        "hz": 144.0,
+        "first_hit": 1.305555555555552,
+        "warning": 1.3
+      }
+    ],
+    "snapshots": [
+      {
+        "scaling": {
+          "projectiles": 0.0,
+          "hp": 1.35,
+          "projectile_speed": 1.0,
+          "damage": 1.3,
+          "speed": 1.0,
+          "tier": 0.0,
+          "minute": 5.0
+        },
+        "hp": 12420.0,
+        "boss": "storm_warden",
+        "minute": 5.0,
+        "unlocked": 3.0
+      },
+      {
+        "scaling": {
+          "projectiles": 0.0,
+          "hp": 1.9,
+          "projectile_speed": 1.08,
+          "damage": 1.6,
+          "speed": 1.07,
+          "tier": 1.0,
+          "minute": 10.0
+        },
+        "hp": 17480.0,
+        "boss": "storm_warden",
+        "minute": 10.0,
+        "unlocked": 6.0
+      },
+      {
+        "scaling": {
+          "projectiles": 1.0,
+          "hp": 2.5,
+          "projectile_speed": 1.16,
+          "damage": 1.9,
+          "speed": 1.1400000000000001,
+          "tier": 2.0,
+          "minute": 15.0
+        },
+        "hp": 23000.0,
+        "boss": "storm_warden",
+        "minute": 15.0,
+        "unlocked": 9.0
+      },
+      {
+        "scaling": {
+          "projectiles": 0.0,
+          "hp": 1.35,
+          "projectile_speed": 1.0,
+          "damage": 1.3,
+          "speed": 1.0,
+          "tier": 0.0,
+          "minute": 5.0
+        },
+        "hp": 17550.0,
+        "boss": "twins",
+        "minute": 5.0,
+        "unlocked": 3.0
+      },
+      {
+        "scaling": {
+          "projectiles": 0.0,
+          "hp": 1.9,
+          "projectile_speed": 1.08,
+          "damage": 1.6,
+          "speed": 1.07,
+          "tier": 1.0,
+          "minute": 10.0
+        },
+        "hp": 24700.0,
+        "boss": "twins",
+        "minute": 10.0,
+        "unlocked": 6.0
+      },
+      {
+        "scaling": {
+          "projectiles": 1.0,
+          "hp": 2.5,
+          "projectile_speed": 1.16,
+          "damage": 1.9,
+          "speed": 1.1400000000000001,
+          "tier": 2.0,
+          "minute": 15.0
+        },
+        "hp": 32500.0,
+        "boss": "twins",
+        "minute": 15.0,
+        "unlocked": 9.0
+      },
+      {
+        "scaling": {
+          "projectiles": 0.0,
+          "hp": 1.35,
+          "projectile_speed": 1.0,
+          "damage": 1.3,
+          "speed": 1.0,
+          "tier": 0.0,
+          "minute": 5.0
+        },
+        "hp": 12420.0,
+        "boss": "behemoth",
+        "minute": 5.0,
+        "unlocked": 3.0
+      },
+      {
+        "scaling": {
+          "projectiles": 0.0,
+          "hp": 1.9,
+          "projectile_speed": 1.08,
+          "damage": 1.6,
+          "speed": 1.07,
+          "tier": 1.0,
+          "minute": 10.0
+        },
+        "hp": 17480.0,
+        "boss": "behemoth",
+        "minute": 10.0,
+        "unlocked": 6.0
+      },
+      {
+        "scaling": {
+          "projectiles": 1.0,
+          "hp": 2.5,
+          "projectile_speed": 1.16,
+          "damage": 1.9,
+          "speed": 1.1400000000000001,
+          "tier": 2.0,
+          "minute": 15.0
+        },
+        "hp": 23000.0,
+        "boss": "behemoth",
+        "minute": 15.0,
+        "unlocked": 9.0
+      }
+    ],
+    "formations": [
+      {
+        "formation": "eight",
+        "combined_distance": 757.7808609008789
+      },
+      {
+        "formation": "circle",
+        "combined_distance": 176.68341445922852
+      },
+      {
+        "formation": "cross",
+        "combined_distance": 239.20619201660156
+      },
+      {
+        "formation": "dive",
+        "combined_distance": 635.6473693847656
+      },
+      {
+        "formation": "split",
+        "combined_distance": 183.1438217163086
+      },
+      {
+        "formation": "follow",
+        "combined_distance": 187.37813568115234
+      }
+    ],
+    "twins_abilities": [
+      {
+        "damage": 26.60000000000582,
+        "ability": 1.0
+      },
+      {
+        "damage": 41.80000000000291,
+        "ability": 2.0
+      },
+      {
+        "damage": 47.5,
+        "ability": 3.0
+      },
+      {
+        "damage": 41.80000000000291,
+        "ability": 4.0
+      },
+      {
+        "damage": 91.20000000001164,
+        "ability": 5.0
+      },
+      {
+        "damage": 53.19999999999709,
+        "ability": 6.0
+      },
+      {
+        "damage": 68.39999999999418,
+        "ability": 7.0
+      },
+      {
+        "damage": 41.80000000000291,
+        "ability": 8.0
+      },
+      {
+        "damage": 76.0,
+        "ability": 9.0
+      }
+    ],
+    "behemoth_abilities": [
+      {
+        "damage": 34.19999999999709,
+        "ability": 1.0
+      },
+      {
+        "damage": 15.19999999999709,
+        "ability": 2.0
+      },
+      {
+        "damage": 32.30000000000291,
+        "ability": 3.0
+      },
+      {
+        "damage": 51.30000000000291,
+        "ability": 4.0
+      },
+      {
+        "damage": 64.60000000000582,
+        "ability": 5.0
+      },
+      {
+        "damage": 13.30000000000291,
+        "ability": 6.0
+      },
+      {
+        "damage": 34.19999999999709,
+        "ability": 7.0
+      },
+      {
+        "damage": 53.19999999999709,
+        "ability": 8.0
+      },
+      {
+        "damage": 57.0,
+        "ability": 9.0
+      }
+    ]
+  },
+  "scope": "Current production functions and input-injected actual Player/Controller Steps in isolated native runner. Targeted regressions and short rendered150-enemy stress fixture; not full runs or human playtests.",
+  "exit_code": 0,
+  "logs": "QA\\logs\\regression-20261124-005922",
+  "screenshots": [
+    "qacapture-crowd150-heavy-rain.png",
+    "qacapture-hud-full-build-1280.png",
+    "qacapture-hud-tooltip-1280.png",
+    "qacapture-hud-tooltip-800.png",
+    "qacapture-levelup-1280.png",
+    "qacapture-levelup-800.png",
+    "qacapture-mage-current-world.png",
+    "qacapture-ranger-current-world.png",
+    "qacapture-twins-hurt-timer2.png",
+    "qacapture-twins-hurt-timer4.png"
+  ]
+}

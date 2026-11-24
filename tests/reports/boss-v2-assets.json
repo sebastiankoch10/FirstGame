@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "status": "PASS",
+  "new_sprites": 54,
+  "new_native_frames": 204,
+  "new_cues": 18,
+  "preserved_hero_dragon_files": 2962,
+  "preservation_mismatches": [],
+  "errors": [],
+  "reference_sha256": {
+    "ChatGPT-Bild 22. Nov. 2026, 23_00_30.png": "fd9cfa742dc36b58c7354e0ab19f229c10d214a0ce5ee1b0513cc39db1c07d5c",
+    "ChatGPT-Bild 22. Nov. 2026, 23_00_42.png": "aa8e7b408b865c8601a5bafd674b35b975386cd69c1a3cc21812f925543ce8e7"
+  }
+}

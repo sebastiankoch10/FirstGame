@@ -1,0 +1,45 @@
+{
+  "status": "PASS_MECHANICAL_EXTRACTION_AND_VISUAL_PREVIEW",
+  "actors": {
+    "magev3": {
+      "frames": 432,
+      "unique_pngs": 256
+    },
+    "rangerv3": {
+      "frames": 424,
+      "unique_pngs": 256
+    }
+  },
+  "canvas": [
+    96,
+    96
+  ],
+  "origin": [
+    48,
+    88
+  ],
+  "directions": [
+    "right",
+    "up_right",
+    "up",
+    "up_left",
+    "left",
+    "down_left",
+    "down",
+    "down_right"
+  ],
+  "alpha_threshold": 180,
+  "source_atlases_preserved": true,
+  "shared_sequences": [
+    "run shares all eight authored walk poses, faster playback",
+    "turn shares directional idle pose; runtime turns through eight authored octants",
+    "slide/dodge share three mobility poses",
+    "idle uses one authored pose with a small procedural breathing transform"
+  ],
+  "notes": [
+    "ranger combat source contains nine rows; first eight directional rows selected with measured alpha/saturation gutter cuts",
+    "No synthetic interpolated frames were counted as authored frames",
+    "Per-source scale is uniform, reference standing/air pose median52px; full frames remain within96px canvas",
+    "Some generated reaction octants and cloth details still warrant human art review"
+  ]
+}

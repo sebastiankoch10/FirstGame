@@ -1,0 +1,97 @@
+Options: C:\ProgramData\GameMakerStudio2\Cache\runtimes\runtime-2024.14.4.268\bin\platform_setting_defaults.json
+Options: C:\Users\sebas\AppData\Roaming\GameMakerStudio2\sebastiank2892_5145957\local_settings.json
+Setting up the Asset compiler
+Found Project Format 2
++++ GMSC serialisation:  SUCCESSFUL LOAD AND LINK TIME: 2734.4278ms
+Success
+finished adding assets from C:/Users/sebas/Dokumente/FirstGame/QA/logs/regression-20261124-005922/project/FirstGameQARegression.yyp.
+Release build
+Options: C:\Users\sebas\Dokumente\FirstGame\QA\logs\regression-20261124-005922\cache\ExtensionOptions.json
+OptionsIni
+Options: C:\Users\sebas\Dokumente\FirstGame\QA\logs\regression-20261124-005922\cache\PlatformOptions.json
+[Compile] Run asset compiler
+Looking for built-in fallback image in C:\ProgramData\GameMakerStudio2\Cache\runtimes\runtime-2024.14.4.268\bin\BuiltinImages
+Compile Constants...finished.
+Remove DnD...finished.
+Compile Scripts...finished.
+Compile Rooms...finished..... 0 CC empty
+finished..... 0 CC empty
+Compile Objects...finished.... 4 empty events
+Compile Timelines...finished.
+Compile Triggers...finished.
+Compile Extensions...Compile UI Layers...finished.
+Global scripts...finished.
+collapsing enums.
+Final Compile...Final Compile finished.
+Saving IFF file... C:\Users\sebas\Dokumente\FirstGame\QA\logs\regression-20261124-005922\build\FirstGameQARegression.win
+Writing Chunk... GEN8 size ... -0.00 MB
+option_game_speed=60
+Writing Chunk... OPTN size ... 0.00 MB
+Writing Chunk... LANG size ... 0.00 MB
+Writing Chunk... EXTN size ... 0.00 MB
+Writing Chunk... SOND size ... 0.00 MB
+Writing Chunk... AGRP size ... 0.00 MB
+Writing Chunk... SPRT size ... 0.00 MB
+Writing Chunk... BGND size ... 0.13 MB
+Writing Chunk... PATH size ... 0.00 MB
+Writing Chunk... SCPT size ... 0.00 MB
+Writing Chunk... GLOB size ... 0.01 MB
+Writing Chunk... SHDR size ... 0.00 MB
+Writing Chunk... FONT size ... 0.00 MB
+Writing Chunk... TMLN size ... 0.00 MB
+Writing Chunk... OBJT size ... 0.00 MB
+Writing Chunk... FEDS size ... 0.01 MB
+Writing Chunk... ACRV size ... 0.00 MB
+Writing Chunk... SEQN size ... 0.00 MB
+Writing Chunk... TAGS size ... 0.00 MB
+Writing Chunk... ROOM size ... 0.00 MB
+Writing Chunk... UILR size ... 0.26 MB
+Writing Chunk... DAFL size ... 0.00 MB
+Writing Chunk... EMBI size ... 0.00 MB
+Writing Chunk... PSEM size ... 0.00 MB
+Writing Chunk... PSYS size ... 0.00 MB
+Writing Chunk... TPAGE size ... 0.00 MB
+Texture Group - Default
+Texture Group - Level_Swamp
+Texture Group - __YY__0fallbacktexture.png_YYG_AUTO_GEN_TEX_GROUP_NAME_
+Texture Group - Level_Ashfrost
+Writing Chunk... TGIN size ... 0.10 MB
+Writing Chunk... CODE size ... 0.00 MB
+Writing Chunk... VARI size ... 0.53 MB
+Writing Chunk... FUNC size ... 0.06 MB
+Writing Chunk... FEAT size ... 0.01 MB
+Writing Chunk... STRG size ... 0.00 MB
+Writing Chunk... TXTR size ... 0.15 MB
+0 Compressing texture... writing texture __yy__0fallbacktexture.png_yyg_auto_gen_tex_group_name__0.yytex... 
+1 Compressing texture... writing texture default_0.yytex... 
+2 Compressing texture... writing texture default_1.yytex... 
+3 Compressing texture... writing texture default_2.yytex... 
+4 Compressing texture... writing texture default_3.yytex... 
+5 Compressing texture... writing texture default_4.yytex... 
+6 Compressing texture... writing texture default_5.yytex... 
+7 Compressing texture... writing texture default_6.yytex... 
+8 Compressing texture... writing texture default_7.yytex... 
+9 Compressing texture... writing texture level_ashfrost_0.yytex... 
+10 Compressing texture... writing texture level_ashfrost_1.yytex... 
+11 Compressing texture... writing texture level_ashfrost_2.yytex... 
+12 Compressing texture... writing texture level_ashfrost_3.yytex... 
+13 Compressing texture... writing texture level_ashfrost_4.yytex... 
+14 Compressing texture... writing texture level_ashfrost_5.yytex... 
+15 Compressing texture... writing texture level_ashfrost_6.yytex... 
+16 Compressing texture... writing texture level_ashfrost_7.yytex... 
+17 Compressing texture... writing texture level_swamp_0.yytex... 
+18 Compressing texture... writing texture level_swamp_1.yytex... 
+19 Compressing texture... writing texture level_swamp_2.yytex... 
+20 Compressing texture... writing texture level_swamp_3.yytex... 
+21 Compressing texture... writing texture level_swamp_4.yytex... 
+22 Compressing texture... writing texture level_swamp_5.yytex... 
+23 Compressing texture... writing texture level_swamp_6.yytex... 
+24 Compressing texture... writing texture level_swamp_7.yytex... 
+Writing Chunk... AUDO size ... 39.46 MB
+Stats : GMA : Elapsed=19732.3427
+Stats : GMA : sp=1218,au=90,bk=1,pt=0,sc=687,sh=0,fo=0,tl=0,ob=21,ro=6,da=0,ex=0,ma=6,fm=0x4040B29D6FFE4FB0
+Igor complete.
+PlatformOptions
+DoVersion
+DoIcon
+Igor complete.

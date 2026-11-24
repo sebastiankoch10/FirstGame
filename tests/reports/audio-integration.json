@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "new_music": 3,
+  "new_effects": 27,
+  "source_manifest": "Audio/manifest.json",
+  "file_validation": "tests/reports/audio-files.json",
+  "runtime_report": "tests/reports/gameplay-smoke-result.json",
+  "runtime_checks": 3448,
+  "auditory_review": "NOT RUN; runtime output muted",
+  "music_quality": "original synthesized chiptune prototypes",
+  "normal_build": "output\\production-build\\20261122-151253\\game\\FirstGame.exe",
+  "archive": "output\\production-build\\20261122-151253\\FirstGame.zip",
+  "runtime_log": "output/gameplay-smoke/20261122-151029/runner.log"
+}

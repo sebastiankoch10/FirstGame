@@ -1,0 +1,194 @@
+{
+  "source": "built-in image_gen",
+  "quality": "new coherent art with short pose-based animations; see README",
+  "sprites": [
+    {
+      "name": "spr_fg_boss_dragon",
+      "resource": "sprites/spr_fg_boss_dragon/spr_fg_boss_dragon.yy"
+    },
+    {
+      "name": "spr_fg_boss_golem",
+      "resource": "sprites/spr_fg_boss_golem/spr_fg_boss_golem.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_attack_down",
+      "resource": "sprites/spr_fg_knightv2_attack_down/spr_fg_knightv2_attack_down.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_attack_left",
+      "resource": "sprites/spr_fg_knightv2_attack_left/spr_fg_knightv2_attack_left.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_attack_right",
+      "resource": "sprites/spr_fg_knightv2_attack_right/spr_fg_knightv2_attack_right.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_attack_up",
+      "resource": "sprites/spr_fg_knightv2_attack_up/spr_fg_knightv2_attack_up.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_death_down",
+      "resource": "sprites/spr_fg_knightv2_death_down/spr_fg_knightv2_death_down.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_death_left",
+      "resource": "sprites/spr_fg_knightv2_death_left/spr_fg_knightv2_death_left.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_death_right",
+      "resource": "sprites/spr_fg_knightv2_death_right/spr_fg_knightv2_death_right.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_death_up",
+      "resource": "sprites/spr_fg_knightv2_death_up/spr_fg_knightv2_death_up.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_dive_down",
+      "resource": "sprites/spr_fg_knightv2_dive_down/spr_fg_knightv2_dive_down.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_dive_left",
+      "resource": "sprites/spr_fg_knightv2_dive_left/spr_fg_knightv2_dive_left.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_dive_right",
+      "resource": "sprites/spr_fg_knightv2_dive_right/spr_fg_knightv2_dive_right.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_dive_up",
+      "resource": "sprites/spr_fg_knightv2_dive_up/spr_fg_knightv2_dive_up.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_dodge_down",
+      "resource": "sprites/spr_fg_knightv2_dodge_down/spr_fg_knightv2_dodge_down.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_dodge_left",
+      "resource": "sprites/spr_fg_knightv2_dodge_left/spr_fg_knightv2_dodge_left.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_dodge_right",
+      "resource": "sprites/spr_fg_knightv2_dodge_right/spr_fg_knightv2_dodge_right.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_dodge_up",
+      "resource": "sprites/spr_fg_knightv2_dodge_up/spr_fg_knightv2_dodge_up.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_fall_down",
+      "resource": "sprites/spr_fg_knightv2_fall_down/spr_fg_knightv2_fall_down.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_fall_left",
+      "resource": "sprites/spr_fg_knightv2_fall_left/spr_fg_knightv2_fall_left.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_fall_right",
+      "resource": "sprites/spr_fg_knightv2_fall_right/spr_fg_knightv2_fall_right.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_fall_up",
+      "resource": "sprites/spr_fg_knightv2_fall_up/spr_fg_knightv2_fall_up.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_hurt_down",
+      "resource": "sprites/spr_fg_knightv2_hurt_down/spr_fg_knightv2_hurt_down.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_hurt_left",
+      "resource": "sprites/spr_fg_knightv2_hurt_left/spr_fg_knightv2_hurt_left.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_hurt_right",
+      "resource": "sprites/spr_fg_knightv2_hurt_right/spr_fg_knightv2_hurt_right.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_hurt_up",
+      "resource": "sprites/spr_fg_knightv2_hurt_up/spr_fg_knightv2_hurt_up.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_idle_down",
+      "resource": "sprites/spr_fg_knightv2_idle_down/spr_fg_knightv2_idle_down.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_idle_left",
+      "resource": "sprites/spr_fg_knightv2_idle_left/spr_fg_knightv2_idle_left.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_idle_right",
+      "resource": "sprites/spr_fg_knightv2_idle_right/spr_fg_knightv2_idle_right.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_idle_up",
+      "resource": "sprites/spr_fg_knightv2_idle_up/spr_fg_knightv2_idle_up.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_jump_down",
+      "resource": "sprites/spr_fg_knightv2_jump_down/spr_fg_knightv2_jump_down.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_jump_left",
+      "resource": "sprites/spr_fg_knightv2_jump_left/spr_fg_knightv2_jump_left.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_jump_right",
+      "resource": "sprites/spr_fg_knightv2_jump_right/spr_fg_knightv2_jump_right.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_jump_up",
+      "resource": "sprites/spr_fg_knightv2_jump_up/spr_fg_knightv2_jump_up.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_run_down",
+      "resource": "sprites/spr_fg_knightv2_run_down/spr_fg_knightv2_run_down.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_run_left",
+      "resource": "sprites/spr_fg_knightv2_run_left/spr_fg_knightv2_run_left.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_run_right",
+      "resource": "sprites/spr_fg_knightv2_run_right/spr_fg_knightv2_run_right.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_run_up",
+      "resource": "sprites/spr_fg_knightv2_run_up/spr_fg_knightv2_run_up.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_slide_down",
+      "resource": "sprites/spr_fg_knightv2_slide_down/spr_fg_knightv2_slide_down.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_slide_left",
+      "resource": "sprites/spr_fg_knightv2_slide_left/spr_fg_knightv2_slide_left.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_slide_right",
+      "resource": "sprites/spr_fg_knightv2_slide_right/spr_fg_knightv2_slide_right.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_slide_up",
+      "resource": "sprites/spr_fg_knightv2_slide_up/spr_fg_knightv2_slide_up.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_walk_down",
+      "resource": "sprites/spr_fg_knightv2_walk_down/spr_fg_knightv2_walk_down.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_walk_left",
+      "resource": "sprites/spr_fg_knightv2_walk_left/spr_fg_knightv2_walk_left.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_walk_right",
+      "resource": "sprites/spr_fg_knightv2_walk_right/spr_fg_knightv2_walk_right.yy"
+    },
+    {
+      "name": "spr_fg_knightv2_walk_up",
+      "resource": "sprites/spr_fg_knightv2_walk_up/spr_fg_knightv2_walk_up.yy"
+    },
+    {
+      "name": "spr_fg_magnet_orb",
+      "resource": "sprites/spr_fg_magnet_orb/spr_fg_magnet_orb.yy"
+    }
+  ]
+}

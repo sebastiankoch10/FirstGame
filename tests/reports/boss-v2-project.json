@@ -1,0 +1,19 @@
+{
+  "success": false,
+  "errors": [
+    "objects/ObjectFireball/ObjectFireball.yy: orphaned event file: Collision_ObjectMonster.gml",
+    "objects/ObjectIceball/ObjectIceball.yy: orphaned event file: Collision_ObjectMonster.gml",
+    "objects/ObjectLightningball/ObjectLightningball.yy: orphaned event file: Collision_ObjectMonster.gml"
+  ],
+  "warnings": [],
+  "yyp": "FirstGame.yyp",
+  "resources": 973,
+  "preexisting_errors": [
+    "objects/ObjectFireball/ObjectFireball.yy: orphaned event file: Collision_ObjectMonster.gml",
+    "objects/ObjectIceball/ObjectIceball.yy: orphaned event file: Collision_ObjectMonster.gml",
+    "objects/ObjectLightningball/ObjectLightningball.yy: orphaned event file: Collision_ObjectMonster.gml"
+  ],
+  "new_errors": [],
+  "boss_v2_success": true,
+  "status": "PASS"
+}

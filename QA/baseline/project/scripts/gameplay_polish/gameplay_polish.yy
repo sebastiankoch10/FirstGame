@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"gameplay_polish",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"gameplay_polish",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

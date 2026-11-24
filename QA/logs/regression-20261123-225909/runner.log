@@ -1,0 +1,34 @@
+Reading File C:\Users\sebas\Dokumente\FirstGame\QA\logs\regression-20261123-225909\build\data.win took 22 ms
+Collision Event time(microsecs)=3
+Variable_Global_Init()
+PrepareGame()
+Audio_Init()
+Attempting to set gamepadcount to 12
+Game_Prepare()
+Script_Prepare() 
+TimeLine_Prepare() 
+Object_Prepare() 
+Room_Prepare() 
+Finished PrepareGame() 
+Run_Start
+Done g_EffectsManager.Init()
+Done RenderStateManager
+CreateColPairs took 0.000000s 2 usecs for 20 object types obj_col_numb=0 physobjcount=4 resizes 0 final size 6
+Done ObjectLists
+Done Extension_Initialize
+About to startroom
+Total memory used = 96403705 (0x05bf00f9) bytes 91.94MB
+Free memory = 5487576 (0x0053bbd8) bytes 5.23MB
+Peak memory used = 96403705 (0x05bf00f9) bytes 91.94MB
+**********************************.
+Entering main loop.
+**********************************.
+BOSS2 PASS Main menu exposes the actual Boss testen entry
+BOSS2 PASS Boss testen opens the production development menu
+ObjectController: Initialisierung abgeschlossen.
+RUNTIME room=Room1 player_instances=1 spawner_instances=1
+BOSS2 PASS Native performance sample covers60 actual frames with150 AI enemies and new boss hazards
+QA_REGRESSION_RESULT {"failures":[],"metrics":{"performance":{"frames":60.0,"enemies":150.0,"mean_frame_ms":16.667150000000003,"max_frame_ms":17.044,"measurement":"Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement."}},"scope":"Short native rendered150-enemy heavy-rain\/boss-hazard fixture. Elevated fixture HP; not a full run, sustained frame-rate guarantee or memory soak test.","passed":true,"checks":3.0}
+###game_end###0
+Attempting to set gamepadcount to 0
+Script_Free called with 610 and global 35

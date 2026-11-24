@@ -1,0 +1,251 @@
+﻿[
+    {
+        "median_reference_height":  128.5,
+        "source":  "walk",
+        "max_source_height":  144,
+        "actions":  {
+                        "run":  [
+                                    0,
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5,
+                                    6,
+                                    7
+                                ],
+                        "walk":  [
+                                     0,
+                                     1,
+                                     2,
+                                     3,
+                                     4,
+                                     5,
+                                     6,
+                                     7
+                                 ]
+                    },
+        "max_source_width":  124,
+        "actor":  "magev3",
+        "scale":  0.40466926070038911
+    },
+    {
+        "median_reference_height":  123.5,
+        "source":  "combat",
+        "max_source_height":  155,
+        "actions":  {
+                        "attack2":  [
+                                        3,
+                                        4,
+                                        5
+                                    ],
+                        "turn":  [
+                                     0
+                                 ],
+                        "idle":  [
+                                     0
+                                 ],
+                        "attack3":  [
+                                        0,
+                                        5,
+                                        7
+                                    ],
+                        "attack1":  [
+                                        0,
+                                        1,
+                                        2
+                                    ],
+                        "attack4":  [
+                                        0,
+                                        6,
+                                        7
+                                    ]
+                    },
+        "max_source_width":  130,
+        "actor":  "magev3",
+        "scale":  0.42105263157894735
+    },
+    {
+        "median_reference_height":  113.5,
+        "source":  "mobility",
+        "max_source_height":  141,
+        "actions":  {
+                        "dodge":  [
+                                      5,
+                                      6,
+                                      7
+                                  ],
+                        "jump":  [
+                                     0,
+                                     1,
+                                     2
+                                 ],
+                        "fall":  [
+                                     2,
+                                     3
+                                 ],
+                        "landing":  [
+                                        4,
+                                        0
+                                    ],
+                        "slide":  [
+                                      5,
+                                      6,
+                                      7
+                                  ],
+                        "dive":  [
+                                     3,
+                                     5,
+                                     6
+                                 ]
+                    },
+        "max_source_width":  134,
+        "actor":  "magev3",
+        "scale":  0.45814977973568283
+    },
+    {
+        "median_reference_height":  138.5,
+        "source":  "reaction",
+        "max_source_height":  148,
+        "actions":  {
+                        "death":  [
+                                      3,
+                                      4,
+                                      5,
+                                      6,
+                                      7
+                                  ],
+                        "hurt":  [
+                                     0,
+                                     1,
+                                     2
+                                 ]
+                    },
+        "max_source_width":  146,
+        "actor":  "magev3",
+        "scale":  0.37545126353790614
+    },
+    {
+        "median_reference_height":  129.5,
+        "source":  "walk",
+        "max_source_height":  136,
+        "actions":  {
+                        "run":  [
+                                    0,
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5,
+                                    6,
+                                    7
+                                ],
+                        "walk":  [
+                                     0,
+                                     1,
+                                     2,
+                                     3,
+                                     4,
+                                     5,
+                                     6,
+                                     7
+                                 ]
+                    },
+        "max_source_width":  113,
+        "actor":  "rangerv3",
+        "scale":  0.40154440154440152
+    },
+    {
+        "median_reference_height":  111.5,
+        "source":  "combat",
+        "max_source_height":  138,
+        "actions":  {
+                        "attack2":  [
+                                        2,
+                                        3,
+                                        4,
+                                        5
+                                    ],
+                        "turn":  [
+                                     0
+                                 ],
+                        "idle":  [
+                                     0
+                                 ],
+                        "attack3":  [
+                                        0,
+                                        6,
+                                        7
+                                    ],
+                        "attack1":  [
+                                        1,
+                                        2,
+                                        3,
+                                        4
+                                    ]
+                    },
+        "max_source_width":  115,
+        "actor":  "rangerv3",
+        "scale":  0.46636771300448432
+    },
+    {
+        "median_reference_height":  95.5,
+        "source":  "mobility",
+        "max_source_height":  148,
+        "actions":  {
+                        "dodge":  [
+                                      5,
+                                      6,
+                                      7
+                                  ],
+                        "jump":  [
+                                     0,
+                                     1,
+                                     2
+                                 ],
+                        "fall":  [
+                                     2,
+                                     3
+                                 ],
+                        "landing":  [
+                                        4,
+                                        0
+                                    ],
+                        "slide":  [
+                                      5,
+                                      6,
+                                      7
+                                  ],
+                        "dive":  [
+                                     3,
+                                     5,
+                                     6
+                                 ]
+                    },
+        "max_source_width":  152,
+        "actor":  "rangerv3",
+        "scale":  0.54450261780104714
+    },
+    {
+        "median_reference_height":  123,
+        "source":  "reaction",
+        "max_source_height":  140,
+        "actions":  {
+                        "death":  [
+                                      3,
+                                      4,
+                                      5,
+                                      6,
+                                      7
+                                  ],
+                        "hurt":  [
+                                     0,
+                                     1,
+                                     2
+                                 ]
+                    },
+        "max_source_width":  143,
+        "actor":  "rangerv3",
+        "scale":  0.42276422764227645
+    }
+]

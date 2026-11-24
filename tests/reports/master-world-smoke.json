@@ -1,0 +1,87 @@
+{
+  "passed": true,
+  "checks": 158.0,
+  "classes": [
+    "Sword",
+    "Mage",
+    "Ranger"
+  ],
+  "combinations": 9.0,
+  "metrics": {
+    "magnet30": {
+      "xp": 30.0,
+      "collected": 30.0,
+      "activations": 1.0,
+      "collision_activations": 1.0,
+      "swept_activations": 0.0,
+      "marked": 30.0
+    },
+    "master_world": {
+      "old_scenery": 0.0,
+      "combo_hp_loss": [
+        11.0,
+        13.0,
+        19.0
+      ],
+      "new_scenery": 1146.0,
+      "normal_spawn_samples": 36.0,
+      "skeleton_pool_only": true,
+      "types_instantiated": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "stationary_dragon_lethal": true,
+    "weather_crowd": {
+      "rain": 160.0,
+      "leaves": 24.0,
+      "enemies": 150.0,
+      "mean_frame_ms": 22.63695,
+      "max_frame_ms": 178.452,
+      "frames": 60.0
+    }
+  },
+  "native_modal_frames": 123.0,
+  "rendered": [
+    "aimedbeam-800.png",
+    "clearing-800.png",
+    "field-800.png",
+    "firearc-800.png",
+    "gust-800.png",
+    "inlinepause-800.png",
+    "loot-800.png",
+    "magma-800.png",
+    "magnetflight-800.png",
+    "master-combo-finisher-800.png",
+    "master-combo-first-800.png",
+    "master-combo-second-800.png",
+    "master-corpse-800.png",
+    "master-north-ruins-800.png",
+    "phase-800.png",
+    "rain-800.png",
+    "raincrowd-800.png",
+    "sweep-800.png",
+    "swordsman-gallery-800.png",
+    "verticalbeam-800.png",
+    "verticalwarning-800.png"
+  ],
+  "assertions_passed": true,
+  "exit_code": 0,
+  "test_type": "Native Windows VM: actual Room1 replacement and 16 scenery types, skeleton-only spawn samples, three independent sword contacts and rendered effects, nine class/room starts, statistics, aimed dragon, magnet collision and exact 30 XP, bounded weather. Scripted inputs/fixtures, not a manual playthrough.",
+  "artifact": "output\\combat-smoke\\20261122-203047\\build\\FirstGameCombatSmoke.exe",
+  "logs": "output\\combat-smoke\\20261122-203047"
+}

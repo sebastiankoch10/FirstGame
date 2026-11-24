@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "compile_success": true,
+  "package_success": true,
+  "igor_exit_code": 0,
+  "artifact": "output\\production-build\\20261122-203226\\game\\FirstGame.exe",
+  "archive": "output\\production-build\\20261122-203226\\FirstGame.zip",
+  "log": "output\\production-build\\20261122-203226\\build.log",
+  "test_hooks": false
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"master_skeleton",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"master_skeleton",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

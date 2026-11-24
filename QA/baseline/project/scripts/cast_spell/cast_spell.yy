@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"cast_spell",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"cast_spell",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

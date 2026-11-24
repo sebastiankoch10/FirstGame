@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"hotbar_assign",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"hotbar_assign",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

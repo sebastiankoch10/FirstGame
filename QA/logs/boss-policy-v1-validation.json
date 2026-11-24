@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "encounters": 180,
+  "completed": 180,
+  "censored": 0,
+  "classes": {
+    "Sword": 60,
+    "Mage": 60,
+    "Ranger": 60
+  },
+  "bosses": {
+    "storm_warden": 36,
+    "twins": 36,
+    "behemoth": 36,
+    "mini_sentinel": 36,
+    "mini_warden": 36
+  },
+  "policies": {
+    "average": 45,
+    "experienced": 45,
+    "no_response": 45,
+    "technical_greedy": 45
+  },
+  "minutes": {
+    "15.0": 60,
+    "5.0": 60,
+    "10.0": 60
+  },
+  "errors": [],
+  "scope": "Integrity checks on actual native encounters; no formal unavoidability proof or human playtest claim."
+}

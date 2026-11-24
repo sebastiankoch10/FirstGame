@@ -1,0 +1,150 @@
+﻿{
+    "frames_checked":  640,
+    "connected_silhouettes_eroded":  false,
+    "changed":  [
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_mage_dive_up/a228dd50-57ba-4edc-b7af-3e7a92976502.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_mage_slide_up/0a322982-e589-4072-b586-3372f4639f40.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_mage_slide_up/23f738cf-0289-4796-8376-a1128d2fb03c.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_mage_slide_up/4b5d4c64-8418-4a2d-91b4-8925b2085830.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_dive_left/8bb4c115-c44f-431f-a870-54cb2b529943.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_fall_right/7caed933-5936-473a-866d-098247750411.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_idle_right/63b73c73-f1dd-4b49-a930-d5d0bf177213.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_jump_right/6319af55-998f-45ef-82c2-195998f7e5a8.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  2,
+                        "path":  "sprites/spr_fg_ranger_run_right/fa4e37bc-9638-4b74-a887-83052409b752.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_run_right/675e95bf-4593-4927-ac35-4c9d01a4c2db.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  2,
+                        "path":  "sprites/spr_fg_ranger_run_right/4cfb9c77-4e75-41b8-b302-23d1fa898542.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_run_right/3b2b5763-de0d-44ec-aaf6-c0c8620762eb.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_slide_left/ebd77e0b-45ae-4fe4-9b08-7593d84f8822.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_slide_left/34aab114-207e-4482-ad4c-cab3f4bac003.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_slide_left/76be1d50-f92e-4633-b382-07263a61466a.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_slide_right/e8bffb43-4989-42d8-afd6-cb79a6f0393f.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  2,
+                        "path":  "sprites/spr_fg_ranger_walk_right/3baf23de-5baa-415d-b744-cb31862c7283.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_walk_right/8ae9e57e-631f-4b14-ba8d-ab78c0a49d5f.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  2,
+                        "path":  "sprites/spr_fg_ranger_walk_right/d5dad799-2490-4cc4-84f8-67d6c54fa2f1.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    },
+                    {
+                        "removed_disconnected_speck_pixels":  1,
+                        "path":  "sprites/spr_fg_ranger_walk_right/f6a08c96-ea92-4283-971b-055c63384f33.png",
+                        "cleared_invisible_rgb":  0,
+                        "quiet_pose":  true,
+                        "partial_alpha_preserved":  0
+                    }
+                ],
+    "visible_detached_specks_removed":  24,
+    "rule":  "Quiet movement poses: remove only detached components \u003c=3 pixels, never the connected figure. Attack poses: only distant gray specks; preserve colored effects.",
+    "invisible_rgb_cleared":  0,
+    "status":  "PASS_CONSERVATIVE_REPAIR"
+}

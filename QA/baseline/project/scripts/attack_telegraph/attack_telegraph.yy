@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"attack_telegraph",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"attack_telegraph",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

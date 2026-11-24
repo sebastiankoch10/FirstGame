@@ -1,0 +1,55 @@
+
+***************************************
+ *     GameMaker v2024.14.4.268    *
+***************************************
+Setting scheduler resolution to 1
+Attempting to use high process priority settings
+Set process priority to HIGH_PRIORITY_CLASS
+Set main thread priority to HIGHEST
+Registered with MMCSS 'Games' task
+Set MMCSS thread priority to CRITICAL
+Reading File C:\Users\sebas\Dokumente\FirstGame\QA\logs\regression-20261123-175820\build\data.win took 35 ms
+DirectX11: Using hardware device
+Collision Event time(microsecs)=11
+Variable_Global_Init()
+PrepareGame()
+Audio_Init()
+Audio group 0 -> Loaded
+Attempting to set gamepadcount to 12
+Game_Prepare()
+Script_Prepare() 
+TimeLine_Prepare() 
+Object_Prepare() 
+Room_Prepare() 
+Finished PrepareGame() 
+Run_Start
+Done g_EffectsManager.Init()
+Done RenderStateManager
+CreateColPairs took 0.000000s 2 usecs for 20 object types obj_col_numb=0 physobjcount=4 resizes 0 final size 6
+Done ObjectLists
+Done Extension_Initialize
+About to startroom
+Setting audio channel count to 24
+Total memory used = 96391600 (0x05bed1b0) bytes 91.93MB
+Free memory = 5489384 (0x0053c2e8) bytes 5.24MB
+Peak memory used = 96391600 (0x05bed1b0) bytes 91.93MB
+**********************************.
+Entering main loop.
+**********************************.
+BOSS2 PASS Main menu exposes the actual Boss testen entry
+BOSS2 PASS Boss testen opens the production development menu
+ObjectController: Initialisierung abgeschlossen.
+RUNTIME room=Room1 player_instances=1 spawner_instances=1
+BOSS2 PASS Sword moving-coin probe uses an unobstructed actual Player Step path 0
+BOSS2 PASS Sword ordinary nearby coin catches the moving player 0
+BOSS2 PASS Mage moving-coin probe uses an unobstructed actual Player Step path 1
+BOSS2 PASS Mage ordinary nearby coin catches the moving player 1
+BOSS2 PASS Ranger moving-coin probe uses an unobstructed actual Player Step path 2
+BOSS2 PASS Ranger ordinary nearby coin catches the moving player 2
+BOSS2 PASS Ranger moving-coin probe uses an unobstructed actual Player Step path 3
+BOSS2 PASS Ranger ordinary nearby coin catches the moving player 3
+QA_REGRESSION_RESULT {"failures":[],"metrics":{"moving_coin":[{"collected_at_tick":17.0,"remaining_distance":0.0,"collected":true,"class_name":"Sword","seconds":3.0,"fleet_footed_level":0.0,"player_speed_pixels_second":192.0,"coin_speed_pixels_second":420.0,"player_distance":575.99853515625},{"collected_at_tick":16.0,"remaining_distance":0.0,"collected":true,"class_name":"Mage","seconds":3.0,"fleet_footed_level":0.0,"player_speed_pixels_second":168.0,"coin_speed_pixels_second":420.0,"player_distance":504.0003662109375},{"collected_at_tick":23.0,"remaining_distance":0.0,"collected":true,"class_name":"Ranger","seconds":3.0,"fleet_footed_level":0.0,"player_speed_pixels_second":252.0,"coin_speed_pixels_second":420.0,"player_distance":755.996826171875},{"collected_at_tick":38.0,"remaining_distance":0.0,"collected":true,"class_name":"Ranger","seconds":3.0,"fleet_footed_level":9.0,"player_speed_pixels_second":316.80000000000001,"coin_speed_pixels_second":420.0,"player_distance":950.4052734375}]},"scope":"Controlled native three-second moving-coin fixture, actual Player and Coin Steps; no complete run.","passed":true,"checks":10.0}
+###game_end###0
+Attempting to set gamepadcount to 0
+Script_Free called with 608 and global 35
+Unsetting previous scheduler resolution of 1

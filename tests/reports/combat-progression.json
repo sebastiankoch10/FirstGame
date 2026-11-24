@@ -1,0 +1,271 @@
+{
+  "curve_unchanged": true,
+  "cost": {
+    "first": [
+      1,
+      2,
+      3
+    ],
+    "base": 4.0,
+    "slope": 1.45
+  },
+  "observed_anchor": {
+    "source": "user report; not a recovered runtime log",
+    "minute": 7,
+    "level": 52,
+    "minimum_spent_total_xp": 1856,
+    "possible_unspent_xp_max": 73,
+    "assumed_first_three_boss_xp": 50,
+    "implied_regular_collected_coins_per_minute": 258.0,
+    "ability_choices_with_three_chests": 54
+  },
+  "xp_for_level102": 7336,
+  "assumptions": [
+    "One coin per normal kill.",
+    "All scheduled bosses are defeated and each upgrade chest is collected.",
+    "Collected coin rates are models or observation-derived averages, not measured full-run kill rates.",
+    "No full thirty-minute runtime simulation was performed."
+  ],
+  "models": {
+    "prior_success_model": {
+      "full_build_minute": 28.833,
+      "milestones": {
+        "1": {
+          "level": 10,
+          "available_upgrade_choices": 10,
+          "collected_regular_coin_xp": 52
+        },
+        "3": {
+          "level": 18,
+          "available_upgrade_choices": 19,
+          "collected_regular_coin_xp": 198
+        },
+        "5": {
+          "level": 26,
+          "available_upgrade_choices": 28,
+          "collected_regular_coin_xp": 401
+        },
+        "7": {
+          "level": 32,
+          "available_upgrade_choices": 34,
+          "collected_regular_coin_xp": 659
+        },
+        "10": {
+          "level": 42,
+          "available_upgrade_choices": 45,
+          "collected_regular_coin_xp": 1151
+        },
+        "15": {
+          "level": 58,
+          "available_upgrade_choices": 62,
+          "collected_regular_coin_xp": 2252
+        },
+        "20": {
+          "level": 74,
+          "available_upgrade_choices": 79,
+          "collected_regular_coin_xp": 3702
+        },
+        "25": {
+          "level": 90,
+          "available_upgrade_choices": 96,
+          "collected_regular_coin_xp": 5503
+        },
+        "28": {
+          "level": 99,
+          "available_upgrade_choices": 105,
+          "collected_regular_coin_xp": 6751
+        },
+        "29": {
+          "level": 102,
+          "available_upgrade_choices": 108,
+          "collected_regular_coin_xp": 7195
+        },
+        "30": {
+          "level": 106,
+          "available_upgrade_choices": 108,
+          "collected_regular_coin_xp": 7654
+        }
+      }
+    },
+    "observed_constant": {
+      "full_build_minute": 27.583,
+      "milestones": {
+        "1": {
+          "level": 20,
+          "available_upgrade_choices": 20,
+          "collected_regular_coin_xp": 258
+        },
+        "3": {
+          "level": 34,
+          "available_upgrade_choices": 35,
+          "collected_regular_coin_xp": 774
+        },
+        "5": {
+          "level": 44,
+          "available_upgrade_choices": 46,
+          "collected_regular_coin_xp": 1290
+        },
+        "7": {
+          "level": 52,
+          "available_upgrade_choices": 54,
+          "collected_regular_coin_xp": 1806
+        },
+        "10": {
+          "level": 62,
+          "available_upgrade_choices": 65,
+          "collected_regular_coin_xp": 2580
+        },
+        "15": {
+          "level": 75,
+          "available_upgrade_choices": 79,
+          "collected_regular_coin_xp": 3870
+        },
+        "20": {
+          "level": 87,
+          "available_upgrade_choices": 92,
+          "collected_regular_coin_xp": 5160
+        },
+        "25": {
+          "level": 97,
+          "available_upgrade_choices": 103,
+          "collected_regular_coin_xp": 6450
+        },
+        "28": {
+          "level": 102,
+          "available_upgrade_choices": 108,
+          "collected_regular_coin_xp": 7224
+        },
+        "29": {
+          "level": 104,
+          "available_upgrade_choices": 108,
+          "collected_regular_coin_xp": 7482
+        },
+        "30": {
+          "level": 106,
+          "available_upgrade_choices": 108,
+          "collected_regular_coin_xp": 7740
+        }
+      }
+    },
+    "observed_then_faster": {
+      "full_build_minute": 20.917,
+      "milestones": {
+        "1": {
+          "level": 20,
+          "available_upgrade_choices": 20,
+          "collected_regular_coin_xp": 258
+        },
+        "3": {
+          "level": 34,
+          "available_upgrade_choices": 35,
+          "collected_regular_coin_xp": 774
+        },
+        "5": {
+          "level": 44,
+          "available_upgrade_choices": 46,
+          "collected_regular_coin_xp": 1290
+        },
+        "7": {
+          "level": 52,
+          "available_upgrade_choices": 54,
+          "collected_regular_coin_xp": 1806
+        },
+        "10": {
+          "level": 66,
+          "available_upgrade_choices": 69,
+          "collected_regular_coin_xp": 2994
+        },
+        "15": {
+          "level": 85,
+          "available_upgrade_choices": 89,
+          "collected_regular_coin_xp": 4974
+        },
+        "20": {
+          "level": 100,
+          "available_upgrade_choices": 105,
+          "collected_regular_coin_xp": 6954
+        },
+        "25": {
+          "level": 113,
+          "available_upgrade_choices": 108,
+          "collected_regular_coin_xp": 8934
+        },
+        "28": {
+          "level": 120,
+          "available_upgrade_choices": 108,
+          "collected_regular_coin_xp": 10122
+        },
+        "29": {
+          "level": 123,
+          "available_upgrade_choices": 108,
+          "collected_regular_coin_xp": 10518
+        },
+        "30": {
+          "level": 125,
+          "available_upgrade_choices": 108,
+          "collected_regular_coin_xp": 10914
+        }
+      }
+    },
+    "observed_then_slower": {
+      "full_build_minute": null,
+      "milestones": {
+        "1": {
+          "level": 20,
+          "available_upgrade_choices": 20,
+          "collected_regular_coin_xp": 258
+        },
+        "3": {
+          "level": 34,
+          "available_upgrade_choices": 35,
+          "collected_regular_coin_xp": 774
+        },
+        "5": {
+          "level": 44,
+          "available_upgrade_choices": 46,
+          "collected_regular_coin_xp": 1290
+        },
+        "7": {
+          "level": 52,
+          "available_upgrade_choices": 54,
+          "collected_regular_coin_xp": 1806
+        },
+        "10": {
+          "level": 59,
+          "available_upgrade_choices": 62,
+          "collected_regular_coin_xp": 2346
+        },
+        "15": {
+          "level": 69,
+          "available_upgrade_choices": 73,
+          "collected_regular_coin_xp": 3246
+        },
+        "20": {
+          "level": 78,
+          "available_upgrade_choices": 83,
+          "collected_regular_coin_xp": 4146
+        },
+        "25": {
+          "level": 86,
+          "available_upgrade_choices": 92,
+          "collected_regular_coin_xp": 5046
+        },
+        "28": {
+          "level": 90,
+          "available_upgrade_choices": 96,
+          "collected_regular_coin_xp": 5586
+        },
+        "29": {
+          "level": 92,
+          "available_upgrade_choices": 98,
+          "collected_regular_coin_xp": 5766
+        },
+        "30": {
+          "level": 94,
+          "available_upgrade_choices": 101,
+          "collected_regular_coin_xp": 5946
+        }
+      }
+    }
+  }
+}

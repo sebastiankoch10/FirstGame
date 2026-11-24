@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"class_weapons",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"class_weapons",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

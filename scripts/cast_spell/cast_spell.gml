@@ -1,86 +1,47 @@
-/// @func cast_spell(spell_struct)
-/// @desc Wirkt einen aktiven Zauber aus deinem Pool (struct mit .name etc.)
-function cast_spell(_spell_struct)
-{
-    if (!is_struct(_spell_struct)) return false;
-
-    var caster = (variable_global_exists("player")) ? global.player : noone;
-    if (!instance_exists(caster)) return false;
-    var ang = (variable_instance_exists(caster, "aim_angle")) ? caster.aim_angle : 0;
-
-    var spell_id = name_to_spell_id(_spell_struct.name);
-    if (is_undefined(spell_id)) return false;
-
-    var data = GetSpellData(spell_id);
-    if (!is_struct(data)) return false;
-    if (data.type != SPELL_TYPE.ACTIVE) return false;
-
-    // Mana / Cooldown
-    if (variable_instance_exists(caster, "mana")) {
-        if (caster.mana < data.mana_cost) return false;
+function cast_spell(_spell,_target=undefined) {
+    if(global.game_paused || global.game_over || !global.round_active) return false;
+    if(!is_struct(_spell)) return false;
+    if(variable_struct_exists(_spell,"cooldown_timer") && _spell.cooldown_timer>0) return false;
+    var sid=variable_struct_exists(_spell,"id") ? _spell.id : name_to_spell_id(_spell.name);
+    var d=GetSpellData(sid);
+    if(!is_struct(d) || d.type!=SPELL_TYPE.ACTIVE || !instance_exists(ObjectPlayer)) return false;
+    var pl=ObjectPlayer;
+    var v=spell_values(sid,_spell.level);
+    if(is_undefined(_target)) _target=auto_spell_target(sid,v,pl);
+    if(sid==SPELL.HEAL && pl.hp>=pl.max_hp) return false;
+    if(sid!=SPELL.HEAL && !instance_exists(_target)) return false;
+    if(sid>=107)return spell_v2_cast(_spell,_target,v);
+    if(sid==SPELL.HEAL) {
+        var before_heal=pl.hp;pl.hp=min(pl.max_hp,pl.hp+v.damage);
+        run_stats_heal(sid,pl.hp-before_heal);
+        effect_add(pl.x,pl.y-10,62,make_color_rgb(111,239,151),24);
+        spell_fx_burst(pl.x,pl.y-10,76,6);
+    } else if(sid==SPELL.LIGHTNING) {
+        cast_chain_lightning(_target,v.damage,v.chain_targets,v.chain_range,pl);
+    } else if(sid==SPELL.FROST_NOVA) {
+        combat_area_hit(pl.x,pl.y-10,v.radius,v.damage,pl,0,0,round(d.slow_time*pl.status_factor*spell_cold_duration_factor()),d.slow_factor,sid);
+        effect_add(pl.x,pl.y-10,v.radius,make_color_rgb(138,218,255),22);
+        spell_fx_burst(pl.x,pl.y-10,v.radius,2);
+    } else {
+        var aim=point_direction(pl.x,pl.y-10,_target.x,_target.y-10);
+        for(var i=0;i<v.count;i++) {
+            var dir=aim+(i-(v.count-1)*0.5)*9;
+            var obj=sid==SPELL.FIREBALL ? ObjectFireball : (sid==SPELL.ICEBALL ? ObjectIceball : ObjectLightningball);
+            var p=instance_create_layer(pl.x+lengthdir_x(18,dir),pl.y-10+lengthdir_y(18,dir),"Instances",obj);
+            p.owner=pl; p.direction=dir; p.image_angle=dir; p.damage=v.damage; p.spell_id=sid;
+            p.projectile_speed=d.projectile_speed*pl.projectile_factor; p.lifetime=ceil(v.range/p.projectile_speed);
+            p.explosion_radius=v.radius;
+            p.projectile_kind=sid==SPELL.ARC_BARRAGE ? "arcane" : "lightning";
+            if(sid==SPELL.FIREBALL) {p.burn_time=round(d.ignite_time*pl.status_factor); p.burn_dps=d.ignite_dps*(1+pl.fire_bonus);}
+            if(sid==SPELL.ICEBALL) {p.slow_on_hit=true; p.slow_factor=d.slow_factor; p.slow_time=round(d.slow_time*pl.status_factor*spell_cold_duration_factor());}
+        }
     }
-    if (is_undefined(caster.cooldown_map)) caster.cooldown_map = ds_map_create();
-    var key = string(spell_id);
-    if (ds_map_exists(caster.cooldown_map, key)) {
-        var cd = ds_map_find_value(caster.cooldown_map, key);
-        if (cd > 0) return false;
-    }
-
-    // Schaden
-    var base = data.base_damage;
-    var pow  = variable_instance_exists(caster, "power") ? caster.power : 0;
-    var lvl  = variable_instance_exists(caster, "level") ? caster.level : 1;
-
-    var pow_scale = (is_struct(data.scaling) && !is_undefined(data.scaling.power)) ? data.scaling.power : 0;
-    var lvl_scale = (is_struct(data.scaling) && !is_undefined(data.scaling.level)) ? data.scaling.level : 0;
-
-    var dmg = base + pow * pow_scale + (max(1, lvl) - 1) * lvl_scale;
-
-    // ----- Objekt-Ressource robust ermitteln -----
-    var proj_obj = noone;
-
-    if (!is_undefined(data.projectile_object) && data.projectile_object != noone) {
-        // falls du irgendwann doch eine direkte Objekt-Referenz einträgst
-        proj_obj = data.projectile_object;
-    } else if (!is_undefined(data.projectile_object_name)) {
-        var idx = asset_get_index(data.projectile_object_name);
-        if (idx != -1) proj_obj = idx; // erfolgreich aufgelöst
-    }
-
-    if (proj_obj == noone) {
-        show_debug_message("cast_spell: Projektil-Objekt nicht gefunden für " + string(_spell_struct.name));
-        return false;
-    }
-
-    // Spawn & Instanz
-    var dist = data.spawn_offset;
-    var sx = caster.x + lengthdir_x(dist, ang);
-    var sy = caster.y + lengthdir_y(dist, ang);
-
-    var proj = instance_create_layer(sx, sy, "Instances", proj_obj);
-    proj.direction   = ang;
-    proj.speed       = data.projectile_speed;
-    proj.image_angle = ang;
-    proj.lifetime    = data.projectile_lifetime;
-    proj.damage      = dmg;
-    proj.owner       = caster;
-
-    if (data.ignite) {
-        proj.ignite      = true;
-        proj.ignite_dps  = data.ignite_dps;
-        proj.ignite_time = data.ignite_time;
-    }
-    if (data.slow_on_hit) {
-        proj.slow_on_hit = true;
-        proj.slow_factor = data.slow_factor;
-        proj.slow_time   = data.slow_time;
-    }
-
-    // Kosten & Cooldown
-    if (variable_instance_exists(caster, "mana")) {
-        caster.mana = max(0, caster.mana - data.mana_cost);
-    }
-    ds_map_replace(caster.cooldown_map, key, data.cooldown);
-
+    var cue=sid==SPELL.HEAL ? "heal_cast" : (sid==SPELL.FROST_NOVA ? "nova_cast" : (sid==SPELL.LIGHTNING ? "lightning" : (sid==SPELL.FIREBALL ? "fireball" : (sid==SPELL.ICEBALL ? "ice" : "magic_projectile"))));
+    fg_sfx(d.cue);
+    run_stats_cast(sid);
+    var extra=max(0,v.count-(sid==SPELL.ARC_BARRAGE ? 3 : 1));
+    if(extra>0){run_stats_get(SPELL.MULTISHOT).extra_projectiles+=extra;run_stats_cast(SPELL.MULTISHOT);}
+    _spell.cooldown=v.cooldown;
+    _spell.cooldown_timer=v.cooldown;
     return true;
 }

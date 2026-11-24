@@ -1,0 +1,10 @@
+{
+  "$GMScript":"v1",
+  "%Name":"player_artpack",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"player_artpack",
+  "parent":{"name":"Skripte","path":"folders/Skripte.yy",},
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

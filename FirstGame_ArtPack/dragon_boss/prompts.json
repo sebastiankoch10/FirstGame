@@ -1,0 +1,20 @@
+{
+  "tool": "built-in image_gen",
+  "transparent_background": true,
+  "assets": [
+    {
+      "output": "sources/life.png",
+      "reference": "../atmosphere_v2/frames/boss-dragon-0.png",
+      "prompt": "Use case: identity-preserve. Asset type: production boss animation sprite sheet, original pixel-art fantasy RPG. Match EXACT midnight-blue storm dragon with turquoise wings, silver horns and armored face in reference, now orange fire glowing in throat. Create 12 full-body poses in strict 4 columns by 3 rows, equal square cells, transparent background. All face right three-quarter side, same feet baseline and camera, same body size, exact identity. Columns sequential within each row. Row1: four breathing idle poses, subtle chest inflate/deflate, tail curl and wing flex. Row2: four heavy walking poses, left leg advance, weight transfer, right leg advance, weight transfer. Row3: four distinct poses: turning head toward viewer, head tilted away, hurt recoiling with wings tense, phase-change roar standing tall. Entire dragon including wings/tail fully inside each cell with margins. Strong crisp pixel art, no scenery, no text, no grid. 2048x1536 canvas with 512px cells if possible. Directly sliceable game frames, never a concept poster. Keep dragon width/height consistent except intentional pose changes."
+    },
+    {
+      "output": "sources/attacks.png",
+      "reference": "../atmosphere_v2/frames/boss-dragon-0.png",
+      "prompt": "Use case: identity-preserve. Asset type: attack animation sprite sheet for original pixel-art fantasy RPG boss. EXACT same midnight-blue dragon, turquoise wing membranes, silver horns and armored face from reference. Orange fire throat. Strict 4 columns by 3 rows, equal 512px cells on 2048x1536 canvas if possible. Same scale, body location and feet baseline in every cell, all face RIGHT three-quarter side. Row1 sequential breath attack: 1 head rises mouth shut orange throat, 2 jaws open charging, 3 leans forward exhaling with tiny flame at mouth, 4 continuous exhale head lower slightly toward viewer. NO long fire beam outside mouth, beam rendered separately. Row2: 1 exhaling head angled upward, 2 exhaling head angled downward, 3 heavy stomp raises front foot and chest, 4 stomp lands foot with body compressed. Row3: 1 phase roar wings lifted, 2 wounded collapse on knees, 3 dying leaning down wings folding, 4 dead fully collapsed on ground. Full silhouette never cropped or touching neighboring cells. Genuine transparent RGBA background, no gradients, no floor shadows, no scene, no text, no grid lines. Consistent readable pixel art, not a painted illustration."
+    },
+    {
+      "output": "sources/vfx.png",
+      "prompt": "Use case: stylized-concept. Asset type: original dragon boss fire VFX sprite sheet for SNES-inspired pixel-art action RPG. Strict regular 4 columns by 2 rows, eight equal square cells, transparent RGBA background. Row1 columns1-4: four seamless-loop frames of a horizontal rightward FIRE BEAM SEGMENT, orange-red outer licking flames, yellow core, white-hot inner strip. Segment runs left edge to right edge inside its own cell, centerline halfway down; no dragon. Row2 col1 and2: two circular fiery dragon-mouth ignition bursts, circular sparks and hot flame core; col3 and4: two vertical MAGMA ERUPTIONS rising upward from small dark molten rock base at bottom, clear red-orange lava jets. Sharp readable pixel-art silhouettes, no painted haze, no text, no grid lines, no scenery. All effects isolated, high contrast; flames visible on dark forest ground. Designed to slice and animate/stretch in game. 2048x1024 canvas, 512px cells if possible."
+    }
+  ]
+}

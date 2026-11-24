@@ -1,0 +1,6 @@
+/// Editable mouth anchors from source pose annotations and import transform.
+function dragon_art_anchor(_action,_frame) {
+ static data={charge:[[160, -342.18], [170, -312.18]],breath_up:[[190, -362.18]],breath:[[200, -292.18], [225, -252.18]],breath_down:[[210, -230.8]]};
+ if(!variable_struct_exists(data,_action))return [150,-300];
+ var points=variable_struct_get(data,_action);return points[clamp(_frame,0,array_length(points)-1)];
+}

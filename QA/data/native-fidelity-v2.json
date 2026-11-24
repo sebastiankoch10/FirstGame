@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "artifact": "output/native-mc-baseline/20261123-174801",
+  "policy": "visible-countdown-v2",
+  "probe_ticks": 600,
+  "persona": "experienced",
+  "class_parity": {
+    "Sword": {
+      "batches": [
+        1.0,
+        600.0
+      ],
+      "hashes": [
+        "fc669a6c2e320324174bafe2a4698700",
+        "fc669a6c2e320324174bafe2a4698700"
+      ],
+      "equal": true,
+      "native_room_speed": [
+        60.0,
+        60.0
+      ],
+      "logical_hz": [
+        60.0,
+        60.0
+      ]
+    },
+    "Mage": {
+      "batches": [
+        1.0,
+        600.0
+      ],
+      "hashes": [
+        "fa2d8efa5f4322debebf1f516d356a72",
+        "fa2d8efa5f4322debebf1f516d356a72"
+      ],
+      "equal": true,
+      "native_room_speed": [
+        60.0,
+        60.0
+      ],
+      "logical_hz": [
+        60.0,
+        60.0
+      ]
+    },
+    "Ranger": {
+      "batches": [
+        1.0,
+        600.0
+      ],
+      "hashes": [
+        "556aadcd02965aea798bcc0d71ba663e",
+        "556aadcd02965aea798bcc0d71ba663e"
+      ],
+      "equal": true,
+      "native_room_speed": [
+        60.0,
+        60.0
+      ],
+      "logical_hz": [
+        60.0,
+        60.0
+      ]
+    }
+  },
+  "limits": [
+    "600tick parity probes, not a formal proof of all states.",
+    "Visible-only countdown and current geometry; no future boss rotations, hidden targets or unreleased projectiles.",
+    "Legal eight keyboard directions; local greedy route scorer, not a complete reachability solver.",
+    "Same seed is paired initial state; combat RNG diverges legitimately between classes."
+  ],
+  "clock_fixture_previous_same_60hz_core": "QA/data/native-fidelity.json"
+}

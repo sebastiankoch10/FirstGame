@@ -1,0 +1,15 @@
+Launching after-runs-Sword-cycle-b600-s750104-223044-6748 from C:\Users\sebas\Dokumente\FirstGame\output\native-mc-after\20261123-175857
+{
+  "work": "output\\native-mc-after\\20261123-175857",
+  "log": "output\\native-mc-after\\20261123-175857\\after-runs-Sword-cycle-b600-s750104-223044-6748.log",
+  "rows": 9,
+  "completed_runs": 9,
+  "elapsed_wall_seconds": 322.14923882484436,
+  "exit_code": 0,
+  "mode": "runs",
+  "phase": "after",
+  "source_phase": "after",
+  "captures": [],
+  "errors": [],
+  "parse_errors": []
+}

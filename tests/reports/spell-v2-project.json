@@ -1,0 +1,33 @@
+{
+  "ok": true,
+  "yyp": "FirstGame.yyp",
+  "problem_count": 0,
+  "warning_count": 0,
+  "problems": [],
+  "warnings": [],
+  "ordering": {
+    "resources": "name-lowercase",
+    "Folders": "ide-2026-path",
+    "IncludedFiles": "ide-2026-path"
+  },
+  "ordering_ambiguous": {
+    "resources": [
+      "name-lowercase",
+      "ide-2026-name"
+    ],
+    "Folders": [
+      "ide-2026-path",
+      "path-lowercase"
+    ],
+    "IncludedFiles": [
+      "ide-2026-path",
+      "path-lowercase"
+    ]
+  },
+  "native_layout": true,
+  "counts": {
+    "resources": 608,
+    "folders": 44,
+    "included_files": 0
+  }
+}

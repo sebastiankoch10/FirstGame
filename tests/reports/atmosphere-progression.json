@@ -1,0 +1,161 @@
+{
+  "cost": {
+    "first": [
+      1,
+      2,
+      3
+    ],
+    "base": 4.0,
+    "slope": 1.45
+  },
+  "assumptions": [
+    "One XP coin per regular kill.",
+    "Kill rate increases linearly; rates are design assumptions.",
+    "Scheduled bosses die immediately and reward XP plus one collected upgrade chest.",
+    "All offered choices are spent on eligible upgrades; no forced unlocks.",
+    "Time is active gameplay; choice pauses excluded."
+  ],
+  "scenarios": {
+    "struggling": {
+      "kill_rate_per_minute": "25+5*minute",
+      "coin_pickup_fraction": 0.75,
+      "full_build_minute": null,
+      "milestones": {
+        "5": {
+          "level": 17,
+          "available_upgrade_choices": 19,
+          "boss_chests_assumed_collected": 3
+        },
+        "10": {
+          "level": 26,
+          "available_upgrade_choices": 29,
+          "boss_chests_assumed_collected": 4
+        },
+        "15": {
+          "level": 35,
+          "available_upgrade_choices": 39,
+          "boss_chests_assumed_collected": 5
+        },
+        "20": {
+          "level": 43,
+          "available_upgrade_choices": 48,
+          "boss_chests_assumed_collected": 6
+        },
+        "25": {
+          "level": 52,
+          "available_upgrade_choices": 58,
+          "boss_chests_assumed_collected": 7
+        },
+        "28": {
+          "level": 56,
+          "available_upgrade_choices": 62,
+          "boss_chests_assumed_collected": 7
+        },
+        "29": {
+          "level": 58,
+          "available_upgrade_choices": 64,
+          "boss_chests_assumed_collected": 7
+        },
+        "30": {
+          "level": 60,
+          "available_upgrade_choices": 67,
+          "boss_chests_assumed_collected": 8
+        }
+      }
+    },
+    "steady": {
+      "kill_rate_per_minute": "35+9*minute",
+      "coin_pickup_fraction": 0.9,
+      "full_build_minute": null,
+      "milestones": {
+        "5": {
+          "level": 22,
+          "available_upgrade_choices": 24,
+          "boss_chests_assumed_collected": 3
+        },
+        "10": {
+          "level": 34,
+          "available_upgrade_choices": 37,
+          "boss_chests_assumed_collected": 4
+        },
+        "15": {
+          "level": 47,
+          "available_upgrade_choices": 51,
+          "boss_chests_assumed_collected": 5
+        },
+        "20": {
+          "level": 59,
+          "available_upgrade_choices": 64,
+          "boss_chests_assumed_collected": 6
+        },
+        "25": {
+          "level": 71,
+          "available_upgrade_choices": 77,
+          "boss_chests_assumed_collected": 7
+        },
+        "28": {
+          "level": 78,
+          "available_upgrade_choices": 84,
+          "boss_chests_assumed_collected": 7
+        },
+        "29": {
+          "level": 80,
+          "available_upgrade_choices": 86,
+          "boss_chests_assumed_collected": 7
+        },
+        "30": {
+          "level": 83,
+          "available_upgrade_choices": 90,
+          "boss_chests_assumed_collected": 8
+        }
+      }
+    },
+    "successful": {
+      "kill_rate_per_minute": "45+14*minute",
+      "coin_pickup_fraction": 1,
+      "full_build_minute": 28.83,
+      "milestones": {
+        "5": {
+          "level": 26,
+          "available_upgrade_choices": 28,
+          "boss_chests_assumed_collected": 3
+        },
+        "10": {
+          "level": 42,
+          "available_upgrade_choices": 45,
+          "boss_chests_assumed_collected": 4
+        },
+        "15": {
+          "level": 58,
+          "available_upgrade_choices": 62,
+          "boss_chests_assumed_collected": 5
+        },
+        "20": {
+          "level": 74,
+          "available_upgrade_choices": 79,
+          "boss_chests_assumed_collected": 6
+        },
+        "25": {
+          "level": 90,
+          "available_upgrade_choices": 96,
+          "boss_chests_assumed_collected": 7
+        },
+        "28": {
+          "level": 99,
+          "available_upgrade_choices": 105,
+          "boss_chests_assumed_collected": 7
+        },
+        "29": {
+          "level": 102,
+          "available_upgrade_choices": 108,
+          "boss_chests_assumed_collected": 7
+        },
+        "30": {
+          "level": 106,
+          "available_upgrade_choices": 108,
+          "boss_chests_assumed_collected": 8
+        }
+      }
+    }
+  }
+}

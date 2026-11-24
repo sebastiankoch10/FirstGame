@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "checks": 3448.0,
+  "classes": [
+    "Sword",
+    "Mage",
+    "Ranger"
+  ],
+  "combinations": 9.0,
+  "gameover_rendered": true,
+  "hud_rendered": true,
+  "boss_rendered": true,
+  "assertions_passed": true,
+  "exit_code": 0,
+  "test_type": "isolated Windows VM: nine actual room transitions via menu actions; injected input for movement and game-over buttons; not OS input E2E",
+  "artifact": "output\\gameplay-smoke\\20261122-151029\\build\\FirstGameGameplaySmoke.exe",
+  "logs": "output\\gameplay-smoke\\20261122-151029"
+}

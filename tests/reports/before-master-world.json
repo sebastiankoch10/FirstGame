@@ -1,0 +1,53 @@
+{
+  "checks": 142.0,
+  "classes": [
+    "Sword",
+    "Mage",
+    "Ranger"
+  ],
+  "combinations": 9.0,
+  "metrics": {
+    "weather_crowd": {
+      "mean_frame_ms": 18.235583333333327,
+      "enemies": 150.0,
+      "max_frame_ms": 117.77,
+      "frames": 60.0,
+      "rain": 160.0,
+      "leaves": 24.0
+    },
+    "magnet30": {
+      "collected": 30.0,
+      "activations": 1.0,
+      "collision_activations": 1.0,
+      "swept_activations": 0.0,
+      "xp": 30.0,
+      "marked": 30.0
+    },
+    "stationary_dragon_lethal": true
+  },
+  "native_modal_frames": 121.0,
+  "passed": true,
+  "rendered": [
+    "aimedbeam-800.png",
+    "clearing-800.png",
+    "field-800.png",
+    "firearc-800.png",
+    "gust-800.png",
+    "inlinepause-800.png",
+    "loot-800.png",
+    "magma-800.png",
+    "magnetflight-800.png",
+    "phase-800.png",
+    "rain-800.png",
+    "raincrowd-800.png",
+    "sweep-800.png",
+    "swordsman-gallery-800.png",
+    "verticalbeam-800.png",
+    "verticalwarning-800.png"
+  ],
+  "assertions_passed": true,
+  "exit_code": 0,
+  "test_type": "native Windows VM: nine class/room starts; authored swordsman octants and resources; actual orb collision and exact 30 coin XP; mouse choices; weapons/statistics; aimed dragon; bounded weather. Injected input, not manual gameplay E2E.",
+  "artifact": "output\\combat-smoke\\20261122-191612\\build\\FirstGameCombatSmoke.exe",
+  "logs": "output\\combat-smoke\\20261122-191612"
+}

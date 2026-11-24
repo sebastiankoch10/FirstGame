@@ -1,0 +1,17 @@
+{
+  "removed": {
+    "layers": 8,
+    "legacy_scenery": 722,
+    "tilesets": [
+      "Grass"
+    ]
+  },
+  "new_scenery": 1087,
+  "room_layers": [
+    "Instances",
+    "MasterScenery"
+  ],
+  "resources": 60,
+  "frames": 157,
+  "seed": 712403
+}

@@ -1,0 +1,488 @@
+[
+  {
+    "name": "spr_bv2_fire_idle",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_fire_fly",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_fire_fast",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_fire_turn",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_fire_charge",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_fire_cast",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_fire_joint",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_fire_hurt",
+    "frames": 2,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_fire_phase",
+    "frames": 2,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_fire_death",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_ice_idle",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_ice_fly",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_ice_fast",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_ice_turn",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_ice_charge",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_ice_cast",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_ice_joint",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_ice_hurt",
+    "frames": 2,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_ice_phase",
+    "frames": 2,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_ice_death",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      116
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_idle",
+    "frames": 4,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_walk",
+    "frames": 4,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_turn",
+    "frames": 4,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_death",
+    "frames": 4,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_roots",
+    "frames": 4,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_spit",
+    "frames": 4,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_stomp",
+    "frames": 4,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_summon",
+    "frames": 4,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_breath",
+    "frames": 4,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_wave",
+    "frames": 4,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_bloom",
+    "frames": 4,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_hurt",
+    "frames": 2,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_behemoth_phase",
+    "frames": 2,
+    "canvas": 512,
+    "origin": [
+      256,
+      480
+    ]
+  },
+  {
+    "name": "spr_bv2_twins_fx_0",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_twins_fx_1",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_twins_fx_2",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_twins_fx_3",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_twins_fx_4",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_twins_fx_5",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_twins_fx_6",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_twins_fx_7",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_twins_fx_8",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_swamp_fx_0",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_swamp_fx_1",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_swamp_fx_2",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_swamp_fx_3",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_swamp_fx_4",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_swamp_fx_5",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_swamp_fx_6",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_swamp_fx_7",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_swamp_fx_8",
+    "frames": 4,
+    "canvas": 256,
+    "origin": [
+      128,
+      128
+    ]
+  },
+  {
+    "name": "spr_bv2_brood",
+    "frames": 4,
+    "canvas": 96,
+    "origin": [
+      48,
+      88
+    ]
+  },
+  {
+    "name": "spr_bv2_fire_projectile",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      64
+    ]
+  },
+  {
+    "name": "spr_bv2_ice_projectile",
+    "frames": 4,
+    "canvas": 128,
+    "origin": [
+      64,
+      64
+    ]
+  }
+]

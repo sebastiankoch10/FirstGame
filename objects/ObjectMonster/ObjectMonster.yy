@@ -31,10 +31,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_blob_down",
-    "path":"sprites/spr_blob_down/spr_blob_down.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

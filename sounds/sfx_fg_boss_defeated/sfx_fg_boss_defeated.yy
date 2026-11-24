@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfx_fg_boss_defeated",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.2,
+  "exportDir":"",
+  "name":"sfx_fg_boss_defeated",
+  "parent":{
+    "name":"Bosses",
+    "path":"folders/Audio/Bosses.yy",
+  },
+  "preload":true,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":32000,
+  "soundFile":"sfx_fg_boss_defeated.wav",
+  "volume":1.0,
+}

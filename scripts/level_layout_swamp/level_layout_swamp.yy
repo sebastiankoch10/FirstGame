@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"level_layout_swamp",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"level_layout_swamp",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

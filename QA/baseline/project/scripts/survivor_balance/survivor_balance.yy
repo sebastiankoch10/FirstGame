@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"survivor_balance",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"survivor_balance",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

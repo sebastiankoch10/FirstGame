@@ -1,0 +1,63 @@
+{
+  "failures": [
+    "Sword moving-coin probe uses an unobstructed actual Player Step path 0",
+    "Ranger moving-coin probe uses an unobstructed actual Player Step path 2",
+    "Ranger ordinary nearby coin catches the moving player 2",
+    "Ranger moving-coin probe uses an unobstructed actual Player Step path 3",
+    "Ranger ordinary nearby coin catches the moving player 3"
+  ],
+  "metrics": {
+    "moving_coin": [
+      {
+        "collected_at_tick": 64.0,
+        "remaining_distance": 0.0,
+        "collected": true,
+        "class_name": "Sword",
+        "seconds": 3.0,
+        "fleet_footed_level": 0.0,
+        "player_speed_pixels_second": 192.0,
+        "coin_speed_pixels_second": 252.0,
+        "player_distance": 575.99853515625
+      },
+      {
+        "collected_at_tick": 46.0,
+        "remaining_distance": 0.0,
+        "collected": true,
+        "class_name": "Mage",
+        "seconds": 3.0,
+        "fleet_footed_level": 0.0,
+        "player_speed_pixels_second": 168.0,
+        "coin_speed_pixels_second": 252.0,
+        "player_distance": 504.0003662109375
+      },
+      {
+        "collected_at_tick": -1.0,
+        "remaining_distance": 79.9989013671875,
+        "collected": false,
+        "class_name": "Ranger",
+        "seconds": 3.0,
+        "fleet_footed_level": 0.0,
+        "player_speed_pixels_second": 252.0,
+        "coin_speed_pixels_second": 252.0,
+        "player_distance": 755.996826171875
+      },
+      {
+        "collected_at_tick": -1.0,
+        "remaining_distance": 988.4051513671875,
+        "collected": false,
+        "class_name": "Ranger",
+        "seconds": 3.0,
+        "fleet_footed_level": 9.0,
+        "player_speed_pixels_second": 316.8,
+        "coin_speed_pixels_second": 252.0,
+        "player_distance": 950.4052734375
+      }
+    ]
+  },
+  "scope": "Controlled native three-second moving-coin fixture, actual Player and Coin Steps; no complete run.",
+  "passed": false,
+  "checks": 10.0,
+  "exit_code": 0,
+  "logs": "QA\\logs\\regression-20261123-175216",
+  "screenshots": []
+}

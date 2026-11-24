@@ -1,0 +1,524 @@
+{
+  "passed": true,
+  "checks": 322.0,
+  "classes": [
+    "Sword",
+    "Mage",
+    "Ranger"
+  ],
+  "combinations": 9.0,
+  "metrics": {
+    "stationary_dragon_lethal": true,
+    "master_world": {
+      "old_scenery": 0.0,
+      "combo_hp_loss": [
+        11.0,
+        13.0,
+        19.0
+      ],
+      "new_scenery": 1087.0,
+      "normal_spawn_samples": 36.0,
+      "skeleton_pool_only": true,
+      "types_instantiated": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "weather_crowd": {
+      "rain": 160.0,
+      "leaves": 24.0,
+      "mean_frame_ms": 16.66613333333333,
+      "enemies": 150.0,
+      "max_frame_ms": 16.86,
+      "frames": 60.0
+    },
+    "spell_v2": {
+      "native_budget_replays": [
+        {
+          "base": 45.0,
+          "slope": 18.0,
+          "samples": [
+            {
+              "minute": 1.0,
+              "level": 4.0,
+              "decisions": 4.0
+            },
+            {
+              "minute": 3.0,
+              "level": 7.0,
+              "decisions": 8.0
+            },
+            {
+              "minute": 5.0,
+              "level": 10.0,
+              "decisions": 12.0
+            },
+            {
+              "minute": 10.0,
+              "level": 17.0,
+              "decisions": 20.0
+            },
+            {
+              "minute": 15.0,
+              "level": 25.0,
+              "decisions": 29.0
+            },
+            {
+              "minute": 20.0,
+              "level": 35.0,
+              "decisions": 40.0
+            },
+            {
+              "minute": 25.0,
+              "level": 46.0,
+              "decisions": 52.0
+            },
+            {
+              "minute": 29.0,
+              "level": 55.0,
+              "decisions": 61.0
+            }
+          ],
+          "full_build_minute": -1.0
+        },
+        {
+          "base": 80.0,
+          "slope": 30.0,
+          "samples": [
+            {
+              "minute": 1.0,
+              "level": 5.0,
+              "decisions": 5.0
+            },
+            {
+              "minute": 3.0,
+              "level": 9.0,
+              "decisions": 10.0
+            },
+            {
+              "minute": 5.0,
+              "level": 13.0,
+              "decisions": 15.0
+            },
+            {
+              "minute": 10.0,
+              "level": 23.0,
+              "decisions": 26.0
+            },
+            {
+              "minute": 15.0,
+              "level": 36.0,
+              "decisions": 40.0
+            },
+            {
+              "minute": 20.0,
+              "level": 49.0,
+              "decisions": 54.0
+            },
+            {
+              "minute": 25.0,
+              "level": 64.0,
+              "decisions": 70.0
+            },
+            {
+              "minute": 29.0,
+              "level": 75.0,
+              "decisions": 81.0
+            }
+          ],
+          "full_build_minute": -1.0
+        },
+        {
+          "base": 70.0,
+          "slope": 55.0,
+          "samples": [
+            {
+              "minute": 1.0,
+              "level": 5.0,
+              "decisions": 5.0
+            },
+            {
+              "minute": 3.0,
+              "level": 10.0,
+              "decisions": 11.0
+            },
+            {
+              "minute": 5.0,
+              "level": 15.0,
+              "decisions": 17.0
+            },
+            {
+              "minute": 10.0,
+              "level": 30.0,
+              "decisions": 33.0
+            },
+            {
+              "minute": 15.0,
+              "level": 48.0,
+              "decisions": 52.0
+            },
+            {
+              "minute": 20.0,
+              "level": 67.0,
+              "decisions": 72.0
+            },
+            {
+              "minute": 25.0,
+              "level": 87.0,
+              "decisions": 93.0
+            },
+            {
+              "minute": 29.0,
+              "level": 102.0,
+              "decisions": 108.0
+            }
+          ],
+          "full_build_minute": 28.833333333333332
+        }
+      ],
+      "combat_benchmarks": [
+        {
+          "stationary_invulnerable_fixture": true,
+          "kills": 26.0,
+          "phase": "start_weapon_only",
+          "sample_seconds": 10.0,
+          "warmup_seconds": 4.0,
+          "kills_per_minute": 156.0,
+          "seed": 20260222.0,
+          "fixed_hz": 60.0
+        },
+        {
+          "stationary_invulnerable_fixture": true,
+          "kills": 281.0,
+          "phase": "six_plus_six_level9_at_minute25",
+          "sample_seconds": 10.0,
+          "warmup_seconds": 4.0,
+          "kills_per_minute": 1686.0,
+          "seed": 20260222.0,
+          "fixed_hz": 60.0
+        }
+      ],
+      "active_outcomes": [
+        {
+          "id": 101.0,
+          "healing": 0.0,
+          "damage": 20.0,
+          "level": 1.0,
+          "hits": 1.0
+        },
+        {
+          "id": 101.0,
+          "healing": 0.0,
+          "damage": 88.0,
+          "level": 9.0,
+          "hits": 2.0
+        },
+        {
+          "id": 102.0,
+          "healing": 0.0,
+          "damage": 17.0,
+          "level": 1.0,
+          "hits": 1.0
+        },
+        {
+          "id": 102.0,
+          "healing": 0.0,
+          "damage": 36.0,
+          "level": 9.0,
+          "hits": 1.0
+        },
+        {
+          "id": 103.0,
+          "healing": 0.0,
+          "damage": 120.0,
+          "level": 1.0,
+          "hits": 6.0
+        },
+        {
+          "id": 103.0,
+          "healing": 0.0,
+          "damage": 258.0,
+          "level": 9.0,
+          "hits": 6.0
+        },
+        {
+          "id": 104.0,
+          "healing": 0.0,
+          "damage": 52.0,
+          "level": 1.0,
+          "hits": 4.0
+        },
+        {
+          "id": 104.0,
+          "healing": 0.0,
+          "damage": 112.0,
+          "level": 9.0,
+          "hits": 4.0
+        },
+        {
+          "id": 105.0,
+          "healing": 0.0,
+          "damage": 36.0,
+          "level": 1.0,
+          "hits": 3.0
+        },
+        {
+          "id": 105.0,
+          "healing": 0.0,
+          "damage": 125.0,
+          "level": 9.0,
+          "hits": 5.0
+        },
+        {
+          "id": 106.0,
+          "healing": 38.0,
+          "damage": 0.0,
+          "level": 1.0,
+          "hits": 0.0
+        },
+        {
+          "id": 106.0,
+          "healing": 84.0,
+          "damage": 0.0,
+          "level": 9.0,
+          "hits": 0.0
+        },
+        {
+          "id": 107.0,
+          "healing": 0.0,
+          "damage": 120.0,
+          "level": 1.0,
+          "hits": 12.0
+        },
+        {
+          "id": 107.0,
+          "healing": 0.0,
+          "damage": 480.0,
+          "level": 9.0,
+          "hits": 24.0
+        },
+        {
+          "id": 108.0,
+          "healing": 0.0,
+          "damage": 162.0,
+          "level": 1.0,
+          "hits": 6.0
+        },
+        {
+          "id": 108.0,
+          "healing": 0.0,
+          "damage": 354.0,
+          "level": 9.0,
+          "hits": 6.0
+        },
+        {
+          "id": 109.0,
+          "healing": 0.0,
+          "damage": 24.0,
+          "level": 1.0,
+          "hits": 2.0
+        },
+        {
+          "id": 109.0,
+          "healing": 0.0,
+          "damage": 75.0,
+          "level": 9.0,
+          "hits": 3.0
+        },
+        {
+          "id": 110.0,
+          "healing": 0.0,
+          "damage": 120.0,
+          "level": 1.0,
+          "hits": 5.0
+        },
+        {
+          "id": 110.0,
+          "healing": 0.0,
+          "damage": 416.0,
+          "level": 9.0,
+          "hits": 8.0
+        },
+        {
+          "id": 111.0,
+          "healing": 0.0,
+          "damage": 98.0,
+          "level": 1.0,
+          "hits": 7.0
+        },
+        {
+          "id": 111.0,
+          "healing": 0.0,
+          "damage": 290.0,
+          "level": 9.0,
+          "hits": 10.0
+        },
+        {
+          "id": 112.0,
+          "healing": 0.0,
+          "damage": 100.0,
+          "level": 1.0,
+          "hits": 2.0
+        },
+        {
+          "id": 112.0,
+          "healing": 0.0,
+          "damage": 333.0,
+          "level": 9.0,
+          "hits": 3.0
+        },
+        {
+          "id": 113.0,
+          "healing": 0.0,
+          "damage": 136.0,
+          "level": 1.0,
+          "hits": 4.0
+        },
+        {
+          "id": 113.0,
+          "healing": 0.0,
+          "damage": 675.0,
+          "level": 9.0,
+          "hits": 9.0
+        },
+        {
+          "id": 114.0,
+          "healing": 0.0,
+          "damage": 147.0,
+          "level": 1.0,
+          "hits": 21.0
+        },
+        {
+          "id": 114.0,
+          "healing": 0.0,
+          "damage": 351.0,
+          "level": 9.0,
+          "hits": 27.0
+        },
+        {
+          "id": 115.0,
+          "healing": 0.0,
+          "damage": 216.0,
+          "level": 1.0,
+          "hits": 12.0
+        },
+        {
+          "id": 115.0,
+          "healing": 0.0,
+          "damage": 684.0,
+          "level": 9.0,
+          "hits": 18.0
+        },
+        {
+          "id": 116.0,
+          "healing": 0.0,
+          "damage": 88.0,
+          "level": 1.0,
+          "hits": 4.0
+        },
+        {
+          "id": 116.0,
+          "healing": 0.0,
+          "damage": 240.0,
+          "level": 9.0,
+          "hits": 5.0
+        },
+        {
+          "id": 117.0,
+          "healing": 0.0,
+          "damage": 79.0,
+          "level": 1.0,
+          "hits": 5.0
+        },
+        {
+          "id": 117.0,
+          "healing": 0.0,
+          "damage": 213.0,
+          "level": 9.0,
+          "hits": 6.0
+        },
+        {
+          "id": 118.0,
+          "healing": 0.0,
+          "damage": 258.0,
+          "level": 1.0,
+          "hits": 3.0
+        },
+        {
+          "id": 118.0,
+          "healing": 0.0,
+          "damage": 582.0,
+          "level": 9.0,
+          "hits": 3.0
+        }
+      ]
+    },
+    "magnet30": {
+      "collision_activations": 1.0,
+      "swept_activations": 0.0,
+      "marked": 30.0,
+      "collected": 30.0,
+      "xp": 30.0,
+      "activations": 1.0
+    }
+  },
+  "native_modal_frames": 133.0,
+  "rendered": [
+    "aimedbeam-800.png",
+    "clearing-800.png",
+    "field-800.png",
+    "firearc-800.png",
+    "gust-800.png",
+    "inlinepause-800.png",
+    "loot-800.png",
+    "magma-800.png",
+    "magnetflight-800.png",
+    "master-combo-finisher-800.png",
+    "master-combo-first-800.png",
+    "master-combo-second-800.png",
+    "master-corpse-800.png",
+    "master-north-ruins-800.png",
+    "phase-800.png",
+    "rain-800.png",
+    "raincrowd-800.png",
+    "sweep-800.png",
+    "swordsman-gallery-800.png",
+    "v2-barrage-800.png",
+    "v2-chain-800.png",
+    "v2-fields-800.png",
+    "v2-fire-flight-800.png",
+    "v2-fire-impact-800.png",
+    "v2-hidden-coin-800.png",
+    "v2-jump-800.png",
+    "v2-magma-impact-800.png",
+    "v2-magma-warning-800.png",
+    "v2-miniboss-arrow-800.png",
+    "v2-offers-800.png",
+    "v2-orbits-summon-800.png",
+    "v2-pause-details-800.png",
+    "v2-screen-beam-800.png",
+    "v2-verdict-800.png",
+    "v2-warning-800.png",
+    "verticalbeam-800.png",
+    "verticalwarning-800.png"
+  ],
+  "assertions_passed": true,
+  "exit_code": 0,
+  "test_type": "Native Windows VM: 36 abilities, real HP/healing at active levels 1/9, all passives and intermediate values, bounded effects/audio voices, weighted choices, three injected XP budget replays, short fixed-step combat benchmarks, nine class/room starts, dragon/jump/scenery/coin checks. Not human gameplay E2E.",
+  "artifact": "output\\combat-smoke\\20261122-215455\\build\\FirstGameCombatSmoke.exe",
+  "logs": "output\\combat-smoke\\20261122-215455"
+}

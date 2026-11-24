@@ -1,0 +1,34 @@
+{
+  "mcpServers": {
+    "gms": {
+      "type": "stdio",
+      "command": "C:\\Users\\sebas\\.local\\bin\\gms-mcp.exe",
+      "args": [],
+      "env": {
+        "GM_PROJECT_ROOT": "C:\\Users\\sebas\\Dokumente\\FirstGame",
+        "GMS_MCP_ENABLE_DIRECT": "0",
+        "GMS_MCP_READ_ONLY": "0",
+        "GMS_MCP_REQUIRE_DRY_RUN": "1",
+        "GMS_MCP_TOOLSETS": "core",
+        "GMS_MCP_RUNTIME_ROOT": "${LOCALAPPDATA}\\FirstGame-QA\\runtimes",
+        "GMS_RUNTIME_VERSION": "2024.14.4.268",
+        "USERPROFILE": "${LOCALAPPDATA}\\FirstGame-QA"
+      },
+      "tools": [
+        "gm_capabilities",
+        "gm_mcp_health",
+        "gm_project_dashboard",
+        "gm_diagnostics",
+        "gm_compile",
+        "gm_run",
+        "gm_run_stop",
+        "gm_run_status",
+        "gm_lock_status",
+        "gm_run_log",
+        "gm_snapshot_compile",
+        "gm_test_run",
+        "gm_verification_status"
+      ]
+    }
+  }
+}

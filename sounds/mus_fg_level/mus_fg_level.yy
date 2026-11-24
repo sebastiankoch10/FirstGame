@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"mus_fg_level",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":68.5714375,
+  "exportDir":"",
+  "name":"mus_fg_level",
+  "parent":{
+    "name":"Music",
+    "path":"folders/Audio/Music.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":32000,
+  "soundFile":"mus_fg_level.wav",
+  "volume":1.0,
+}

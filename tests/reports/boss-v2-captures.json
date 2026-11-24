@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "status": "PASS",
+  "capture_only": true,
+  "checks": 2.0,
+  "failures": [],
+  "metrics": {
+    "audio": []
+  },
+  "scope": "Native visual captures only; does not replace the full runtime assertion report.",
+  "exit_code": 0,
+  "logs": "output\\boss-v2-captures\\20261123-062051",
+  "artifact": "output\\boss-v2-captures\\20261123-062051\\build\\FirstGameBossV2Smoke.exe",
+  "rendered": [
+    "behemoth-bloom-active.png",
+    "behemoth-bloom.png",
+    "behemoth-brood.png",
+    "behemoth-roots-active.png",
+    "behemoth-roots-warning.png",
+    "dragon-fifteen-beam.png",
+    "subtle-warning-0.png",
+    "subtle-warning-100.png",
+    "subtle-warning-50.png",
+    "test-menu.png",
+    "twins-link-active.png",
+    "twins-link-warning.png",
+    "twins-nova.png",
+    "twins-projectiles.png"
+  ]
+}

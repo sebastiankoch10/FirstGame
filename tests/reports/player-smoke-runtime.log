@@ -1,0 +1,87 @@
+
+***************************************
+ *     GameMaker v2024.14.4.268    *
+***************************************
+Setting scheduler resolution to 1
+Attempting to use high process priority settings
+Set process priority to HIGH_PRIORITY_CLASS
+Set main thread priority to HIGHEST
+Registered with MMCSS 'Games' task
+Set MMCSS thread priority to CRITICAL
+Reading File C:\Users\sebas\Dokumente\FirstGame\output\player-smoke\20261122-124938\build\data.win took 1 ms
+DirectX11: Using hardware device
+Collision Event time(microsecs)=3
+Variable_Global_Init()
+PrepareGame()
+Audio_Init()
+Audio group 0 -> Loaded
+Attempting to set gamepadcount to 12
+Game_Prepare()
+Script_Prepare() 
+TimeLine_Prepare() 
+Object_Prepare() 
+Room_Prepare() 
+Finished PrepareGame() 
+Run_Start
+Done g_EffectsManager.Init()
+Done RenderStateManager
+CreateColPairs took 0.000000s 2 usecs for 16 object types obj_col_numb=0 physobjcount=6 resizes 0 final size 8
+Done ObjectLists
+Done Extension_Initialize
+About to startroom
+ObjectController: Initialisierung abgeschlossen.
+RUNTIME room=Room1 player_instances=1 spawner_instances=1
+Total memory used = 43594588 (0x0299335c) bytes 41.58MB
+Free memory = 5389216 (0x00523ba0) bytes 5.14MB
+Peak memory used = 43594588 (0x0299335c) bytes 41.58MB
+**********************************.
+Entering main loop.
+**********************************.
+PLAYER_SMOKE_STEP Sword 1
+Pause event has been registered for this frame
+Pause event has been unregistered
+PLAYER_SMOKE_STEP Sword 121
+PLAYER_SMOKE_STEP Sword 241
+PLAYER_SMOKE_STEP Sword 361
+Warning! - <unknown>(0) : Error: Failed to get padding from audio client [-4
+
+Warning! - <unknown>(0) : Warning: Could not initialize audio output device. Falling back to dummy device.
+
+Warning! - <unknown>(0) : Note: No audio will be heard.
+
+PLAYER_SMOKE_STEP Sword 481
+PLAYER_SMOKE_STEP Sword 601
+DAMAGE 72 -> 48 (24)
+DAMAGE 72 -> 48 (24)
+ObjectController: Initialisierung abgeschlossen.
+RUNTIME room=Room1 player_instances=1 spawner_instances=1
+PLAYER_SMOKE_STEP Mage 1
+PLAYER_SMOKE_STEP Mage 121
+PLAYER_SMOKE_STEP Mage 241
+PLAYER_SMOKE_STEP Mage 361
+PLAYER_SMOKE_STEP Mage 481
+DAMAGE 72 -> 49 (23)
+DAMAGE 49 -> 26 (23)
+PLAYER_SMOKE_STEP Mage 601
+DAMAGE 25.00 -> 2.00 (23)
+DAMAGE 72 -> 49 (23)
+ObjectController: Initialisierung abgeschlossen.
+RUNTIME room=Room1 player_instances=1 spawner_instances=1
+PLAYER_SMOKE_STEP Ranger 1
+PLAYER_SMOKE_STEP Ranger 121
+DAMAGE 72 -> 46 (26)
+PLAYER_SMOKE_STEP Ranger 241
+DAMAGE 72 -> 46 (26)
+DAMAGE 46 -> 20 (26)
+PLAYER_SMOKE_STEP Ranger 361
+DAMAGE 20 -> 0 (26)
+PLAYER_SMOKE_STEP Ranger 481
+DAMAGE 46 -> 20 (26)
+DAMAGE 20 -> 0 (26)
+PLAYER_SMOKE_STEP Ranger 601
+DAMAGE 72 -> 46 (26)
+PLAYER_SMOKE_RESULT {"passed":true,"failure":"","classes":[{"character":"Sword","frames":720.0,"movement_distance":2059.362548828125,"attack_frames":200.0,"attack_effect":true,"elapsed_ms":12679.0,"actions":{"walk":true,"attack":true,"idle":true,"jump":true,"dive":true,"slide":true,"hurt":true,"fall":true},"room":"Room1"},{"character":"Mage","frames":720.0,"movement_distance":1820.439697265625,"attack_frames":200.0,"attack_effect":true,"elapsed_ms":11967.0,"actions":{"walk":true,"attack":true,"idle":true,"jump":true,"dive":true,"slide":true,"hurt":true,"fall":true},"room":"Room1"},{"character":"Ranger","frames":720.0,"movement_distance":2656.653564453125,"attack_frames":200.0,"attack_effect":true,"elapsed_ms":11967.0,"actions":{"walk":true,"attack":true,"idle":true,"jump":true,"dive":true,"slide":true,"hurt":true,"fall":true},"room":"Room1"}],"elapsed_ms":36767.0}
+###game_end###0
+Attempting to set gamepadcount to 0
+Script_Free called with 67 and global 8
+Unsetting previous scheduler resolution of 1

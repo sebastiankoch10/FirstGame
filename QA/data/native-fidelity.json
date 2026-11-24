@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "native_artifact": "output/native-mc-baseline/20261123-173646",
+  "logic": "actual production GML at 1/60; native room_speed remains60; no rendering except fixture; audio no-op",
+  "batch_parity": [
+    {
+      "batch": 60.0,
+      "ticks": 600.0,
+      "hash": "fbd362e1884e2bfcbe31b904e3dbd121",
+      "room_speed": 60.0,
+      "hp": 75.98826666666665,
+      "damage_out": 1198.1789666666668
+    },
+    {
+      "batch": 1.0,
+      "ticks": 600.0,
+      "hash": "fbd362e1884e2bfcbe31b904e3dbd121",
+      "room_speed": 60.0,
+      "hp": 75.98826666666665,
+      "damage_out": 1198.1789666666668
+    },
+    {
+      "batch": 600.0,
+      "ticks": 600.0,
+      "hash": "fbd362e1884e2bfcbe31b904e3dbd121",
+      "room_speed": 60.0,
+      "hp": 75.98826666666665,
+      "damage_out": 1198.1789666666668
+    }
+  ],
+  "all_hashes_equal": true,
+  "fixture": {
+    "contact_hp_loss": 11.0,
+    "contact_pass": true,
+    "coin_mask_pass": true,
+    "player_mask": [
+      -10.0,
+      -29.0,
+      11.0,
+      -6.0
+    ],
+    "monster_dot_60dps_one_second": 60.0,
+    "boss_dot_60dps_one_second": 60.0,
+    "status_frames_remaining": 0.0,
+    "clock_pass": true,
+    "scenery_footprint_pass": true,
+    "logical_hz": 60.0,
+    "native_room_speed": 60.0,
+    "physical_scenery_count": 10.0
+  },
+  "rendered_fixture": "output/native-mc-baseline/20261123-173646/qa-mc-capture-collision-fixture.png",
+  "limits": [
+    "Parity probe is Sword/beginner/600ticks; not a full formal equivalence proof.",
+    "Physicscache initialized from same all-room production props normally populated in Draw.",
+    "Manual engine event dispatch uses registered production mechanics; three unregistered projectile collision orphans intentionally ignored.",
+    "Reaction policies are synthetic visible-information agents, not human playtests.",
+    "Same input seed does not guarantee identical future worlds across classes because production combat consumes shared RNG differently."
+  ]
+}

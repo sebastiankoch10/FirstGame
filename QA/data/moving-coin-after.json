@@ -1,0 +1,57 @@
+{
+  "failures": [],
+  "metrics": {
+    "moving_coin": [
+      {
+        "collected_at_tick": 17.0,
+        "remaining_distance": 0.0,
+        "collected": true,
+        "class_name": "Sword",
+        "seconds": 3.0,
+        "fleet_footed_level": 0.0,
+        "player_speed_pixels_second": 192.0,
+        "coin_speed_pixels_second": 420.0,
+        "player_distance": 575.99853515625
+      },
+      {
+        "collected_at_tick": 16.0,
+        "remaining_distance": 0.0,
+        "collected": true,
+        "class_name": "Mage",
+        "seconds": 3.0,
+        "fleet_footed_level": 0.0,
+        "player_speed_pixels_second": 168.0,
+        "coin_speed_pixels_second": 420.0,
+        "player_distance": 504.0003662109375
+      },
+      {
+        "collected_at_tick": 23.0,
+        "remaining_distance": 0.0,
+        "collected": true,
+        "class_name": "Ranger",
+        "seconds": 3.0,
+        "fleet_footed_level": 0.0,
+        "player_speed_pixels_second": 252.0,
+        "coin_speed_pixels_second": 420.0,
+        "player_distance": 755.996826171875
+      },
+      {
+        "collected_at_tick": 38.0,
+        "remaining_distance": 0.0,
+        "collected": true,
+        "class_name": "Ranger",
+        "seconds": 3.0,
+        "fleet_footed_level": 9.0,
+        "player_speed_pixels_second": 316.8,
+        "coin_speed_pixels_second": 420.0,
+        "player_distance": 950.4052734375
+      }
+    ]
+  },
+  "scope": "Controlled native three-second moving-coin fixture, actual Player and Coin Steps; no complete run.",
+  "passed": true,
+  "checks": 10.0,
+  "exit_code": 0,
+  "logs": "QA\\logs\\regression-20261123-175820",
+  "screenshots": []
+}

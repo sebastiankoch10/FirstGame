@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"level_worlds",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"level_worlds",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

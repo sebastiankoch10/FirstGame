@@ -1,0 +1,11 @@
+{
+  "policy": "visible-greedy-v1",
+  "completed_natural_full_runs": 12,
+  "files": [
+    "QA/data/native-policy-v1-calibration-pilot.jsonl",
+    "QA/data/native-policy-v1-calibration-cohort.jsonl"
+  ],
+  "mechanics_validated": true,
+  "use_for_balance_decisions": false,
+  "reason": "Calibration exposed bot flaws: early dodge and jumps against ALL/high attacks; replaced with visible-countdown-v2 before main cohorts."
+}

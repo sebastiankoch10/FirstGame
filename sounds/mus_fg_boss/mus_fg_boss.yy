@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"mus_fg_boss",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":51.89190625,
+  "exportDir":"",
+  "name":"mus_fg_boss",
+  "parent":{
+    "name":"Music",
+    "path":"folders/Audio/Music.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":32000,
+  "soundFile":"mus_fg_boss.wav",
+  "volume":1.0,
+}

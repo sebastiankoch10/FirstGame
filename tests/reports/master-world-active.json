@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "room": "Room1",
+  "layers": [
+    "Instances",
+    "MasterScenery"
+  ],
+  "objects": {
+    "ObjectController": 1,
+    "ObjectOverlay": 1,
+    "ObjectPlayer": 1,
+    "ObjectSpawner": 1,
+    "ObjectMasterWorld": 1,
+    "ObjectMasterScenery": 1087
+  },
+  "old_tile_layers": 0,
+  "old_scenery": 0,
+  "new_sprites": 60,
+  "verified_rgba_images": 157
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"boss_combat",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"boss_combat",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

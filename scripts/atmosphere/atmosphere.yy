@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"atmosphere",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"atmosphere",
+  "parent":{
+    "name":"Skripte",
+    "path":"folders/Skripte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
