@@ -12,7 +12,8 @@ GameMaker-2024-Projekt (Runtime 2024.14.4.268), Top-down-Survivor mit Runs von 3
 ## Regeln
 
 - Keine numerischen Balancing-Änderungen (HP, Schaden, XP, Klassenwerte, Skalierung) ohne ausdrücklichen Auftrag.
-- Kein Git-Commit und kein Push ohne Auftrag. Der Arbeitsstand ist groß und weitgehend uncommittet; vor größeren Änderungen ein ZIP unter `output/` anlegen.
+- Arbeitsweise des Nutzers: Änderungen direkt im Projekt vornehmen. Der Nutzer öffnet `FirstGame.yyp` in GameMaker, drückt F5 und testet. Keine EXE, kein ZIP und keine Zwischenstände zum Entpacken als Lieferung; Builds unter `output/` dienen nur den eigenen automatischen Prüfungen.
+- Git nur lokal: Branch `entwicklung`, bei größeren Zwischenständen selbstständig committen (erlaubt seit 2026-11-24). Niemals pushen, GitHub wird nicht genutzt. Vor größeren Änderungen committen statt ein ZIP anzulegen. `output/` ist ignoriert.
 - Kein Build ist ein Gameplay-Nachweis. Ergebnisse als PASS / FAIL / BLOCKED / NOT RUN berichten.
 - Vorhandene Drachen-PNGs und ArtPack-Originale nicht verändern.
 
