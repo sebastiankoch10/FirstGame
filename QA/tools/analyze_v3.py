@@ -85,7 +85,8 @@ def main():
         for sid, s in items:
             if not isinstance(s, dict):
                 continue
-            key = int(s.get('id', sid)) if str(s.get('id', sid)).lstrip('-').isdigit() else sid
+            raw_key = str(s.get('id', sid)); raw_key = raw_key[1:] if raw_key.startswith('s') else raw_key
+            key = int(raw_key) if raw_key.lstrip('-').isdigit() else sid
             a = abil[key]; a['runs'] += 1; a['seconds'] += r['seconds']
             for f in ('casts', 'hits', 'damage', 'healing'):
                 a[f] += float(s.get(f, 0) or 0)

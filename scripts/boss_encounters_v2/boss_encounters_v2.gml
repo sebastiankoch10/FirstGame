@@ -120,7 +120,11 @@ function bv2_encounter_attack_begin(_b,_index) {
         var ice=instance_exists(_b.v2_child) ? _b.v2_child : _b;
         var fire_hand=bv2_twins_origin(_b,false),ice_hand=bv2_twins_origin(_b,true);
         switch(_index) {
-            case 1:break; // Visible moving ordinary projectiles have no floor countdown.
+            case 1:
+                // Visible moving ordinary projectiles have no floor countdown. From phase 3 the figure-eight flight
+                // drags a connection beam between the witches across the area.
+                if(phase>=3)bv2_encounter_add_line(_b,"twins_link",fire_hand.x,fire_hand.y,ice_hand.x,ice_hand.y,26,warning,p.active+1.2,damage,"link");
+                break;
             case 2:
                 h=bv2_ring(_b,"twins_ring",cx,cy,255,205,warning,2.4,damage,"ground");
                 if(is_struct(h)){h.gap_angle=90;h.gap_width=75;h.rotate_speed=35+phase*5;h.interval=.55;}
@@ -288,6 +292,8 @@ function bv2_encounter_update_links(_b) {
         if(rec.mode=="fire_cross" || rec.mode=="ice_cross") {
             // Very long beams: aimed through the announced point and continuing far beyond it.
             var aim=point_direction(ax,ay,_b.v2_target_x+(rec.mode=="fire_cross" ? 250 : -250),_b.v2_target_y+180);
+            // Phase 3+: the fire beam sweeps 28 degrees during its active time (beam sweep over the ice stripe pattern).
+            if(rec.mode=="fire_cross" && _b.boss_phase>=3)aim+=28*clamp((h.age-h.warning)/max(.1,h.active),0,1)*((_b.v2_cycle mod 2)==0 ? 1 : -1);
             ex=ax+lengthdir_x(bc_config().beam_length,aim);ey=ay+lengthdir_y(bc_config().beam_length,aim);
         }
         h.g.x=ax;h.g.y=ay;h.g.radius=point_distance(ax,ay,ex,ey);h.g.angle=point_direction(ax,ay,ex,ey);
