@@ -1,0 +1,136 @@
+{
+  "started_utc": "2026-11-24T07:02:21.317454+00:00",
+  "phase": "after",
+  "workers": 12,
+  "runs_per_class_per_worker": 30,
+  "requested_total": 1080,
+  "seedstart": 930101,
+  "batchsize": 600,
+  "artifact": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\native-mc-after\\20261124-080008",
+  "exe_sha256": "8f5d5c443666a69dc950f2fb50045a722d6d4391e4d2df1bc6825c4c4cfb7f78",
+  "children": [
+    {
+      "worker": 7,
+      "seedstart": 930311,
+      "exit_code": 0,
+      "wall_seconds": 6580.024211645126,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-7.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-7.log"
+    },
+    {
+      "worker": 0,
+      "seedstart": 930101,
+      "exit_code": 0,
+      "wall_seconds": 6646.928884983063,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-0.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-0.log"
+    },
+    {
+      "worker": 4,
+      "seedstart": 930221,
+      "exit_code": 0,
+      "wall_seconds": 6877.667265892029,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-4.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-4.log"
+    },
+    {
+      "worker": 8,
+      "seedstart": 930341,
+      "exit_code": 0,
+      "wall_seconds": 7557.651359081268,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-8.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-8.log"
+    },
+    {
+      "worker": 5,
+      "seedstart": 930251,
+      "exit_code": 0,
+      "wall_seconds": 7715.138280391693,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-5.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-5.log"
+    },
+    {
+      "worker": 9,
+      "seedstart": 930371,
+      "exit_code": 0,
+      "wall_seconds": 8008.061454296112,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-9.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-9.log"
+    },
+    {
+      "worker": 10,
+      "seedstart": 930401,
+      "exit_code": 0,
+      "wall_seconds": 8226.47984790802,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-10.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-10.log"
+    },
+    {
+      "worker": 11,
+      "seedstart": 930431,
+      "exit_code": 0,
+      "wall_seconds": 8253.591003894806,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-11.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-11.log"
+    },
+    {
+      "worker": 2,
+      "seedstart": 930161,
+      "exit_code": 0,
+      "wall_seconds": 8542.802884817123,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-2.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-2.log"
+    },
+    {
+      "worker": 1,
+      "seedstart": 930131,
+      "exit_code": 0,
+      "wall_seconds": 8555.39586687088,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-1.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-1.log"
+    },
+    {
+      "worker": 3,
+      "seedstart": 930191,
+      "exit_code": 0,
+      "wall_seconds": 9418.1099858284,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-3.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-3.log"
+    },
+    {
+      "worker": 6,
+      "seedstart": 930281,
+      "exit_code": 0,
+      "wall_seconds": 10259.572055101395,
+      "rows": 90,
+      "completed_runs": 90,
+      "data": "QA\\data\\v3-cohort-a\\worker-6.jsonl",
+      "log": "QA\\data\\v3-cohort-a\\worker-6.log"
+    }
+  ],
+  "completed": true,
+  "elapsed_wall_seconds": 10259.580573320389,
+  "completed_runs": 1080
+}

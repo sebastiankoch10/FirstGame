@@ -142,13 +142,43 @@ Arbeitsweise: Änderungen direkt im Projekt (F5 in GameMaker). Tests bauen isoli
 - **Zahlenwerte von Talenten und Gegenständen:** Es sind neue, bewusst moderate Werte. Sie sind ausdrücklich nicht durch Simulation ausbalanciert.
 - **Ausrüstungsoptik am Charakter:** nicht umgesetzt (siehe 2.2).
 
-## 5. Simulationen (Priorität 11)
-- **Kohorte v3-cohort-a:**
-  - Code-Stand: Commit `92855ef0` (Talente, Ausrüstung, Boss-Choreografie). Ohne Drachen-Feuerkegel, Hexen-Acht-Strahl und Feuerschwenk, Funken, automatisches Anlegen und Waffenschimmer; diese kamen danach.
-  - 12 Worker, Ziel 1.080 vollständige Runs (je Klasse 360, je Persona 120).
-  - Die Bots verteilen Talentpunkte deterministisch und legen Funde automatisch an.
-- **Isolierte Bosskämpfe v3-boss:** Code-Stand von Commit `dd5d79dd`, also mit allen Bossänderungen. Ziel 180 Fälle.
-- **Ergebnisse:** siehe `QA/V3_SIMULATION_REPORT.md` (wird nach Abschluss erzeugt) und den Abschlussbericht.
+## 5. Simulationen (Priorität 11) – ABGESCHLOSSEN
+Vollständige Tabellen: `QA/V3_SIMULATION_REPORT.md`, Rohdaten: `QA/data/v3-analysis.json`.
+
+**Vollständige Runs:** 1.080 von 1.080 abgeschlossen (`QA/data/v3-cohort-a`).
+- Aufteilung: je Klasse 360, je Klasse und Persona 120.
+- Code-Stand: Commit `92855ef0`, also Talente, Ausrüstung und Boss-Choreografie **vor** den Fairness-Korrekturen. Die meisten Runs enden vor Minute 5; Bossbegegnungen in den Runs zeigen daher den alten Stand.
+- **Überlebenszeit Mittel/Median:**
+  - Schwert 229/132 s; Minute 5/10/15/30 erreicht von 24/8/5/2 %
+  - Magierin 196/195 s; 20/3/1/0 %
+  - Waldläufer 191/146 s; 14/2/2/0 %
+- **Erfahrene Bots:**
+  - Schwert 439/309 s, 4 % überleben 30 Minuten
+  - Magierin 293/246 s
+  - Waldläufer 256/226 s
+- **Vergleich mit Codex' Baseline** (Mann-Whitney je Klasse/Persona): Kein Unterschied ist signifikant, alle p > 0,05. Talente und Ausrüstung haben die Überlebenszeit der Bots also nicht messbar verschoben. Es gab im Schnitt 0,7 bis 6,7 Talentpunkte und 0,1 bis 5,8 Gegenstände je Run.
+- **Zauber im Run (DPS über die Laufzeit der Runs mit der Fähigkeit):** Ice Prison 299, Ember Field 281, Gravity Well 211 und Thunder Seal 184 liegen vorn. Am niedrigsten liegen Iceball 16, Arcane Barrage 17, Wisp Sentinel 21 und Lightning 41. Fireball liegt mit 170 rund viermal so hoch wie Lightning. Das deckt sich mit Codex' kontrolliertem Test (Stufe 9: Fireball 30 gegenüber Lightning 23 DPS gegen ein Ziel, 99 gegenüber 68 gegen acht Ziele). **Nur eine Empfehlung, nicht umgesetzt:** Lightning, Iceball und Arcane Barrage prüfen.
+
+**Isolierte Bosskämpfe:** 270 Kämpfe mit dem endgültigen Code (`QA/data/v3-boss.jsonl`). Bot-Siegquoten im Vergleich zu Codex vom 23.11.:
+
+| Boss | Minute 5 | Minute 10 | Minute 15 |
+|---|---|---|---|
+| Behemoth | 61 % (Codex 67 %) | 50 % (58 %) | 50 % (41 %) |
+| Hexen | 44 % (67 %) | 50 % (54 %) | 25 % (37 %) |
+| Drache | 44 % (50 %) | **17 % (54 %)** | **8 % (37 %)** |
+| Minibosse | 75–83 % (75 %) | | |
+
+**Auffällig schwer für Bots:**
+- Drache ab Minute 10. Sein Schwenkstrahl trifft bedrohte Bots zu 26 % und war 12-mal tödlich; dazu kommen Magma-Schachbrett, Feuerbogen-Kegel und unveränderte Projektile.
+- Behemoth-Sumpfstampfer mit zwei Lückenringen: 79 % Treffer, wenn bedroht.
+- Hexen-Verbindungsstrahl: 43 %.
+- Projektilangriffe (Hexen 1, Drache 6/7/9, Behemoth 1): 50–100 %. Das ist eine bekannte Bot-Grenze, die Bots weichen Geschossen kaum aus.
+
+**Selten treffend:**
+- Hexen 7 und 9 sowie Behemoth 7 und 9: 0–6 %
+- Drache 4, 5 und 8: 0 %
+
+**Das Boss-Orakel zeigt für alle Muster jederzeit eine erreichbare sichere Position.** Die niedrigen Drachenwerte sind deshalb eine Frage von Schwierigkeit und Lesbarkeit, nicht technischer Unmöglichkeit. Das muss ein menschlicher Spieltest bewerten. Es sind keine numerischen Änderungen erfolgt.
 
 ## 6. Nächste Schritte
 1. Menschlicher Spieltest: Bosse in Phase 2 bis 4 (F3 im Boss-Testmodus), Charakterbildschirm (T), Ausrüstungsfunde.
