@@ -8,8 +8,8 @@
    "frames_over_20": 65
   },
   "halo_px": 7119,
-  "seconds": 97,
-  "atlas_px": 2220544,
+  "seconds": 272,
+  "atlas_px": 2146304,
   "atlases": 38
  },
  "magev3": {
@@ -21,8 +21,8 @@
    "frames_over_20": 41
   },
   "halo_px": 0,
-  "seconds": 115,
-  "atlas_px": 3110400,
+  "seconds": 287,
+  "atlas_px": 3062784,
   "atlases": 38
  },
  "rangerv3": {
@@ -34,8 +34,8 @@
    "frames_over_20": 124
   },
   "halo_px": 4482,
-  "seconds": 253,
-  "atlas_px": 4595200,
+  "seconds": 304,
+  "atlas_px": 4539904,
   "atlases": 38
  },
  "segment_code": "b64817ccaa"

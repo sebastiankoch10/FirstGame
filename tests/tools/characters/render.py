@@ -24,7 +24,7 @@ RAMPS = {
     'wraps':     [(30, 20, 16), (48, 32, 24), (68, 46, 33), (90, 62, 44), (112, 80, 57), (136, 101, 73), (160, 124, 92)],
     'shoes':     [(24, 16, 12), (40, 27, 19), (58, 39, 27), (78, 53, 36), (99, 68, 46), (122, 86, 58), (146, 106, 74)],
     'dress':     [(26, 15, 46), (42, 25, 74), (62, 39, 104), (86, 57, 136), (112, 80, 166), (142, 110, 194), (180, 150, 218)],
-    'linen':     [(58, 52, 50), (88, 80, 76), (120, 112, 106), (150, 142, 134), (180, 172, 162), (206, 200, 190), (230, 226, 216)],
+    'linen':     [(62, 50, 40), (92, 76, 62), (124, 106, 88), (154, 136, 114), (182, 164, 140), (208, 192, 168), (232, 220, 198)],
     'silver':    [(30, 32, 40), (56, 60, 72), (88, 94, 108), (124, 130, 144), (162, 168, 180), (200, 206, 216), (240, 244, 250)],
     'gold':      [(48, 30, 10), (86, 56, 18), (128, 88, 30), (170, 124, 46), (206, 162, 70), (234, 198, 108), (252, 232, 170)],
     'ice':       [(20, 40, 70), (34, 70, 110), (56, 110, 160), (88, 156, 206), (134, 200, 236), (186, 230, 250), (236, 250, 255)],
@@ -305,7 +305,7 @@ def helmet_layer(fr: Frame, tier, max_half_width=8.5, crown_frac=.62):
     # smallest dome (fixed aspect) that still covers almost every hair pixel above the brow -> no spikes poke through
     k = np.percentile(np.sqrt(((ax - cx) / rx0) ** 2 + ((ay - cy) / ry0) ** 2), 97)
     k = float(np.clip(k, 1.0, 1.35))
-    rx = min(max_half_width, rx0 * k); ry = ry0 * k
+    rx = min(max_half_width, rx0 * k); ry = min(ry0 * k, 1.05 * rx + 1.0)
     yy, xx = np.mgrid[0:96, 0:96]
     helm = (((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2 <= 1.0) & (yy <= brow)
     if helm.sum() < 6:
@@ -450,8 +450,8 @@ def inpaint_nearest(rgba, holes, known):
 
 BASE_CLOTHES = {
     'swordsmanv3': {CHEST: ('gambeson', .70), HANDS: ('wraps', .75), LEGS: ('trousers', .70), FEET: ('shoes', .80)},
-    'magev3': {CHEST: ('dress', .95), HANDS: ('dress', .9), LEGS: ('dress', 1.0), FEET: ('shoes', .80)},
-    'rangerv3': {CHEST: ('linen', .70), HANDS: ('linen', .70), FEET: ('shoes', .80)},
+    'magev3': {CHEST: ('detrim', 0), HANDS: ('detrim', 0), LEGS: ('detrim', 0), FEET: ('shoes', .80)},
+    'rangerv3': {CHEST: ('linen', .55), HANDS: ('linen', .60), FEET: ('shoes', .80)},
 }
 # chest armour also covers the hips/thighs (mail skirt, tassets) from this tier on; None = never
 CHEST_COVERS_LEGS = {'swordsmanv3': 1, 'magev3': None, 'rangerv3': None}
@@ -489,6 +489,13 @@ def base_layer(fr: Frame, kinds):
     for reg, (rname, contrast) in BASE_CLOTHES[fr.actor].items():
         m = lab == reg
         if not m.any():
+            continue
+        if rname == 'detrim':   # original garment, gold ornaments replaced by the surrounding cloth colours
+            hh, ss, vv = hsv(rgb)
+            gold = m & hue_in(hh, 18, 60) & (ss > .26) & (vv > .33)
+            if gold.any():
+                filled, _ = inpaint_nearest(out, gold, m & ~gold)
+                out[gold] = filled[gold]
             continue
         sh = material_shade(rgb, m, kinds)
         t = np.clip(.45 + (sh - .5) * contrast, 0, 1)

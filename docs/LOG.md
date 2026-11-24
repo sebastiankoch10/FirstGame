@@ -4,6 +4,11 @@ updated: 2026-11-24
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-24 · Claude · Charaktermodelle + sichtbare Ausrüstung
+- Basismodelle aller 3 Klassen ohne Rüstung/Waffe (Frames in `spr_fg_<actor>_*` ersetzt, Originale im ArtPack); Saum der Walk-Frames entfernt.
+- 4 Stufen × Kopf/Brust/Hände/Füße/Waffe je Klasse als gepackte Atlanten `spr_eqv_*`, Startwaffe als Ebene, Seltenheit als Akzentfarbe, Item-Icons `spr_eqv_icons_*`.
+- Laufzeit `scripts/equipment_visual` (+ generiert `equipment_visual_data`), Pipeline `tests/tools/characters/`, Suite `visual` (75). Details: [[Charaktergrafik & Ausrüstungs-Layer]].
+
 ### 2026-11-24 · Claude · QA-Agent modernisiert (Meilenstein 1)
 - Neu `tests/tools/qa.py`: Stufen 0–4 aus dem Diff, Suiten-Auswahl je System, PASS-Cache über Eingabe-Hash, Einzeilen-Ausgabe.
 - `.codex/agents/qa.toml` aktualisiert, `.claude/agents/qa.md` neu. Suite `classes` repariert (baut außerhalb, Drachen-Altteil optional, Warnflächen-Check aktuell): PASS 150.

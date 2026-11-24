@@ -5,34 +5,29 @@ agent: Claude
 ---
 # Übergabe (wird nach jeder Aufgabe überschrieben, max. ~40 Zeilen)
 
-**Zuletzt dran:** Claude, 2026-11-24. Aufgabe: Doku- und Übergabestruktur, Hooks, Obsidian-Vault, Token-Regeln für beide Agenten. Kein Spielcode geändert, kein Commit.
+**Zuletzt dran:** Claude, 2026-11-24. Aufgabe: QA-Agent modernisieren + Charaktermodelle mit sichtbarer Ausrüstung.
 
 ## Stand
-- Spielbar per F5: 3 Klassen, 3 Level, Talente (T), Ausrüstung, Zauber-Partikel, Bosse mit FFXIV-artigen Mustern ([[Bosse]]).
-- Git: Branch `entwicklung`, letzter Commit `40e446bb`. Die neue Doku-Struktur ist noch **nicht committet**.
-- Tests auf dem letzten Code-Stand: Regression 811/811, Boss 141/141, Feature 129/129, Level 166/166 (alles PASS).
-- Simulationen: 1.080 vollständige Bot-Runs und 270 isolierte Bosskämpfe, siehe `QA/V3_SIMULATION_REPORT.md`.
+- Spielbar per F5. Jede Klasse = Basismodell (Grundkleidung, ohne Rüstung/Waffe) + sichtbare Ausrüstung in 4 Stufen je Slot (Kopf, Brust, Hände, Füße, Waffe). Startwaffe als eigene Ebene. Details: [[Charaktergrafik & Ausrüstungs-Layer]].
+- QA: `python tests/tools/qa.py --plan` wählt Stufe 1–4 und Suiten aus dem Diff, PASS-Cache. QA-Prüfer `.codex/agents/qa.toml` = `.claude/agents/qa.md`. Siehe [[Tests & QA]].
+- Tests auf `9c3f3937`: regression 811, feature 129, boss 141, level 166, classes 150, visual 75 – alle PASS.
 
 ## Zuletzt gearbeitet an
-- `AGENTS.md` ist die einzige Hauptquelle, `CLAUDE.md` importiert sie nur.
-- `docs/` als Obsidian-Vault mit Systemnotizen, `LOG`, `DECISIONS` und `Bugs & Ideen`.
-- Claude-Hooks: SessionStart zeigt diese Datei an, der Stop-Hook schreibt `docs/ai-activity.log`.
-- `AGENTS.md`, Abschnitt „Synchron bleiben und Token sparen“: Lesereihenfolge, Tests nach Änderung, Commit mit `[Claude]`/`[Codex]` pro Aufgabe.
-- Der Nutzer hat einen Einstiegs-Prompt für Codex bekommen. Codex soll danach einmal aufholen und in höchstens 8 Zeilen bestätigen.
+- Pipeline `tests/tools/characters/` (Atlas-Port, Zerlegung, Malen, Build). Neu bauen: `python tests/tools/characters/build_characters.py --previews` (~10 min, 18 Prozesse).
+- Laufzeit `scripts/equipment_visual` (`player_layers_draw`), Daten `scripts/equipment_visual_data` (generiert), Item-Icons `spr_eqv_icons_<actor>`.
+- Zeichenstellen umgestellt: `ObjectPlayer/Draw_0`, Menüporträt `ObjectMainMenu/Draw_64`, Inventar/HUD/Bodenfunde (`equipment_item_icon`).
 
 ## Halb fertig / offen
-- Die Doku-Struktur ist noch nicht committet; der Nutzer prüft sie zuerst ([[SETUP_REPORT]]).
-- Designentscheidungen zu Talenten und Ausrüstung sind offen: pro Run oder dauerhaft, Punktetempo, Respec, Zahlenwerte.
-- Für die neuen Bossmuster fehlt der menschliche Spieltest.
+- Grafik ist prozedural abgeleitet (nicht handgezeichnet). Künstlerische Feinabnahme durch den Nutzer fehlt.
+- Waffe nicht in jedem Frame getrennt: Schwert 223/256, Stab 212/256, Bogen 230/256 Zellen (`tests/reports/character-layers.json`). Dort zeigt der Frame mit Item-Waffe die Originalwaffe.
+- Talisman nicht sichtbar (bewusst). Umhänge bleiben Basis (kein Slot) – Entscheidung in [[DECISIONS]].
 
 ## Bekannte Bugs / Risiken
-- Der Drache ist ab Minute 10 für Bots sehr schwer: 17 % bzw. 8 % Siege, früher 54 % bzw. 37 %.
-- `tests/tools/run_combat_smoke.py` ist veraltet (FAIL vor 2026-11-24).
-- Der Level-Test liefert unter paralleler CPU-Last einmal 165/166 (Timing-Ausreißer).
-- Mehr in [[Bugs & Ideen]].
+- Vereinzelte Fehlpixel der Zerlegung (z. B. Bogen-Fehltreffer an Umhangspitzen, Stabkopf-Reste) – nur bei angelegter Item-Waffe sichtbar.
+- Spielerskalierung 1,65 (nicht ganzzahlig) verzerrt Pixel leicht – bestand vorher schon.
+- Drache ab Minute 10 sehr schwer für Bots (siehe [[Bosse]]); `run_combat_smoke.py` veraltet.
 
 ## Nächste Schritte
-1. Nutzer: Setup prüfen, dann committen. Prüfen, ob `docs/ai-activity.log` in die `.gitignore` gehört.
-2. Spieltest der Bosse ab Minute 10 (Boss testen, F3/F6).
-3. Entscheidungen aus [[Talente]] und [[Ausrüstung]] treffen.
-4. Simulationen mit dem aktuellen Stand fortsetzen (Ziel 3.000 Runs).
+1. Nutzer: F5, Klasse wählen, Ausrüstung sammeln (Boss-Test F9 gibt Testgegenstände) und Aussehen beurteilen.
+2. Bei Bedarf Grafik verfeinern: Parameter in `render.py`, dann Build + `qa.py` (Suite visual).
+3. Optional: Codex mit Bildgenerator für handgezeichnete Varianten einzelner Teile (Pipeline übernimmt Platzierung).

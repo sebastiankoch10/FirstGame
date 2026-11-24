@@ -32,7 +32,7 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
 | `boss` | `run_native_harness.py boss` | Muster, Orakel, Kiting, Aufholattacken |
 | `level` | `tests/tools/run_level_smoke.py` | 3 Level inklusive Neustart |
 | `classes` | `tests/tools/run_class_dragon_smoke.py` | Startwaffen und Kombos, Warnflächen-Rendering, Klassen-DPS (150) |
-| `visual` | `run_native_harness.py visual` | Charakter- und Ausrüstungs-Layer, Laufzeit-Aufnahmen |
+| `visual` | `run_native_harness.py visual` | Charakter- und Ausrüstungs-Layer (75): Datenintegrität, Anlegen/Ablegen/Wechsel, Pixelvergleich, Kontaktbögen 8 Richtungen × 11 Zustände × 5 Sets, Weltbild |
 
 - **QA-Prüfer** (nur lesend, gleicher Inhalt): `.codex/agents/qa.toml` und `.claude/agents/qa.md`.
 - **Simulationen** (Stufe 4): `QA/tools/run_cohort.py`, `run_boss_mc.py`, `analyze_v3.py`.

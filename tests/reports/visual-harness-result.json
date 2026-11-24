@@ -3,8 +3,8 @@
   "checks": 75.0,
   "failures": [],
   "metrics": {
-    "rangerv3_diff_t2": 55908.0,
-    "rangerv3_diff_t3": 56558.0,
+    "rangerv3_diff_t2": 54410.0,
+    "rangerv3_diff_t3": 55056.0,
     "swordsmanv3": {
       "filled": {
         "hands0": 218.0,
@@ -59,9 +59,9 @@
       "cells": 256.0,
       "frames": 424.0
     },
-    "swordsmanv3_diff_t0": 46780.0,
-    "swordsmanv3_diff_t1": 55266.0,
-    "swordsmanv3_diff_t2": 55266.0,
+    "swordsmanv3_diff_t0": 43324.0,
+    "swordsmanv3_diff_t1": 51810.0,
+    "swordsmanv3_diff_t2": 51810.0,
     "magev3": {
       "filled": {
         "hands0": 236.0,
@@ -89,16 +89,16 @@
       "cells": 256.0,
       "frames": 432.0
     },
-    "swordsmanv3_diff_t3": 56088.0,
-    "magev3_diff_t0": 43218.0,
-    "magev3_diff_t1": 43218.0,
-    "magev3_diff_t2": 43218.0,
-    "magev3_diff_t3": 43720.0,
-    "rangerv3_diff_t0": 55908.0,
-    "rangerv3_diff_t1": 55908.0
+    "swordsmanv3_diff_t3": 52630.0,
+    "magev3_diff_t0": 42648.0,
+    "magev3_diff_t1": 42648.0,
+    "magev3_diff_t2": 42648.0,
+    "magev3_diff_t3": 43146.0,
+    "rangerv3_diff_t0": 54410.0,
+    "rangerv3_diff_t1": 54410.0
   },
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\visual\\20261124-223800",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\visual\\20261124-234119",
   "exceptions": [],
   "captures": [
     "Mage-base.png",

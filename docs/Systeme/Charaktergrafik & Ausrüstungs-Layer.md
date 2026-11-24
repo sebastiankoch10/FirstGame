@@ -66,5 +66,8 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
 
 ## Bekannte Probleme / Grenzen
 - **Prozedurale Grafik:** Die Ausrüstung ist aus den vorhandenen Figuren abgeleitet (Material, Muster, Silhouettenzusätze), nicht von Hand gezeichnet. Formen folgen den Originalrüstungen. Eine künstlerische Feinabnahme bleibt sinnvoll.
-- **Waffenerkennung ist nicht in jedem Frame vollständig.** Zahlen stehen in `tests/reports/character-layers.json`. Wo die Waffe nicht erkannt wurde, zeigt der Frame auch mit Item-Waffe die Originalwaffe.
+- **Waffenerkennung ist nicht in jedem Frame vollständig:** Schwert 223/256, Stab 212/256, Bogen 230/256 Zellen (`tests/reports/character-layers.json`).
+  - Wo die Waffe nicht erkannt wurde, zeigt der Frame auch mit Item-Waffe die Originalwaffe. Nicht erkannte Klingenreste bleiben original statt umgefärbt.
+  - Meist betroffen: verdeckte Waffen in Rückansichten, Todesposen und senkrecht nach unten gehaltene Klingen.
+- **Basis der Magierin:** Originalrobe ohne Goldornamente. Schwertkämpfer und Waldläufer bekommen dagegen neue Grundkleidung (Waffenrock bzw. Leinenhemd).
 - **Startwaffe:** Basis plus Startwaffe ergibt das Original. Ausnahmen sind der entfernte Saum und einzelne Umrisspixel der Waffe.
