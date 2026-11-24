@@ -1,0 +1,4 @@
+# Automatisch vom Claude-Code-Stop-Hook (.claude/hooks/log-activity.sh). Format: Zeit | Ereignis | git-Status (ohne diese Datei)
+2026-11-24 18:08:35 | Stop TEST | git: 7 Aenderung(en) | M CLAUDE.md; ?? .claude/; ?? AGENTS.md; ?? QA/logs/regression-20261124-074915/; ?? QA/logs/regression-20261124-075351/; ?? QA/logs/regression-20261124-170737/; ?? docs/
+2026-11-24 18:10:31 | Stop | git: 7 Aenderung(en) | M CLAUDE.md; ?? .claude/; ?? AGENTS.md; ?? QA/logs/regression-20261124-074915/; ?? QA/logs/regression-20261124-075351/; ?? QA/logs/regression-20261124-170737/; ?? docs/
+2026-11-24 18:54:52 | Stop | git: 7 Aenderung(en) | M CLAUDE.md; ?? .claude/; ?? AGENTS.md; ?? QA/logs/regression-20261124-074915/; ?? QA/logs/regression-20261124-075351/; ?? QA/logs/regression-20261124-170737/; ?? docs/

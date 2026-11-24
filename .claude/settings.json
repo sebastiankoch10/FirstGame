@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"${CLAUDE_PROJECT_DIR:-.}/docs/HANDOFF.md\" 2>/dev/null || cat docs/HANDOFF.md 2>/dev/null || true",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/log-activity.sh\" >/dev/null 2>&1 || true",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
