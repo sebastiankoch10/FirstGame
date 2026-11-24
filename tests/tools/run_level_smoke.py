@@ -1,6 +1,8 @@
 """Isolated native Windows checks for the three playable levels (forest, swamp, ash-frost ruins).
 Run: python tests/tools/run_level_smoke.py
-Hooks (menu driver, input fixtures, captures) exist only in the copied test project under output/level-smoke/<stamp>.
+Hooks (menu driver, input fixtures, captures) exist only in the copied test project under
+%LOCALAPPDATA%/FirstGame-Tests/level-smoke/<stamp>. Nothing is built inside the project folder; the copied
+project and the test executable are deleted after the run (logs, captures and the result JSON stay).
 """
 from __future__ import annotations
 
@@ -28,7 +30,7 @@ def write(p, s):
 
 
 def main():
-    work = ROOT / 'output/level-smoke' / time.strftime('%Y%m%d-%H%M%S')
+    work = Path(os.environ['LOCALAPPDATA']) / 'FirstGame-Tests/level-smoke' / time.strftime('%Y%m%d-%H%M%S')
     project = work / 'project'
     project.mkdir(parents=True)
     for name in ('objects', 'scripts', 'sprites', 'sounds', 'tilesets', 'rooms', 'options'):
@@ -99,10 +101,12 @@ def main():
                     shutil.copyfile(c, work / c.name.removeprefix('lvcapture-'))
     if result is None:
         result = {'passed': False, 'checks': 0, 'failures': fails, 'error': 'no LEVEL_RESULT', 'exceptions': exc[:5]}
-    result.update(exit_code=code, logs=str(work.relative_to(ROOT)), exceptions=exc[:5], captures=sorted(p.name for p in work.glob('*.png')),
+    result.update(exit_code=code, logs=str(work), exceptions=exc[:5], captures=sorted(p.name for p in work.glob('*.png')),
                   test_type='native Windows VM, injected input and menu driver; not manual play')
     result['passed'] = bool(result.get('passed')) and code == 0 and not exc
     write(ROOT / 'tests/reports/level-smoke-result.json', json.dumps(result, indent=2) + '\n')
+    for n in ('project', 'build', 'cache', 'temp'):
+        shutil.rmtree(work / n, ignore_errors=True)
     print(json.dumps({k: result.get(k) for k in ('passed', 'checks', 'failures', 'exceptions', 'metrics', 'captures', 'logs')}, indent=2), flush=True)
     if not result['passed']:
         raise SystemExit(1)

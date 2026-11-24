@@ -96,8 +96,8 @@ Vor der ersten Änderung: `output/level-expansion-backup/pre-level-expansion-202
 | `tests/tools/levels/compile_check.py` (echter Igor-Build) | PASS |
 | `tests/tools/run_level_smoke.py` (nativ, injizierte Eingaben, 3 Level) | **PASS 166/166** |
 | `QA/tools/run_qa_regression.py` (bestehende Codex-Regression) | **PASS 811/811** |
-| `tests/tools/run_combat_smoke.py` (bestehend, veraltet) | **FAIL, bereits im Ausgangsstand.** Er bricht mit identischer Exception in `v2_passive_behaviour` ab, auch gegen das unveränderte Backup (`output/baseline-check/`). Der Test erwartet ein sofortiges Mage-Projektil; seit der Klassenwaffen-Überarbeitung feuert die Waffe verzögert. Nicht Teil dieses Auftrags, unverändert gelassen. |
-| `tests/tools/build_production.py` | **PASS**: `output/production-build/20261124-011149/FirstGame.zip` (ohne Test-Hooks) |
+| `tests/tools/run_combat_smoke.py` (bestehend, veraltet) | **FAIL, bereits im Ausgangsstand.** Er bricht mit identischer Exception in `v2_passive_behaviour` ab, auch gegen das unveränderte Backup (Prüfkopie am 2026-11-24 wieder gelöscht). Der Test erwartet ein sofortiges Mage-Projektil; seit der Klassenwaffen-Überarbeitung feuert die Waffe verzögert. Nicht Teil dieses Auftrags, unverändert gelassen. |
+| `tests/tools/build_production.py` | **PASS** (ohne Test-Hooks). Das ZIP wurde danach gelöscht: Der Nutzer testet direkt mit F5 in der IDE. Gegenprobe 2026-11-24: Ein Build des echten Projekts zeigt nach „Neues Spiel“ und Charakterwahl die neue Levelauswahl, und der Sumpf startet. |
 | Menschlicher Spieltest | NOT RUN |
 | Langzeit-Performance über 30 Minuten | NOT RUN |
 | Hörabnahme Ambient | NOT RUN |
@@ -111,7 +111,7 @@ Was die Levelsuite je Level prüft:
 - Level-up, Pause, Bosse bei Minute 5/10/15 mit 3/6/9 Fähigkeiten, 80 Gegner bei Minute 10
 - Tod, Neustart ohne Duplikate, Menü ohne Reste
 
-Zusätzlich: Die Ambient-Schleife startet und stoppt beim Verlassen. Aufnahmen: `output/level-smoke/<stamp>/*.png` (Start, Vorschau, Gegner, Gefahr, Countdown, Boss 5/15, Masse Minute 10, Levelauswahl).
+Zusätzlich: Die Ambient-Schleife startet und stoppt beim Verlassen. Aufnahmen: `%LOCALAPPDATA%/FirstGame-Tests/level-smoke/<stamp>/*.png`; der ursprüngliche Lauf lag noch unter `output/` und ist gelöscht (Start, Vorschau, Gegner, Gefahr, Countdown, Boss 5/15, Masse Minute 10, Levelauswahl).
 
 **Performance (nativ, 80 Gegner bei Minute 10):** mittlere Framezeit Wald 17,6 ms, Sumpf 17,1 ms, Ruinen 17,1 ms. Einzelne Spitzen von 100–345 ms treten auf allen Leveln auf, auch im unveränderten Wald (vermutlich das erste Laden von Texturen). Die Texturgruppe des Levels wird beim Start vorgeladen.
 

@@ -1,8 +1,11 @@
-"""Compile the real project with Igor (Windows VM, no test hooks) into output/level-build/<stamp>.
+"""Compile the real project with Igor (Windows VM, no test hooks) into %LOCALAPPDATA%/FirstGame-Tests/compile/<stamp>.
+Nothing is written into the project folder; the game/cache/temp copies are deleted afterwards (only build.log stays).
 Usage: python tests/tools/levels/compile_check.py [--run SECONDS]
 """
 from __future__ import annotations
 
+import os
+import shutil
 import subprocess
 import sys
 import time
@@ -15,7 +18,7 @@ from gms_helpers.runner import GameMakerRunner  # noqa: E402
 
 
 def main():
-    work = ROOT / 'output/level-build' / time.strftime('%Y%m%d-%H%M%S')
+    work = Path(os.environ['LOCALAPPDATA']) / 'FirstGame-Tests/compile' / time.strftime('%Y%m%d-%H%M%S')
     for n in ('cache', 'temp', 'game'):
         (work / n).mkdir(parents=True, exist_ok=True)
     runner = GameMakerRunner(ROOT, runtime_version='2024.14.4.268')
@@ -41,6 +44,9 @@ def main():
         except subprocess.TimeoutExpired:
             p.kill()
         print((work / 'runner.log').read_text(encoding='utf-8', errors='replace')[-3000:] if (work / 'runner.log').exists() else 'no runner log')
+    for n in ('game', 'cache', 'temp', 'FirstGame.zip'):
+        p = work / n
+        shutil.rmtree(p, ignore_errors=True) if p.is_dir() else p.unlink(missing_ok=True)
     sys.exit(0 if ok else 1)
 
 
