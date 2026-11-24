@@ -61,7 +61,8 @@ if (!sprite_exists(player_draw_sprite)) {
     show_error("ObjectPlayer has no valid ArtPack draw sprite", true);
     exit;
 }
-draw_sprite_ext(player_draw_sprite, player_draw_frame, x, y - jump_height, draw_xscale, draw_yscale, image_angle, hud_hit_flash>0 ? make_color_rgb(255,85,82) : c_white, 1);
+// Base model + visible equipment layers, all on the same frame (scripts/equipment_visual).
+player_layers_draw(visual_actor, player_draw_sprite, player_draw_frame, x, y - jump_height, draw_xscale, draw_yscale, hud_hit_flash>0 ? make_color_rgb(255,85,82) : c_white, 1);
 
 if (damage_reduction>0 && variable_instance_exists(id,"orbit_angle")) {
     var d=GetSpellData(SPELL.SHIELD);

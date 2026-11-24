@@ -28,12 +28,18 @@ class Seg:
     info: dict = field(default_factory=dict)
 
 
-def halo_mask(rgb, fig):
-    """Warm, light, unsaturated matte fringe left by the generator around some figures (walk atlas).
-    Steel is neutral/cool (R-B ~ -2, R-G ~ 0); the matte is warm (R-B ~ 12-20, R-G ~ 8-13, value .6-.8)."""
+def halo_mask(rgb, fig, mode='warm'):
+    """Light matte fringe left by the generator around some figures (walk atlases).
+    warm: swordsman matte is warm (R-B ~ 12-20, R-G ~ 8-13), steel is neutral/cool (R-B ~ -2) -> strict warm test.
+    neutral: ranger matte is unsaturated grey (s ~ .06, v ~ .77); hair (lavender) and shirt (bright white) stay."""
     h, s, v = hsv(rgb)
     r, g, b = (rgb[..., i].astype(int) for i in range(3))
-    light = fig & (s < .19) & (v > .52) & (v < .88) & (r - g >= 4) & (r - b >= 6)
+    if mode == 'warm':
+        light = fig & (s < .19) & (v > .52) & (v < .88) & (r - g >= 5) & (r - b >= 9)
+    elif mode == 'loose':   # only for side tests of blades (may also take blade highlights)
+        light = fig & (s < .19) & (v > .52) & (v < .88) & (r - g >= 4) & (r - b >= 6)
+    else:
+        light = fig & (s < .11) & (v > .56) & (v < .87)
     border = fig & ~erode(fig, 1, disk=False)
     ratio = (light & border).sum() / max(1, border.sum())
     halo = np.zeros_like(fig)
@@ -79,7 +85,7 @@ def _protrusion(fig, p0, u, lo, hi, width, extra=0.0):
     return both, one
 
 
-def blade_from_steel(fig2, steel, body_c, min_len=22, max_width=10.5, seed=7, iters=2500, value=None, one_side=True, extra=0.0, core=None, trim=True, inlier=4.0, min_free=10):
+def blade_from_steel(fig2, steel, body_c, min_len=22, max_width=10.5, seed=7, iters=2500, value=None, one_side=True, extra=0.0, core=None, trim=True, inlier=4.0, min_free=10, head_zone=None):
     """Sword blade = straight, narrow run of steel pixels that sticks out of the figure (both sides background).
     RANSAC over all steel pixels (blades vary 3-9 px wide and are often split by the hand).
     Returns (mask, inner_end, outer_end, width) or None."""
@@ -113,8 +119,16 @@ def blade_from_steel(fig2, steel, body_c, min_len=22, max_width=10.5, seed=7, it
         if core is not None and core[ys[inl], xs[inl]].mean() < .25:
             continue
         both, one = _protrusion(fig2, pts[i], u, lo, hi, width, extra)
-        if both < min_free and not (one_side and one >= 13 and both >= 1 and bright[inl].mean() > .52):
+        long_bright = one_side and length >= 30 and both >= 4 and bright[inl].mean() > .55
+        if both < min_free and not (one_side and one >= 13 and both >= 1 and bright[inl].mean() > .52) and not long_bright:
             continue
+        if head_zone is not None:
+            e0 = pts[i] + u * lo; e1 = pts[i] + u * hi
+            top_y = min(e0[0], e1[0])
+            in_head = max(e0[0], e1[0]) < head_zone[0]          # whole line inside the head band
+            raised = top_y < head_zone[1] - 4 and length >= 26  # sticks out above the head
+            if in_head and not raised:
+                continue
         free = both + .5 * one
         score = 6 * free + 2 * length + n_run
         if best is None or score > best[0]:
@@ -242,7 +256,11 @@ def seg_swordsman(rgba):
     skin = fig2 & hue_in(h, 6, 34) & (s > .16) & (s < .56) & (v > .60)
     body_c = np.array(np.nonzero(fig2)).mean(1)
     weapon = np.zeros_like(fig); grip = None; blade_ends = None
-    bl = blade_from_steel(fig2, steel, body_c, value=v)
+    fy0 = np.nonzero(fig2)[0]
+    hz = (fy0.min() + .36 * (fy0.max() - fy0.min()), fy0.min())   # (lower edge of the head band, figure top)
+    loose, _ = halo_mask(rgb, fig, 'loose')
+    side_fig = fig & ~loose if hr >= .20 else fig2              # matte around a blade must not hide its free stretch
+    bl = blade_from_steel(side_fig, steel, body_c, value=v, head_zone=hz)
     if bl is not None:
         fy, fx = np.nonzero(fig2)
         upright = (fy.max() - fy.min()) >= .8 * (fx.max() - fx.min())
@@ -283,6 +301,13 @@ def seg_swordsman(rgba):
     lab[fig2] = KEEP
     lab[chest] = CHEST; lab[legs] = LEGS; lab[feet] = FEET; lab[hands] = HANDS
     lab[hair] = HAIR
+    # undetected blade fragments (thin, elongated bright steel) stay original instead of being re-dressed as cloth
+    core = drop_small(depth(steel, 8) >= 4, 8)
+    loose = steel & ~dilate(core, 4) & ~weapon & (v > .5)
+    for ys_, xs_ in components(loose):
+        n = len(ys_); diag = np.hypot(ys_.max() - ys_.min(), xs_.max() - xs_.min())
+        if diag >= 14 and n / max(diag, 1) < 4.5:
+            lab[ys_, xs_] = KEEP
     lab[weapon] = WEAPON
     lab[halo] = HALO
     hy = np.nonzero(head)
@@ -359,7 +384,7 @@ def seg_mage(rgba):
 def seg_ranger(rgba):
     rgb = rgba[..., :3]; fig = rgba[..., 3] > 0
     h, s, v = hsv(rgb)
-    halo, hr = halo_mask(rgb, fig)
+    halo, hr = halo_mask(rgb, fig, 'neutral')
     fig2 = fig & ~halo
     green = fig2 & hue_in(h, 48, 175) & (s > .16) & (v > .08)
     gold = fig2 & hue_in(h, 22, 60) & (s > .38) & (v > .45)

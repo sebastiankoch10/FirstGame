@@ -57,6 +57,35 @@ def seg_cached(actor, src, col, row, cell, ver):
     return sg
 
 
+_ATLAS = {}
+
+
+def _seg_worker(job):
+    actor, src, col, row, ver = job
+    f = CACHE / f'{actor}_{src}_{col}_{row}_{ver}.pkl'
+    if f.exists():
+        return 0
+    a = _ATLAS.get((actor, src))
+    if a is None:
+        a = _ATLAS[(actor, src)] = Atlas(actor, src)
+    seg_cached(actor, src, col, row, a.cell(col, row), ver)
+    return 1
+
+
+def presegment(actors, ver, workers):
+    """Fill the segmentation cache in parallel (cells are independent)."""
+    from multiprocessing import Pool
+    jobs = [(a, src, col, row, ver) for a in actors for (src, col, row) in cells_of(a)
+            if not (CACHE / f'{a}_{src}_{col}_{row}_{ver}.pkl').exists()]
+    if not jobs:
+        return
+    CACHE.mkdir(parents=True, exist_ok=True)
+    t = time.time()
+    with Pool(workers) as pool:
+        done = sum(pool.imap_unordered(_seg_worker, jobs, chunksize=2))
+    print(f'segmented {done} cells in {time.time() - t:.0f}s with {workers} workers', flush=True)
+
+
 def cells_of(actor):
     """Ordered unique cells [(src, col, row)] -> canonical index."""
     out = []
@@ -179,6 +208,7 @@ def build_actor(actor, ver, project, previews):
             project.sprite(sname, [atlas], (0, 0), texgroup='Equipment')
             rect_tables[p + kind] = encode(rects)
             sizes[sname] = list(atlas.shape[:2])
+    build_icons(actor, cells, layer_frames, acc_frames, project)
     sprite_map = {}
     for name, fi, src, col, row in frame_plan(actor):
         sprite_map.setdefault(name, {})[fi] = index[(src, col, row)]
@@ -192,6 +222,48 @@ def build_actor(actor, ver, project, previews):
 
 
 RARITY = [(176, 138, 92), (110, 170, 255), (242, 200, 92), (196, 124, 255)]
+ICON_SLOTS = ['wpn', 'head', 'chest', 'hands', 'feet']
+
+
+def build_icons(actor, cells, layer_frames, acc_frames, project, size=32):
+    """Item icons straight from the on-body pieces: spr_eqv_icons_<actor>, frame = slot_index*4 + tier
+    (slot order weapon, head, chest, hands, feet). Showcase cell = the idle/walk view where the piece is largest."""
+    show = [i for i, (src, col, row) in enumerate(cells) if src in ('combat', 'walk') and col in (0, 2) and row in (6, 7, 0, 5)]
+    frames = []
+    for slot in ICON_SLOTS:
+        for t in range(4):
+            key = f'{slot}{t}'
+            best = max(show, key=lambda i: 0 if layer_frames[key][i] is None else int((layer_frames[key][i][0][..., 3] > 0).sum()))
+            c = layer_frames[key][best]
+            icon = np.zeros((size, size, 4), np.uint8)
+            if c is not None:
+                im = c[0].copy()
+                ac = acc_frames.get(key)
+                if ac is not None and ac[best] is not None:
+                    a_im, ax, ay = ac[best]; ox, oy = c[1], c[2]
+                    tint = np.array((214, 186, 128), float) / 255.0   # neutral trim; rarity is shown by the slot frame
+                    for yy in range(a_im.shape[0]):
+                        for xx in range(a_im.shape[1]):
+                            if a_im[yy, xx, 3]:
+                                ty, tx = ay - oy + yy, ax - ox + xx
+                                if 0 <= ty < im.shape[0] and 0 <= tx < im.shape[1]:
+                                    im[ty, tx, :3] = (a_im[yy, xx, :3] * tint).astype(np.uint8); im[ty, tx, 3] = 255
+                h, w = im.shape[:2]
+                f = max(1, min((size - 4) // max(h, 1), (size - 4) // max(w, 1)))
+                big = np.kron(im, np.ones((f, f, 1), np.uint8))
+                if big.shape[0] > size - 2 or big.shape[1] > size - 2:
+                    big = np.asarray(Image.fromarray(im).resize((min(size - 2, w), min(size - 2, h)), Image.NEAREST))
+                bh, bw = big.shape[:2]; y0, x0 = (size - bh) // 2, (size - bw) // 2
+                icon[y0:y0 + bh, x0:x0 + bw] = big
+                # 1 px dark outline around the item for readability on the slot frame
+                a = icon[..., 3] > 0
+                ring = np.zeros_like(a)
+                for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                    ring |= np.roll(np.roll(a, dy, 0), dx, 1)
+                ring &= ~a
+                icon[ring] = (12, 10, 14, 255)
+            frames.append(icon)
+    project.sprite(f'spr_eqv_icons_{actor}', frames, (size // 2, size // 2), texgroup='Equipment')
 
 
 def uncrop(c):
@@ -255,6 +327,7 @@ def main():
     ap.add_argument('--actors', default=','.join(ACTORS)); ap.add_argument('--previews', action='store_true')
     a = ap.parse_args()
     ver = code_hash()
+    presegment(a.actors.split(','), ver, max(1, (os.cpu_count() or 2) - 2))
     project = Project(); project.ensure_texture_group('Equipment')
     data = {}; report = {}
     # keep already built actors in the data script when only some are rebuilt

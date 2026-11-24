@@ -23,7 +23,7 @@ RAMPS = {
     'trousers':  [(22, 17, 18), (35, 27, 27), (50, 38, 36), (66, 51, 46), (84, 66, 58), (104, 83, 72), (126, 104, 90)],
     'wraps':     [(30, 20, 16), (48, 32, 24), (68, 46, 33), (90, 62, 44), (112, 80, 57), (136, 101, 73), (160, 124, 92)],
     'shoes':     [(24, 16, 12), (40, 27, 19), (58, 39, 27), (78, 53, 36), (99, 68, 46), (122, 86, 58), (146, 106, 74)],
-    'dress':     [(30, 24, 44), (48, 40, 68), (70, 60, 94), (96, 86, 122), (126, 116, 150), (158, 150, 178), (192, 186, 206)],
+    'dress':     [(26, 15, 46), (42, 25, 74), (62, 39, 104), (86, 57, 136), (112, 80, 166), (142, 110, 194), (180, 150, 218)],
     'linen':     [(58, 52, 50), (88, 80, 76), (120, 112, 106), (150, 142, 134), (180, 172, 162), (206, 200, 190), (230, 226, 216)],
     'silver':    [(30, 32, 40), (56, 60, 72), (88, 94, 108), (124, 130, 144), (162, 168, 180), (200, 206, 216), (240, 244, 250)],
     'gold':      [(48, 30, 10), (86, 56, 18), (128, 88, 30), (170, 124, 46), (206, 162, 70), (234, 198, 108), (252, 232, 170)],
@@ -286,21 +286,32 @@ def helmet_layer(fr: Frame, tier, max_half_width=8.5, crown_frac=.62):
     h, s, v = hsv(rgb)
     ys, xs = np.nonzero(hair)
     top = ys.min(); hb = ys.max()
-    skin = (fr.lab == KEEP) & hue_in(h, 6, 34) & (s > .14) & (s < .58) & (v > .58) & (np.arange(96)[:, None] >= top) & (np.arange(96)[:, None] <= hb + 3)
+    rows = np.arange(96)[:, None]
+    # face skin only below the upper third of the hair mass (matte remnants above the hair are not skin)
+    skin = (fr.lab == KEEP) & hue_in(h, 6, 34) & (s > .14) & (s < .58) & (v > .58) & (rows >= top + .3 * (hb - top)) & (rows <= hb + 3)
+    skin &= dilate(hair, 2)
     if skin.sum() >= 3:
         brow = int(np.nonzero(skin)[0].min()) + 1
     else:
         brow = int(top + crown_frac * (hb - top + 1))
-    cx = xs[ys <= brow].mean() if (ys <= brow).any() else xs.mean()
-    dome = hair & (np.arange(96)[:, None] <= brow)
-    dome &= np.abs(np.arange(96)[None, :] - cx) <= max_half_width + 1
-    helm = convex_fill(dome) & (np.arange(96)[:, None] <= brow)
-    helm &= np.abs(np.arange(96)[None, :] - cx) <= max_half_width
+    brow = max(brow, int(top + .32 * (hb - top + 1)))
+    above = hair & (rows <= brow)
+    if above.sum() < 6:
+        return main, acc
+    ay, ax = np.nonzero(above)
+    cx = float(np.median(ax)); cy = float(brow) + .5
+    rx0 = max(3.0, min(max_half_width, (np.percentile(ax, 95) - np.percentile(ax, 5)) / 2 + 1.0))
+    ry0 = max(3.0, cy - np.percentile(ay, 8))
+    # smallest dome (fixed aspect) that still covers almost every hair pixel above the brow -> no spikes poke through
+    k = np.percentile(np.sqrt(((ax - cx) / rx0) ** 2 + ((ay - cy) / ry0) ** 2), 97)
+    k = float(np.clip(k, 1.0, 1.35))
+    rx = min(max_half_width, rx0 * k); ry = ry0 * k
+    yy, xx = np.mgrid[0:96, 0:96]
+    helm = (((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2 <= 1.0) & (yy <= brow)
     if helm.sum() < 6:
         return main, acc
     hy, hx = np.nonzero(helm)
-    cy = hy.max(); rx = max(2.0, (hx.max() - hx.min() + 1) / 2); ry = max(2.0, cy - hy.min() + 1)
-    yy, xx = np.mgrid[0:96, 0:96]
+    cy = hy.max()
     nx = (xx - cx) / rx; ny = (yy - cy) / ry
     nz = np.sqrt(np.clip(1 - nx ** 2 - ny ** 2, 0, 1))
     light = np.array([-.55, -.6, .58]); light /= np.linalg.norm(light)
@@ -439,7 +450,7 @@ def inpaint_nearest(rgba, holes, known):
 
 BASE_CLOTHES = {
     'swordsmanv3': {CHEST: ('gambeson', .70), HANDS: ('wraps', .75), LEGS: ('trousers', .70), FEET: ('shoes', .80)},
-    'magev3': {CHEST: ('dress', .75), HANDS: ('dress', .75), LEGS: ('dress', .80), FEET: ('shoes', .80)},
+    'magev3': {CHEST: ('dress', .95), HANDS: ('dress', .9), LEGS: ('dress', 1.0), FEET: ('shoes', .80)},
     'rangerv3': {CHEST: ('linen', .70), HANDS: ('linen', .70), FEET: ('shoes', .80)},
 }
 # chest armour also covers the hips/thighs (mail skirt, tassets) from this tier on; None = never
@@ -461,6 +472,11 @@ def base_layer(fr: Frame, kinds):
     lab2, _ = inpaint_nearest(lab_rgba, inside, body)
     lab = np.where(W, lab2[..., 0], lab)
     lab[W & ~inside] = BG
+    # thin remnants (1 px wide outline strokes) next to the removed weapon -> gone
+    alive0 = out[..., 3] > 0
+    near = dilate(W & ~inside, 2) & alive0 & ~W
+    thin = near & ~dilate(erode(alive0, 1, disk=False), 1, disk=False)
+    out[thin] = 0; lab[thin] = BG
     # specks left around a removed blade (outline fragments) -> gone
     from morph import components
     alive = out[..., 3] > 0

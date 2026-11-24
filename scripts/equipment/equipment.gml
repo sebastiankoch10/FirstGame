@@ -181,7 +181,7 @@ function equipment_step(_dt) {
 }
 function equipment_world_draw() {
     if(!variable_global_exists("equipment_drops"))return;
-    var spr=asset_get_index("spr_eq_icons"),t=current_time/1000;
+    var t=current_time/1000;
     for(var i=0;i<array_length(global.equipment_drops);i++) {
         var d=global.equipment_drops[i],col=equipment_rarity_color(d.item.rarity),bob=sin(t*3+i)*3,fade=clamp(d.age*3,0,1);
         gpu_set_blendmode(bm_add);
@@ -190,7 +190,8 @@ function equipment_world_draw() {
         draw_set_alpha(.16*fade);draw_ellipse(d.x-20,d.y-6,d.x+20,d.y+6,false);
         gpu_set_blendmode(bm_normal);
         draw_set_alpha(.5*fade);draw_set_color(c_black);draw_ellipse(d.x-11,d.y-3,d.x+11,d.y+3,false);draw_set_alpha(fade);
-        if(sprite_exists(spr))draw_sprite_ext(spr,equipment_icon_frame(d.item.slot),d.x,d.y-16+bob,.75,.75,0,c_white,fade);
+        var ic=equipment_item_icon(d.item);
+        if(sprite_exists(ic.spr))draw_sprite_ext(ic.spr,ic.frame,d.x,d.y-16+bob,.75,.75,0,c_white,fade);
         else{draw_set_color(col);draw_circle(d.x,d.y-16+bob,7,false);}
     }
     draw_set_alpha(1);draw_set_color(c_white);
@@ -257,9 +258,21 @@ function equipment_menu_step(_L,_mx,_my) {
         if(h>=100 && h-100<array_length(global.equipment_backpack)){array_delete(global.equipment_backpack,h-100,1);fg_sfx("ui_back");}
     }
 }
+/// Item icon: per-class, per-tier icon rendered from the visible piece (spr_eqv_icons_<actor>, frame slot*4+tier);
+/// talismans and missing art fall back to the slot icons in spr_eq_icons.
+function equipment_item_icon(_item) {
+    var order=["weapon","head","chest","hands","feet"],si=-1;
+    for(var i=0;i<5;i++)if(order[i]==_item.slot)si=i;
+    if(si>=0) {
+        var cls=variable_global_exists("selected_character") ? global.selected_character : "Sword";
+        var spr=asset_get_index("spr_eqv_icons_"+(cls=="Mage" ? "magev3" : (cls=="Ranger" ? "rangerv3" : "swordsmanv3")));
+        if(sprite_exists(spr))return {spr:spr,frame:si*4+eqv_item_tier(_item)};
+    }
+    return {spr:asset_get_index("spr_eq_icons"),frame:equipment_icon_frame(_item.slot)};
+}
 function equipment_icon_draw(_item,_x,_y,_size,_alpha=1) {
-    var spr=asset_get_index("spr_eq_icons");
-    if(sprite_exists(spr))draw_sprite_stretched_ext(spr,equipment_icon_frame(_item.slot),_x,_y,_size,_size,c_white,_alpha);
+    var ic=equipment_item_icon(_item),spr=ic.spr;
+    if(sprite_exists(spr))draw_sprite_stretched_ext(spr,ic.frame,_x,_y,_size,_size,c_white,_alpha);
     else{draw_set_color(equipment_rarity_color(_item.rarity));draw_circle(_x+_size/2,_y+_size/2,_size*.3,false);}
 }
 function equipment_cell_draw(_r,_item,_hover,_empty_label) {
@@ -326,14 +339,14 @@ function equipment_hud_draw(_x,_y) {
         var it=global.equipment[$ s[i]],xx=_x+i*(cell+3);
         draw_set_alpha(.7);draw_set_color(make_color_rgb(12,17,25));draw_rectangle(xx,_y,xx+cell,_y+cell,false);draw_set_alpha(1);
         draw_set_color(is_struct(it) ? equipment_rarity_color(it.rarity) : make_color_rgb(52,62,76));draw_rectangle(xx,_y,xx+cell,_y+cell,true);
-        if(is_struct(it) && sprite_exists(spr))draw_sprite_stretched(spr,equipment_icon_frame(it.slot),xx+1,_y+1,cell-2,cell-2);
+        if(is_struct(it))equipment_icon_draw(it,xx+1,_y+1,cell-2);
         else if(sprite_exists(spr))draw_sprite_stretched_ext(spr,equipment_icon_frame(s[i]),xx+3,_y+3,cell-6,cell-6,c_black,.45);
     }
     if(array_length(global.equipment_backpack)>0){draw_set_color(make_color_rgb(200,214,226));draw_text_transformed(_x+6*(cell+3)+4,_y+4,"+"+string(array_length(global.equipment_backpack))+" [T]",.75,.75,0);}
     draw_set_color(c_white);
 }
-/// Visible gear feedback on the character (no armour sprite variants exist): a ground ring in the colour of the
-/// best equipped rarity, thicker with more pieces, and a short sheen every few seconds. Drawn under the player.
+/// Ground ring in the colour of the best equipped rarity (thicker with more pieces, short sheen every few seconds),
+/// drawn under the player. The pieces themselves are drawn on the character by scripts/equipment_visual.
 function equipment_player_aura_draw(_pl) {
     if(!variable_global_exists("equipment"))return;
     var s=equipment_slots(),best=-1,pieces=0;

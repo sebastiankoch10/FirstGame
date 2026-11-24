@@ -1,0 +1,42 @@
+{
+ "swordsmanv3": {
+  "cells": 256,
+  "weapon_cells": 223,
+  "composite_diff_px": {
+   "mean": 34.4,
+   "max": 175,
+   "frames_over_20": 65
+  },
+  "halo_px": 7119,
+  "seconds": 97,
+  "atlas_px": 2220544,
+  "atlases": 38
+ },
+ "magev3": {
+  "cells": 256,
+  "weapon_cells": 212,
+  "composite_diff_px": {
+   "mean": 12.1,
+   "max": 44,
+   "frames_over_20": 41
+  },
+  "halo_px": 0,
+  "seconds": 115,
+  "atlas_px": 3110400,
+  "atlases": 38
+ },
+ "rangerv3": {
+  "cells": 256,
+  "weapon_cells": 230,
+  "composite_diff_px": {
+   "mean": 32.1,
+   "max": 151,
+   "frames_over_20": 124
+  },
+  "halo_px": 4482,
+  "seconds": 253,
+  "atlas_px": 4595200,
+  "atlases": 38
+ },
+ "segment_code": "b64817ccaa"
+}

@@ -3,6 +3,7 @@ Builds and runs outside the project folder in %LOCALAPPDATA%/FirstGame-Tests/<na
 
   python tests/tools/run_native_harness.py feature   -> tests/feature_harness.gml  (prefix ft)
   python tests/tools/run_native_harness.py boss      -> tests/boss_harness.gml     (prefix bh)
+  python tests/tools/run_native_harness.py visual    -> tests/visual_harness.gml   (prefix vh): layered characters, captures
 
 The harness must define <prefix>_menu_tick, <prefix>_controller_tick, <prefix>_gui_capture_begin/_end, <prefix>_world_capture,
 <prefix>_show_error and print "<TAG>_RESULT {json}" (TAG = FEATURE / BOSSMECH).
@@ -27,6 +28,7 @@ from gms_helpers.runner import GameMakerRunner  # noqa: E402
 SUITES = {
     'feature': ('tests/feature_harness.gml', 'ft', 'FEATURE', 'FirstGameFeatureSmoke', 900),
     'boss': ('tests/boss_harness.gml', 'bh', 'BOSSMECH', 'FirstGameBossMech', 3000),
+    'visual': ('tests/visual_harness.gml', 'vh', 'VISUAL', 'FirstGameVisual', 900),
 }
 
 

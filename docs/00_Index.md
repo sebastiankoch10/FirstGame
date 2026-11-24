@@ -26,6 +26,7 @@ Die Regeln für KI-Agenten stehen in `AGENTS.md` im Projektordner, außerhalb di
 - [[Progression & Level-up]]
 - [[Talente]]
 - [[Ausrüstung]]
+- [[Charaktergrafik & Ausrüstungs-Layer]]
 
 **Welt und Gegner**
 - [[Level & Welten]]

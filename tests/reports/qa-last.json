@@ -1,21 +1,15 @@
 {
- "date": "2026-11-24 19:31",
- "commit": "de2f471d",
- "tier": 1,
+ "date": "2026-11-24 22:40",
+ "commit": "f6e651c4",
+ "tier": 3,
  "dirty": true,
  "results": [
   {
-   "suite": "static",
+   "suite": "visual",
    "status": "PASS",
-   "seconds": 82,
-   "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-static.log"
-  },
-  {
-   "suite": "classes",
-   "status": "PASS",
-   "cached": true,
-   "checks": 150.0,
-   "detail": "wiederverwendet vom 2026-11-24 19:30 (Eingaben unveraendert)"
+   "seconds": 178,
+   "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-visual.log",
+   "checks": 75.0
   }
  ]
 }

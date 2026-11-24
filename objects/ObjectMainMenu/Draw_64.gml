@@ -47,7 +47,9 @@ if (menu_mode == "characters") {
     var portrait_sprite = asset_get_index(portrait_names[menu_index]);
     if (sprite_exists(portrait_sprite)) {
         var portrait_scale = min(200 / sprite_get_width(portrait_sprite), 240 / sprite_get_height(portrait_sprite));
-        draw_sprite_ext(portrait_sprite, 0, gw * 0.78, gh * 0.55, portrait_scale, portrait_scale, 0, c_white, 1);
+        // Base model + start weapon (no equipment in the menu).
+        var portrait_actors = ["swordsmanv3", "magev3", "rangerv3"];
+        player_layers_draw(portrait_actors[menu_index], portrait_sprite, 0, gw * 0.78, gh * 0.55, portrait_scale, portrait_scale, c_white, 1, {});
     }
     draw_set_color(make_color_rgb(210, 218, 210));
     draw_text_ext(menu_x+menu_w*0.5, top + count * (button_h + gap) + 24, descriptions[menu_index], 20, menu_w);

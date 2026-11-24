@@ -22,3 +22,8 @@ updated: 2026-11-24
 - **2026-11-24 · Schwenkstrahlen treffen pro Überstreichen nur einmal.** Grund: Die Simulationen zeigten Mehrfachtreffer.
 - **2026-11-24 · Komplexe Varianten der Fähigkeiten 1–3 erst bei Bossen ab Minute 10.** Grund: Der erste Boss in Minute 5 soll zugänglich bleiben (laut `BOSS_DESIGN.md` Abschnitt H: „später komplexere Varianten“).
 - **2026-11-24 · Aufholattacken ersetzen den Teleport.** Der Teleport bleibt nur als Notfall (über 850 px außerhalb des Bildes, nach 6 s).
+- **2026-11-24 · Charaktere aus Basismodell plus sichtbaren Ausrüstungsebenen.** Basis = Grundkleidung ohne Waffe. Die Startwaffe ist eine eigene Ebene, solange keine Waffe angelegt ist. Siehe [[Charaktergrafik & Ausrüstungs-Layer]].
+- **2026-11-24 · Umhänge bleiben im Basismodell.** Grund: Das Ausrüstungssystem hat keinen Umhang-Slot (Waffe, Kopf, Brust, Hände, Füße, Talisman). Der rote bzw. grüne Umhang ist Klassenidentität. Ein Umhang-Slot wäre eine Design- und Balancing-Änderung.
+- **2026-11-24 · Aussehen eines Gegenstands = Stufe aus der Gegenstandsstufe (wie der Name), Seltenheit = Akzentfarbe.** Grund: Die Namen hängen schon an der Stufe; keine neuen Item-Daten, keine Wertänderung.
+- **2026-11-24 · Ausrüstungsgrafik prozedural aus den Originalfiguren abgeleitet.** Grund: Claude hat keinen Bildgenerator. So sitzen alle Teile in jedem der rund 1.240 Frames pixelgenau. Für handgezeichnete Varianten kann Codex (mit Bildgenerator) die Pipeline weiterverwenden.
+- **2026-11-24 · Gepackte Atlanten plus Rechtecktabelle statt Einzelframes.** Grund: rund 23.000 Ausrüstungsframes als Einzel-PNGs würden Build, IDE und Testkopien stark verlangsamen.

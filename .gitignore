@@ -86,3 +86,6 @@ output/native-mc-*/
 
 # Testkopien, Builds und Backups (jederzeit neu erzeugbar)
 output/
+
+# Python bytecode
+__pycache__/
