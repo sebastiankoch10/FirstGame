@@ -100,7 +100,6 @@ function equipment_reset_run() {
     global.equipment_backpack=[];global.equipment_drops=[];global.equipment_hover=-1;global.equipment_found=0;
     global.equipment_seed=max(1,(variable_global_exists("choice_rng") ? global.choice_rng : 12345) mod 2147483646);
     if(!variable_global_exists("toasts"))global.toasts=[];
-    global.toasts=[];
     equipment_rebuild_cache();
 }
 function equipment_rebuild_cache() {
@@ -325,4 +324,18 @@ function equipment_hud_draw(_x,_y) {
     }
     if(array_length(global.equipment_backpack)>0){draw_set_color(make_color_rgb(200,214,226));draw_text_transformed(_x+6*(cell+3)+4,_y+4,"+"+string(array_length(global.equipment_backpack))+" [T]",.75,.75,0);}
     draw_set_color(c_white);
+}
+/// Visible gear feedback on the character (no armour sprite variants exist): a ground ring in the colour of the
+/// best equipped rarity, thicker with more pieces, and a short sheen every few seconds. Drawn under the player.
+function equipment_player_aura_draw(_pl) {
+    if(!variable_global_exists("equipment"))return;
+    var s=equipment_slots(),best=-1,pieces=0;
+    for(var i=0;i<6;i++){var it=global.equipment[$ s[i]];if(is_struct(it)){pieces++;best=max(best,it.rarity);}}
+    if(pieces==0)return;
+    var col=equipment_rarity_color(best),t=current_time/1000,pulse=.5+.5*sin(t*2.2),lift=_pl.jump_height;
+    gpu_set_blendmode(bm_add);draw_set_color(col);
+    for(var k=0;k<min(3,1+pieces div 2);k++){draw_set_alpha((.10+.05*pulse)*(1-k*.25)*(lift>0 ? .5 : 1));draw_ellipse(_pl.x-22-k*3,_pl.y-4-k,_pl.x+22+k*3,_pl.y+8+k,true);}
+    var sheen=frac(t/3.2);
+    if(sheen<.18){var a=sheen/.18*360;draw_set_alpha(.35*(1-sheen/.18));draw_circle(_pl.x+lengthdir_x(22,a),_pl.y+2+lengthdir_y(6,a),2,false);}
+    gpu_set_blendmode(bm_normal);draw_set_alpha(1);draw_set_color(c_white);
 }

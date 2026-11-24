@@ -1,5 +1,6 @@
 effects_draw();
 if(level_world_room())master_shadow_draw(x-4,y+3,17-jump_height*.12,6-jump_height*.04,jump_height>0 ? .2 : .4);
+equipment_player_aura_draw(id);
 // Draw-Event von ObjectPlayer oder ObjectMonster
 
 if (!variable_instance_exists(id, "jump_height")) jump_height = 0;

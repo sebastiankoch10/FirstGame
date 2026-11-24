@@ -77,6 +77,8 @@ function talent_reset_run() {
     global.talent_last_stand_used=false;global.talent_tab=0;
     if(talent_config().persistent)talent_load();
     talent_rebuild_cache();
+    // One hint per session so the new character screen is discoverable.
+    if(!variable_global_exists("talent_hint_shown")){global.talent_hint_shown=true;global.toasts=[];feedback_toast_add("Neu: Talente und Ausruestung - Taste [T] oeffnet den Charakter",make_color_rgb(242,206,120));}
 }
 function talent_rank(_id) {
     if(!variable_global_exists("talent_ranks"))return 0;

@@ -110,6 +110,9 @@ def main():
     result['passed'] = result['passed'] and code == 0
     report = 'moving-coin-'+coin_fixture+'.json' if coin_fixture else ('performance.json' if stress_only else 'regression.json')
     write(ROOT/'QA/data'/report, json.dumps(result, indent=2)+'\n')
+    # Keep logs, drop the re-creatable project copy and test executable (no EXEs inside the project folder).
+    for n in ('project','build','cache','temp'):
+        shutil.rmtree(work/n, ignore_errors=True)
     print(json.dumps({k:result[k] for k in ['passed','checks','failures','logs','screenshots']}, indent=2), flush=True)
     if not result['passed']: raise RuntimeError('Native regression assertions failed')
 

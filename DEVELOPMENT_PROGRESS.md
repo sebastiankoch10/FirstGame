@@ -82,13 +82,43 @@ Arbeitsweise: Änderungen direkt im Projekt (F5 in GameMaker). Tests bauen isoli
 - **Dauerhafte Lichtquellen** für alle aktiven Felder und Klasseneffekte im bestehenden multiplikativen Lichtsystem.
 - Das Limit der Lichtimpulse steigt von 24 auf 40. Das Budget von 72 Lichtquellen bleibt bestehen.
 
+### 2.4 Bosskampf-Designphilosophie – UMGESETZT, nativ getestet
+- **Dateien:** `scripts/boss_choreo/boss_choreo.gml` ist neu; eingebaut in `boss_hazards_v2`, `dragon_encounter`, `dragon_boss` und `boss_encounters_v2`.
+- **Vollständige Übersicht:** `DESIGN/BOSS_DESIGN.md`, Abschnitt „Umsetzungsstand“.
+- **Musterbibliothek** auf den bestehenden bv2-Gefahren, eine Uhr je Boss:
+  - Schachbrett und invertiertes Schachbrett
+  - Streifen
+  - Quadranten
+  - innen/außen
+  - Explosionskette
+  - schließender Giftring
+  - Schwenkstrahl mit 2.600 px
+- **13 Fähigkeiten** der drei Bosse haben phasenabhängige, komplexere Varianten. Es bleiben 9 Fähigkeiten je Boss, die Freischaltung 3/6/9 ist unverändert, und es gibt keine neuen HP- oder Schadenswerte.
+- **Seltene Aufholattacken:** Sturzflug (Drache), Untertauchen (Behemoth), Formationswechsel (Hexen). Der Teleport bleibt nur als Notfall bei mehr als 850 px außerhalb des Bildes, nach 6 s statt 2,5 s.
+- **Überlappende Wellen** sind lesbar: Die nächste Welle wird kräftig mit Countdown gezeigt, die spätere Welle nur blass mit Punktmarkierung.
+- **Warnungen allgemein (Priorität 9):** Zusätzlich zum Zeiger in der Mitte läuft ein radialer Countdown am Zonenrand. Kurz vor dem Einschlag leuchtet die Kante auf. Es gilt dieselbe Uhr wie für den Treffer.
+- **Waldwächter (Punkt 39):** war schon korrekt. Er hat einen eigenen automatischen Grundangriff, ein Einzelgeschoss alle 1,6 s ohne Bodenwarnung.
+- **Boss-Testmodus (Priorität 10):** Vorhanden waren:
+  - Auswahl von Boss, Zufallsboss, Minute, Klasse, Build, Schwierigkeit, Einzelangriff und Seed
+  - Direktstart „Drache / Minute 15 / alle neun“
+  - F1 Unverwundbarkeit, F2 Heilen, F3 Phase, F4 Boss-HP 25 %, F5 Attacke, F10 Körperboxen
+
+  Neu sind F6 (Attacke wechseln), F7 (Aufholattacke erlauben), F8 (+5 Talentpunkte) und F9 (epischer Testgegenstand).
+
 ## 3. Tests (ehrlich gekennzeichnet)
 
 | Test | Ergebnis |
 |---|---|
 | Kompilierung echtes Projekt (Igor, VM) | PASS |
-| `python tests/tools/run_native_harness.py feature` – Talente/Ausrüstung/VFX/Charakterbildschirm für alle 3 Klassen, nativ | **PASS 129/129** (24.11. 07:03) |
+| `python tests/tools/run_native_harness.py feature` – Talente/Ausrüstung/VFX/Charakterbildschirm für alle 3 Klassen, nativ | **PASS 129/129** (24.11. 07:03, erneut nach Bossarbeit PASS 129/129) |
+| `python tests/tools/run_native_harness.py boss` – alle 9 Fähigkeiten × Phase 1/3 × 3 Bosse mit Orakel-Ausweich-Bot; Kiting 560 px je Boss mit der Rotation | **PASS 135/135**. Kein Frame ohne erreichbare sichere Position. Strahlreichweite 2.600 px, Schlammwelle 1.500 px. Kiter auf 560 px werden von 15–19 Gefahren je Boss erreicht. Natürliche Aufholattacken: Drache 2, Behemoth 2; die Hexen folgen per Formation (Ø 476 px). Ihre Aufholattacke lief erzwungen fehlerfrei. |
+| `python QA/tools/validate_project.py` (statisch) | PASS: 1.380 Ressourcen, keine neuen Fehler (3 bekannte alte verwaiste Kollisionsdateien) |
+| `python QA/tools/run_qa_regression.py` (811 Codex-Prüfungen) | 1. Lauf: 810/811. Fehlgeschlagen ist „Dragon beam causes real active HP loss“. Die Testvorlage stellte den Spieler auf die alte, starre Strahlrichtung. Sie wurde angepasst: Spieler auf der angekündigten Startkante des Schwenkstrahls, Treffer im ersten Aktivierungsframe. Ergebnis des 2. Laufs: siehe unten. |
 | Menschlicher Spieltest | NOT RUN |
+
+**Bekannte Grenzen der Bosstests:**
+- Das Orakel sieht nur bv2-Gefahren. Die älteren Drachenangriffe (Bogen, Bodeneinschlag, Flügelsturm, Void, Wirbel, Salven) und alle Projektile sind darin nicht erfasst; sie sind unverändert und waren in der Codex-QA vermessen.
+- Treffer des Orakels sind Bot-Treffer, kein Beweis für Unfairness. Sie entstanden nur bei bewusst beweglichen Mechaniken: rotierender Verbindungsstrahl, Säurestreifen, Projektilspritzer.
 
 ## 4. Offene Designentscheidungen (Talente/Ausrüstung)
 - **Punktequelle und -tempo:** jetzt alle 4 Stufen plus Hauptboss. Ob Talente pro Run gelten oder dauerhaft sind (Meta-Progression), ist offen; umschaltbar über `talent_config().persistent`.

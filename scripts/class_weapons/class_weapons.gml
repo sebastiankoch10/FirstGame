@@ -50,7 +50,7 @@ function class_weapon_release(_pl,_step) {
     } else {
         if(_step==12) {
             var waves=talent_stat("ranger_rain");
-            class_fx_add("ranger_rain",_pl.class_target_x,_pl.class_target_y,amount,125*_pl.spell_area,1.25+waves*.16);global.class_effects[array_length(global.class_effects)-1].waves=5+waves;fg_sfx("ranger_rain");
+            class_fx_add("ranger_rain",_pl.class_target_x,_pl.class_target_y,amount,125*_pl.spell_area,1.25+waves*.16);var rain=array_length(global.class_effects)>0 ? global.class_effects[array_length(global.class_effects)-1] : undefined;if(is_struct(rain) && rain.kind=="ranger_rain" && rain.age==0)rain.waves=5+waves;fg_sfx("ranger_rain");
             if(talent_stat("ranger_quiver")>0)for(var q=0;q<7;q++)class_weapon_projectile(_pl,_pl.attack_direction+(q-3)*9,amount,true);
         }
         else {
