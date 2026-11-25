@@ -197,9 +197,12 @@ function vfx_px(_x,_y,_s,_col,_alpha) {
 /// Solid pixel line on the world grid (one _w x _w block per pixel step, Bresenham-like).
 function vfx_pixel_line(_ax,_ay,_bx,_by,_w,_col,_alpha) {
     if(_alpha<=0)return;
-    var n=max(1,ceil(max(abs(_bx-_ax),abs(_by-_ay))));draw_set_color(_col);draw_set_alpha(min(1,_alpha));
-    var h=floor(_w/2);
-    for(var i=0;i<=n;i++){var px=round(lerp(_ax,_bx,i/n))-h,py=round(lerp(_ay,_by,i/n))-h;draw_rectangle(px,py,px+_w-1,py+_w-1,false);}
+    draw_set_color(_col);draw_set_alpha(min(1,_alpha));
+    // The world surface is the pixel grid (render_pipeline), so one primitive already lands on whole pixels; this was
+    // one rectangle per pixel step before (hundreds of draw calls for arrows and beams, which cost frame time).
+    var ax=round(_ax),ay=round(_ay),bx=round(_bx),by=round(_by);
+    if(ax==bx && ay==by){var h=floor(_w/2);draw_rectangle(ax-h,ay-h,ax-h+_w-1,ay-h+_w-1,false);}
+    else if(_w<=1)draw_line(ax,ay,bx,by);else draw_line_width(ax,ay,bx,by,_w);
 }
 /// Soft additive glow (light layer of a composed effect); never darkens the ground.
 function vfx_glow_line(_ax,_ay,_bx,_by,_w,_col,_alpha) {

@@ -18,6 +18,9 @@ Multiplikatives Weltlicht, Wetter, Kampf-Feedback, Zauberpartikel.
   - Projektile über `vfx_projectile_draw` (aus `projectile_draw`), Flächeneffekte aus `effect_add(..., style)` über `vfx_area_effect_draw` (Stile `nova`, `heal`, `fire`). Irrlicht `vfx_wisp_draw`, Prismensamen `vfx_seed_draw`. Hilfen `vfx_pixel_line`, `vfx_glow_line`, `vfx_glow_disc`.
 - `scripts/combat_feedback`: Schadenszahlen (seit 25.11. Pixelschrift `world_font()` aus `spr_font_world`, erzeugt mit `tests/tools/art/build_pixel_font.py`), Einschläge, Trefferreaktion.
 - Drachenfeuer als Pixel-Komposite in `scripts/dragon_boss`: `vfx_fire_tongue` (Strahl, Schwenk), `vfx_fire_cone` (Feuerbogen, füllt genau den Sektor).
+- Übrige Drachen-Effekte über `dragon_fx_sprite` (`scripts/dragon_encounter`) als Pixel-Komposite: `vfx_meteor`, `vfx_eruption` (Einschlag, Magma), `vfx_wind_blade`, `vfx_void_orb`, `vfx_fire_bolt`, `vfx_vortex`. Klassen-Projektile über `class_fx_sprite`: `vfx_arcane_bolt`, `vfx_arrow_shot`, `vfx_dust_puff`.
+- Hexen- und Sumpf-Effekte über `bv2_fx` (`scripts/boss_hazards_v2`): `vfx_element_orb` (Geschosse, Perlen), `vfx_element_burst` (Flächen; Feuer, Eis, Säure, Erde). Die Hexen-Projektile sind ebenfalls Pixel-Kugeln. Gemalte Effekt-Sheets werden nirgends mehr skaliert gezeichnet.
+- `vfx_pixel_line` zeichnet seit 25.11. ein einzelnes Linien-Primitiv (im Weltraster pixelgenau).
 - `scripts/attack_telegraph`: Warnflächen mit Countdown (zusammen mit [[Bosse]]).
 
 ## Abhängigkeiten

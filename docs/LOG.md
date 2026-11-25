@@ -4,6 +4,10 @@ updated: 2026-11-25
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-25 · Claude · Zwillingshexen gebacken, alle Boss-Effekte als Pixel-Komposite, deterministische Boss-Tests
+- Hexen aus den Quellbögen in Spielgröße (`build_boss_baked.py twins`); `dragon_fx_sprite`, `class_fx_sprite`, `bv2_fx` und Hexen-Projektile als Pixel-Komposite (`dragon_encounter`, `class_weapons`, `boss_hazards_v2`, `boss_combat`).
+- `vfx_pixel_line` als ein Primitiv (`spell_vfx`); Boss-Suite mit fester Bildzeit (`run_native_harness.py` `FIXED_DT_SUITES`), nachdem die Hexen-Kennzahl von der Bildrate abhing (8/17 → 10/17).
+
 ### 2026-11-25 · Claude · Pixelraster, Drache als Verbund, Pixel-Effekte, Testmodus (`77f68e40` und folgende)
 - Rendering Variante B (`scripts/render_pipeline`, `ObjectRender`): Welt 960×540, Ausgabe ganzzahlig/sharp-bilinear; Szenen-Aufnahme `record_scene.py`, Aufräumen `clean_test_artifacts.py`; erster Push von `entwicklung`.
 - Drache aus Teilen (`scripts/dragon_parts`, `dragon_parts_data`, `tests/tools/bosses/build_dragon_parts.py`, `spr_drg_*`), Behemoth in Spielgröße (`build_boss_baked.py`, `spr_bv2b_*`), Pixel-Werkzeug `tests/tools/art/pixelize.py`.

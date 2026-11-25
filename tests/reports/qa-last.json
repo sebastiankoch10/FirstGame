@@ -1,34 +1,55 @@
 {
- "date": "2026-11-25 21:21",
- "commit": "5eb9d2d4",
- "tier": 2,
+ "date": "2026-11-25 23:01",
+ "commit": "fc37f4c7",
+ "tier": 3,
  "dirty": true,
  "results": [
   {
    "suite": "anchors",
    "status": "PASS",
-   "seconds": 1,
+   "seconds": 3,
    "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-anchors.log"
   },
   {
    "suite": "static",
    "status": "PASS",
-   "seconds": 158,
+   "seconds": 167,
    "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-static.log"
   },
   {
    "suite": "regression",
    "status": "PASS",
-   "seconds": 156,
+   "seconds": 183,
    "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-regression.log",
    "checks": 811.0
   },
   {
+   "suite": "feature",
+   "status": "PASS",
+   "seconds": 189,
+   "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-feature.log",
+   "checks": 162.0
+  },
+  {
    "suite": "boss",
    "status": "PASS",
-   "seconds": 659,
+   "seconds": 724,
    "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-boss.log",
    "checks": 141.0
+  },
+  {
+   "suite": "level",
+   "status": "PASS",
+   "seconds": 335,
+   "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-level.log",
+   "checks": 166.0
+  },
+  {
+   "suite": "classes",
+   "status": "PASS",
+   "seconds": 251,
+   "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-classes.log",
+   "checks": 151.0
   }
  ]
 }

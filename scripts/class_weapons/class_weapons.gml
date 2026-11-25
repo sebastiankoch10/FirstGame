@@ -93,9 +93,38 @@ function class_effects_step(_dt) {
     }
 }
 function class_fx_burst(_x,_y,_radius,_row) {class_fx_add("burst"+string(_row),_x,_y,0,_radius,.4);light_pulse(_x,_y,min(360,_radius*2),_row<4 ? make_color_rgb(166,116,255) : make_color_rgb(166,235,119),1,.3);}
+/// Class effect sheet rows as pixel composites (render_pipeline): 0 arcane bolt, 4 arrow, 7 dust; others keep the
+/// old sprite (no class uses them any more).
 function class_fx_sprite(_row,_progress,_x,_y,_radius,_angle=0,_alpha=1) {
-    var spr=asset_get_index("spr_class_fx_"+string(_row));if(!sprite_exists(spr))return;
-    draw_sprite_ext(spr,min(7,floor(clamp(_progress,0,.999)*8)),_x,_y,_radius*2/256,_radius*2/256,_angle,c_white,_alpha);
+    switch(_row) {
+        case 0:vfx_arcane_bolt(_x,_y,_radius,_angle,_alpha);break;
+        case 4:vfx_arrow_shot(_x,_y,_radius,_angle,_alpha);break;
+        case 7:vfx_dust_puff(_x,_y,_radius,_progress,_alpha);break;
+        default:var spr=asset_get_index("spr_class_fx_"+string(_row));if(sprite_exists(spr))draw_sprite_ext(spr,min(7,floor(clamp(_progress,0,.999)*8)),_x,_y,_radius*2/256,_radius*2/256,_angle,c_white,_alpha);
+    }
+    draw_set_alpha(1);draw_set_color(c_white);
+}
+/// Arkanistin bolt: violet pixel orb with a light core and a short tapering trail.
+function vfx_arcane_bolt(_x,_y,_r,_dir,_alpha) {
+    var pal=vfx_palette(4),x0=round(_x),y0=round(_y),r=max(3,round(_r*.3));
+    if(vfx_quality()>0)vfx_glow_disc(x0,y0,r*2,pal[1],.22*_alpha);
+    for(var g=1;g<=4;g++)vfx_px(x0-lengthdir_x(r+g*4,_dir)-1,y0-lengthdir_y(r+g*4,_dir)-1,g<3 ? 3 : 2,g<3 ? pal[1] : pal[0],_alpha*(1-g*.18));
+    draw_set_alpha(_alpha);draw_set_color(pal[0]);draw_circle(x0,y0,r,false);draw_set_color(pal[1]);draw_circle(x0,y0,max(1,r-1),false);
+    draw_set_color(pal[2]);draw_circle(x0-1,y0-1,max(1,r*.45),false);
+}
+/// Waldlaeufer arrow in flight: shaft, steel head, green fletching, a faint streak.
+function vfx_arrow_shot(_x,_y,_r,_dir,_alpha) {
+    var len=max(12,_r*.9),tx=_x-lengthdir_x(len,_dir),ty=_y-lengthdir_y(len,_dir);
+    if(vfx_quality()>0)vfx_pixel_line(tx-lengthdir_x(len*.8,_dir),ty-lengthdir_y(len*.8,_dir),tx,ty,1,make_color_rgb(228,255,234),.25*_alpha);
+    vfx_pixel_line(tx,ty,_x,_y,2,make_color_rgb(140,104,64),_alpha);
+    vfx_pixel_line(tx,ty,_x,_y,1,make_color_rgb(214,178,120),_alpha);
+    vfx_pixel_line(_x,_y,_x+lengthdir_x(4,_dir),_y+lengthdir_y(4,_dir),2,make_color_rgb(236,240,232),_alpha);
+    for(var s=-1;s<=1;s+=2)vfx_pixel_line(tx,ty,tx-lengthdir_x(4,_dir)+lengthdir_x(3*s,_dir+90),ty-lengthdir_y(4,_dir)+lengthdir_y(3*s,_dir+90),1,make_color_rgb(116,239,153),_alpha);
+}
+/// Dust puff (slam, stomp): three grey-brown pixel clouds that swell and fade.
+function vfx_dust_puff(_x,_y,_r,_p,_alpha) {
+    var k=(1-_p)*_alpha;
+    for(var i=0;i<3;i++){var a=i*120+30,d=_r*.35*_p;draw_set_alpha(k*.8);draw_set_color(i==1 ? make_color_rgb(150,128,96) : make_color_rgb(112,94,72));draw_circle(round(_x+lengthdir_x(d,a)),round(_y+lengthdir_y(d*.6,a)),max(2,_r*(.25+.35*_p)),false);}
 }
 function class_effects_draw() {
     if(!variable_global_exists("class_effects"))return;
@@ -179,10 +208,10 @@ function weapon_upgrade_text(_level) {
 function vfx_arc_sweep(_x,_y,_dir,_half,_r,_p,_element,_tier) {
     var pal=vfx_palette(_element),head=clamp(_p*1.6,0,1),tail=clamp(_p*1.6-.7,0,1),fade=_p<.6 ? 1 : (_p<.8 ? .7 : .4);
     if(head-tail<.02)return;
-    var a0=_dir-_half,a1=_dir+_half,cy=_y-6,ro=_r*.55,band=ro*(.4+.04*_tier),n=max(10,ceil(_half*2*(head-tail)*ro/120)),k=.7+.1*_tier;
+    var a0=_dir-_half,a1=_dir+_half,cy=_y-6,ro=_r*.55,band=ro*(.26+.03*_tier),n=max(10,ceil(_half*2*(head-tail)*ro/120)),k=.7+.1*_tier;
     if(vfx_quality()>0){gpu_set_blendmode(bm_add);vfx_crescent(_x,cy,a0,a1,tail,head,ro,band,n,3,pal[1],.25*k*fade);gpu_set_blendmode(bm_normal);}
     vfx_crescent(_x,cy,a0,a1,tail,head,ro,band,n,0,pal[0],.9*fade);
-    vfx_crescent(_x,cy,a0,a1,tail,head,ro,band,n,1,pal[1],fade);
+    vfx_crescent(_x,cy,a0,a1,tail,head,ro,band,n,1,pal[1],.8*fade);
     vfx_crescent(_x,cy,a0,a1,tail,head,ro,band,n,2,pal[2],fade);
     var tick=floor(_p*30),sp=4+_tier*2;
     for(var s=0;s<sp;s++){var q=lerp(tail,head,(s+.5)/sp),a=lerp(a0,a1,q),rr=ro+3+5*abs(vfx_hash(s,tick));vfx_px(_x+lengthdir_x(rr,a),cy+lengthdir_y(rr,a),s mod 2 ? 1 : 2,pal[2],fade);}

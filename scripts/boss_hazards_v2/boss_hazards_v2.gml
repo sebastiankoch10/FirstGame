@@ -58,14 +58,39 @@ function bv2_element_color(_kind) {
     if(string_pos("link",_kind)>0 || string_pos("nova",_kind)>0 || string_pos("void",_kind)>0)return make_color_rgb(213,146,249);
     return make_color_rgb(255,141,76);
 }
+/// Twins and swamp effects as pixel composites on the world grid (render_pipeline) instead of the scaled painted sheets.
+/// The element follows the hazard kind: fire or ice for the twins; acid/nature or earth for the swamp. Small radii are
+/// bullets or beads (an orb), larger ones a burst over the hazard area. _p keeps its old meaning (0..1 over the sheet).
 function bv2_fx(_kind,_p,_x,_y,_radius,_angle=0) {
-    var swamp=string_pos("swamp",_kind)>0,row=0;
-    var kinds=swamp ? ["spit","acid","roots","mushroom","stomp","brood","breath","wave","bloom"] : ["fire","ring","rain","link","spiral","cross","blast","flood","nova"];
-    for(var i=0;i<array_length(kinds);i++)if(string_pos(kinds[i],_kind)>0)row=i;
-    if(_kind=="swamp_spores")row=3;if(string_pos("emerge",_kind)>0)row=4;if(string_pos("closing",_kind)>0)row=1;if(_kind=="twins_burning_frost")row=6;if(_kind=="twins_meteor")row=2;
-    var spr=asset_get_index((swamp ? "spr_bv2_swamp_fx_" : "spr_bv2_twins_fx_")+string(row));
-    if(!sprite_exists(spr))return;
-    draw_sprite_ext(spr,min(sprite_get_number(spr)-1,floor(clamp(_p,0,.999)*sprite_get_number(spr))),_x,_y,_radius*2/256,_radius*2/256,_angle,string_pos("ice",_kind)>0 ? make_color_rgb(150,218,255) : c_white,1);
+    var swamp=string_pos("swamp",_kind)>0,ice=string_pos("ice",_kind)>0 || string_pos("frost",_kind)>0;
+    var earth=swamp && (string_pos("roots",_kind)>0 || string_pos("stomp",_kind)>0 || string_pos("emerge",_kind)>0 || string_pos("wave",_kind)>0);
+    var el=swamp ? (earth ? 5 : 6) : (ice ? 2 : 1);
+    if(_radius<=40)vfx_element_orb(_x,_y,_radius,_angle,el);else vfx_element_burst(_x,_y,_radius,clamp(_p,0,1),el);
+    draw_set_alpha(1);draw_set_color(c_white);
+}
+/// Small element orb with a short trail (bullets, beads on rings).
+function vfx_element_orb(_x,_y,_r,_dir,_el) {
+    var pal=vfx_palette(_el),x0=round(_x),y0=round(_y),r=max(3,round(_r*.4));
+    if(vfx_quality()>0)vfx_glow_disc(x0,y0,r*1.8,pal[1],.2);
+    for(var g=1;g<=3;g++)vfx_px(x0-lengthdir_x(r+g*3,_dir)-1,y0-lengthdir_y(r+g*3,_dir)-1,g<2 ? 3 : 2,g<2 ? pal[1] : pal[0],1-g*.22);
+    draw_set_alpha(1);draw_set_color(pal[0]);draw_circle(x0,y0,r,false);draw_set_color(pal[1]);draw_circle(x0,y0,max(1,r-1),false);
+    draw_set_color(pal[2]);draw_circle(x0-1,y0-1,max(1,r*.4),false);
+}
+/// Burst over a hazard area: core flash, pixel shock rings, element debris (fire embers, ice shards, acid bubbles,
+/// earth chips) flying out and fading; q runs 0..1.
+function vfx_element_burst(_x,_y,_r,_q,_el) {
+    var pal=vfx_palette(_el),k=1-_q,x0=round(_x),y0=round(_y);
+    if(vfx_quality()>0)vfx_glow_disc(x0,y0,_r*(.3+.6*_q),pal[1],.2*k);
+    if(_q<.4){var c=1-_q/.4;draw_set_alpha(c*.9);draw_set_color(pal[2]);draw_circle(x0,y0,max(2,_r*.3*(1-c*.3)),false);}
+    vfx_pixel_ring(x0,y0,_r*(.3+.7*_q),pal[1],k,0,0,2);
+    vfx_pixel_ring(x0,y0,_r*(.2+.6*_q),pal[0],.8*k,_q*40,3,1);
+    var n=vfx_quality()==0 ? 8 : 16;
+    for(var i=0;i<n;i++) {
+        var a=i*360/n+20*vfx_hash(i,_el),d=_r*(.2+.8*_q)*(.7+.3*abs(vfx_hash(i,_el+3))),px=x0+lengthdir_x(d,a),py=y0+lengthdir_y(d,a);
+        if(_el==2){vfx_pixel_line(px,py-2,px,py+2,1,pal[2],k);vfx_pixel_line(px-2,py,px+2,py,1,pal[1],k);}
+        else if(_el==6){draw_set_alpha(k);draw_set_color(i mod 2 ? pal[1] : pal[2]);draw_circle(round(px),round(py-_q*8),1+(i mod 3),true);}
+        else vfx_px(px,py,i mod 3==0 ? 3 : 2,i mod 2 ? pal[0] : pal[1],k);
+    }
 }
 function bv2_hazards_draw() {
     if(!variable_global_exists("bv2_hazards"))return;

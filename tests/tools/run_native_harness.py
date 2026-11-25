@@ -32,6 +32,9 @@ SUITES = {
 }
 # Extra (regex, replacement) pairs applied to every GML file of the copy; used by record_scene.py for a fixed frame time.
 EXTRA_REPLACEMENTS: list[tuple[str, str]] = []
+# Suites whose checks compare boss and hazard timing with a bot that steps 1/60 s run on a fixed 60 Hz frame time, so
+# frame-rate jitter of the test machine cannot move the results (twins repositioning metric drifted 10/9/8 of 17).
+FIXED_DT_SUITES = {'boss'}
 
 
 def write(p, s):
@@ -42,6 +45,7 @@ def write(p, s):
 def main():
     suite = sys.argv[1] if len(sys.argv) > 1 else 'feature'
     harness, px, tag, name, timeout = SUITES[suite]
+    extra = list(EXTRA_REPLACEMENTS) + ([(r'\bdelta_time\b', '16667')] if suite in FIXED_DT_SUITES else [])
     work = Path(os.environ['LOCALAPPDATA']) / 'FirstGame-Tests' / suite / time.strftime('%Y%m%d-%H%M%S')
     project = work / 'project'
     project.mkdir(parents=True)
@@ -68,7 +72,7 @@ def main():
         code = re.sub(r'\bmouse_x\b', 'gp_mouse_x()', code)
         code = re.sub(r'\bmouse_y\b', 'gp_mouse_y()', code)
         code = code.replace('show_error(', f'{px}_show_error(')
-        for pattern, repl in EXTRA_REPLACEMENTS:
+        for pattern, repl in extra:
             code = re.sub(pattern, repl, code)
         write(path, code)
     runner = GameMakerRunner(project, runtime_version='2024.14.4.268')

@@ -191,9 +191,70 @@ function dragon_encounter_draw(_b) {
     }
     draw_set_alpha(1);draw_set_color(c_white);
 }
+/// Dragon effects as pixel composites on the world grid (render_pipeline) instead of the scaled painted sheet.
+/// _progress keeps its old meaning (0..1 over the 8-frame sheet: bullets loop in .125-.375, impacts run .375-1).
 function dragon_fx_sprite(_row,_progress,_x,_y,_radius,_angle=0,_alpha=1) {
-    var spr=asset_get_index("spr_dragon_fx_"+string(_row));
-    draw_sprite_ext(spr,min(7,floor(clamp(_progress,0,.999)*8)),_x,_y,_radius*2/256,_radius*2/256,_angle,c_white,_alpha);
+    switch(_row) {
+        case 2:if(_progress<.35)vfx_meteor(_x,_y,_radius,_angle,_alpha);else vfx_eruption(_x,_y,_radius,clamp((_progress-.375)/.625,0,1),false,_alpha);break;
+        case 5:vfx_eruption(_x,_y,_radius,clamp((_progress-.375)/.625,0,1),true,_alpha);break;
+        case 3:vfx_wind_blade(_x,_y,_radius,_angle,_alpha);break;
+        case 4:vfx_void_orb(_x,_y,_radius,_alpha);break;
+        case 7:vfx_fire_bolt(_x,_y,_radius,_angle,_alpha);break;
+        case 6:vfx_vortex(_x,_y,_radius,_angle,_alpha);break;
+        default:var spr=asset_get_index("spr_dragon_fx_"+string(_row));if(sprite_exists(spr))draw_sprite_ext(spr,min(7,floor(clamp(_progress,0,.999)*8)),_x,_y,_radius*2/256,_radius*2/256,_angle,c_white,_alpha);
+    }
+    draw_set_alpha(1);draw_set_color(c_white);
+}
+/// Falling meteor: a rock (dark, mid, lit side) with a fire tail against the flight direction.
+function vfx_meteor(_x,_y,_r,_dir,_alpha) {
+    var t=current_time/1000,r=max(5,_r*.58);
+    vfx_fire_tongue(_x,_y,_dir+180,_r*1.5,_r*1.05,t,_alpha*.95);
+    draw_set_alpha(_alpha);draw_set_color(make_color_rgb(70,44,40));draw_circle(round(_x),round(_y),r,false);
+    draw_set_color(make_color_rgb(140,82,56));draw_circle(round(_x-1),round(_y-1),max(1,r-2),false);
+    draw_set_color(make_color_rgb(255,186,104));draw_circle(round(_x+lengthdir_x(r*.4,_dir)),round(_y+lengthdir_y(r*.4,_dir)),max(1,r*.35),false);
+}
+/// Impact (meteor) or magma eruption: bright core, pixel shock ring, debris arcing out, embers; magma adds lava blobs
+/// that linger. q runs 0..1 over the effect.
+function vfx_eruption(_x,_y,_r,_q,_magma,_alpha) {
+    var pal=vfx_palette(1),k=(1-_q)*_alpha,core=make_color_rgb(255,232,140),x0=round(_x),y0=round(_y);
+    if(vfx_quality()>0)vfx_glow_disc(x0,y0,_r*(.4+.6*_q),pal[1],.25*k);
+    if(_q<.45){var c=1-_q/.45;draw_set_alpha(c*_alpha);draw_set_color(core);draw_circle(x0,y0,max(2,_r*.45*(1-c*.3)),false);draw_set_color(make_color_rgb(255,250,226));draw_circle(x0,y0,max(1,_r*.22*c),false);}
+    vfx_pixel_ring(x0,y0,_r*(.35+.65*_q),pal[1],k,0,0,2);
+    vfx_pixel_ring(x0,y0,_r*(.25+.6*_q),pal[0],.8*k,_q*40,3,1);
+    var n=vfx_quality()==0 ? 8 : 16;
+    for(var i=0;i<n;i++) {
+        var a=i*360/n+20*vfx_hash(i,7),d=_r*(.2+.9*_q)*(.7+.3*abs(vfx_hash(i,3))),lift=sin(pi*_q)*_r*.25*abs(vfx_hash(i,5));
+        vfx_px(x0+lengthdir_x(d,a),y0+lengthdir_y(d,a)-lift,i mod 3==0 ? 3 : 2,i mod 2 ? make_color_rgb(90,62,48) : pal[1],k);
+    }
+    if(_magma)for(var b=0;b<6;b++){var a=b*60+15,d=_r*(.35+.25*abs(vfx_hash(b,11)));draw_set_alpha(min(1,(1.3-_q))*_alpha);draw_set_color(b mod 2 ? pal[1] : pal[0]);draw_circle(round(x0+lengthdir_x(d,a)),round(y0+lengthdir_y(d*.6,a)),2+(b mod 3),false);}
+}
+/// Wind blade bullet: a cyan crescent facing its flight with two streak lines behind it.
+function vfx_wind_blade(_x,_y,_r,_dir,_alpha) {
+    var dark=make_color_rgb(52,132,124),mid=make_color_rgb(130,225,211),light=make_color_rgb(232,255,250),ro=_r*.55,n=12;
+    vfx_crescent(_x,_y,_dir-70,_dir+70,0,1,ro,ro*.45,n,0,dark,.9*_alpha);
+    vfx_crescent(_x,_y,_dir-70,_dir+70,0,1,ro,ro*.45,n,1,mid,_alpha);
+    vfx_crescent(_x,_y,_dir-70,_dir+70,0,1,ro,ro*.45,n,2,light,_alpha);
+    for(var s=-1;s<=1;s+=2){var ox=lengthdir_x(ro*.4*s,_dir+90),oy=lengthdir_y(ro*.4*s,_dir+90);vfx_pixel_line(_x+ox,_y+oy,_x+ox-lengthdir_x(_r*.9,_dir),_y+oy-lengthdir_y(_r*.9,_dir),1,mid,.6*_alpha);}
+}
+/// Void bullet: a dark violet pixel orb with a bright rim and two pixels circling it.
+function vfx_void_orb(_x,_y,_r,_alpha) {
+    var pal=vfx_palette(4),x0=round(_x),y0=round(_y),r=max(3,round(_r*.55)),a=current_time*.4;
+    if(vfx_quality()>0)vfx_glow_disc(x0,y0,r*1.7,pal[1],.2*_alpha);
+    draw_set_alpha(_alpha);draw_set_color(pal[1]);draw_circle(x0,y0,r,false);draw_set_color(make_color_rgb(28,10,46));draw_circle(x0,y0,max(1,r-2),false);
+    for(var i=0;i<2;i++)vfx_px(x0+lengthdir_x(r+3,a+i*180)-1,y0+lengthdir_y(r+3,a+i*180)-1,2,pal[2],_alpha);
+}
+/// Fire volley bullet: a bright head with a short flame trail.
+function vfx_fire_bolt(_x,_y,_r,_dir,_alpha) {
+    vfx_fire_tongue(_x,_y,_dir+180,_r*2.2,_r*.8,current_time/1000,_alpha);
+    draw_set_alpha(_alpha);draw_set_color(make_color_rgb(255,232,140));draw_circle(round(_x),round(_y),max(2,_r*.32),false);
+}
+/// Vortex: three pixel spiral arms turning around a dark core, a dashed outer ring.
+function vfx_vortex(_x,_y,_r,_rot,_alpha) {
+    var pal=vfx_palette(4),x0=round(_x),y0=round(_y);
+    if(vfx_quality()>0)vfx_glow_disc(x0,y0,_r*.6,pal[0],.25*_alpha);
+    for(var arm=0;arm<3;arm++)for(var s=0;s<18;s++){var q=s/18,a=_rot+arm*120+q*220,d=_r*(.15+.85*q);vfx_px(x0+lengthdir_x(d,a),y0+lengthdir_y(d,a),q<.5 ? 3 : 2,q<.3 ? pal[2] : (q<.7 ? pal[1] : pal[0]),_alpha*(1-q*.5));}
+    vfx_pixel_ring(x0,y0,_r,pal[1],.7*_alpha,_rot*.5,3,1);
+    draw_set_alpha(_alpha);draw_set_color(make_color_rgb(20,8,34));draw_circle(x0,y0,max(2,_r*.12),false);
 }
 
 // ---------------- Close-range attacks (user decision 25.11.2026) ----------------

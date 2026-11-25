@@ -21,7 +21,6 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
 - **`RoomCrypt` und `RoomRuins`** sind Fallbacks aus der Codex-Zeit. Prüfen, ob sie noch gebraucht werden. → [[Level & Welten]]
 - **Test-Flake:** `run_level_smoke.py` lieferte unter paralleler CPU-Last einmal 165/166. → [[Tests & QA]]
 - **`run_combat_smoke.py` veraltet** (FAIL schon vor 2026-11-24). → [[Tests & QA]]
-- **Noch gemalte, skaliert gezeichnete Effekte:** `dragon_fx_sprite` (Meteor, Wirbel, Bodeneinschlag, Flügelsturm, Magma), `spr_bv2_twins_fx_*`/`spr_bv2_swamp_fx_*`, Projektile der Hexen. Im Weltraster wirken sie unscharf; als Pixel-Komposite nachbauen wie Feueratem und Feuerkegel. → [[Licht, Wetter & Effekte]]
 - **Schrift im Weltraum:** „MAGNET“ über Magnetkugeln nutzt noch die Standardschrift (nur Ziffern haben eine Pixelschrift). → [[Rendering & Pixelraster]]
 - **Drachenkopf bei steilen Winkeln:** Die Kopfansichten entstehen durch Drehen der Seitenansicht; nach unten gerichtet wirkt der Kopf flach. Besser: eigene Draufsicht-Variante des Kopfes. → [[Bosse]]
 - **`docs/ai-activity.log`** wächst mit jedem Stop-Hook-Lauf. Gelegentlich kürzen; prüfen, ob die Datei in die `.gitignore` gehört. → [[SETUP_REPORT]]

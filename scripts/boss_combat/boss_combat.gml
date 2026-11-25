@@ -323,7 +323,7 @@ function boss_hazards_draw() {
         var b=global.hostile_bullets[i];
         if(variable_struct_exists(b,"bv2_kind")){
             var angle=point_direction(0,0,b.vx,b.vy);
-            if(b.bv2_kind=="twins_fire" || b.bv2_kind=="twins_ice")draw_sprite_ext(b.bv2_kind=="twins_fire" ? spr_bv2_fire_projectile : spr_bv2_ice_projectile,floor(b.age*9) mod 3,b.x,b.y,.5,.5,angle,c_white,1);
+            if(b.bv2_kind=="twins_fire" || b.bv2_kind=="twins_ice")vfx_element_orb(b.x,b.y,30,angle,b.bv2_kind=="twins_ice" ? 2 : 1); // pixel orb instead of the scaled painted sprite
             else bv2_fx(b.bv2_kind,.2+frac(b.age)*.25,b.x,b.y,30,angle);
             continue;
         }

@@ -41,6 +41,7 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
 - **Szenen-Aufnahme** (kein Test): `python tests/tools/record_scene.py walk|combat|spell|boss|horde` mit `--class`, `--level`, `--spell NAME --spell-level N`, `--boss`, `--minute`. Harness `tests/scene_harness.gml` (Präfix `sc`), `delta_time` fest auf 60 Hz, Ergebnis WebP plus Übersichtsbild unter `%LOCALAPPDATA%\FirstGame-Tests\scene\<Zeit>\`. Seit 25.11.
 - **Aufräumen:** `tests/tools/clean_test_artifacts.py` (läuft nach `qa.py` und `record_scene.py`): je Ordner die 2 neuesten Läufe, Probe-Ordner nach 3 Tagen, Capture-PNGs in den Build-Speicherordnern, ungetrackte `QA/logs/regression-*` bis auf 3. `qa-cache.json` und `charcache` bleiben.
 - `run_native_harness.py`: `EXTRA_REPLACEMENTS` für zusätzliche Code-Ersetzungen in der Testkopie; Captures werden verschoben statt kopiert.
+- **Feste Bildzeit für `boss`** (`FIXED_DT_SUITES`, seit 25.11.): `delta_time` ist in der Testkopie 16667 µs. Grund: Der Orakel-Bot rechnet mit 1/60 s, die Bosse mit der echten Bildzeit; Bildraten-Schwankungen verschoben die Kennzahl „Muster erzwingen Umpositionierung“ (10/9/8 von 17).
 
 ## QA-Agent: Überprüfung 2026-11-24 (Claude)
 **Vorher**
