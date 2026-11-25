@@ -126,7 +126,9 @@ FirstGame_ArtPack/                 Name bleibt (bekannt bei Nutzer und Agenten)
 - `monster_originals/` und die fünf losen Konzeptbilder liegen in `references/`; die zwei Audit-Werkzeuge sind nachgezogen.
 - Das ArtPack-README ist jetzt ein Index.
 
-**Offen:** die aktiven Quellen nach Schritt 1–4 (Pfadtabelle zuerst).
+**Schritt 1 erledigt am 25.11.:** Pfadtabelle `tests/tools/assets/art_paths.py` (eine Konstante je Quellordner, `level_dir()` für Levelgrafik). 24 Werkzeuge lesen nur noch daraus; `python tests/tools/assets/art_paths.py --check` meldet 0 Code-Verweise außerhalb der Tabelle. Jeder umgestellte Ausdruck wurde vorher auf denselben Zielpfad geprüft.
+
+**Offen:** Schritte 2–4 (Probelauf der Importer, Verschieben mit `git mv`, Prüfen).
 
 **Sofort zulässig, ohne Migration:**
 - neue Quellen gleich in die Zielstruktur legen und in der Pfadtabelle eintragen;

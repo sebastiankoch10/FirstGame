@@ -5,9 +5,10 @@ sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/sit
 from gms_helpers.gm_json import loads,dumps
 from gms_helpers.asset_types.media import SoundAsset
 ROOT=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 
 def main():
- catalog=json.loads((ROOT/'FirstGame_ArtPack/spell_v2/catalog.json').read_text(encoding='utf-8'))
+ catalog=json.loads((AP.SPELL_CATALOG).read_text(encoding='utf-8'))
  project=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'));manifest=json.loads((ROOT/'Audio/manifest.json').read_text(encoding='utf-8'));rate=32000
  for d in catalog[:18]:
   sid=d['id'];element=d['element'];rng=random.Random(sid*173);duration=.29+(sid%5)*.055+(.18 if sid in [103,118] else 0);phase=0;values=[]

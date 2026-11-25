@@ -12,6 +12,7 @@ from PIL import Image
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from gm_project import ROOT, Project  # noqa: E402
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 
 TARGETS = {'forest': ('spr_lv_forest_preview', 'level_forest'), 'swamp': ('spr_lv_sw_preview', 'level_swamp'), 'ashfrost': ('spr_lv_af_preview', 'level_ashfrost')}
 
@@ -29,7 +30,7 @@ def main():
         w, h = im.size
         tw = min(w, int(h * 16 / 9)); th = int(tw * 9 / 16)
         im = im.crop(((w - tw) // 2, (h - th) // 2, (w - tw) // 2 + tw, (h - th) // 2 + th)).resize((384, 216), Image.LANCZOS)
-        out = ROOT / 'FirstGame_ArtPack' / folder / 'preview_native.png'
+        out = AP.level_dir(folder) / 'preview_native.png'
         out.parent.mkdir(parents=True, exist_ok=True)
         im.save(out)
         proj.sprite(sprite, [out], (192, 108))

@@ -4,7 +4,8 @@ import copy,json,math,random,shutil,sys,uuid
 sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/site-packages'))
 from gms_helpers.gm_json import loads,dumps
 ROOT=Path(__file__).resolve().parents[2]
-ART=ROOT/'FirstGame_ArtPack/master_world'
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
+ART=AP.MASTER_WORLD
 
 def read(path):return loads((ROOT/path).read_text(encoding='utf-8'))
 def write(path,data):(ROOT/path).write_text(dumps(data),encoding='utf-8')

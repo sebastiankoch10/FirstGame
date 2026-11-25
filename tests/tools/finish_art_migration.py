@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path.home() / 'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/
 from gms_helpers.gm_json import dumps as gm_dumps
 
 ROOT = Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 def read(path):
     return json.loads(re.sub(r',\s*([}\]])', r'\1', (ROOT / path).read_text(encoding='utf-8-sig')))
 def write(path, data):
@@ -62,7 +63,7 @@ def sprite(name, sources, width=64, height=64, origin=(32, 52)):
     if not any(r['id']['name'] == name for r in project['resources']):
         project['resources'].append(dict(id=ref('sprites', name)))
 
-art = ROOT / 'FirstGame_ArtPack'
+art = AP.ART
 sprite('spr_fg_landscape', [art / 'environment' / f'detail_{i:02}.png' for i in range(13)])
 sprite('spr_fg_chest', [art / 'environment' / 'detail_13.png'])
 sprite('spr_fg_firebolt', [art / 'environment' / 'detail_14.png'], origin=(32,32))

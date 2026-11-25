@@ -29,12 +29,13 @@ from PIL import Image
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE)); sys.path.insert(0, str(HERE.parent / 'levels'))
 from atlas import DENSITY, FRAME, OX, OY, ROOT, SETS, SOURCES, Atlas, frame_plan  # noqa: E402
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 import render as R  # noqa: E402
 from segment import CHEST, FEET, HAIR, HANDS, LEGS, WEAPON, Seg, segment  # noqa: E402
 from gm_project import Project, read, write  # noqa: E402
 
 CACHE = Path(os.environ.get('LOCALAPPDATA', str(Path.home()))) / 'FirstGame-Tests' / 'charcache'
-ART_OUT = ROOT / 'FirstGame_ArtPack' / 'character_layers'
+ART_OUT = AP.CHARACTER_LAYERS
 ACTORS = ['swordsmanv3', 'magev3', 'rangerv3']
 PIECES = ['wpn_s'] + [f'{k}{t}' for k in ('wpn', 'head', 'chest', 'hands', 'feet') for t in range(4)]
 HELM = {'swordsmanv3': dict(max_half_width=8.5 * DENSITY), 'magev3': dict(max_half_width=8.0 * DENSITY), 'rangerv3': dict(max_half_width=8.0 * DENSITY)}

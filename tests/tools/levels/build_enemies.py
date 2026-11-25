@@ -14,6 +14,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import enemies as E  # noqa: E402
 from gm_project import ROOT, Project  # noqa: E402
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 
 DERIVED = {'swskel': 'Level_Swamp', 'knight': 'Level_Swamp', 'ashwar': 'Level_Ashfrost', 'armor': 'Level_Ashfrost'}
 CREATURES = {'crawler': 'Level_Swamp', 'shroom': 'Level_Swamp', 'spirit': 'Level_Ashfrost', 'construct': 'Level_Ashfrost'}
@@ -25,7 +26,7 @@ def _derived(v):
 
 def main():
     t0 = time.time()
-    out = ROOT / 'FirstGame_ArtPack' / 'level_enemies'
+    out = AP.LEVEL_ENEMIES
     out.mkdir(parents=True, exist_ok=True)
     sprites = {}
     with ProcessPoolExecutor(max_workers=16) as ex:

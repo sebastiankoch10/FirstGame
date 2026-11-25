@@ -2,13 +2,14 @@
 from pathlib import Path
 import json
 ROOT=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 
 def main():
     validation=json.loads((ROOT/'QA/data/ability-validation.json').read_text())
     if not validation['passed']:raise RuntimeError('Native benchmark integrity is not validated')
     rows=[json.loads(x) for x in (ROOT/'QA/data/ability-baseline.jsonl').read_text().splitlines() if x]
     rows=[r for r in rows if r.get('record_type')=='controlled_benchmark']
-    names={r['id']:r['name'] for r in json.loads((ROOT/'FirstGame_ArtPack/spell_v2/catalog.json').read_text())}
+    names={r['id']:r['name'] for r in json.loads((AP.SPELL_CATALOG).read_text())}
     def active(sid,level,count):return next(r for r in rows if r['kind']=='active' and r['sid']==sid and r['level']==level and r['target_count']==count)
     out=['# Fähigkeiten: native kontrollierte Messungen','',
          '**654 Messfenster tatsächlich ausgeführt:** 18 aktive Fähigkeiten × 9 Stufen × 1/8 Ziele = 324; 18 passive Fähigkeiten × 3 Stufen × 1/8 Ziele × 3 Varianten = 324; drei Startwaffen × 1/8 Ziele = 6. Jedes Fenster dauert 900 echte Produktionsschritte / 15 simulierte Sekunden. Dazu bestehen zehn native Prüfungen mit bekannten HP-Werten. Integrität: `data/ability-validation.json` PASS.','',

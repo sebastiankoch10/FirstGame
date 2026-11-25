@@ -16,6 +16,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from analyze_qa import describe, wilson, read, source_totals  # noqa: E402
 
@@ -25,7 +26,7 @@ SPELL_NAMES = {}
 def spell_names():
     if SPELL_NAMES:
         return SPELL_NAMES
-    cat = ROOT / 'FirstGame_ArtPack/spell_v2/catalog.json'
+    cat = AP.SPELL_CATALOG
     try:
         data = json.loads(cat.read_text(encoding='utf-8'))
         for e in (data if isinstance(data, list) else data.get('spells', [])):

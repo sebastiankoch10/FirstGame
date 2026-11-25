@@ -10,7 +10,7 @@
   "halo_px": 19058,
   "hair_bones": 256,
   "cape_bones": 256,
-  "seconds": 184,
+  "seconds": 182,
   "atlas_px": 6075392,
   "atlases": 38
  },
@@ -25,7 +25,7 @@
   "halo_px": 0,
   "hair_bones": 256,
   "cape_bones": 0,
-  "seconds": 185,
+  "seconds": 187,
   "atlas_px": 8628224,
   "atlases": 38
  },
@@ -40,9 +40,9 @@
   "halo_px": 12074,
   "hair_bones": 256,
   "cape_bones": 256,
-  "seconds": 203,
+  "seconds": 202,
   "atlas_px": 12859392,
   "atlases": 38
  },
- "segment_code": "a7915f0adf"
+ "segment_code": "2805bc9d40"
 }

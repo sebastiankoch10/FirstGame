@@ -1,10 +1,26 @@
 /// Bounded spell particles and persistent spell lights. Purely visual: no gameplay value is read back from here.
 /// Elements (spell_element_color): 0 neutral, 1 fire, 2 ice, 3 storm, 4 arcane, 5 earth, 6 nature/wisp, 7 holy.
 function spell_vfx_reset() {global.spell_particles=[];global.spell_vfx_clock=0;}
-function spell_vfx_cap() {return 420;}
+function spell_vfx_cap() {var caps=[150,280,420];return caps[vfx_quality()];}
+/// Effect quality (graphics option): 0 Niedrig, 1 Mittel, 2 Hoch (default, the full look). Visual only; it never
+/// touches gameplay or the global RNG. Saved in firstgame_settings.ini (section Grafik).
+function vfx_quality() {
+    if(!variable_global_exists("vfx_quality_level")){ini_open("firstgame_settings.ini");global.vfx_quality_level=clamp(round(ini_read_real("Grafik","effekte",2)),0,2);ini_close();}
+    return global.vfx_quality_level;
+}
+function vfx_quality_cycle() {
+    global.vfx_quality_level=(vfx_quality()+2) mod 3;   // Hoch -> Mittel -> Niedrig -> Hoch
+    ini_open("firstgame_settings.ini");ini_write_real("Grafik","effekte",global.vfx_quality_level);ini_close();
+}
+function vfx_quality_label() {var names=[": Niedrig",": Mittel",": Hoch"];return names[vfx_quality()];}
+/// Secondary motion (hair, cape, boss rigs) from quality Mittel upwards.
+function vfx_secondary_motion() {return vfx_quality()>=1;}
 /// kind: 0 soft dot (pixel star), 1 streak (velocity aligned), 2 diamond spark, 3 rising rune square, 4 pixel spark
 function spell_particle(_x,_y,_vx,_vy,_life,_size,_color,_kind=0,_grav=0) {
     if(!variable_global_exists("spell_particles"))spell_vfx_reset();
+    // Lower quality keeps a fixed share of particles (deterministic counter; callers' RNG use is unchanged).
+    var q=vfx_quality();
+    if(q<2){if(!variable_global_exists("vfx_particle_n"))global.vfx_particle_n=0;global.vfx_particle_n=(global.vfx_particle_n+1) mod 20;if(global.vfx_particle_n>=(q==0 ? 7 : 13))return;}
     if(array_length(global.spell_particles)>=spell_vfx_cap())array_delete(global.spell_particles,0,1);
     array_push(global.spell_particles,{x:_x,y:_y,vx:_vx,vy:_vy,life:_life,total:_life,size:_size,color:_color,kind:_kind,grav:_grav});
 }
@@ -187,11 +203,11 @@ function vfx_pixel_line(_ax,_ay,_bx,_by,_w,_col,_alpha) {
 }
 /// Soft additive glow (light layer of a composed effect); never darkens the ground.
 function vfx_glow_line(_ax,_ay,_bx,_by,_w,_col,_alpha) {
-    if(_alpha<=0)return;
+    if(_alpha<=0 || vfx_quality()==0)return;
     gpu_set_blendmode(bm_add);draw_set_color(_col);draw_set_alpha(min(1,_alpha));draw_line_width(_ax,_ay,_bx,_by,_w);gpu_set_blendmode(bm_normal);
 }
 function vfx_glow_disc(_x,_y,_r,_col,_alpha) {
-    if(_alpha<=0)return;
+    if(_alpha<=0 || vfx_quality()==0)return;
     gpu_set_blendmode(bm_add);draw_set_color(_col);draw_set_alpha(min(1,_alpha));draw_circle(_x,_y,_r,false);gpu_set_blendmode(bm_normal);
 }
 /// Piercing Lance: additive glow over the hitbox width, solid 1 px edges, a 3 px light core with a body-coloured

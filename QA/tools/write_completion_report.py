@@ -4,6 +4,7 @@ from collections import Counter
 import json,statistics
 from analyze_qa import describe
 ROOT=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 CLASSES=['Sword','Mage','Ranger']
 def read(p):return [json.loads(s) for s in p.read_text(encoding='utf-8').splitlines() if s.strip()]
 def main():
@@ -60,7 +61,7 @@ def main():
     best=max(CLASSES,key=lambda c:mean(groups['after',c],'seconds'))
     reached={c:sum(r['seconds']>=1799.99 for r in groups['after',c]) for c in CLASSES}
     top_run=max(phases['after'],key=lambda r:r['seconds'])
-    skill_names={d['id']:d['name'] for d in json.loads((ROOT/'FirstGame_ArtPack/spell_v2/catalog.json').read_text())}
+    skill_names={d['id']:d['name'] for d in json.loads((AP.SPELL_CATALOG).read_text())}
     top_build=', '.join(f"{skill_names[e['id']]} {int(e['level'])}" for e in top_run['active'])
     shares=[]
     for c in CLASSES:

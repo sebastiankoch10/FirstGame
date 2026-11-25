@@ -372,7 +372,7 @@ function bv2_actor_draw(_b,_ice=false) {
     if(level_world_room())master_shadow_draw(actor.x,actor.y,twin ? 30 : 120,twin ? 9 : 28,twin ? .22 : .38);
     var col=_b.hurt_flash_timer>0 ? make_color_rgb(255,205,196) : c_white,sy=scale*(1+sin(_b.v2_clock*2.1)*.006);
     // Body rig (docs/Design/Boss-Design.md G2): flapping hat and cloak for the witches, heavy wobble for the behemoth.
-    if(BV2_RIG_ENABLED && a.action!="death")rig_draw_frame(spr,draw_frame,bv2_rig_bones(twin),bv2_rig_pose(_b,_ice,twin),twin ? "witch" : "behemoth",twin ? -1 : 455,actor.x,actor.y-hover,scale*face,sy,col,alpha,twin ? 8 : 24);
+    if(BV2_RIG_ENABLED && vfx_secondary_motion() && a.action!="death")rig_draw_frame(spr,draw_frame,bv2_rig_bones(twin),bv2_rig_pose(_b,_ice,twin),twin ? "witch" : "behemoth",twin ? -1 : 455,actor.x,actor.y-hover,scale*face,sy,col,alpha,twin ? 8 : 24);
     else draw_sprite_ext(spr,draw_frame,actor.x,actor.y-hover,scale*face,sy,0,col,alpha);
     if(twin && _b.hp>0){var col=_ice ? make_color_rgb(118,210,255) : make_color_rgb(255,134,70);draw_set_color(col);draw_set_alpha(.55);for(var i=0;i<3;i++){var phase=frac(_b.v2_clock*.6+i*.33);draw_circle(actor.x+sin(_b.v2_clock*2+i)*15,actor.y-hover+10+phase*28,2*(1-phase),false);}}
     draw_set_alpha(1);draw_set_color(c_white);

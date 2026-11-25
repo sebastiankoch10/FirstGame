@@ -18,7 +18,8 @@ from PIL import Image
 from pixsdf import (box, capsule, cone, ellipsoid, hexramp, Material, render, rot, scale_prims, sphere, transform_prims)
 
 ROOT = Path(__file__).resolve().parents[3]
-SKEL = ROOT / 'FirstGame_ArtPack/master_world/frames'
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
+SKEL = AP.MASTER_WORLD / 'frames'
 DIRS = ['right', 'up_right', 'up', 'up_left', 'left', 'down_left', 'down', 'down_right']
 DIR_ANGLE = {d: i * 45 for i, d in enumerate(DIRS)}
 SK_ACTIONS = {'idle': 2, 'walk': 4, 'attack': 2, 'hurt': 3, 'death': 5}

@@ -7,8 +7,8 @@ updated: 2026-11-25
 Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Doku (Claude, 24./25.11.2026). Status: offen, wenn nicht anders vermerkt. Größere Arbeiten stehen geordnet in [[Roadmap & Vertical Slice]].
 
 ## Mögliche Bugs und Aufräumpunkte
+- **`tests/tools/audit_boss_v2_assets.py` scheitert:** vergleicht mit einer alten Testkopie unter `output/class-dragon-smoke/…`, die mit `output/` gelöscht wurde (25.11.). Läuft in keiner Suite; Vergleichsbasis auf `QA/baseline` umstellen oder Prüfung entfernen. → [[Tests & QA]]
 - **Minibosse nutzen 0.1-Gegnerstreifen** (Eber, Golem; 64×64, ohne Blickrichtungen), Stilbruch. → [[Roadmap & Vertical Slice]] Schritt 9.
-- **Lose Bilder im ArtPack-Wurzelordner:** `ChatGPT-Bild 22. Nov. 2026, 23_00_30.png` und `…23_00_42.png` haben keinen dokumentierten Zweck. → [[Assets & Pipeline]]
 - **MCP-Zeitlimit:** `MCP_TIMEOUT` in `.claude/settings.json` wirkt nicht (25.11. geprüft). Abhilfe per `setx` nur mit Zustimmung des Nutzers. → [[Tests & QA]]
 - **Verwaiste Event-Dateien:** `objects/ObjectFireball/Collision_ObjectMonster.gml`, `ObjectIceball/…` und `ObjectLightningball/…` sind in den `.yy` der Objekte nicht registriert. GameMaker führt sie nicht aus. Prüfen, ob sie gelöscht werden können oder registriert werden müssen. → [[Zauber & Passiva]]
 - **Boss-Testmenü im Release:** `#macro BOSS_TEST_MENU_ENABLED true` in `scripts/boss_test_mode`. Vor einer Veröffentlichung auf `false` setzen. → [[Boss-Testmodus]]

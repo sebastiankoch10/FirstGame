@@ -4,8 +4,9 @@ import hashlib,json,struct,sys
 sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/site-packages'))
 from gms_helpers.gm_json import loads
 ROOT=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 def main():
- project=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'));registered={r['id']['name'] for r in project['resources']};manifest=json.loads((ROOT/'FirstGame_ArtPack/boss_v2/manifest.json').read_text());errors=[];frames=0
+ project=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'));registered={r['id']['name'] for r in project['resources']};manifest=json.loads((AP.BOSS_V2/'manifest.json').read_text());errors=[];frames=0
  for item in manifest:
   name=item['name'];folder=ROOT/'sprites'/name;data=loads((folder/(name+'.yy')).read_text())
   if name not in registered:errors.append('Unregistered '+name)
@@ -19,7 +20,7 @@ def main():
    if path.is_file():
     target=ROOT/'sprites'/path.relative_to(prior);preserved+=1
     if not target.is_file() or path.read_bytes()!=target.read_bytes():mismatches.append(str(target.relative_to(ROOT)))
- refs={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'FirstGame_ArtPack'/'references').glob('ChatGPT-Bild*23_00_*.png')}
+ refs={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (AP.REFERENCES).glob('ChatGPT-Bild*23_00_*.png')}
  cues=[f'sfx_fg_{family}_{i}' for family in ['twins','swamp'] for i in range(1,10)]
  for cue in cues:
   if cue not in registered or not (ROOT/f'sounds/{cue}/{cue}.wav').is_file():errors.append('Missing cue '+cue)

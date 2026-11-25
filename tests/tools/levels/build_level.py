@@ -25,6 +25,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 from gm_project import ROOT, Project  # noqa: E402
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 from pixsdf import render_fit  # noqa: E402
 from worldgen import CHUNK, START, WORLD  # noqa: E402
 
@@ -179,7 +180,7 @@ def main():
     skip_ground = '--skip-ground' in sys.argv
     skip_props = '--skip-props' in sys.argv
     mod = importlib.import_module(cfg['module'])
-    out = ROOT / 'FirstGame_ArtPack' / cfg['dir']
+    out = AP.level_dir(cfg['dir'])
     (out / 'props').mkdir(parents=True, exist_ok=True); (out / 'ground').mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     layout = mod.Layout(); layout.build_coarse(8); props = layout.scatter()

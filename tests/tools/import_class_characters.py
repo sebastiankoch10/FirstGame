@@ -4,10 +4,11 @@ import copy,json,shutil,sys,uuid
 sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/site-packages'))
 from gms_helpers.gm_json import loads,dumps
 ROOT=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 def main():
  project=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'))
  template=loads((ROOT/'sprites/spr_fg_coin_idle/spr_fg_coin_idle.yy').read_text(encoding='utf-8'))
- base=ROOT/'FirstGame_ArtPack/class_overhaul/frames';manifest=[]
+ base=AP.CLASS_OVERHAUL/'frames';manifest=[]
  dirs=['right','up_right','up','up_left','left','down_left','down','down_right']
  actions=['idle','turn','walk','run','attack1','attack2','attack3','jump','fall','dive','landing','slide','dodge','hurt','death']
  for actor in ['magev3','rangerv3']:

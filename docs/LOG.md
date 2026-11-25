@@ -4,6 +4,12 @@ updated: 2026-11-25
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-25 · Claude · Gegner-Pixeldichte, letzte Zauber, Effektqualität, Pfadtabelle (`d461d3e4` und folgende)
+- Pixeldichte 1:1 für Kriecher, Pilzkreatur, Eisgeist, Konstrukt (`enemies.py` `creature_spec`, `level_worlds` `baked`/`monster_art_div`); Skelett-Gegner bleiben (A/B ohne Gewinn).
+- Irrlicht und Prismensamen als Pixel-Effekte (`vfx_wisp_draw`, `vfx_seed_draw`), Verbindungsstrahl als Pixellinie: alle 18 Zauber fertig.
+- Grafikoption Effektqualität Niedrig/Mittel/Hoch (`vfx_quality*` in `spell_vfx`, Menüs in `gameplay` und `ObjectMainMenu`, `firstgame_settings.ini`), Feature-Test 160.
+- Asset-Migration Schritt 1: Pfadtabelle `tests/tools/assets/art_paths.py`, 24 Werkzeuge umgestellt, Regel in AGENTS.md.
+
 ### 2026-11-25 · Claude · Haar/Umhang, Attack Timeline, Zauber-Effekte (`e7c2cc31` bis `3a701c4e` und folgende)
 - Gemeinsamer Rig (`rig_mesh`/`rig_draw_frame`) für Drache, Zwillingshexen, Sumpfbehemoth und das Basismodell der Spielfigur: Haar und Umhang federn über Knochen je Zelle (`eqv_bones`, Pipeline `build_characters.py`).
 - S1 Attack Timeline (`scripts/attack_timeline`): Schwertkette und Klassen-Kombos laufen als Zeitachsen, Werte unverändert; neue Klassenprüfung (151).

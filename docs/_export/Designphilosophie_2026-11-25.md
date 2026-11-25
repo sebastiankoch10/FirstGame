@@ -1081,7 +1081,7 @@ Rang 2 unter „Leitbild“. Die Technik (wie es gebaut wird) steht in „Techni
   | Asset | Welteinheiten pro Artpixel | Bildschirmpixel (x × y) bei 1280×720 |
   |---|---|---|
   | Spielerfiguren (96er-Canvas) | 1,65 → **seit 25.11. 1,0** (160er-Canvas) | 2,64 × 1,98 → 1,33 × 1,33 (720p), 2 × 2 (1080p) |
-  | Normale Gegner | 1,15–1,65 | bis 2,64 × 1,98 |
+  | Normale Gegner | 1,15–1,65; **seit 25.11. Kreaturen von Sumpf und Ruinen 1,0** (in Zielgröße gerendert) | bis 2,64 × 1,98; Kreaturen 1,33 × 1,33 |
   | Umgebung (Wald, Sumpf, Ruinen) | 1,0 | 1,6 × 1,2 |
   | Bosse (512er-Sprites auf Zielhöhe skaliert) | ca. 0,25–0,8 | uneinheitlich |
   | Zaubereffekte (`spr_v2_fx`, auf Radius gestreckt) | beliebig (Radius·2/208) | beliebig |
@@ -1321,7 +1321,7 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
   - Feuerball, Eiskugel und Arkansalve: Kern-Sprite in ganzer Pixelgröße (nicht mehr gestreckt), weiches additives Glühen, Glutpixel bzw. Eissplitter bzw. Runenkern mit kreisenden Funken.
   - Frostnova, Heilpuls und Feuerball-Explosion (`effect_add` mit Stil): Pixelring statt deckender Vektorscheibe, dazu Eissplitter, aufsteigende Pluszeichen bzw. Glut.
   - Die Altaufrufe von `spell_fx_burst` übergeben jetzt das Band; vorher zeigten Nova, Heilung und Projektileinschläge auf jeder Stufe das Endgame-Sprite.
-- Noch ohne eigenen Effekt: Irrlicht und Prismensamen (kleiner gemalter Kern).
+- Irrlicht (lebendes Licht mit Schweif) und Prismensamen (rotierendes Prisma mit Farbfunken) ebenfalls seit 25.11.; Zauber-Verbindungsstrahlen als Pixellinie. **Damit haben alle 18 aktiven Zauber einen eigenen zusammengesetzten Effekt.** Grafikoption **Effektqualität** (Niedrig/Mittel/Hoch) in beiden Einstellungsmenüs, siehe „Technische Architektur“ 4.4. Offen: Talent-Zusatzmerkmale.
 
 **Zielbild je Band:**
 
@@ -1406,7 +1406,7 @@ Rang 2 unter „Leitbild“. Beschreibt, **wie** die Anforderungen aus „Visuel
 | A5 | Große Bosse sind Einzelsprites, kein artikulierter Körper | fehlendes System |
 | A6 | VFX ohne Profile oder Bänder; Größe = Radius-Streckung | bestehendes System verbessern |
 | A7 | Audio ohne Ereignisschicht (Drosselung, Priorität, Varianten nur teilweise) | bestehendes System verbessern |
-| A8 | Keine Qualitätsstufen (LOD) für Effekte | bestehendes System verbessern |
+| A8 | Keine Qualitätsstufen (LOD) für Effekte *(Ist 25.11.: Einstellung Effektqualität Niedrig/Mittel/Hoch)* | bestehendes System verbessern |
 
 ### 3. Vergleich der Animationstechniken (GameMaker 2024)
 
@@ -1512,6 +1512,7 @@ Ausbaustufe (Soll):
   - Gegnergefahren darüber (Hierarchie).
 - **Qualitätsstufen:**
   - Partikel-Multiplikator, Sekundärbewegung an/aus, Lichtauflösung;
+  - *Ist 25.11.:* `vfx_quality()` (0 Niedrig, 1 Mittel, 2 Hoch = Standard) in `spell_vfx`. Partikelanteil 35/65/100 % über einen festen Zähler (kein Zufall), Pool 150/280/420, weiches Glühen erst ab Mittel, Sekundärbewegung (Haar, Umhang, Boss-Rigs) erst ab Mittel. Lichtauflösung noch nicht;
   - automatische Dämpfung eigener Effekte bei aktiven Bossgefahren (Vorschlag).
 
 #### 4.5 Telegraph-System (vorhanden: `attack_telegraph` + `bv2`)
@@ -1746,7 +1747,9 @@ FirstGame_ArtPack/                 Name bleibt (bekannt bei Nutzer und Agenten)
 - `monster_originals/` und die fünf losen Konzeptbilder liegen in `references/`; die zwei Audit-Werkzeuge sind nachgezogen.
 - Das ArtPack-README ist jetzt ein Index.
 
-**Offen:** die aktiven Quellen nach Schritt 1–4 (Pfadtabelle zuerst).
+**Schritt 1 erledigt am 25.11.:** Pfadtabelle `tests/tools/assets/art_paths.py` (eine Konstante je Quellordner, `level_dir()` für Levelgrafik). 24 Werkzeuge lesen nur noch daraus; `python tests/tools/assets/art_paths.py --check` meldet 0 Code-Verweise außerhalb der Tabelle. Jeder umgestellte Ausdruck wurde vorher auf denselben Zielpfad geprüft.
+
+**Offen:** Schritte 2–4 (Probelauf der Importer, Verschieben mit `git mv`, Prüfen).
 
 **Sofort zulässig, ohne Migration:**
 - neue Quellen gleich in die Zielstruktur legen und in der Pfadtabelle eintragen;
@@ -1932,15 +1935,15 @@ graph LR
 | Nr. | Auftrag (je ein eigener Prompt bzw. eine Aufgabe) | Größe | Abhängig von | Nutzerentscheidung |
 |---|---|---|---|---|
 | 1 | ~~R1 Verzerrung beheben~~ **erledigt 25.11.:** 960×540, Makros `VIEW_W`/`VIEW_H`, 16:9-Viewports | M | — | entschieden (b) |
-| 2 | *(erledigt 25.11. für Figuren und Ausrüstung: Dichte 1,0, 160-px-Frames; Gegner und Bosse offen)* **Umsetzung Pixeldichte:** Schwertkämpfer mit Faktor 1,0 aus den Quellatlanten (160er-Leinwand) neben dem heutigen 1,65; Varianten A und B des Feinrasters; Aufnahmen bei 720p und 1080p | M | 1 | **ja:** Auswahl nach Bildvergleich |
+| 2 | *(erledigt 25.11. für Figuren, Ausrüstung und die 4 prozeduralen Kreaturen; offen: gezeichnete Skelett-Gegner (Neuabtasten bringt keinen Gewinn, braucht neue Grafik) und Bosse)* **Umsetzung Pixeldichte:** Schwertkämpfer mit Faktor 1,0 aus den Quellatlanten (160er-Leinwand) neben dem heutigen 1,65; Varianten A und B des Feinrasters; Aufnahmen bei 720p und 1080p | M | 1 | **ja:** Auswahl nach Bildvergleich |
 | 3 | *(erledigt 25.11.: Kern, Schwertkette und Klassen-Kombos)* **S1 Attack Timeline (Kern)** plus Migration der Schwertkette ohne Wertänderung; Telemetrie-Anker anpassen | M | — | nein |
 | 4 | *(teilweise 25.11.: prozedurale Lebendigkeit, Haar und Umhang gefedert über Rig-Knochen)* **S2 Animation Controller plus Federmodul**; Spieler: Übergangsposen (Landung, Richtungswechsel), Haar und Umhang als Ebenen (Segmentierung aus `tests/tools/characters/`) | L | 2, 3 | nein |
-| 5 | *(teilweise 25.11.: Pixelpartikel, Kettenblitz in 3 Bändern, Intensitäts-Bänder aller Zauber, Tonvariation, Musikabsenkung; zusammengesetzte Effekte für 16 von 18 Zaubern, offen: Irrlicht, Prismensamen, Qualitätsstufen)* **S4 VFX-Profile** für alle Zauber, Qualitätsstufen; **S5** Band-Varianten und Musikabsenkung | M | 3 | nein |
+| 5 | *(teilweise 25.11.: Pixelpartikel, Kettenblitz in 3 Bändern, Intensitäts-Bänder aller Zauber, Tonvariation, Musikabsenkung; zusammengesetzte Effekte für alle 18 Zauber, Effektqualität Niedrig/Mittel/Hoch; offen: Talent-Merkmale, Lichtauflösung)* **S4 VFX-Profile** für alle Zauber, Qualitätsstufen; **S5** Band-Varianten und Musikabsenkung | M | 3 | nein |
 | 6 | **Vertical Slice bauen** (Abschnitt 4) | L | 1–5 | Abnahme |
 | 7 | *(Stufe 1 am 25.11.: Drachen-Skinning-Rig)* **S3 Ausbau:** Hitboxen an Knochen, Schweifschlag, Biss, Knochen für alle Posen | L | 3, 4 | entschieden: eigenes Rig in GML (kostenlos) |
 | 8 | Auswertung des Slice, Anpassung der Standards, dann **L3 Übertragung** je Inhaltsgruppe (Klassen → Gegner → Bosse → Zauber) | XL | 6, 7 | Reihenfolge |
 | 9 | V3 Minibosse (Codex zeichnet, Vorgaben von Claude); ~~L5 Elitegegner~~ und ~~L4 Waffen-Upgrades~~ umgesetzt am 25.11. | L | 8 | entschieden |
-| 10 | L1 Asset-Migration (Pfadtabelle, dann Verschieben) | M | — (jederzeit) | nein |
+| 10 | *(Pfadtabelle erledigt 25.11.)* L1 Asset-Migration (Pfadtabelle, dann Verschieben) | M | — (jederzeit) | nein |
 
 ### 4. Vertical Slice: Spezifikation
 

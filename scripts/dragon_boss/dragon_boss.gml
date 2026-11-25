@@ -96,7 +96,7 @@ function dragon_draw(_b) {
     if(level_world_room())master_shadow_draw(_b.x,_b.y,100-lift*.25,25-lift*.08,.3);
     var col=_b.hurt_flash_timer>0 ? make_color_rgb(255,208,180) : element_tint(_b);
     // Body rig on the original dragonboss frames (wings, tail, neck/head); extra poses keep the plain sprite.
-    if(DRAGON_RIG_ENABLED && sprite_exists(a.sprite) && string_pos("spr_fg_dragonboss_",sprite_get_name(a.sprite))==1)dragon_rig_draw(_b,a.sprite,a.frame,a.action,_b.x,_b.y-lift,sx*_b.dragon_facing,sy,col,alpha);
+    if(DRAGON_RIG_ENABLED && vfx_secondary_motion() && sprite_exists(a.sprite) && string_pos("spr_fg_dragonboss_",sprite_get_name(a.sprite))==1)dragon_rig_draw(_b,a.sprite,a.frame,a.action,_b.x,_b.y-lift,sx*_b.dragon_facing,sy,col,alpha);
     else draw_sprite_ext(a.sprite,a.frame,_b.x,_b.y-lift,sx*_b.dragon_facing,sy,0,col,alpha);
     _b.dragon_anim=a.action;_b.dragon_frame=a.frame;draw_set_color(c_white);draw_set_alpha(1);
 }

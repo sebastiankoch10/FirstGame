@@ -4,6 +4,7 @@ from pathlib import Path
 sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/site-packages'))
 from gms_helpers.gm_json import loads,dumps
 R=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(R / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 project=loads((R/'FirstGame.yyp').read_text(encoding='utf-8'))
 template=loads((R/'sprites/spr_fg_coin_idle/spr_fg_coin_idle.yy').read_text(encoding='utf-8'))
 def sprite(name,paths,size,origin):
@@ -17,7 +18,7 @@ def sprite(name,paths,size,origin):
   shutil.copyfile(source,folder/f'{uid}.png');dest=folder/'layers'/uid;dest.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,dest/f'{layer}.png')
  seq['tracks'][0]['keyframes']['Keyframes']=keys;(folder/f'{name}.yy').write_text(dumps(d),encoding='utf-8')
  if not any(r['id']['name']==name for r in project['resources']):project['resources'].append({'id':{'name':name,'path':f'sprites/{name}/{name}.yy'}})
-frames=R/'FirstGame_ArtPack/atmosphere_v2/frames'
+frames=AP.ATMOSPHERE_V2/'frames'
 for action in ['idle','walk','run','attack','jump','fall','dive','slide','dodge','hurt','death']:
  for direction in ['right','left','up','down']:
   actual='right' if direction=='left' else direction

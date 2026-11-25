@@ -4,9 +4,10 @@ import copy,json,shutil,sys,uuid
 sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/site-packages'))
 from gms_helpers.gm_json import loads,dumps
 ROOT=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 
 def main():
- project=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'));template=loads((ROOT/'sprites/spr_fg_coin_idle/spr_fg_coin_idle.yy').read_text(encoding='utf-8'));frames=ROOT/'FirstGame_ArtPack/spell_v2/frames';manifest=[]
+ project=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'));template=loads((ROOT/'sprites/spr_fg_coin_idle/spr_fg_coin_idle.yy').read_text(encoding='utf-8'));frames=AP.SPELL_V2/'frames';manifest=[]
  def sprite(name,paths,size,origin):
   d=copy.deepcopy(template);d['name']=d['%Name']=d['sequence']['name']=name;d.update(width=size,height=size,bboxMode=0,bbox_left=0,bbox_top=0,bbox_right=size-1,bbox_bottom=size-1,origin=9)
   seq=d['sequence'];seq.update(xorigin=origin[0],yorigin=origin[1],seqWidth=float(size),seqHeight=float(size),length=float(len(paths)))

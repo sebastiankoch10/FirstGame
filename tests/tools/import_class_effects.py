@@ -4,6 +4,7 @@ import copy,json,shutil,sys,uuid
 sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/site-packages'))
 from gms_helpers.gm_json import loads,dumps
 ROOT=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 def main():
  project=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'));template=loads((ROOT/'sprites/spr_fg_coin_idle/spr_fg_coin_idle.yy').read_text());manifest=[]
  def sprite(name,paths,size,origin):
@@ -15,7 +16,7 @@ def main():
   seq['tracks'][0]['keyframes']['Keyframes']=keys;(folder/f'{name}.yy').write_text(dumps(d),encoding='utf-8')
   if not any(r['id']['name']==name for r in project['resources']):project['resources'].append({'id':{'name':name,'path':f'sprites/{name}/{name}.yy'}})
   manifest.append(dict(name=name,frames=len(paths),size=size,origin=origin))
- frames=ROOT/'FirstGame_ArtPack/class_overhaul/frames'
+ frames=AP.CLASS_OVERHAUL/'frames'
  for prefix,source in [('spr_class_fx','class_fx'),('spr_dragon_fx','dragon_fx')]:
   for row in range(8):sprite(f'{prefix}_{row}',[frames/source/f'{row}-{i}.png' for i in range(8)],256,[128,128])
  for row,action in enumerate(['wingbeat','leap','channel','summon']):sprite('spr_fg_dragonextra_'+action,[frames/'dragon_poses'/f'{row}-{i}.png' for i in range(4)],512,[256,480])

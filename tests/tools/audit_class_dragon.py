@@ -4,12 +4,13 @@ import hashlib,json,struct,sys
 sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/site-packages'))
 from gms_helpers.gm_json import loads
 ROOT=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 def main():
  checks=[]
  def check(label,ok):checks.append(dict(label=label,passed=bool(ok)))
  refs={'Zaubermeisterin_Referenz.png':'ChatGPT-Bild 22. Nov. 2026, 21_17_51.png','Waldlaeufer_Referenz.png':'ChatGPT-Bild 22. Nov. 2026, 21_17_44.png','Drache_Attacken_Referenz.png':'Drachenangriffs-Atlas im Pixelstil.png'}
- for dest,src in refs.items():check('Original reference byte identity '+dest,(ROOT/'FirstGame_ArtPack/References'/dest).read_bytes()==(ROOT/'FirstGame_ArtPack/references'/src).read_bytes())
- hashes=json.loads((ROOT/'FirstGame_ArtPack/class_overhaul/dragon-preserved.json').read_text())
+ for dest,src in refs.items():check('Original reference byte identity '+dest,(AP.REFERENCES/dest).read_bytes()==(AP.REFERENCES/src).read_bytes())
+ hashes=json.loads((AP.CLASS_OVERHAUL/'dragon-preserved.json').read_text())
  check('All 67 approved dragon PNGs byte-identical',len(hashes)==67 and all(hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h for p,h in hashes.items()))
  project=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'));registered={r['id']['name'] for r in project['resources']}
  count=0

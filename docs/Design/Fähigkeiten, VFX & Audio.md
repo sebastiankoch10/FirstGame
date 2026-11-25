@@ -141,7 +141,7 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
   - Feuerball, Eiskugel und Arkansalve: Kern-Sprite in ganzer Pixelgröße (nicht mehr gestreckt), weiches additives Glühen, Glutpixel bzw. Eissplitter bzw. Runenkern mit kreisenden Funken.
   - Frostnova, Heilpuls und Feuerball-Explosion (`effect_add` mit Stil): Pixelring statt deckender Vektorscheibe, dazu Eissplitter, aufsteigende Pluszeichen bzw. Glut.
   - Die Altaufrufe von `spell_fx_burst` übergeben jetzt das Band; vorher zeigten Nova, Heilung und Projektileinschläge auf jeder Stufe das Endgame-Sprite.
-- Irrlicht (lebendes Licht mit Schweif) und Prismensamen (rotierendes Prisma mit Farbfunken) ebenfalls seit 25.11.; Zauber-Verbindungsstrahlen als Pixellinie. **Damit haben alle 18 aktiven Zauber einen eigenen zusammengesetzten Effekt.** Offen: Qualitätsstufen (Grafikoption) und Talent-Zusatzmerkmale.
+- Irrlicht (lebendes Licht mit Schweif) und Prismensamen (rotierendes Prisma mit Farbfunken) ebenfalls seit 25.11.; Zauber-Verbindungsstrahlen als Pixellinie. **Damit haben alle 18 aktiven Zauber einen eigenen zusammengesetzten Effekt.** Grafikoption **Effektqualität** (Niedrig/Mittel/Hoch) in beiden Einstellungsmenüs, siehe [[Technische Architektur]] 4.4. Offen: Talent-Zusatzmerkmale.
 
 **Zielbild je Band:**
 

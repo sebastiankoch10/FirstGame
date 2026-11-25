@@ -9,6 +9,7 @@ Es gibt **keinen Spielstand**. Jeder Run beginnt neu. Gespeichert wird nur wenig
 
 ## Was wird geschrieben (laut Code)
 - `firstgame_audio.ini`: die Option „Ton im Hintergrund“ (`scripts/audio_manager`). Gesamt-, Musik- und Effektlautstärke wurden im Code **nicht** als gespeichert gefunden.
+- `firstgame_settings.ini` (seit 25.11.): Effektqualität, Abschnitt `Grafik`, Schlüssel `effekte` (0 Niedrig, 1 Mittel, 2 Hoch). Menüeintrag „Effektqualitaet“ in beiden Einstellungsmenüs (`scripts/gameplay`, `ObjectMainMenu`).
 - `firstgame_talents.ini`: Talentränge und -punkte je Klasse (seit 2026-11-25 aktiv, nur im echten Spiel).
 - `firstgame_progression_current.json`: Messpunkte des Runs (`scripts/progression_audit`); schreibt in jedem Run.
 - `boss-dev-errors.log`: nur im Boss-Entwicklermodus.

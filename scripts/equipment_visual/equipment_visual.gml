@@ -86,7 +86,7 @@ function eqv_cell(_actor, _spr, _frame) {
 /// _pose (optional): {hair, cape} screen angles in degrees from player_motion_life; bends hair and cape of the base
 /// model through the shared rig (bones per cell from the generated data). Without a pose the base is drawn as is.
 function player_layers_draw(_actor, _spr, _frame, _x, _y, _xs, _ys, _col, _alpha, _equip = undefined, _rot = 0, _pose = undefined) {
-    var cell = eqv_cell(_actor, _spr, _frame), bones = (is_struct(_pose) && cell >= 0) ? eqv_bones(_actor, cell) : [];
+    var cell = eqv_cell(_actor, _spr, _frame), bones = (is_struct(_pose) && cell >= 0 && vfx_secondary_motion()) ? eqv_bones(_actor, cell) : [];
     if (array_length(bones) > 0) {
         // Angles are given on screen; mirrored frames turn the other way in sprite space.
         var s = sign(_xs), p = {hair: _pose.hair * s, cape: _pose.cape * s};

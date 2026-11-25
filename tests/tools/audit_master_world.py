@@ -5,16 +5,17 @@ import hashlib,json,struct,sys
 sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/site-packages'))
 from gms_helpers.gm_json import loads
 ROOT=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 
 def main():
  room=loads((ROOT/'rooms/Room1/Room1.yy').read_text(encoding='utf-8'))
  objects=Counter(i['objectId']['name'] for layer in room['layers'] for i in layer.get('instances',[]))
  assert objects['ObjectEnvironmentDecoration']==0 and objects['ObjectMasterWorld']==1
- layout=json.loads((ROOT/'FirstGame_ArtPack/master_world/layout.json').read_text(encoding='utf-8'))
+ layout=json.loads((AP.MASTER_WORLD/'layout.json').read_text(encoding='utf-8'))
  assert objects['ObjectMasterScenery']==len(layout)
  assert not any(layer.get('tilesetId') or layer['resourceType']=='GMRTileLayer' for layer in room['layers'])
  assert set(objects)=={'ObjectController','ObjectOverlay','ObjectPlayer','ObjectSpawner','ObjectMasterWorld','ObjectMasterScenery'}
- manifest=json.loads((ROOT/'FirstGame_ArtPack/master_world/manifest.json').read_text(encoding='utf-8'))
+ manifest=json.loads((AP.MASTER_WORLD/'manifest.json').read_text(encoding='utf-8'))
  checked=0
  for entry in manifest:
   name=entry['name'];folder=ROOT/'sprites'/name;data=loads((folder/(name+'.yy')).read_text(encoding='utf-8'))

@@ -1,6 +1,6 @@
 ---
 tags: [system, effekte]
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 # Licht, Wetter & Effekte
 

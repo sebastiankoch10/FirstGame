@@ -34,6 +34,7 @@ for (var i = 0; i < count; i++) {
     var text_label = labels[i];
     if (menu_mode == "settings" && i>=1 && i<=3) text_label += fg_audio_volume_label(i);
     if(menu_mode=="settings" && i==4) text_label+=global.audio_background ? ": Ein" : ": Aus";
+    if(menu_mode=="settings" && i==5) text_label+=vfx_quality_label();
     draw_text(bx + menu_w * 0.5, by + button_h * 0.5, text_label);
 }
 

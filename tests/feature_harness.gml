@@ -131,6 +131,14 @@ function ft_controller_tick() {
             global.ft_stage=5;global.ft_frame=0;break;
         case 5: // vfx: cast some effects for a world capture
             if(global.ft_frame==1) {
+                // Effect quality (graphics option): particle share, pool size, secondary motion; restored afterwards.
+                var q0=vfx_quality(),cnt=[];
+                for(var q=0;q<=2;q++){global.vfx_quality_level=q;global.vfx_particle_n=0;spell_vfx_reset();repeat(40)spell_particle(0,0,0,0,1,1,c_white);array_push(cnt,array_length(global.spell_particles));}
+                global.vfx_quality_level=0;var low_ok=spell_vfx_cap()==150 && !vfx_secondary_motion();
+                global.vfx_quality_level=1;var mid_ok=spell_vfx_cap()==280 && vfx_secondary_motion();
+                global.vfx_quality_level=q0;repeat(3)vfx_quality_cycle();
+                ft_check(cnt[0]==14 && cnt[1]==26 && cnt[2]==40 && low_ok && mid_ok && vfx_quality()==q0,"effect quality keeps 35/65/100 % of particles, smaller pool and no secondary motion on Niedrig");
+                spell_vfx_reset();
                 var d=ft_spawn_dummy(pl.x+140,pl.y);
                 spell_fx_burst(pl.x+140,pl.y,60,1);spell_fx_burst(pl.x-120,pl.y+40,70,2);spell_fx_burst(pl.x,pl.y-110,60,3);
                 ft_check(array_length(global.spell_particles)>0,"spell bursts emit particles");

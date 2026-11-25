@@ -85,6 +85,7 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 - **Weitere Werkzeuge:**
   - Produktions-ZIP nur auf ausdrücklichen Wunsch: `python tests/tools/build_production.py`.
   - Grafik- und Weltgenerierung: `tests/tools/levels/`, siehe `LEVEL_EXPANSION_PROGRESS.md`.
+  - Pfade zu Quellgrafik unter `FirstGame_ArtPack/` liest jedes Werkzeug nur aus `tests/tools/assets/art_paths.py`. Prüfung: `python tests/tools/assets/art_paths.py --check` (0 Verweise außerhalb der Tabelle).
 
 ## Regeln
 - **Keine Zahlenänderungen am Balancing** (HP, Schaden, XP, Klassenwerte, Skalierung) ohne ausdrücklichen Auftrag. Empfehlungen nur dokumentieren.
@@ -101,6 +102,7 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 - **Daten** als statische Struct-Arrays in Funktionen, z. B. `talent_definitions()` oder `level_definitions()`.
 - **Kommentare** im Code auf Englisch, UI-Texte auf Deutsch ohne Umlaute (ae/oe/ue).
 - **Asset-Namen sind globale Bezeichner.** Ein bloßes `if(master_skeleton)` liefert die Skript-Referenz, nicht die Instanzvariable. Deshalb `self.<name>` verwenden oder solche Namen meiden.
+  - Auch jede Skriptfunktion ist eine globale Variable: `global.vfx_quality` ist die Funktion `vfx_quality`, und `variable_global_exists("vfx_quality")` ist immer wahr. Globale Werte nie wie eine Funktion benennen (z. B. `global.vfx_quality_level`).
 - **Reservierte Namen** wie `other`, `speed`, `score`, `mean` nicht als Variablen nutzen. Folgefehler zeigen sonst irreführende Zeilen („Unknown token eArrayRef“).
 - **Neue Skripte, Sprites und Objekte** in `FirstGame.yyp` registrieren, z. B. mit `tests/tools/levels/gm_project.py`. Unbekannte Funktionen kompilieren sonst als Variablen und scheitern erst zur Laufzeit.
 - **Die IDE-Diagnose** meldet bei einzeiligen `if(...)return` und Komma-`var`-Listen viele Fehlalarme („unreachable“, „argument-count“).

@@ -19,7 +19,8 @@ import numpy as np
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[3]
-ART = ROOT / 'FirstGame_ArtPack'
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
+ART = AP.ART
 DIRS = ['right', 'up_right', 'up', 'up_left', 'left', 'down_left', 'down', 'down_right']
 SOURCES = ['walk', 'combat', 'mobility', 'reaction']
 
@@ -59,8 +60,8 @@ def cs_round(v: float) -> int:
 
 def source_path(actor: str, source: str) -> Path:
     if actor == 'swordsmanv3':
-        return ART / 'swordsman_v3' / 'sources' / f'{source}.png'
-    return ART / 'class_overhaul' / 'sources' / f'{actor[:-2]}_{source}.png'
+        return AP.SWORDSMAN_V3 / 'sources' / f'{source}.png'
+    return AP.CLASS_OVERHAUL / 'sources' / f'{actor[:-2]}_{source}.png'
 
 
 def load_rgba(p: Path) -> np.ndarray:
@@ -174,7 +175,7 @@ class Atlas:
             ref_col = {'walk': 0, 'combat': 0, 'mobility': 3, 'reaction': 2}[self.source]
             _, _, _, b = self._keep(ref_col, 6)
             return 52.0 / (b[3] - b[1])
-        ext = json.loads((ART / 'class_overhaul' / 'character-extraction.json').read_text(encoding='utf-8-sig'))
+        ext = json.loads((AP.CLASS_OVERHAUL / 'character-extraction.json').read_text(encoding='utf-8-sig'))
         e = next(e for e in ext if e['actor'] == self.actor and e['source'] == self.source)
         return float(e['scale'])
 

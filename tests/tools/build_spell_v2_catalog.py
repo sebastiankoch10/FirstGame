@@ -2,6 +2,7 @@
 from pathlib import Path
 import json
 ROOT=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 ACTIVE=[
  (101,'Fireball','projectile',1,18,105,64,'Explodiert am Projektilkopf und entzuendet Gegner im Radius.'),
  (102,'Iceball','projectile',2,15,96,0,'Ein schneller Eissplitter verletzt und verlangsamt sein Ziel.'),
@@ -80,7 +81,7 @@ def catalog():
  return out
 
 def main():
- data=catalog();folder=ROOT/'FirstGame_ArtPack/spell_v2';folder.mkdir(exist_ok=True)
+ data=catalog();folder=AP.SPELL_V2;folder.mkdir(exist_ok=True)
  (folder/'catalog.json').write_text(json.dumps(data,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
  code='/// Generated from tests/tools/build_spell_v2_catalog.py. Execution and UI share this data.\nfunction spell_catalog() {\n static data='+json.dumps(data,ensure_ascii=False,separators=(',',':'))+';\n return data;\n}\n'
  target=ROOT/'scripts/spell_v2_catalog';target.mkdir(exist_ok=True);(target/'spell_v2_catalog.gml').write_text(code,encoding='utf-8')

@@ -4,6 +4,7 @@ import copy,json,shutil,sys,uuid
 sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/site-packages'))
 from gms_helpers.gm_json import loads,dumps
 ROOT=Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 def main():
  project=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'));template=loads((ROOT/'sprites/spr_fg_coin_idle/spr_fg_coin_idle.yy').read_text());manifest=[]
  for family in ['twins','swamp']:
@@ -12,7 +13,7 @@ def main():
  if not any(f['folderPath']==folder_path for f in project['Folders']):
   f=copy.deepcopy(project['Folders'][0]);f.update(name='Boss_System_2',folderPath=folder_path);f['%Name']='Boss_System_2';project['Folders'].append(f)
  project['Folders'].sort(key=lambda f:f['folderPath'])
- frames=ROOT/'FirstGame_ArtPack/boss_v2/frames'
+ frames=AP.BOSS_V2/'frames'
  def sprite(name,paths,size,origin):
   assert paths and all(p.exists() for p in paths),(name,paths)
   d=copy.deepcopy(template);d['name']=d['%Name']=d['sequence']['name']=name;d.update(width=size,height=size,bboxMode=0,bbox_left=0,bbox_top=0,bbox_right=size-1,bbox_bottom=size-1,origin=9)

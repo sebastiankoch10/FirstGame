@@ -13,6 +13,7 @@ import statistics
 from analyze_qa import describe, wilson
 
 ROOT = Path(__file__).resolve().parents[2]
+import sys as _sys_ap; _sys_ap.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets')); import art_paths as AP  # noqa: E402
 QA = ROOT / "QA"
 DATA = QA / "data"
 COHORTS = ("baseline-v2-a", "baseline-v2-b", "after-v2-a", "after-v2-b", "holdout-v2")
@@ -111,7 +112,7 @@ def ending_sources(rows):
 def full_run_sources(rows):
     """Actual observed contributions; never an equal-exposure DPS ranking."""
     rs = group(rows, "after")
-    catalog = {int(s["id"]): s["name"] for s in load(ROOT / "FirstGame_ArtPack/spell_v2/catalog.json")}
+    catalog = {int(s["id"]): s["name"] for s in load(AP.SPELL_CATALOG)}
     stats = {}
     held = Counter()
     for row in rs:

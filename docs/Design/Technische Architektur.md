@@ -41,7 +41,7 @@ Rang 2 unter [[Leitbild]]. Beschreibt, **wie** die Anforderungen aus [[Visuelles
 | A5 | Große Bosse sind Einzelsprites, kein artikulierter Körper | fehlendes System |
 | A6 | VFX ohne Profile oder Bänder; Größe = Radius-Streckung | bestehendes System verbessern |
 | A7 | Audio ohne Ereignisschicht (Drosselung, Priorität, Varianten nur teilweise) | bestehendes System verbessern |
-| A8 | Keine Qualitätsstufen (LOD) für Effekte | bestehendes System verbessern |
+| A8 | Keine Qualitätsstufen (LOD) für Effekte *(Ist 25.11.: Einstellung Effektqualität Niedrig/Mittel/Hoch)* | bestehendes System verbessern |
 
 ## 3. Vergleich der Animationstechniken (GameMaker 2024)
 
@@ -147,6 +147,7 @@ Ausbaustufe (Soll):
   - Gegnergefahren darüber (Hierarchie).
 - **Qualitätsstufen:**
   - Partikel-Multiplikator, Sekundärbewegung an/aus, Lichtauflösung;
+  - *Ist 25.11.:* `vfx_quality()` (0 Niedrig, 1 Mittel, 2 Hoch = Standard) in `spell_vfx`. Partikelanteil 35/65/100 % über einen festen Zähler (kein Zufall), Pool 150/280/420, weiches Glühen erst ab Mittel, Sekundärbewegung (Haar, Umhang, Boss-Rigs) erst ab Mittel. Lichtauflösung noch nicht;
   - automatische Dämpfung eigener Effekte bei aktiven Bossgefahren (Vorschlag).
 
 ### 4.5 Telegraph-System (vorhanden: `attack_telegraph` + `bv2`)
