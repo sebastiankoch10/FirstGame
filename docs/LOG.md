@@ -4,6 +4,11 @@ updated: 2026-11-25
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-25 · Claude · Meilensteine 3 und 4 (`aa35461e` und folgende)
+- Meta-Progression mit zwei Punktetöpfen, Elitegegner (`elite_*`), Drachen-Nahangriffe (`dragon_melee_*`), Waffen-Upgrades (`weapon_upgrade_*`, WAFFE-Karten).
+- Pixeldichte 1:1: Pipeline `atlas.py` (`DENSITY`/`FRAME`/`OX`/`OY`), Neubau aller Figuren und Ausrüstungen (160 px), `eqv_frame()`, `player_scale` 1.
+- Bug gefunden und behoben: `combat_mask()` hatte feste 96er-Koordinaten; jetzt relativ zum Ursprung. QA Stufe 3 PASS.
+
 ### 2026-11-25 · Claude · Nutzerentscheidungen und Roadmap-Schritte (Commits `fcc27f13`, `710bb348` und folgende)
 - Kamera 960×540 (`VIEW_W/VIEW_H`), Namen Schwertmeister/Arkanistin, dauerhafte Talente (`talent_persistent`, `talent_respec`, Taste R), 164 Legacy-Sprites und `output/` gelöscht.
 - Kettenblitz zusammengesetzt in 3 Bändern (`gameplay_polish`), Intensitäts-Bänder für alle Zauber (`spell_v2`, `spell_vfx`), Pixel-Partikel, Tonvariation und Musikabsenkung bei Bosswarnungen (`audio_manager`).

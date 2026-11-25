@@ -3,39 +3,39 @@
   "cells": 256,
   "weapon_cells": 223,
   "composite_diff_px": {
-   "mean": 34.4,
-   "max": 175,
-   "frames_over_20": 65
+   "mean": 86.1,
+   "max": 453,
+   "frames_over_20": 84
   },
-  "halo_px": 7119,
-  "seconds": 272,
-  "atlas_px": 2146304,
+  "halo_px": 19058,
+  "seconds": 188,
+  "atlas_px": 6075392,
   "atlases": 38
  },
  "magev3": {
   "cells": 256,
   "weapon_cells": 212,
   "composite_diff_px": {
-   "mean": 12.1,
-   "max": 44,
-   "frames_over_20": 41
+   "mean": 22.7,
+   "max": 70,
+   "frames_over_20": 129
   },
   "halo_px": 0,
-  "seconds": 287,
-  "atlas_px": 3062784,
+  "seconds": 186,
+  "atlas_px": 8628224,
   "atlases": 38
  },
  "rangerv3": {
   "cells": 256,
   "weapon_cells": 230,
   "composite_diff_px": {
-   "mean": 32.1,
-   "max": 151,
-   "frames_over_20": 124
+   "mean": 71.2,
+   "max": 340,
+   "frames_over_20": 186
   },
-  "halo_px": 4482,
-  "seconds": 304,
-  "atlas_px": 4539904,
+  "halo_px": 12074,
+  "seconds": 204,
+  "atlas_px": 12859392,
   "atlases": 38
  },
  "segment_code": "b64817ccaa"

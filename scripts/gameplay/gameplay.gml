@@ -6,8 +6,10 @@
 function combat_mask() {
     if (!variable_global_exists("body_mask") || !sprite_exists(global.body_mask)) {
         global.body_mask=sprite_duplicate(spr_fg_swordsmanv3_idle_right);
-        // Same physical offsets (-10,-29)..(10,-7) despite larger art canvas.
-        sprite_collision_mask(global.body_mask,false,2,38,59,58,81,2,0);
+        // Same physical offsets (-10,-29)..(10,-7) around the foot origin, whatever the art canvas is
+        // (was hard-coded 38,59..58,81 for the 96 px frame; the density switch moved the origin to 80,145).
+        var ox=sprite_get_xoffset(global.body_mask),oy=sprite_get_yoffset(global.body_mask);
+        sprite_collision_mask(global.body_mask,false,2,ox-10,oy-29,ox+10,oy-7,2,0);
     }
     return global.body_mask;
 }
@@ -35,7 +37,7 @@ function player_combat_init() {
     health_visible_time=0;last_damage_taken=0;
     jump_time=0;jump_second_used=false;dive_time=0;dive_start_height=0;dodge_elapsed=0;
     hud_hp_trail=hp; hud_damage_hold=0; hud_hit_flash=0;
-    player_scale=1.65;
+    player_scale=1; // art is drawn 1:1 since the density switch (was 1.65 with 96 px frames)
     mask_index=combat_mask();
     collision_half_width=11; collision_half_height=12;
     contact_radius=10;

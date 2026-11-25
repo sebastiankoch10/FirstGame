@@ -1,9 +1,176 @@
 {
+  "scope": "Native production functions; deterministic fixtures and short scripted damage windows. Not human gameplay E2E.",
   "status": "PASS",
   "passed": true,
   "checks": 150.0,
   "failures": [],
   "metrics": {
+    "ranger": {
+      "outcomes": [
+        {
+          "projectiles": 1.0,
+          "step": 1.0,
+          "damage": 6.0
+        },
+        {
+          "projectiles": 1.0,
+          "step": 2.0,
+          "damage": 6.0
+        },
+        {
+          "projectiles": 3.0,
+          "step": 3.0,
+          "damage": 12.0
+        },
+        {
+          "projectiles": 1.0,
+          "step": 4.0,
+          "damage": 6.0
+        },
+        {
+          "projectiles": 1.0,
+          "step": 5.0,
+          "damage": 6.0
+        },
+        {
+          "projectiles": 1.0,
+          "step": 6.0,
+          "damage": 6.0
+        },
+        {
+          "projectiles": 1.0,
+          "step": 7.0,
+          "damage": 6.0
+        },
+        {
+          "projectiles": 1.0,
+          "step": 8.0,
+          "damage": 6.0
+        },
+        {
+          "projectiles": 5.0,
+          "step": 9.0,
+          "damage": 12.0
+        },
+        {
+          "projectiles": 1.0,
+          "step": 10.0,
+          "damage": 6.0
+        },
+        {
+          "projectiles": 1.0,
+          "step": 11.0,
+          "damage": 6.0
+        },
+        {
+          "projectiles": 0.0,
+          "step": 12.0,
+          "damage": 15.0
+        },
+        {
+          "projectiles": 1.0,
+          "step": 1.0,
+          "damage": 6.0
+        }
+      ],
+      "counts": [
+        1.0,
+        1.0,
+        3.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        5.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ]
+    },
+    "audio": [
+      {
+        "handle_created": true,
+        "native_frame": 8.0,
+        "cue": "mage_bolt"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 15.0,
+        "cue": "mage_arc"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 22.0,
+        "cue": "mage_circle"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 29.0,
+        "cue": "mage_star"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 36.0,
+        "cue": "mage_implosion"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 43.0,
+        "cue": "ranger_arrow"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 50.0,
+        "cue": "ranger_volley"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 57.0,
+        "cue": "ranger_rain"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 64.0,
+        "cue": "dragon_fire"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 71.0,
+        "cue": "dragon_charge"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 78.0,
+        "cue": "dragon_meteor"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 85.0,
+        "cue": "dragon_slam"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 92.0,
+        "cue": "dragon_wind"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 99.0,
+        "cue": "dragon_void"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 106.0,
+        "cue": "dragon_magma"
+      },
+      {
+        "handle_created": true,
+        "native_frame": 113.0,
+        "cue": "dragon_vortex"
+      }
+    ],
     "dps": [
       {
         "dps": 108.51666666862245,
@@ -96,6 +263,37 @@
         "class_name": "Ranger"
       }
     ],
+    "mage": {
+      "stages": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        1.0
+      ],
+      "outcomes": [
+        {
+          "step": 1.0,
+          "damage": 29.0
+        },
+        {
+          "step": 2.0,
+          "damage": 41.0
+        },
+        {
+          "step": 3.0,
+          "damage": 52.0
+        },
+        {
+          "step": 4.0,
+          "damage": 102.0
+        },
+        {
+          "step": 1.0,
+          "damage": 29.0
+        }
+      ]
+    },
     "controlled_target_defeats": [
       {
         "dps": 86.0806283932078,
@@ -146,306 +344,108 @@
     "rendered_fill": [
       {
         "shape": "circle",
-        "ratios": [
-          0.421259842519685,
-          0.562992125984252,
-          0.7007874015748031,
-          0.84251968503937,
-          1.0
-        ],
         "filled_pixel_samples": [
           107.0,
           143.0,
           178.0,
           214.0,
           254.0
+        ],
+        "ratios": [
+          0.421259842519685,
+          0.562992125984252,
+          0.7007874015748031,
+          0.84251968503937,
+          1.0
         ]
       },
       {
         "shape": "sector",
-        "ratios": [
-          0.6363636363636364,
-          0.6818181818181818,
-          0.8363636363636363,
-          0.8272727272727273,
-          1.0
-        ],
         "filled_pixel_samples": [
           70.0,
           75.0,
           92.0,
           91.0,
           110.0
+        ],
+        "ratios": [
+          0.6363636363636364,
+          0.6818181818181818,
+          0.8363636363636363,
+          0.8272727272727273,
+          1.0
         ]
       },
       {
         "shape": "line",
-        "ratios": [
-          0.6351351351351351,
-          0.7972972972972973,
-          0.8243243243243243,
-          0.9864864864864865,
-          1.0
-        ],
         "filled_pixel_samples": [
           47.0,
           59.0,
           61.0,
           73.0,
           74.0
+        ],
+        "ratios": [
+          0.6351351351351351,
+          0.7972972972972973,
+          0.8243243243243243,
+          0.9864864864864865,
+          1.0
         ]
       },
       {
         "shape": "rectangle",
-        "ratios": [
-          0.6351351351351351,
-          0.7972972972972973,
-          0.8243243243243243,
-          0.9864864864864865,
-          1.0
-        ],
         "filled_pixel_samples": [
           47.0,
           59.0,
           61.0,
           73.0,
           74.0
+        ],
+        "ratios": [
+          0.6351351351351351,
+          0.7972972972972973,
+          0.8243243243243243,
+          0.9864864864864865,
+          1.0
         ]
       },
       {
         "shape": "ring",
-        "ratios": [
-          0.44106463878326996,
-          0.5779467680608364,
-          0.7110266159695817,
-          0.8479087452471483,
-          1.0
-        ],
         "filled_pixel_samples": [
           116.0,
           152.0,
           187.0,
           223.0,
           263.0
+        ],
+        "ratios": [
+          0.44106463878326996,
+          0.5779467680608364,
+          0.7110266159695817,
+          0.8479087452471483,
+          1.0
         ]
       }
     ],
-    "mage": {
-      "stages": [
-        1.0,
-        2.0,
-        3.0,
-        4.0,
-        1.0
-      ],
-      "outcomes": [
-        {
-          "step": 1.0,
-          "damage": 29.0
-        },
-        {
-          "step": 2.0,
-          "damage": 41.0
-        },
-        {
-          "step": 3.0,
-          "damage": 52.0
-        },
-        {
-          "step": 4.0,
-          "damage": 102.0
-        },
-        {
-          "step": 1.0,
-          "damage": 29.0
-        }
-      ]
-    },
     "performance": {
       "frames": 60.0,
-      "mean_frame_ms": 16.664516666666668,
-      "max_frame_ms": 16.933,
+      "mean_frame_ms": 23.35901666666666,
+      "max_frame_ms": 424.996,
       "weather": "heavy_rain",
       "class_weapon_effects": true,
+      "enemies": 150.0,
       "enemy_ai_stepped": true,
-      "measurement": "real get_timer intervals between native frames; short sample, not a long-term benchmark",
-      "enemies": 150.0
+      "measurement": "real get_timer intervals between native frames; short sample, not a long-term benchmark"
     },
     "sword_combo": [
       11.0,
       13.0,
       19.0
-    ],
-    "ranger": {
-      "counts": [
-        1.0,
-        1.0,
-        3.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        5.0,
-        1.0,
-        1.0,
-        0.0,
-        1.0
-      ],
-      "outcomes": [
-        {
-          "projectiles": 1.0,
-          "step": 1.0,
-          "damage": 6.0
-        },
-        {
-          "projectiles": 1.0,
-          "step": 2.0,
-          "damage": 6.0
-        },
-        {
-          "projectiles": 3.0,
-          "step": 3.0,
-          "damage": 12.0
-        },
-        {
-          "projectiles": 1.0,
-          "step": 4.0,
-          "damage": 6.0
-        },
-        {
-          "projectiles": 1.0,
-          "step": 5.0,
-          "damage": 6.0
-        },
-        {
-          "projectiles": 1.0,
-          "step": 6.0,
-          "damage": 6.0
-        },
-        {
-          "projectiles": 1.0,
-          "step": 7.0,
-          "damage": 6.0
-        },
-        {
-          "projectiles": 1.0,
-          "step": 8.0,
-          "damage": 6.0
-        },
-        {
-          "projectiles": 5.0,
-          "step": 9.0,
-          "damage": 12.0
-        },
-        {
-          "projectiles": 1.0,
-          "step": 10.0,
-          "damage": 6.0
-        },
-        {
-          "projectiles": 1.0,
-          "step": 11.0,
-          "damage": 6.0
-        },
-        {
-          "projectiles": 0.0,
-          "step": 12.0,
-          "damage": 15.0
-        },
-        {
-          "projectiles": 1.0,
-          "step": 1.0,
-          "damage": 6.0
-        }
-      ]
-    },
-    "audio": [
-      {
-        "handle_created": true,
-        "native_frame": 8.0,
-        "cue": "mage_bolt"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 15.0,
-        "cue": "mage_arc"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 22.0,
-        "cue": "mage_circle"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 29.0,
-        "cue": "mage_star"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 36.0,
-        "cue": "mage_implosion"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 43.0,
-        "cue": "ranger_arrow"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 50.0,
-        "cue": "ranger_volley"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 57.0,
-        "cue": "ranger_rain"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 64.0,
-        "cue": "dragon_fire"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 71.0,
-        "cue": "dragon_charge"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 78.0,
-        "cue": "dragon_meteor"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 85.0,
-        "cue": "dragon_slam"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 92.0,
-        "cue": "dragon_wind"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 99.0,
-        "cue": "dragon_void"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 106.0,
-        "cue": "dragon_magma"
-      },
-      {
-        "handle_created": true,
-        "native_frame": 113.0,
-        "cue": "dragon_vortex"
-      }
     ]
   },
-  "scope": "Native production functions; deterministic fixtures and short scripted damage windows. Not human gameplay E2E.",
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\classes\\20261125-101228",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\classes\\20261125-112026",
   "rendered": [
     "crowd-class-rain.png",
     "mage-arc.png",

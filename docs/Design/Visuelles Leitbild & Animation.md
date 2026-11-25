@@ -132,7 +132,7 @@ Rang 2 unter [[Leitbild]]. Die Technik (wie es gebaut wird) steht in [[Technisch
 
   | Asset | Welteinheiten pro Artpixel | Bildschirmpixel (x × y) bei 1280×720 |
   |---|---|---|
-  | Spielerfiguren (96er-Canvas) | 1,65 | 2,64 × 1,98 |
+  | Spielerfiguren (96er-Canvas) | 1,65 → **seit 25.11. 1,0** (160er-Canvas) | 2,64 × 1,98 → 1,33 × 1,33 (720p), 2 × 2 (1080p) |
   | Normale Gegner | 1,15–1,65 | bis 2,64 × 1,98 |
   | Umgebung (Wald, Sumpf, Ruinen) | 1,0 | 1,6 × 1,2 |
   | Bosse (512er-Sprites auf Zielhöhe skaliert) | ca. 0,25–0,8 | uneinheitlich |

@@ -1080,7 +1080,7 @@ Rang 2 unter „Leitbild“. Die Technik (wie es gebaut wird) steht in „Techni
 
   | Asset | Welteinheiten pro Artpixel | Bildschirmpixel (x × y) bei 1280×720 |
   |---|---|---|
-  | Spielerfiguren (96er-Canvas) | 1,65 | 2,64 × 1,98 |
+  | Spielerfiguren (96er-Canvas) | 1,65 → **seit 25.11. 1,0** (160er-Canvas) | 2,64 × 1,98 → 1,33 × 1,33 (720p), 2 × 2 (1080p) |
   | Normale Gegner | 1,15–1,65 | bis 2,64 × 1,98 |
   | Umgebung (Wald, Sumpf, Ruinen) | 1,0 | 1,6 × 1,2 |
   | Bosse (512er-Sprites auf Zielhöhe skaliert) | ca. 0,25–0,8 | uneinheitlich |
@@ -1554,8 +1554,11 @@ Vorhanden (`boss_choreo`). Künftig als Folge von Zeitachsen (4.1), damit Körpe
 - **A/B-Vergleich (25.11., aus dem Schwertmeister-Quellatlas):**
   - Heute: 52-px-Figur ×1,65; bei 1080p sind die Pixel 3,3 px breit und 1,65-mal gröber als der Boden.
   - Mit Dichte 1,0: 86-px-Figur aus derselben Quelle, Pixel so groß wie der Boden, mehr Detail.
-  - **Empfehlung: Dichte 1,0.**
-  - Umsetzung offen, weil der Pipeline-Umbau groß ist:
+  - **Empfehlung: Dichte 1,0. Nutzerentscheidung 25.11.: umstellen. Umgesetzt am 25.11.** für Spielerfiguren und Ausrüstung:
+    - Frames 160×160, Ursprung (80,145), `player_scale` 1,0.
+    - Frame-Spezifikation in `tests/tools/characters/atlas.py` (`DENSITY`, `FRAME`, `OX`, `OY`); die Laufzeit liest sie aus den generierten Daten (`eqv_frame()`).
+    - Gegner und Bosse folgen in eigenen Schritten (andere Quellen).
+  - Umgesetzte Schritte:
     - Leinwand 96 → 160 px, Ursprung (48,88) → (80,147);
     - `atlas.py`/`render.py`/`build_characters.py` und alle Ausrüstungs-Atlanten neu bauen;
     - `eqv_piece_draw`-Konstanten und `player_scale` 1,65 → 1,0 anpassen;

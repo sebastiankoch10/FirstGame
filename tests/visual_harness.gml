@@ -65,7 +65,7 @@ function vh_data_checks(_actor) {
                 var o = c * 8, w = buffer_peek(pc.buf, o + 4, buffer_u8); if (w == 0) continue; n++;
                 var ax = buffer_peek(pc.buf, o, buffer_u16), ay = buffer_peek(pc.buf, o + 2, buffer_u16), h = buffer_peek(pc.buf, o + 5, buffer_u8);
                 var ox = buffer_peek(pc.buf, o + 6, buffer_u8), oy = buffer_peek(pc.buf, o + 7, buffer_u8);
-                if (ax + w > sw || ay + h > sh || ox + w > 96 || oy + h > 96) bad_rect++;
+                if (ax + w > sw || ay + h > sh || ox + w > eqv_frame().size || oy + h > eqv_frame().size) bad_rect++;
             }
             if (q == 0) filled[$ keys[q]] = n;
         }
@@ -104,13 +104,13 @@ function vh_api_checks(_actor) {
 function vh_sheet(_actor, _set, _name) {
     var dirs = ["right", "up_right", "up", "up_left", "left", "down_left", "down", "down_right"];
     var acts = [["idle", 0], ["walk", 2], ["run", 5], ["attack1", 1], ["attack2", 1], ["attack3", 1], ["jump", 1], ["slide", 1], ["dodge", 1], ["hurt", 1], ["death", 4]];
-    var cw = 72, chh = 72, W = cw * array_length(acts), H = chh * 8;
+    var cw = 120, chh = 120, W = cw * array_length(acts), H = chh * 8;   // cells fit the 1:1 figures (density switch)
     var s = surface_create(W, H);
     surface_set_target(s); draw_clear(make_color_rgb(44, 54, 46));
     for (var r = 0; r < 8; r++) for (var c = 0; c < array_length(acts); c++) {
         var spr = asset_get_index("spr_fg_" + _actor + "_" + acts[c][0] + "_" + dirs[r]);
         if (!sprite_exists(spr)) continue;
-        player_layers_draw(_actor, spr, min(acts[c][1], sprite_get_number(spr) - 1), c * cw + 36, r * chh + 66, 1, 1, c_white, 1, _set);
+        player_layers_draw(_actor, spr, min(acts[c][1], sprite_get_number(spr) - 1), c * cw + 60, r * chh + 110, 1, 1, c_white, 1, _set);
     }
     surface_reset_target();
     if (_name != "") surface_save(s, "vhcapture-" + _name + ".png");

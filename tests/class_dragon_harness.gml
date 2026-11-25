@@ -170,7 +170,7 @@ function cd_assets_audio_tests() {
     for(var i=0;i<array_length(names);i++){var name=names[i],resource=asset_get_index("sfx_fg_"+name);cd_check(audio_exists(resource),"Actual imported class/dragon audio resource "+name);}
     global.cd_metrics.audio=[];
     var actors=["magev3","rangerv3"],dirs=["right","up_right","up","up_left","left","down_left","down","down_right"],actions=["idle","walk","run","jump","fall","landing","dodge","slide","dive","hurt","death"];
-    for(var a=0;a<2;a++){var valid=true,total_frames=0;for(var d=0;d<8;d++)for(var k=0;k<array_length(actions);k++){var spr=asset_get_index("spr_fg_"+actors[a]+"_"+actions[k]+"_"+dirs[d]);if(!sprite_exists(spr))valid=false;else{total_frames+=sprite_get_number(spr);if(sprite_get_xoffset(spr)!=48 || sprite_get_yoffset(spr)!=88)valid=false;}}cd_check(valid && total_frames>100,"New "+actors[a]+" real eight-direction animation resources and consistent origins");}
+    for(var a=0;a<2;a++){var valid=true,total_frames=0;for(var d=0;d<8;d++)for(var k=0;k<array_length(actions);k++){var spr=asset_get_index("spr_fg_"+actors[a]+"_"+actions[k]+"_"+dirs[d]);if(!sprite_exists(spr))valid=false;else{total_frames+=sprite_get_number(spr);if(sprite_get_xoffset(spr)!=eqv_frame().ox || sprite_get_yoffset(spr)!=eqv_frame().oy)valid=false;}}cd_check(valid && total_frames>100,"New "+actors[a]+" real eight-direction animation resources and consistent origins");}
     var bounded=true;for(var i=0;i<100;i++)class_fx_add("mage_circle",ObjectPlayer.x,ObjectPlayer.y,0,20,.05);if(array_length(global.class_effects)>48)bounded=false;repeat(80)class_effects_step(.05);cd_check(bounded && array_length(global.class_effects)==0,"Class effect pool is bounded and expired effects are destroyed");
 }
 function cd_menu_tick() {

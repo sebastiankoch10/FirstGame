@@ -1,6 +1,6 @@
 ---
 tags: [system, grafik, ausruestung, charaktere]
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 # Charaktergrafik & Ausrüstungs-Layer
 
@@ -34,7 +34,7 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
 - **Test:** `tests/visual_harness.gml` über `run_native_harness.py visual`, Suite `visual` in `tests/tools/qa.py`.
 
 ## Wie die Grafik entsteht (Kurzfassung)
-1. Die Originalfiguren stammen aus 1254×1254-Atlanten (8 Richtungen × 8 Posen, 256 Posen je Klasse). `atlas.py` bildet den Import nach: Schnitt, Alphaschwelle, größte Komponente, GDI+-Nearest-Neighbor nach 96×96, Ursprung (48, 88).
+1. Die Originalfiguren stammen aus 1254×1254-Atlanten (8 Richtungen × 8 Posen, 256 Posen je Klasse). `atlas.py` bildet den Import nach: Schnitt, Alphaschwelle, größte Komponente, GDI+-Nearest-Neighbor. Seit 25.11.2026 entstehen die Frames mit 160×160 und Ursprung (80, 145), gezeichnet 1:1 (Pixeldichte wie die Welt; vorher 96×96, Ursprung (48,88), Skalierung 1,65). Neu bauen: `FG_SEG_VER=<segment_code> python tests/tools/characters/build_characters.py --previews` nutzt den Zerlegungs-Cache.
 2. **Zerlegung in Atlas-Auflösung** (`segment.py`):
    - Saum entfernen (warme Mattkante).
    - Waffe finden: Klinge bzw. Stab per RANSAC als gerade, frei herausragende Linie; Bogen als frei liegende Holzkurve.
@@ -70,4 +70,5 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
   - Wo die Waffe nicht erkannt wurde, zeigt der Frame auch mit Item-Waffe die Originalwaffe. Nicht erkannte Klingenreste bleiben original statt umgefärbt.
   - Meist betroffen: verdeckte Waffen in Rückansichten, Todesposen und senkrecht nach unten gehaltene Klingen.
 - **Basis der Magierin:** Originalrobe ohne Goldornamente. Schwertkämpfer und Waldläufer bekommen dagegen neue Grundkleidung (Waffenrock bzw. Leinenhemd).
+- **Kollisionsmaske:** `combat_mask()` (`scripts/gameplay`) dupliziert ein Schwertmeister-Sprite. Die Box wird seit 25.11. aus dessen Ursprung berechnet; vorher feste 96er-Koordinaten, die bei der Umstellung auf 160 px die Projektiltreffer verschoben hätten (von der Suite `classes` gefunden).
 - **Startwaffe:** Basis plus Startwaffe ergibt das Original. Ausnahmen sind der entfernte Saum und einzelne Umrisspixel der Waffe.

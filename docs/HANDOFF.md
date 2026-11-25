@@ -24,18 +24,20 @@ agent: Claude
   - Pixel-Partikel und Tonvariation;
   - Drachen-Körper-Rig (2D-Skinning);
   - Lebendigkeit der Spielfigur (Absprung, Landung, Lehnen);
-  - IDE-Ordner nach Kategorien.
-- **Tests (25.11.):** Stufe 3 nach jedem Meilenstein PASS (static, regression 811, feature 141, boss 141, level 166, classes 150, visual 75); Musikabsenkung zuletzt mit regression, level, boss PASS.
+  - IDE-Ordner nach Kategorien;
+  - **Meilenstein 3:** langsamere Meta-Progression (nur Boss-Punkte dauerhaft), Elitegegner, Drachen-Nahangriffe, Waffen-Upgrade-Karten;
+  - **Meilenstein 4:** Pixeldichte 1:1 für Figuren und Ausrüstung (160-px-Frames, Ursprung 80/145, `player_scale` 1).
+- **Tests (25.11., Meilenstein 4):** static, regression 811, feature 159, boss 141, level 166, classes 150, visual 75 – alle PASS.
 
 ## Offen (Details und Reihenfolge in [[Roadmap & Vertical Slice]])
-1. **Pixeldichte 1,0 umsetzen:** A/B entschieden (Empfehlung), Pipeline-Umbau 96 → 160 px und Ausrüstungs-Neubau.
+1. **Pixeldichte für Gegner und Bosse:** Figuren und Ausrüstung sind fertig; Gegner und Bosse stammen aus anderen Quellen.
 2. **Haar und Umhang** als eigene, nachschwingende Ebenen (Pipeline-Trennung plus Federmodul).
 3. **Attack Timeline (S1)** als gemeinsames System und Migration von Schwert und Klassenwaffen; Animation Controller (S2).
 4. **Drachen-Rig Stufe 2:** Hitboxen an Knochen, Schweifschlag, Biss, Knochen für alle Posen; Hexen und Behemoth.
 5. **Eigene zusammengesetzte Effekte** für die übrigen 17 Zauber (Vorlage: Kettenblitz).
-6. **Minibosse** im aktuellen Stil (neue Grafik nötig), **Elitegegner**, **Waffen-Upgrade-System**: Design durch den Nutzer.
+6. **Minibosse:** Codex-Auftrag liegt beim Nutzer (neue Grafik).
 7. **Quell-Asset-Migration** (Pfadtabelle, dann Verschieben).
-8. **Tempo der Meta-Progression:** Zahlenentscheidung des Nutzers.
+8. **Werte** von Elitegegnern und Waffen-Upgrades sind ungetestete Designwerte; Spieltest bzw. Simulation empfohlen.
 
 ## Bekannte Bugs / Risiken
 - **MCP:** `MCP_TIMEOUT` in `.claude/settings.json` wirkt nicht (gms-MCP bricht nach 30 s ab). Für die Tests egal.

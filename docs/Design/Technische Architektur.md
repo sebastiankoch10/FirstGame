@@ -204,8 +204,11 @@ Vorhanden (`boss_choreo`). Künftig als Folge von Zeitachsen (4.1), damit Körpe
 - **A/B-Vergleich (25.11., aus dem Schwertmeister-Quellatlas):**
   - Heute: 52-px-Figur ×1,65; bei 1080p sind die Pixel 3,3 px breit und 1,65-mal gröber als der Boden.
   - Mit Dichte 1,0: 86-px-Figur aus derselben Quelle, Pixel so groß wie der Boden, mehr Detail.
-  - **Empfehlung: Dichte 1,0.**
-  - Umsetzung offen, weil der Pipeline-Umbau groß ist:
+  - **Empfehlung: Dichte 1,0. Nutzerentscheidung 25.11.: umstellen. Umgesetzt am 25.11.** für Spielerfiguren und Ausrüstung:
+    - Frames 160×160, Ursprung (80,145), `player_scale` 1,0.
+    - Frame-Spezifikation in `tests/tools/characters/atlas.py` (`DENSITY`, `FRAME`, `OX`, `OY`); die Laufzeit liest sie aus den generierten Daten (`eqv_frame()`).
+    - Gegner und Bosse folgen in eigenen Schritten (andere Quellen).
+  - Umgesetzte Schritte:
     - Leinwand 96 → 160 px, Ursprung (48,88) → (80,147);
     - `atlas.py`/`render.py`/`build_characters.py` und alle Ausrüstungs-Atlanten neu bauen;
     - `eqv_piece_draw`-Konstanten und `player_scale` 1,65 → 1,0 anpassen;

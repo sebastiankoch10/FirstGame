@@ -108,7 +108,7 @@ function reset_round()
         global.player.image_speed = 0;
         global.player.image_xscale = 1;
         global.player.image_yscale = 1;
-        global.player.player_scale = 1.65;
+        global.player.player_scale = 1; // art 1:1 (density switch 25.11.2026)
         with(global.player) player_combat_init();
         global.player.image_angle = 0;
         with (ObjectSwordHitbox) {
