@@ -226,5 +226,5 @@ Visuell relevante Fähigkeiten haben Phasen; siehe [[Fähigkeiten, VFX & Audio]]
   - Bei Angriffen: Flügelschlag beim Flügelsturm, Aufrichten in der Vorbereitung, Rückstoß bei Treffern.
   - Keine Nähte, Original-PNGs unverändert.
   - In Feuerposen bleiben Kopf und Hals unbewegt, damit Maul-Anker und Strahl übereinstimmen.
-- **Hexen, Behemoth:** Einzelsprites je Aktion (2–4 Frames), Richtung durch Spiegeln, Atmung per Skalierung, Flug per Höhenversatz.
+- **Hexen, Behemoth:** Einzelsprites je Aktion (2–4 Frames), Richtung durch Spiegeln. Seit 25.11. ebenfalls über den gemeinsamen Rig (`rig_draw_frame`, `bv2_rig_*`): Hexen mit flatterndem Hut, Umhangzipfeln und Saum, Behemoth mit schwer wackelndem Pilzrücken und Kopf, Arme leicht, Klauen am Boden.
 - **Zaubereffekte:** 4-Frame-Sprite auf Wirkradius gestreckt, dazu Vektorlinien und -kreise; Partikel als Vektorformen.

@@ -370,7 +370,10 @@ function bv2_actor_draw(_b,_ice=false) {
     if(variable_instance_exists(_b,"bc_alpha"))alpha*=_b.bc_alpha;
     if(alpha<=.01)return;
     if(level_world_room())master_shadow_draw(actor.x,actor.y,twin ? 30 : 120,twin ? 9 : 28,twin ? .22 : .38);
-    draw_sprite_ext(spr,draw_frame,actor.x,actor.y-hover,scale*face,scale*(1+sin(_b.v2_clock*2.1)*.006),0,_b.hurt_flash_timer>0 ? make_color_rgb(255,205,196) : c_white,alpha);
+    var col=_b.hurt_flash_timer>0 ? make_color_rgb(255,205,196) : c_white,sy=scale*(1+sin(_b.v2_clock*2.1)*.006);
+    // Body rig (docs/Design/Boss-Design.md G2): flapping hat and cloak for the witches, heavy wobble for the behemoth.
+    if(BV2_RIG_ENABLED && a.action!="death")rig_draw_frame(spr,draw_frame,bv2_rig_bones(twin),bv2_rig_pose(_b,_ice,twin),twin ? "witch" : "behemoth",twin ? -1 : 455,actor.x,actor.y-hover,scale*face,sy,col,alpha,twin ? 8 : 24);
+    else draw_sprite_ext(spr,draw_frame,actor.x,actor.y-hover,scale*face,sy,0,col,alpha);
     if(twin && _b.hp>0){var col=_ice ? make_color_rgb(118,210,255) : make_color_rgb(255,134,70);draw_set_color(col);draw_set_alpha(.55);for(var i=0;i<3;i++){var phase=frac(_b.v2_clock*.6+i*.33);draw_circle(actor.x+sin(_b.v2_clock*2+i)*15,actor.y-hover+10+phase*28,2*(1-phase),false);}}
     draw_set_alpha(1);draw_set_color(c_white);
 }
@@ -381,4 +384,30 @@ function bv2_encounter_draw(_b) {
         var a=bv2_twins_origin(_b,false),b=bv2_twins_origin(_b,true);draw_set_color(make_color_rgb(193,140,238));draw_set_alpha(.35);draw_line_width(a.x,a.y,b.x,b.y,2);
     }
     draw_set_alpha(1);draw_set_color(c_white);
+}
+
+#macro BV2_RIG_ENABLED true
+/// Bones in sprite pixels: witches (128 px frames, origin 64,116), behemoth (512 px, origin 256,480), measured on idle.
+function bv2_rig_bones(_twin) {
+    static witch=[
+        {id:"hat",x:66,y:46,ex:72,ey:24,r:22,parent:-1},
+        {id:"cloakL",x:54,y:70,ex:34,ey:96,r:26,parent:-1},
+        {id:"cloakR",x:78,y:70,ex:96,ey:92,r:26,parent:-1},
+        {id:"hem",x:66,y:82,ex:68,ey:104,r:24,parent:-1}
+    ];
+    static behemoth=[
+        {id:"back",x:256,y:230,ex:300,ey:100,r:140,parent:-1},
+        {id:"head",x:230,y:300,ex:222,ey:200,r:70,parent:-1},
+        {id:"armL",x:170,y:280,ex:100,ey:420,r:80,parent:-1},
+        {id:"armR",x:340,y:280,ex:395,ey:420,r:80,parent:-1}
+    ];
+    return _twin ? witch : behemoth;
+}
+/// Angles in degrees: witches flutter fast with lag between hat, cloak and hem; the behemoth sways slowly and heavily.
+function bv2_rig_pose(_b,_ice,_twin) {
+    var t=_b.v2_clock+(_ice ? 1.3 : 0),p={};
+    if(_twin){p.hat=7*sin(t*2.3-.6);p.cloakL=6*sin(t*2.9);p.cloakR=-6*sin(t*2.9+.8);p.hem=4*sin(t*2.1-.4);}
+    else {p.back=2.5*sin(t*.9-.7);p.head=2*sin(t*.9);p.armL=1.5*sin(t*.9+.4);p.armR=-1.5*sin(t*.9+.4);}
+    if(_b.hurt_flash_timer>0){var j=_b.hurt_flash_timer/6;if(_twin){p.hat-=8*j;p.hem+=5*j;}else{p.back-=4*j;p.head-=4*j;}}
+    return p;
 }

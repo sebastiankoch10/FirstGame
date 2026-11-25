@@ -173,27 +173,28 @@ function dragon_rig_pose(_b,_action) {
     }
     return p;
 }
-/// Weighted grid for one frame (cached): sprite-space vertices plus the uv of each vertex on the texture page.
-function dragon_rig_mesh(_spr,_frame,_action) {
-    if(!variable_global_exists("dragon_rig_cache"))global.dragon_rig_cache={};
-    var key=string(_spr)+":"+string(_frame);
-    if(variable_struct_exists(global.dragon_rig_cache,key))return global.dragon_rig_cache[$ key];
+/// Weighted grid for one frame (cached per _key): sprite-space vertices with bone weights.
+/// _feet_y >= 0 keeps everything below that line planted (weights fade out over 26 px above it).
+function rig_mesh(_spr,_frame,_bones,_key,_feet_y=-1,_step=24) {
+    if(!variable_global_exists("rig_cache"))global.rig_cache={};
+    var key=_key+":"+string(_spr)+":"+string(_frame);
+    if(variable_struct_exists(global.rig_cache,key))return global.rig_cache[$ key];
     var uv=sprite_get_uvs(_spr,_frame),w=sprite_get_width(_spr),h=sprite_get_height(_spr);
     // The grid covers the opaque part of the frame (crop rectangle reported by sprite_get_uvs, in pixels).
-    var x0=uv[4],y0=uv[5],x1=x0+w*uv[6],y1=y0+h*uv[7],step=24;
-    var cols=max(2,ceil((x1-x0)/step)+1),rows=max(2,ceil((y1-y0)/step)+1),bones=dragon_rig_bones(_action),nb=array_length(bones);
+    var x0=uv[4],y0=uv[5],x1=x0+w*uv[6],y1=y0+h*uv[7];
+    var cols=max(2,ceil((x1-x0)/_step)+1),rows=max(2,ceil((y1-y0)/_step)+1),nb=array_length(_bones);
     var m={cols:cols,rows:rows,px:[],py:[],w:[]};
     for(var r=0;r<rows;r++)for(var c=0;c<cols;c++) {
         var px=lerp(x0,x1,c/(cols-1)),py=lerp(y0,y1,r/(rows-1));
         array_push(m.px,px);array_push(m.py,py);
-        var ws=array_create(nb,0),feet=clamp((458-py)/26,0,1);     // feet stay planted
+        var ws=array_create(nb,0),feet=_feet_y>=0 ? clamp((_feet_y-py)/26,0,1) : 1;
         for(var i=0;i<nb;i++) {
-            var bn=bones[i],d=dragon_rig_seg_dist(px,py,bn.x,bn.y,bn.ex,bn.ey);
+            var bn=_bones[i],d=dragon_rig_seg_dist(px,py,bn.x,bn.y,bn.ex,bn.ey);
             ws[i]=sqr(1-clamp(d/bn.r,0,1))*feet;
         }
         array_push(m.w,ws);
     }
-    global.dragon_rig_cache[$ key]=m;
+    global.rig_cache[$ key]=m;
     return m;
 }
 function dragon_rig_seg_dist(_x,_y,_ax,_ay,_bx,_by) {
@@ -216,26 +217,27 @@ function dragon_rig_matrices(_bones,_pose) {
     }
     return mats;
 }
-/// Draws the deformed frame. _ox/_oy: world position of the sprite origin; _sx/_sy: scale (facing in _sx).
+/// Draws the deformed dragon frame. _ox/_oy: world position of the sprite origin; _sx/_sy: scale (facing in _sx).
 function dragon_rig_draw(_b,_spr,_frame,_action,_ox,_oy,_sx,_sy,_col,_alpha) {
-    var m=dragon_rig_mesh(_spr,_frame,_action),bones=dragon_rig_bones(_action),mats=dragon_rig_matrices(bones,dragon_rig_pose(_b,_action));
-    var nb=array_length(bones),n=m.cols*m.rows,wx=array_create(n),wy=array_create(n);
-    var xo=sprite_get_xoffset(_spr),yo=sprite_get_yoffset(_spr);
+    rig_draw_frame(_spr,_frame,dragon_rig_bones(_action),dragon_rig_pose(_b,_action),"dragon_"+_action,458,_ox,_oy,_sx,_sy,_col,_alpha,24);
+}
+/// Generic skinned draw: the frame is first drawn normally into a surface of its size (page uvs from sprite_get_uvs
+/// did not match the primitive texture for large frames, tested 25.11.), then the bent grid is drawn as strips.
+function rig_draw_frame(_spr,_frame,_bones,_pose,_key,_feet_y,_ox,_oy,_sx,_sy,_col,_alpha,_step=24) {
+    var m=rig_mesh(_spr,_frame,_bones,_key,_feet_y,_step),mats=dragon_rig_matrices(_bones,_pose);
+    var nb=array_length(_bones),n=m.cols*m.rows,wx=array_create(n),wy=array_create(n);
+    var xo=sprite_get_xoffset(_spr),yo=sprite_get_yoffset(_spr),sw=sprite_get_width(_spr),sh=sprite_get_height(_spr);
     for(var k=0;k<n;k++) {
         var px=m.px[k],py=m.py[k],ws=m.w[k],sum=0,qx=0,qy=0;
         for(var i=0;i<nb;i++)if(ws[i]>0){var M=mats[i];sum+=ws[i];qx+=ws[i]*(M[0]*px+M[1]*py+M[2]);qy+=ws[i]*(M[3]*px+M[4]*py+M[5]);}
         if(sum>1){qx/=sum;qy/=sum;} else {qx+=(1-sum)*px;qy+=(1-sum)*py;}
         wx[k]=_ox+(qx-xo)*_sx;wy[k]=_oy+(qy-yo)*_sy;
     }
-    // The frame is first drawn normally into its own surface: page uvs from sprite_get_uvs did not match the
-    // texture used by primitives for these frames (tested 25.11.), a surface gives exact pixel uvs.
-    var sw=sprite_get_width(_spr),sh=sprite_get_height(_spr);
-    if(!variable_global_exists("dragon_rig_surf") || !surface_exists(global.dragon_rig_surf) || surface_get_width(global.dragon_rig_surf)!=sw){
-        if(variable_global_exists("dragon_rig_surf") && surface_exists(global.dragon_rig_surf))surface_free(global.dragon_rig_surf);
-        global.dragon_rig_surf=surface_create(sw,sh);
-    }
-    surface_set_target(global.dragon_rig_surf);draw_clear_alpha(c_black,0);draw_sprite(_spr,_frame,xo,yo);surface_reset_target();
-    var tex=surface_get_texture(global.dragon_rig_surf),tu=texture_get_texel_width(tex),tv=texture_get_texel_height(tex);
+    if(!variable_global_exists("rig_surfs"))global.rig_surfs={};
+    var sk=string(sw)+"x"+string(sh),s=variable_struct_exists(global.rig_surfs,sk) ? global.rig_surfs[$ sk] : -1;
+    if(!surface_exists(s)){s=surface_create(sw,sh);global.rig_surfs[$ sk]=s;}
+    surface_set_target(s);draw_clear_alpha(c_black,0);draw_sprite(_spr,_frame,xo,yo);surface_reset_target();
+    var tex=surface_get_texture(s),tu=texture_get_texel_width(tex),tv=texture_get_texel_height(tex);
     for(var r=0;r<m.rows-1;r++) {
         draw_primitive_begin_texture(pr_trianglestrip,tex);
         for(var c=0;c<m.cols;c++) {

@@ -121,6 +121,13 @@ FirstGame_ArtPack/                 Name bleibt (bekannt bei Nutzer und Agenten)
 4. **Prüfen:** Static-Suite, ein Importer-Testlauf je Quelle, Visual-Suite. Links in den Notizen werden nachgezogen; historische Berichte bleiben unverändert (historisch).
 5. **Legacy:** `_legacy/` bleibt im Repo. Löschen nur auf ausdrücklichen Wunsch.
 
+**Erledigt am 25.11. (sicherer Teil, kein Werkzeug liest diese Ordner):**
+- `heroes/`, `monsters/`, `icons/`, `portraits/`, `previews/` und `effects/` liegen in `FirstGame_ArtPack/_legacy/`.
+- `monster_originals/` und die fünf losen Konzeptbilder liegen in `references/`; die zwei Audit-Werkzeuge sind nachgezogen.
+- Das ArtPack-README ist jetzt ein Index.
+
+**Offen:** die aktiven Quellen nach Schritt 1–4 (Pfadtabelle zuerst).
+
 **Sofort zulässig, ohne Migration:**
 - neue Quellen gleich in die Zielstruktur legen und in der Pfadtabelle eintragen;
 - das README des ArtPacks aktuell halten.

@@ -1,22 +1,22 @@
 {
- "date": "2026-11-25 12:17",
- "commit": "55ba2627",
+ "date": "2026-11-25 12:32",
+ "commit": "4521405f",
  "tier": 2,
  "dirty": true,
  "results": [
   {
    "suite": "regression",
    "status": "PASS",
-   "seconds": 115,
+   "seconds": 112,
    "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-regression.log",
    "checks": 811.0
   },
   {
-   "suite": "feature",
+   "suite": "boss",
    "status": "PASS",
-   "seconds": 119,
-   "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-feature.log",
-   "checks": 159.0
+   "seconds": 597,
+   "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-boss.log",
+   "checks": 141.0
   }
  ]
 }

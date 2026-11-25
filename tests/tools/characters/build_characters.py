@@ -30,7 +30,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE)); sys.path.insert(0, str(HERE.parent / 'levels'))
 from atlas import DENSITY, FRAME, OX, OY, ROOT, SETS, SOURCES, Atlas, frame_plan  # noqa: E402
 import render as R  # noqa: E402
-from segment import CHEST, FEET, HANDS, LEGS, WEAPON, Seg, segment  # noqa: E402
+from segment import CHEST, FEET, HAIR, HANDS, LEGS, WEAPON, Seg, segment  # noqa: E402
 from gm_project import Project, read, write  # noqa: E402
 
 CACHE = Path(os.environ.get('LOCALAPPDATA', str(Path.home()))) / 'FirstGame-Tests' / 'charcache'
@@ -146,6 +146,41 @@ def encode(rects):
     return base64.b64encode(b''.join(struct.pack('<HHBBBB', *r) for r in rects)).decode('ascii')
 
 
+def cell_to_frame(cell, ax, ay):
+    """Atlas-cell pixel -> frame pixel (same mapping as Cell.to_frame)."""
+    l, t, r, b = cell.bounds
+    x, y, w, h = cell.dest
+    return x + (ax - l + .5) * w / max(1, r - l), y + (ay - t + .5) * h / max(1, b - t)
+
+
+def mask_bone(cell, mask, top=.35, bottom=.30, min_px=40):
+    """Bone of a soft part: pivot = centroid of its upper band, tip = centroid of its lower band (frame pixels),
+    radius = half its frame width. None when the part is too small to animate."""
+    ys, xs = np.nonzero(mask)
+    if len(ys) < min_px:
+        return None
+    y0, y1 = ys.min(), ys.max()
+    if y1 - y0 < 6:
+        return None
+    up = ys <= y0 + (y1 - y0) * top
+    lo = ys >= y1 - (y1 - y0) * bottom
+    px, py = cell_to_frame(cell, xs[up].mean(), ys[up].mean())
+    tx, ty = cell_to_frame(cell, xs[lo].mean(), ys[lo].mean())
+    fx0, _ = cell_to_frame(cell, xs.min(), y0)
+    fx1, _ = cell_to_frame(cell, xs.max(), y0)
+    r = max(6.0, (fx1 - fx0) * .5)
+    clamp = lambda v: int(max(0, min(255, round(v))))
+    return [clamp(px), clamp(py), clamp(tx), clamp(ty), clamp(r)]
+
+
+def encode_bones(bones):
+    """10 bytes per cell: hair (px,py,tx,ty,r) then cape (px,py,tx,ty,r); all zero = no bone."""
+    out = b''
+    for hb, cb in bones:
+        out += struct.pack('<BBBBB', *(hb or [0] * 5)) + struct.pack('<BBBBB', *(cb or [0] * 5))
+    return base64.b64encode(out).decode('ascii')
+
+
 def write_sprite_frames(name, frames_by_index):
     """Overwrite the PNGs of an existing sprite in place (frame ids and count unchanged)."""
     d = ROOT / 'sprites' / name
@@ -171,7 +206,8 @@ def build_actor(actor, ver, project, previews):
     atlases = {}
     base_frames = [None] * len(cells); layer_frames = {p: [None] * len(cells) for p in PIECES}
     acc_frames = {p: [None] * len(cells) for p in PIECES if p != 'wpn_s'}
-    stats = dict(cells=len(cells), weapon_cells=0, composite_diff_px=[], halo_px=0)
+    stats = dict(cells=len(cells), weapon_cells=0, composite_diff_px=[], halo_px=0, hair_bones=0, cape_bones=0)
+    bones = [(None, None)] * len(cells)
     for i, (src, col, row) in enumerate(cells):
         a = atlases.setdefault(src, Atlas(actor, src))
         cell = a.cell(col, row)
@@ -185,6 +221,11 @@ def build_actor(actor, ver, project, previews):
             if ac is not None:
                 acc_frames[p][i] = crop(ac)
         stats['weapon_cells'] += bool((fr.lab == WEAPON).any())
+        # secondary motion: hair from its label, cape from the segmentation's cape mask (swordsman, ranger)
+        hb = mask_bone(cell, sg.lab == HAIR)
+        cape = sg.info.get('cape') if isinstance(sg.info, dict) else None
+        cb = mask_bone(cell, cape, top=.20, bottom=.25, min_px=120) if cape is not None else None
+        bones[i] = (hb, cb); stats['hair_bones'] += hb is not None; stats['cape_bones'] += cb is not None
         # consistency: base + start weapon must reproduce the original except removed matte / weapon outline specks
         comp = base.copy(); w = L['wpn_s'][0][..., 3] > 0; comp[w] = L['wpn_s'][0][w]
         if previews:
@@ -223,7 +264,7 @@ def build_actor(actor, ver, project, previews):
     d = stats['composite_diff_px']
     stats.update(composite_diff_px=dict(mean=round(float(np.mean(d)), 1), max=int(np.max(d)), frames_over_20=int(sum(x > 20 for x in d))),
                  seconds=round(time.time() - t0), atlas_px=int(sum(h * w for h, w in sizes.values())), atlases=len(sizes))
-    return dict(cells=len(cells), sprites=sprite_map, rects=rect_tables), stats
+    return dict(cells=len(cells), sprites=sprite_map, rects=rect_tables, bones=encode_bones(bones)), stats
 
 
 RARITY = [(176, 138, 92), (110, 170, 255), (242, 200, 92), (196, 124, 255)]
@@ -319,6 +360,8 @@ def write_gml(data, project):
         lines.append('                sprites: {')
         lines.extend(f'                    {k}: {json.dumps(v)},' for k, v in d['sprites'].items())
         lines.append('                },')
+        if 'bones' in d:
+            lines.append(f'                bones: "{d["bones"]}",')
         lines.append('                rects: {')
         lines.extend(f'                    {k}: "{v}",' for k, v in d['rects'].items())
         lines.append('                }')

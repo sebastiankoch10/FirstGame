@@ -19,7 +19,7 @@ def main():
    if path.is_file():
     target=ROOT/'sprites'/path.relative_to(prior);preserved+=1
     if not target.is_file() or path.read_bytes()!=target.read_bytes():mismatches.append(str(target.relative_to(ROOT)))
- refs={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'FirstGame_ArtPack').glob('ChatGPT-Bild*23_00_*.png')}
+ refs={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'FirstGame_ArtPack'/'references').glob('ChatGPT-Bild*23_00_*.png')}
  cues=[f'sfx_fg_{family}_{i}' for family in ['twins','swamp'] for i in range(1,10)]
  for cue in cues:
   if cue not in registered or not (ROOT/f'sounds/{cue}/{cue}.wav').is_file():errors.append('Missing cue '+cue)

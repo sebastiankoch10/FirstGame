@@ -312,7 +312,7 @@ def seg_swordsman(rgba):
     lab[halo] = HALO
     hy = np.nonzero(head)
     hb = (int(hy[0].min()), int(hy[0].max()), int(hy[1].min()), int(hy[1].max())) if len(hy[0]) else None
-    return Seg(lab, grip, hb, lying, dict(halo_ratio=round(float(hr), 3), blade=blade_ends))
+    return Seg(lab, grip, hb, lying, dict(halo_ratio=round(float(hr), 3), blade=blade_ends, cape=cape))
 
 
 # ---------------------------------------------------------------- mage
@@ -459,7 +459,7 @@ def seg_ranger(rgba):
     lab[halo] = HALO
     hy = np.nonzero(head)
     hb = (int(hy[0].min()), int(hy[0].max()), int(hy[1].min()), int(hy[1].max())) if len(hy[0]) else None
-    return Seg(lab, grip, hb, lying, dict(halo_ratio=round(float(hr), 3), blade=blade_ends))
+    return Seg(lab, grip, hb, lying, dict(halo_ratio=round(float(hr), 3), blade=blade_ends, cape=cape))
 
 
 SEGMENTERS = {'swordsmanv3': seg_swordsman, 'magev3': seg_mage, 'rangerv3': seg_ranger}
