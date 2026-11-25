@@ -184,21 +184,24 @@ function spell_v2_draw() {
         if(f.kind=="lance"){draw_set_alpha((1-f.age/f.duration)*.5);draw_line_width(f.sx,f.sy,f.ex,f.ey,f.radius*2);draw_set_color(c_white);draw_line_width(f.sx,f.sy,f.ex,f.ey,3);}
         else if(f.kind=="orbit")for(var n=0;n<f.count;n++){var a=f.age*190+n*360/f.count,xx=f.x+lengthdir_x(f.radius,a),yy=f.y+lengthdir_y(f.radius,a);draw_sprite_ext(spr_master_slash_1,1,xx,yy,.23,.23,a,c_white,1);}
         else if(f.kind=="glaive"){draw_sprite_ext(spr_master_slash_3,1,f.x,f.y,.32,.32,f.age*900,c_white,1);}
-        else if(f.kind=="summon" || f.kind=="seed"){spell_fx_draw(f.x,f.y,42,f.element,(f.age mod .6)/.6,.9);}
+        else if(f.kind=="summon" || f.kind=="seed"){spell_fx_core_draw(f.x,f.y,42,f.element,(f.age mod .6)/.6,.9);}
         else if(f.kind=="gravity") {
             for(var arm=0;arm<5;arm++){var px=f.x,py=f.y;for(var part=1;part<=8;part++){var a=arm*72+f.age*180+part*25,xx=f.x+lengthdir_x(f.radius*part/8,a),yy=f.y+lengthdir_y(f.radius*part/8,a);draw_line_width(px,py,xx,yy,2);px=xx;py=yy;}}
-            spell_fx_draw(f.x,f.y,45,4,(f.age mod .6)/.6,.8);
+            spell_fx_core_draw(f.x,f.y,45,4,(f.age mod .6)/.6,.8);
         } else if(f.kind=="prison") {
-            draw_circle(f.x,f.y,f.radius,true);for(var n=0;n<8;n++){var a=n*45,xx=f.x+lengthdir_x(f.radius,a),yy=f.y+lengthdir_y(f.radius,a);draw_triangle(xx-7,yy,xx+7,yy,xx,yy-32,false);}
+            var b=vfx_band(f.level);vfx_pixel_ring(f.x,f.y,f.radius,col,.75*fa,f.age*20,0,2);
+            for(var n=0;n<(b==0 ? 6 : (b==1 ? 8 : 12));n++){var a=n*360/(b==0 ? 6 : (b==1 ? 8 : 12)),xx=f.x+lengthdir_x(f.radius,a),yy=f.y+lengthdir_y(f.radius,a);vfx_pixel_shard(xx,yy,b==2 ? 22 : 16,make_color_rgb(190,236,255),fa);}
         } else if(f.kind=="spikes" || f.kind=="meteor") {
             for(var n=f.ticks;n<f.count;n++){
                 var xx=f.kind=="spikes" ? f.sx+lengthdir_x(65+n*70,f.angle) : f.x+lengthdir_x(n*32,f.angle+n*137);
                 var yy=f.kind=="spikes" ? f.sy+lengthdir_y(65+n*70,f.angle) : f.y+lengthdir_y(n*32,f.angle+n*137);
-                draw_circle(xx,yy,f.radius,true);if(f.kind=="meteor")draw_line_width(xx-40,yy-160,xx,yy-18,3);
+                vfx_pixel_ring(xx,yy,f.radius,col,.6*fa,f.age*40+n*30,3,2);if(f.kind=="meteor")vfx_pixel_streak(xx-40,yy-160,xx,yy-18,col,fa);
             }
         } else {
-            draw_circle(f.x,f.y,f.radius,true);
-            for(var n=0;n<8;n++){var a=n*45+f.age*60;draw_circle(f.x+lengthdir_x(f.radius*.85,a),f.y+lengthdir_y(f.radius*.85,a),3,false);}
+            var b=vfx_band(f.level),rot=f.age*(30+b*20);
+            vfx_pixel_ring(f.x,f.y,f.radius,col,.7*fa,rot,b==0 ? 3 : (b==1 ? 4 : 0),b==2 ? 3 : 2);
+            if(b>=1)vfx_pixel_ring(f.x,f.y,f.radius*.62,merge_color(col,c_white,.4),.45*fa,-rot*1.5,5,1);
+            for(var n=0;n<(b==2 ? 8 : 6);n++){var a=n*360/(b==2 ? 8 : 6)+rot*2,px=round(f.x+lengthdir_x(f.radius*.85,a)),py=round(f.y+lengthdir_y(f.radius*.85,a));draw_set_alpha(.9*fa);draw_set_color(merge_color(col,c_white,.5));draw_rectangle(px-1,py-1,px+1,py+1,false);}
             if(f.kind=="seal" || f.kind=="verdict")draw_line_width(f.x,f.y-230*(1-f.age/f.duration),f.x,f.y,f.age>(f.kind=="seal" ? .9 : .72) ? 20 : 3);
         }
     }
@@ -207,6 +210,20 @@ function spell_v2_draw() {
     spell_vfx_draw();
 }
 function spell_fx_draw(_x,_y,_radius,_element,_progress,_alpha) {
+    // Pixel shock ring + core flash on the world grid; the 4-frame sprite only in the endgame band and capped in size,
+    // so spells no longer show a large stretched block (Fähigkeiten, VFX & Audio 2/4).
+    var col=spell_element_color(_element),k=clamp(1-_progress,0,1);
+    vfx_pixel_ring(_x,_y,_radius*(.3+.7*_progress),col,.85*k*_alpha,_progress*90,0,_alpha>=1 ? 3 : 2);
+    if(_progress<.25){var s=round(3+_radius*.06);draw_set_color(c_white);draw_set_alpha(_alpha);draw_rectangle(round(_x)-s,round(_y),round(_x)+s,round(_y),false);draw_rectangle(round(_x),round(_y)-s,round(_x),round(_y)+s,false);}
+    // Middle band: a second, inner pixel ring instead of a sprite.
+    if(_alpha<1){if(_alpha>=.8)vfx_pixel_ring(_x,_y,_radius*(.15+.5*_progress),merge_color(col,c_white,.45),.7*k,-_progress*140,4,1);return;}
+    // Endgame band: the painted burst sprite as a core, capped in size (large areas are carried by the pixel rings).
+    var row=_element==0 || _element==7 ? 4 : clamp(_element-1,0,5),spr=asset_get_index("spr_v2_fx_"+string(row));
+    var frame=clamp(floor(_progress*4),0,3),size=min(_radius,110)*2/208;
+    draw_sprite_ext(spr,frame,_x,_y,size,size,0,c_white,.85*clamp((1-_progress)*2,0,1));
+}
+/// Small persistent spell core (summon, seed, gravity): the painted 4-frame sprite at a fixed small radius.
+function spell_fx_core_draw(_x,_y,_radius,_element,_progress,_alpha) {
     var row=_element==0 || _element==7 ? 4 : clamp(_element-1,0,5),spr=asset_get_index("spr_v2_fx_"+string(row));
     var frame=clamp(floor(_progress*4),0,3),size=_radius*2/208;
     draw_sprite_ext(spr,frame,_x,_y,size,size,0,c_white,_alpha*clamp((1-_progress)*2,0,1));

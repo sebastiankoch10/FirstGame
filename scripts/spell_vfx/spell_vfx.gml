@@ -131,3 +131,25 @@ function spell_vfx_lights(_rect) {
         else if(f.kind=="ranger_rain")atmosphere_source(f.x,f.y,f.radius*1.3,make_color_rgb(150,232,113),.35,_rect);
     }
 }
+
+// ---------------- Pixel effect building blocks (25.11.2026) ----------------
+/// Ring of square dots on the world grid, rotating; _dash > 0 leaves out every _dash-th dot; _w = dot size.
+function vfx_pixel_ring(_x,_y,_r,_col,_alpha,_rot=0,_dash=0,_w=2) {
+    if(_alpha<=0 || _r<=1)return;
+    var n=clamp(round(_r*2*pi/7),10,96);draw_set_color(_col);draw_set_alpha(clamp(_alpha,0,1));
+    for(var i=0;i<n;i++) {
+        if(_dash>0 && (i mod _dash)==0)continue;
+        var a=_rot+i*360/n,px=round(_x+lengthdir_x(_r,a)),py=round(_y+lengthdir_y(_r,a));
+        draw_rectangle(px,py,px+_w-1,py+_w-1,false);
+    }
+}
+/// Upright ice shard as a pixel diamond (bright edge, cold core).
+function vfx_pixel_shard(_x,_y,_h,_col,_alpha) {
+    var x0=round(_x),y0=round(_y);draw_set_alpha(clamp(_alpha,0,1));
+    for(var r=0;r<_h;r++){var w=max(0,round((1-abs(r-_h*.35)/(_h*.65))*4));draw_set_color(r<_h*.35 ? c_white : _col);draw_rectangle(x0-w,y0-r,x0+w,y0-r,false);}
+}
+/// Falling streak: a 2 px trail that brightens towards its head.
+function vfx_pixel_streak(_ax,_ay,_bx,_by,_col,_alpha) {
+    var n=12;
+    for(var i=0;i<n;i++){var t=i/(n-1),px=round(lerp(_ax,_bx,t)),py=round(lerp(_ay,_by,t));draw_set_alpha(clamp(_alpha*(.2+.8*t),0,1));draw_set_color(t>.8 ? c_white : _col);draw_rectangle(px,py,px+1,py+1,false);}
+}
