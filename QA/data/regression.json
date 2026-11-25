@@ -3,49 +3,6 @@
   "checks": 811.0,
   "failures": [],
   "metrics": {
-    "sword_combo": [
-      11.0,
-      13.0,
-      19.0
-    ],
-    "behemoth_abilities": [
-      {
-        "ability": 1.0,
-        "damage": 34.19999999999709
-      },
-      {
-        "ability": 2.0,
-        "damage": 15.19999999999709
-      },
-      {
-        "ability": 3.0,
-        "damage": 32.30000000000291
-      },
-      {
-        "ability": 4.0,
-        "damage": 51.30000000000291
-      },
-      {
-        "ability": 5.0,
-        "damage": 64.60000000000582
-      },
-      {
-        "ability": 6.0,
-        "damage": 13.30000000000291
-      },
-      {
-        "ability": 7.0,
-        "damage": 34.19999999999709
-      },
-      {
-        "ability": 8.0,
-        "damage": 53.19999999999709
-      },
-      {
-        "ability": 9.0,
-        "damage": 57.0
-      }
-    ],
     "dragon_abilities": [
       {
         "warning": 1.0526315789473684,
@@ -256,71 +213,6 @@
         "unlocked": 9.0
       }
     ],
-    "formations": [
-      {
-        "formation": "eight",
-        "combined_distance": 757.7808609008789
-      },
-      {
-        "formation": "circle",
-        "combined_distance": 176.68341445922852
-      },
-      {
-        "formation": "cross",
-        "combined_distance": 239.20619201660156
-      },
-      {
-        "formation": "dive",
-        "combined_distance": 635.6473693847656
-      },
-      {
-        "formation": "split",
-        "combined_distance": 183.1438217163086
-      },
-      {
-        "formation": "follow",
-        "combined_distance": 187.37813568115234
-      }
-    ],
-    "performance": {
-      "enemies": 150.0,
-      "frames": 60.0,
-      "mean_frame_ms": 16.666866666666667,
-      "max_frame_ms": 16.98,
-      "measurement": "Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement."
-    },
-    "random_selection": [
-      "twins",
-      "storm_warden",
-      "storm_warden",
-      "storm_warden",
-      "behemoth",
-      "storm_warden",
-      "twins",
-      "behemoth",
-      "storm_warden",
-      "storm_warden",
-      "twins",
-      "behemoth",
-      "twins",
-      "storm_warden",
-      "storm_warden",
-      "behemoth",
-      "behemoth",
-      "twins",
-      "storm_warden",
-      "behemoth",
-      "twins",
-      "storm_warden",
-      "storm_warden",
-      "storm_warden",
-      "twins",
-      "behemoth",
-      "storm_warden",
-      "storm_warden",
-      "storm_warden",
-      "behemoth"
-    ],
     "twins_abilities": [
       {
         "ability": 1.0,
@@ -358,11 +250,119 @@
         "ability": 9.0,
         "damage": 76.0
       }
+    ],
+    "behemoth_abilities": [
+      {
+        "ability": 1.0,
+        "damage": 34.19999999999709
+      },
+      {
+        "ability": 2.0,
+        "damage": 15.19999999999709
+      },
+      {
+        "ability": 3.0,
+        "damage": 32.30000000000291
+      },
+      {
+        "ability": 4.0,
+        "damage": 51.30000000000291
+      },
+      {
+        "ability": 5.0,
+        "damage": 64.60000000000582
+      },
+      {
+        "ability": 6.0,
+        "damage": 13.30000000000291
+      },
+      {
+        "ability": 7.0,
+        "damage": 34.19999999999709
+      },
+      {
+        "ability": 8.0,
+        "damage": 53.19999999999709
+      },
+      {
+        "ability": 9.0,
+        "damage": 57.0
+      }
+    ],
+    "formations": [
+      {
+        "formation": "eight",
+        "combined_distance": 757.7808609008789
+      },
+      {
+        "formation": "circle",
+        "combined_distance": 176.68341445922852
+      },
+      {
+        "formation": "cross",
+        "combined_distance": 239.20619201660156
+      },
+      {
+        "formation": "dive",
+        "combined_distance": 635.6473693847656
+      },
+      {
+        "formation": "split",
+        "combined_distance": 183.1438217163086
+      },
+      {
+        "formation": "follow",
+        "combined_distance": 187.37813568115234
+      }
+    ],
+    "performance": {
+      "enemies": 150.0,
+      "frames": 60.0,
+      "mean_frame_ms": 16.666066666666673,
+      "max_frame_ms": 16.921,
+      "measurement": "Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement."
+    },
+    "random_selection": [
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "behemoth",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "storm_warden",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "behemoth",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "behemoth"
+    ],
+    "sword_combo": [
+      11.0,
+      13.0,
+      19.0
     ]
   },
   "scope": "Current production functions and input-injected actual Player/Controller Steps in isolated native runner. Targeted regressions and short rendered150-enemy stress fixture; not full runs or human playtests.",
   "exit_code": 0,
-  "logs": "QA\\logs\\regression-20261125-141922",
+  "logs": "QA\\logs\\regression-20261125-144308",
   "screenshots": [
     "qacapture-crowd150-heavy-rain.png",
     "qacapture-hud-full-build-1280.png",

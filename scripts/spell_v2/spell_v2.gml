@@ -178,14 +178,15 @@ function spell_v2_step(_dt) {
     spell_passive_step(dt);
 }
 function spell_v2_draw() {
-    for(var i=0;i<array_length(global.spell_links);i++){var link=global.spell_links[i];draw_set_alpha(link.life/.18);draw_set_color(spell_element_color(link.element));draw_line_width(link.ax,link.ay,link.bx,link.by,5);draw_set_color(c_white);draw_line_width(link.ax,link.ay,link.bx,link.by,1);}
+    for(var i=0;i<array_length(global.spell_links);i++){var link=global.spell_links[i],lk=link.life/.18,lp=vfx_palette(link.element);vfx_glow_line(link.ax,link.ay,link.bx,link.by,6,lp[1],.3*lk);vfx_pixel_line(link.ax,link.ay,link.bx,link.by,2,lp[1],lk);vfx_pixel_line(link.ax,link.ay,link.bx,link.by,1,lp[2],lk);}
     for(var i=0;i<array_length(global.spell_fields);i++) {
         var f=global.spell_fields[i],col=spell_element_color(f.element),fa=vfx_band_alpha(vfx_band(f.level));draw_set_color(col);draw_set_alpha(.5*fa);
         var fb=vfx_field_band(f);
         if(f.kind=="lance")vfx_lance_draw(f,fb,fa);
         else if(f.kind=="orbit")vfx_orbit_draw(f,fb,fa);
         else if(f.kind=="glaive")vfx_glaive_draw(f,fb,fa);
-        else if(f.kind=="summon" || f.kind=="seed"){spell_fx_core_draw(f.x,f.y,42,f.element,(f.age mod .6)/.6,.9);}
+        else if(f.kind=="summon")vfx_wisp_draw(f,fb,fa);
+        else if(f.kind=="seed")vfx_seed_draw(f,fb,fa);
         else if(f.kind=="gravity")vfx_gravity_draw(f,fb,fa);
         else if(f.kind=="seal" || f.kind=="verdict")vfx_pillar_draw(f,fb,fa);
         else if(f.kind=="field")vfx_ember_field_draw(f,fb,fa);

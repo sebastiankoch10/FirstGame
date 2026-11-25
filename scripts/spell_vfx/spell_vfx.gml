@@ -334,3 +334,28 @@ function vfx_area_effect_draw(_e) {
         for(var i=0;i<10;i++){var a=i*36+20*vfx_hash(i,1),rr=r*(.5+.5*f),px=_e.x+lengthdir_x(rr,a),py=_e.y+lengthdir_y(rr,a)-f*14*abs(vfx_hash(i,2));vfx_px(px,py,f<.5 ? 2 : 1,f<.4 ? make_color_rgb(255,232,140) : _e.color,k);}
     }
 }
+
+/// Wisp Sentinel: a small living light (flickering pixel core, soft halo) with a tail of motes along its orbit.
+function vfx_wisp_draw(_f,_b,_fa) {
+    var pal=vfx_palette(_f.element),tick=floor(_f.age*16),tails=2+_b*2;
+    vfx_glow_disc(_f.x,_f.y,9+_b*2,pal[1],.16+.05*_b);
+    if(instance_exists(ObjectPlayer))for(var i=1;i<=tails;i++) {
+        // earlier positions of the same orbit (summon step: x = player + 54 * cos, y = player - 45 + 20 * sin)
+        var a=(_f.age-i*.045)*80,tx=ObjectPlayer.x+lengthdir_x(54,a),ty=ObjectPlayer.y-45+lengthdir_y(20,a);
+        vfx_px(tx,ty+sin(_f.age*9+i)*1.5,i<=1 ? 2 : 1,i<=2 ? pal[1] : pal[0],(1-i/(tails+1))*_fa);
+    }
+    var fl=vfx_hash(tick,7)>.0 ? 1 : 0;
+    vfx_px(_f.x-2,_f.y-2,4+fl,pal[1],1);vfx_px(_f.x-1,_f.y-1,2,pal[2],1);
+    vfx_px(_f.x-1,_f.y-4-fl,1,pal[2],.8);
+    if(_b>=1)for(var m=0;m<_b*2;m++){var a=_f.age*240+m*180/_b;vfx_px(_f.x+lengthdir_x(7,a),_f.y+lengthdir_y(7,a)*.6,1,pal[2],.85);}
+}
+/// Prismatic Seed: a spinning pixel prism with three light facets and a sparkle trail towards its target.
+function vfx_seed_draw(_f,_b,_fa) {
+    var pal=vfx_palette(_f.element),dir=point_direction(_f.sx,_f.sy,_f.ex,_f.ey),spin=_f.age*300,s=5+_b;
+    var cols=[make_color_rgb(255,120,150),make_color_rgb(120,230,255),make_color_rgb(255,232,120)];
+    vfx_glow_disc(_f.x,_f.y,s+5,pal[1],.15+.05*_b);
+    for(var g=1;g<=2+_b;g++){var bx=_f.x-lengthdir_x(g*7,dir),by=_f.y-lengthdir_y(g*7,dir);vfx_px(bx+vfx_hash(g,floor(_f.age*20))*3,by,1,cols[g mod 3],(1-g/(4+_b))*_fa);}
+    for(var k=0;k<3;k++){var a=spin+k*120;vfx_pixel_line(_f.x,_f.y,_f.x+lengthdir_x(s,a),_f.y+lengthdir_y(s,a),2,cols[k],1);}
+    vfx_pixel_ring(_f.x,_f.y,s,pal[0],.9,spin,0,1);
+    vfx_px(_f.x-1,_f.y-1,2,c_white,1);
+}
