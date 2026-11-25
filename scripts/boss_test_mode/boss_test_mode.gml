@@ -138,7 +138,7 @@ function boss_test_draw_gui() {
 function boss_test_menu_labels() {
     var s=boss_test_settings(),d=boss_test_definition(s.boss),name=is_struct(d) ? d.name : s.boss;
     if(is_struct(d) && !d.implemented)name+=" [noch nicht verfuegbar]";
-    var actor=s.class_name=="Mage" ? "Zaubermeisterin" : (s.class_name=="Ranger" ? "Waldlaeufer" : (s.class_name=="random" ? "Zufaellig" : "Schwertkaempfer"));
+    var actor=s.class_name=="Mage" ? "Arkanistin" : (s.class_name=="Ranger" ? "Waldlaeufer" : (s.class_name=="random" ? "Zufaellig" : "Schwertmeister"));
     var attack="Gesamtkampf",count=boss_v2_ability_count(s.minute*60);
     if(is_struct(d) && s.attack>0 && s.attack<=min(count,array_length(d.abilities)))attack=d.abilities[s.attack-1].name;
     return ["Boss: "+name,"Spielminute: "+string(s.minute)+" / "+string(count)+" Faehigkeiten","Klasse: "+actor,"Build: "+(s.random_build ? "Zufaellig (gueltig)" : "Ausgewogen"),"Schwierigkeit: "+["Leicht","Normal","Hart"][s.difficulty_index],"Angriff: "+attack,"Seed: "+string(s.seed)+" (Ziffern tippen / R neu)","Test starten","Direkt: Drache / Minute 15 / alle neun","Zurueck"];

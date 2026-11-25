@@ -7,7 +7,8 @@ function talent_config() {
         level_interval:4,      // ... then one point every further 4 levels (8, 12, 16, ...)
         boss_points:1,         // per defeated main boss (minibosses: miniboss_points)
         miniboss_points:0,
-        persistent:false,      // false: talents belong to one run. true: ranks/points persist per class in save_file.
+        persistent:true,       // true (user decision 25.11.2026): ranks/points persist per class between runs in save_file.
+                               // Only in the real game (project "FirstGame"); renamed test/simulation builds stay per run.
         save_file:"firstgame_talents.ini"
     };
     return cfg;
@@ -26,7 +27,7 @@ function talent_definitions() {
         {id:"g_mend",tree:"general",name:"Lebenskraft",icon:"icon_v2_215",col:0,row:2,max:2,req:[["g_hide",1]],fx:{regen:.15},desc:"+{regen} Leben pro Sekunde."},
         {id:"g_luck",tree:"general",name:"Glueckstreffer",icon:"icon_v2_207",col:2,row:2,max:3,req:[["g_focus",2]],fx:{crit:.02},desc:"+{crit}% kritische Trefferchance."},
         {id:"g_last",tree:"general",name:"Ueberlebenswille",icon:"icon_v2_118",col:1,row:3,max:1,req:[["g_mend",1],["g_breath",2]],fx:{last_stand:1},desc:"Einmal pro Run: Ein toedlicher Treffer laesst dich mit 1 Leben zurueck, danach 1,5 s unverwundbar."},
-        // ---------- Schwertkaempfer: Nahkampf, Bewegung, kontrollierte Flaechen ----------
+        // ---------- Schwertmeister: Nahkampf, Bewegung, kontrollierte Flaechen ----------
         {id:"s_edge",tree:"Sword",name:"Klingenschaerfe",icon:"icon_v2_116",col:0,row:0,max:3,req:[],fx:{sword_dmg_pct:.06},desc:"Schwertkette +{sword_dmg_pct}% Schaden."},
         {id:"s_reach",tree:"Sword",name:"Weiter Schwung",icon:"icon_v2_209",col:1,row:0,max:3,req:[],fx:{sword_reach_pct:.06},desc:"Schwerthiebe +{sword_reach_pct}% Reichweite."},
         {id:"s_rhythm",tree:"Sword",name:"Kampfrhythmus",icon:"icon_v2_204",col:2,row:0,max:3,req:[],fx:{haste:.04},desc:"+{haste}% Angriffstempo der Startwaffe."},
@@ -35,7 +36,7 @@ function talent_definitions() {
         {id:"s_stance",tree:"Sword",name:"Eiserne Haltung",icon:"icon_v2_201",col:1,row:1,max:2,req:[["s_reach",1]],fx:{armor:.5},desc:"+{armor} flache Ruestung."},
         {id:"s_blood",tree:"Sword",name:"Blutrausch",icon:"icon_v2_106",col:0,row:2,max:2,req:[["s_wave",1]],fx:{sword_leech:2},desc:"Ein Finale, das mindestens einen Gegner erreicht, heilt {sword_leech} Leben."},
         {id:"s_whirl",tree:"Sword",name:"Klingensturm",icon:"icon_v2_109",col:1,row:3,max:1,req:[["s_wave",2],["s_charge",1]],fx:{sword_whirl:1},desc:"Jede vierte Schwertkette endet in einem Rundumhieb (360 Grad)."},
-        // ---------- Zaubermeisterin: langsame, starke Kombos, grosse Effekte ----------
+        // ---------- Arkanistin: langsame, starke Kombos, grosse Effekte ----------
         {id:"m_power",tree:"Mage",name:"Arkane Macht",icon:"icon_v2_202",col:0,row:0,max:3,req:[],fx:{power:1},desc:"+{power} Power (Startwaffe und Zauber)."},
         {id:"m_glyph",tree:"Mage",name:"Weite Glyphen",icon:"icon_v2_209",col:1,row:0,max:3,req:[],fx:{area_pct:.05},desc:"+{area_pct}% Wirkflaeche."},
         {id:"m_ward",tree:"Mage",name:"Arkaner Schild",icon:"icon_v2_201",col:2,row:0,max:2,req:[],fx:{dr:.04},desc:"{dr}% weniger Schaden (Gesamtgrenze 60%)."},
@@ -71,11 +72,26 @@ function talent_class_key() {return variable_global_exists("selected_character")
 function talent_applies(_def) {return _def.tree=="general" || _def.tree==talent_class_key();}
 
 // ---------------- State ----------------
+/// Persistence is on for the real game only, so native suites and bot simulations stay reproducible.
+/// global.talent_persist_override (true/false) lets a harness test the save/load path explicitly.
+function talent_persistent() {
+    if(variable_global_exists("talent_persist_override"))return global.talent_persist_override;
+    return talent_config().persistent && game_project_name=="FirstGame";
+}
+/// Respec: all spent points of the current class (general + class tree) come back, ranks reset.
+function talent_respec() {
+    if(global.talent_spent<=0)return false;
+    global.talent_points+=global.talent_spent;global.talent_spent=0;global.talent_ranks={};
+    talent_rebuild_cache();
+    if(talent_persistent())talent_save();
+    if(instance_exists(ObjectPlayer))apply_passives(ObjectPlayer);
+    return true;
+}
 function talent_reset_run() {
     global.talent_ranks={};global.talent_points=0;global.talent_spent=0;global.talent_earned=0;
     global.talent_menu_active=false;global.talent_hover="";global.talent_mouse_armed=false;global.talent_flash=0;
     global.talent_last_stand_used=false;global.talent_tab=0;
-    if(talent_config().persistent)talent_load();
+    if(talent_persistent())talent_load();
     talent_rebuild_cache();
     // One hint per session so the new character screen is discoverable.
     if(!variable_global_exists("talent_hint_shown")){global.talent_hint_shown=true;global.toasts=[];feedback_toast_add("Neu: Talente und Ausruestung - Taste [T] oeffnet den Charakter",make_color_rgb(242,206,120));}
@@ -102,7 +118,7 @@ function talent_invest(_id) {
     if(talent_block_reason(_id)!="")return false;
     global.talent_ranks[$ _id]=talent_rank(_id)+1;global.talent_points--;global.talent_spent++;
     talent_rebuild_cache();
-    if(talent_config().persistent)talent_save();
+    if(talent_persistent())talent_save();
     if(instance_exists(ObjectPlayer))apply_passives(ObjectPlayer);
     return true;
 }
@@ -110,7 +126,7 @@ function talent_grant(_amount,_reason="") {
     if(_amount<=0)return;
     global.talent_points+=_amount;global.talent_earned+=_amount;global.talent_flash=3;
     if(_reason!="")feedback_toast_add("+"+string(_amount)+" Talentpunkt"+(_amount>1 ? "e" : "")+" ("+_reason+") - [T]",make_color_rgb(242,206,120));
-    if(talent_config().persistent)talent_save();
+    if(talent_persistent())talent_save();
 }
 function talent_on_level(_level) {
     var cfg=talent_config();
@@ -137,7 +153,7 @@ function talent_stat(_key) {
 function talent_save() {
     var cfg=talent_config(),cls=talent_class_key();
     ini_open(cfg.save_file);
-    ini_write_real(cls,"points",global.talent_points);ini_write_real(cls,"earned",global.talent_earned);
+    ini_write_real(cls,"points",global.talent_points);ini_write_real(cls,"earned",global.talent_earned);ini_write_real(cls,"spent",global.talent_spent);
     var defs=talent_definitions();
     for(var i=0;i<array_length(defs);i++)if(talent_applies(defs[i]))ini_write_real(cls,defs[i].id,talent_rank(defs[i].id));
     ini_close();
@@ -145,7 +161,7 @@ function talent_save() {
 function talent_load() {
     var cfg=talent_config(),cls=talent_class_key();
     ini_open(cfg.save_file);
-    global.talent_points=ini_read_real(cls,"points",0);global.talent_earned=ini_read_real(cls,"earned",0);
+    global.talent_points=ini_read_real(cls,"points",0);global.talent_earned=ini_read_real(cls,"earned",0);global.talent_spent=ini_read_real(cls,"spent",0);
     var defs=talent_definitions();
     for(var i=0;i<array_length(defs);i++)if(talent_applies(defs[i])){var r=clamp(ini_read_real(cls,defs[i].id,0),0,defs[i].max);if(r>0)global.talent_ranks[$ defs[i].id]=r;}
     ini_close();
@@ -213,6 +229,7 @@ function talent_menu_step() {
         return global.talent_menu_active;
     }
     if(keyboard_check_pressed(vk_escape) || keyboard_check_pressed(ord("T"))){talent_menu_close();return true;}
+    if(keyboard_check_pressed(ord("R"))){if(talent_respec()){fg_sfx("spell_upgrade");feedback_toast_add("Talente zurueckgesetzt - Punkte erstattet",make_color_rgb(242,206,120));}else fg_sfx("ui_back");}
     if(!mouse_check_button(mb_left) && !mouse_check_button(mb_right))global.talent_mouse_armed=true;
     var L=talent_menu_layout(),mx=device_mouse_x_to_gui(0),my=device_mouse_y_to_gui(0);
     global.talent_hover="";
@@ -251,7 +268,7 @@ function talent_menu_draw() {
     draw_set_alpha(.93);draw_set_color(make_color_rgb(7,10,17));draw_rectangle(0,0,L.w,L.h,false);draw_set_alpha(1);
     draw_set_font(-1);draw_set_halign(fa_left);draw_set_valign(fa_top);
     draw_set_color(make_color_rgb(239,211,158));draw_text_transformed(L.margin,16,"CHARAKTER",1.25,1.25,0);
-    var cls=talent_class_key(),cls_name=cls=="Mage" ? "Zaubermeisterin" : (cls=="Ranger" ? "Waldlaeufer" : "Schwertkaempfer");
+    var cls=talent_class_key(),cls_name=cls=="Mage" ? "Arkanistin" : (cls=="Ranger" ? "Waldlaeufer" : "Schwertmeister");
     draw_set_color(make_color_rgb(170,186,199));draw_text(L.margin+150,22,cls_name+" | Stufe "+string(global.current_level));
     var pts=global.talent_points;
     draw_set_halign(fa_right);draw_set_color(pts>0 ? merge_color(make_color_rgb(242,206,120),c_white,.25+.25*sin(t*5)) : make_color_rgb(140,152,166));
@@ -285,7 +302,7 @@ function talent_menu_draw() {
     draw_set_halign(fa_center);draw_set_valign(fa_middle);draw_set_color(c_white);draw_text(L.close_x+L.close_w/2,L.close_y+L.close_h/2,"Zurueck  [T / Esc]");
     draw_set_halign(fa_left);draw_set_valign(fa_middle);draw_set_color(make_color_rgb(128,141,155));
     var cfg=talent_config();
-    draw_text_transformed(L.margin,L.close_y+L.close_h/2,"Talentpunkte: ab Stufe "+string(cfg.first_point_level)+" alle "+string(cfg.level_interval)+" Stufen und je besiegtem Hauptboss. Linksklick investiert einen Punkt.",.8,.8,0);
+    draw_text_transformed(L.margin,L.close_y+L.close_h/2,"Talentpunkte: ab Stufe "+string(cfg.first_point_level)+" alle "+string(cfg.level_interval)+" Stufen und je Hauptboss. Linksklick investiert."+(talent_persistent() ? " Talente bleiben zwischen Runs erhalten. [R] zuruecksetzen." : " [R] zuruecksetzen."),.8,.8,0);
     draw_set_valign(fa_top);
     if(global.talent_hover!="")talent_tooltip_draw(L,talent_find(global.talent_hover));
     else equipment_tooltip_draw(L);

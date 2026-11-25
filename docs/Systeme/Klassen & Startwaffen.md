@@ -1,11 +1,11 @@
 ---
 tags: [system, klassen]
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 # Klassen & Startwaffen
 
 ## Zweck
-Drei Klassen mit eigener automatischer Startwaffe. Die Startwaffe belegt keinen Zauberslot.
+Drei Klassen mit eigener automatischer Startwaffe: Schwertmeister (`Sword`), Arkanistin (`Mage`), Waldläufer (`Ranger`); Anzeigenamen in `menu_labels` (`scripts/gameplay`). Die Startwaffe belegt keinen Zauberslot.
 
 ## Wichtige Dateien
 - `scripts/reset_round`: Basiswerte (Schwert 120 HP / Tempo 3,2 / Power 2; Magierin 70 / 2,8 / 4; Waldläufer 82 / 4,2 / 1).

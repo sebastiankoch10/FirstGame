@@ -27,6 +27,12 @@ Rang 2 unter [[Leitbild]]. Technik: [[Talente]], [[Ausrüstung]], [[Zauber & Pas
   - die Schwierigkeit plötzlich sprunghaft steigt;
   - der Spieler nach einigen Upgrades unbesiegbar ist;
   - Bosse unabhängig vom Build in Sekunden sterben (Auftrag 23.11.).
+- **Fortschritt zwischen Runs (Nutzerentscheidung 25.11.: „beides“):**
+  - Runs bleiben 30 Minuten.
+  - Talentränge und Talentpunkte bleiben **je Klasse** zwischen den Runs erhalten.
+  - **[R]** im Charakterbildschirm setzt alle Talente der Klasse zurück und erstattet die Punkte.
+  - Gilt nur im echten Spiel; umbenannte Test- und Simulationsbuilds bleiben pro Run, damit Tests und Bot-Statistiken reproduzierbar sind.
+  - **Balancing-Hinweis (Empfehlung, nichts geändert):** Mit den heutigen Punktequellen (ab Stufe 4 alle 4 Stufen plus Hauptbosse) ist der Klassenbaum nach etwa 2–3 erfolgreichen Runs voll. Für eine längere Meta-Progression wären eigene, seltenere Meta-Punkte nötig. Das ist eine Zahlenentscheidung für den Nutzer.
 - **Waffen-Upgrade-System** (Auftrag 22.11.):
   - Die Klassenwaffen sollen später unabhängig von den sechs Zaubern aufgewertet werden können: Schaden, Tempo, Reichweite, Projektilzahl, Schlaggröße, Durchschlag, Zusatzeffekte.
   - **Offen:** noch nicht umgesetzt. Die Architektur muss es zulassen.
@@ -73,7 +79,10 @@ Alle Zahlenwerte sind **neue, bewusst moderate Designwerte**. Sie sind nicht dur
 - **Punkte:** `talent_config()`
   - `first_point_level=4`, `level_interval=4`: Punkte auf Stufe 4, 8, 12 usw.
   - `boss_points=1` je Hauptboss, `miniboss_points=0`
-  - `persistent=false`: Die Talente gelten nur für einen Run. Mit `true` werden Ränge und Punkte je Klasse in `firstgame_talents.ini` gespeichert und geladen. Die Funktionen dafür existieren, sind aber nicht aktiv.
+  - `persistent=true` (seit 25.11.): Ränge, Punkte und ausgegebene Punkte werden je Klasse in `firstgame_talents.ini` gespeichert und geladen.
+    - `talent_persistent()` schaltet das nur für das Projekt „FirstGame“ ein; `global.talent_persist_override` erlaubt Tests.
+    - `talent_respec()` erstattet alle Punkte (Taste R).
+    - Nativ getestet (Suite `feature`).
 - **Bots:** `talent_bot_invest()` verteilt Punkte deterministisch, erst im Klassenbaum, dann im Allgemein-Baum. Das nutzen nur die QA-Simulationen.
 
 ### Oberfläche
@@ -212,8 +221,8 @@ Die 12er-Kombo des Waldläufers bleibt ohne Talente exakt: 1, 1, 3, 1, 1, 1, 1, 
 - Partikel
 
 ### Offene Entscheidungen
-1. **Punktevergabe:** pro Stufe, pro Boss oder als dauerhafte Meta-Progression zwischen Runs. Umschaltbar über `talent_config().persistent`.
-2. **Respec:** Ob Talente zurückgesetzt werden können, ist nicht vorgesehen und offen.
+1. **Punktevergabe:** dauerhafte Talente entschieden (25.11.). Offen ist nur das Tempo der Meta-Progression (siehe Balancing-Hinweis oben).
+2. **Respec:** umgesetzt (Taste R, volle Erstattung).
 3. **Zahlenwerte von Talenten und Gegenständen:** Sie brauchen menschliche Spieltests und gezielte Simulationen.
 4. **Ausrüstungsoptik am Charakter:** seit 24.11. umgesetzt (prozedural abgeleitet). Offen sind die künstlerische Feinabnahme und handgezeichnete Varianten.
 5. **Weitere Talentquellen:** Ob es zusätzliche Quellen geben soll, etwa Truhen, ist offen.

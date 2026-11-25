@@ -79,6 +79,15 @@ function ft_controller_tick() {
             if(cls=="Ranger")ft_check(abs(talent_stat("ranger_dmg_pct")-.16)<.0001 && talent_stat("sword_dmg_pct")==0,"ranger talent stats only");
             var maxed=talent_find(own);while(talent_rank(own)<maxed.max){talent_grant(1);talent_invest(own);}
             talent_grant(1);ft_check(!talent_invest(own) && talent_block_reason(own)=="Maximaler Rang erreicht","max rank enforced");
+            // Talents persist between runs in the real game only (decision 25.11.2026); renamed test builds stay per run.
+            ft_check(!talent_persistent(),"test build keeps talents per run (no ini side effects)");
+            global.talent_persist_override=true;file_delete(talent_config().save_file);
+            var keep_rank=talent_rank(own),keep_points=global.talent_points,keep_spent=global.talent_spent;
+            talent_save();talent_reset_run();
+            ft_check(talent_rank(own)==keep_rank && global.talent_points==keep_points && global.talent_spent==keep_spent,"persistent talents survive a new run");
+            ft_check(talent_respec() && talent_rank(own)==0 && global.talent_spent==0 && global.talent_points==keep_points+keep_spent,"respec refunds every spent point");
+            talent_reset_run();ft_check(talent_rank(own)==0 && global.talent_points==keep_points+keep_spent,"respec is saved for the next run");
+            file_delete(talent_config().save_file);global.talent_persist_override=false;talent_reset_run();
             global.ft_stage=3;global.ft_frame=0;break;
         case 3: // equipment
             var armor0=pl.armor_flat;

@@ -45,10 +45,10 @@ Das langfristige Ziel (Auftrag 25.11.):
 
 **Nicht mehr Pixel-Art, sondern besser inszenierte Pixel-Art.**
 
-- **Offen: Run-Format gegenüber Action-RPG.**
-  - Die Aufträge vom 22.11. nennen FirstGame ein „Survivors-Roguelite“, der vom 23.11. ein „Survivors-Spiel mit Action-RPG-Bosskämpfen“, der vom 25.11. ein „Action-RPG“.
-  - Bis zu einer Entscheidung gilt: Das Run-Format bleibt (30 Minuten, automatische Angriffe, Talente pro Run, umschaltbar). Die RPG-Tiefe wächst über Builds, Talente, Ausrüstung und die Inszenierung.
-  - Zu klären sind: dauerhafte Fortschritte zwischen Runs, Länge und Struktur eines Runs, manuelles Zielen.
+- **Entschieden (Nutzer, 25.11.): beides.**
+  - Das Run-Format bleibt (30 Minuten, automatische Angriffe).
+  - **Dazu kommt Fortschritt zwischen den Runs:** Talente und Talentpunkte bleiben je Klasse erhalten, ein Zurücksetzen ist jederzeit möglich. Details: [[Progression & Builds]].
+  - Manuelles Zielen ist weiterhin nicht vorgesehen.
 
 ## 3. Die drei Inspirationsquellen und wie sie zusammenwirken
 
@@ -114,9 +114,9 @@ Diese Regeln gelten für alle Klassen, Gegner, Bosse und Fähigkeiten, auch kün
 
 ## 7. Glossar
 
-- **Klassen:** Schwertkämpfer (`Sword`, Figur `swordsmanv3`), Zaubermeisterin (`Mage`, `magev3`), Waldläufer (`Ranger`, `rangerv3`).
-  - Der Auftrag vom 25.11. nennt sie auch „Schwertmeister“ und „Arkanistin“.
-  - **Offen:** Sollen die Klassen umbenannt werden? Bis dahin gelten die Namen im Spiel.
+- **Klassen:** **Schwertmeister** (Code `Sword`, Figur `swordsmanv3`), **Arkanistin** (`Mage`, `magev3`), **Waldläufer** (`Ranger`, `rangerv3`).
+  - Umbenannt am 25.11. (Nutzerentscheidung).
+  - Frühere Namen in älteren Texten: Schwertkämpfer, Zaubermeisterin.
 - **Gegnerränge:** normaler Gegner, Elite (noch nicht im Spiel), Miniboss (Minute 1 und 3), Hauptboss (ab Minute 5, alle 5 Minuten).
 - **Warnung (Telegraph):** angekündigte Trefferfläche mit Countdown.
 - **Aktive Phase:** Zeitraum, in dem eine Attacke Schaden verursachen kann.

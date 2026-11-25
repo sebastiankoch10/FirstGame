@@ -41,13 +41,13 @@ graph LR
 
 | Nr. | Auftrag (je ein eigener Prompt bzw. eine Aufgabe) | Größe | Abhängig von | Nutzerentscheidung |
 |---|---|---|---|---|
-| 1 | **R1 Verzerrung beheben:** Kamera 16:9 (Vorschlag 960×540), Konstanten statt fester Zahlen, Viewports, Spawnring und Boss-Sichtprüfungen anpassen; Suiten `level`, `boss`, `regression`, `visual` | M | — | **ja:** Option a/b/c ([[Technische Architektur]] R1) |
+| 1 | ~~R1 Verzerrung beheben~~ **erledigt 25.11.:** 960×540, Makros `VIEW_W`/`VIEW_H`, 16:9-Viewports | M | — | entschieden (b) |
 | 2 | **A/B-Prototyp Pixeldichte:** Schwertkämpfer mit Faktor 1,0 aus den Quellatlanten (160er-Leinwand) neben dem heutigen 1,65; Varianten A und B des Feinrasters; Aufnahmen bei 720p und 1080p | M | 1 | **ja:** Auswahl nach Bildvergleich |
 | 3 | **S1 Attack Timeline (Kern)** plus Migration der Schwertkette ohne Wertänderung; Telemetrie-Anker anpassen | M | — | nein |
 | 4 | **S2 Animation Controller plus Federmodul**; Spieler: Übergangsposen (Landung, Richtungswechsel), Haar und Umhang als Ebenen (Segmentierung aus `tests/tools/characters/`) | L | 2, 3 | nein |
 | 5 | **S4 VFX-Profile plus Pixelpartikel** (Erweiterung `spell_vfx`), Qualitätsstufen; **S5 Audio-Ereignisse** | M | 3 | nein |
 | 6 | **Vertical Slice bauen** (Abschnitt 4) | L | 1–5 | Abnahme |
-| 7 | **S3 Rig-System plus Drache** (Teil des Slice; eigener Auftrag wegen Umfang) | L | 3, 4 | **ja:** eigenes Rig (Vorschlag) oder Spine (kostenpflichtig) |
+| 7 | **S3 Rig-System plus Drache** (Teil des Slice; eigener Auftrag wegen Umfang) | L | 3, 4 | entschieden: eigenes Rig in GML (kostenlos) |
 | 8 | Auswertung des Slice, Anpassung der Standards, dann **L3 Übertragung** je Inhaltsgruppe (Klassen → Gegner → Bosse → Zauber) | XL | 6, 7 | Reihenfolge |
 | 9 | V3 Minibosse auf aktuellen Stil, L5 Elitegegner, L4 Waffen-Upgrade-System | L | 8 | **ja:** Design |
 | 10 | L1 Asset-Migration (Pfadtabelle, dann Verschieben) | M | — (jederzeit) | nein |

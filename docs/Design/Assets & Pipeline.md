@@ -31,7 +31,7 @@ Rang 2 unter [[Leitbild]].
 | `Assets/` | 2 MB / 522 | Kataloge und Altbestand aus der Codex-Zeit | nicht geprüft; ändern nur nach eigenem Audit |
 | `tests/` | 76 MB / 288 | Harnesses, Werkzeuge, Berichte | `tests/reports/` enthält Testbilder |
 | `QA/` | 240 MB / 6.123 (436 versioniert) | Simulationen, Daten, Berichte | `QA/logs/` ist überwiegend unversioniert |
-| `output/` | 820 MB / 1.068 | **alte Codex-Builds**, gitignored | kann vom Nutzer gelöscht werden (temporär), wird nicht mehr beschrieben |
+| `output/` | — | alte Codex-Builds | **am 25.11. gelöscht** (Nutzerfreigabe, 820 MB, war gitignored) |
 | `scripts/`, `objects/`, `rooms/`, `tilesets/`, `options/` | klein | GameMaker-Ressourcen | — |
 
 ### 2.2 `FirstGame_ArtPack/` je Unterordner
@@ -61,9 +61,8 @@ Rang 2 unter [[Leitbild]].
 ### 2.3 GameMaker-Ressourcen
 - **Bestand:** 1.337 Sprites, 44 Skripte, 21 Objekte, 90 Klänge.
 - **Texturgruppen:** `Default`, `Level_Swamp`, `Level_Ashfrost`, `Equipment`.
-- **Legacy im Projekt:**
-  - 164 Sprites der ArtPack-0.1-Helden (`spr_fg_warrior_*`, `spr_fg_mage_*`, `spr_fg_ranger_*`, `spr_fg_knightv2_*`). Kein Codepfad wählt sie mehr; `player_artpack` nutzt nur `*v3`.
-  - **Nicht gelöscht**, nur einsortiert. Löschen erst nach Bestätigung durch den Nutzer.
+- **Legacy im Projekt:** Die 164 Sprites der ArtPack-0.1-Helden (`spr_fg_warrior_*`, `spr_fg_mage_*`, `spr_fg_ranger_*`, `spr_fg_knightv2_*`) wurden am 25.11. gelöscht (Nutzerfreigabe; kein Codepfad nutzte sie). Ihre Quellen liegen weiter unter `FirstGame_ArtPack/heroes/`.
+- **Bestand danach:** 1.173 Sprites.
 - **Stilbruch im Spiel:** 80 Sprites der 0.1-Gegnerstreifen (`spr_fg_<art>_*`, 64×64, ohne Blickrichtungen) werden von den Minibossen (Eber, Golem) und von Ersatz-Spawns genutzt.
 
 ## 3. Umgesetzt am 25.11.2026: IDE-Ressourcenbaum nach Kategorien
@@ -82,7 +81,6 @@ Sprites/
   Welt/         Wald · Sumpf · Aschenfrost · Allgemein
   UI/           Zauber_Icons · Menue
   Beute/
-  Legacy/       ArtPack_0_1_Helden
 Skripte/
   Kern_und_Spieler · Kampf_und_Klassen · Zauber · Bosse · Gegner
   Welt_und_Atmosphaere · Fortschritt_und_Ausruestung · Audio

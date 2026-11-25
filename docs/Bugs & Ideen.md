@@ -7,18 +7,15 @@ updated: 2026-11-25
 Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Doku (Claude, 24./25.11.2026). Status: offen, wenn nicht anders vermerkt. Größere Arbeiten stehen geordnet in [[Roadmap & Vertical Slice]].
 
 ## Mögliche Bugs und Aufräumpunkte
-- **Bild horizontal um 33 % verzerrt:** Kamera 800×600 (4:3) auf 1280×720 (16:9), gemessen am 25.11. Kreise wirken als Ellipsen. → R1 in [[Technische Architektur]], Roadmap Schritt 1 (Nutzerentscheidung nötig).
 - **Minibosse nutzen 0.1-Gegnerstreifen** (Eber, Golem; 64×64, ohne Blickrichtungen), Stilbruch. → [[Roadmap & Vertical Slice]] Schritt 9.
-- **164 Legacy-Sprites** der ArtPack-0.1-Helden sind im Projekt registriert, aber unerreichbar (IDE-Ordner `Sprites/Legacy`). Löschen nur nach Bestätigung durch den Nutzer. → [[Assets & Pipeline]]
-- **`output/`** belegt ca. 820 MB alter Codex-Builds (gitignored). Der Nutzer kann den Ordner löschen.
 - **Lose Bilder im ArtPack-Wurzelordner:** `ChatGPT-Bild 22. Nov. 2026, 23_00_30.png` und `…23_00_42.png` haben keinen dokumentierten Zweck. → [[Assets & Pipeline]]
 - **MCP-Zeitlimit:** `MCP_TIMEOUT` in `.claude/settings.json` wirkt nicht (25.11. geprüft). Abhilfe per `setx` nur mit Zustimmung des Nutzers. → [[Tests & QA]]
 - **Verwaiste Event-Dateien:** `objects/ObjectFireball/Collision_ObjectMonster.gml`, `ObjectIceball/…` und `ObjectLightningball/…` sind in den `.yy` der Objekte nicht registriert. GameMaker führt sie nicht aus. Prüfen, ob sie gelöscht werden können oder registriert werden müssen. → [[Zauber & Passiva]]
 - **Boss-Testmenü im Release:** `#macro BOSS_TEST_MENU_ENABLED true` in `scripts/boss_test_mode`. Vor einer Veröffentlichung auf `false` setzen. → [[Boss-Testmodus]]
 - **Lautstärken werden nicht gespeichert:** In `firstgame_audio.ini` steht nur „Ton im Hintergrund“, ein Speichern der Regler wurde im Code nicht gefunden. Vermutung; im Spiel prüfen. → [[Speichern & Einstellungen]]
 - **progression_audit schreibt in jedem Run** `firstgame_progression_current.json`, auch in normalen Spielen. Harmlos, aber unnötige Dateizugriffe. → [[Progression & Level-up]]
-- **Dauerhafte Talente ungetestet:** Der `persistent`-Zweig (ini) ist implementiert, aber nie im Spiel getestet. → [[Talente]]
 - **Alte Drachenangriffe** (Bogen, Bodeneinschlag, Flügelsturm, Void, Wirbel, Salven) laufen nicht über bv2. Das Ausweich-Orakel im Boss-Test prüft sie nicht. → [[Bosse]]
+- **Legacy-Harnesses** `tests/atmosphere_harness.gml`, `dragon_harness.gml`, `player_smoke_harness.gml` verweisen auf gelöschte 0.1-Sprites. Sie laufen in keiner Suite; bei Bedarf entfernen. → [[Tests & QA]]
 - **Partikel und Zufall:** `spell_vfx` nutzt das globale `random()`. Geseedete Runs sind dadurch nicht mehr mit älteren Ständen vergleichbar. → [[Licht, Wetter & Effekte]]
 - **`RoomCrypt` und `RoomRuins`** sind Fallbacks aus der Codex-Zeit. Prüfen, ob sie noch gebraucht werden. → [[Level & Welten]]
 - **Test-Flake:** `run_level_smoke.py` lieferte unter paralleler CPU-Last einmal 165/166. → [[Tests & QA]]
@@ -34,7 +31,6 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
 
 ## Ideen
 - Eigene Talent-Icons; derzeit werden Zauber-Icons wiederverwendet. → [[Talente]]
-- Talente neu verteilen (Respec), z. B. gegen Münzen oder einmal pro Run. → [[Talente]]
-- Meta-Progression zwischen Runs, als Option über `talent_config().persistent`.
+- Eigene Meta-Punkte für ein langsameres Fortschrittstempo zwischen Runs (Zahlenentscheidung). → [[Progression & Builds]]
 - Lautstärken in der ini speichern. → [[Audio]]
 - Menschliche Spieltests der neuen Bossmuster und Rückmeldungen hier sammeln. → [[HANDOFF]]

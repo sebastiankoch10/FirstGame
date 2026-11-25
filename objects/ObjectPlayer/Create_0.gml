@@ -86,5 +86,5 @@ player_combat_init();
 
  // Kamera-Setup
 camera = camera_create();
-camera_set_view_size(camera, 800, 600); // Sichtgröße (800x600)
+camera_set_view_size(camera, VIEW_W, VIEW_H); // world view 16:9 (R1)
 view_set_camera(0, camera); // Viewport 0 verwendet diese Kamera

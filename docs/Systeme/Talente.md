@@ -19,6 +19,9 @@ Datengetriebene Talentbäume: ein allgemeiner Baum mit 9 Talenten und je 8 pro K
 ## Abhängigkeiten
 [[Zauber & Passiva]] (`apply_passives`) · [[Klassen & Startwaffen]] · [[Ausrüstung]] (gemeinsamer Bildschirm) · [[UI, HUD & Menüs]] · [[Progression & Level-up]]
 
+## Persistenz
+- Seit 2026-11-25 bleiben Talente je Klasse zwischen Runs erhalten (`talent_persistent()`, nur im Projekt „FirstGame“), `talent_respec()` per Taste R. Datei `firstgame_talents.ini`.
+
 ## Offene Entscheidungen
 - Pro Run oder dauerhaft?
 - Punktetempo

@@ -25,5 +25,5 @@ Steuerung, Bewegung, Sprung, Sturz, Slide und Ausweichrolle, Treffer am Spieler,
 ## Bekannte Probleme
 - Ausrüstung ist seit 2026-11-24 als Ebenen sichtbar ([[Charaktergrafik & Ausrüstungs-Layer]]).
 - Keine Sekundärbewegung (Haar, Umhang) und keine Übergangsposen; Idle ist ein Frame mit Atembewegung. Soll: [[Visuelles Leitbild & Animation]].
-- Die Kamera hat feste 800×600 (`Create_0`, Folgelogik in `Step_0` mit `x-400`/`y-300`). Auf dem 16:9-Fenster wird das Bild verzerrt (x×1,6, y×1,2). Behebung: R1 in [[Technische Architektur]].
+- Kamera seit 2026-11-25: `VIEW_W`×`VIEW_H` = 960×540 (16:9, Makros in `scripts/gameplay`). Vorher 800×600, horizontal um 33 % verzerrt. Siehe R1 in [[Technische Architektur]].
 - Die Treffer-Höhen (`ground`, `high`, `all`) entscheiden über Sprung, Slide und Ausweichen. Bei neuen Angriffen bewusst wählen.

@@ -66,7 +66,7 @@ Abnahme nach [[Qualitätsstandard]]:
 
 ## 3. Klassenprofile (nur Besonderheiten)
 
-### Schwertkämpfer (`Sword`, `swordsmanv3`)
+### Schwertmeister (`Sword`, `swordsmanv3`; früher „Schwertkämpfer“)
 - **Rolle:** Nahkampf, Bewegung, kontrollierte Fläche. Robust (Ist: 120 HP, Tempo 3,2, Power 2).
 - **Startwaffe:** Kette aus drei Hieben mit festem Ablauf (`master_combat`, `ObjectSwordHitbox`). Slash-Effekte mit drei visuellen Stufen.
 - **Talentrichtung:** Druckwelle am Finale, Rundumhieb, Sturmangriff nach Ausweichrolle, Heilung beim Finale.
@@ -77,7 +77,7 @@ Abnahme nach [[Qualitätsstandard]]:
   - Trefferstopp bei Gegnern.
   - Erste Klasse des Vertical Slice.
 
-### Zaubermeisterin (`Mage`, `magev3`)
+### Arkanistin (`Mage`, `magev3`; früher „Zaubermeisterin“)
 - **Rolle:** langsame, wuchtige Kombos. Zerbrechlich (Ist: 70 HP, Tempo 2,8, Power 4).
 - **Startwaffe:** Vierer-Kombo, danach wieder von vorn:
   1. Kristallprojektil
@@ -109,6 +109,6 @@ Abnahme nach [[Qualitätsstandard]]:
   - Ton gedrosselt und variiert, damit Dauerfeuer nicht ermüdet.
 
 ## 4. Offene Entscheidungen
-1. **Klassennamen:** „Schwertkämpfer/Zaubermeisterin/Waldläufer“ (im Spiel) oder „Schwertmeister/Arkanistin/…“ (Auftrag 25.11.)?
+1. ~~Klassennamen~~: entschieden am 25.11.: Schwertmeister, Arkanistin, Waldläufer (im Spiel umgesetzt).
 2. **Waffen-Upgrade-System** (Auftrag 22.11.): Form und Zeitpunkt. Es koppelt danach die visuelle Waffenentwicklung.
 3. **Umhang-Slot:** Ein Umhang ist derzeit Klassenidentität und kein Ausrüstungsteil (DECISIONS 24.11.).

@@ -51,8 +51,8 @@ Bewertung: ++ sehr gut, + gut, o mittel, − schwach, −− ungeeignet.
 |---|---|---|---|---|---|---|---|---|
 | Frame-by-Frame | ++ (wenn gut gezeichnet) | ++ | ++ | −− (je Frame und Richtung) | − | kleine Gegner, Spielerposen | ++ | **ja**: Spieler-Grundposen, normale Gegner |
 | Hierarchische Sprite-Teile (Parent-Child) | + | ++ (eigene GML-Struktur) | + | o | ++ | große Bosse, Waffen | o (Rotation bricht das Raster, siehe R3) | **ja**: Bosse, Waffen, Anhänge |
-| Skelett-Animation mit Spine | ++ | + (Laufzeit eingebaut) | + | o | ++ | Bosse, Menschen | o | **Offen**: Der Spine-Editor ist kostenpflichtig, also nur mit Freigabe |
-| Eigenes Bone-System in GML | + | + | + | o bis − (einmalig) | ++ | Bosse | o | **ja** (Vorschlag): schlanker Cutout-Rig statt Spine |
+| Skelett-Animation mit Spine | ++ | + (Laufzeit eingebaut) | + | o | ++ | Bosse, Menschen | o | **nein**: Der Editor ist kostenpflichtig. Nutzerentscheidung 25.11.: immer kostenlose Werkzeuge |
+| Eigenes Bone-System in GML | + | + | + | o bis − (einmalig) | ++ | Bosse | o | **ja (entschieden 25.11.)**: schlanker Cutout-Rig |
 | Mesh-Verformung (Vertex-Buffer, `draw_sprite_pos`) | + | o | + | − | + | Flügelhäute, Stoff, Schleim | − | punktuell: Flügel, Umhang-Saum |
 | Prozedurale Animation (Sinus, Federn) | + | ++ | ++ | ++ | ++ | Atmung, Wippen, Nachschwingen | + (auf ganze Pixel runden) | **ja, überall** als billige Lebendigkeit |
 | Inverse Kinematik (2-Glied, analytisch) | + | ++ | ++ | o | + | Beine und Füße großer Bosse, Hals | o | **ja**: Drachenbeine, Hals mit Blick |
@@ -178,7 +178,9 @@ Vorhanden (`boss_choreo`). Künftig als Folge von Zeitachsen (4.1), damit Körpe
   - Viewports aller Räume auf 16:9;
   - Prüfung aller Stellen, die die Sichtgröße nutzen (`survivor_balance` Spawnring, Boss-Notfallteleport außerhalb des Bildes, Minimap, Boss-Testmodus).
   - Tests: `level`, `boss`, `regression`, `visual`.
-- **Offen:** Der Nutzer bestätigt die Option. Die Änderung des Sichtbereichs beeinflusst das Spielgefühl. Sie ist keine Balancing-Zahl, aber eine spürbare Änderung.
+- **Entschieden und umgesetzt (25.11.):** Option b, 960×540.
+  - `#macro VIEW_W/VIEW_H` in `scripts/gameplay`; Kamera und Folgelogik in `ObjectPlayer` nutzen die Konstanten.
+  - Spiel-Räume haben 16:9-Viewports (1280×720).
 
 ### R2: Einheitliche Pixeldichte (Vorschlag, Entscheidung nach A/B-Prototyp)
 - **Zielregel:** **1 Artpixel = 1 Welteinheit für alle Sprites**, so wie die Umgebung heute schon gezeichnet ist.

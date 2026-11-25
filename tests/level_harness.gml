@@ -69,7 +69,7 @@ function lv_resolve_choice() {
 }
 function lv_place(_x,_y) {
     var pl=ObjectPlayer;pl.x=_x;pl.y=_y;pl.pickup_prev_x=_x;pl.pickup_prev_y=_y;pl.motion_state=player_motion_state.grounded;pl.dodge_timer=0;pl.jump_height=0;
-    camera_set_view_pos(pl.camera,clamp(_x-400,0,room_width-800),clamp(_y-300,0,room_height-600));
+    camera_set_view_pos(pl.camera,clamp(_x-VIEW_W/2,0,room_width-VIEW_W),clamp(_y-VIEW_H/2,0,room_height-VIEW_H));
 }
 function lv_clear_enemies() {with(ObjectMonster)instance_destroy();with(ObjectBossMonster)instance_destroy();with(ObjectCoin)instance_destroy();with(ObjectChest)instance_destroy();with(ObjectMagnetOrb)instance_destroy();global.active_boss=noone;global.boss_exists=false;}
 function lv_find_hazard(_kind) {

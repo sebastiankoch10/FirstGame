@@ -1,4 +1,8 @@
 /// Independent weapons, movement/contact rules, common menus and bounded effects.
+// World camera size in world units: 16:9 like the window, so pixels stay square (was 800x600 = 4:3 stretched to 16:9).
+// 960x540 scales by exactly 2 at 1080p. See docs/Design/Technische Architektur.md, R1.
+#macro VIEW_W 960
+#macro VIEW_H 540
 function combat_mask() {
     if (!variable_global_exists("body_mask") || !sprite_exists(global.body_mask)) {
         global.body_mask=sprite_duplicate(spr_fg_swordsmanv3_idle_right);
@@ -207,7 +211,7 @@ function enemy_draw(_scale,_boss) {
 }
 function menu_labels(_mode) {
     switch(_mode) {
-        case "characters": return ["Schwertkaempfer","Zaubermeisterin","Waldlaeufer"];
+        case "characters": return ["Schwertmeister","Arkanistin","Waldlaeufer"];
         case "levels": return level_names();
         case "settings": return ["Vollbild: Ein/Aus","Gesamtlautstaerke","Musik","Effekte","Ton im Hintergrund abspielen","Zurueck zum Titelbildschirm"];
         case "boss_test":return boss_test_menu_labels();
