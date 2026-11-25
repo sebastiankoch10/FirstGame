@@ -20,6 +20,13 @@ updated: 2026-11-25
 - **2026-11-25 · Export des Kanons wird erzeugt, nicht gepflegt** (`tests/tools/export_design.py`). Grund: keine zweite Wahrheitsquelle.
 
 ## Spieldesign
+- **2026-11-25 (2) · Nutzerentscheidungen:**
+  - Pixeldichte 1 Artpixel = 1 Welteinheit umsetzen.
+  - Drache bekommt Schweifschlag und Biss als **zusätzliche** Nahangriffe; die neun Fähigkeiten bleiben, der Schaden entspricht einer vorhandenen Drachenfähigkeit.
+  - Minibosse zeichnet Codex neu; Claude liefert Vorgaben und Import.
+  - Waffen-Upgrades als eigene Karten in der Level-up-Auswahl.
+  - Elitegegner ab Minute 3, selten.
+  - Langsamere Meta-Progression: Nur Hauptboss-Punkte sind dauerhaft, Stufenpunkte gelten nur im laufenden Run.
 - **2026-11-25 · Nutzerentscheidungen:** Kamera nach Vorschlag (960×540); Werkzeuge immer kostenlos (eigenes Rig statt Spine); Klassen heißen Schwertmeister, Arkanistin, Waldläufer; Run-Format **und** Fortschritt zwischen Runs; Legacy-Sprites und `output/` gelöscht; keine Internetsperre.
 - **2026-11-25 · Dauerhafte Talente nur im echten Spiel** (Projektname „FirstGame“). Grund: Native Suiten und Bot-Simulationen müssen reproduzierbar bleiben.
 - **2026-11-25 · Drachen-Rig als 2D-Skinning des Original-Frames statt zerlegter Teile.** Grund: keine Nähte, kein neues Artwork, Originale bleiben unverändert. In Feuerposen keine Kopfbewegung, damit Maul-Anker und Strahl synchron bleiben.

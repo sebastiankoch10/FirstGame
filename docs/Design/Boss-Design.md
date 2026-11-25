@@ -131,6 +131,16 @@ Große Bosse haben Körper, deren Teile gezielt für Angriffe und Bewegungen ein
 - Annotierte Maul-Anker existieren (`dragon_art_anchor`).
 - Hexen und Behemoth sind ebenfalls Einzelsprites.
 
+**Nahangriffe (Nutzerentscheidung 25.11., umgesetzt):**
+- Stehst du länger als 0,6 s näher als 230 px am Drachen, greift er statt der nächsten Rotationsfähigkeit im Nahkampf an (Abklingzeit 8 s).
+- **Biss** und **Schweifschlag** wechseln sich ab:
+  - Biss: Sektor 205 px, 70°, Warnung 0,6 s, trifft jede Höhe;
+  - Schweifschlag: vom Hüftbereich, 250 px, 150°, Warnung 0,75 s, Bodenhöhe, also überspringbar.
+- Der Schaden entspricht dem vorhandenen Feuerbogen. Die neun Fähigkeiten und die Rotation bleiben unverändert.
+- Im Rig holt der Schweif aus und peitscht durch, beim Biss zieht der Hals zurück und stößt vor.
+- **Noch offen:** Die Trefferzone ist ein angekündigter Sektor; eine Hitbox, die exakt der Schweifspitze folgt, kommt mit Rig-Stufe 2.
+- Funktionen: `dragon_melee_config` und `dragon_melee_try` in `scripts/dragon_encounter`.
+
 **Weg zum Soll:** Rig-System in [[Technische Architektur]], Drachen-Prototyp im [[Roadmap & Vertical Slice]].
 
 **Wichtig:** Das bestehende Drachenmodell bleibt erhalten. Die Zerlegung in Körperteile nutzt die vorhandene Gestaltung, ohne sie zu ersetzen.

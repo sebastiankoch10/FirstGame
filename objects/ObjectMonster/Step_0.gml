@@ -25,6 +25,7 @@ if (damage_number_timer > 0) {
 // Monster stirbt, wenn HP <= 0
 if (hp <= 0) {
     // Explicit self: the bare name resolves to the master_skeleton script asset (always truthy).
+    if(elite_is(id))elite_on_death(id);
     if(variable_instance_exists(id,"lvl_kind"))level_enemy_death(id);
     else if(self.master_skeleton)master_skeleton_remains(id);
     global.run_kills++;
@@ -36,6 +37,7 @@ if (hp <= 0) {
     exit;
 }
 
+if(elite_is(id) && !global.game_paused && elite_step(id,min(.05,max(0,delta_time/1000000))))exit;
 if(variable_instance_exists(id,"lvl_kind")){level_enemy_step(min(.05,max(0,delta_time/1000000)));exit;}
 if(self.master_skeleton){master_skeleton_step(min(.05,max(0,delta_time/1000000)));exit;}
 

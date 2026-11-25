@@ -289,12 +289,18 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
   - Gegner mit eigenem Angriff kündigen ihn über den Körper an (kurzes Ausholen).
 - **Lesbarkeit:** Statuseffekte bleiben in der Silhouette des Monsters. Die Grundfarbe bleibt erkennbar (Auftrag 22.11.).
 
-#### Elitegegner
-**Vorschlag, noch nicht im Spiel:** ein normaler Gegnertyp mit einer zusätzlichen, gut lesbaren Mechanik:
-- z. B. ein angekündigter Sprungangriff oder eine kleine Fläche beim Tod;
-- dazu eine klare visuelle Markierung (Silhouettenrand, Größe, Aura) und ein eigener Ton-Cue.
-- Elitegegner nutzen dieselben Warnregeln wie Bosse.
-- **Offen:** Ob und wann sie kommen, entscheidet der Nutzer (Roadmap).
+#### Elitegegner (Nutzerentscheidung 25.11., umgesetzt)
+- **Auftreten:** Ab Minute 3 wird **jeder 60. neue Gegner** zur Elite (fester Zähler statt Zufall, Simulationen bleiben vergleichbar). Das gilt für alle Level.
+- **Werte (neue, ungetestete Designwerte, `elite_config` in `scripts/survivor_balance`):**
+  - 3-fache Lebenspunkte;
+  - 1,25-facher Schaden;
+  - 1,2-fache Größe;
+  - 10 % Chance auf Ausrüstung, mindestens magisch.
+- **Erkennbarkeit:** goldener, pulsierender Silhouettenrand (Fog-Umriss).
+- **Fähigkeit,** abwechselnd eine von zwei:
+  - **Sprungangriff:** In 120–360 px Abstand wird ein Zielkreis (70 px) auf deine Position angekündigt (0,9 s). Die Elite springt im Bogen dorthin; bei der Landung entsteht eine Bodenwelle, die ein Sprung überwindet. Danach 5 s Pause.
+  - **Giftfläche beim Tod:** Ein Kreis (85 px) wird 0,6 s angekündigt und bleibt 3 s giftig.
+- **Technik:** Beides läuft über das gemeinsame bv2-Gefahrensystem mit denselben Warn-, Treffer- und Pausenregeln wie bei Bossen. Uhrgeber ist der Spawner.
 
 #### Minibosse
 - **Zeitplan:** Minute 1 und 3.
@@ -483,6 +489,16 @@ Große Bosse haben Körper, deren Teile gezielt für Angriffe und Bewegungen ein
 - Annotierte Maul-Anker existieren (`dragon_art_anchor`).
 - Hexen und Behemoth sind ebenfalls Einzelsprites.
 
+**Nahangriffe (Nutzerentscheidung 25.11., umgesetzt):**
+- Stehst du länger als 0,6 s näher als 230 px am Drachen, greift er statt der nächsten Rotationsfähigkeit im Nahkampf an (Abklingzeit 8 s).
+- **Biss** und **Schweifschlag** wechseln sich ab:
+  - Biss: Sektor 205 px, 70°, Warnung 0,6 s, trifft jede Höhe;
+  - Schweifschlag: vom Hüftbereich, 250 px, 150°, Warnung 0,75 s, Bodenhöhe, also überspringbar.
+- Der Schaden entspricht dem vorhandenen Feuerbogen. Die neun Fähigkeiten und die Rotation bleiben unverändert.
+- Im Rig holt der Schweif aus und peitscht durch, beim Biss zieht der Hals zurück und stößt vor.
+- **Noch offen:** Die Trefferzone ist ein angekündigter Sektor; eine Hitbox, die exakt der Schweifspitze folgt, kommt mit Rig-Stufe 2.
+- Funktionen: `dragon_melee_config` und `dragon_melee_try` in `scripts/dragon_encounter`.
+
 **Weg zum Soll:** Rig-System in „Technische Architektur“, Drachen-Prototyp im „Roadmap & Vertical Slice“.
 
 **Wichtig:** Das bestehende Drachenmodell bleibt erhalten. Die Zerlegung in Körperteile nutzt die vorhandene Gestaltung, ohne sie zu ersetzen.
@@ -643,9 +659,7 @@ Rang 2 unter „Leitbild“. Technischer Ist-Stand: „Klassen & Startwaffen“,
 
 #### Visuelle Waffenentwicklung
 - **Ist:** drei visuelle Stufen ab Spielerstufe 1, 34 und 68, gleich für alle Klassen (`sword_visual_tier`). Sie sind bewusst ohne Schadenswirkung (Auftrag 22.11.).
-- **Soll:**
-  - Die visuelle Stufe folgt dem tatsächlichen Fortschritt der Waffe. Das setzt das geplante **Waffen-Upgrade-System** voraus (Auftrag 22.11.: „Waffen sollen ein eigener großer Bestandteil des Fortschritts werden“, noch nicht umgesetzt).
-  - Bis dahin bleiben die Schwellen nach Spielerstufe.
+- **Seit 25.11. umgesetzt:** Die visuelle Stufe folgt dem tatsächlichen Fortschritt der Waffe, also den Waffen-Upgrades (Stufe 2 und 4, `weapon_visual_tier`). Details: „Progression & Builds“.
   - Die Regeln der visuellen Progression gelten auch für Klassenwaffen.
 
 #### Checkliste für eine neue Klasse
@@ -701,7 +715,7 @@ Abnahme nach „Qualitätsstandard“:
 
 ### 4. Offene Entscheidungen
 1. ~~Klassennamen~~: entschieden am 25.11.: Schwertmeister, Arkanistin, Waldläufer (im Spiel umgesetzt).
-2. **Waffen-Upgrade-System** (Auftrag 22.11.): Form und Zeitpunkt. Es koppelt danach die visuelle Waffenentwicklung.
+2. ~~Waffen-Upgrade-System~~: entschieden und umgesetzt am 25.11. (Karten in der Level-up-Auswahl).
 3. **Umhang-Slot:** Ein Umhang ist derzeit Klassenidentität und kein Ausrüstungsteil (DECISIONS 24.11.).
 
 ---
@@ -736,9 +750,14 @@ Rang 2 unter „Leitbild“. Technik: „Talente“, „Ausrüstung“, „Zaube
   - **[R]** im Charakterbildschirm setzt alle Talente der Klasse zurück und erstattet die Punkte.
   - Gilt nur im echten Spiel; umbenannte Test- und Simulationsbuilds bleiben pro Run, damit Tests und Bot-Statistiken reproduzierbar sind.
   - **Balancing-Hinweis (Empfehlung, nichts geändert):** Mit den heutigen Punktequellen (ab Stufe 4 alle 4 Stufen plus Hauptbosse) ist der Klassenbaum nach etwa 2–3 erfolgreichen Runs voll. Für eine längere Meta-Progression wären eigene, seltenere Meta-Punkte nötig. Das ist eine Zahlenentscheidung für den Nutzer.
-- **Waffen-Upgrade-System** (Auftrag 22.11.):
-  - Die Klassenwaffen sollen später unabhängig von den sechs Zaubern aufgewertet werden können: Schaden, Tempo, Reichweite, Projektilzahl, Schlaggröße, Durchschlag, Zusatzeffekte.
-  - **Offen:** noch nicht umgesetzt. Die Architektur muss es zulassen.
+- **Waffen-Upgrade-System** (Auftrag 22.11., Nutzerentscheidung 25.11.: Karten in der Level-up-Auswahl, umgesetzt):
+  - Goldene „WAFFE“-Karten erscheinen in Level-up- und Truhenauswahl neben den Zaubern. Sie belegen keinen Zauberplatz; es gibt 5 Stufen je Klassenwaffe.
+  - **Je Stufe** (neue, ungetestete Designwerte, `weapon_upgrade_levels` in `scripts/class_weapons`):
+    - Klinge: +8 % Schwertschaden; Stufe 2/4 +5 % Hiebreichweite; Stufe 3/5 +4 % Tempo.
+    - Sternenstab: +8 % Stabschaden; Stufe 2/4 +8 % Sternenorb; Stufe 3/5 +4 % Tempo.
+    - Jagdbogen: +7 % Pfeilschaden; Stufe 2 +8 % Reichweite; Stufe 3/5 +4 % Tempo; Stufe 4 +1 Pfeil je Salve.
+  - Die Upgrades wirken über dieselben Hooks wie die Talente (`talent_stat` addiert beide).
+  - **Waffenoptik** folgt jetzt der Upgradestufe (Stufe 2 und 4) statt der Spielerstufe 34/68.
 - **Mechanische und visuelle Progression gehören zusammen:**
   - Jede mechanische Stufe hat eine erkennbare, aber verdiente visuelle Entsprechung.
   - Qualitative Veränderungen (neue Phasen, Projektiltypen, Verkettungen, Elemente, Ton) sind ebenso Progression wie Größe.
@@ -1891,7 +1910,7 @@ graph LR
 | 6 | **Vertical Slice bauen** (Abschnitt 4) | L | 1–5 | Abnahme |
 | 7 | *(Stufe 1 am 25.11.: Drachen-Skinning-Rig)* **S3 Ausbau:** Hitboxen an Knochen, Schweifschlag, Biss, Knochen für alle Posen | L | 3, 4 | entschieden: eigenes Rig in GML (kostenlos) |
 | 8 | Auswertung des Slice, Anpassung der Standards, dann **L3 Übertragung** je Inhaltsgruppe (Klassen → Gegner → Bosse → Zauber) | XL | 6, 7 | Reihenfolge |
-| 9 | V3 Minibosse auf aktuellen Stil, L5 Elitegegner, L4 Waffen-Upgrade-System | L | 8 | **ja:** Design |
+| 9 | V3 Minibosse (Codex zeichnet, Vorgaben von Claude); ~~L5 Elitegegner~~ und ~~L4 Waffen-Upgrades~~ umgesetzt am 25.11. | L | 8 | entschieden |
 | 10 | L1 Asset-Migration (Pfadtabelle, dann Verschieben) | M | — (jederzeit) | nein |
 
 ### 4. Vertical Slice: Spezifikation

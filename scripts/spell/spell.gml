@@ -73,6 +73,7 @@ function apply_attack_damage(_target, _amount, _source, _sid=0) {
 function spell_values(_sid,_level){return spell_v2_values(_sid,_level);}
 
 function learn_spell(_sid) {
+    if (_sid == -2) return weapon_upgrade_take();   // weapon upgrade card
     var d = GetSpellData(_sid);
     if (!is_struct(d)) return false;
     var active = d.type == SPELL_TYPE.ACTIVE;
@@ -145,6 +146,7 @@ function spell_ui_layout() {
         tw:compact ? w-32 : w-cw-48, bottom:h-24};
 }
 function spell_ui_icon(_sid,_x,_y,_size) {
+    if(_sid==-2){var c=talent_class_key(),spr=c=="Mage" ? icon_fg_magic_arcane : (c=="Ranger" ? icon_fg_nature : icon_fg_sword);draw_sprite_stretched(spr,0,_x,_y,_size,_size);return;}
     var d=GetSpellData(_sid);
     if (!is_struct(d)) return;
     var spr=asset_get_index(d.icon_sprite_name);

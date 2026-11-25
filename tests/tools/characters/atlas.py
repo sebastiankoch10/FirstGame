@@ -1,6 +1,8 @@
 """Exact Python port of the character atlas import (tests/tools/prepare_swordsman_art.ps1 and
 prepare_class_characters.ps1): grid/row cutting, alpha cutoff, largest 8-connected component, bounds and the
-GDI+ nearest-neighbour placement into 96x96 frames with foot origin (48,88).
+GDI+ nearest-neighbour placement into FRAME x FRAME frames with foot origin (OX, OY).
+Since 25.11.2026 the frames are drawn 1:1 in the world (pixel density 1 art px = 1 world unit): the former 96x96
+frames were drawn with player_scale 1.65, so the factor is scaled by DENSITY and the frame grows to 160.
 
 The point of the port: any additional layer painted in atlas space (base clothing, equipment, weapon) can be
 cut with the ORIGINAL cell's keep-mask/bounds and scaled with the identical pixel mapping, so every layer lands
@@ -42,6 +44,12 @@ SETS = {
         'reaction': {'hurt': [0, 1, 2], 'death': [3, 4, 5, 6, 7]},
     },
 }
+
+
+# Frame spec (density 1:1 in the world). Old spec: 96x96, origin (48,88), drawn at 1.65.
+DENSITY = 1.65
+FRAME = 160
+OX, OY = 80, 145
 
 
 def cs_round(v: float) -> int:
@@ -121,7 +129,7 @@ class Cell:
         """Map a cell-space RGBA layer into the 96x96 frame exactly like GDI+ DrawImage(NearestNeighbor, Half)."""
         l, t, r, b = self.bounds
         x, y, w, h = self.dest
-        out = np.zeros((96, 96, 4), np.uint8)
+        out = np.zeros((FRAME, FRAME, 4), np.uint8)
         sx = l + np.floor((np.arange(w) + .5) * (r - l) / w).astype(int)
         sy = t + np.floor((np.arange(h) + .5) * (b - t) / h).astype(int)
         src = layer[np.ix_(sy, sx)]
@@ -173,14 +181,14 @@ class Atlas:
     def cell(self, column, row) -> Cell:
         rect, px, keep, bounds = self._keep(column, row)
         l, t, r, b = bounds
-        f = self.factor
+        f = self.factor * DENSITY
         w, h = cs_round((r - l) * f), cs_round((b - t) * f)
         cw = rect[2] - rect[0]
         if self.actor == 'swordsmanv3':
-            x = 48 + cs_round((l - cw / 2.0) * f)
+            x = OX + cs_round((l - cw / 2.0) * f)
         else:
-            x = 48 - int(w / 2)
-        y = 88 - h
+            x = OX - int(w / 2)
+        y = OY - h
         rgba = px.copy(); rgba[..., 3] = np.where(keep, 255, 0); rgba[~keep] = 0
         return Cell(self.actor, self.source, column, row, rect, keep, bounds, f, (x, y, w, h), rgba)
 

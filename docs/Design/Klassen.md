@@ -52,9 +52,7 @@ Rang 2 unter [[Leitbild]]. Technischer Ist-Stand: [[Klassen & Startwaffen]], [[C
 
 ### Visuelle Waffenentwicklung
 - **Ist:** drei visuelle Stufen ab Spielerstufe 1, 34 und 68, gleich für alle Klassen (`sword_visual_tier`). Sie sind bewusst ohne Schadenswirkung (Auftrag 22.11.).
-- **Soll:**
-  - Die visuelle Stufe folgt dem tatsächlichen Fortschritt der Waffe. Das setzt das geplante **Waffen-Upgrade-System** voraus (Auftrag 22.11.: „Waffen sollen ein eigener großer Bestandteil des Fortschritts werden“, noch nicht umgesetzt).
-  - Bis dahin bleiben die Schwellen nach Spielerstufe.
+- **Seit 25.11. umgesetzt:** Die visuelle Stufe folgt dem tatsächlichen Fortschritt der Waffe, also den Waffen-Upgrades (Stufe 2 und 4, `weapon_visual_tier`). Details: [[Progression & Builds]].
   - Die Regeln der visuellen Progression gelten auch für Klassenwaffen.
 
 ### Checkliste für eine neue Klasse
@@ -110,5 +108,5 @@ Abnahme nach [[Qualitätsstandard]]:
 
 ## 4. Offene Entscheidungen
 1. ~~Klassennamen~~: entschieden am 25.11.: Schwertmeister, Arkanistin, Waldläufer (im Spiel umgesetzt).
-2. **Waffen-Upgrade-System** (Auftrag 22.11.): Form und Zeitpunkt. Es koppelt danach die visuelle Waffenentwicklung.
+2. ~~Waffen-Upgrade-System~~: entschieden und umgesetzt am 25.11. (Karten in der Level-up-Auswahl).
 3. **Umhang-Slot:** Ein Umhang ist derzeit Klassenidentität und kein Ausrüstungsteil (DECISIONS 24.11.).

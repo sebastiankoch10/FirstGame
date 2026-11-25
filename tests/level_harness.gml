@@ -265,7 +265,7 @@ function lv_skill_points() {
     var n=0;
     for(var i=0;i<array_length(global.active_spells);i++)n+=global.active_spells[i].level;
     for(var i=0;i<array_length(global.passive_spells);i++)n+=global.passive_spells[i].level;
-    return n;
+    return n+weapon_upgrade_level();   // weapon upgrade cards (25.11.2026) are build levels too
 }
 function lv_menu_capture_begin() {
     if(!variable_global_exists("lv_menu_shot") || global.lv_menu_shot=="")return;

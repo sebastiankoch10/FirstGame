@@ -37,6 +37,8 @@ function spell_choices_v2(_source) {
         var option={id:d.id,name:d.name,type:d.type==1 ? "active" : "passive",level:lv};
         if(lv>0)array_push(upgrades,option);else array_push(fresh,option);
     }
+    // Weapon upgrade card (counts as an upgrade; independent of the spell slots).
+    if(weapon_upgrade_level()<weapon_upgrade_max())array_push(upgrades,{id:-2,name:weapon_upgrade_name()+" verbessern",type:"weapon",level:weapon_upgrade_level()});
     var options=[];
     // One owned upgrade and one new option when both exist; the third favours investment 65/35.
     if(array_length(upgrades)>0){var n=spell_choice_random(array_length(upgrades));array_push(options,upgrades[n]);array_delete(upgrades,n,1);}
@@ -57,5 +59,5 @@ function spell_choices_v2(_source) {
     global.spell_options=options;global.selected_spell_index=0;global.choice_open=false;global.choice_mouse_armed=false;
     global.levelup_active=_source=="levelup";global.chest_collected=_source=="chest";global.game_paused=true;
 }
-function spell_type_color(_sid) {var d=GetSpellData(_sid);return is_struct(d) && d.type==2 ? make_color_rgb(191,132,242) : make_color_rgb(87,211,242);}
-function spell_choice_badge(_option) {return _option.type=="info" ? "MAXIMUM" : (_option.level>0 ? "UPGRADE" : "NEU");}
+function spell_type_color(_sid) {if(_sid==-2)return make_color_rgb(242,196,96);var d=GetSpellData(_sid);return is_struct(d) && d.type==2 ? make_color_rgb(191,132,242) : make_color_rgb(87,211,242);}
+function spell_choice_badge(_option) {return _option.type=="info" ? "MAXIMUM" : (_option.type=="weapon" ? "WAFFE" : (_option.level>0 ? "UPGRADE" : "NEU"));}

@@ -109,6 +109,9 @@ function dragon_encounter_step(_b,_dt) {
     if(_b.hp<=0){dragon_die(_b);return;}
     if(_b.v2_enabled)_b.v2_clock+=_dt; // drives the shared bv2 pattern hazards of this encounter
     _b.dragon_clock+=_dt;_b.dragon_state_age+=_dt;_b.dragon_hit_age+=_dt;
+    if(!variable_instance_exists(_b,"dragon_melee_cd")){_b.dragon_melee_cd=0;_b.dragon_close_t=0;}
+    _b.dragon_melee_cd=max(0,_b.dragon_melee_cd-_dt);
+    _b.dragon_close_t=(instance_exists(ObjectPlayer) && point_distance(_b.x,_b.y,ObjectPlayer.x,ObjectPlayer.y)<dragon_melee_config().range) ? _b.dragon_close_t+_dt : 0;
     if(_b.hp<_b.dragon_last_hp)_b.dragon_hit_age=0;_b.dragon_last_hp=_b.hp;
     if(boss_navigation_step(_b,_dt)){_b.enc_zones=[];_b.dragon_magma=[];return;}
     if(_b.v2_enabled && bc_catchup_step(_b,"dragon",_dt))return; // rare announced dive towards a far-away player
@@ -127,7 +130,7 @@ function dragon_encounter_step(_b,_dt) {
         else {
             var phase=dragon_phase_for_hp(_b);
             if(phase!=_b.boss_phase){_b.boss_phase=phase;_b.dragon_cycle=0;dragon_state(_b,"transition",1.2);fg_sfx("boss_phase");}
-            else {if(variable_global_exists("boss_test") && global.boss_test.active && global.boss_test.ability!=-1)boss_v2_force_attack(_b,global.boss_test.ability);else {var rotation=boss_v2_dragon_rotation(_b);dragon_encounter_begin(_b,rotation[_b.dragon_cycle mod array_length(rotation)]);_b.dragon_cycle++;}}
+            else {if(variable_global_exists("boss_test") && global.boss_test.active && global.boss_test.ability!=-1)boss_v2_force_attack(_b,global.boss_test.ability);else if(!dragon_melee_try(_b)){var rotation=boss_v2_dragon_rotation(_b);dragon_encounter_begin(_b,rotation[_b.dragon_cycle mod array_length(rotation)]);_b.dragon_cycle++;}}
         }
     }
     if(_b.boss_state=="windup" || _b.boss_state=="active") {
@@ -140,7 +143,7 @@ function dragon_encounter_step(_b,_dt) {
             }
             var swept=variable_instance_exists(_b,"enc_sweep") && is_struct(_b.enc_sweep);
             if(kind=="beam" && swept)_b.dragon_angle=_b.enc_sweep.g.angle; // the bv2 hazard owns the hitbox
-            else if(kind=="beam" || kind=="arc")hit=telegraph_contains(g,pl.x,pl.y-10);
+            else if(kind=="beam" || kind=="arc" || kind=="tail" || kind=="bite")hit=telegraph_contains(g,pl.x,pl.y-10);
             if(kind=="sweep") {_b.dragon_angle=_b.dragon_base_angle-55+110*clamp(age/c.active,0,1);hit=dragon_player_in_fire(_b,pl);}
             if(kind=="slam" || kind=="vortex") {
                 var ring=telegraph_make("ring",g.x,g.y,kind=="slam" ? max(45,320*age/c.active) : 100+210*age/c.active,1,0,360,40);
@@ -164,7 +167,7 @@ function dragon_encounter_step(_b,_dt) {
 }
 function dragon_encounter_draw(_b) {
     if(_b.dragon_dying || !variable_instance_exists(_b,"enc_geometry"))return;
-    var kind=_b.boss_cast,g=_b.enc_geometry,c=_b.enc_cfg,age=_b.dragon_state_age,col=(kind=="void" || kind=="volley") ? make_color_rgb(181,104,251) : (kind=="wind" ? make_color_rgb(130,225,211) : make_color_rgb(255,115,58));
+    var kind=_b.boss_cast,g=_b.enc_geometry,c=_b.enc_cfg,age=_b.dragon_state_age,col=(kind=="void" || kind=="volley") ? make_color_rgb(181,104,251) : (kind=="wind" ? make_color_rgb(130,225,211) : ((kind=="tail" || kind=="bite") ? make_color_rgb(236,214,170) : make_color_rgb(255,115,58)));
     var swept=variable_instance_exists(_b,"enc_sweep") && is_struct(_b.enc_sweep);
     if(_b.boss_state=="windup" && !array_contains(["meteor","stomp","void","volley","wind"],kind) && !(kind=="beam" && swept)) {
         g.elapsed=age;telegraph_draw(g,col);
@@ -194,4 +197,33 @@ function dragon_encounter_draw(_b) {
 function dragon_fx_sprite(_row,_progress,_x,_y,_radius,_angle=0,_alpha=1) {
     var spr=asset_get_index("spr_dragon_fx_"+string(_row));
     draw_sprite_ext(spr,min(7,floor(clamp(_progress,0,.999)*8)),_x,_y,_radius*2/256,_radius*2/256,_angle,c_white,_alpha);
+}
+
+// ---------------- Close-range attacks (user decision 25.11.2026) ----------------
+/// Bite and tail sweep (alternating) are extra basic attacks: the nine abilities and the
+/// rotation stay unchanged. Damage reuses the existing "arc" ability (no new damage numbers). The warning is short but
+/// announced (sector + body windup in the rig); the tail sweep is a ground attack (a jump clears it), the bite hits all heights.
+function dragon_melee_config() {
+    static c={range:230,close_time:.6,cooldown:8,tail:{warning:.75,active:.3,radius:250,span:150,height:"ground"},bite:{warning:.6,active:.22,radius:205,span:70,height:"all"}};
+    return c;
+}
+function dragon_melee_try(_b) {
+    var m=dragon_melee_config();
+    if(!_b.v2_enabled || _b.dragon_melee_cd>0 || _b.dragon_close_t<m.close_time || !instance_exists(ObjectPlayer))return false;
+    var pl=ObjectPlayer,size=_b.visual_height/430;
+    // The dragon turns towards the player while recovering, so bite and tail sweep alternate (bite first).
+    // The tail sweep comes from the hip on the tail side and fans 150 degrees towards the player.
+    if(!variable_instance_exists(_b,"dragon_melee_n"))_b.dragon_melee_n=0;
+    var behind=_b.dragon_melee_n mod 2==1,kind=behind ? "tail" : "bite",k=behind ? m.tail : m.bite;_b.dragon_melee_n++;
+    var ox=behind ? _b.x-_b.dragon_facing*95*size : _b.x+_b.dragon_facing*85*size,oy=_b.y-(behind ? 70 : 40)*size;
+    var c=variable_clone(dragon_encounter_config("arc",_b.boss_phase));
+    c.warning=k.warning;c.active=k.active;c.height=k.height;c.radius=k.radius;c.span=k.span;c.shape="sector";
+    if(_b.v2_enabled)c.damage*=_b.v2_scaling.damage;
+    _b.boss_cast=kind;_b.dragon_pose_locked=false;_b.enc_cfg=c;_b.enc_hits=0;_b.enc_waves=0;_b.dragon_next_hit=0;
+    _b.enc_zones=[];_b.dragon_magma=[];_b.enc_lanes=[];_b.enc_combo=undefined;_b.enc_combo_fired=false;_b.enc_sweep=undefined;
+    _b.enc_geometry=telegraph_make("sector",ox,oy,k.radius,k.warning,point_direction(ox,oy,pl.x,pl.y-10),k.span);
+    _b.dragon_melee_cd=m.cooldown;_b.dragon_close_t=0;
+    fg_sfx("dragon_charge");
+    dragon_state(_b,"windup",k.warning);
+    return true;
 }

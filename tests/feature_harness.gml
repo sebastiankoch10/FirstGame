@@ -81,13 +81,23 @@ function ft_controller_tick() {
             talent_grant(1);ft_check(!talent_invest(own) && talent_block_reason(own)=="Maximaler Rang erreicht","max rank enforced");
             // Talents persist between runs in the real game only (decision 25.11.2026); renamed test builds stay per run.
             ft_check(!talent_persistent(),"test build keeps talents per run (no ini side effects)");
+            // Slower meta progression: only main-boss points (and the ranks bought with them) survive a run.
+            ft_check(global.talent_spent_meta==1 && talent_rank_meta(own)==1,"the main-boss point was spent first and is permanent");
             global.talent_persist_override=true;file_delete(talent_config().save_file);
-            var keep_rank=talent_rank(own),keep_points=global.talent_points,keep_spent=global.talent_spent;
+            var keep_meta=talent_rank_meta(own),keep_mp=global.talent_points_meta,keep_ms=global.talent_spent_meta;
             talent_save();talent_reset_run();
-            ft_check(talent_rank(own)==keep_rank && global.talent_points==keep_points && global.talent_spent==keep_spent,"persistent talents survive a new run");
-            ft_check(talent_respec() && talent_rank(own)==0 && global.talent_spent==0 && global.talent_points==keep_points+keep_spent,"respec refunds every spent point");
-            talent_reset_run();ft_check(talent_rank(own)==0 && global.talent_points==keep_points+keep_spent,"respec is saved for the next run");
+            ft_check(talent_rank(own)==keep_meta && talent_rank(gated)==talent_rank_meta(gated) && global.talent_points==keep_mp && global.talent_spent==keep_ms,"only boss-point talents survive a new run");
+            ft_check(talent_respec() && talent_rank(own)==0 && global.talent_spent==0 && global.talent_points_meta==keep_mp+keep_ms,"respec refunds the permanent points");
+            talent_reset_run();ft_check(talent_rank(own)==0 && global.talent_points==keep_mp+keep_ms,"respec is saved for the next run");
             file_delete(talent_config().save_file);global.talent_persist_override=false;talent_reset_run();
+            // Weapon upgrades (cards in the level-up offer, decision 25.11.2026): level, damage hook, look tier, offer, cap.
+            weapon_upgrade_reset();var wkey=cls=="Mage" ? "mage_dmg_pct" : (cls=="Ranger" ? "ranger_dmg_pct" : "sword_dmg_pct"),w0=talent_stat(wkey);
+            ft_check(learn_spell(-2) && weapon_upgrade_level()==1 && talent_stat(wkey)>w0,"weapon upgrade card raises weapon level and damage hook");
+            ft_check(weapon_visual_tier()==1,"weapon look tier 1 at upgrade 1");learn_spell(-2);ft_check(weapon_visual_tier()==2,"weapon look tier 2 at upgrade 2");
+            var offered=false;repeat(40){spell_choices_v2("chest");for(var oi=0;oi<array_length(global.spell_options);oi++)if(global.spell_options[oi].id==-2)offered=true;global.game_paused=false;global.chest_collected=false;}
+            ft_check(offered,"weapon upgrade cards appear in the offers");
+            repeat(5)learn_spell(-2);ft_check(weapon_upgrade_level()==weapon_upgrade_max() && !learn_spell(-2),"weapon upgrades stop at level 5");
+            weapon_upgrade_reset();apply_passives(pl);
             global.ft_stage=3;global.ft_frame=0;break;
         case 3: // equipment
             var armor0=pl.armor_flat;

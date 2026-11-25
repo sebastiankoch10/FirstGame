@@ -12,7 +12,7 @@ function class_weapon_projectile(_pl,_dir,_damage,_ranger) {
     var shot=instance_create_layer(_pl.x+lengthdir_x(23,_dir),_pl.y-20+lengthdir_y(23,_dir),"Instances",ObjectLightningball);
     shot.owner=_pl;shot.direction=_dir;shot.image_angle=_dir;shot.damage=_damage+_pl.split_bonus;shot.spell_id=0;
     shot.projectile_kind=_ranger ? "bolt" : "wand";shot.projectile_speed=(_ranger ? 16 : 10)*_pl.projectile_factor;shot.lifetime=ceil(_pl.weapon.range*(variable_instance_exists(_pl,"weapon_range_mult") ? _pl.weapon_range_mult : 1)/shot.projectile_speed);shot.damage_radius=_ranger ? 5 : 10;
-    shot.class_weapon_v2=true;shot.class_tier=sword_visual_tier(global.current_level);return shot;
+    shot.class_weapon_v2=true;shot.class_tier=weapon_visual_tier();return shot;
 }
 function class_weapon_auto_step() {
     if(global.game_paused || hp<=0)return;
@@ -34,7 +34,7 @@ function class_weapon_auto_step() {
 function class_weapon_release(_pl,_step) {
     var mage=global.selected_character=="Mage",amount=round(_pl.weapon.damage+_pl.player_power*_pl.weapon.power_scale),tier=sword_visual_tier(global.current_level),radius;
     // Equipment weapon damage and class talents (neutral without gear / at rank 0).
-    amount=round(amount*(variable_instance_exists(_pl,"weapon_damage_mult") ? _pl.weapon_damage_mult : 1)*(mage ? 1 : 1+talent_stat("ranger_dmg_pct")));
+    amount=round(amount*(variable_instance_exists(_pl,"weapon_damage_mult") ? _pl.weapon_damage_mult : 1)*(mage ? 1+talent_stat("mage_dmg_pct") : 1+talent_stat("ranger_dmg_pct")));
     if(mage) {
         switch(_step) {
             case 1:class_weapon_projectile(_pl,_pl.attack_direction,amount,false);fg_sfx("mage_bolt");break;
@@ -94,7 +94,7 @@ function class_fx_sprite(_row,_progress,_x,_y,_radius,_angle=0,_alpha=1) {
 }
 function class_effects_draw() {
     if(!variable_global_exists("class_effects"))return;
-    var tier=sword_visual_tier(global.current_level);
+    var tier=weapon_visual_tier();
     for(var i=0;i<array_length(global.class_effects);i++) {
         var f=global.class_effects[i],p=f.age/f.duration;
         if(string_pos("burst",f.kind)==1) {if(f.kind=="burst3")draw_sprite_ext(spr_mage_star_implosion,min(3,2+floor(p*2)),f.x,f.y,f.radius*2/256,f.radius*2/256,0,c_white,1);else class_fx_sprite(real(string_delete(f.kind,1,5)),p,f.x,f.y,f.radius);continue;}
@@ -126,4 +126,47 @@ function class_effects_draw() {
         }
     }
     draw_set_alpha(1);draw_set_color(c_white);
+}
+
+// ---------------- Weapon upgrades (user decision 25.11.2026) ----------------
+/// Cards in the level-up/chest offer, five levels per class weapon, independent of the six spell slots.
+/// Each level adds a bundle on the existing weapon hooks (read through talent_stat). New, untested design values;
+/// see docs/Design/Progression & Builds.md. The weapon look (slash/projectile tiers) follows the upgrade level.
+function weapon_upgrade_levels(_cls) {
+    static data={
+        Sword:[{sword_dmg_pct:.08},{sword_dmg_pct:.08,sword_reach_pct:.05},{sword_dmg_pct:.08,haste:.04},{sword_dmg_pct:.08,sword_reach_pct:.05},{sword_dmg_pct:.08,haste:.04}],
+        Mage:[{mage_dmg_pct:.08},{mage_dmg_pct:.08,mage_star:.08},{mage_dmg_pct:.08,haste:.04},{mage_dmg_pct:.08,mage_star:.08},{mage_dmg_pct:.08,haste:.04}],
+        Ranger:[{ranger_dmg_pct:.07},{ranger_dmg_pct:.07,range_pct:.08},{ranger_dmg_pct:.07,haste:.04},{ranger_dmg_pct:.07,ranger_volley:1},{ranger_dmg_pct:.07,haste:.04}]
+    };
+    return variable_struct_exists(data,_cls) ? data[$ _cls] : data.Sword;
+}
+function weapon_upgrade_max() {return 5;}
+function weapon_upgrade_level() {return variable_global_exists("weapon_upgrade_level") ? global.weapon_upgrade_level : 0;}
+function weapon_upgrade_name() {var c=talent_class_key();return c=="Mage" ? "Sternenstab" : (c=="Ranger" ? "Jagdbogen" : "Klinge");}
+function weapon_upgrade_reset() {global.weapon_upgrade_level=0;global.weapon_upgrade_cache={};}
+function weapon_upgrade_stat(_key) {
+    if(!variable_global_exists("weapon_upgrade_cache"))return 0;
+    return variable_struct_exists(global.weapon_upgrade_cache,_key) ? global.weapon_upgrade_cache[$ _key] : 0;
+}
+function weapon_upgrade_rebuild() {
+    var c={},lv=weapon_upgrade_levels(talent_class_key());
+    for(var i=0;i<min(weapon_upgrade_level(),array_length(lv));i++){var k=variable_struct_get_names(lv[i]);for(var j=0;j<array_length(k);j++)c[$ k[j]]=(variable_struct_exists(c,k[j]) ? c[$ k[j]] : 0)+lv[i][$ k[j]];}
+    global.weapon_upgrade_cache=c;
+}
+function weapon_upgrade_take() {
+    if(weapon_upgrade_level()>=weapon_upgrade_max())return false;
+    global.weapon_upgrade_level=weapon_upgrade_level()+1;weapon_upgrade_rebuild();
+    if(instance_exists(ObjectPlayer))apply_passives(ObjectPlayer);
+    feedback_toast_add(weapon_upgrade_name()+" Stufe "+string(global.weapon_upgrade_level),make_color_rgb(242,206,120));
+    return true;
+}
+/// Visual tier 1-3 of the class weapon: follows the weapon's real progress (was the player level 1/34/68).
+function weapon_visual_tier() {var l=weapon_upgrade_level();return l>=4 ? 3 : (l>=2 ? 2 : 1);}
+/// Readable effect of level _level (1-5) for the card detail.
+function weapon_upgrade_text(_level) {
+    var lv=weapon_upgrade_levels(talent_class_key());if(_level<1 || _level>array_length(lv))return "";
+    var e=lv[_level-1],k=variable_struct_get_names(e),s="";
+    var names={sword_dmg_pct:"Schwertschaden",mage_dmg_pct:"Stabschaden",ranger_dmg_pct:"Pfeilschaden",sword_reach_pct:"Hiebreichweite",haste:"Angriffstempo",mage_star:"Sternenorb Radius und Schaden",range_pct:"Waffenreichweite",ranger_volley:"Pfeile je Salve"};
+    for(var i=0;i<array_length(k);i++){var v=e[$ k[i]];s+=(s=="" ? "" : "\n")+"+"+(k[i]=="ranger_volley" ? string(v) : string(round(v*100))+"%")+" "+(variable_struct_exists(names,k[i]) ? names[$ k[i]] : k[i]);}
+    return s;
 }

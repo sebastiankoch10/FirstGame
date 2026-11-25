@@ -12,6 +12,8 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from atlas import FRAME  # frame size of the drawn sprites (density 1:1)
+
 from morph import close, dilate, erode, fill_holes, hsv, hue_in, luma
 from segment import BG, CHEST, FEET, HAIR, HALO, HANDS, KEEP, LEGS, WEAPON
 
@@ -189,12 +191,12 @@ ARMOR = {
 def armor_layer(fr: Frame, region, slot, tier, kinds, light_bias=0.0):
     """Main + accent layer for one armour piece painted over `region`."""
     rgb = fr.rgba[..., :3]
-    main = np.zeros((96, 96, 4), np.uint8); acc = np.zeros((96, 96, 4), np.uint8)
+    main = np.zeros((FRAME, FRAME, 4), np.uint8); acc = np.zeros((FRAME, FRAME, 4), np.uint8)
     if not region.any():
         return main, acc
     rname, pat, contrast, glow = ARMOR[(slot, tier)]
     sh = material_shade(rgb, region, kinds)
-    yy, xx = np.mgrid[0:96, 0:96]
+    yy, xx = np.mgrid[0:FRAME, 0:FRAME]
     t = np.clip(.5 + (sh - .5) * contrast + pat(yy, xx) + light_bias, 0, 1)
     t[edge_dark(region, fr.rgba[..., 3] > 0)] *= .55
     cols = ramp(rname, t)
@@ -278,7 +280,7 @@ HELMS = {0: 'leather', 1: 'iron', 2: 'runesteel', 3: 'scale'}
 
 def helmet_layer(fr: Frame, tier, max_half_width=8.5, crown_frac=.62):
     """Fit a helmet dome over the hair down to the brow line; shade it as a sphere lit from the upper left."""
-    main = np.zeros((96, 96, 4), np.uint8); acc = np.zeros((96, 96, 4), np.uint8)
+    main = np.zeros((FRAME, FRAME, 4), np.uint8); acc = np.zeros((FRAME, FRAME, 4), np.uint8)
     hair = fr.lab == HAIR
     if hair.sum() < 6:
         return main, acc
@@ -286,7 +288,7 @@ def helmet_layer(fr: Frame, tier, max_half_width=8.5, crown_frac=.62):
     h, s, v = hsv(rgb)
     ys, xs = np.nonzero(hair)
     top = ys.min(); hb = ys.max()
-    rows = np.arange(96)[:, None]
+    rows = np.arange(FRAME)[:, None]
     # face skin only below the upper third of the hair mass (matte remnants above the hair are not skin)
     skin = (fr.lab == KEEP) & hue_in(h, 6, 34) & (s > .14) & (s < .58) & (v > .58) & (rows >= top + .3 * (hb - top)) & (rows <= hb + 3)
     skin &= dilate(hair, 2)
@@ -306,7 +308,7 @@ def helmet_layer(fr: Frame, tier, max_half_width=8.5, crown_frac=.62):
     k = np.percentile(np.sqrt(((ax - cx) / rx0) ** 2 + ((ay - cy) / ry0) ** 2), 97)
     k = float(np.clip(k, 1.0, 1.35))
     rx = min(max_half_width, rx0 * k); ry = min(ry0 * k, 1.05 * rx + 1.0)
-    yy, xx = np.mgrid[0:96, 0:96]
+    yy, xx = np.mgrid[0:FRAME, 0:FRAME]
     helm = (((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2 <= 1.0) & (yy <= brow)
     if helm.sum() < 6:
         return main, acc
@@ -354,7 +356,7 @@ def helmet_layer(fr: Frame, tier, max_half_width=8.5, crown_frac=.62):
             hyn = int(hy.min() + ry * .35)
             for k in range(2):
                 y0, x0 = hyn - k, hxn + sgn * (k + 1)
-                if 0 <= y0 < 96 and 0 <= x0 < 96 and not helm[y0, x0]:
+                if 0 <= y0 < FRAME and 0 <= x0 < FRAME and not helm[y0, x0]:
                     main[y0, x0] = (*RAMPS['bone'][4 - k], 255)
     return main, acc
 
@@ -368,7 +370,7 @@ def blade_coords(fr: Frame):
     if L < 3:
         return None
     u = d / L
-    yy, xx = np.mgrid[0:96, 0:96]
+    yy, xx = np.mgrid[0:FRAME, 0:FRAME]
     rel = np.stack([yy - yi, xx - xi], -1)
     along = rel @ u; across = rel @ np.array([-u[1], u[0]])
     return along, across, L, u
@@ -379,7 +381,7 @@ SWORDS = {0: 'iron', 1: 'steel', 2: 'runesteel', 3: 'bone'}
 
 def sword_layer(fr: Frame, tier):
     """tier None = start weapon (original pixels). Tiers 0..3 = Kurzschwert, Langschwert, Runenklinge, Drachenzahn."""
-    main = np.zeros((96, 96, 4), np.uint8); acc = np.zeros((96, 96, 4), np.uint8)
+    main = np.zeros((FRAME, FRAME, 4), np.uint8); acc = np.zeros((FRAME, FRAME, 4), np.uint8)
     W = fr.lab == WEAPON
     if not W.any():
         return main, acc
@@ -398,7 +400,7 @@ def sword_layer(fr: Frame, tier):
     else:
         along = across = None; L = 0; blade = W & ~guard
     sh = material_shade(rgb, W, sword_kinds)
-    yy, xx = np.mgrid[0:96, 0:96]
+    yy, xx = np.mgrid[0:FRAME, 0:FRAME]
     keep_blade = blade.copy()
     if tier == 0 and bc is not None:          # short sword: cut at 62 %, taper the new tip
         keep_blade &= along <= L * .62
@@ -443,7 +445,7 @@ def inpaint_nearest(rgba, holes, known):
             take = todo & src
             if take.any():
                 ys, xs = np.nonzero(take)
-                out[ys, xs] = out[(ys - dy) % 96, (xs - dx) % 96]
+                out[ys, xs] = out[(ys - dy) % FRAME, (xs - dx) % FRAME]
                 filled[ys, xs] = True; todo[ys, xs] = False
     return out, filled
 
@@ -467,7 +469,7 @@ def base_layer(fr: Frame, kinds):
     body = (out[..., 3] > 0) & ~W
     inside = W & fill_holes(close(body, 1))
     out[W & ~inside] = 0
-    lab_rgba = np.zeros((96, 96, 4), np.uint8); lab_rgba[..., 0] = lab; lab_rgba[..., 3] = 255
+    lab_rgba = np.zeros((FRAME, FRAME, 4), np.uint8); lab_rgba[..., 0] = lab; lab_rgba[..., 3] = 255
     out, _ = inpaint_nearest(out, inside, body)
     lab2, _ = inpaint_nearest(lab_rgba, inside, body)
     lab = np.where(W, lab2[..., 0], lab)
@@ -485,7 +487,7 @@ def base_layer(fr: Frame, kinds):
         if len(ys) < 12:
             out[ys, xs] = 0; lab[ys, xs] = BG
     rgb = out[..., :3]
-    yy, xx = np.mgrid[0:96, 0:96]
+    yy, xx = np.mgrid[0:FRAME, 0:FRAME]
     for reg, (rname, contrast) in BASE_CLOTHES[fr.actor].items():
         m = lab == reg
         if not m.any():
@@ -515,7 +517,7 @@ STAFFS = {0: ('oak', 'amber', 'bronze'), 1: ('silver', 'ice', 'silver'), 2: ('go
 
 def staff_layer(fr: Frame, tier):
     """Eichenstab / Kristallstab / Sternenzepter / Leerenfokus: shaft + crystal + ornament frame (accent)."""
-    main = np.zeros((96, 96, 4), np.uint8); acc = np.zeros((96, 96, 4), np.uint8)
+    main = np.zeros((FRAME, FRAME, 4), np.uint8); acc = np.zeros((FRAME, FRAME, 4), np.uint8)
     W = fr.lab == WEAPON
     if not W.any():
         return main, acc
@@ -523,7 +525,7 @@ def staff_layer(fr: Frame, tier):
         main[W] = fr.rgba[W]
         return main, acc
     rgb = fr.rgba[..., :3]; h, s, v = hsv(rgb)
-    yy, xx = np.mgrid[0:96, 0:96]
+    yy, xx = np.mgrid[0:FRAME, 0:FRAME]
     head = np.zeros_like(W)
     if fr.blade is not None:
         (yf, xf), (yh, xh) = fr.blade           # foot end, head end
@@ -539,7 +541,7 @@ def staff_layer(fr: Frame, tier):
     if tier == 2 and crystal.any():   # star sparkle in the crystal centre
         cy, cx = np.argwhere(crystal).mean(0).round().astype(int)
         for dy, dx in ((0, 0), (1, 0), (-1, 0), (0, 1), (0, -1)):
-            if 0 <= cy + dy < 96 and 0 <= cx + dx < 96 and W[cy + dy, cx + dx]:
+            if 0 <= cy + dy < FRAME and 0 <= cx + dx < FRAME and W[cy + dy, cx + dx]:
                 main[cy + dy, cx + dx, :3] = (255, 250, 220) if dy == 0 and dx == 0 else (255, 226, 140)
     if tier == 3 and crystal.any():   # dark void core
         cy, cx = np.argwhere(crystal).mean(0).round().astype(int)
@@ -556,7 +558,7 @@ BOWS = {0: ('oak', (236, 230, 214)), 1: ('darkwood', (230, 224, 206)), 2: ('moon
 
 def bow_layer(fr: Frame, tier):
     """Jagdbogen / Kompositbogen / Mondbogen / Sturmbogen: limbs re-materialised, string recoloured, grip = accent."""
-    main = np.zeros((96, 96, 4), np.uint8); acc = np.zeros((96, 96, 4), np.uint8)
+    main = np.zeros((FRAME, FRAME, 4), np.uint8); acc = np.zeros((FRAME, FRAME, 4), np.uint8)
     W = fr.lab == WEAPON
     if not W.any():
         return main, acc
@@ -564,7 +566,7 @@ def bow_layer(fr: Frame, tier):
         main[W] = fr.rgba[W]
         return main, acc
     rgb = fr.rgba[..., :3]; h, s, v = hsv(rgb)
-    yy, xx = np.mgrid[0:96, 0:96]
+    yy, xx = np.mgrid[0:FRAME, 0:FRAME]
     string = W & (s < .30) & (v > .62)
     limb = W & ~string
     sh = material_shade(rgb, W, ranger_kinds)

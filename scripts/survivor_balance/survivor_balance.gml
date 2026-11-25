@@ -49,6 +49,11 @@ function population_spawn_point(_side,_offset) {
     return {x:xx,y:yy};
 }
 function population_spawn_enemy(_x,_y) {
+    var e=population_spawn_enemy_base(_x,_y);
+    elite_try_make(e);
+    return e;
+}
+function population_spawn_enemy_base(_x,_y) {
     // Generated worlds use their own authored enemy pools on the unchanged population curve.
     if(room!=Room1 && level_generated())return level_enemy_spawn(_x,_y);
     var e=instance_create_layer(_x,_y,"Instances",ObjectMonster),elapsed=global.round_seconds;
@@ -78,6 +83,9 @@ function population_spawn_enemy(_x,_y) {
 }
 function population_step(_spawner,_dt) {
     if(global.game_paused || global.game_over || !instance_exists(ObjectPlayer)) return;
+    // The spawner owns elite hazards (bv2 needs an owner clock that outlives the elite).
+    if(!variable_instance_exists(_spawner,"v2_clock"))_spawner.v2_clock=0;
+    _spawner.v2_clock+=_dt;
     _spawner.population_timer-=_dt;
     // Track actual frame cadence; sustained slow frames lower the ceiling, not HP/XP.
     _spawner.frame_ms=lerp(_spawner.frame_ms,min(100,_dt*1000),0.04);
@@ -121,4 +129,70 @@ function population_spawn_safe(_x,_y) {
  if(scenery_point_blocked(_x,_y-6,12))return false;
  var blocker=instance_position(_x,_y,ObjectEnvironmentDecoration);
  return !instance_exists(blocker) || !blocker.blocks_movement;
+}
+
+// ---------------- Elite enemies (user decision 25.11.2026) ----------------
+/// From minute 3 every 60th spawned enemy becomes an elite (deterministic counter, no RNG: seeded runs stay comparable).
+/// All numbers are new, untested design values (docs/Design/Kampf & Begegnungen.md 7). Abilities use the shared
+/// bv2 hazards, so warning, countdown, hit and pause follow the same rules as boss attacks (G1).
+function elite_config() {
+    static c={from_seconds:180,every:60,hp_mult:3,damage_mult:1.25,scale_mult:1.2,drop_chance:.1,
+        leap_cooldown:5,leap_min:120,leap_max:360,leap_radius:70,leap_warning:.9,leap_damage_mult:1.6,
+        toxic_radius:85,toxic_warning:.6,toxic_active:3,toxic_damage_mult:.35};
+    return c;
+}
+function elite_try_make(_e) {
+    if(!instance_exists(_e) || !variable_global_exists("round_seconds") || global.round_seconds<elite_config().from_seconds)return;
+    if(!variable_global_exists("elite_counter"))global.elite_counter=0;
+    global.elite_counter++;
+    var c=elite_config();if(global.elite_counter mod c.every!=0)return;
+    _e.elite=true;_e.max_hp*=c.hp_mult;_e.hp=_e.max_hp;_e.damage*=c.damage_mult;_e.monster_scale*=c.scale_mult;
+    _e.elite_ability=(global.elite_counter div c.every) mod 2==0 ? "leap" : "toxic";
+    _e.elite_timer=c.leap_cooldown*.5;_e.elite_leap=undefined;
+}
+function elite_is(_e) {return variable_instance_exists(_e,"elite") && _e.elite;}
+function elite_owner() {return instance_exists(ObjectSpawner) ? instance_find(ObjectSpawner,0) : noone;}
+/// Returns true while the elite performs its leap (normal movement is suspended).
+function elite_step(_e,_dt) {
+    var c=elite_config(),own=elite_owner();if(!instance_exists(own) || !instance_exists(ObjectPlayer))return false;
+    if(is_struct(_e.elite_leap)) {
+        var L=_e.elite_leap;L.t+=_dt;var p=clamp(L.t/c.leap_warning,0,1);
+        _e.x=lerp(L.sx,L.tx,p);_e.y=lerp(L.sy,L.ty,p);
+        if(p>=1){_e.elite_leap=undefined;_e.elite_timer=c.leap_cooldown;spell_vfx_burst(_e.x,_e.y,40,5,1);}
+        return true;
+    }
+    if(_e.elite_ability!="leap")return false;
+    _e.elite_timer-=_dt;
+    var pl=ObjectPlayer,d=point_distance(_e.x,_e.y,pl.x,pl.y);
+    if(_e.elite_timer<=0 && d>=c.leap_min && d<=c.leap_max && combat_target_visible(_e)) {
+        // Target is fixed when the warning appears (Kampf & Begegnungen 5.5); a jump clears the ground wave.
+        bv2_zone(own,"elite_slam",pl.x,pl.y,c.leap_radius,c.leap_warning,.2,_e.damage*c.leap_damage_mult,"ground");
+        _e.elite_leap={sx:_e.x,sy:_e.y,tx:pl.x,ty:pl.y,t:0};fg_sfx("dodge");
+        return true;
+    }
+    return false;
+}
+/// Visual lift of a leaping elite (arc), used by the Draw event.
+function elite_lift(_e) {
+    if(!elite_is(_e) || !is_struct(_e.elite_leap))return 0;
+    return sin(pi*clamp(_e.elite_leap.t/elite_config().leap_warning,0,1))*56;
+}
+function elite_on_death(_e) {
+    var c=elite_config(),own=elite_owner();
+    if(_e.elite_ability=="toxic" && instance_exists(own)) {
+        var h=bv2_zone(own,"swamp_elite_acid",_e.x,_e.y,c.toxic_radius,c.toxic_warning,c.toxic_active,_e.damage*c.toxic_damage_mult,"all");
+        if(is_struct(h) && !h.expired){h.hit_once=false;h.interval=.5;}
+    }
+    // Better loot than a normal enemy: 10 % chance on gear, at least magic rarity.
+    if(variable_global_exists("equipment_drops") && !global.game_over && equipment_rng()<c.drop_chance)
+        equipment_drop(_e.x,_e.y,equipment_generate(equipment_random_slot(),equipment_rng()<.75 ? 1 : 2,equipment_item_level()));
+}
+/// Gold outline (flat-colour silhouette via fog) drawn under an elite, pulsing slightly.
+function elite_outline_draw(_e,_scale) {
+    if(!elite_is(_e))return;
+    var a=.55+.25*sin(current_time/180),col=make_color_rgb(255,206,96),sp=_e.sprite_index,fr=_e.image_index;
+    var hover=variable_instance_exists(_e,"lvl_hover") ? _e.lvl_hover*(1+sin(current_time/260+_e.lvl_weave_phase)*.25) : 0;   // same as enemy_draw
+    gpu_set_fog(true,col,0,1);
+    for(var i=0;i<4;i++)draw_sprite_ext(sp,fr,_e.x+lengthdir_x(2,i*90),_e.y-hover+lengthdir_y(2,i*90),_scale*_e.image_xscale,_scale*_e.image_yscale,0,c_white,a);
+    gpu_set_fog(false,c_black,0,0);
 }

@@ -63,6 +63,8 @@ function dragon_death_step(_b,_dt) {
 function dragon_animation(_b) {
     var action="idle",frame=0,age=_b.dragon_state_age;
     if(variable_instance_exists(_b,"bc_catch") && is_struct(_b.bc_catch) && !_b.dragon_dying)return {action:"leap",frame:clamp(floor(_b.bc_catch.age/max(.01,_b.bc_catch.warning)*4),0,3),sprite:asset_get_index("spr_fg_dragonextra_leap")};
+    // Close-range attacks use the idle frame family: there the rig has tail, neck and head bones.
+    if(!_b.dragon_dying && (_b.boss_cast=="tail" || _b.boss_cast=="bite") && (_b.boss_state=="windup" || _b.boss_state=="active"))return {action:"idle",frame:floor(_b.dragon_clock*4) mod 4,sprite:spr_fg_dragonboss_idle};
     if(!_b.dragon_dying && (_b.boss_state=="windup" || _b.boss_state=="active")) {
         var extra="",progress=_b.boss_state=="windup" ? age/max(.001,_b.enc_cfg.warning) : age/max(.001,_b.enc_cfg.active);
         switch(_b.boss_cast) {
@@ -162,6 +164,12 @@ function dragon_rig_pose(_b,_action) {
         }
         if(_b.boss_cast=="wind" && _b.boss_state=="active"){var f=sin(age*2*pi*3.5);p.wingL+=-14*f;p.wingR+=14*f;}
         if(_b.dragon_hit_age<0.18){var j=(1-_b.dragon_hit_age/.18);p.neck-=5*j;p.head-=6*j;p.tail2+=6*j;}
+        // Tail sweep: the tail lifts and coils (windup), then whips through (active). Bite: neck pulls back, then lunges.
+        if(_b.boss_cast=="tail" || _b.boss_cast=="bite") {
+            var w=_b.boss_state=="windup" ? clamp(age/max(.001,_b.enc_cfg.warning),0,1) : 1,s=_b.boss_state=="active" ? sin(pi*clamp(age/max(.001,_b.enc_cfg.active),0,1)) : 0;
+            if(_b.boss_cast=="tail"){p.tail1+=10*w-24*s;p.tail2+=20*w-38*s;p.wingL-=4*w;}
+            else {p.neck+=-9*w+16*s;p.head+=-11*w+18*s;p.wingL-=5*w;p.wingR+=5*w;}
+        }
     }
     return p;
 }

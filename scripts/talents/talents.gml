@@ -78,10 +78,15 @@ function talent_persistent() {
     if(variable_global_exists("talent_persist_override"))return global.talent_persist_override;
     return talent_config().persistent && game_project_name=="FirstGame";
 }
+/// Two pools (user decision 25.11.2026, slower meta progression): main-boss points are permanent ("meta"),
+/// level points only last for the current run. Investing uses meta points first, so progress is kept.
+/// talent_ranks = effective ranks (meta + run); talent_ranks_meta = the permanent part that is saved.
+function talent_rank_meta(_id) {return variable_global_exists("talent_ranks_meta") && variable_struct_exists(global.talent_ranks_meta,_id) ? global.talent_ranks_meta[$ _id] : 0;}
 /// Respec: all spent points of the current class (general + class tree) come back, ranks reset.
 function talent_respec() {
     if(global.talent_spent<=0)return false;
-    global.talent_points+=global.talent_spent;global.talent_spent=0;global.talent_ranks={};
+    global.talent_points+=global.talent_spent;global.talent_points_meta+=global.talent_spent_meta;
+    global.talent_spent=0;global.talent_spent_meta=0;global.talent_ranks={};global.talent_ranks_meta={};
     talent_rebuild_cache();
     if(talent_persistent())talent_save();
     if(instance_exists(ObjectPlayer))apply_passives(ObjectPlayer);
@@ -89,6 +94,8 @@ function talent_respec() {
 }
 function talent_reset_run() {
     global.talent_ranks={};global.talent_points=0;global.talent_spent=0;global.talent_earned=0;
+    global.talent_ranks_meta={};global.talent_points_meta=0;global.talent_spent_meta=0;
+    weapon_upgrade_reset();
     global.talent_menu_active=false;global.talent_hover="";global.talent_mouse_armed=false;global.talent_flash=0;
     global.talent_last_stand_used=false;global.talent_tab=0;
     if(talent_persistent())talent_load();
@@ -117,15 +124,17 @@ function talent_requirements_met(_id) {
 function talent_invest(_id) {
     if(talent_block_reason(_id)!="")return false;
     global.talent_ranks[$ _id]=talent_rank(_id)+1;global.talent_points--;global.talent_spent++;
+    if(global.talent_points_meta>0){global.talent_points_meta--;global.talent_spent_meta++;global.talent_ranks_meta[$ _id]=talent_rank_meta(_id)+1;}
     talent_rebuild_cache();
     if(talent_persistent())talent_save();
     if(instance_exists(ObjectPlayer))apply_passives(ObjectPlayer);
     return true;
 }
-function talent_grant(_amount,_reason="") {
+function talent_grant(_amount,_reason="",_meta=false) {
     if(_amount<=0)return;
     global.talent_points+=_amount;global.talent_earned+=_amount;global.talent_flash=3;
-    if(_reason!="")feedback_toast_add("+"+string(_amount)+" Talentpunkt"+(_amount>1 ? "e" : "")+" ("+_reason+") - [T]",make_color_rgb(242,206,120));
+    if(_meta)global.talent_points_meta+=_amount;
+    if(_reason!="")feedback_toast_add("+"+string(_amount)+" Talentpunkt"+(_amount>1 ? "e" : "")+(_meta && talent_persistent() ? " dauerhaft" : "")+" ("+_reason+") - [T]",make_color_rgb(242,206,120));
     if(talent_persistent())talent_save();
 }
 function talent_on_level(_level) {
@@ -134,7 +143,7 @@ function talent_on_level(_level) {
 }
 function talent_on_boss_defeated(_main) {
     var cfg=talent_config();
-    talent_grant(_main ? cfg.boss_points : cfg.miniboss_points,_main ? "Hauptboss" : "Miniboss");
+    talent_grant(_main ? cfg.boss_points : cfg.miniboss_points,_main ? "Hauptboss" : "Miniboss",_main);
 }
 /// Sum of rank * per-rank value for every node of the general tree and the current class tree.
 function talent_rebuild_cache() {
@@ -146,24 +155,27 @@ function talent_rebuild_cache() {
     }
     global.talent_cache=cache;
 }
+/// Talents plus weapon upgrades: both feed the same weapon hooks.
 function talent_stat(_key) {
-    if(!variable_global_exists("talent_cache"))return 0;
-    return variable_struct_exists(global.talent_cache,_key) ? global.talent_cache[$ _key] : 0;
+    if(!variable_global_exists("talent_cache"))return weapon_upgrade_stat(_key);
+    return (variable_struct_exists(global.talent_cache,_key) ? global.talent_cache[$ _key] : 0)+weapon_upgrade_stat(_key);
 }
 function talent_save() {
     var cfg=talent_config(),cls=talent_class_key();
     ini_open(cfg.save_file);
-    ini_write_real(cls,"points",global.talent_points);ini_write_real(cls,"earned",global.talent_earned);ini_write_real(cls,"spent",global.talent_spent);
+    // Only the permanent (main boss) pool is saved; keys are prefixed so older files are not misread.
+    ini_write_real(cls,"meta_points",global.talent_points_meta);ini_write_real(cls,"meta_spent",global.talent_spent_meta);
     var defs=talent_definitions();
-    for(var i=0;i<array_length(defs);i++)if(talent_applies(defs[i]))ini_write_real(cls,defs[i].id,talent_rank(defs[i].id));
+    for(var i=0;i<array_length(defs);i++)if(talent_applies(defs[i]))ini_write_real(cls,"m_"+defs[i].id,talent_rank_meta(defs[i].id));
     ini_close();
 }
 function talent_load() {
     var cfg=talent_config(),cls=talent_class_key();
     ini_open(cfg.save_file);
-    global.talent_points=ini_read_real(cls,"points",0);global.talent_earned=ini_read_real(cls,"earned",0);global.talent_spent=ini_read_real(cls,"spent",0);
+    global.talent_points_meta=ini_read_real(cls,"meta_points",0);global.talent_spent_meta=ini_read_real(cls,"meta_spent",0);
+    global.talent_points=global.talent_points_meta;global.talent_spent=global.talent_spent_meta;
     var defs=talent_definitions();
-    for(var i=0;i<array_length(defs);i++)if(talent_applies(defs[i])){var r=clamp(ini_read_real(cls,defs[i].id,0),0,defs[i].max);if(r>0)global.talent_ranks[$ defs[i].id]=r;}
+    for(var i=0;i<array_length(defs);i++)if(talent_applies(defs[i])){var r=clamp(ini_read_real(cls,"m_"+defs[i].id,0),0,defs[i].max);if(r>0){global.talent_ranks[$ defs[i].id]=r;global.talent_ranks_meta[$ defs[i].id]=r;}}
     ini_close();
 }
 /// Readable effect text: {key} is replaced with rank * value (percent keys as percentages).
@@ -272,7 +284,7 @@ function talent_menu_draw() {
     draw_set_color(make_color_rgb(170,186,199));draw_text(L.margin+150,22,cls_name+" | Stufe "+string(global.current_level));
     var pts=global.talent_points;
     draw_set_halign(fa_right);draw_set_color(pts>0 ? merge_color(make_color_rgb(242,206,120),c_white,.25+.25*sin(t*5)) : make_color_rgb(140,152,166));
-    draw_text_transformed(L.w-L.margin,18,"Talentpunkte: "+string(pts),1.15,1.15,0);draw_set_halign(fa_left);
+    draw_text_transformed(L.w-L.margin,18,"Talentpunkte: "+string(pts)+(talent_persistent() ? "  (dauerhaft: "+string(global.talent_points_meta)+")" : ""),1.15,1.15,0);draw_set_halign(fa_left);
     equipment_panel_draw(L);
     var trees=["general",cls];
     for(var tr=0;tr<2;tr++) {
@@ -302,7 +314,7 @@ function talent_menu_draw() {
     draw_set_halign(fa_center);draw_set_valign(fa_middle);draw_set_color(c_white);draw_text(L.close_x+L.close_w/2,L.close_y+L.close_h/2,"Zurueck  [T / Esc]");
     draw_set_halign(fa_left);draw_set_valign(fa_middle);draw_set_color(make_color_rgb(128,141,155));
     var cfg=talent_config();
-    draw_text_transformed(L.margin,L.close_y+L.close_h/2,"Talentpunkte: ab Stufe "+string(cfg.first_point_level)+" alle "+string(cfg.level_interval)+" Stufen und je Hauptboss. Linksklick investiert."+(talent_persistent() ? " Talente bleiben zwischen Runs erhalten. [R] zuruecksetzen." : " [R] zuruecksetzen."),.8,.8,0);
+    draw_text_transformed(L.margin,L.close_y+L.close_h/2,"Talentpunkte: ab Stufe "+string(cfg.first_point_level)+" alle "+string(cfg.level_interval)+" Stufen und je Hauptboss. Linksklick investiert."+(talent_persistent() ? " Dauerhaft bleiben nur Talente aus Hauptboss-Punkten. [R] zuruecksetzen." : " [R] zuruecksetzen."),.8,.8,0);
     draw_set_valign(fa_top);
     if(global.talent_hover!="")talent_tooltip_draw(L,talent_find(global.talent_hover));
     else equipment_tooltip_draw(L);

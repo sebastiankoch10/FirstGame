@@ -136,12 +136,18 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
   - Gegner mit eigenem Angriff kündigen ihn über den Körper an (kurzes Ausholen).
 - **Lesbarkeit:** Statuseffekte bleiben in der Silhouette des Monsters. Die Grundfarbe bleibt erkennbar (Auftrag 22.11.).
 
-### Elitegegner
-**Vorschlag, noch nicht im Spiel:** ein normaler Gegnertyp mit einer zusätzlichen, gut lesbaren Mechanik:
-- z. B. ein angekündigter Sprungangriff oder eine kleine Fläche beim Tod;
-- dazu eine klare visuelle Markierung (Silhouettenrand, Größe, Aura) und ein eigener Ton-Cue.
-- Elitegegner nutzen dieselben Warnregeln wie Bosse.
-- **Offen:** Ob und wann sie kommen, entscheidet der Nutzer (Roadmap).
+### Elitegegner (Nutzerentscheidung 25.11., umgesetzt)
+- **Auftreten:** Ab Minute 3 wird **jeder 60. neue Gegner** zur Elite (fester Zähler statt Zufall, Simulationen bleiben vergleichbar). Das gilt für alle Level.
+- **Werte (neue, ungetestete Designwerte, `elite_config` in `scripts/survivor_balance`):**
+  - 3-fache Lebenspunkte;
+  - 1,25-facher Schaden;
+  - 1,2-fache Größe;
+  - 10 % Chance auf Ausrüstung, mindestens magisch.
+- **Erkennbarkeit:** goldener, pulsierender Silhouettenrand (Fog-Umriss).
+- **Fähigkeit,** abwechselnd eine von zwei:
+  - **Sprungangriff:** In 120–360 px Abstand wird ein Zielkreis (70 px) auf deine Position angekündigt (0,9 s). Die Elite springt im Bogen dorthin; bei der Landung entsteht eine Bodenwelle, die ein Sprung überwindet. Danach 5 s Pause.
+  - **Giftfläche beim Tod:** Ein Kreis (85 px) wird 0,6 s angekündigt und bleibt 3 s giftig.
+- **Technik:** Beides läuft über das gemeinsame bv2-Gefahrensystem mit denselben Warn-, Treffer- und Pausenregeln wie bei Bossen. Uhrgeber ist der Spawner.
 
 ### Minibosse
 - **Zeitplan:** Minute 1 und 3.

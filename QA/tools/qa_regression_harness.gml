@@ -59,7 +59,7 @@ function qr_states_choices(){
     global.coins=global.coins_needed;global.next_levelup_time=0;qr_controller_production();
     bt_check(global.current_level==2 && global.levelup_active && global.game_paused,"Actual earned XP triggers level-up and pauses");
     var options=global.spell_options;qr_input();qr_controller_production();var ui=spell_ui_layout();global.qr_gui_x=ui.x+20;global.qr_gui_y=ui.y+20;global.qr_mouse_down=true;global.qr_mouse_clicked=true;qr_controller_production();
-    bt_check(!global.game_paused && !global.levelup_active && spell_level(options[0].id)==1,"Actual choice-card click learns only the selected offered skill and resumes");
+    bt_check(!global.game_paused && !global.levelup_active && (options[0].id==-2 ? weapon_upgrade_level()==1 : spell_level(options[0].id)==1),"Actual choice-card click learns only the selected offered skill and resumes");
     bt_check(pl.menu_input_guard==1 && !pl.mouse_move_armed,"Choice confirmation restores movement input guard");
     for(var k=0;k<3;k++){
         global.selected_character=["Sword","Mage","Ranger"][k];reset_round();qr_input();

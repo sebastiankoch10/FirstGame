@@ -33,9 +33,14 @@ Rang 2 unter [[Leitbild]]. Technik: [[Talente]], [[Ausrüstung]], [[Zauber & Pas
   - **[R]** im Charakterbildschirm setzt alle Talente der Klasse zurück und erstattet die Punkte.
   - Gilt nur im echten Spiel; umbenannte Test- und Simulationsbuilds bleiben pro Run, damit Tests und Bot-Statistiken reproduzierbar sind.
   - **Balancing-Hinweis (Empfehlung, nichts geändert):** Mit den heutigen Punktequellen (ab Stufe 4 alle 4 Stufen plus Hauptbosse) ist der Klassenbaum nach etwa 2–3 erfolgreichen Runs voll. Für eine längere Meta-Progression wären eigene, seltenere Meta-Punkte nötig. Das ist eine Zahlenentscheidung für den Nutzer.
-- **Waffen-Upgrade-System** (Auftrag 22.11.):
-  - Die Klassenwaffen sollen später unabhängig von den sechs Zaubern aufgewertet werden können: Schaden, Tempo, Reichweite, Projektilzahl, Schlaggröße, Durchschlag, Zusatzeffekte.
-  - **Offen:** noch nicht umgesetzt. Die Architektur muss es zulassen.
+- **Waffen-Upgrade-System** (Auftrag 22.11., Nutzerentscheidung 25.11.: Karten in der Level-up-Auswahl, umgesetzt):
+  - Goldene „WAFFE“-Karten erscheinen in Level-up- und Truhenauswahl neben den Zaubern. Sie belegen keinen Zauberplatz; es gibt 5 Stufen je Klassenwaffe.
+  - **Je Stufe** (neue, ungetestete Designwerte, `weapon_upgrade_levels` in `scripts/class_weapons`):
+    - Klinge: +8 % Schwertschaden; Stufe 2/4 +5 % Hiebreichweite; Stufe 3/5 +4 % Tempo.
+    - Sternenstab: +8 % Stabschaden; Stufe 2/4 +8 % Sternenorb; Stufe 3/5 +4 % Tempo.
+    - Jagdbogen: +7 % Pfeilschaden; Stufe 2 +8 % Reichweite; Stufe 3/5 +4 % Tempo; Stufe 4 +1 Pfeil je Salve.
+  - Die Upgrades wirken über dieselben Hooks wie die Talente (`talent_stat` addiert beide).
+  - **Waffenoptik** folgt jetzt der Upgradestufe (Stufe 2 und 4) statt der Spielerstufe 34/68.
 - **Mechanische und visuelle Progression gehören zusammen:**
   - Jede mechanische Stufe hat eine erkennbare, aber verdiente visuelle Entsprechung.
   - Qualitative Veränderungen (neue Phasen, Projektiltypen, Verkettungen, Elemente, Ton) sind ebenso Progression wie Größe.

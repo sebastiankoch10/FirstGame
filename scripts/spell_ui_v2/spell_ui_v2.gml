@@ -97,10 +97,16 @@ function spell_choices_draw() {
         spell_ui_panel(ui.x,yy,ui.w,ui.row,i==global.selected_spell_index);
         draw_set_color(color);draw_rectangle(ui.x,yy,ui.x+4,yy+ui.row,false);spell_ui_icon(e.id,ui.x+12,yy+14,40);
         draw_set_color(c_white);draw_text_ext_transformed(ui.x+64,yy+7,e.name,18,(ui.w-74)/.92,.92,.92,0);
-        draw_set_color(color);draw_text_transformed(ui.x+64,yy+29,e.type=="active" ? "AKTIV" : (e.type=="passive" ? "PASSIV" : "VOLLSTAENDIG"),.8,.8,0);
+        draw_set_color(color);draw_text_transformed(ui.x+64,yy+29,e.type=="active" ? "AKTIV" : (e.type=="passive" ? "PASSIV" : (e.type=="weapon" ? "KLASSENWAFFE" : "VOLLSTAENDIG")),.8,.8,0);
         draw_set_color(e.level>0 ? make_color_rgb(242,202,110) : color);draw_text_transformed(ui.x+64,yy+49,spell_choice_badge(e),.8,.8,0);
-        if(e.id>0)draw_text_transformed(ui.x+140,yy+49,"Stufe "+string(e.level)+" -> "+string(e.level+1),.8,.8,0);
+        if(e.id>0 || e.id==-2)draw_text_transformed(ui.x+140,yy+49,"Stufe "+string(e.level)+" -> "+string(e.level+1),.8,.8,0);
     }
-    if(array_length(global.spell_options)>0){var e=global.spell_options[global.selected_spell_index];if(e.id>0)spell_detail_draw(e.id,e.level+1,ui.tx,ui.ty,ui.tw,ui.bottom,true);}
+    if(array_length(global.spell_options)>0){var e=global.spell_options[global.selected_spell_index];if(e.id>0)spell_detail_draw(e.id,e.level+1,ui.tx,ui.ty,ui.tw,ui.bottom,true);else if(e.id==-2)weapon_upgrade_detail_draw(e,ui);}
     draw_set_color(c_white);
+}
+/// Detail panel of a weapon upgrade card.
+function weapon_upgrade_detail_draw(_e,_ui) {
+    spell_ui_panel(_ui.tx,_ui.ty,_ui.tw,190,false);
+    draw_set_color(make_color_rgb(242,196,96));draw_text(_ui.tx+14,_ui.ty+12,_e.name+" - Stufe "+string(_e.level+1)+" / "+string(weapon_upgrade_max()));
+    draw_set_color(c_white);draw_text_ext(_ui.tx+14,_ui.ty+44,weapon_upgrade_text(_e.level+1)+"\n\nBelegt keinen Zauberplatz. Die Waffe sieht ab Stufe 2 und 4 maechtiger aus.",20,_ui.tw-28);
 }

@@ -53,7 +53,7 @@ function master_slash_draw() {
     var spr=player_artpack_sprite("spr_master_slash_"+string(combo_stage));
     var frame=min(sprite_get_number(spr)-1,floor(progress*sprite_get_number(spr)));
     var alpha=clamp(lifetime/3,0,1),scale=hit_radius/112;
-    var tier=sword_visual_tier(global.current_level);
+    var tier=weapon_visual_tier();
     gpu_set_blendmode(bm_add);
     draw_sprite_ext(spr,frame,x,y,scale,scale,direction,c_white,alpha*(tier==1 ? .28 : (tier==2 ? .62 : .9)));
     if(tier==3)draw_sprite_ext(spr,frame,x,y,scale,scale,direction+4,make_color_rgb(255,212,116),alpha*.25);
