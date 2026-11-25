@@ -366,8 +366,8 @@ function bv2_actor_draw(_b,_ice=false) {
     // draw_sprite_ext wraps excess indices, which replayed hurt frame 0 at the end.
     var draw_frame=(a.action=="hurt" || a.action=="death") ? clamp(a.frame,0,sprite_get_number(spr)-1) : a.frame;
     var hover=twin ? (_ice ? _b.v2_other_hover : _b.v2_hover) : 0,scale=twin ? 135/90 : 340/430;
-    // Behemoth frames baked at in-game size (tests/tools/bosses/build_boss_baked.py): drawn 1:1, rig bones scaled.
-    var baked=twin ? -1 : asset_get_index("spr_bv2b_behemoth_"+a.action),bk=1;
+    // Behemoth and witch frames baked at in-game size (tests/tools/bosses/build_boss_baked.py): drawn 1:1, rig bones scaled.
+    var baked=asset_get_index(twin ? (_ice ? "spr_bv2b_ice_" : "spr_bv2b_fire_")+a.action : "spr_bv2b_behemoth_"+a.action),bk=1;
     if(sprite_exists(baked)){bk=scale;spr=baked;scale=1;draw_frame=min(draw_frame,sprite_get_number(spr)-1);}
     var face=_ice ? _b.v2_other_facing : _b.v2_facing,alpha=_b.hp<=0 ? clamp(1-_b.v2_state_age/1.5,0,1) : 1;
     if(variable_instance_exists(_b,"bc_alpha"))alpha*=_b.bc_alpha;
@@ -375,7 +375,7 @@ function bv2_actor_draw(_b,_ice=false) {
     if(level_world_room())master_shadow_draw(actor.x,actor.y,twin ? 30 : 120,twin ? 9 : 28,twin ? .22 : .38);
     var col=_b.hurt_flash_timer>0 ? make_color_rgb(255,205,196) : c_white,sy=bk!=1 ? 1 : scale*(1+sin(_b.v2_clock*2.1)*.006);
     // Body rig (docs/Design/Boss-Design.md G2): flapping hat and cloak for the witches, heavy wobble for the behemoth.
-    if(BV2_RIG_ENABLED && vfx_secondary_motion() && a.action!="death")rig_draw_frame(spr,draw_frame,bk!=1 ? rig_bones_scaled(bv2_rig_bones(twin),bk,"behemoth_b") : bv2_rig_bones(twin),bv2_rig_pose(_b,_ice,twin),twin ? "witch" : (bk!=1 ? "behemoth_b" : "behemoth"),twin ? -1 : 455*bk,round(actor.x),round(actor.y-hover),scale*face,sy,col,alpha,twin ? 8 : round(24*bk));
+    if(BV2_RIG_ENABLED && vfx_secondary_motion() && a.action!="death")rig_draw_frame(spr,draw_frame,bk!=1 ? rig_bones_scaled(bv2_rig_bones(twin),bk,twin ? "witch_b" : "behemoth_b") : bv2_rig_bones(twin),bv2_rig_pose(_b,_ice,twin),(twin ? "witch" : "behemoth")+(bk!=1 ? "_b" : ""),twin ? -1 : 455*bk,round(actor.x),round(actor.y-hover),scale*face,sy,col,alpha,round((twin ? 8 : 24)*bk));
     else draw_sprite_ext(spr,draw_frame,round(actor.x),round(actor.y-hover),scale*face,sy,0,col,alpha);
     if(twin && _b.hp>0){var col=_ice ? make_color_rgb(118,210,255) : make_color_rgb(255,134,70);draw_set_color(col);draw_set_alpha(.55);for(var i=0;i<3;i++){var phase=frac(_b.v2_clock*.6+i*.33);draw_circle(actor.x+sin(_b.v2_clock*2+i)*15,actor.y-hover+10+phase*28,2*(1-phase),false);}}
     draw_set_alpha(1);draw_set_color(c_white);

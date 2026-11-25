@@ -22,7 +22,6 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
 - **Test-Flake:** `run_level_smoke.py` lieferte unter paralleler CPU-Last einmal 165/166. → [[Tests & QA]]
 - **`run_combat_smoke.py` veraltet** (FAIL schon vor 2026-11-24). → [[Tests & QA]]
 - **Noch gemalte, skaliert gezeichnete Effekte:** `dragon_fx_sprite` (Meteor, Wirbel, Bodeneinschlag, Flügelsturm, Magma), `spr_bv2_twins_fx_*`/`spr_bv2_swamp_fx_*`, Projektile der Hexen. Im Weltraster wirken sie unscharf; als Pixel-Komposite nachbauen wie Feueratem und Feuerkegel. → [[Licht, Wetter & Effekte]]
-- **Zwillingshexen werden 1,5-fach hochskaliert** (128-px-Frames, `bv2_actor_draw`), das verletzt Q1. Die Frames wurden beim Import einzeln zugeschnitten; zum Neubacken aus `sources/fire.png`/`ice.png` (Zellen 221,75 px) muss die Ausrichtung je Frame rekonstruiert werden (Unterkante bei y=116). → [[Bosse]]
 - **Schrift im Weltraum:** „MAGNET“ über Magnetkugeln nutzt noch die Standardschrift (nur Ziffern haben eine Pixelschrift). → [[Rendering & Pixelraster]]
 - **Drachenkopf bei steilen Winkeln:** Die Kopfansichten entstehen durch Drehen der Seitenansicht; nach unten gerichtet wirkt der Kopf flach. Besser: eigene Draufsicht-Variante des Kopfes. → [[Bosse]]
 - **`docs/ai-activity.log`** wächst mit jedem Stop-Hook-Lauf. Gelegentlich kürzen; prüfen, ob die Datei in die `.gitignore` gehört. → [[SETUP_REPORT]]
