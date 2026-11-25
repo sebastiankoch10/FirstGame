@@ -3,33 +3,33 @@
   "checks": 141.0,
   "failures": [],
   "metrics": {
-    "storm_warden_kite_mean_distance": 543.3629777131257,
+    "twins_kite_mean_distance": 476.94592196853074,
+    "twins_natural_catchups": 0.0,
+    "twins_kite_contacts": 3.0,
+    "twins_kite_reach": 16.0,
+    "twins_catchups": 1.0,
+    "storm_warden_kite_mean_distance": 543.3785255036531,
     "storm_warden_natural_catchups": 2.0,
     "storm_warden_kite_contacts": 2.0,
-    "storm_warden_kite_reach": 23.0,
+    "storm_warden_kite_reach": 24.0,
     "storm_warden_catchups": 2.0,
-    "behemoth_kite_mean_distance": 532.9016208676939,
+    "behemoth_kite_mean_distance": 532.9013080173069,
     "behemoth_natural_catchups": 2.0,
-    "behemoth_kite_contacts": 2.0,
-    "behemoth_kite_reach": 16.0,
-    "behemoth_catchups": 2.0,
     "behemoth_oracle_contacts": 10.0,
+    "behemoth_kite_contacts": 2.0,
     "behemoth_cases": 18.0,
+    "behemoth_kite_reach": 16.0,
     "storm_warden_oracle_contacts": 3.0,
     "behemoth_cases_with_movement": 13.0,
-    "storm_warden_cases": 18.0,
+    "behemoth_catchups": 2.0,
     "behemoth_hazard_cases": 17.0,
+    "storm_warden_cases": 18.0,
     "storm_warden_cases_with_movement": 5.0,
     "storm_warden_hazard_cases": 5.0,
     "twins_oracle_contacts": 5.0,
     "twins_cases": 18.0,
     "twins_cases_with_movement": 10.0,
-    "twins_hazard_cases": 17.0,
-    "twins_kite_mean_distance": 476.576450659434,
-    "twins_natural_catchups": 0.0,
-    "twins_kite_contacts": 3.0,
-    "twins_kite_reach": 15.0,
-    "twins_catchups": 1.0
+    "twins_hazard_cases": 17.0
   },
   "rows": [
     {
@@ -72,7 +72,7 @@
       "unsafe_frames": 0.0,
       "frames": 390.0,
       "hazards": 15.0,
-      "moved": 205.0,
+      "moved": 206.0,
       "max_beam": 0.0,
       "start_unsafe": true,
       "max_line": 0.0,
@@ -98,7 +98,7 @@
       "unsafe_frames": 0.0,
       "frames": 390.0,
       "hazards": 75.0,
-      "moved": 172.0,
+      "moved": 171.0,
       "max_beam": 0.0,
       "start_unsafe": false,
       "max_line": 118.0,
@@ -271,7 +271,7 @@
       "moved": 0.0,
       "max_beam": 0.0,
       "start_unsafe": false,
-      "max_line": 282.0729675292969,
+      "max_line": 282.07269287109375,
       "kinds": [],
       "label": "twins A1 P3",
       "contacts": 0.0
@@ -331,7 +331,7 @@
       "moved": 61.0,
       "max_beam": 0.0,
       "start_unsafe": false,
-      "max_line": 436.3605041503906,
+      "max_line": 436.4075927734375,
       "kinds": [
         "twins_link"
       ],
@@ -345,7 +345,7 @@
       "moved": 54.0,
       "max_beam": 0.0,
       "start_unsafe": false,
-      "max_line": 392.8299560546875,
+      "max_line": 392.22039794921875,
       "kinds": [
         "twins_link"
       ],
@@ -392,7 +392,7 @@
       "unsafe_frames": 0.0,
       "frames": 390.0,
       "hazards": 12.0,
-      "moved": 128.0,
+      "moved": 129.0,
       "max_beam": 0.0,
       "start_unsafe": false,
       "max_line": 2600.0,
@@ -715,7 +715,7 @@
       ],
       "label": "storm_warden kite 560px",
       "contacts": 2.0,
-      "reach": 23.0,
+      "reach": 24.0,
       "forced_catchup": false
     },
     {
@@ -735,7 +735,7 @@
       ],
       "label": "twins kite 560px",
       "contacts": 3.0,
-      "reach": 15.0,
+      "reach": 16.0,
       "forced_catchup": true
     },
     {
@@ -761,7 +761,7 @@
     }
   ],
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\boss\\20261125-163041",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\boss\\20261125-184806",
   "exceptions": [],
   "captures": [
     "behemoth-A2-P3.png",

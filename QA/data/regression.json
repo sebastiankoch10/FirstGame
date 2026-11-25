@@ -34,44 +34,6 @@
       "storm_warden",
       "behemoth"
     ],
-    "behemoth_abilities": [
-      {
-        "ability": 1.0,
-        "damage": 34.19999999999709
-      },
-      {
-        "ability": 2.0,
-        "damage": 15.19999999999709
-      },
-      {
-        "ability": 3.0,
-        "damage": 32.30000000000291
-      },
-      {
-        "ability": 4.0,
-        "damage": 51.30000000000291
-      },
-      {
-        "ability": 5.0,
-        "damage": 64.60000000000582
-      },
-      {
-        "ability": 6.0,
-        "damage": 13.30000000000291
-      },
-      {
-        "ability": 7.0,
-        "damage": 34.19999999999709
-      },
-      {
-        "ability": 8.0,
-        "damage": 53.19999999999709
-      },
-      {
-        "ability": 9.0,
-        "damage": 57.0
-      }
-    ],
     "sword_combo": [
       11.0,
       13.0,
@@ -316,8 +278,8 @@
     "performance": {
       "frames": 60.0,
       "enemies": 150.0,
-      "mean_frame_ms": 16.667833333333334,
-      "max_frame_ms": 17.184,
+      "mean_frame_ms": 16.668916666666668,
+      "max_frame_ms": 18.778,
       "measurement": "Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement."
     },
     "twins_abilities": [
@@ -357,12 +319,50 @@
         "ability": 9.0,
         "damage": 76.0
       }
+    ],
+    "behemoth_abilities": [
+      {
+        "ability": 1.0,
+        "damage": 34.19999999999709
+      },
+      {
+        "ability": 2.0,
+        "damage": 15.19999999999709
+      },
+      {
+        "ability": 3.0,
+        "damage": 32.30000000000291
+      },
+      {
+        "ability": 4.0,
+        "damage": 51.30000000000291
+      },
+      {
+        "ability": 5.0,
+        "damage": 64.60000000000582
+      },
+      {
+        "ability": 6.0,
+        "damage": 13.30000000000291
+      },
+      {
+        "ability": 7.0,
+        "damage": 34.19999999999709
+      },
+      {
+        "ability": 8.0,
+        "damage": 53.19999999999709
+      },
+      {
+        "ability": 9.0,
+        "damage": 57.0
+      }
     ]
   },
   "scope": "Current production functions and input-injected actual Player/Controller Steps in isolated native runner. Targeted regressions and short rendered150-enemy stress fixture; not full runs or human playtests.",
   "passed": true,
   "exit_code": 0,
-  "logs": "QA\\logs\\regression-20261125-162654",
+  "logs": "QA\\logs\\regression-20261125-184400",
   "screenshots": [
     "qacapture-crowd150-heavy-rain.png",
     "qacapture-hud-full-build-1280.png",

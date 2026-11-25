@@ -235,7 +235,7 @@ function menu_activate(_choice) {
         reset_round();
         room_goto(level_room(global.selected_level));
     } else if (menu_mode=="settings") {
-        if (_choice==0) window_set_fullscreen(!window_get_fullscreen());
+        if (_choice==0) render_set_fullscreen(!window_get_fullscreen());
         if (_choice>=1 && _choice<=3) {var volume_keys=["master_volume","music_volume","effects_volume"]; fg_audio_cycle_volume(volume_keys[_choice-1]);}
         if (_choice==4) fg_audio_toggle_background();
         if (_choice==5) vfx_quality_cycle();
@@ -255,7 +255,7 @@ function round_menu_labels() {
 function round_menu_activate(_choice) {
     fg_sfx("ui_click");
     if (global.settings_active && !global.game_over) {
-        if (_choice==0) window_set_fullscreen(!window_get_fullscreen());
+        if (_choice==0) render_set_fullscreen(!window_get_fullscreen());
         if (_choice>=1 && _choice<=3) {var volume_keys=["master_volume","music_volume","effects_volume"]; fg_audio_cycle_volume(volume_keys[_choice-1]);}
         if (_choice==4) fg_audio_toggle_background();
         if (_choice==5) vfx_quality_cycle();

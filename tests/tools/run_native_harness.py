@@ -30,6 +30,8 @@ SUITES = {
     'boss': ('tests/boss_harness.gml', 'bh', 'BOSSMECH', 'FirstGameBossMech', 3000),
     'visual': ('tests/visual_harness.gml', 'vh', 'VISUAL', 'FirstGameVisual', 900),
 }
+# Extra (regex, replacement) pairs applied to every GML file of the copy; used by record_scene.py for a fixed frame time.
+EXTRA_REPLACEMENTS: list[tuple[str, str]] = []
 
 
 def write(p, s):
@@ -66,6 +68,8 @@ def main():
         code = re.sub(r'\bmouse_x\b', 'gp_mouse_x()', code)
         code = re.sub(r'\bmouse_y\b', 'gp_mouse_y()', code)
         code = code.replace('show_error(', f'{px}_show_error(')
+        for pattern, repl in EXTRA_REPLACEMENTS:
+            code = re.sub(pattern, repl, code)
         write(path, code)
     runner = GameMakerRunner(project, runtime_version='2024.14.4.268')
     igor = runner.find_gamemaker_runtime(); lic = runner.find_license_file()
@@ -106,7 +110,7 @@ def main():
         if save.is_dir() and save != work:
             for c in save.rglob(f'{px}capture-*.png'):
                 if c.stat().st_mtime >= started:
-                    shutil.copyfile(c, work / c.name.removeprefix(f'{px}capture-'))
+                    shutil.move(c, work / c.name.removeprefix(f'{px}capture-'))  # move: no copies pile up in the save folder
     if result is None:
         result = {'passed': False, 'checks': 0, 'failures': fails, 'error': f'no {tag}_RESULT'}
     result.update(exit_code=code, logs=str(work), exceptions=exc[:5], captures=sorted(p.name for p in work.glob('*.png')),

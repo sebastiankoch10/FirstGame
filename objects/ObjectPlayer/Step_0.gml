@@ -110,4 +110,4 @@ if (sprite_exists(visual_sprite_index)) {
 
 var camera_x = clamp(x - VIEW_W / 2, 0, max(0, room_width - VIEW_W));
 var camera_y = clamp(y - VIEW_H / 2, 0, max(0, room_height - VIEW_H));
-camera_set_view_pos(camera, camera_x, camera_y);
+camera_set_view_pos(camera, round(camera_x), round(camera_y)); // whole world pixels: no shimmer between layers

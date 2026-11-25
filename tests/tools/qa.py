@@ -268,6 +268,11 @@ def main():
     (ROOT / 'tests/reports').mkdir(parents=True, exist_ok=True)
     (ROOT / 'tests/reports/qa-last.json').write_text(json.dumps(summary, indent=1, ensure_ascii=False) + '\n', encoding='utf-8')
     bad = [r for r in results if r['status'] != 'PASS']
+    try:  # disk hygiene: older runs, probe folders and leftover captures (tests/tools/clean_test_artifacts.py)
+        from clean_test_artifacts import clean
+        clean(quiet=True)
+    except Exception as exc:
+        print('Aufraeumen uebersprungen:', exc)
     print('GESAMT: ' + ('PASS' if not bad else 'FAIL/BLOCKED: ' + ', '.join(r['suite'] for r in bad)))
     return 1 if bad else 0
 

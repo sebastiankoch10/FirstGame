@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"render_pipeline",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"render_pipeline",
+  "parent":{
+    "name":"Welt_und_Atmosphaere",
+    "path":"folders/Skripte/Welt_und_Atmosphaere.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

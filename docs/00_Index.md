@@ -53,6 +53,7 @@ Momentaufnahme des ganzen Kanons als ein Text: `docs/_export/` (nicht verbindlic
 - [[Boss-Testmodus]]
 
 **Darstellung, Ton, Daten**
+- [[Rendering & Pixelraster]]
 - [[Licht, Wetter & Effekte]]
 - [[UI, HUD & Menüs]]
 - [[Audio]]

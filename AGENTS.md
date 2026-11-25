@@ -14,7 +14,7 @@
   - Projektdatei `FirstGame.yyp`.
   - Werkzeuge in Python 3: Igor-Builds über das pipx-Paket `gms-mcp`; numpy/PIL für prozedurale Pixelgrafik.
   - Kein npm- oder pip-Projekt im Repo.
-- **Git:** nur lokal, Branch `entwicklung`.
+- **Git:** Branch `entwicklung`, Remote `origin` (GitHub); Pushen von `entwicklung` erlaubt (seit 25.11.).
 
 ## Ordner
 | Pfad | Inhalt |
@@ -83,6 +83,7 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
   - Lange Läufe als eigenständigen Prozess starten (PowerShell `Start-Process`).
 - **Bekannt veraltet:** `tests/tools/run_combat_smoke.py` scheiterte schon vor 2026-11-24. Die Vorlage ist veraltet.
 - **Weitere Werkzeuge:**
+  - Szenen-Aufnahme: `python tests/tools/record_scene.py walk|combat|spell|boss|horde` (feste 60-Hz-Bildzeit, WebP und Übersichtsbild unter `%LOCALAPPDATA%\FirstGame-Tests\scene\`). Für Bewegung, Timing und Effekte statt Einzelbildern.
   - Produktions-ZIP nur auf ausdrücklichen Wunsch: `python tests/tools/build_production.py`.
   - Grafik- und Weltgenerierung: `tests/tools/levels/`, siehe `LEVEL_EXPANSION_PROGRESS.md`.
   - Pfade zu Quellgrafik unter `FirstGame_ArtPack/` liest jedes Werkzeug nur aus `tests/tools/assets/art_paths.py`. Prüfung: `python tests/tools/assets/art_paths.py --check` (0 Verweise außerhalb der Tabelle).
@@ -90,11 +91,16 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 ## Regeln
 - **Keine Zahlenänderungen am Balancing** (HP, Schaden, XP, Klassenwerte, Skalierung) ohne ausdrücklichen Auftrag. Empfehlungen nur dokumentieren.
 - **Testergebnisse** immer als PASS / FAIL / BLOCKED / NOT RUN angeben. Nichts erfinden.
-- **Git nur lokal** auf `entwicklung`, **niemals pushen**. Am Ende jeder abgeschlossenen Aufgabe lokal committen (siehe unten), sofern die Aufgabe nichts anderes sagt. Vor größeren Änderungen committen statt ein ZIP anzulegen.
+- **Git** auf `entwicklung`: am Ende jeder abgeschlossenen Aufgabe committen (siehe unten), sofern die Aufgabe nichts anderes sagt; vor größeren Änderungen committen statt ein ZIP anzulegen.
+  - Pushen von `entwicklung` nach `origin` ist erlaubt (Nutzerfreigabe 25.11.). Kein Force-Push, `main` nicht verändern.
+- **Qualitätsanspruch des Nutzers (25.11.):** Alles auf den höchsten fachlichen Standard bringen, auch frühe Festlegungen aus der Zeit vor der KI-Nutzung (z. B. Pixelgrößen). Wo ein Nutzervorschlag erkennbar ohne Fachwissen entstanden ist, kurz sagen, wie es besser ginge.
+  - Der Nutzer hat für Umsetzungsentscheidungen generell zugestimmt. Weiterhin vorher fragen: kostenpflichtige Dienste, Balancing-Zahlen, künstlerische Abnahme.
+  - Spiel starten, Testläufe und Simulationen sind ohne Rückfrage erlaubt.
+- **Speicherplatz:** Testartefakte nicht anhäufen. `tests/tools/clean_test_artifacts.py` läuft nach `qa.py` und `record_scene.py` automatisch; Aufnahmen, die nicht mehr gebraucht werden, löschen.
 - **Arbeitsweise des Nutzers:** Änderungen direkt im Projekt. Test-Builds nie im Projektordner ablegen und danach löschen.
 - **Bossarbeit** folgt `docs/Design/Boss-Design.md` und `docs/Design/Kampf & Begegnungen.md`. Gefahren laufen über eine Uhr je Boss (`v2_clock`), sodass Warnung und Treffer synchron bleiben.
 - **Grafik-, Animations-, Effekt- und Tonarbeit** folgt `docs/Design/Visuelles Leitbild & Animation.md` und `Fähigkeiten, VFX & Audio.md`. Bewegungsreferenz Terranigma nur für Bewegungsqualität, nie Assets oder Stil kopieren.
-- **Größere Umbauten** an Rendering, Animation oder Kampfsystem nur nach `docs/Design/Technische Architektur.md` und `Roadmap & Vertical Slice.md`. Mit „Offen“ markierte Entscheidungen brauchen die Zustimmung des Nutzers.
+- **Größere Umbauten** an Rendering, Animation oder Kampfsystem nur nach `docs/Design/Technische Architektur.md` und `Roadmap & Vertical Slice.md`. Mit „Offen“ markierte Entscheidungen trifft der Agent nach bestem Standard (Generalfreigabe 25.11.) und begründet sie in `docs/DECISIONS.md`.
 
 ## Code-Konventionen (GML)
 - **Stil:** dichtes GML, kurze Hilfsfunktionen.
@@ -155,7 +161,7 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
   - Nur die betroffenen Zeilen ändern und `updated:` anpassen.
   - Neues System: neue Notiz nach dem Muster der bestehenden und einen Link in `docs/00_Index.md`.
 - e) Neue Bugs und Ideen als eine Zeile in `docs/Bugs & Ideen.md`. Erledigtes dort entfernen.
-- f) Lokal committen, die Nachricht beginnt mit `[Claude]` oder `[Codex]`. Nie pushen.
+- f) Committen, die Nachricht beginnt mit `[Claude]` oder `[Codex]`; danach `entwicklung` pushen ist erlaubt.
 
 ### Grundsätze
 - **Jede Information steht an genau einer Stelle:**

@@ -1,0 +1,70 @@
+"""Pixel font for numbers drawn in the world (damage labels): 5x7 glyphs with a 1 px dark outline, white fill so
+draw_set_colour tints the fill while the outline stays dark. Written as sprite spr_font_world (one frame per glyph,
+order = GLYPHS); the game builds the font with font_add_sprite_ext (world_font() in scripts/combat_feedback).
+
+  python tests/tools/art/build_pixel_font.py
+"""
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / 'tests' / 'tools' / 'levels'))
+
+GLYPHS = '0123456789.,+-%'
+G = {
+    '0': ['.###.', '#...#', '#..##', '#.#.#', '##..#', '#...#', '.###.'],
+    '1': ['..#..', '.##..', '..#..', '..#..', '..#..', '..#..', '.###.'],
+    '2': ['.###.', '#...#', '....#', '...#.', '..#..', '.#...', '#####'],
+    '3': ['.###.', '#...#', '....#', '..##.', '....#', '#...#', '.###.'],
+    '4': ['...#.', '..##.', '.#.#.', '#..#.', '#####', '...#.', '...#.'],
+    '5': ['#####', '#....', '####.', '....#', '....#', '#...#', '.###.'],
+    '6': ['..##.', '.#...', '#....', '####.', '#...#', '#...#', '.###.'],
+    '7': ['#####', '....#', '...#.', '..#..', '.#...', '.#...', '.#...'],
+    '8': ['.###.', '#...#', '#...#', '.###.', '#...#', '#...#', '.###.'],
+    '9': ['.###.', '#...#', '#...#', '.####', '....#', '...#.', '.##..'],
+    '.': ['..', '..', '..', '..', '..', '##', '##'],
+    ',': ['..', '..', '..', '..', '##', '.#', '#.'],
+    '+': ['.....', '.....', '..#..', '.###.', '..#..', '.....', '.....'],
+    '-': ['....', '....', '....', '####', '....', '....', '....'],
+    '%': ['##..#', '##.#.', '...#.', '..#..', '.#...', '.#.##', '#..##'],
+}
+
+
+def glyph(rows: list[str]) -> np.ndarray:
+    w = len(rows[0])
+    fill = np.array([[c == '#' for c in r] for r in rows])
+    a = np.zeros((9, w + 2, 4), np.uint8)
+    pad = np.zeros((9, w + 2), bool)
+    pad[1:8, 1:w + 1] = fill
+    ring = np.zeros_like(pad)
+    for dy in (-1, 0, 1):
+        for dx in (-1, 0, 1):
+            ring |= np.roll(np.roll(pad, dy, 0), dx, 1)
+    ring &= ~pad
+    a[ring] = (24, 18, 26, 255)
+    a[pad] = (255, 255, 255, 255)
+    return a
+
+
+def main():
+    from gm_project import Project
+    frames = [glyph(G[c]) for c in GLYPHS]
+    w = max(f.shape[1] for f in frames)
+    # each frame left-aligned on a common canvas; proportional fonts use the glyph's own bbox
+    canvas = []
+    for f in frames:
+        c = np.zeros((9, w, 4), np.uint8)
+        c[:, :f.shape[1]] = f
+        canvas.append(c)
+    pj = Project()
+    pj.sprite('spr_font_world', canvas, (0, 0))
+    pj.save()
+    print('spr_font_world:', len(frames), 'glyphs', GLYPHS, '| new:', pj.added)
+
+
+if __name__ == '__main__':
+    main()

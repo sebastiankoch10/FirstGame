@@ -9,7 +9,7 @@ updated: 2026-11-25
 - **2026-11-24 · `docs/` ist der Obsidian-Vault, nicht das ganze Repo.** Grund: übersichtlich, keine Code- oder Assetflut im Vault. Die älteren Berichte bleiben an ihrem Ort und werden verlinkt.
 - **2026-11-24 · Übergabe nur am Aufgabenende** über HANDOFF, LOG und DECISIONS. Grund: spart Tokens.
 - **2026-11-24 · Hooks kosten keine Tokens.** SessionStart zeigt nur HANDOFF an, Stop schreibt nur eine Logzeile (kein KI-Aufruf).
-- **2026-11-24 · Git nur lokal (`entwicklung`), nie pushen.** Grund: Der Nutzer nutzt GitHub nicht.
+- ~~**2026-11-24 · Git nur lokal (`entwicklung`), nie pushen.**~~ Ersetzt am 25.11.: Pushen von `entwicklung` nach `origin` ist erlaubt (Nutzer: Die Regel stammte nur aus der Sorge um Tokens). Kein Force-Push, `main` unverändert.
 - **2026-11-24 · Token-Regeln:** Lesereihenfolge HANDOFF → eine Systemnotiz → gezielter Code. Jede Info an genau einer Stelle. Am Aufgabenende ein Commit mit `[Claude]` oder `[Codex]`. Grund: Beide Agenten bleiben synchron, ohne jedes Mal Doku oder Code komplett zu lesen. `git log` ist die billigste Synchronquelle.
 - **2026-11-24 · `DEVELOPMENT_PROGRESS.md`, `TODO.md` und `QA/CURRENT_STATUS.md` werden nicht mehr laufend gepflegt.** Grund: Sie würden HANDOFF und Bugs & Ideen doppeln.
 - **2026-11-24 · Test-Builds unter `%LOCALAPPDATA%\FirstGame-Tests\`, nie im Projektordner.** Grund: Der Nutzer will keine EXE oder ZIP im Projekt; er testet mit F5.
@@ -20,6 +20,8 @@ updated: 2026-11-25
 - **2026-11-25 · Export des Kanons wird erzeugt, nicht gepflegt** (`tests/tools/export_design.py`). Grund: keine zweite Wahrheitsquelle.
 - **2026-11-25 · Telemetrie-Anker werden in jeder QA-Stufe geprüft (Suite `anchors`).** Grund: Zwei Anker waren nach Codeänderungen unbemerkt kaputt; die Simulationen wären erst spät gescheitert. Die Prüfung dauert Sekunden.
 - **2026-11-25 · Attack Timeline: Uhr und Einheit bleiben die des Besitzers** (Spielerwaffen in Spielschritten, Bosse in Sekunden auf `v2_clock`). Grund: Migration ohne jede Verhaltensänderung; Auslösung nach Zeit folgt, wenn alle Angriffe auf der Zeitachse laufen.
+- **2026-11-25 · Generalfreigabe und Qualitätsanspruch:** Der Nutzer will alles auf den höchsten fachlichen Standard, auch frühe Festlegungen aus der Zeit vor der KI-Nutzung. Umsetzungsentscheidungen trifft der Agent selbst und begründet sie hier; vorher gefragt werden nur kostenpflichtige Dienste, Balancing-Zahlen und die künstlerische Abnahme.
+- **2026-11-25 · Szenen-Aufnahme statt Einzelbilder** (`tests/tools/record_scene.py`, feste 60-Hz-Bildzeit) und automatisches Aufräumen der Testartefakte (`clean_test_artifacts.py`, nach `qa.py` und Aufnahmen). Grund: Bewegung und Timing lassen sich nur in Folgen beurteilen; der Nutzer will keinen wachsenden Speicherverbrauch.
 
 ## Spieldesign
 - **2026-11-25 · Helm = Kopf und Helm als ein Bild** (Auftrag des Nutzers): Das Kopfteil ersetzt die oberen Zeilen des Basismodells, statt darüber zu liegen. Grund: Haare standen um die Helmkuppel heraus. Haare unterhalb des Helmrands bleiben sichtbar.

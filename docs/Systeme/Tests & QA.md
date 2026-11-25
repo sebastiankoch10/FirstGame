@@ -38,6 +38,9 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
 - **QA-Prüfer** (nur lesend, gleicher Inhalt): `.codex/agents/qa.toml` und `.claude/agents/qa.md`. `.github/agents/qa.agent.md` ist Legacy (Copilot).
 - **Abnahme von Inhalten:** Statusskala und Kriterien Q1–Q11 in [[Qualitätsstandard]].
 - **Simulationen** (Stufe 4): `QA/tools/run_cohort.py`, `run_boss_mc.py`, `analyze_v3.py`.
+- **Szenen-Aufnahme** (kein Test): `python tests/tools/record_scene.py walk|combat|spell|boss|horde` mit `--class`, `--level`, `--spell NAME --spell-level N`, `--boss`, `--minute`. Harness `tests/scene_harness.gml` (Präfix `sc`), `delta_time` fest auf 60 Hz, Ergebnis WebP plus Übersichtsbild unter `%LOCALAPPDATA%\FirstGame-Tests\scene\<Zeit>\`. Seit 25.11.
+- **Aufräumen:** `tests/tools/clean_test_artifacts.py` (läuft nach `qa.py` und `record_scene.py`): je Ordner die 2 neuesten Läufe, Probe-Ordner nach 3 Tagen, Capture-PNGs in den Build-Speicherordnern, ungetrackte `QA/logs/regression-*` bis auf 3. `qa-cache.json` und `charcache` bleiben.
+- `run_native_harness.py`: `EXTRA_REPLACEMENTS` für zusätzliche Code-Ersetzungen in der Testkopie; Captures werden verschoben statt kopiert.
 
 ## QA-Agent: Überprüfung 2026-11-24 (Claude)
 **Vorher**

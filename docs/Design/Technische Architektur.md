@@ -23,7 +23,7 @@ Rang 2 unter [[Leitbild]]. Beschreibt, **wie** die Anforderungen aus [[Visuelles
 | Bossanimation | Drache: Aktion → Sprite (2–4 Frames), Spiegeln, Atmen per Skalierung, Flug per Höhenversatz, **Maul-Anker** (`dragon_art_anchor`) | kein artikulierter Körper; Anker sind ein erster Ansatzpunkt |
 | Audio | `audio_manager`/`fg_sfx`: 16 Stimmen, 2 je Cue, Musik-Überblendung | Grundlage für eine Ereignisschicht |
 | Shader, Partikelsysteme, Sequenzen, Skelett-Animation | **nicht verwendet** | — |
-| Rendering | Kamera 800×600, Viewport 1366×768, Fenster und App-Surface 1280×720, Texturfilter aus | **Fehler:** nicht-uniforme Skalierung (siehe R1) |
+| Rendering | Kamera 800×600, Viewport 1366×768, Fenster und App-Surface 1280×720, Texturfilter aus | **Fehler:** nicht-uniforme Skalierung (siehe R1); behoben am 25.11. (R1, R2 Variante B) |
 
 **Gemessen (Testkopie, Minute 0, Wald):**
 - 1.115 Instanzen, überwiegend Szenerie, dabei 23 Gegner.
@@ -206,6 +206,13 @@ Vorhanden (`boss_choreo`). Künftig als Folge von Zeitachsen (4.1), damit Körpe
 - **Feinraster:**
   - **Variante A:** App-Surface in Ausgabeauflösung. Partikel dürfen auf halbe Welteinheiten (= 1 Bildschirmpixel bei 1080p).
   - **Variante B:** Welt in eine 960×540-Fläche rendern, ganzzahlig bzw. „sharp-bilinear“ hochskalieren, Effekte und Licht in Ausgabeauflösung darüber. Diese Variante ist rastertreuer bei 720p, kostet aber mehr Umbau.
+  - **Entschieden und umgesetzt (25.11., Generalfreigabe des Nutzers): Variante B, abgewandelt.**
+    - Befund vorher: Die 960×540-Welt wurde auf 1280×720 ausgegeben (Faktor 1,333), jede dritte Pixelspalte doppelt breit; beim Bewegen flimmerte es.
+    - Welt, Effekte und Partikel liegen alle im Weltraster (App-Surface 960×540). Effekte in Ausgabeauflösung hätten wieder zwei Pixelgrößen gemischt; nur das Licht bleibt weich (eigene halbe Auflösung, gefiltert).
+    - Ausgabe in `scripts/render_pipeline` über das persistente `ObjectRender` (Post-Draw): ganzzahlig mit Nearest, sonst sharp-bilinear (Nearest auf das nächste ganze Vielfache, dann ein bilinearer Schritt), zentriert mit schwarzem Rand.
+    - Fenster: größtes ganzes Vielfaches, das auf den Desktop passt; auf 1080p-Desktops 1280×720 (sharp-bilinear), Vollbild dort exakt 2×. Vollbild wird in `firstgame_settings.ini` gespeichert.
+    - GUI bleibt 1280×720 (scharfe Schrift). Kamera auf ganzen Weltpixeln (`round`), damit Ebenen nicht gegeneinander zittern.
+    - Folge für Grafik: Was im Spiel skaliert oder gedreht wird, rastet auf das Weltraster. Bosse und Effekte werden deshalb in Zielgröße gebacken bzw. als Drehstufen vorberechnet (RotSprite, `tests/tools/art/pixelize.py`).
 - **A/B-Vergleich (25.11., aus dem Schwertmeister-Quellatlas):**
   - Heute: 52-px-Figur ×1,65; bei 1080p sind die Pixel 3,3 px breit und 1,65-mal gröber als der Boden.
   - Mit Dichte 1,0: 86-px-Figur aus derselben Quelle, Pixel so groß wie der Boden, mehr Detail.
