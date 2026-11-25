@@ -1,14 +1,16 @@
 {
+  "passed": true,
   "checks": 75.0,
   "failures": [],
   "metrics": {
-    "swordsmanv3_diff_t0": 117192.0,
-    "swordsmanv3_diff_t1": 140194.0,
-    "swordsmanv3_diff_t2": 140194.0,
+    "swordsmanv3_diff_t0": 149042.0,
+    "swordsmanv3_diff_t1": 172044.0,
+    "swordsmanv3_diff_t2": 172044.0,
     "swordsmanv3": {
       "frames": 384.0,
-      "cells": 256.0,
       "filled": {
+        "feet0": 256.0,
+        "feet1": 256.0,
         "feet2": 256.0,
         "feet3": 256.0,
         "wpn_s": 223.0,
@@ -27,16 +29,16 @@
         "hands0": 219.0,
         "hands1": 219.0,
         "hands2": 219.0,
-        "hands3": 219.0,
-        "feet0": 256.0,
-        "feet1": 256.0
-      }
+        "hands3": 219.0
+      },
+      "cells": 256.0
     },
-    "swordsmanv3_diff_t3": 140892.0,
+    "swordsmanv3_diff_t3": 172498.0,
     "rangerv3": {
       "frames": 424.0,
-      "cells": 256.0,
       "filled": {
+        "feet0": 256.0,
+        "feet1": 256.0,
         "feet2": 256.0,
         "feet3": 256.0,
         "wpn_s": 230.0,
@@ -55,15 +57,15 @@
         "hands0": 239.0,
         "hands1": 239.0,
         "hands2": 239.0,
-        "hands3": 239.0,
-        "feet0": 256.0,
-        "feet1": 256.0
-      }
+        "hands3": 239.0
+      },
+      "cells": 256.0
     },
     "magev3": {
       "frames": 432.0,
-      "cells": 256.0,
       "filled": {
+        "feet0": 241.0,
+        "feet1": 241.0,
         "feet2": 241.0,
         "feet3": 241.0,
         "wpn_s": 212.0,
@@ -82,23 +84,21 @@
         "hands0": 242.0,
         "hands1": 242.0,
         "hands2": 242.0,
-        "hands3": 242.0,
-        "feet0": 241.0,
-        "feet1": 241.0
-      }
+        "hands3": 242.0
+      },
+      "cells": 256.0
     },
-    "rangerv3_diff_t0": 148336.0,
-    "rangerv3_diff_t1": 148336.0,
-    "rangerv3_diff_t2": 148336.0,
-    "rangerv3_diff_t3": 148878.0,
-    "magev3_diff_t0": 112696.0,
-    "magev3_diff_t1": 112696.0,
-    "magev3_diff_t2": 112696.0,
-    "magev3_diff_t3": 113176.0
+    "rangerv3_diff_t0": 163188.0,
+    "rangerv3_diff_t1": 163188.0,
+    "rangerv3_diff_t2": 163188.0,
+    "rangerv3_diff_t3": 163662.0,
+    "magev3_diff_t0": 123318.0,
+    "magev3_diff_t1": 123318.0,
+    "magev3_diff_t2": 123318.0,
+    "magev3_diff_t3": 123800.0
   },
-  "passed": true,
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\visual\\20261125-152337",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\visual\\20261125-164944",
   "exceptions": [],
   "captures": [
     "Mage-base.png",

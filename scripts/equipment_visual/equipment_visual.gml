@@ -20,7 +20,8 @@ function eqv_init() {
             var ps = asset_get_index("spr_eqv_" + a + "_" + pn[k]);
             if (sprite_exists(ps)) pieces[$ pn[k]] = {spr: ps, buf: buffer_base64_decode(src.rects[$ pn[k]]), cells: src.cells};
         }
-        out[$ a] = {map: map, pieces: pieces, cells: src.cells, bones: variable_struct_exists(src, "bones") ? buffer_base64_decode(src.bones) : -1};
+        out[$ a] = {map: map, pieces: pieces, cells: src.cells, bones: variable_struct_exists(src, "bones") ? buffer_base64_decode(src.bones) : -1,
+            hcut: variable_struct_exists(src, "hcut") ? buffer_base64_decode(src.hcut) : -1};
     }
     global.eqv = out;
     return out;
@@ -87,14 +88,18 @@ function eqv_cell(_actor, _spr, _frame) {
 /// model through the shared rig (bones per cell from the generated data). Without a pose the base is drawn as is.
 function player_layers_draw(_actor, _spr, _frame, _x, _y, _xs, _ys, _col, _alpha, _equip = undefined, _rot = 0, _pose = undefined) {
     var cell = eqv_cell(_actor, _spr, _frame), bones = (is_struct(_pose) && cell >= 0 && vfx_secondary_motion()) ? eqv_bones(_actor, cell) : [];
+    if (is_undefined(_equip)) _equip = variable_global_exists("equipment") ? global.equipment : {};
+    var list = eqv_pieces_for(_equip), cut = 0;
+    // A helmet piece is head and helmet in one: the base's rows above the brow are left out (no hair around it).
+    if (cell >= 0) for (var h = 0; h < array_length(list); h++) if (string_copy(list[h].key, 1, 4) == "head") cut = eqv_hcut(_actor, cell);
     if (array_length(bones) > 0) {
         // Angles are given on screen; mirrored frames turn the other way in sprite space.
         var s = sign(_xs), p = {hair: _pose.hair * s, cape: _pose.cape * s};
-        rig_draw_frame(_spr, _frame, bones, p, "plr_" + _actor, eqv_frame().oy - 6, _x, _y, _xs, _ys, _col, _alpha, 8, _rot);
-    } else draw_sprite_ext(_spr, _frame, _x, _y, _xs, _ys, _rot, _col, _alpha);
+        rig_draw_frame(_spr, _frame, bones, p, "plr_" + _actor, eqv_frame().oy - 6, _x, _y, _xs, _ys, _col, _alpha, 8, _rot, cut);
+    } else if (cut > 0) eqv_draw_base_cut(_spr, _frame, _x, _y, _xs, _ys, _rot, _col, _alpha, cut);
+    else draw_sprite_ext(_spr, _frame, _x, _y, _xs, _ys, _rot, _col, _alpha);
     if (cell < 0) return 0;
-    if (is_undefined(_equip)) _equip = variable_global_exists("equipment") ? global.equipment : {};
-    var P = global.eqv[$ _actor].pieces, list = eqv_pieces_for(_equip), drawn = 0, flash = _col != c_white;
+    var P = global.eqv[$ _actor].pieces, drawn = 0, flash = _col != c_white;
     for (var i = 0; i < array_length(list); i++) {
         var key = list[i].key;
         if (variable_struct_exists(P, key)) drawn += eqv_piece_draw(P[$ key], cell, _x, _y, _xs, _ys, _col, _alpha, _rot);
@@ -123,4 +128,17 @@ function eqv_bones(_actor, _cell) {
             ex: buffer_peek(b, o + k * 5 + 2, buffer_u8), ey: buffer_peek(b, o + k * 5 + 3, buffer_u8), r: r * 1.2, parent: -1});
     }
     return out;
+}
+/// First base row covered by the head-and-helmet piece of a cell (0 = this frame has no helmet piece).
+function eqv_hcut(_actor, _cell) {
+    var E = eqv_init();
+    if (!variable_struct_exists(E, _actor) || E[$ _actor].hcut < 0) return 0;
+    var b = E[$ _actor].hcut;
+    return (_cell >= 0 && _cell < buffer_get_size(b)) ? buffer_peek(b, _cell, buffer_u8) : 0;
+}
+/// Base frame without its top _cut rows; same placement, mirroring and rotation (about the origin) as draw_sprite_ext.
+function eqv_draw_base_cut(_spr, _frame, _x, _y, _xs, _ys, _rot, _col, _alpha, _cut) {
+    var ox = sprite_get_xoffset(_spr), oy = sprite_get_yoffset(_spr), w = sprite_get_width(_spr), h = sprite_get_height(_spr);
+    var dx = -ox * _xs, dy = (_cut - oy) * _ys, cs = dcos(_rot), sn = dsin(_rot);
+    draw_sprite_general(_spr, _frame, 0, _cut, w, h - _cut, _x + dx * cs + dy * sn, _y - dx * sn + dy * cs, _xs, _ys, _rot, _col, _col, _col, _col, _alpha);
 }

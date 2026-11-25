@@ -105,14 +105,37 @@ def layers_for(actor, fr, base, lab_base):
     wl = R.WEAPON_LAYER[actor]
     covers = R.CHEST_COVERS_LEGS[actor]
     out = {'wpn_s': (wl(fr, None)[0], None)}
+    cut = 0
     for t in range(4):
         out[f'wpn{t}'] = wl(fr, t)
         chest = (lab_base == CHEST) | ((lab_base == LEGS) if covers is not None and t >= covers else False)
         out[f'chest{t}'] = R.armor_layer(fr2, chest & alive, 'chest', t, kinds)
         out[f'hands{t}'] = R.armor_layer(fr2, (lab_base == HANDS) & alive, 'hands', t, kinds)
         out[f'feet{t}'] = R.armor_layer(fr2, (lab_base == FEET) & alive, 'feet', t, kinds)
-        out[f'head{t}'] = R.helmet_layer(fr2, t, **HELM[actor])
-    return out
+        hm, ha, brow = R.helmet_layer(fr2, t, want_brow=True, **HELM[actor])
+        out[f'head{t}'] = helmet_composite(base, lab_base, hm, ha, brow)
+        cut = brow + 1 if brow >= 0 and (hm[..., 3] > 0).any() else cut
+    return out, cut
+
+
+def helmet_composite(base, lab, main, acc, brow):
+    """Head and helmet as one piece: the base rows down to the brow without the hair, the helmet painted over them.
+    At runtime this piece replaces the base's top rows (eqv_hcut), so no hair pokes out around the helmet."""
+    if brow < 0 or not (main[..., 3] > 0).any():
+        return main, acc
+    from morph import components, dilate as _dil, hsv as _hsv
+    top = np.zeros(base.shape[:2], bool); top[:brow + 1] = True
+    comp = np.zeros_like(base); comp[top] = base[top]
+    hair = (lab == HAIR) & top
+    v = _hsv(base[..., :3])[2]
+    rim = _dil(hair, 1) & top & (v < .34)          # outline pixels that only bordered the hair go with it
+    comp[hair | rim] = 0
+    for ys, xs in components(comp[..., 3] > 0)[1:]:
+        if len(ys) < 10:
+            comp[ys, xs] = 0
+    m = main[..., 3] > 0
+    comp[m] = main[m]
+    return comp, acc
 
 
 def crop(img):
@@ -209,6 +232,7 @@ def build_actor(actor, ver, project, previews):
     acc_frames = {p: [None] * len(cells) for p in PIECES if p != 'wpn_s'}
     stats = dict(cells=len(cells), weapon_cells=0, composite_diff_px=[], halo_px=0, hair_bones=0, cape_bones=0)
     bones = [(None, None)] * len(cells)
+    cuts = [0] * len(cells)
     for i, (src, col, row) in enumerate(cells):
         a = atlases.setdefault(src, Atlas(actor, src))
         cell = a.cell(col, row)
@@ -216,7 +240,7 @@ def build_actor(actor, ver, project, previews):
         fr = R.make_frame(cell, sg, actor)
         base, lab_base = R.base_layer(fr, R.KINDS[actor])
         base_frames[i] = base
-        L = layers_for(actor, fr, base, lab_base)
+        L, cuts[i] = layers_for(actor, fr, base, lab_base)
         for p, (m, ac) in L.items():
             layer_frames[p][i] = crop(m)
             if ac is not None:
@@ -265,7 +289,9 @@ def build_actor(actor, ver, project, previews):
     d = stats['composite_diff_px']
     stats.update(composite_diff_px=dict(mean=round(float(np.mean(d)), 1), max=int(np.max(d)), frames_over_20=int(sum(x > 20 for x in d))),
                  seconds=round(time.time() - t0), atlas_px=int(sum(h * w for h, w in sizes.values())), atlases=len(sizes))
-    return dict(cells=len(cells), sprites=sprite_map, rects=rect_tables, bones=encode_bones(bones)), stats
+    stats['helm_cells'] = int(sum(c > 0 for c in cuts))
+    return dict(cells=len(cells), sprites=sprite_map, rects=rect_tables, bones=encode_bones(bones),
+                hcut=base64.b64encode(bytes(min(255, c) for c in cuts)).decode('ascii')), stats
 
 
 RARITY = [(176, 138, 92), (110, 170, 255), (242, 200, 92), (196, 124, 255)]
@@ -363,6 +389,8 @@ def write_gml(data, project):
         lines.append('                },')
         if 'bones' in d:
             lines.append(f'                bones: "{d["bones"]}",')
+        if 'hcut' in d:
+            lines.append(f'                hcut: "{d["hcut"]}",')
         lines.append('                rects: {')
         lines.extend(f'                    {k}: "{v}",' for k, v in d['rects'].items())
         lines.append('                }')

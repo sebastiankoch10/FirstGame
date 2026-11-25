@@ -44,6 +44,8 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
    - Die Formschattierung des Originals wird beibehalten, normiert je Ursprungsmaterial und median-geglättet.
    - Darauf kommt die Materialrampe der Stufe, plus Muster in Endpixelgröße: Ketten, Schuppen, Nieten, Runenband.
    - Helme sind Kuppeln über dem Haar bis zur Brauenlinie, mit Kugelschattierung von oben links.
+   - **Seit 25.11. Kopf und Helm als ein Stück** (`helmet_composite` in `build_characters.py`): Das Kopfteil enthält die Zeilen des Basismodells bis zur Braue ohne Haar, darüber den Helm. Zur Laufzeit lässt `player_layers_draw` diese Zeilen im Basismodell weg (`eqv_hcut`, `eqv_draw_base_cut`; im Rig `rig_draw_frame(..., _cut)`), deshalb stehen keine Haare mehr um den Helm heraus.
+   - **Kantenreinigung** (`clean_fringe` in `render.py`): heller, ungesättigter Saum am Umriss (Reste des alten Ausschnitts) bekommt den dunklen Konturton des Nachbarn; Haar ausgenommen. Beim Schwertmeister entfernt `clean_matte` zusätzlich graue Hintergrundreste (zwischen den Beinen, an den Stiefeln). Bei Arkanistin und Waldläufer nicht, weil dort echte weiße bzw. graue Kleidung mit erfasst würde.
 
 ## Stufen (Item-Stufe = Gegenstandsstufe 1–4 / 5–8 / 9–12 / 13+)
 

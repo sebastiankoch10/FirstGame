@@ -4,6 +4,11 @@ updated: 2026-11-25
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-25 · Claude · Helme als Kopf-Komposit, saubere Figurenkanten (Nutzerauftrag)
+- Kopf und Helm als ein Stück (`helmet_composite` in `build_characters.py`, Daten `hcut`); Laufzeit lässt die oberen Zeilen des Basismodells weg (`eqv_hcut`, `eqv_draw_base_cut`, `rig_draw_frame(..., _cut)`).
+- Kantenreinigung in `render.py`: `clean_fringe` (heller Saum → Konturton, alle Klassen), `clean_matte` (graue Hintergrundreste, nur Schwertmeister). Alle Figuren neu gebaut.
+- QA: Helm-Stand Stufe 3 PASS (8 Suiten); nach dem Schwertmeister-Neubau visual 75 und classes 151 PASS.
+
 ### 2026-11-25 · Claude · Gegner-Pixeldichte, letzte Zauber, Effektqualität, Pfadtabelle (`d461d3e4` und folgende)
 - Pixeldichte 1:1 für Kriecher, Pilzkreatur, Eisgeist, Konstrukt (`enemies.py` `creature_spec`, `level_worlds` `baked`/`monster_art_div`); Skelett-Gegner bleiben (A/B ohne Gewinn).
 - Irrlicht und Prismensamen als Pixel-Effekte (`vfx_wisp_draw`, `vfx_seed_draw`), Verbindungsstrahl als Pixellinie: alle 18 Zauber fertig.

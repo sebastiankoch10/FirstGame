@@ -278,12 +278,12 @@ def convex_fill(mask):
 HELMS = {0: 'leather', 1: 'iron', 2: 'runesteel', 3: 'scale'}
 
 
-def helmet_layer(fr: Frame, tier, max_half_width=8.5, crown_frac=.62):
+def helmet_layer(fr: Frame, tier, max_half_width=8.5, crown_frac=.62, want_brow=False):
     """Fit a helmet dome over the hair down to the brow line; shade it as a sphere lit from the upper left."""
     main = np.zeros((FRAME, FRAME, 4), np.uint8); acc = np.zeros((FRAME, FRAME, 4), np.uint8)
     hair = fr.lab == HAIR
     if hair.sum() < 6:
-        return main, acc
+        return (main, acc, -1) if want_brow else (main, acc)
     rgb = fr.rgba[..., :3]
     h, s, v = hsv(rgb)
     ys, xs = np.nonzero(hair)
@@ -299,7 +299,7 @@ def helmet_layer(fr: Frame, tier, max_half_width=8.5, crown_frac=.62):
     brow = max(brow, int(top + .32 * (hb - top + 1)))
     above = hair & (rows <= brow)
     if above.sum() < 6:
-        return main, acc
+        return (main, acc, brow) if want_brow else (main, acc)
     ay, ax = np.nonzero(above)
     cx = float(np.median(ax)); cy = float(brow) + .5
     rx0 = max(3.0, min(max_half_width, (np.percentile(ax, 95) - np.percentile(ax, 5)) / 2 + 1.0))
@@ -311,7 +311,7 @@ def helmet_layer(fr: Frame, tier, max_half_width=8.5, crown_frac=.62):
     yy, xx = np.mgrid[0:FRAME, 0:FRAME]
     helm = (((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2 <= 1.0) & (yy <= brow)
     if helm.sum() < 6:
-        return main, acc
+        return (main, acc, brow) if want_brow else (main, acc)
     hy, hx = np.nonzero(helm)
     cy = hy.max()
     nx = (xx - cx) / rx; ny = (yy - cy) / ry
@@ -358,7 +358,7 @@ def helmet_layer(fr: Frame, tier, max_half_width=8.5, crown_frac=.62):
                 y0, x0 = hyn - k, hxn + sgn * (k + 1)
                 if 0 <= y0 < FRAME and 0 <= x0 < FRAME and not helm[y0, x0]:
                     main[y0, x0] = (*RAMPS['bone'][4 - k], 255)
-    return main, acc
+    return (main, acc, brow) if want_brow else (main, acc)
 
 
 # ------------------------------------------------------------------ swords
@@ -508,7 +508,57 @@ def base_layer(fr: Frame, kinds):
             q = m & (((xx + yy) % 4 == 0) | ((xx - yy) % 4 == 0)) & ~edge_dark(m, None)
             cols[q] = ramp(rname, np.clip(t[q] - .16, 0, 1))
         paint(out, m, cols[m])
+    if fr.actor == 'swordsmanv3':
+        out = clean_matte(out, lab)
+    out = clean_fringe(out, lab)
     return out, lab
+
+
+def clean_matte(out, lab):
+    """Grey background remnants of the old cut-out (between the legs, at the boots): light, unsaturated regions that
+    touch the outside or are enclosed by dark outline become transparent; their new border takes the outline tone.
+    Only for actors without light grey clothing (swordsman), otherwise real cloth would be cut away."""
+    from morph import components
+    out = out.copy()
+    alive = out[..., 3] > 0
+    h, s, v = hsv(out[..., :3])
+    grey = alive & (lab != HAIR) & (s < .22) & (v > .42)
+    removed = np.zeros_like(alive)
+    for ys, xs in components(grey):
+        m = np.zeros_like(alive); m[ys, xs] = True
+        grown = dilate(m, 1, disk=False)
+        ring = grown & ~m & alive
+        touch_out = (grown & ~alive).any()
+        dark_border = ring.any() and float(v[ring].mean()) < .36
+        if (touch_out and len(ys) >= 2) or (dark_border and len(ys) >= 5):
+            removed |= m
+    out[removed] = 0
+    edge = (out[..., 3] > 0) & dilate(removed, 1, disk=False)
+    out[edge, :3] = (out[edge, :3].astype(np.float64) * .42).astype(np.uint8)
+    return out
+
+
+def clean_fringe(out, lab, rounds=2):
+    """Light, unsaturated matte remnants on the silhouette (grey/white fringe from the old cut-out) take the
+    outline tone of their nearest interior neighbour. Hair is left alone (its pale tips are intended)."""
+    for _ in range(rounds):
+        alive = out[..., 3] > 0
+        ring = alive & ~erode(alive, 1, disk=False)
+        h, s, v = hsv(out[..., :3])
+        inner = alive & ~ring
+        # mean value of interior neighbours (3x3)
+        vin = np.zeros_like(v); cnt = np.zeros_like(v)
+        for dy in (-1, 0, 1):
+            for dx in (-1, 0, 1):
+                vin += np.roll(np.roll(np.where(inner, v, 0), dy, 0), dx, 1)
+                cnt += np.roll(np.roll(inner.astype(np.float64), dy, 0), dx, 1)
+        vin = np.where(cnt > 0, vin / np.maximum(cnt, 1), 0)
+        fringe = ring & (lab != HAIR) & (s < .24) & (v > .46) & ((cnt == 0) | (v > vin + .12))
+        if not fringe.any():
+            break
+        filled, _ = inpaint_nearest(out, fringe, alive & ~fringe)
+        out[fringe, :3] = (filled[fringe, :3].astype(np.float64) * .36).astype(np.uint8)
+    return out
 
 
 # ------------------------------------------------------------------ staffs (mage)

@@ -7,6 +7,7 @@ updated: 2026-11-25
 Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Doku (Claude, 24./25.11.2026). Status: offen, wenn nicht anders vermerkt. Größere Arbeiten stehen geordnet in [[Roadmap & Vertical Slice]].
 
 ## Mögliche Bugs und Aufräumpunkte
+- **Helm fehlt in einzelnen Frames:** Wo die Segmentierung kaum Haar findet (manche Rückansichten), entsteht kein Helm und das Haar bleibt sichtbar. Abhilfe: Helmform aus dem Nachbarframe derselben Animation übernehmen. → [[Charaktergrafik & Ausrüstungs-Layer]]
 - **`tests/tools/audit_boss_v2_assets.py` scheitert:** vergleicht mit einer alten Testkopie unter `output/class-dragon-smoke/…`, die mit `output/` gelöscht wurde (25.11.). Läuft in keiner Suite; Vergleichsbasis auf `QA/baseline` umstellen oder Prüfung entfernen. → [[Tests & QA]]
 - **Minibosse nutzen 0.1-Gegnerstreifen** (Eber, Golem; 64×64, ohne Blickrichtungen), Stilbruch. → [[Roadmap & Vertical Slice]] Schritt 9.
 - **MCP-Zeitlimit:** `MCP_TIMEOUT` in `.claude/settings.json` wirkt nicht (25.11. geprüft). Abhilfe per `setx` nur mit Zustimmung des Nutzers. → [[Tests & QA]]

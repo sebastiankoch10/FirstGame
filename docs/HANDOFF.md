@@ -17,10 +17,11 @@ agent: Claude
   - **S1 Attack Timeline** (`scripts/attack_timeline`): Schwertkette und Klassen-Kombos, Werte unverändert.
   - **Alle 18 Zauber** als zusammengesetzte Pixel-Effekte in 3 Bändern; Grafikoption **Effektqualität** Niedrig/Mittel/Hoch.
   - QA-Suite `anchors` (Telemetrie-Anker); Pfadtabelle `tests/tools/assets/art_paths.py` (Asset-Migration Schritt 1).
+  - **Helme als Kopf-Komposit** (Kopf und Helm ein Bild, keine Haare mehr um den Helm) und **saubere Figurenkanten** (Nutzerauftrag 25.11. nachmittags).
 - **Tests:** zuletzt QA Stufe 3 PASS (anchors, static, regression 811, feature 162, boss 141, level 166, classes 151, visual 75).
 
 ## Offen (Reihenfolge in [[Roadmap & Vertical Slice]])
-1. **Spieltest durch den Nutzer** (F5): Elitegegner, Waffen-Upgrades, Drachen-Nahangriffe, Haar/Umhang, Zauber in Stufe 1/5/9, Effektqualität im Einstellungsmenü. Werte von Elite und Waffen-Upgrades sind ungetestete Designwerte.
+1. **Spieltest durch den Nutzer** (F5): Helme und Kanten (Talente & Ausrüstung), Elitegegner, Waffen-Upgrades, Drachen-Nahangriffe, Haar/Umhang, Zauber in Stufe 1/5/9, Effektqualität im Einstellungsmenü. Werte von Elite und Waffen-Upgrades sind ungetestete Designwerte.
 2. **S2 Animation Controller** (Übergangsposen, Clip-Ereignisse) und für den Vertical Slice Trefferstopp und Körperrotation beim Schwerthieb (Gefühl, braucht Spieltest).
 3. **Drachen-Rig Stufe 2:** Kopf, Hals und rechter Flügel für alle Posen vermessen (über 15 Posen), Hitboxen an Knochen.
 4. **Asset-Migration** Schritte 2–4 (Probelauf, `git mv`, Prüfen). **Minibosse:** Codex-Auftrag liegt beim Nutzer.

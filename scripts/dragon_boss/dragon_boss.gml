@@ -223,7 +223,7 @@ function dragon_rig_draw(_b,_spr,_frame,_action,_ox,_oy,_sx,_sy,_col,_alpha) {
 }
 /// Generic skinned draw: the frame is first drawn normally into a surface of its size (page uvs from sprite_get_uvs
 /// did not match the primitive texture for large frames, tested 25.11.), then the bent grid is drawn as strips.
-function rig_draw_frame(_spr,_frame,_bones,_pose,_key,_feet_y,_ox,_oy,_sx,_sy,_col,_alpha,_step=24,_rot=0) {
+function rig_draw_frame(_spr,_frame,_bones,_pose,_key,_feet_y,_ox,_oy,_sx,_sy,_col,_alpha,_step=24,_rot=0,_cut=0) {
     var m=rig_mesh(_spr,_frame,_bones,_key,_feet_y,_step),mats=dragon_rig_matrices(_bones,_pose);
     var nb=array_length(_bones),n=m.cols*m.rows,wx=array_create(n),wy=array_create(n);
     var xo=sprite_get_xoffset(_spr),yo=sprite_get_yoffset(_spr),sw=sprite_get_width(_spr),sh=sprite_get_height(_spr);
@@ -238,7 +238,7 @@ function rig_draw_frame(_spr,_frame,_bones,_pose,_key,_feet_y,_ox,_oy,_sx,_sy,_c
     if(!variable_global_exists("rig_surfs"))global.rig_surfs={};
     var sk=string(sw)+"x"+string(sh),s=variable_struct_exists(global.rig_surfs,sk) ? global.rig_surfs[$ sk] : -1;
     if(!surface_exists(s)){s=surface_create(sw,sh);global.rig_surfs[$ sk]=s;}
-    surface_set_target(s);draw_clear_alpha(c_black,0);draw_sprite(_spr,_frame,xo,yo);surface_reset_target();
+    surface_set_target(s);draw_clear_alpha(c_black,0);if(_cut>0)draw_sprite_part(_spr,_frame,0,_cut,sw,sh-_cut,0,_cut);else draw_sprite(_spr,_frame,xo,yo);surface_reset_target();
     var tex=surface_get_texture(s),tu=texture_get_texel_width(tex),tv=texture_get_texel_height(tex);
     for(var r=0;r<m.rows-1;r++) {
         draw_primitive_begin_texture(pr_trianglestrip,tex);

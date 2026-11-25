@@ -3,16 +3,17 @@
   "cells": 256,
   "weapon_cells": 223,
   "composite_diff_px": {
-   "mean": 86.1,
-   "max": 453,
-   "frames_over_20": 84
+   "mean": 106.4,
+   "max": 557,
+   "frames_over_20": 114
   },
   "halo_px": 19058,
   "hair_bones": 256,
   "cape_bones": 256,
-  "seconds": 182,
-  "atlas_px": 6075392,
-  "atlases": 38
+  "seconds": 191,
+  "atlas_px": 6214656,
+  "atlases": 38,
+  "helm_cells": 256
  },
  "magev3": {
   "cells": 256,
@@ -25,9 +26,10 @@
   "halo_px": 0,
   "hair_bones": 256,
   "cape_bones": 0,
-  "seconds": 187,
-  "atlas_px": 8628224,
-  "atlases": 38
+  "seconds": 179,
+  "atlas_px": 9001984,
+  "atlases": 38,
+  "helm_cells": 256
  },
  "rangerv3": {
   "cells": 256,
@@ -40,9 +42,10 @@
   "halo_px": 12074,
   "hair_bones": 256,
   "cape_bones": 256,
-  "seconds": 202,
-  "atlas_px": 12859392,
-  "atlases": 38
+  "seconds": 194,
+  "atlas_px": 13209600,
+  "atlases": 38,
+  "helm_cells": 256
  },
  "segment_code": "2805bc9d40"
 }
