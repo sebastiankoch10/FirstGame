@@ -54,13 +54,13 @@ function level_music_asset() {
 function level_enemy_kinds() {
     static kinds={
         swamp_skeleton:{name:"Sumpfskelett",prefix:"spr_lv_en_swskel_",hp:96,damage:11,speed:0.96,scale:1.4,reach:43,trigger:41,windup:.24,strike_end:.40,total:.80,hover:0,weave:0,death:"remains",frames_attack:2},
-        swamp_crawler:{name:"Sumpfkriecher",prefix:"spr_lv_en_crawler_",hp:46,damage:7,speed:1.62,scale:1.1,reach:32,trigger:30,windup:.16,strike_end:.30,total:.56,hover:0,weave:.35,death:"remains",frames_attack:4},
-        swamp_mushroom:{name:"Pilzkreatur",prefix:"spr_lv_en_shroom_",hp:70,damage:9,speed:0.92,scale:1.25,reach:36,trigger:34,windup:.30,strike_end:.46,total:.85,hover:0,weave:0,death:"spores",frames_attack:4},
+        swamp_crawler:{name:"Sumpfkriecher",prefix:"spr_lv_en_crawler_",baked:true,hp:46,damage:7,speed:1.62,scale:1.1,reach:32,trigger:30,windup:.16,strike_end:.30,total:.56,hover:0,weave:.35,death:"remains",frames_attack:4},
+        swamp_mushroom:{name:"Pilzkreatur",prefix:"spr_lv_en_shroom_",baked:true,hp:70,damage:9,speed:0.92,scale:1.25,reach:36,trigger:34,windup:.30,strike_end:.46,total:.85,hover:0,weave:0,death:"spores",frames_attack:4},
         swamp_knight:{name:"Versunkener Ritter",prefix:"spr_lv_en_knight_",hp:190,damage:19,speed:0.74,scale:1.62,reach:54,trigger:51,windup:.42,strike_end:.60,total:1.08,hover:0,weave:0,death:"remains",frames_attack:2},
         ash_warrior:{name:"Aschenkrieger",prefix:"spr_lv_en_ashwar_",hp:64,damage:10,speed:1.45,scale:1.36,reach:44,trigger:42,windup:.14,strike_end:.30,total:.56,hover:0,weave:0,death:"remains",frames_attack:2},
         cursed_armor:{name:"Verfluchte Ruestung",prefix:"spr_lv_en_armor_",hp:175,damage:17,speed:0.80,scale:1.56,reach:52,trigger:49,windup:.40,strike_end:.58,total:1.02,hover:0,weave:0,death:"remains",frames_attack:2},
-        ice_spirit:{name:"Eisgeist",prefix:"spr_lv_en_spirit_",hp:52,damage:8,speed:1.25,scale:1.3,reach:38,trigger:36,windup:.22,strike_end:.36,total:.62,hover:18,weave:1,death:"remains",frames_attack:4},
-        construct:{name:"Magisches Konstrukt",prefix:"spr_lv_en_construct_",hp:230,damage:14,speed:0.62,scale:1.62,reach:46,trigger:70,windup:.62,strike_end:.78,total:1.35,hover:0,weave:0,death:"remains",frames_attack:4,slam:76}
+        ice_spirit:{name:"Eisgeist",prefix:"spr_lv_en_spirit_",baked:true,hp:52,damage:8,speed:1.25,scale:1.3,reach:38,trigger:36,windup:.22,strike_end:.36,total:.62,hover:18,weave:1,death:"remains",frames_attack:4},
+        construct:{name:"Magisches Konstrukt",prefix:"spr_lv_en_construct_",baked:true,hp:230,damage:14,speed:0.62,scale:1.62,reach:46,trigger:70,windup:.62,strike_end:.78,total:1.35,hover:0,weave:0,death:"remains",frames_attack:4,slam:76}
     };
     return kinds;
 }
@@ -85,6 +85,11 @@ function level_enemy_spawn(_x,_y) {
         repeat(2){var a=random(360),px=_x+lengthdir_x(26,a),py=_y+lengthdir_y(26,a);if(!scenery_point_blocked(px,py-6,12))level_enemy_create(px,py,kind);}
     }
     return e;
+}
+/// Sprite scale divisor: creatures marked baked are rendered at their cfg.scale (pixel density 1:1, see
+/// tests/tools/levels/enemies.py creature_spec), so they are drawn at monster_scale/cfg.scale (1 unless elite).
+function monster_art_div(_e) {
+    return (variable_instance_exists(_e,"lvl_cfg") && is_struct(_e.lvl_cfg) && variable_struct_exists(_e.lvl_cfg,"baked")) ? _e.lvl_cfg.scale : 1;
 }
 function level_enemy_create(_x,_y,_kind) {
     var cfg=variable_struct_get(level_enemy_kinds(),_kind);
@@ -137,7 +142,7 @@ function level_enemy_death(_e) {
     if(instance_number(ObjectSkeletonRemains)>=32)with(instance_find(ObjectSkeletonRemains,0))instance_destroy();
     var rem=instance_create_layer(_e.x,_e.y,"Instances",ObjectSkeletonRemains);
     rem.sprite_index=player_artpack_sprite(cfg.prefix+"death_"+_e.skeleton_direction);
-    rem.remains_scale=_e.monster_scale;rem.depth=-_e.y;rem.life=0;rem.remains_hover=_e.lvl_hover;
+    rem.remains_scale=_e.monster_scale;rem.remains_art=monster_art_div(_e);rem.depth=-_e.y;rem.life=0;rem.remains_hover=_e.lvl_hover;
     if(cfg.death=="spores")level_puff_add(_e.x,_e.y-6,66,.55,9*global.monster_damage_multiplier,"spore");
 }
 

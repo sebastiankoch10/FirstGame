@@ -358,8 +358,19 @@ def construct_model(action, t):
 CREATURES = {'crawler': crawler_model, 'shroom': shroom_model, 'spirit': spirit_model, 'construct': construct_model}
 
 
+def creature_spec(kind):
+    """Canvas, integer origin and render scale of a creature, baked at its gameplay scale (pixel density 1:1).
+    The scale is read from scripts/level_worlds (cfg.scale of the kind with this sprite prefix), so it cannot drift."""
+    import re
+    src = (ROOT / 'scripts' / 'level_worlds' / 'level_worlds.gml').read_text(encoding='utf-8')
+    m = re.search(r'prefix:"spr_lv_en_' + kind + r'_",[^}]*?scale:([\d.]+)', src)
+    k = float(m.group(1)) if m else 1.0
+    return round(CANVAS * k), (round(ORIGIN[0] * k), round(ORIGIN[1] * k)), k
+
+
 def render_creature_frame(args):
     kind, action, direction, i = args
+    canvas, origin, k = creature_spec(kind)
     n = CR_ACTIONS[action]
     t = i / n
     if action == 'death':
@@ -368,7 +379,7 @@ def render_creature_frame(args):
     if kind == 'construct':
         prims = scale_prims(prims, 0.74)
     prims = transform_prims(prims, yaw=DIR_ANGLE[direction])
-    img = render(prims, creature_mats(), CANVAS, CANVAS, ORIGIN, max_steps=90)
+    img = render(prims, creature_mats(), canvas, canvas, origin, scale=k, max_steps=90)
     if kind == 'spirit' and action == 'death':
         img[:, :, 3] = (img[:, :, 3].astype(np.float64) * (1 - 0.8 * t)).astype(np.uint8)
     if kind == 'spirit':

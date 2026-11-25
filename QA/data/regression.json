@@ -3,6 +3,49 @@
   "checks": 811.0,
   "failures": [],
   "metrics": {
+    "sword_combo": [
+      11.0,
+      13.0,
+      19.0
+    ],
+    "behemoth_abilities": [
+      {
+        "ability": 1.0,
+        "damage": 34.19999999999709
+      },
+      {
+        "ability": 2.0,
+        "damage": 15.19999999999709
+      },
+      {
+        "ability": 3.0,
+        "damage": 32.30000000000291
+      },
+      {
+        "ability": 4.0,
+        "damage": 51.30000000000291
+      },
+      {
+        "ability": 5.0,
+        "damage": 64.60000000000582
+      },
+      {
+        "ability": 6.0,
+        "damage": 13.30000000000291
+      },
+      {
+        "ability": 7.0,
+        "damage": 34.19999999999709
+      },
+      {
+        "ability": 8.0,
+        "damage": 53.19999999999709
+      },
+      {
+        "ability": 9.0,
+        "damage": 57.0
+      }
+    ],
     "dragon_abilities": [
       {
         "warning": 1.0526315789473684,
@@ -62,26 +105,22 @@
     "countdown_fps": [
       {
         "warning": 1.3,
-        "hz": 30.0,
-        "first_hit": 1.3000000000000007
+        "first_hit": 1.3000000000000007,
+        "hz": 30.0
       },
       {
         "warning": 1.3,
-        "hz": 60.0,
-        "first_hit": 1.3000000000000003
+        "first_hit": 1.3000000000000003,
+        "hz": 60.0
       },
       {
         "warning": 1.3,
-        "hz": 144.0,
-        "first_hit": 1.305555555555552
+        "first_hit": 1.305555555555552,
+        "hz": 144.0
       }
     ],
     "snapshots": [
       {
-        "minute": 5.0,
-        "hp": 12420.0,
-        "boss": "storm_warden",
-        "unlocked": 3.0,
         "scaling": {
           "tier": 0.0,
           "hp": 1.35,
@@ -90,13 +129,13 @@
           "speed": 1.0,
           "minute": 5.0,
           "projectile_speed": 1.0
-        }
+        },
+        "minute": 5.0,
+        "hp": 12420.0,
+        "boss": "storm_warden",
+        "unlocked": 3.0
       },
       {
-        "minute": 10.0,
-        "hp": 17480.0,
-        "boss": "storm_warden",
-        "unlocked": 6.0,
         "scaling": {
           "tier": 1.0,
           "hp": 1.9,
@@ -105,13 +144,13 @@
           "speed": 1.07,
           "minute": 10.0,
           "projectile_speed": 1.08
-        }
+        },
+        "minute": 10.0,
+        "hp": 17480.0,
+        "boss": "storm_warden",
+        "unlocked": 6.0
       },
       {
-        "minute": 15.0,
-        "hp": 23000.0,
-        "boss": "storm_warden",
-        "unlocked": 9.0,
         "scaling": {
           "tier": 2.0,
           "hp": 2.5,
@@ -120,43 +159,43 @@
           "speed": 1.1400000000000001,
           "minute": 15.0,
           "projectile_speed": 1.16
-        }
+        },
+        "minute": 15.0,
+        "hp": 23000.0,
+        "boss": "storm_warden",
+        "unlocked": 9.0
       },
       {
+        "scaling": {
+          "tier": 0.0,
+          "hp": 1.35,
+          "damage": 1.3,
+          "projectiles": 0.0,
+          "speed": 1.0,
+          "minute": 5.0,
+          "projectile_speed": 1.0
+        },
         "minute": 5.0,
         "hp": 17550.0,
         "boss": "twins",
-        "unlocked": 3.0,
-        "scaling": {
-          "tier": 0.0,
-          "hp": 1.35,
-          "damage": 1.3,
-          "projectiles": 0.0,
-          "speed": 1.0,
-          "minute": 5.0,
-          "projectile_speed": 1.0
-        }
+        "unlocked": 3.0
       },
       {
+        "scaling": {
+          "tier": 1.0,
+          "hp": 1.9,
+          "damage": 1.6,
+          "projectiles": 0.0,
+          "speed": 1.07,
+          "minute": 10.0,
+          "projectile_speed": 1.08
+        },
         "minute": 10.0,
         "hp": 24700.0,
         "boss": "twins",
-        "unlocked": 6.0,
-        "scaling": {
-          "tier": 1.0,
-          "hp": 1.9,
-          "damage": 1.6,
-          "projectiles": 0.0,
-          "speed": 1.07,
-          "minute": 10.0,
-          "projectile_speed": 1.08
-        }
+        "unlocked": 6.0
       },
       {
-        "minute": 15.0,
-        "hp": 32500.0,
-        "boss": "twins",
-        "unlocked": 9.0,
         "scaling": {
           "tier": 2.0,
           "hp": 2.5,
@@ -165,13 +204,13 @@
           "speed": 1.1400000000000001,
           "minute": 15.0,
           "projectile_speed": 1.16
-        }
+        },
+        "minute": 15.0,
+        "hp": 32500.0,
+        "boss": "twins",
+        "unlocked": 9.0
       },
       {
-        "minute": 5.0,
-        "hp": 12420.0,
-        "boss": "behemoth",
-        "unlocked": 3.0,
         "scaling": {
           "tier": 0.0,
           "hp": 1.35,
@@ -180,13 +219,13 @@
           "speed": 1.0,
           "minute": 5.0,
           "projectile_speed": 1.0
-        }
+        },
+        "minute": 5.0,
+        "hp": 12420.0,
+        "boss": "behemoth",
+        "unlocked": 3.0
       },
       {
-        "minute": 10.0,
-        "hp": 17480.0,
-        "boss": "behemoth",
-        "unlocked": 6.0,
         "scaling": {
           "tier": 1.0,
           "hp": 1.9,
@@ -195,13 +234,13 @@
           "speed": 1.07,
           "minute": 10.0,
           "projectile_speed": 1.08
-        }
+        },
+        "minute": 10.0,
+        "hp": 17480.0,
+        "boss": "behemoth",
+        "unlocked": 6.0
       },
       {
-        "minute": 15.0,
-        "hp": 23000.0,
-        "boss": "behemoth",
-        "unlocked": 9.0,
         "scaling": {
           "tier": 2.0,
           "hp": 2.5,
@@ -210,7 +249,11 @@
           "speed": 1.1400000000000001,
           "minute": 15.0,
           "projectile_speed": 1.16
-        }
+        },
+        "minute": 15.0,
+        "hp": 23000.0,
+        "boss": "behemoth",
+        "unlocked": 9.0
       }
     ],
     "formations": [
@@ -242,8 +285,8 @@
     "performance": {
       "enemies": 150.0,
       "frames": 60.0,
-      "mean_frame_ms": 16.671599999999998,
-      "max_frame_ms": 17.177,
+      "mean_frame_ms": 16.666866666666667,
+      "max_frame_ms": 16.98,
       "measurement": "Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement."
     },
     "random_selection": [
@@ -315,54 +358,11 @@
         "ability": 9.0,
         "damage": 76.0
       }
-    ],
-    "behemoth_abilities": [
-      {
-        "ability": 1.0,
-        "damage": 34.19999999999709
-      },
-      {
-        "ability": 2.0,
-        "damage": 15.19999999999709
-      },
-      {
-        "ability": 3.0,
-        "damage": 32.30000000000291
-      },
-      {
-        "ability": 4.0,
-        "damage": 51.30000000000291
-      },
-      {
-        "ability": 5.0,
-        "damage": 64.60000000000582
-      },
-      {
-        "ability": 6.0,
-        "damage": 13.30000000000291
-      },
-      {
-        "ability": 7.0,
-        "damage": 34.19999999999709
-      },
-      {
-        "ability": 8.0,
-        "damage": 53.19999999999709
-      },
-      {
-        "ability": 9.0,
-        "damage": 57.0
-      }
-    ],
-    "sword_combo": [
-      11.0,
-      13.0,
-      19.0
     ]
   },
   "scope": "Current production functions and input-injected actual Player/Controller Steps in isolated native runner. Targeted regressions and short rendered150-enemy stress fixture; not full runs or human playtests.",
   "exit_code": 0,
-  "logs": "QA\\logs\\regression-20261125-134732",
+  "logs": "QA\\logs\\regression-20261125-141922",
   "screenshots": [
     "qacapture-crowd150-heavy-rain.png",
     "qacapture-hud-full-build-1280.png",

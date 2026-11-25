@@ -22,6 +22,7 @@ updated: 2026-11-25
 - **2026-11-25 · Attack Timeline: Uhr und Einheit bleiben die des Besitzers** (Spielerwaffen in Spielschritten, Bosse in Sekunden auf `v2_clock`). Grund: Migration ohne jede Verhaltensänderung; Auslösung nach Zeit folgt, wenn alle Angriffe auf der Zeitachse laufen.
 
 ## Spieldesign
+- **2026-11-25 · Gegner-Pixeldichte 1:1 nur, wo echte Details entstehen.** Prozedurale Kreaturen werden in Zielgröße gerendert; gezeichnete Skelett-Gegner werden nicht neu abgetastet (A/B: kein Detailgewinn, eher weicher). Sie bleiben gestreckt, bis neue Grafik kommt.
 - **2026-11-25 (2) · Nutzerentscheidungen:**
   - Pixeldichte 1 Artpixel = 1 Welteinheit umsetzen.
   - Drache bekommt Schweifschlag und Biss als **zusätzliche** Nahangriffe; die neun Fähigkeiten bleiben, der Schaden entspricht einer vorhandenen Drachenfähigkeit.

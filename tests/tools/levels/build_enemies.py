@@ -40,7 +40,8 @@ def main():
     for (k, a, d), frames in sorted(sprites.items()):
         group = DERIVED.get(k) or CREATURES[k]
         proj.ensure_texture_group(group)
-        proj.sprite(f'spr_lv_en_{k}_{a}_{d}', frames, E.ORIGIN, texgroup=group)
+        origin = E.creature_spec(k)[1] if k in CREATURES else E.ORIGIN
+        proj.sprite(f'spr_lv_en_{k}_{a}_{d}', frames, origin, texgroup=group)
         if d == 'down':
             Image.fromarray(frames[0], 'RGBA').save(out / f'{k}_{a}_down_0.png')
     proj.save()
