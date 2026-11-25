@@ -27,8 +27,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"FirstGame_ArtPack",
-    "path":"folders/Sprites/FirstGame_ArtPack.yy",
+    "name":"Minibosse",
+    "path":"folders/Sprites/Bosse/Minibosse.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

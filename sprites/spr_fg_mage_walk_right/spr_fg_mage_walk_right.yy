@@ -63,8 +63,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "FirstGame_ArtPack",
-    "path": "folders/Sprites/FirstGame_ArtPack.yy"
+    "name": "ArtPack_0_1_Helden",
+    "path": "folders/Sprites/Legacy/ArtPack_0_1_Helden.yy"
   },
   "preMultiplyAlpha": false,
   "resourceType": "GMSprite",

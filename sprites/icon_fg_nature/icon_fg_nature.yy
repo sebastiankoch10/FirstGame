@@ -42,8 +42,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "FirstGame_ArtPack",
-    "path": "folders/Sprites/FirstGame_ArtPack.yy"
+    "name": "Zauber_Icons",
+    "path": "folders/Sprites/UI/Zauber_Icons.yy"
   },
   "preMultiplyAlpha": false,
   "resourceType": "GMSprite",

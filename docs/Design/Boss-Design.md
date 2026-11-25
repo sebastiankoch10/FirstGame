@@ -1,6 +1,13 @@
-# FirstGame – Bosskampf-Designphilosophie (verbindlich, höchste Priorität für alle Hauptbosse)
+---
+tags: [design, verbindlich, bosse]
+updated: 2026-11-25
+status: verbindlich (Fachgebiet Hauptbosse); bis 24.11. unter DESIGN/BOSS_DESIGN.md
+---
+# Boss-Design: Bosskampf-Philosophie und Umsetzungsstand
 
-Quelle: Vorgabe des Projektinhabers vom 23.11.2026. Gilt vor jeder Entwicklung, Überarbeitung oder umfassenden Prüfung von Bossangriffen.
+**Quelle:** Vorgabe des Projektinhabers vom 23.11.2026, ergänzt am 25.11.2026 um artikulierte Bosskörper (Abschnitt G2).
+
+**Geltung:** Für Bossarbeit ist dieses Dokument maßgeblich (Rang 2 unter [[Leitbild]]). Die allgemeinen Kampf-, Warn- und Fairnessregeln für alle Gegner stehen in [[Kampf & Begegnungen]]. Hier stehen nur die Besonderheiten der Hauptbosse.
 
 ## Leitbild
 
@@ -94,6 +101,39 @@ Alle Muster sind an die offene Top-down-Welt angepasst; es gibt keine geschlosse
 
   Das ergibt eine eigene Choreografie, keine zwei unabhängigen Gegner.
 - **Sumpfbehemoth:** Flächenkontrolle durch nacheinander hervortretende Wurzeln, Giftflächen, die den Raum verkleinern, Säurefelder mit wechselnden Zwischenräumen, Schockwellen mit begrenzten sicheren Bereichen, kurz aufeinanderfolgende Pilzexplosionen und eine große Sumpfwelle. Weit entfernte Spieler erreicht er über gezielte Bodenattacken und eine seltene Aufholbewegung.
+
+## G2 – Artikulierte Bosskörper (Soll, Auftrag 25.11.2026)
+
+**Referenz:** Bosssequenz im Terranigma-Trailer ab 0:37. Analyse und Grenzen stehen in [[Visuelles Leitbild & Animation]].
+
+Große Bosse haben Körper, deren Teile gezielt für Angriffe und Bewegungen eingesetzt werden. Die Animation übernimmt einen Teil der Angriffskommunikation.
+
+**Grundregeln:**
+- Die Körperteile sind optisch **ein zusammenhängender Körper**, keine Papierpuppe aus losen Teilen.
+- Starke Bewegungen einzelner Teile lösen eine **Reaktion des Rumpfes** aus (Gewichtsverlagerung, Gegenbewegung).
+- Hitboxen, Hurtboxen und Schadenszeitpunkte hängen an den sichtbaren Körperteilen und laufen auf der Uhr des Bosses.
+- Ein Schweifschlag ist **sichtbar ausgeholt und räumlich nachvollziehbar** und kein eingeblendetes Angriffs-Sprite.
+
+**Drache (Qualitätsreferenz):**
+- Der Kopf richtet sich unabhängig vom Körper aus.
+- Der Hals unterstützt die Kopfbewegung, z. B. als Kette mit Nachlauf.
+- Der Rumpf reagiert auf Gewichtsverlagerung.
+- Die Flügel haben eigene Bewegungsphasen: Ausbreiten, Schlag, Anlegen.
+- Die Beine vermitteln Standfestigkeit und Gewicht; die Füße bleiben beim Stampfen und Laufen am Boden.
+- Biss: Der ganze Vorderkörper geht mit (Ausholen zurück, Vorstoß, Rückzug).
+- Atemangriff: Hals, Kopf und Rumpf bereiten ihn vor (Aufrichten, Einatmen, Vorbeugen), das Feuer entsteht am Maul-Anker.
+- Schweifschlag: Ausholen zur Gegenseite, Schwung durch einen angekündigten Sektor, Nachschwingen. Die Hitbox folgt der Schweifspitze.
+
+**Ist (25.11.):**
+- Der Drache ist ein einzelnes Sprite je Aktion mit 2–4 Frames.
+- Die Richtung entsteht nur durch Spiegeln.
+- Es gibt eine Atembewegung per Skalierung.
+- Annotierte Maul-Anker existieren (`dragon_art_anchor`).
+- Hexen und Behemoth sind ebenfalls Einzelsprites.
+
+**Weg zum Soll:** Rig-System in [[Technische Architektur]], Drachen-Prototyp im [[Roadmap & Vertical Slice]].
+
+**Wichtig:** Das bestehende Drachenmodell bleibt erhalten. Die Zerlegung in Körperteile nutzt die vorhandene Gestaltung, ohne sie zu ersetzen.
 
 ## H – Technische Grundarchitektur
 

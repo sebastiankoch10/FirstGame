@@ -1,6 +1,44 @@
-# Talentbäume und Ausrüstung (Stand 24.11.2026)
+---
+tags: [design, verbindlich, progression, talente, ausruestung]
+updated: 2026-11-25
+status: verbindlich (Fachgebiet Progression); Talent- und Ausrüstungsteil bis 24.11. unter DESIGN/TALENTS_AND_EQUIPMENT.md
+---
+# Progression & Builds
 
-## Herkunft der Regeln (wichtig)
+Rang 2 unter [[Leitbild]]. Technik: [[Talente]], [[Ausrüstung]], [[Zauber & Passiva]], [[Progression & Level-up]].
+
+## Grundsätze der Progression (Soll)
+
+- **Build-Tiefe nach dem Vorbild Path of Exile:**
+  - Synergien zwischen aktiven Zaubern, Passiva, Talenten und Ausrüstung;
+  - unterschiedliche Spezialisierungen;
+  - bedeutsame Entscheidungen statt reiner Zahlenschritte.
+  - Kein Talentsystem, das alle Klassen gleich macht (Auftrag 24.11.).
+- **Zauberpool:** 18 aktive und 18 passive Fähigkeiten, Stufe 1–9, je 6 Slots. Der Spieler kann einen gewünschten Build gezielt verfolgen, ohne dass jeder Run gleich verläuft (Auftrag 22.11.).
+  - **Vorgesehen, aber noch nicht umgesetzt:** Rerolls und weitere Auswahlmechaniken.
+- **Level-ups sind Ereignisse:**
+  - Der erste kommt schnell.
+  - Eine neue Fähigkeit soll man einige Sekunden erleben, bevor die nächste Wahl kommt (Ist: mindestens 6 s Abstand).
+  - Danach dauern Level-ups zunehmend länger.
+  - Keine automatische Heilung beim Level-up.
+  - Die XP-Kurve zielt auf vollständige Builds gegen Ende eines erfolgreichen 30-Minuten-Runs (Aufträge 22.11.).
+- **Schwierigkeit steigt kontinuierlich.** Es soll nicht passieren, dass:
+  - die ersten 15 Minuten trivial sind;
+  - die Schwierigkeit plötzlich sprunghaft steigt;
+  - der Spieler nach einigen Upgrades unbesiegbar ist;
+  - Bosse unabhängig vom Build in Sekunden sterben (Auftrag 23.11.).
+- **Waffen-Upgrade-System** (Auftrag 22.11.):
+  - Die Klassenwaffen sollen später unabhängig von den sechs Zaubern aufgewertet werden können: Schaden, Tempo, Reichweite, Projektilzahl, Schlaggröße, Durchschlag, Zusatzeffekte.
+  - **Offen:** noch nicht umgesetzt. Die Architektur muss es zulassen.
+- **Mechanische und visuelle Progression gehören zusammen:**
+  - Jede mechanische Stufe hat eine erkennbare, aber verdiente visuelle Entsprechung.
+  - Qualitative Veränderungen (neue Phasen, Projektiltypen, Verkettungen, Elemente, Ton) sind ebenso Progression wie Größe.
+  - Regeln und Stufenbänder: [[Fähigkeiten, VFX & Audio]] Abschnitt 4.
+- **Keine Zahlenänderungen ohne Auftrag.** Werte unten sind Designwerte vom 24.11., nicht ausbalanciert. Empfehlungen werden nur dokumentiert.
+
+## Talentbäume und Ausrüstung (Stand 24.11.2026, Pflege laufend)
+
+### Herkunft der Regeln (wichtig)
 
 **Gefundene Vorgaben:** keine. Durchsucht wurden:
 - alle Projekt- und QA-Dokumente
@@ -17,7 +55,7 @@ Gesucht wurde nach Talentbaum, Skill Tree, Talentpunkten, Talenten, Freischaltun
 
 Alle Zahlenwerte sind **neue, bewusst moderate Designwerte**. Sie sind nicht durch Simulationen ausbalanciert. Siehe „Offene Entscheidungen“.
 
-## Architektur Talente (`scripts/talents/talents.gml`)
+### Architektur Talente (`scripts/talents/talents.gml`)
 
 - **Daten:** `talent_definitions()` ist eine statische Liste. Jeder Eintrag hat:
   - `id` (eindeutig), `tree` (`general`, `Sword`, `Mage` oder `Ranger`), `name`, `icon` (Sprite-Name)
@@ -38,7 +76,7 @@ Alle Zahlenwerte sind **neue, bewusst moderate Designwerte**. Sie sind nicht dur
   - `persistent=false`: Die Talente gelten nur für einen Run. Mit `true` werden Ränge und Punkte je Klasse in `firstgame_talents.ini` gespeichert und geladen. Die Funktionen dafür existieren, sind aber nicht aktiv.
 - **Bots:** `talent_bot_invest()` verteilt Punkte deterministisch, erst im Klassenbaum, dann im Allgemein-Baum. Das nutzen nur die QA-Simulationen.
 
-## Oberfläche
+### Oberfläche
 
 **Charakterbildschirm:** Taste **T** während des Spiels oder im Pausenmenü „Talente & Ausrüstung“. Das Spiel pausiert. Schließen mit T, Esc oder dem Knopf.
 - **Links Ausrüstung**, Mitte der Allgemein-Baum, rechts der Baum der eigenen Klasse. Fremde Klassenbäume werden nicht angezeigt.
@@ -59,11 +97,11 @@ Alle Zahlenwerte sind **neue, bewusst moderate Designwerte**. Sie sind nicht dur
   - „Talentpunkte: N [T]“ neben der Stufe
   - Einblendung „+1 Talentpunkt (Stufe 8) – [T]“
 
-## Talentdefinitionen
+### Talentdefinitionen
 
 Die Wirkung ist pro Rang angegeben.
 
-### Allgemein (alle Klassen)
+#### Allgemein (alle Klassen)
 
 | Talent | Rang | Wirkung | Voraussetzung |
 |---|---|---|---|
@@ -77,7 +115,7 @@ Die Wirkung ist pro Rang angegeben.
 | Glückstreffer | 3 | +2 % Krit-Chance | Konzentration 2 |
 | **Überlebenswille** | 1 | einmal pro Run ein tödlicher Treffer → 1 Leben und 1,5 s unverwundbar | Lebenskraft 1, Zweiter Atem 2 |
 
-### Schwertkämpfer
+#### Schwertkämpfer
 
 | Talent | Rang | Wirkung | Voraussetzung |
 |---|---|---|---|
@@ -90,7 +128,7 @@ Die Wirkung ist pro Rang angegeben.
 | Blutrausch | 2 | ein Finale, das trifft, heilt 2 Leben | Wellenfinale 1 |
 | **Klingensturm** | 1 | jede 4. Kette endet mit einem 360°-Rundumhieb | Wellenfinale 2, Sturmangriff 1 |
 
-### Zaubermeisterin
+#### Zaubermeisterin
 
 | Talent | Rang | Wirkung | Voraussetzung |
 |---|---|---|---|
@@ -103,7 +141,7 @@ Die Wirkung ist pro Rang angegeben.
 | Elementarfokus | 3 | +5 % Feuer-, Kälte- und Blitzbonus | Zauberfluss 2 |
 | **Supernova** | 1 | Implosion zieht normale Gegner an, zweite Explosion mit 50 % Schaden | Sternenkunde 2, Elementarfokus 1 |
 
-### Waldläufer
+#### Waldläufer
 
 | Talent | Rang | Wirkung | Voraussetzung |
 |---|---|---|---|
@@ -123,7 +161,7 @@ Die Wirkung ist pro Rang angegeben.
 
 Die 12er-Kombo des Waldläufers bleibt ohne Talente exakt: 1, 1, 3, 1, 1, 1, 1, 1, 5, 1, 1, Hagel.
 
-## Ausrüstung (`scripts/equipment/equipment.gml`)
+### Ausrüstung (`scripts/equipment/equipment.gml`)
 
 - **Start:** Jeder Run beginnt ohne Ausrüstung.
 - **Slots:** Waffe, Kopf, Brust, Hände, Füße, Talisman.
@@ -154,9 +192,12 @@ Die 12er-Kombo des Waldläufers bleibt ohne Talente exakt: 1, 1, 3, 1, 1, 1, 1, 
 - **Darstellung:**
   - Drops mit Lichtsäule in Rarity-Farbe, eigener Lichtquelle und Punkt auf der Minimap
   - HUD-Leiste mit den sechs Slots über den Zauberslots
-- **Grenze:** Die Charaktersprites zeigen Ausrüstung **nicht** an. Dafür bräuchte es Rüstungsvarianten aller Animationen in 8 Richtungen für 3 Klassen.
+- **Sichtbarkeit am Charakter (seit 24.11.2026):**
+  - Kopf, Brust, Hände, Füße und Waffe erscheinen als Ebenen auf dem Basismodell. Das Aussehen hängt an der Stufe aus der Gegenstandsstufe, die Seltenheit färbt die Akzente.
+  - Der Talisman ist nicht sichtbar.
+  - Details und Grenzen: [[Charaktergrafik & Ausrüstungs-Layer]].
 
-## Tests
+### Tests
 
 `python tests/tools/run_native_harness.py feature` prüft nativ für alle drei Klassen:
 - Startzustand
@@ -170,9 +211,9 @@ Die 12er-Kombo des Waldläufers bleibt ohne Talente exakt: 1, 1, 3, 1, 1, 1, 1, 
 - Charakterbildschirm per T, Mausklick und Esc
 - Partikel
 
-## Offene Entscheidungen
+### Offene Entscheidungen
 1. **Punktevergabe:** pro Stufe, pro Boss oder als dauerhafte Meta-Progression zwischen Runs. Umschaltbar über `talent_config().persistent`.
 2. **Respec:** Ob Talente zurückgesetzt werden können, ist nicht vorgesehen und offen.
 3. **Zahlenwerte von Talenten und Gegenständen:** Sie brauchen menschliche Spieltests und gezielte Simulationen.
-4. **Ausrüstungsoptik am Charakter:** Sie bräuchte neue Animationsgrafiken.
+4. **Ausrüstungsoptik am Charakter:** seit 24.11. umgesetzt (prozedural abgeleitet). Offen sind die künstlerische Feinabnahme und handgezeichnete Varianten.
 5. **Weitere Talentquellen:** Ob es zusätzliche Quellen geben soll, etwa Truhen, ist offen.

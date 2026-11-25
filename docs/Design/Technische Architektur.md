@@ -1,0 +1,228 @@
+---
+tags: [design, verbindlich, architektur, rendering, animation, performance]
+updated: 2026-11-25
+status: verbindlich als Zielarchitektur; Entscheidungen mit „Offen“ brauchen die Zustimmung des Nutzers
+---
+# Technische Architektur
+
+Rang 2 unter [[Leitbild]]. Beschreibt, **wie** die Anforderungen aus [[Visuelles Leitbild & Animation]], [[Fähigkeiten, VFX & Audio]] und [[Kampf & Begegnungen]] in GameMaker 2024 (Runtime 2024.14.4.268) umgesetzt werden. Die Systemkarte im Detail steht in `docs/Systeme/`.
+
+## 1. Ist-Architektur (Audit 25.11.2026)
+
+| Bereich | Ist | Bewertung |
+|---|---|---|
+| Hauptschleife | `ObjectController` Step: Bosswelt, Zauber, Passiva, Talente/Ausrüstung. `Draw_73` zeichnet Zauber, Bossgefahren, Beute nach dem Licht | tragfähig |
+| Bossgefahren | `bv2_zone/line/sector/ring/bullet` mit Warn- und Aktivzeit, Trefferhöhe, **einer Uhr je Boss** (`v2_clock`); Choreografie `boss_choreo`; Darstellung `attack_telegraph` | **Kernstück einer Zeitachse**, nativ getestet. Erweitern statt ersetzen. |
+| Spielerangriffe | Schwert: festes Zeitraster in `master_combat` (`timings=[0,4,16,22,34,42,56]` Frames), `ObjectSwordHitbox`. Stab/Bogen: Kombozähler in `class_weapons`, Projektile als Objekte (`ObjectLightningball`) | Zeitachsen existieren, aber je System anders |
+| Zauber | `spell_v2`: Felder, Einschläge und Verbindungen als Structs; Darstellung als gestrecktes 4-Frame-Sprite (`spell_fx_draw`) plus Vektorformen | funktional, visuell der Hauptmangel |
+| Partikel | `spell_vfx`: eigener Struct-Pool (Grenze 420), Sichtfeld-Culling, additive Vektorformen | Pool und Culling gut; Darstellung nicht auf dem Pixelraster |
+| Licht | `atmosphere`: multiplikative Lichtfläche in halber Auflösung, Budget 72 Quellen | gut |
+| Spieleranimation | Zustand → Sprite `spr_fg_<figur>_<aktion>_<richtung>`; Sprung, Fall, Slide und Ausweichen wählen Posen nach Fortschritt | einfach; keine Ereignisse, keine Übergänge, keine Sekundärbewegung |
+| Ausrüstung | `equipment_visual`: Ebenen aus gepackten Atlanten, Rechtecktabelle je Zelle, ein Frame-Takt | Vorlage für weitere Ebenen (Haar, Umhang) |
+| Gegneranimation | Sprite je Aktion und Richtung, Frame-Index nach Zeit | einfach |
+| Bossanimation | Drache: Aktion → Sprite (2–4 Frames), Spiegeln, Atmen per Skalierung, Flug per Höhenversatz, **Maul-Anker** (`dragon_art_anchor`) | kein artikulierter Körper; Anker sind ein erster Ansatzpunkt |
+| Audio | `audio_manager`/`fg_sfx`: 16 Stimmen, 2 je Cue, Musik-Überblendung | Grundlage für eine Ereignisschicht |
+| Shader, Partikelsysteme, Sequenzen, Skelett-Animation | **nicht verwendet** | — |
+| Rendering | Kamera 800×600, Viewport 1366×768, Fenster und App-Surface 1280×720, Texturfilter aus | **Fehler:** nicht-uniforme Skalierung (siehe R1) |
+
+**Gemessen (Testkopie, Minute 0, Wald):**
+- 1.115 Instanzen, überwiegend Szenerie, dabei 23 Gegner.
+- `fps_real` ≈ 380 ohne VSync-Grenze.
+- Frühere Messung mit 150 Gegnern: 16,7 ms (VSync-gedeckelt, grob).
+
+## 2. Architekturdefizite
+
+| Nr. | Defizit | Art |
+|---|---|---|
+| A1 | Verzerrte, nicht-uniforme Skalierung (4:3-Kamera auf 16:9-Ausgabe) | fundamental, Rendering |
+| A2 | Kein gemeinsames Pixelraster (Artpixel = 0,25–1,65 Welteinheiten; Vektoreffekte) | fundamental, Rendering/Assets |
+| A3 | Keine gemeinsame Zeitachse für Animation, Gameplay, Effekt und Ton. Boss, Schwert und Klassenwaffen lösen das jeweils anders. | fehlendes System |
+| A4 | Keine Animationsereignisse, keine Übergänge, keine Sekundärbewegung | fehlendes System |
+| A5 | Große Bosse sind Einzelsprites, kein artikulierter Körper | fehlendes System |
+| A6 | VFX ohne Profile oder Bänder; Größe = Radius-Streckung | bestehendes System verbessern |
+| A7 | Audio ohne Ereignisschicht (Drosselung, Priorität, Varianten nur teilweise) | bestehendes System verbessern |
+| A8 | Keine Qualitätsstufen (LOD) für Effekte | bestehendes System verbessern |
+
+## 3. Vergleich der Animationstechniken (GameMaker 2024)
+
+Bewertung: ++ sehr gut, + gut, o mittel, − schwach, −− ungeeignet.
+
+| Technik | Qualität | Machbarkeit GM 2024 | Leistung | Aufwand | Wiederverwendung | Eignung | Pixel-Treue | Einsatz in FirstGame |
+|---|---|---|---|---|---|---|---|---|
+| Frame-by-Frame | ++ (wenn gut gezeichnet) | ++ | ++ | −− (je Frame und Richtung) | − | kleine Gegner, Spielerposen | ++ | **ja**: Spieler-Grundposen, normale Gegner |
+| Hierarchische Sprite-Teile (Parent-Child) | + | ++ (eigene GML-Struktur) | + | o | ++ | große Bosse, Waffen | o (Rotation bricht das Raster, siehe R3) | **ja**: Bosse, Waffen, Anhänge |
+| Skelett-Animation mit Spine | ++ | + (Laufzeit eingebaut) | + | o | ++ | Bosse, Menschen | o | **Offen**: Der Spine-Editor ist kostenpflichtig, also nur mit Freigabe |
+| Eigenes Bone-System in GML | + | + | + | o bis − (einmalig) | ++ | Bosse | o | **ja** (Vorschlag): schlanker Cutout-Rig statt Spine |
+| Mesh-Verformung (Vertex-Buffer, `draw_sprite_pos`) | + | o | + | − | + | Flügelhäute, Stoff, Schleim | − | punktuell: Flügel, Umhang-Saum |
+| Prozedurale Animation (Sinus, Federn) | + | ++ | ++ | ++ | ++ | Atmung, Wippen, Nachschwingen | + (auf ganze Pixel runden) | **ja, überall** als billige Lebendigkeit |
+| Inverse Kinematik (2-Glied, analytisch) | + | ++ | ++ | o | + | Beine und Füße großer Bosse, Hals | o | **ja**: Drachenbeine, Hals mit Blick |
+| Sprite-Layering | + | ++ (Ist bei Ausrüstung) | + | o | ++ | Spieler | ++ | **ja**: Erweiterung um Haar und Umhang als eigene Ebenen |
+| Ankerpunkte | ++ (für Synchronität) | ++ (Ist: Maul-Anker) | ++ | + | ++ | Waffen, Projektile, Effekte, Hitboxen | ++ | **ja, Pflicht** für alle Angriffsquellen |
+| Sekundäranimation (Federketten) | ++ | ++ | + | o | ++ | Haar, Umhang, Schweif, Flügel | o | **ja** |
+| Animations-Blending | o | o | + | o | o | Pixel-Frames lassen sich nicht überblenden | −− (Überblendung verschmiert) | **nein** für Pixel-Frames; stattdessen **Übergangsposen**. Für Rig-Posen (Winkel) ja |
+| Kontrollierte Rotation/Skalierung | o | ++ | ++ | ++ | + | Zieldrehung, Atmen, Squash | − ohne Raster-Rendering | nur nach R3 |
+| Shader-Effekte | + | + (GLSL ES) | + | o | ++ | Trefferblitz, Kontur, Palette, Hitze, Auflösen | + | **ja**, gezielt (R4) |
+| Vorgerenderte 3D-Animation als Pixel-Art | ++ (Bewegung) | o (Pipeline außerhalb, Blender kostenlos) | ++ | −− (Modelle nötig) | o | große Bosse | o (Stilbruch-Gefahr) | **Offen**, nur als Experiment; passt nicht zu den vorhandenen gezeichneten Assets |
+
+### Empfehlung: Hybrid je Inhaltstyp
+
+| Inhalt | Technik |
+|---|---|
+| Spielerfiguren | Gezeichnete Grundposen (Ist) **plus** Übergangsposen (Landung, Richtungswechsel, Ausholen) **plus** eigene Ebenen für Haar und Umhang mit Federversatz (1–2 Artpixel, auf ganze Pixel gerundet) **plus** prozedurale Neigung und Atmung. Kein Rig, damit die gezeichnete Qualität erhalten bleibt. |
+| Normale Gegner | Frame-Animation (Ziel: Lauf 6–8 Frames je Richtung), dazu prozedurales Wippen, Lehnen und Treffer-Wackeln, Anker für Angriffe |
+| Elite und Minibosse | Frame-Animation plus Anker plus ein bis zwei getrennte Teile (Waffe, Schild, Kopf) |
+| Hauptbosse | **Cutout-Rig in GML**: Teile als Pixel-Sprites je Körperregion, Bone-Hierarchie, Schlüsselposen mit Easing, IK für Beine und Hals, Federketten für Schweif und Flügel. Gerendert nach R3. Hitboxen an Bones. |
+| Waffen und Ausrüstung | Ebenen (Ist) plus Anker an der Hand, Verwischungsbilder als eigene Effekt-Sprites |
+| Effekte | VFX-Bausteine (siehe 4.4) |
+
+## 4. Zielarchitektur: gemeinsame Bausteine
+
+Prüfregel: zuerst Bestehendes erweitern, nur bei echtem Defizit neu bauen. Kein vorsorgliches Neuschreiben.
+
+### 4.1 Attack Timeline (A3), Erweiterung des bv2-Prinzips
+- **Daten:** Eine Fähigkeit oder ein Angriff ist eine Zeitachse aus Ereignissen auf **einer Uhr des Besitzers** (Spieler, Gegner, Boss):
+  ```
+  {length:0.9, events:[
+    {t:0.00, ev:"pose", clip:"tail_windup"},
+    {t:0.00, ev:"telegraph", shape:"sector", radius:260, span:120, warn:0.6, height:"ground"},
+    {t:0.05, ev:"sfx", cue:"dragon_tail_windup"},
+    {t:0.60, ev:"hitbox_on", bone:"tail_tip", radius:34, height:"ground"},
+    {t:0.60, ev:"vfx", profile:"dust_sweep", bone:"tail_tip"},
+    {t:0.82, ev:"hitbox_off"},
+    {t:0.82, ev:"pose", clip:"tail_recover"}]}
+  ```
+- **Verarbeitung:** Gameplay, Animation, VFX und Audio lesen dieselbe Zeitachse. Pause hält die Uhr an. Bei variabler Bildrate werden Ereignisse nach Zeit ausgelöst, nicht nach Frames.
+- **Bestehendes übernehmen:**
+  - `bv2_*` sind die Ereignisse `telegraph`, `hitbox_on` und `hitbox_off` für Bossflächen.
+  - Das `master_combat`-Raster wird zur Schwert-Zeitachse.
+  - Die `class_weapons`-Kombos werden zur Zeitachse je Kombostufe.
+  - **Migration schrittweise; Verhalten und Werte bleiben gleich.** Die Telemetrie-Anker in `QA/tools/telemetry_injections.py` werden mitgezogen.
+
+### 4.2 Animation Controller (A4)
+- **Aufgabe:**
+  - Zustand → Clip (Frames bzw. Rig-Pose, Wiedergabe nach Zeit oder nach Fortschritt);
+  - Übergänge mit Übergangsposen;
+  - **Ereignisse** je Frame bzw. Zeitpunkt (Fußaufsatz, Kontaktframe, Freigabe);
+  - Abbruchregeln (Eingabe bricht jede rein visuelle Phase ab).
+- **Gemeinsam genutzt** von Spieler, Gegnern und Bossen. Er ersetzt die verstreute Auswahl in `ObjectPlayer/Step_0`, `master_skeleton` und `dragon_animation`, schrittweise.
+- **Sekundärbewegung:** ein Federmodul (Feder-Dämpfer je Ebene bzw. Kettenglied), aus dem Bewegungsvektor gespeist. Ausgabe auf ganze Artpixel gerundet.
+
+### 4.3 Rig-System für große Bosse (A5)
+- **Daten:**
+  - Bones (Elternteil, Länge, Ruhewinkel), Teil-Sprites mit Drehpunkt;
+  - Zeichenreihenfolge je Blickrichtung;
+  - Schlüsselposen je Aktion, Easing.
+- **Prozedural:**
+  - Federketten für Schweif, Hals und Flügel;
+  - 2-Glied-IK für die Beine mit Fußankern am Boden;
+  - Blickrichtung des Kopfes.
+- **Hitboxen und Hurtboxen** als Kapseln an Bones, auf der Uhr des Bosses aktiv. Debug-Anzeige über das vorhandene F10-Körperbox-Overlay.
+- **Teile-Quelle:** Zerlegung der vorhandenen Drachen-Grafik in Regionen mit dem Werkzeugansatz aus `tests/tools/characters/` (Segmentierung). Fehlende verdeckte Bereiche werden ergänzt. **Die Originale bleiben unverändert.**
+
+### 4.4 VFX-System (A6, A8): Erweiterung von `spell_vfx`
+- **Emitter-Profile (Daten):** Element, Bausteine, Partikelzahl, Lebensdauer, Licht, Deckkraft, Ton-Variante; **je Band** (Basis, Mittel, Endgame) plus Talent-Zusatzmerkmale.
+- **Partikel:**
+  - Pixel-Sprites (1–4 Artpixel, kleiner Atlas) statt Vektorformen;
+  - Position auf das Raster gelegt (Sprite- bzw. Feinraster nach R2);
+  - Pool mit Budget (Ist: 420).
+- **Ebenen:**
+  - Bodenmale (unter Figuren);
+  - Welt (mit Tiefe);
+  - additives Licht (weiche Ebene);
+  - Gegnergefahren darüber (Hierarchie).
+- **Qualitätsstufen:**
+  - Partikel-Multiplikator, Sekundärbewegung an/aus, Lichtauflösung;
+  - automatische Dämpfung eigener Effekte bei aktiven Bossgefahren (Vorschlag).
+
+### 4.5 Telegraph-System (vorhanden: `attack_telegraph` + `bv2`)
+- **Erweiterung:**
+  - Regel für die Intensivierung zum Ende hin;
+  - Ankündigungston-Ereignis;
+  - Prioritätsebene;
+  - Nutzung für Elite- und normale Gegner mit großen Flächen.
+- Keine zweite, parallele Warnlogik (Auftrag 22.11.).
+
+### 4.6 Projektile
+- **Ist:** Spielerprojektile als Objekte, Bossprojektile als Structs (`bv2_bullet`).
+- **Vorschlag:** Spielerprojektile langfristig ebenfalls als Struct-Pool. Das bringt Leistung bei Ranger-Salven und gleiche Trefferlogik.
+- Erst messen, dann umbauen.
+
+### 4.7 Audio-Ereignisse (A7): Schicht über `fg_sfx`
+`audio_event(id, x, y, band)` mit:
+- Mindestabstand je Cue;
+- Priorität;
+- Zufallsvariante, Tonhöhenstreuung;
+- Band-Varianten;
+- Bündelung gleichzeitiger gleicher Ereignisse;
+- Absenken der Musik bei Bossankündigungen.
+
+### 4.8 Bossmechanik-Sequenzen
+Vorhanden (`boss_choreo`). Künftig als Folge von Zeitachsen (4.1), damit Körper (4.3), Warnungen (4.5), Effekte (4.4) und Ton (4.7) automatisch synchron sind.
+
+## 5. Rendering-Entscheidungen
+
+### R1: Verzerrung beheben (Priorität 1)
+- **Ist:**
+  - Kamera 800×600 auf 1280×720 ergibt x×1,6, y×1,2.
+  - Kamera und Folgelogik nutzen feste Zahlen (`x-400`, `y-300`, `800`, `600` in `ObjectPlayer`).
+- **Optionen:**
+
+  | Option | Sichtbarer Weltausschnitt | Skalierung 720p / 1080p | Folgen |
+  |---|---|---|---|
+  | a) 1067×600 | +33 % Breite, gleiche Höhe | 1,2 / 1,8 | mehr Horizont, Spawnabstände ändern sich |
+  | **b) 960×540 (Vorschlag)** | Fläche ≈ heute (518k statt 480k): +20 % Breite, −10 % Höhe | 1,333 / **2,0** (ganzzahlig bei 1080p) | geringe Gameplay-Änderung; Raster bei 1080p perfekt |
+  | c) 1280×720 | fast doppelte Fläche | 1,0 / 1,5 | starke Gameplay-Änderung |
+
+- **Umsetzung:**
+  - Kamerafläche aus einer Konstante, Folgelogik relativ zur Kameragröße;
+  - Viewports aller Räume auf 16:9;
+  - Prüfung aller Stellen, die die Sichtgröße nutzen (`survivor_balance` Spawnring, Boss-Notfallteleport außerhalb des Bildes, Minimap, Boss-Testmodus).
+  - Tests: `level`, `boss`, `regression`, `visual`.
+- **Offen:** Der Nutzer bestätigt die Option. Die Änderung des Sichtbereichs beeinflusst das Spielgefühl. Sie ist keine Balancing-Zahl, aber eine spürbare Änderung.
+
+### R2: Einheitliche Pixeldichte (Vorschlag, Entscheidung nach A/B-Prototyp)
+- **Zielregel:** **1 Artpixel = 1 Welteinheit für alle Sprites**, so wie die Umgebung heute schon gezeichnet ist.
+- **Machbarkeit:** Die Quellatlanten der Spielerfiguren haben bereits etwa 157 px je Zelle (1254/8). Das entspricht fast der heutigen Bildschirmgröße (96 × 1,65 ≈ 158).
+  - Neu importiert mit Faktor 1,0 auf eine 160er-Leinwand werden sie **detailreicher und rastertreu**, ohne die Figur zu ändern.
+  - Für Gegner und Bosse gilt dasselbe aus deren Quellen (Bosse: Export in Zielgröße statt 512er-Sprites mit Faktor 0,25–0,8).
+- **Feinraster:**
+  - **Variante A:** App-Surface in Ausgabeauflösung. Partikel dürfen auf halbe Welteinheiten (= 1 Bildschirmpixel bei 1080p).
+  - **Variante B:** Welt in eine 960×540-Fläche rendern, ganzzahlig bzw. „sharp-bilinear“ hochskalieren, Effekte und Licht in Ausgabeauflösung darüber. Diese Variante ist rastertreuer bei 720p, kostet aber mehr Umbau.
+- **A/B-Prototyp** im Vertical Slice entscheidet zwischen Varianten und Dichte. Die Bildvergleiche legt der Nutzer ab.
+
+### R3: Rotation von Pixel-Art (Rig, Waffen)
+Teile großer Rigs werden:
+- (a) als vorgedrehte Varianten erzeugt (Pipeline, RotSprite-artig, 16–32 Schritte); oder
+- (b) in ein eigenes Render-Ziel in Artpixel-Auflösung gezeichnet und als Ganzes auf das Raster gebracht.
+
+**Vorschlag:** (b) für Bosse, weil einmal eine Fläche je Boss genügt; (a) für Waffen-Verwischungsbilder.
+
+### R4: Shader (gezielt)
+Trefferblitz (statt Farbmultiplikation), Kontur bzw. Randlicht zur Lesbarkeit des Spielers, Paletten- und Elementtausch, Auflösen beim Tod, Hitzeflimmern beim Feueratem, Windbewegung der Vegetation.
+
+Alles optional und einzeln abschaltbar (Qualitätsstufen).
+
+## 6. Leistungsbudgets (Vorschlag, gemessen und angepasst im Vertical Slice)
+
+| Budget | Ist | Ziel |
+|---|---|---|
+| Bildzeit bei 150 Gegnern und Bosskampf | 16,7 ms (VSync) | ≤ 12 ms CPU+GPU ohne VSync auf dem Entwicklungsrechner |
+| Partikel gleichzeitig | 420 (Grenze) | 420 „Hoch“, 200 „Mittel“, 80 „Niedrig“ |
+| Lichtquellen | 72 | unverändert |
+| Stimmen | 16 (2 je Cue) | unverändert plus Ereignisschicht |
+| Gegner (technische Grenze) | 180 | unverändert |
+| Rig-Teile je Boss | — | ≤ 40 Teile, eine Render-Fläche |
+| Draw-Aufrufe | nicht gemessen | Messung im Vertical Slice; Ausrüstung und Effekte in eigenen Texturgruppen |
+
+- **Culling:** Effekte außerhalb des Bildes werden nicht gezeichnet. Ist: Partikel ja.
+- **Pooling** über Structs statt Instanzen für Massenobjekte.
+
+## 7. Verträglichkeit mit GameMaker 2024
+Alle oben genannten Mittel stehen in GM 2024.14 unter Windows zur Verfügung:
+- Surfaces, Shader (GLSL ES), Vertex-Buffer, `draw_sprite_pos`, Texturgruppen;
+- Spine-Laufzeit, Partikelsysteme, Sequenzen.
+
+**Einschränkungen:**
+- Spine braucht einen kostenpflichtigen Editor (Freigabe nötig).
+- Neue Ressourcen müssen in `FirstGame.yyp` registriert werden (`tests/tools/levels/gm_project.py`).
+- Generierte Daten (`equipment_visual_data`, `level_layout_*`, `spell_v2_catalog`) werden nur über ihre Werkzeuge erzeugt.

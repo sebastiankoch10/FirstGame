@@ -1,4 +1,4 @@
-/// Native boss-mechanics checks (DESIGN/BOSS_DESIGN.md): forced abilities per boss and phase with an oracle
+/// Native boss-mechanics checks (docs/Design/Boss-Design.md): forced abilities per boss and phase with an oracle
 /// "dodger" bot (does a reachable safe position exist?), plus a max-range kiting bot (does kiting still meet
 /// the mechanics, do catch-up moves happen?). Injected only into the copy built by run_native_harness.py boss.
 function gp_key_down(_key) {return false;}

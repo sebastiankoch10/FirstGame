@@ -3,7 +3,7 @@
 **Einzige Hauptquelle** für beide Agenten. `CLAUDE.md` importiert nur diese Datei. Projektsprache, Doku und Berichte sind **Deutsch**. Laufender Stand: `docs/HANDOFF.md`.
 
 ## Projekt
-- **Spiel:** Top-down-Survivor mit Runs von 30 Minuten.
+- **Spiel:** Pixel-Art-Action-RPG im Run-Format: Top-down, Runs von 30 Minuten, Horden, Builds, anspruchsvolle Bosskämpfe. Leitbild und alle Designregeln: `docs/Design/` (siehe „Design-Kanon“).
   - Klassen: Schwertkämpfer `Sword`, Zaubermeisterin `Mage`, Waldläufer `Ranger`, jeweils mit automatischer Startwaffe.
   - Zauber: 18 aktive und 18 passive, Stufe 1–9, 6+6 Slots.
   - Talente (Taste T) und Ausrüstung (jeder Run startet ohne).
@@ -23,16 +23,35 @@
 | `scripts/<name>/<name>.gml` | Spiellogik, je Skript eine `.gml` und eine `.yy` |
 | `objects/<Objekt>/` | Events wie `Create_0`, `Step_0`, `Draw_0` (Welt), `Draw_64` (GUI), `Draw_73` (nach dem Licht) |
 | `rooms/` | `RoomMenu` (Start), `Room1`, `RoomSwamp`, `RoomAshfrost`; `RoomCrypt` und `RoomRuins` sind Fallbacks |
-| `sprites/`, `sounds/`, `tilesets/`, `options/` | Assets. Drachen-PNGs und ArtPack-Originale nicht verändern. |
-| `FirstGame_ArtPack/`, `Audio/`, `Assets/` | Quellmaterial und Kataloge |
-| `tests/` | Test-Harnesses (`*_harness.gml`), Runner und Werkzeuge (`tests/tools/`, Levelgrafik in `tests/tools/levels/`) |
+| `sprites/`, `sounds/`, `tilesets/`, `options/` | GameMaker-Assets. Drachen-PNGs und ArtPack-Originale nicht verändern. IDE-Ordnerbaum nach Kategorien (`tests/tools/assets/ide_folders.py`). |
+| `FirstGame_ArtPack/`, `Audio/`, `Assets/` | Quell-, Referenz- und generierte Grafik bzw. Tonquellen. Einordnung je Unterordner und Zielstruktur: `docs/Design/Assets & Pipeline.md` |
+| `tests/` | Test-Harnesses (`*_harness.gml`), Runner und Werkzeuge (`tests/tools/`, Levelgrafik in `tests/tools/levels/`, Figuren in `tests/tools/characters/`, Asset-Ordnung in `tests/tools/assets/`) |
 | `QA/` | Bot-Simulationen, Daten (`QA/data/`), Berichte (`QA/*.md`), Werkzeuge (`QA/tools/`) |
-| `DESIGN/` | Verbindliche Designs: `BOSS_DESIGN.md` (höchste Priorität für Bosse), `TALENTS_AND_EQUIPMENT.md` |
-| `docs/` | Obsidian-Vault mit Übergabe (`HANDOFF.md`, `LOG.md`, `DECISIONS.md`), Systemnotizen und Archiv |
-| `output/` | Alte Codex-Testausgaben, gitignored. Keine neuen Builds hier ablegen. |
+| `docs/Design/` | **Design-Kanon (verbindlich):** Leitbild, Kampf, Boss-Design, Klassen, Progression, Visuelles Leitbild, Fähigkeiten/VFX/Audio, Technische Architektur, Assets, Qualitätsstandard, Roadmap |
+| `docs/` | Obsidian-Vault mit Übergabe (`HANDOFF.md`, `LOG.md`, `DECISIONS.md`), Systemnotizen (`docs/Systeme/`), Archiv, Export (`docs/_export/`, nur Momentaufnahme) |
+| `output/` | Alte Codex-Builds (ca. 820 MB), gitignored. Keine neuen Builds hier ablegen; kann vom Nutzer gelöscht werden. |
 | `DEVELOPMENT_PROGRESS.md`, `TODO.md`, `QA/CURRENT_STATUS.md` | Ausführlicher Stand bis 2026-11-24. Wird nicht mehr laufend gepflegt; der aktuelle Stand steht in `docs/HANDOFF.md`. |
 | `LEVEL_EXPANSION_PROGRESS.md`, `QA/QA_SUMMARY.md`, `QA/README.md` | Level-Stand, Bot-Simulationen und Regression aus der Codex-Zeit |
 | übrige Root-`*_REPORT.md` | Frühere Stände. Werte können veraltet sein; im Zweifel gilt der Code. |
+
+## Design-Kanon (verbindlich)
+- **Ort:** `docs/Design/`. Einstieg ist `Leitbild.md`: Identität, Säulen, globale Grundsätze G1–G14 und die **Vorrangregeln**.
+- **Vorrang bei Widersprüchen:**
+  1. `Leitbild.md`
+  2. übrige `docs/Design/*` im eigenen Fachgebiet
+  3. `docs/DECISIONS.md` (neuere Entscheidung gilt sofort)
+  4. `docs/Systeme/*` (nur Ist-Beschreibung)
+  5. HANDOFF und LOG (Stand)
+  6. `Bugs & Ideen` (unverbindlich)
+  7. Root-`*_REPORT.md`, `DEVELOPMENT_PROGRESS.md`, `TODO.md`, `QA/*.md`, `FirstGame_ArtPack/**/*.md`, `docs/_archive/`, `docs/_export/` (historisch, Momentaufnahme)
+- **Geltungsbereich:**
+  - **Global** gilt, was im Leitbild steht.
+  - **Systemspezifisch** gelten Kampf, Boss-Design, Progression, Fähigkeiten/VFX/Audio, Technische Architektur und Assets.
+  - **Klassenspezifisch** gilt nur Abschnitt 3 in `Klassen.md`.
+  - Anforderungen, die für eine Klasse formuliert sind, aber alle betreffen, gehören ins Leitbild bzw. in `Klassen.md` Abschnitt 2.
+- **Neue Designentscheidungen** aus Nutzeraufträgen werden im selben Auftrag mit Datum in das passende Designdokument übernommen, dazu eine Zeile in `DECISIONS.md`. Nichts Wesentliches bleibt nur im Chat.
+- **Soll gegen Ist:** Designdokumente sind das Soll, der Code ist das Ist. Abweichungen kommen in die Roadmap oder in `Bugs & Ideen`, statt das Soll stillschweigend anzupassen.
+- **Fertig** ist ein Inhalt erst nach `docs/Design/Qualitätsstandard.md` (Statusskala). „Künstlerisch abgenommen“ und „vollständig“ setzt nur der Nutzer.
 
 ## Architektur
 - **Systemkarte:** `docs/00_Index.md`.
@@ -72,7 +91,9 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 - **Testergebnisse** immer als PASS / FAIL / BLOCKED / NOT RUN angeben. Nichts erfinden.
 - **Git nur lokal** auf `entwicklung`, **niemals pushen**. Am Ende jeder abgeschlossenen Aufgabe lokal committen (siehe unten), sofern die Aufgabe nichts anderes sagt. Vor größeren Änderungen committen statt ein ZIP anzulegen.
 - **Arbeitsweise des Nutzers:** Änderungen direkt im Projekt. Test-Builds nie im Projektordner ablegen und danach löschen.
-- **Bossarbeit** folgt `DESIGN/BOSS_DESIGN.md`. Gefahren laufen über eine Uhr je Boss (`v2_clock`), sodass Warnung und Treffer synchron bleiben.
+- **Bossarbeit** folgt `docs/Design/Boss-Design.md` und `docs/Design/Kampf & Begegnungen.md`. Gefahren laufen über eine Uhr je Boss (`v2_clock`), sodass Warnung und Treffer synchron bleiben.
+- **Grafik-, Animations-, Effekt- und Tonarbeit** folgt `docs/Design/Visuelles Leitbild & Animation.md` und `Fähigkeiten, VFX & Audio.md`. Bewegungsreferenz Terranigma nur für Bewegungsqualität, nie Assets oder Stil kopieren.
+- **Größere Umbauten** an Rendering, Animation oder Kampfsystem nur nach `docs/Design/Technische Architektur.md` und `Roadmap & Vertical Slice.md`. Mit „Offen“ markierte Entscheidungen brauchen die Zustimmung des Nutzers.
 
 ## Code-Konventionen (GML)
 - **Stil:** dichtes GML, kurze Hilfsfunktionen.
@@ -93,16 +114,17 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
    - `docs/HANDOFF.md` (Claude bekommt sie per Hook eingeblendet, Codex liest sie selbst)
    - `git log --oneline -5` und `git status --short`
    - **Nicht** die ganze Doku.
-2. **Passende Systemnotiz:** die eine Notiz in `docs/Systeme/`, die zur Aufgabe gehört (Liste in `docs/00_Index.md`).
+2. **Bei Design-, Inhalts- oder Grafikaufgaben:** `docs/Design/Leitbild.md` (Abschnitte 4–5 genügen meist) plus das **eine** passende Designdokument und `Qualitätsstandard.md`. Nicht den ganzen Kanon lesen.
+3. **Passende Systemnotiz:** die eine Notiz in `docs/Systeme/`, die zur Aufgabe gehört (Liste in `docs/00_Index.md`).
    - `[[Name]]` ist die Datei `docs/**/Name.md`.
    - Obsidian ist nur die Ansicht für den Nutzer. Agenten lesen die Notizen als normale Dateien.
-3. **Erst dann Code, und gezielt:**
+4. **Erst dann Code, und gezielt:**
    - Nach Funktionsnamen aus der Notiz suchen (`rg -n` oder `grep -n`) und nur die betroffenen Zeilenbereiche lesen.
    - Nie ganze Skripte oder den ganzen Code „zur Orientierung“ durchgehen.
 - **Nicht komplett lesen:**
   - `docs/LOG.md`: nur die obersten ~15 Zeilen
   - `docs/DECISIONS.md`: nur gezielt per Suche
-  - `docs/ai-activity.log`, `docs/_archive/`, `QA/data/`, `QA/logs/`
+  - `docs/ai-activity.log`, `docs/_archive/`, `docs/_export/`, `QA/data/`, `QA/logs/`
   - generierte Dateien (`level_layout_*`, `spell_v2_catalog`)
   - Root-`*_REPORT.md`, `DEVELOPMENT_PROGRESS.md`, `TODO.md`, `QA/CURRENT_STATUS.md`
 - **Ausgaben klein halten:**
@@ -135,7 +157,8 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 
 ### Grundsätze
 - **Jede Information steht an genau einer Stelle:**
-  - Regeln: AGENTS.md
+  - Arbeitsregeln: AGENTS.md
+  - Designregeln (Soll): `docs/Design/`
   - Stand: HANDOFF
   - Verlauf: LOG und git
   - Begründungen: DECISIONS

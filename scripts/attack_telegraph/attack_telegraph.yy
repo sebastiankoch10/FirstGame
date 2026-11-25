@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"attack_telegraph",
   "parent":{
-    "name":"Skripte",
-    "path":"folders/Skripte.yy",
+    "name":"Kampf_und_Klassen",
+    "path":"folders/Skripte/Kampf_und_Klassen.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

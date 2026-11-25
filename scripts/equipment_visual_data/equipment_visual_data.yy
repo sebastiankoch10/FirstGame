@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"equipment_visual_data",
   "parent":{
-    "name":"Skripte",
-    "path":"folders/Skripte.yy",
+    "name":"Fortschritt_und_Ausruestung",
+    "path":"folders/Skripte/Fortschritt_und_Ausruestung.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

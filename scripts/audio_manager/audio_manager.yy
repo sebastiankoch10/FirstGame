@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"audio_manager",
   "parent":{
-    "name":"Skripte",
-    "path":"folders/Skripte.yy",
+    "name":"Audio",
+    "path":"folders/Skripte/Audio.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -42,8 +42,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "FirstGame_ArtPack",
-    "path": "folders/Sprites/FirstGame_ArtPack.yy"
+    "name": "Menue",
+    "path": "folders/Sprites/UI/Menue.yy"
   },
   "preMultiplyAlpha": false,
   "resourceType": "GMSprite",

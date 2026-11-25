@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"weather",
   "parent":{
-    "name":"Skripte",
-    "path":"folders/Skripte.yy",
+    "name":"Welt_und_Atmosphaere",
+    "path":"folders/Skripte/Welt_und_Atmosphaere.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -54,7 +54,7 @@ function dragon_encounter_begin(_b,_kind) {
         if(_kind=="stomp")_b.dragon_magma=_b.enc_zones;
     }
     _b.enc_sweep=undefined;
-    // Boss design philosophy (DESIGN/BOSS_DESIGN.md): same nine abilities, more complex choreography in later phases.
+    // Boss design philosophy (docs/Design/Boss-Design.md): same nine abilities, more complex choreography in later phases.
     if(_b.v2_enabled) {
         var phase=_b.boss_phase,cfgc=bc_config();
         if(_kind=="beam") {

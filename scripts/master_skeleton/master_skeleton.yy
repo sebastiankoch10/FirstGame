@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"master_skeleton",
   "parent":{
-    "name":"Skripte",
-    "path":"folders/Skripte.yy",
+    "name":"Gegner",
+    "path":"folders/Skripte/Gegner.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

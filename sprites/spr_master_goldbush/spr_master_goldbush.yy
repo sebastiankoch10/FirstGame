@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"FirstGame_ArtPack",
-    "path":"folders/Sprites/FirstGame_ArtPack.yy",
+    "name":"Wald",
+    "path":"folders/Sprites/Welt/Wald.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

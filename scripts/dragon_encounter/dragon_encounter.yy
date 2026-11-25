@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"dragon_encounter",
   "parent":{
-    "name":"Skripte",
-    "path":"folders/Skripte.yy",
+    "name":"Bosse",
+    "path":"folders/Skripte/Bosse.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

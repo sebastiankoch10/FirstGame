@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"FirstGame_ArtPack",
-    "path":"folders/Sprites/FirstGame_ArtPack.yy",
+    "name":"Sumpf_und_Ruinen",
+    "path":"folders/Sprites/Gegner/Sumpf_und_Ruinen.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

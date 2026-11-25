@@ -1,5 +1,7 @@
 @AGENTS.md
 
+Design-Kanon (verbindlich, mit Vorrangregeln): `docs/Design/`, Einstieg `docs/Design/Leitbild.md`. Details in AGENTS.md, Abschnitt „Design-Kanon“.
+
 ## Nur für Claude Code
 - Der SessionStart-Hook (`.claude/settings.json`) blendet `docs/HANDOFF.md` automatisch ein. Sie muss nicht noch einmal gelesen werden.
 - Der Stop-Hook `.claude/hooks/log-activity.sh` schreibt ohne KI-Aufruf eine Zeile nach `docs/ai-activity.log`. Das ersetzt **nicht** das Übergabe-Protokoll in AGENTS.md.

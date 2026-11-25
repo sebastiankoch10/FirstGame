@@ -1,6 +1,6 @@
 ---
 tags: [system, talente]
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 # Talente
 
@@ -14,7 +14,7 @@ Datengetriebene Talentbäume: ein allgemeiner Baum mit 9 Talenten und je 8 pro K
   - Wirkung: `talent_equipment_apply`, Oberfläche: `talent_menu_*`
   - Bots: `talent_bot_invest`
 - Klassenmechaniken in `scripts/master_combat` und `scripts/class_weapons`.
-- Vollständige Doku: `DESIGN/TALENTS_AND_EQUIPMENT.md`. Test: `tests/feature_harness.gml`.
+- Design und vollständige Doku: [[Progression & Builds]]. Test: `tests/feature_harness.gml`.
 
 ## Abhängigkeiten
 [[Zauber & Passiva]] (`apply_passives`) · [[Klassen & Startwaffen]] · [[Ausrüstung]] (gemeinsamer Bildschirm) · [[UI, HUD & Menüs]] · [[Progression & Level-up]]

@@ -1,13 +1,18 @@
 ---
 tags: [bugs, ideen, backlog]
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 # Bugs & Ideen
 
-Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Doku am 2026-11-24 (Claude). Status: offen, wenn nicht anders vermerkt.
+Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Doku (Claude, 24./25.11.2026). Status: offen, wenn nicht anders vermerkt. Größere Arbeiten stehen geordnet in [[Roadmap & Vertical Slice]].
 
 ## Mögliche Bugs und Aufräumpunkte
-- **README veraltet:** `README.md` verlinkt `output/production-build/20261123-223542/FirstGame.zip`, das nicht mehr existiert, und nennt `run_combat_smoke.py` als Test. Diese Doku-Aufgabe durfte die README nicht ändern.
+- **Bild horizontal um 33 % verzerrt:** Kamera 800×600 (4:3) auf 1280×720 (16:9), gemessen am 25.11. Kreise wirken als Ellipsen. → R1 in [[Technische Architektur]], Roadmap Schritt 1 (Nutzerentscheidung nötig).
+- **Minibosse nutzen 0.1-Gegnerstreifen** (Eber, Golem; 64×64, ohne Blickrichtungen), Stilbruch. → [[Roadmap & Vertical Slice]] Schritt 9.
+- **164 Legacy-Sprites** der ArtPack-0.1-Helden sind im Projekt registriert, aber unerreichbar (IDE-Ordner `Sprites/Legacy`). Löschen nur nach Bestätigung durch den Nutzer. → [[Assets & Pipeline]]
+- **`output/`** belegt ca. 820 MB alter Codex-Builds (gitignored). Der Nutzer kann den Ordner löschen.
+- **Lose Bilder im ArtPack-Wurzelordner:** `ChatGPT-Bild 22. Nov. 2026, 23_00_30.png` und `…23_00_42.png` haben keinen dokumentierten Zweck. → [[Assets & Pipeline]]
+- **MCP-Zeitlimit:** `MCP_TIMEOUT` in `.claude/settings.json` wirkt nicht (25.11. geprüft). Abhilfe per `setx` nur mit Zustimmung des Nutzers. → [[Tests & QA]]
 - **Verwaiste Event-Dateien:** `objects/ObjectFireball/Collision_ObjectMonster.gml`, `ObjectIceball/…` und `ObjectLightningball/…` sind in den `.yy` der Objekte nicht registriert. GameMaker führt sie nicht aus. Prüfen, ob sie gelöscht werden können oder registriert werden müssen. → [[Zauber & Passiva]]
 - **Boss-Testmenü im Release:** `#macro BOSS_TEST_MENU_ENABLED true` in `scripts/boss_test_mode`. Vor einer Veröffentlichung auf `false` setzen. → [[Boss-Testmodus]]
 - **Lautstärken werden nicht gespeichert:** In `firstgame_audio.ini` steht nur „Ton im Hintergrund“, ein Speichern der Regler wurde im Code nicht gefunden. Vermutung; im Spiel prüfen. → [[Speichern & Einstellungen]]
@@ -28,7 +33,6 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
 - **Talent- und Ausrüstungswerte** sind neue Designwerte, nicht ausbalanciert. → [[Talente]] · [[Ausrüstung]]
 
 ## Ideen
-- Ausrüstung am Charakter sichtbar machen (Overlay-Sprites je Slot). → [[Ausrüstung]]
 - Eigene Talent-Icons; derzeit werden Zauber-Icons wiederverwendet. → [[Talente]]
 - Talente neu verteilen (Respec), z. B. gegen Münzen oder einmal pro Run. → [[Talente]]
 - Meta-Progression zwischen Runs, als Option über `talent_config().persistent`.

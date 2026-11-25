@@ -18,6 +18,8 @@ sys.path.insert(0, str(Path.home() / 'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/
 from gms_helpers.gm_json import dumps, loads  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / 'tests' / 'tools' / 'assets'))
+from ide_folders import ensure_folders, folder_for  # noqa: E402
 
 
 def read(rel):
@@ -41,6 +43,13 @@ class Project:
             self.yyp['resources'].append({'id': {'name': name, 'path': path}})
             self.added.append(name)
 
+    def _file_under(self, data, kind, name):
+        """Put a new resource into its IDE folder (tests/tools/assets/ide_folders.py); keep the template's otherwise."""
+        folder = folder_for(kind, name)
+        if folder:
+            ensure_folders(self.yyp, folder)
+            data['parent'] = {'name': folder.rsplit('/', 1)[-1], 'path': f'folders/{folder}.yy'}
+
     def ensure_texture_group(self, name):
         groups = self.yyp['TextureGroups']
         if any(g['name'] == name for g in groups):
@@ -62,6 +71,7 @@ class Project:
         imgs = [i if i.size == (w, h) else _pad(i, w, h) for i in imgs]
         data = copy.deepcopy(self.sprite_template)
         data['name'] = data['%Name'] = data['sequence']['name'] = name
+        self._file_under(data, 'sprites', name)
         if bbox is None:
             bbox = (0, 0, w - 1, h - 1)
         data.update(width=w, height=h, bboxMode=2 if bbox != (0, 0, w - 1, h - 1) else 0, bbox_left=int(bbox[0]), bbox_top=int(bbox[1]),
@@ -93,6 +103,7 @@ class Project:
     def script(self, name, code):
         data = read('scripts/master_world/master_world.yy')
         data['name'] = data['%Name'] = name
+        self._file_under(data, 'scripts', name)
         write(f'scripts/{name}/{name}.yy', data)
         (ROOT / 'scripts' / name / f'{name}.gml').write_text(code, encoding='utf-8')
         self._register(name, f'scripts/{name}/{name}.yy')

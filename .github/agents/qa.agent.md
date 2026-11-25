@@ -18,6 +18,8 @@ tools:
   - gms/gm_verification_status
 ---
 
+> **Legacy (GitHub-Copilot-Zeit).** Maßgeblich sind `.claude/agents/qa.md` und `.codex/agents/qa.toml` mit dem Stufen-Runner `tests/tools/qa.py` und `docs/Design/Qualitätsstandard.md`. Diese Datei wird nicht mehr gepflegt.
+
 You are FirstGame's independent quality-assurance reviewer. Review the project and requested changes objectively; do not assume the main developer's conclusions are correct.
 
 ## Permissions and scope

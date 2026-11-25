@@ -1,6 +1,6 @@
 ---
 tags: [system, qa]
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 # Tests & QA
 
@@ -34,7 +34,8 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
 | `classes` | `tests/tools/run_class_dragon_smoke.py` | Startwaffen und Kombos, Warnflächen-Rendering, Klassen-DPS (150) |
 | `visual` | `run_native_harness.py visual` | Charakter- und Ausrüstungs-Layer (75): Datenintegrität, Anlegen/Ablegen/Wechsel, Pixelvergleich, Kontaktbögen 8 Richtungen × 11 Zustände × 5 Sets, Weltbild |
 
-- **QA-Prüfer** (nur lesend, gleicher Inhalt): `.codex/agents/qa.toml` und `.claude/agents/qa.md`.
+- **QA-Prüfer** (nur lesend, gleicher Inhalt): `.codex/agents/qa.toml` und `.claude/agents/qa.md`. `.github/agents/qa.agent.md` ist Legacy (Copilot).
+- **Abnahme von Inhalten:** Statusskala und Kriterien Q1–Q11 in [[Qualitätsstandard]].
 - **Simulationen** (Stufe 4): `QA/tools/run_cohort.py`, `run_boss_mc.py`, `analyze_v3.py`.
 
 ## QA-Agent: Überprüfung 2026-11-24 (Claude)
@@ -53,7 +54,7 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
 
 **MCP**
 - `gms-mcp` braucht 13–15 s bis zur ersten Antwort und reißt beim Sitzungsstart das 30-s-Limit von Claude.
-- `.claude/settings.json` setzt jetzt `MCP_TIMEOUT=60000`; nach einem Neustart prüfen.
+- `.claude/settings.json` setzt `MCP_TIMEOUT=60000`. **Geprüft am 25.11.: wirkt nicht**; der Server brach nach dem Neustart wieder nach 30.000 ms ab. Vermutlich wird der Wert gelesen, bevor die Projekteinstellungen greifen. Abhilfe nur mit Zustimmung des Nutzers: Windows-Umgebungsvariable `setx MCP_TIMEOUT 60000`.
 - Die Test-Runner brauchen das MCP nicht, sie rufen Igor direkt auf.
 
 **Legacy** (in keiner Stufe):

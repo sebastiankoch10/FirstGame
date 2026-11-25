@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Boss_System_2",
-    "path":"folders/Sprites/Boss_System_2.yy",
+    "name":"Zwillingshexen",
+    "path":"folders/Sprites/Bosse/Zwillingshexen.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

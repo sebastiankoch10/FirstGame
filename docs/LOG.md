@@ -1,8 +1,14 @@
 ---
 tags: [log]
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
+
+### 2026-11-25 · Claude · Design-Kanon, Audit, Terranigma-Referenz, IDE-Ordnung
+- Neuer verbindlicher Kanon `docs/Design/` (11 Dokumente, Vorrang im [[Leitbild]]). `DESIGN/*.md` dorthin verschoben (`Boss-Design.md`, `Progression & Builds.md`), `DESIGN/` entfällt.
+- Audit früherer Aufträge (15 Codex-Anhänge, Claude-Prompts) gegen Doku und Code; Widersprüche aufgelöst (Leitbild Abschnitt 6). Gemessen: Bild um 33 % verzerrt (800×600 auf 1280×720), Pixeldichte 0,25–1,65.
+- IDE-Ressourcenbaum nach Kategorien (1.381 `.yy`-`parent`, `tests/tools/assets/ide_folders.py`, `gm_project.py` sortiert neue Ressourcen ein). Keine Datei verschoben.
+- `AGENTS.md`, `CLAUDE.md`, QA-Agenten, README, Index, Systemnotizen aktualisiert; Export `tests/tools/export_design.py` → `docs/_export/`; 47 versionierte `.pyc` aus Git entfernt.
 
 ### 2026-11-24 · Claude · Charaktermodelle + sichtbare Ausrüstung
 - Basismodelle aller 3 Klassen ohne Rüstung/Waffe (Frames in `spr_fg_<actor>_*` ersetzt, Originale im ArtPack); Saum der Walk-Frames entfernt.

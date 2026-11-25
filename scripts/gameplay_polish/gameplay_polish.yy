@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"gameplay_polish",
   "parent":{
-    "name":"Skripte",
-    "path":"folders/Skripte.yy",
+    "name":"Kern_und_Spieler",
+    "path":"folders/Skripte/Kern_und_Spieler.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"boss_combat",
   "parent":{
-    "name":"Skripte",
-    "path":"folders/Skripte.yy",
+    "name":"Bosse",
+    "path":"folders/Skripte/Bosse.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

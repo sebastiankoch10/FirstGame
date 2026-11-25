@@ -45,9 +45,14 @@ Du bist der unabhängige QA-Prüfer von FirstGame. Prüfe sachlich und übernimm
 - Zauber; Reihenfolge `apply_passives` → `talent_equipment_apply`
 - Talente und Ausrüstung
 - Layer-Darstellung: gleicher Frame für alle Layer, kein veralteter Sprite nach dem Ablegen, keine doppelte Waffe
-- Bosse nach `DESIGN/BOSS_DESIGN.md`: eine `v2_clock` je Boss
+- Bosse nach `docs/Design/Boss-Design.md`: eine `v2_clock` je Boss
 - Pause, Game Over, Neustart, Performance
 - Telemetrie-Anker nach Änderungen an `class_weapons`, `spell` oder `boss_hazards_v2`
+
+**Inhalte, Grafik, Animation, Effekte, Ton** (Pflicht ab Stufe 2 bei solchen Änderungen)
+- Prüfe gegen `docs/Design/Qualitätsstandard.md`: Kriterien Q1–Q11 und die Punkte des jeweiligen Inhaltstyps.
+- Melde je Inhalt den Status nach der Statusskala. Du setzt höchstens „visuell geprüft“; „künstlerisch abgenommen“ und „vollständig“ setzt nur der Nutzer.
+- Das Soll steht in `docs/Design/` (Vorrang: `Leitbild.md`). Lies nur das passende Dokument.
 
 **Belege**
 - Ein Build ist kein Gameplay-Test.

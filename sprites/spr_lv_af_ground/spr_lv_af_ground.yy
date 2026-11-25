@@ -88,8 +88,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"FirstGame_ArtPack",
-    "path":"folders/Sprites/FirstGame_ArtPack.yy",
+    "name":"Aschenfrost",
+    "path":"folders/Sprites/Welt/Aschenfrost.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

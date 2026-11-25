@@ -1,6 +1,6 @@
 # Level-Erweiterung – Fortschritt und Übergabe
 
-Stand: 24.11.2026. Auftrag: zwei neue spielbare Welten (Verfluchter Sumpf, Aschenfrost-Ruinen). Bossmechaniken bleiben laut Auftrag unverändert; die Bosskampf-Philosophie liegt verbindlich in `DESIGN/BOSS_DESIGN.md`.
+Stand: 24.11.2026. Auftrag: zwei neue spielbare Welten (Verfluchter Sumpf, Aschenfrost-Ruinen). Bossmechaniken bleiben laut Auftrag unverändert; die Bosskampf-Philosophie liegt verbindlich in `docs/Design/Boss-Design.md`.
 
 ## Sicherung
 

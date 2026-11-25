@@ -1,11 +1,29 @@
 ---
 tags: [index, start]
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 # FirstGame – Startseite
 
-Top-down-Survivor in GameMaker 2024: 30-Minuten-Runs, 3 Klassen, 3 Level, Talente, Ausrüstung, Bosse mit 9 Fähigkeiten.
-Die Regeln für KI-Agenten stehen in `AGENTS.md` im Projektordner, außerhalb dieses Vaults.
+Pixel-Art-Action-RPG im Run-Format in GameMaker 2024: 30-Minuten-Runs, 3 Klassen, 3 Level, Talente, Ausrüstung, Bosse mit 9 Fähigkeiten.
+Die Arbeitsregeln für KI-Agenten stehen in `AGENTS.md` im Projektordner, außerhalb dieses Vaults.
+
+## Design-Kanon (verbindlich, Soll)
+**Einstieg und Vorrangregeln:** [[Leitbild]]
+
+| Fachgebiet | Dokument |
+|---|---|
+| Kampf, räumliche Entscheidungen, Warnungen, Gegner, Lesbarkeit | [[Kampf & Begegnungen]] |
+| Hauptbosse | [[Boss-Design]] |
+| Klassen | [[Klassen]] |
+| Level-ups, Zauber, Talente, Ausrüstung | [[Progression & Builds]] |
+| Art Direction, Terranigma-Referenz, Pixelraster, Animation | [[Visuelles Leitbild & Animation]] |
+| Fähigkeiten-Inszenierung, VFX, visuelle Progression, Ton | [[Fähigkeiten, VFX & Audio]] |
+| Ist-Architektur, Technikvergleich, Zielarchitektur, Budgets | [[Technische Architektur]] |
+| Asset-Bestand, Struktur, Namen, Arbeitsablauf | [[Assets & Pipeline]] |
+| Statusskala, Abnahme, Review | [[Qualitätsstandard]] |
+| Reihenfolge und Vertical Slice | [[Roadmap & Vertical Slice]] |
+
+Momentaufnahme des ganzen Kanons als ein Text: `docs/_export/` (nicht verbindlich, erzeugt mit `python tests/tools/export_design.py`).
 
 ## Übergabe zwischen Claude Code und Codex
 - [[HANDOFF]]: aktueller Stand, wird nach jeder Aufgabe überschrieben. **Hier anfangen.**
@@ -15,7 +33,7 @@ Die Regeln für KI-Agenten stehen in `AGENTS.md` im Projektordner, außerhalb di
 - [[SETUP_REPORT]]: wie diese Struktur und die Hooks eingerichtet wurden.
 - `ai-activity.log` wird automatisch vom Stop-Hook geschrieben (Textdatei, keine Notiz).
 
-## Spielsysteme
+## Spielsysteme (Ist-Zustand, beschreibend)
 **Ablauf und Spieler**
 - [[Spielablauf & Zustände]]
 - [[Spieler & Bewegung]]
@@ -43,8 +61,7 @@ Die Regeln für KI-Agenten stehen in `AGENTS.md` im Projektordner, außerhalb di
 **Qualität**
 - [[Tests & QA]]
 
-## Weitere Dokumente außerhalb des Vaults (im Projektordner)
-- `DESIGN/BOSS_DESIGN.md` (verbindlich für Bosse) und `DESIGN/TALENTS_AND_EQUIPMENT.md`
+## Historische Dokumente außerhalb des Vaults (nicht verbindlich)
 - `DEVELOPMENT_PROGRESS.md`, `TODO.md`, `QA/CURRENT_STATUS.md`, `QA/V3_SIMULATION_REPORT.md`
 - `LEVEL_EXPANSION_PROGRESS.md`, `QA/QA_SUMMARY.md`, ältere Root-`*_REPORT.md`
 - Archiv: `_archive/CLAUDE_2026-11-24.md` (frühere `CLAUDE.md`)

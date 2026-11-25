@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"get_spell_data",
   "parent":{
-    "name":"Skripte",
-    "path":"folders/Skripte.yy",
+    "name":"Zauber",
+    "path":"folders/Skripte/Zauber.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

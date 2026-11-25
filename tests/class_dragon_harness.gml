@@ -239,7 +239,7 @@ function cd_capture_draw() {
             }
             array_push(global.cd_fill_counts[i],filled);
             if(f==6) {
-                // Current warning design (DESIGN/BOSS_DESIGN.md): faint zone fill from 0 %, countdown runs along the edge and brightens late.
+                // Current warning design (docs/Design/Boss-Design.md): faint zone fill from 0 %, countdown runs along the edge and brightens late.
                 var counts=global.cd_fill_counts[i],ratios=[],mono=true;for(var j=0;j<5;j++){array_push(ratios,counts[j]/max(1,counts[4]));if(j>0 && counts[j]<counts[j-1]-2)mono=false;}
                 cd_check(counts[0]>0,"Native rendered "+shapes[i]+" warning zone is visible from 0% countdown");
                 cd_check(mono && counts[4]>counts[0],"Native rendered "+shapes[i]+" edge countdown grows monotonically to activation");

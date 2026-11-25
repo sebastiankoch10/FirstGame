@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Boss_System_2",
-    "path":"folders/Sprites/Boss_System_2.yy",
+    "name":"Sumpfbehemoth",
+    "path":"folders/Sprites/Bosse/Sumpfbehemoth.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

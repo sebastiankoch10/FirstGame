@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"FirstGame_ArtPack",
-    "path":"folders/Sprites/FirstGame_ArtPack.yy",
+    "name":"Wald_Skelette",
+    "path":"folders/Sprites/Gegner/Wald_Skelette.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

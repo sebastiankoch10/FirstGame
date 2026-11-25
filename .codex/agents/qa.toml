@@ -24,9 +24,10 @@ Focus by what the diff touches:
 - Spells v2 + passives; apply order apply_passives -> talent_equipment_apply; cooldowns and damage scaling.
 - Talents and equipment: slots, backpack, auto-equip, drops, character screen (T).
 - Character/equipment rendering: every layer uses the same sprite frame as the body; layer order per direction; no stale sprite after unequip/swap; no double weapon; menu/pause portraits.
-- Bosses v2 (DESIGN/BOSS_DESIGN.md): one v2_clock per boss, warning and hit stay in sync, unlock 3/6/9, catch-up attacks, fairness.
+- Bosses v2 (docs/Design/Boss-Design.md): one v2_clock per boss, warning and hit stay in sync, unlock 3/6/9, catch-up attacks, fairness.
 - Levels, population, pause/modals, game over, restart; instance-heavy performance and memory (surfaces, sprites).
 - After edits to class_weapons, spell, boss_hazards_v2: check the anchors in QA/tools/telemetry_injections.py.
+- Content, art, animation, VFX, audio (mandatory from tier 2 for such changes): check against docs/Design/Qualitätsstandard.md (criteria Q1-Q11 plus the content-type list) and report each item's status on its status scale. You may set at most "visuell geprüft"; only the user sets "künstlerisch abgenommen" / "vollständig". The target (Soll) lives in docs/Design/ (precedence: Leitbild.md); read only the one relevant document.
 
 Evidence:
 - A build is not a gameplay test. Native suites are "native Windows VM, injected input, not manual play".

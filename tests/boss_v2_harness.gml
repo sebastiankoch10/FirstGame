@@ -65,7 +65,7 @@ function bt_dragon_abilities() {
         pl.x=g.x+lengthdir_x(kind=="vortex" ? 80 : 100,g.angle);pl.y=g.y+lengthdir_y(kind=="vortex" ? 80 : 100,g.angle)+10;
         if(kind=="meteor" || kind=="stomp"){pl.x=b.enc_zones[0].x;pl.y=b.enc_zones[0].y+10;}
         if(kind=="slam"){pl.x=g.x+30;pl.y=g.y+10;}
-        // Since 24.11.2026 the fire beam is a sweeping bv2 hazard (DESIGN/BOSS_DESIGN.md): stand on its announced start edge.
+        // Since 24.11.2026 the fire beam is a sweeping bv2 hazard (docs/Design/Boss-Design.md): stand on its announced start edge.
         var swept=kind=="beam" && variable_instance_exists(b,"enc_sweep") && is_struct(b.enc_sweep);
         if(swept){var sg=b.enc_sweep.g;pl.x=sg.x+lengthdir_x(100,b.enc_sweep.sweep_from);pl.y=sg.y+lengthdir_y(100,b.enc_sweep.sweep_from)+10;}
         boss_step(b,c.warning-.001);if(swept)bv2_hazards_step(0);bt_check(pl.hp==hp0,"Dragon "+kind+" does not damage during preparation");boss_step(b,.0011);if(swept)bv2_hazards_step(0);

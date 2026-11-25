@@ -1,4 +1,4 @@
-/// FFXIV-style choreography on top of the shared Boss System 2.0 hazards (DESIGN/BOSS_DESIGN.md).
+/// FFXIV-style choreography on top of the shared Boss System 2.0 hazards (docs/Design/Boss-Design.md).
 /// Every pattern piece is an ordinary bv2 hazard: warning and activation run on the owner's single v2_clock,
 /// so the countdown clock and the hitbox can never drift apart. Damage values are always the calling
 /// ability's existing damage; this file adds geometry and timing, no new balancing numbers.

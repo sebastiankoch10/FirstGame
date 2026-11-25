@@ -1,6 +1,6 @@
 ---
 tags: [system, bosse]
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 # Bosse
 
@@ -13,7 +13,7 @@ Zwei Minibosse in Minute 1 und 3. Ab Minute 5 alle 5 Minuten ein zufälliger Hau
 - `scripts/boss_encounters_v2` (Hexen, Behemoth) sowie `scripts/dragon_encounter` und `scripts/dragon_boss` (Drache).
 - `scripts/boss_hazards_v2` und `scripts/attack_telegraph`: gemeinsame Gefahren, eine Uhr `v2_clock` je Boss, Countdown am Zonenrand.
 - `scripts/boss_choreo`: Muster, Schwenkstrahlen mit 2.600 px, Aufholattacken und die Eskalationsregel `bc_complex`.
-- Objekt: `ObjectBossMonster`. Regeln: `DESIGN/BOSS_DESIGN.md` (verbindlich). Test: `tests/boss_harness.gml`.
+- Objekt: `ObjectBossMonster`. Regeln: [[Boss-Design]] und [[Kampf & Begegnungen]] (verbindlich). Test: `tests/boss_harness.gml`.
 
 ## Abhängigkeiten
 [[Boss-Testmodus]] · [[Spieler & Bewegung]] · [[Licht, Wetter & Effekte]] · [[Ausrüstung]] · [[Talente]]
