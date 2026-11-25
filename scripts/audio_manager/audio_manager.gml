@@ -99,7 +99,12 @@ function fg_audio_tick(_dt) {
     fg_music_set(context);
     a.fade=min(1,a.fade+max(0,_dt)/0.65);
     var duck=(room!=RoomMenu && global.game_paused && !global.game_over) ? 0.45 : 1;
-    var music=clamp(global.music_volume,0,1)*duck;
+    // While a boss hazard is in its warning phase the music dips smoothly to 72 %, so warning cues stand out.
+    var danger=false;
+    if(variable_global_exists("bv2_hazards"))for(var i=0;i<array_length(global.bv2_hazards);i++){var h=global.bv2_hazards[i];if(h.age<h.warning){danger=true;break;}}
+    if(!variable_struct_exists(a,"danger_duck"))a.danger_duck=1;
+    a.danger_duck=lerp(a.danger_duck,danger ? .72 : 1,min(1,max(0,_dt)*6));
+    var music=clamp(global.music_volume,0,1)*duck*a.danger_duck;
     fg_audio_apply_focus(window_has_focus());
     if(a.current!=-1) audio_sound_gain(a.current,music*a.fade,0);
     if(a.retiring!=-1) {

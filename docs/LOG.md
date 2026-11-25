@@ -4,6 +4,12 @@ updated: 2026-11-25
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-25 · Claude · Nutzerentscheidungen und Roadmap-Schritte (Commits `fcc27f13`, `710bb348` und folgende)
+- Kamera 960×540 (`VIEW_W/VIEW_H`), Namen Schwertmeister/Arkanistin, dauerhafte Talente (`talent_persistent`, `talent_respec`, Taste R), 164 Legacy-Sprites und `output/` gelöscht.
+- Kettenblitz zusammengesetzt in 3 Bändern (`gameplay_polish`), Intensitäts-Bänder für alle Zauber (`spell_v2`, `spell_vfx`), Pixel-Partikel, Tonvariation und Musikabsenkung bei Bosswarnungen (`audio_manager`).
+- Drachen-Rig per 2D-Skinning (`dragon_rig_*` in `dragon_boss`), Lebendigkeit der Spielfigur (`player_motion_life`, Ebenen drehen mit), A/B-Vergleich Pixeldichte.
+- QA Stufe 3 nach jedem Meilenstein: alle Suiten PASS (Details in den Commit-Texten).
+
 ### 2026-11-25 · Claude · Design-Kanon, Audit, Terranigma-Referenz, IDE-Ordnung
 - Neuer verbindlicher Kanon `docs/Design/` (11 Dokumente, Vorrang im [[Leitbild]]). `DESIGN/*.md` dorthin verschoben (`Boss-Design.md`, `Progression & Builds.md`), `DESIGN/` entfällt.
 - Audit früherer Aufträge (15 Codex-Anhänge, Claude-Prompts) gegen Doku und Code; Widersprüche aufgelöst (Leitbild Abschnitt 6). Gemessen: Bild um 33 % verzerrt (800×600 auf 1280×720), Pixeldichte 0,25–1,65.

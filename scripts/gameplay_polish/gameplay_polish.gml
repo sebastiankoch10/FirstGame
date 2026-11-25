@@ -108,7 +108,7 @@ function cast_chain_lightning(_first,_damage,_targets,_hop_range,_owner) {
         apply_attack_damage(target,_damage,_owner,SPELL.LIGHTNING);target.shock_time=max(target.shock_time,round(GetSpellData(SPELL.LIGHTNING).shock_time*_owner.status_factor));impact_add(target.x,target.y-12,"arcane");
         // Visual band from the spell level (docs/Design/Fähigkeiten, VFX & Audio.md 4): compact at 1-3, full at 7-9.
         var band=vfx_spell_band(SPELL.LIGHTNING);
-        if(band==2)spell_fx_burst(bx,by,56,3,.3); else if(band==1)spell_fx_burst(bx,by,34,3,.24);
+        if(band==2)spell_fx_burst(bx,by,56,3,.3,2); else if(band==1)spell_fx_burst(bx,by,34,3,.24,1);
         light_pulse(bx,by,band==2 ? 185 : (band==1 ? 150 : 110),make_color_rgb(115,193,255),band==0 ? .6 : .8,.22);
         if(array_length(visited)==1)chain_segment_add(bx-26,by-(band==0 ? 160 : 220),bx,by,band,true);
         chain_segment_add(ax,ay,bx,by,band);
@@ -134,6 +134,8 @@ function chain_visual_step(_dt) {
 /// Purely visual: damage, targets, hop range and timing are unchanged.
 /// Band from the spell level: 1-3 basis, 4-6 middle, 7-9 endgame.
 function vfx_band(_level) {return _level>=7 ? 2 : (_level>=4 ? 1 : 0);}
+/// Intensity of a band: basis .55, middle .8, endgame 1 (alpha/glow multiplier, never the hit radius).
+function vfx_band_alpha(_band) {return _band<=0 ? .55 : (_band==1 ? .8 : 1);}
 /// Band of a learned spell; global.vfx_band_override (0-2) forces a band for previews and capture tests.
 function vfx_spell_band(_sid) {return variable_global_exists("vfx_band_override") ? global.vfx_band_override : vfx_band(spell_level(_sid));}
 /// Deterministic hash in [-1,1] (no global RNG: seeded runs stay comparable).

@@ -5,37 +5,43 @@ agent: Claude
 ---
 # Übergabe (wird nach jeder Aufgabe überschrieben, max. ~40 Zeilen)
 
-**Zuletzt dran:** Claude, 2026-11-25. Aufgabe: globale Designphilosophie, Audit, Terranigma-Referenz, Asset-Struktur, Qualitätsstandard, Roadmap.
+**Zuletzt dran:** Claude, 2026-11-25. Aufgaben: Design-Kanon und Audit, danach Nutzerentscheidungen und Roadmap-Schritte.
 
 ## Stand
-- **Neuer verbindlicher Design-Kanon** `docs/Design/` (11 Dokumente). Einstieg und Vorrangregeln: [[Leitbild]]. Alte `DESIGN/*.md` liegen jetzt dort (`Boss-Design.md`, `Progression & Builds.md`).
-- **Spiel unverändert spielbar (F5).** Geändert wurden nur der IDE-Ordnerbaum (`parent` in 1.381 `.yy`, Ordner in der `.yyp`) und Kommentar-Pfade. Keine Logik, keine Werte.
-- **Tests am 25.11. nach der IDE-Neuordnung:**
-  - static PASS, regression 811 PASS.
-  - feature, boss, level, classes, visual: NOT RUN (nur Kommentare und IDE-Ordner geändert, keine Logik). Letzter Vollstand 24.11.: alle PASS.
+- **Design-Kanon** `docs/Design/` (11 Dokumente). Vorrang und globale Regeln: [[Leitbild]]. Reihenfolge: [[Roadmap & Vertical Slice]].
+- **Entschieden (25.11.):**
+  - Kamera 960×540;
+  - eigenes kostenloses Rig;
+  - Namen Schwertmeister, Arkanistin, Waldläufer;
+  - 30-min-Runs plus Talente zwischen Runs;
+  - Legacy-Sprites und `output/` gelöscht.
+- **Umgesetzt und getestet:**
+  - Kamera 16:9 (keine Verzerrung mehr);
+  - Klassennamen;
+  - dauerhafte Talente je Klasse mit R = zurücksetzen (nur im echten Spiel, Testbuilds pro Run);
+  - Kettenblitz als Pixel-Effekt in 3 Stufen;
+  - Intensitäts-Bänder für alle Zauber;
+  - Pixel-Partikel und Tonvariation;
+  - Drachen-Körper-Rig (2D-Skinning);
+  - Lebendigkeit der Spielfigur (Absprung, Landung, Lehnen);
+  - IDE-Ordner nach Kategorien.
+- **Tests (25.11.):** Stufe 3 nach jedem Meilenstein PASS (static, regression 811, feature 141, boss 141, level 166, classes 150, visual 75); Musikabsenkung zuletzt mit regression, level, boss PASS.
 
-## Zuletzt gearbeitet an
-- **Audit früherer Aufträge** (15 Codex-Anhänge, Claude-Prompts) gegen Doku und Code. Widersprüche aufgelöst: [[Leitbild]] Abschnitt 6.
-- **Gemessen:**
-  - Bild horizontal um 33 % verzerrt (Kamera 800×600 auf 1280×720);
-  - Pixeldichte je Asset 0,25–1,65;
-  - VFX als gestreckte Sprites und Vektorformen;
-  - Drache als Einzelsprite mit 2–4 Frames.
-- **Terranigma:** nur Storyboard-Vorschaubilder (1 Bild/s) ausgewertet, kein Video-Download. Grenzen dokumentiert.
-- **Werkzeuge:**
-  - `tests/tools/assets/ide_folders.py` (`--check`/`--apply`); `gm_project.py` sortiert neue Ressourcen automatisch ein;
-  - `tests/tools/export_design.py` erzeugt `docs/_export/`.
-
-## Offen: Entscheidungen des Nutzers (siehe [[Roadmap & Vertical Slice]])
-1. R1: Kamera-Option (Vorschlag 960×540), danach A/B-Prototyp zur Pixeldichte.
-2. Eigenes Rig in GML (Vorschlag) oder Spine (kostenpflichtig) für Bosse.
-3. Klassennamen (Schwertmeister/Arkanistin?), Waffen-Upgrade-System, Elitegegner, Run-Format gegenüber Action-RPG.
-4. Löschen der 164 Legacy-Sprites und von `output/` (820 MB)? Internetsperre in `.claude/settings.json`?
+## Offen (Details und Reihenfolge in [[Roadmap & Vertical Slice]])
+1. **Pixeldichte 1,0 umsetzen:** A/B entschieden (Empfehlung), Pipeline-Umbau 96 → 160 px und Ausrüstungs-Neubau.
+2. **Haar und Umhang** als eigene, nachschwingende Ebenen (Pipeline-Trennung plus Federmodul).
+3. **Attack Timeline (S1)** als gemeinsames System und Migration von Schwert und Klassenwaffen; Animation Controller (S2).
+4. **Drachen-Rig Stufe 2:** Hitboxen an Knochen, Schweifschlag, Biss, Knochen für alle Posen; Hexen und Behemoth.
+5. **Eigene zusammengesetzte Effekte** für die übrigen 17 Zauber (Vorlage: Kettenblitz).
+6. **Minibosse** im aktuellen Stil (neue Grafik nötig), **Elitegegner**, **Waffen-Upgrade-System**: Design durch den Nutzer.
+7. **Quell-Asset-Migration** (Pfadtabelle, dann Verschieben).
+8. **Tempo der Meta-Progression:** Zahlenentscheidung des Nutzers.
 
 ## Bekannte Bugs / Risiken
-- `MCP_TIMEOUT` in `.claude/settings.json` wirkt nicht; `gms`-MCP bricht nach 30 s ab. Die Test-Runner brauchen ihn nicht.
-- Minibosse nutzen noch 0.1-Gegnerstreifen (Stilbruch). Telemetrie-Anker bei einer Timeline-Migration mitziehen.
+- **MCP:** `MCP_TIMEOUT` in `.claude/settings.json` wirkt nicht (gms-MCP bricht nach 30 s ab). Für die Tests egal.
+- **Rig:** `sprite_get_uvs` passt bei den Drachen-Frames nicht zur Primitive-Textur; das Rig rendert deshalb über eine eigene Surface. Ursache unklar.
+- **Legacy-Harnesses** (`atmosphere_`, `dragon_`, `player_smoke_harness`) verweisen auf gelöschte 0.1-Sprites. Sie laufen in keiner Suite.
 
 ## Nächste Schritte
-1. Nutzer: [[Leitbild]] und Export lesen, offene Entscheidungen 1–4 treffen.
-2. Danach Roadmap-Auftrag 1 (R1 Verzerrung), dann 2 (A/B-Pixeldichte), dann 3 (Attack Timeline).
+1. **Nutzer:** F5. Kamera, Kettenblitz (Stufe 1 gegen 7+), Drache und Talente über mehrere Runs ansehen; künstlerische Abnahme.
+2. **Danach** Roadmap-Punkt 1 (Pixeldichte) oder 2 (Haar und Umhang), je nach Rückmeldung.

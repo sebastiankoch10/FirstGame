@@ -20,6 +20,11 @@ updated: 2026-11-25
 - **2026-11-25 · Export des Kanons wird erzeugt, nicht gepflegt** (`tests/tools/export_design.py`). Grund: keine zweite Wahrheitsquelle.
 
 ## Spieldesign
+- **2026-11-25 · Nutzerentscheidungen:** Kamera nach Vorschlag (960×540); Werkzeuge immer kostenlos (eigenes Rig statt Spine); Klassen heißen Schwertmeister, Arkanistin, Waldläufer; Run-Format **und** Fortschritt zwischen Runs; Legacy-Sprites und `output/` gelöscht; keine Internetsperre.
+- **2026-11-25 · Dauerhafte Talente nur im echten Spiel** (Projektname „FirstGame“). Grund: Native Suiten und Bot-Simulationen müssen reproduzierbar bleiben.
+- **2026-11-25 · Drachen-Rig als 2D-Skinning des Original-Frames statt zerlegter Teile.** Grund: keine Nähte, kein neues Artwork, Originale bleiben unverändert. In Feuerposen keine Kopfbewegung, damit Maul-Anker und Strahl synchron bleiben.
+- **2026-11-25 · Zauber-Bänder verändern nur die Intensität** (Deckkraft, Glühen, Licht, Partikelzahl), nie Radius oder Schaden. Grund: G12, keine Balancing-Änderung.
+- **2026-11-25 · Pixeldichte-Empfehlung 1 Artpixel = 1 Welteinheit** nach A/B-Vergleich. Umsetzung ist ein eigener Auftrag (Pipeline-Umbau).
 - **2026-11-25 · Hybride Animationsarchitektur:** gezeichnete Posen plus Übergangsposen plus Federebenen für Spieler; Frame-Animation plus prozedurale Lebendigkeit für Gegner; Cutout-Rig in GML für Hauptbosse; VFX aus Bausteinen auf dem Pixelraster. Grund: Qualität ohne Papierpuppe, machbar in GM 2024, keine kostenpflichtigen Werkzeuge. Details: [[Technische Architektur]].
 - **2026-11-25 · Präsenz von Fähigkeiten durch Klarheit, Timing und Ton statt Fläche; drei visuelle Bänder (Stufe 1–3/4–6/7–9).** Ersetzt „größer und präsenter“ (22.11.). Werte und Radien bleiben unverändert. [[Fähigkeiten, VFX & Audio]].
 - **2026-11-25 · Terranigma-Trailer als Bewegungsreferenz** (nur Bewegung, keine Assets oder Stil). Analysiert über öffentliche Storyboard-Vorschaubilder (1 Bild/s); kein Video-Download. [[Visuelles Leitbild & Animation]].

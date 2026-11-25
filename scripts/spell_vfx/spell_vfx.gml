@@ -8,8 +8,8 @@ function spell_particle(_x,_y,_vx,_vy,_life,_size,_color,_kind=0,_grav=0) {
     if(array_length(global.spell_particles)>=spell_vfx_cap())array_delete(global.spell_particles,0,1);
     array_push(global.spell_particles,{x:_x,y:_y,vx:_vx,vy:_vy,life:_life,total:_life,size:_size,color:_color,kind:_kind,grav:_grav});
 }
-function spell_vfx_burst(_x,_y,_radius,_element) {
-    var col=spell_element_color(_element),n=clamp(round(_radius/9),5,16);
+function spell_vfx_burst(_x,_y,_radius,_element,_band=2) {
+    var col=spell_element_color(_element),n=max(3,round(clamp(round(_radius/9),5,16)*(_band==0 ? .5 : (_band==1 ? .75 : 1))));
     for(var i=0;i<n;i++) {
         var a=random(360),sp=random_range(40,120)*(.6+_radius/160);
         switch(_element) {
@@ -46,6 +46,8 @@ function spell_vfx_step(_dt) {
     var emit=global.spell_vfx_clock>=1/30;if(emit)global.spell_vfx_clock-=1/30;
     if(emit && variable_global_exists("spell_fields")) for(var i=0;i<array_length(global.spell_fields);i++) {
         var f=global.spell_fields[i],col=spell_element_color(f.element);
+        // Basis band emits every second tick (half the particles); middle and endgame emit every tick.
+        if(vfx_band(f.level)==0){f.vfx_skip=!(variable_struct_exists(f,"vfx_skip") && f.vfx_skip);if(f.vfx_skip)continue;}
         switch(f.kind) {
             case "field":
                 repeat(2){var a=random(360),r=random(f.radius);spell_particle(f.x+lengthdir_x(r,a),f.y+lengthdir_y(r*.7,a),random_range(-8,8),-random_range(30,70),random_range(.4,.8),random_range(1.8,3),choose(col,make_color_rgb(255,214,120),make_color_rgb(255,96,40)),0,-20);}break;
@@ -86,7 +88,7 @@ function spell_vfx_draw() {
     if(variable_global_exists("spell_fields")) for(var i=0;i<array_length(global.spell_fields);i++) {
         var f=global.spell_fields[i];
         if(!array_contains(["field","gravity","prison","seal","verdict"],f.kind))continue;
-        var col=spell_element_color(f.element),k=clamp(min(f.age*4,(f.duration-f.age)*3),0,1),fl=.85+.15*sin(current_time/90+i*1.7);
+        var col=spell_element_color(f.element),k=clamp(min(f.age*4,(f.duration-f.age)*3),0,1)*vfx_band_alpha(vfx_band(f.level)),fl=.85+.15*sin(current_time/90+i*1.7);
         draw_set_color(col);
         for(var n=0;n<4;n++){draw_set_alpha(.05*k*fl);draw_ellipse(f.x-f.radius*(1-n*.2),f.y-f.radius*(1-n*.2)*.72,f.x+f.radius*(1-n*.2),f.y+f.radius*(1-n*.2)*.72,false);}
         if(f.kind=="field"){draw_set_color(make_color_rgb(255,214,120));for(var n=0;n<7;n++){var a=n*51.4+current_time/14,rr=f.radius*(.35+.5*frac(n*.37+current_time/1700));var fx=f.x+lengthdir_x(rr,a),fy=f.y+lengthdir_y(rr*.72,a),h=6+5*sin(current_time/70+n);draw_set_alpha(.35*k);draw_triangle(fx-3,fy,fx+3,fy,fx,fy-h,false);}}

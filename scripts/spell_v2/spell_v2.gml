@@ -53,11 +53,12 @@ function spell_v2_values(_sid,_level) {
         chain_targets:_sid==SPELL.LIGHTNING ? d.chain_base+floor((lv-1)/3)+(conductor>=5 ? 1 : 0)+(conductor>=9 ? 1 : 0) : 0,
         chain_range:d.chain_range+(lv-1)*4,stages:d.base_count+floor((lv-1)/d.count_every),element:d.element};
 }
-function spell_fx_burst(_x,_y,_radius,_element,_duration=.4) {
+/// _band: visual band 0-2 (vfx_band of the spell level). Radius stays the hit radius; band only sets intensity.
+function spell_fx_burst(_x,_y,_radius,_element,_duration=.4,_band=2) {
     if(array_length(global.spell_bursts)>=64)array_delete(global.spell_bursts,0,1);
-    array_push(global.spell_bursts,{x:_x,y:_y,radius:_radius,element:_element,age:0,duration:_duration});
-    light_pulse(_x,_y,min(280,_radius*1.7),spell_element_color(_element),.65,min(.3,_duration));
-    spell_vfx_burst(_x,_y,_radius,_element);
+    array_push(global.spell_bursts,{x:_x,y:_y,radius:_radius,element:_element,age:0,duration:_duration,band:_band});
+    light_pulse(_x,_y,min(280,_radius*1.7),spell_element_color(_element),.65*vfx_band_alpha(_band),min(.3,_duration));
+    spell_vfx_burst(_x,_y,_radius,_element,_band);
 }
 function spell_element_color(_element) {
     var colors=[make_color_rgb(242,213,145),make_color_rgb(255,137,44),make_color_rgb(108,225,255),make_color_rgb(143,197,255),make_color_rgb(206,118,255),make_color_rgb(213,174,101),make_color_rgb(116,239,153),make_color_rgb(255,218,108)];
@@ -107,7 +108,7 @@ function spell_v2_cast(_spell,_target,_v) {
         radius:_v.radius,damage:_v.damage,duration:_v.duration,count:_v.stages,angle:aim,hit_ids:[],return_done:false};
     if(sid==SPELL.LANCE) {
         spell_v2_line(f.sx,f.sy,f.ex,f.ey,f.radius,f.damage,sid,f.level);
-        spell_fx_burst(tx,ty,64,4);f.duration=.28;
+        spell_fx_burst(tx,ty,64,4,.4,vfx_band(f.level));f.duration=.28;
     }
     if(sid==SPELL.ORBIT_BLADES || sid==SPELL.WISP){f.x=pl.x;f.y=pl.y-10;}
     if(sid==SPELL.STONE_SPIKES || sid==SPELL.STARFALL)f.duration=.4+f.count*.35;
@@ -135,7 +136,7 @@ function spell_v2_step(_dt) {
                 if(f.age>=f.next) {
                     spell_v2_area(f.x,f.y,f.radius,f.damage,f.sid,f.level);f.next=f.age+.5;f.ticks++;
                     if(f.kind=="prison"){var victims=spell_targets(f.x,f.y,f.radius);for(var n=0;n<array_length(victims);n++)if(!boss_is_actor(victims[n]))victims[n].hit_stun=max(victims[n].hit_stun,.18);}
-                    spell_fx_burst(f.x,f.y,f.radius,f.element,.34);
+                    spell_fx_burst(f.x,f.y,f.radius,f.element,.34,vfx_band(f.level));
                 }break;
             case "orbit":
                 f.x=pl.x;f.y=pl.y-10;
@@ -151,10 +152,10 @@ function spell_v2_step(_dt) {
                 if(f.ticks<f.count && f.age>=.28+f.ticks*.35){
                     var xx=f.kind=="spikes" ? f.sx+lengthdir_x(65+f.ticks*70,f.angle) : f.x+lengthdir_x(f.ticks*32,f.angle+f.ticks*137);
                     var yy=f.kind=="spikes" ? f.sy+lengthdir_y(65+f.ticks*70,f.angle) : f.y+lengthdir_y(f.ticks*32,f.angle+f.ticks*137);
-                    spell_v2_area(xx,yy,f.radius,f.damage,f.sid,f.level);spell_fx_burst(xx,yy,f.radius,f.element,.45);f.ticks++;
+                    spell_v2_area(xx,yy,f.radius,f.damage,f.sid,f.level);spell_fx_burst(xx,yy,f.radius,f.element,.45,vfx_band(f.level));f.ticks++;
                 }break;
             case "seal":case "verdict":
-                if(f.ticks==0 && f.age>=(f.kind=="seal" ? .9 : .72)) {spell_v2_area(f.x,f.y,f.radius,f.damage,f.sid,f.level);spell_fx_burst(f.x,f.y,f.radius,f.element,.45);f.ticks++;}
+                if(f.ticks==0 && f.age>=(f.kind=="seal" ? .9 : .72)) {spell_v2_area(f.x,f.y,f.radius,f.damage,f.sid,f.level);spell_fx_burst(f.x,f.y,f.radius,f.element,.45,vfx_band(f.level));f.ticks++;}
                 break;
             case "glaive":
                 var ox=f.x,oy=f.y,p=clamp(f.age/.55,0,1);
@@ -169,7 +170,7 @@ function spell_v2_step(_dt) {
                 if(dist<=speed_value || f.age>2){
                     spell_v2_area(f.x,f.y,f.radius,f.damage,f.sid,f.level);
                     var victims=spell_targets(f.x,f.y,f.radius+130);for(var n=0;n<min(f.count,array_length(victims));n++){spell_v2_hit(victims[n],f.damage*.65,f.sid,f.level);spell_link(f.x,f.y,victims[n].x,victims[n].y-12,4);spell_fx_burst(victims[n].x,victims[n].y-12,44,4);}
-                    spell_fx_burst(f.x,f.y,f.radius,4);f.age=f.duration;
+                    spell_fx_burst(f.x,f.y,f.radius,4,.4,vfx_band(f.level));f.age=f.duration;
                 }break;
         }
         if(f.age>=f.duration)array_delete(global.spell_fields,i,1);
@@ -179,7 +180,7 @@ function spell_v2_step(_dt) {
 function spell_v2_draw() {
     for(var i=0;i<array_length(global.spell_links);i++){var link=global.spell_links[i];draw_set_alpha(link.life/.18);draw_set_color(spell_element_color(link.element));draw_line_width(link.ax,link.ay,link.bx,link.by,5);draw_set_color(c_white);draw_line_width(link.ax,link.ay,link.bx,link.by,1);}
     for(var i=0;i<array_length(global.spell_fields);i++) {
-        var f=global.spell_fields[i],col=spell_element_color(f.element);draw_set_color(col);draw_set_alpha(.5);
+        var f=global.spell_fields[i],col=spell_element_color(f.element),fa=vfx_band_alpha(vfx_band(f.level));draw_set_color(col);draw_set_alpha(.5*fa);
         if(f.kind=="lance"){draw_set_alpha((1-f.age/f.duration)*.5);draw_line_width(f.sx,f.sy,f.ex,f.ey,f.radius*2);draw_set_color(c_white);draw_line_width(f.sx,f.sy,f.ex,f.ey,3);}
         else if(f.kind=="orbit")for(var n=0;n<f.count;n++){var a=f.age*190+n*360/f.count,xx=f.x+lengthdir_x(f.radius,a),yy=f.y+lengthdir_y(f.radius,a);draw_sprite_ext(spr_master_slash_1,1,xx,yy,.23,.23,a,c_white,1);}
         else if(f.kind=="glaive"){draw_sprite_ext(spr_master_slash_3,1,f.x,f.y,.32,.32,f.age*900,c_white,1);}
@@ -201,7 +202,7 @@ function spell_v2_draw() {
             if(f.kind=="seal" || f.kind=="verdict")draw_line_width(f.x,f.y-230*(1-f.age/f.duration),f.x,f.y,f.age>(f.kind=="seal" ? .9 : .72) ? 20 : 3);
         }
     }
-    for(var i=0;i<array_length(global.spell_bursts);i++){var e=global.spell_bursts[i];spell_fx_draw(e.x,e.y,e.radius,e.element,e.age/e.duration,1);}
+    for(var i=0;i<array_length(global.spell_bursts);i++){var e=global.spell_bursts[i];spell_fx_draw(e.x,e.y,e.radius,e.element,e.age/e.duration,vfx_band_alpha(variable_struct_exists(e,"band") ? e.band : 2));}
     draw_set_alpha(1);draw_set_color(c_white);
     spell_vfx_draw();
 }

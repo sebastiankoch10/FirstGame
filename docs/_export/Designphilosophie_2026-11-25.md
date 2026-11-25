@@ -59,10 +59,10 @@ Das langfristige Ziel (Auftrag 25.11.):
 
 **Nicht mehr Pixel-Art, sondern besser inszenierte Pixel-Art.**
 
-- **Offen: Run-Format gegenüber Action-RPG.**
-  - Die Aufträge vom 22.11. nennen FirstGame ein „Survivors-Roguelite“, der vom 23.11. ein „Survivors-Spiel mit Action-RPG-Bosskämpfen“, der vom 25.11. ein „Action-RPG“.
-  - Bis zu einer Entscheidung gilt: Das Run-Format bleibt (30 Minuten, automatische Angriffe, Talente pro Run, umschaltbar). Die RPG-Tiefe wächst über Builds, Talente, Ausrüstung und die Inszenierung.
-  - Zu klären sind: dauerhafte Fortschritte zwischen Runs, Länge und Struktur eines Runs, manuelles Zielen.
+- **Entschieden (Nutzer, 25.11.): beides.**
+  - Das Run-Format bleibt (30 Minuten, automatische Angriffe).
+  - **Dazu kommt Fortschritt zwischen den Runs:** Talente und Talentpunkte bleiben je Klasse erhalten, ein Zurücksetzen ist jederzeit möglich. Details: „Progression & Builds“.
+  - Manuelles Zielen ist weiterhin nicht vorgesehen.
 
 ### 3. Die drei Inspirationsquellen und wie sie zusammenwirken
 
@@ -128,9 +128,9 @@ Diese Regeln gelten für alle Klassen, Gegner, Bosse und Fähigkeiten, auch kün
 
 ### 7. Glossar
 
-- **Klassen:** Schwertkämpfer (`Sword`, Figur `swordsmanv3`), Zaubermeisterin (`Mage`, `magev3`), Waldläufer (`Ranger`, `rangerv3`).
-  - Der Auftrag vom 25.11. nennt sie auch „Schwertmeister“ und „Arkanistin“.
-  - **Offen:** Sollen die Klassen umbenannt werden? Bis dahin gelten die Namen im Spiel.
+- **Klassen:** **Schwertmeister** (Code `Sword`, Figur `swordsmanv3`), **Arkanistin** (`Mage`, `magev3`), **Waldläufer** (`Ranger`, `rangerv3`).
+  - Umbenannt am 25.11. (Nutzerentscheidung).
+  - Frühere Namen in älteren Texten: Schwertkämpfer, Zaubermeisterin.
 - **Gegnerränge:** normaler Gegner, Elite (noch nicht im Spiel), Miniboss (Minute 1 und 3), Hauptboss (ab Minute 5, alle 5 Minuten).
 - **Warnung (Telegraph):** angekündigte Trefferfläche mit Countdown.
 - **Aktive Phase:** Zeitraum, in dem eine Attacke Schaden verursachen kann.
@@ -657,7 +657,7 @@ Abnahme nach „Qualitätsstandard“:
 
 ### 3. Klassenprofile (nur Besonderheiten)
 
-#### Schwertkämpfer (`Sword`, `swordsmanv3`)
+#### Schwertmeister (`Sword`, `swordsmanv3`; früher „Schwertkämpfer“)
 - **Rolle:** Nahkampf, Bewegung, kontrollierte Fläche. Robust (Ist: 120 HP, Tempo 3,2, Power 2).
 - **Startwaffe:** Kette aus drei Hieben mit festem Ablauf (`master_combat`, `ObjectSwordHitbox`). Slash-Effekte mit drei visuellen Stufen.
 - **Talentrichtung:** Druckwelle am Finale, Rundumhieb, Sturmangriff nach Ausweichrolle, Heilung beim Finale.
@@ -668,7 +668,7 @@ Abnahme nach „Qualitätsstandard“:
   - Trefferstopp bei Gegnern.
   - Erste Klasse des Vertical Slice.
 
-#### Zaubermeisterin (`Mage`, `magev3`)
+#### Arkanistin (`Mage`, `magev3`; früher „Zaubermeisterin“)
 - **Rolle:** langsame, wuchtige Kombos. Zerbrechlich (Ist: 70 HP, Tempo 2,8, Power 4).
 - **Startwaffe:** Vierer-Kombo, danach wieder von vorn:
   1. Kristallprojektil
@@ -700,7 +700,7 @@ Abnahme nach „Qualitätsstandard“:
   - Ton gedrosselt und variiert, damit Dauerfeuer nicht ermüdet.
 
 ### 4. Offene Entscheidungen
-1. **Klassennamen:** „Schwertkämpfer/Zaubermeisterin/Waldläufer“ (im Spiel) oder „Schwertmeister/Arkanistin/…“ (Auftrag 25.11.)?
+1. ~~Klassennamen~~: entschieden am 25.11.: Schwertmeister, Arkanistin, Waldläufer (im Spiel umgesetzt).
 2. **Waffen-Upgrade-System** (Auftrag 22.11.): Form und Zeitpunkt. Es koppelt danach die visuelle Waffenentwicklung.
 3. **Umhang-Slot:** Ein Umhang ist derzeit Klassenidentität und kein Ausrüstungsteil (DECISIONS 24.11.).
 
@@ -730,6 +730,12 @@ Rang 2 unter „Leitbild“. Technik: „Talente“, „Ausrüstung“, „Zaube
   - die Schwierigkeit plötzlich sprunghaft steigt;
   - der Spieler nach einigen Upgrades unbesiegbar ist;
   - Bosse unabhängig vom Build in Sekunden sterben (Auftrag 23.11.).
+- **Fortschritt zwischen Runs (Nutzerentscheidung 25.11.: „beides“):**
+  - Runs bleiben 30 Minuten.
+  - Talentränge und Talentpunkte bleiben **je Klasse** zwischen den Runs erhalten.
+  - **[R]** im Charakterbildschirm setzt alle Talente der Klasse zurück und erstattet die Punkte.
+  - Gilt nur im echten Spiel; umbenannte Test- und Simulationsbuilds bleiben pro Run, damit Tests und Bot-Statistiken reproduzierbar sind.
+  - **Balancing-Hinweis (Empfehlung, nichts geändert):** Mit den heutigen Punktequellen (ab Stufe 4 alle 4 Stufen plus Hauptbosse) ist der Klassenbaum nach etwa 2–3 erfolgreichen Runs voll. Für eine längere Meta-Progression wären eigene, seltenere Meta-Punkte nötig. Das ist eine Zahlenentscheidung für den Nutzer.
 - **Waffen-Upgrade-System** (Auftrag 22.11.):
   - Die Klassenwaffen sollen später unabhängig von den sechs Zaubern aufgewertet werden können: Schaden, Tempo, Reichweite, Projektilzahl, Schlaggröße, Durchschlag, Zusatzeffekte.
   - **Offen:** noch nicht umgesetzt. Die Architektur muss es zulassen.
@@ -776,7 +782,10 @@ Alle Zahlenwerte sind **neue, bewusst moderate Designwerte**. Sie sind nicht dur
 - **Punkte:** `talent_config()`
   - `first_point_level=4`, `level_interval=4`: Punkte auf Stufe 4, 8, 12 usw.
   - `boss_points=1` je Hauptboss, `miniboss_points=0`
-  - `persistent=false`: Die Talente gelten nur für einen Run. Mit `true` werden Ränge und Punkte je Klasse in `firstgame_talents.ini` gespeichert und geladen. Die Funktionen dafür existieren, sind aber nicht aktiv.
+  - `persistent=true` (seit 25.11.): Ränge, Punkte und ausgegebene Punkte werden je Klasse in `firstgame_talents.ini` gespeichert und geladen.
+    - `talent_persistent()` schaltet das nur für das Projekt „FirstGame“ ein; `global.talent_persist_override` erlaubt Tests.
+    - `talent_respec()` erstattet alle Punkte (Taste R).
+    - Nativ getestet (Suite `feature`).
 - **Bots:** `talent_bot_invest()` verteilt Punkte deterministisch, erst im Klassenbaum, dann im Allgemein-Baum. Das nutzen nur die QA-Simulationen.
 
 #### Oberfläche
@@ -915,8 +924,8 @@ Die 12er-Kombo des Waldläufers bleibt ohne Talente exakt: 1, 1, 3, 1, 1, 1, 1, 
 - Partikel
 
 #### Offene Entscheidungen
-1. **Punktevergabe:** pro Stufe, pro Boss oder als dauerhafte Meta-Progression zwischen Runs. Umschaltbar über `talent_config().persistent`.
-2. **Respec:** Ob Talente zurückgesetzt werden können, ist nicht vorgesehen und offen.
+1. **Punktevergabe:** dauerhafte Talente entschieden (25.11.). Offen ist nur das Tempo der Meta-Progression (siehe Balancing-Hinweis oben).
+2. **Respec:** umgesetzt (Taste R, volle Erstattung).
 3. **Zahlenwerte von Talenten und Gegenständen:** Sie brauchen menschliche Spieltests und gezielte Simulationen.
 4. **Ausrüstungsoptik am Charakter:** seit 24.11. umgesetzt (prozedural abgeleitet). Offen sind die künstlerische Feinabnahme und handgezeichnete Varianten.
 5. **Weitere Talentquellen:** Ob es zusätzliche Quellen geben soll, etwa Truhen, ist offen.
@@ -1130,6 +1139,7 @@ Visuell relevante Fähigkeiten haben Phasen; siehe „Fähigkeiten, VFX & Audio�
 ### 6. Ist-Stand der Animation (Audit 25.11.)
 
 - **Spielerfiguren:**
+  - **Seit 25.11. prozedurale Lebendigkeit** (`player_motion_life` in `scripts/player_artpack`): Streckung beim Absprung, Abfedern bei der Landung, kurzes Stauchen beim Richtungswechsel, gefedertes Lehnen in Tempo und Beschleunigung (höchstens 2,8°). Die Ausrüstungsebenen drehen exakt mit. Rein visuell, keine Eingabeverzögerung.
   - 8 Richtungen × 8 Ausgangsposen je Klasse;
   - Laufen mit 8 Frames, Rennen als schneller abgespielter Lauf;
   - Sprung und Fall wählen Posen nach Fortschritt; Idle ist ein Frame mit Atembewegung;
@@ -1138,7 +1148,14 @@ Visuell relevante Fähigkeiten haben Phasen; siehe „Fähigkeiten, VFX & Audio�
 - **Skelette (Wald):** 8 Richtungen, 5 Aktionen, Frame-Animation.
 - **Sumpf- und Ruinengegner:** 104er-Sprites, 5 Aktionen in 8 Richtungen, generiert.
 - **Minibosse und ein Teil der Fallback-Gegner:** Streifen aus ArtPack 0.1 (64×64, ohne Richtungen), hochskaliert. **Stilbruch.**
-- **Drache, Hexen, Behemoth:** Einzelsprites je Aktion (2–4 Frames), Richtung durch Spiegeln, Atmung per Skalierung, Flug per Höhenversatz.
+- **Drache:**
+  - Seit 25.11. **Körper-Rig per 2D-Skinning** (`dragon_rig_*` in `scripts/dragon_boss`): ein Gitter über dem Original-Frame, verformt durch Knochen.
+  - In allen Posen: linker Flügel und zweigliedriger Schweif mit Nachlauf.
+  - In der Ruhepose zusätzlich: Hals, Kopf (folgt der Höhe des Spielers) und rechter Flügel.
+  - Bei Angriffen: Flügelschlag beim Flügelsturm, Aufrichten in der Vorbereitung, Rückstoß bei Treffern.
+  - Keine Nähte, Original-PNGs unverändert.
+  - In Feuerposen bleiben Kopf und Hals unbewegt, damit Maul-Anker und Strahl übereinstimmen.
+- **Hexen, Behemoth:** Einzelsprites je Aktion (2–4 Frames), Richtung durch Spiegeln, Atmung per Skalierung, Flug per Höhenversatz.
 - **Zaubereffekte:** 4-Frame-Sprite auf Wirkradius gestreckt, dazu Vektorlinien und -kreise; Partikel als Vektorformen.
 
 ---
@@ -1233,6 +1250,17 @@ Rang 2 unter „Leitbild“. Darstellungsregeln (Pixelraster, Animation): „Vis
 
 Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirken sie wie ein Blitz.
 
+**Ist (25.11.): umgesetzt für Lightning (Zauber 103)** in `scripts/gameplay_polish`.
+- Funktionen: `cast_chain_lightning`, `chain_segment_add`, `chain_visual_draw`, `vfx_band`, `vfx_spell_band`.
+- Der Kern wird alle 45 ms neu gezackt und liegt auf ganzen Welteinheiten.
+- **Bänder:**
+  - Basis: Kern 2 px, 1 Zweig, 3 Funken, kein gestrecktes Burst-Sprite, Licht 110.
+  - Mittel: Glühen, 2 Zweige, 6 Funken, kleiner Burst, Licht 150.
+  - Endgame: doppeltes Glühen, 4 Zweige, 10 Funken, Burst, Licht 185.
+- Die Pixelfunken sind die neue Partikelart 4 in `spell_vfx`.
+- Schaden, Ziele, Sprungweite und Takt sind unverändert.
+- Ohne Zufallszahlen aus dem globalen RNG (deterministischer Hash), seeded Runs bleiben vergleichbar.
+
 ### 3. Größendisziplin
 
 - **Sichtbare Schadensfläche = Hitbox (G6).** Dekoratives Glühen darf den Rand höchstens leicht überschreiten (Richtwert 10 %). Es darf nie wie Schaden aussehen.
@@ -1250,7 +1278,18 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
 - Zauber haben **keine** visuellen Stufen; die Darstellung wächst nur mit dem Radius.
 - Klassenwaffen haben drei Stufen nach Spielerstufe (1/34/68).
 
-**Soll: drei Bänder**, die zusätzlich durch Talente und Spezialisierungen verfeinert werden:
+**Soll: drei Bänder**, die zusätzlich durch Talente und Spezialisierungen verfeinert werden.
+
+**Ist (25.11.):**
+- **Lightning:** vollständig als zusammengesetzter Effekt (siehe oben).
+- **Alle übrigen Zauberfelder und Einschläge:** bekommen das Band ihrer Stufe als **Intensität** (`vfx_band_alpha`: Basis 0,55, Mittel 0,8, Endgame 1,0). Das gilt für:
+  - Deckkraft von Burst-Sprite, Feldumriss und Bodenglühen;
+  - Lichtpuls;
+  - Partikelzahl (Basis: halbe Emission).
+- Radien bleiben die Hitbox.
+- Eigene zusammengesetzte Effekte je Zauber (wie beim Blitz) sind noch offen.
+
+**Zielbild je Band:**
 
 | Band | Zauberstufe (Vorschlag) | Charakter | Typische Merkmale |
 |---|---|---|---|
@@ -1269,7 +1308,10 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
 ### 5. Audio als Teil des Kampfgefühls
 
 **Ist:**
-- Zentraler Mixer `fg_sfx`: höchstens 16 Stimmen, 2 je Cue.
+- Zentraler Mixer `fg_sfx`: höchstens 16 Stimmen, 2 je Cue, Mindestabstand je Cue (70 ms, einige Cues eigene Werte), Vorrang für wichtige Ereignisse.
+  - Seit 25.11. kommt eine deterministische Tonhöhen-Variation ±5 % für wiederholte Cues dazu.
+  - Seit 25.11. senkt sich die Musik weich auf 72 %, solange eine Bossgefahr in ihrer Warnphase ist (`fg_audio_tick`).
+  - Damit sind Drosselung, Priorität, Variation und Musikabsenkung vorhanden. Es fehlen noch Band-Varianten der Klänge und eine Hörabnahme.
 - Alle Klänge sind programmatisch synthetisierte Prototypen, eine Hörabnahme gab es nicht.
 - Musik für Menü, Level und Boss, Ambience für Sumpf und Ruinen.
 
@@ -1340,8 +1382,8 @@ Bewertung: ++ sehr gut, + gut, o mittel, − schwach, −− ungeeignet.
 |---|---|---|---|---|---|---|---|---|
 | Frame-by-Frame | ++ (wenn gut gezeichnet) | ++ | ++ | −− (je Frame und Richtung) | − | kleine Gegner, Spielerposen | ++ | **ja**: Spieler-Grundposen, normale Gegner |
 | Hierarchische Sprite-Teile (Parent-Child) | + | ++ (eigene GML-Struktur) | + | o | ++ | große Bosse, Waffen | o (Rotation bricht das Raster, siehe R3) | **ja**: Bosse, Waffen, Anhänge |
-| Skelett-Animation mit Spine | ++ | + (Laufzeit eingebaut) | + | o | ++ | Bosse, Menschen | o | **Offen**: Der Spine-Editor ist kostenpflichtig, also nur mit Freigabe |
-| Eigenes Bone-System in GML | + | + | + | o bis − (einmalig) | ++ | Bosse | o | **ja** (Vorschlag): schlanker Cutout-Rig statt Spine |
+| Skelett-Animation mit Spine | ++ | + (Laufzeit eingebaut) | + | o | ++ | Bosse, Menschen | o | **nein**: Der Editor ist kostenpflichtig. Nutzerentscheidung 25.11.: immer kostenlose Werkzeuge |
+| Eigenes Bone-System in GML | + | + | + | o bis − (einmalig) | ++ | Bosse | o | **ja (entschieden 25.11.)**: schlanker Cutout-Rig |
 | Mesh-Verformung (Vertex-Buffer, `draw_sprite_pos`) | + | o | + | − | + | Flügelhäute, Stoff, Schleim | − | punktuell: Flügel, Umhang-Saum |
 | Prozedurale Animation (Sinus, Federn) | + | ++ | ++ | ++ | ++ | Atmung, Wippen, Nachschwingen | + (auf ganze Pixel runden) | **ja, überall** als billige Lebendigkeit |
 | Inverse Kinematik (2-Glied, analytisch) | + | ++ | ++ | o | + | Beine und Füße großer Bosse, Hals | o | **ja**: Drachenbeine, Hals mit Blick |
@@ -1397,6 +1439,17 @@ Prüfregel: zuerst Bestehendes erweitern, nur bei echtem Defizit neu bauen. Kein
 - **Sekundärbewegung:** ein Federmodul (Feder-Dämpfer je Ebene bzw. Kettenglied), aus dem Bewegungsvektor gespeist. Ausgabe auf ganze Artpixel gerundet.
 
 #### 4.3 Rig-System für große Bosse (A5)
+
+**Ist (25.11.), erste Stufe für den Drachen:**
+- 2D-Skinning statt Teilen: Ein 24-px-Gitter über dem Original-Frame wird durch Knochen mit weichen Distanzgewichten verformt (FK, Eltern-Kind). Gezeichnet als texturierte Dreiecksstreifen.
+- Vorteile: Keine Zerlegung, keine verdeckten Lücken, keine Nähte, kein neues Artwork.
+- Grenzen:
+  - Knochenlage je Pose gemessen (Flügel links und Schweif überall, Kopf/Hals/Flügel rechts nur Ruhepose).
+  - Große Winkel verzerren Pixel; deshalb kleine Amplituden.
+  - Hitboxen hängen noch nicht an Knochen.
+- Schalter: `#macro DRAGON_RIG_ENABLED`.
+
+Ausbaustufe (Soll):
 - **Daten:**
   - Bones (Elternteil, Länge, Ruhewinkel), Teil-Sprites mit Drehpunkt;
   - Zeichenreihenfolge je Blickrichtung;
@@ -1467,7 +1520,9 @@ Vorhanden (`boss_choreo`). Künftig als Folge von Zeitachsen (4.1), damit Körpe
   - Viewports aller Räume auf 16:9;
   - Prüfung aller Stellen, die die Sichtgröße nutzen (`survivor_balance` Spawnring, Boss-Notfallteleport außerhalb des Bildes, Minimap, Boss-Testmodus).
   - Tests: `level`, `boss`, `regression`, `visual`.
-- **Offen:** Der Nutzer bestätigt die Option. Die Änderung des Sichtbereichs beeinflusst das Spielgefühl. Sie ist keine Balancing-Zahl, aber eine spürbare Änderung.
+- **Entschieden und umgesetzt (25.11.):** Option b, 960×540.
+  - `#macro VIEW_W/VIEW_H` in `scripts/gameplay`; Kamera und Folgelogik in `ObjectPlayer` nutzen die Konstanten.
+  - Spiel-Räume haben 16:9-Viewports (1280×720).
 
 #### R2: Einheitliche Pixeldichte (Vorschlag, Entscheidung nach A/B-Prototyp)
 - **Zielregel:** **1 Artpixel = 1 Welteinheit für alle Sprites**, so wie die Umgebung heute schon gezeichnet ist.
@@ -1477,7 +1532,16 @@ Vorhanden (`boss_choreo`). Künftig als Folge von Zeitachsen (4.1), damit Körpe
 - **Feinraster:**
   - **Variante A:** App-Surface in Ausgabeauflösung. Partikel dürfen auf halbe Welteinheiten (= 1 Bildschirmpixel bei 1080p).
   - **Variante B:** Welt in eine 960×540-Fläche rendern, ganzzahlig bzw. „sharp-bilinear“ hochskalieren, Effekte und Licht in Ausgabeauflösung darüber. Diese Variante ist rastertreuer bei 720p, kostet aber mehr Umbau.
-- **A/B-Prototyp** im Vertical Slice entscheidet zwischen Varianten und Dichte. Die Bildvergleiche legt der Nutzer ab.
+- **A/B-Vergleich (25.11., aus dem Schwertmeister-Quellatlas):**
+  - Heute: 52-px-Figur ×1,65; bei 1080p sind die Pixel 3,3 px breit und 1,65-mal gröber als der Boden.
+  - Mit Dichte 1,0: 86-px-Figur aus derselben Quelle, Pixel so groß wie der Boden, mehr Detail.
+  - **Empfehlung: Dichte 1,0.**
+  - Umsetzung offen, weil der Pipeline-Umbau groß ist:
+    - Leinwand 96 → 160 px, Ursprung (48,88) → (80,147);
+    - `atlas.py`/`render.py`/`build_characters.py` und alle Ausrüstungs-Atlanten neu bauen;
+    - `eqv_piece_draw`-Konstanten und `player_scale` 1,65 → 1,0 anpassen;
+    - Suite `visual` anpassen.
+  - Hitboxen bleiben in Welteinheiten unverändert.
 
 #### R3: Rotation von Pixel-Art (Rig, Waffen)
 Teile großer Rigs werden:
@@ -1546,7 +1610,7 @@ Rang 2 unter „Leitbild“.
 | `Assets/` | 2 MB / 522 | Kataloge und Altbestand aus der Codex-Zeit | nicht geprüft; ändern nur nach eigenem Audit |
 | `tests/` | 76 MB / 288 | Harnesses, Werkzeuge, Berichte | `tests/reports/` enthält Testbilder |
 | `QA/` | 240 MB / 6.123 (436 versioniert) | Simulationen, Daten, Berichte | `QA/logs/` ist überwiegend unversioniert |
-| `output/` | 820 MB / 1.068 | **alte Codex-Builds**, gitignored | kann vom Nutzer gelöscht werden (temporär), wird nicht mehr beschrieben |
+| `output/` | — | alte Codex-Builds | **am 25.11. gelöscht** (Nutzerfreigabe, 820 MB, war gitignored) |
 | `scripts/`, `objects/`, `rooms/`, `tilesets/`, `options/` | klein | GameMaker-Ressourcen | — |
 
 #### 2.2 `FirstGame_ArtPack/` je Unterordner
@@ -1576,9 +1640,8 @@ Rang 2 unter „Leitbild“.
 #### 2.3 GameMaker-Ressourcen
 - **Bestand:** 1.337 Sprites, 44 Skripte, 21 Objekte, 90 Klänge.
 - **Texturgruppen:** `Default`, `Level_Swamp`, `Level_Ashfrost`, `Equipment`.
-- **Legacy im Projekt:**
-  - 164 Sprites der ArtPack-0.1-Helden (`spr_fg_warrior_*`, `spr_fg_mage_*`, `spr_fg_ranger_*`, `spr_fg_knightv2_*`). Kein Codepfad wählt sie mehr; `player_artpack` nutzt nur `*v3`.
-  - **Nicht gelöscht**, nur einsortiert. Löschen erst nach Bestätigung durch den Nutzer.
+- **Legacy im Projekt:** Die 164 Sprites der ArtPack-0.1-Helden (`spr_fg_warrior_*`, `spr_fg_mage_*`, `spr_fg_ranger_*`, `spr_fg_knightv2_*`) wurden am 25.11. gelöscht (Nutzerfreigabe; kein Codepfad nutzte sie). Ihre Quellen liegen weiter unter `FirstGame_ArtPack/heroes/`.
+- **Bestand danach:** 1.173 Sprites.
 - **Stilbruch im Spiel:** 80 Sprites der 0.1-Gegnerstreifen (`spr_fg_<art>_*`, 64×64, ohne Blickrichtungen) werden von den Minibossen (Eber, Golem) und von Ersatz-Spawns genutzt.
 
 ### 3. Umgesetzt am 25.11.2026: IDE-Ressourcenbaum nach Kategorien
@@ -1597,7 +1660,6 @@ Sprites/
   Welt/         Wald · Sumpf · Aschenfrost · Allgemein
   UI/           Zauber_Icons · Menue
   Beute/
-  Legacy/       ArtPack_0_1_Helden
 Skripte/
   Kern_und_Spieler · Kampf_und_Klassen · Zauber · Bosse · Gegner
   Welt_und_Atmosphaere · Fortschritt_und_Ausruestung · Audio
@@ -1821,13 +1883,13 @@ graph LR
 
 | Nr. | Auftrag (je ein eigener Prompt bzw. eine Aufgabe) | Größe | Abhängig von | Nutzerentscheidung |
 |---|---|---|---|---|
-| 1 | **R1 Verzerrung beheben:** Kamera 16:9 (Vorschlag 960×540), Konstanten statt fester Zahlen, Viewports, Spawnring und Boss-Sichtprüfungen anpassen; Suiten `level`, `boss`, `regression`, `visual` | M | — | **ja:** Option a/b/c („Technische Architektur“ R1) |
-| 2 | **A/B-Prototyp Pixeldichte:** Schwertkämpfer mit Faktor 1,0 aus den Quellatlanten (160er-Leinwand) neben dem heutigen 1,65; Varianten A und B des Feinrasters; Aufnahmen bei 720p und 1080p | M | 1 | **ja:** Auswahl nach Bildvergleich |
+| 1 | ~~R1 Verzerrung beheben~~ **erledigt 25.11.:** 960×540, Makros `VIEW_W`/`VIEW_H`, 16:9-Viewports | M | — | entschieden (b) |
+| 2 | *(A/B-Vergleich am 25.11. erstellt, Empfehlung Dichte 1,0)* **Umsetzung Pixeldichte:** Schwertkämpfer mit Faktor 1,0 aus den Quellatlanten (160er-Leinwand) neben dem heutigen 1,65; Varianten A und B des Feinrasters; Aufnahmen bei 720p und 1080p | M | 1 | **ja:** Auswahl nach Bildvergleich |
 | 3 | **S1 Attack Timeline (Kern)** plus Migration der Schwertkette ohne Wertänderung; Telemetrie-Anker anpassen | M | — | nein |
-| 4 | **S2 Animation Controller plus Federmodul**; Spieler: Übergangsposen (Landung, Richtungswechsel), Haar und Umhang als Ebenen (Segmentierung aus `tests/tools/characters/`) | L | 2, 3 | nein |
-| 5 | **S4 VFX-Profile plus Pixelpartikel** (Erweiterung `spell_vfx`), Qualitätsstufen; **S5 Audio-Ereignisse** | M | 3 | nein |
+| 4 | *(teilweise 25.11.: prozedurale Lebendigkeit der Spielfigur)* **S2 Animation Controller plus Federmodul**; Spieler: Übergangsposen (Landung, Richtungswechsel), Haar und Umhang als Ebenen (Segmentierung aus `tests/tools/characters/`) | L | 2, 3 | nein |
+| 5 | *(teilweise 25.11.: Pixelpartikel, Kettenblitz in 3 Bändern, Intensitäts-Bänder aller Zauber, Tonvariation, Musikabsenkung)* **S4 VFX-Profile** für alle Zauber, Qualitätsstufen; **S5** Band-Varianten und Musikabsenkung | M | 3 | nein |
 | 6 | **Vertical Slice bauen** (Abschnitt 4) | L | 1–5 | Abnahme |
-| 7 | **S3 Rig-System plus Drache** (Teil des Slice; eigener Auftrag wegen Umfang) | L | 3, 4 | **ja:** eigenes Rig (Vorschlag) oder Spine (kostenpflichtig) |
+| 7 | *(Stufe 1 am 25.11.: Drachen-Skinning-Rig)* **S3 Ausbau:** Hitboxen an Knochen, Schweifschlag, Biss, Knochen für alle Posen | L | 3, 4 | entschieden: eigenes Rig in GML (kostenlos) |
 | 8 | Auswertung des Slice, Anpassung der Standards, dann **L3 Übertragung** je Inhaltsgruppe (Klassen → Gegner → Bosse → Zauber) | XL | 6, 7 | Reihenfolge |
 | 9 | V3 Minibosse auf aktuellen Stil, L5 Elitegegner, L4 Waffen-Upgrade-System | L | 8 | **ja:** Design |
 | 10 | L1 Asset-Migration (Pfadtabelle, dann Verschieben) | M | — (jederzeit) | nein |

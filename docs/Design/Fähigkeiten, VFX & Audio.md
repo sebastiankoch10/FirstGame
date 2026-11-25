@@ -121,7 +121,18 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
 - Zauber haben **keine** visuellen Stufen; die Darstellung wächst nur mit dem Radius.
 - Klassenwaffen haben drei Stufen nach Spielerstufe (1/34/68).
 
-**Soll: drei Bänder**, die zusätzlich durch Talente und Spezialisierungen verfeinert werden. Umgesetzt bisher nur für Lightning (Vorlage für die übrigen 17 aktiven Zauber):
+**Soll: drei Bänder**, die zusätzlich durch Talente und Spezialisierungen verfeinert werden.
+
+**Ist (25.11.):**
+- **Lightning:** vollständig als zusammengesetzter Effekt (siehe oben).
+- **Alle übrigen Zauberfelder und Einschläge:** bekommen das Band ihrer Stufe als **Intensität** (`vfx_band_alpha`: Basis 0,55, Mittel 0,8, Endgame 1,0). Das gilt für:
+  - Deckkraft von Burst-Sprite, Feldumriss und Bodenglühen;
+  - Lichtpuls;
+  - Partikelzahl (Basis: halbe Emission).
+- Radien bleiben die Hitbox.
+- Eigene zusammengesetzte Effekte je Zauber (wie beim Blitz) sind noch offen.
+
+**Zielbild je Band:**
 
 | Band | Zauberstufe (Vorschlag) | Charakter | Typische Merkmale |
 |---|---|---|---|
@@ -142,7 +153,8 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
 **Ist:**
 - Zentraler Mixer `fg_sfx`: höchstens 16 Stimmen, 2 je Cue, Mindestabstand je Cue (70 ms, einige Cues eigene Werte), Vorrang für wichtige Ereignisse.
   - Seit 25.11. kommt eine deterministische Tonhöhen-Variation ±5 % für wiederholte Cues dazu.
-  - Damit sind Drosselung, Priorität und Variation vorhanden. Es fehlen noch Band-Varianten und das Absenken der Musik.
+  - Seit 25.11. senkt sich die Musik weich auf 72 %, solange eine Bossgefahr in ihrer Warnphase ist (`fg_audio_tick`).
+  - Damit sind Drosselung, Priorität, Variation und Musikabsenkung vorhanden. Es fehlen noch Band-Varianten der Klänge und eine Hörabnahme.
 - Alle Klänge sind programmatisch synthetisierte Prototypen, eine Hörabnahme gab es nicht.
 - Musik für Menü, Level und Boss, Ambience für Sumpf und Ruinen.
 

@@ -7,8 +7,8 @@
       "measurement": "real get_timer intervals between native frames; short sample, not a long-term benchmark",
       "enemies": 150.0,
       "frames": 60.0,
-      "mean_frame_ms": 16.664283333333334,
-      "max_frame_ms": 16.862,
+      "mean_frame_ms": 16.666166666666665,
+      "max_frame_ms": 17.123,
       "weather": "heavy_rain",
       "class_weapon_effects": true,
       "enemy_ai_stepped": true
@@ -445,7 +445,7 @@
   "scope": "Native production functions; deterministic fixtures and short scripted damage windows. Not human gameplay E2E.",
   "status": "PASS",
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\classes\\20261125-082336",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\classes\\20261125-084549",
   "rendered": [
     "crowd-class-rain.png",
     "mage-arc.png",
