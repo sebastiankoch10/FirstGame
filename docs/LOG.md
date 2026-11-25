@@ -4,6 +4,12 @@ updated: 2026-11-25
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-25 · Claude · Haar/Umhang, Attack Timeline, Zauber-Effekte (`e7c2cc31` bis `3a701c4e` und folgende)
+- Gemeinsamer Rig (`rig_mesh`/`rig_draw_frame`) für Drache, Zwillingshexen, Sumpfbehemoth und das Basismodell der Spielfigur: Haar und Umhang federn über Knochen je Zelle (`eqv_bones`, Pipeline `build_characters.py`).
+- S1 Attack Timeline (`scripts/attack_timeline`): Schwertkette und Klassen-Kombos laufen als Zeitachsen, Werte unverändert; neue Klassenprüfung (151).
+- Zusammengesetzte Pixel-Effekte für 16 von 18 Zaubern (`spell_vfx`: `vfx_*_draw`, `vfx_projectile_draw`, `vfx_area_effect_draw`); Altaufrufe von `spell_fx_burst` übergeben das Band.
+- Zwei kaputte Telemetrie-Anker repariert; neue QA-Suite `anchors` (`QA/tools/check_telemetry_anchors.py`). ArtPack: Altbestand nach `_legacy/`, Referenzen nach `references/`.
+
 ### 2026-11-25 · Claude · Meilensteine 3 und 4 (`aa35461e` und folgende)
 - Meta-Progression mit zwei Punktetöpfen, Elitegegner (`elite_*`), Drachen-Nahangriffe (`dragon_melee_*`), Waffen-Upgrades (`weapon_upgrade_*`, WAFFE-Karten).
 - Pixeldichte 1:1: Pipeline `atlas.py` (`DENSITY`/`FRAME`/`OX`/`OY`), Neubau aller Figuren und Ausrüstungen (160 px), `eqv_frame()`, `player_scale` 1.

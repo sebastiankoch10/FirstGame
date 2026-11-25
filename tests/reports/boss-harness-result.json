@@ -1,38 +1,39 @@
 {
+  "checks": 141.0,
   "failures": [],
   "metrics": {
     "behemoth_oracle_contacts": 10.0,
     "behemoth_cases": 18.0,
-    "storm_warden_oracle_contacts": 3.0,
     "behemoth_cases_with_movement": 13.0,
-    "storm_warden_cases": 18.0,
+    "storm_warden_oracle_contacts": 3.0,
     "behemoth_hazard_cases": 17.0,
+    "storm_warden_cases": 18.0,
     "storm_warden_cases_with_movement": 5.0,
     "storm_warden_hazard_cases": 5.0,
+    "behemoth_kite_mean_distance": 532.9001456931785,
+    "behemoth_natural_catchups": 2.0,
+    "behemoth_kite_contacts": 2.0,
+    "behemoth_kite_reach": 16.0,
+    "behemoth_catchups": 2.0,
     "twins_oracle_contacts": 5.0,
     "twins_cases": 18.0,
     "twins_cases_with_movement": 10.0,
     "twins_hazard_cases": 17.0,
-    "twins_kite_mean_distance": 476.300853587963,
+    "twins_kite_mean_distance": 476.2741332626343,
     "twins_natural_catchups": 0.0,
     "twins_kite_contacts": 3.0,
     "twins_kite_reach": 15.0,
     "twins_catchups": 1.0,
-    "storm_warden_kite_mean_distance": 543.3791871586552,
+    "storm_warden_kite_mean_distance": 543.3822122983579,
     "storm_warden_natural_catchups": 2.0,
     "storm_warden_kite_contacts": 2.0,
-    "storm_warden_kite_reach": 24.0,
-    "storm_warden_catchups": 2.0,
-    "behemoth_kite_mean_distance": 532.9014267137316,
-    "behemoth_natural_catchups": 2.0,
-    "behemoth_kite_contacts": 2.0,
-    "behemoth_kite_reach": 16.0,
-    "behemoth_catchups": 2.0
+    "storm_warden_kite_reach": 23.0,
+    "storm_warden_catchups": 2.0
   },
   "passed": true,
-  "checks": 141.0,
   "rows": [
     {
+      "start_unsafe": true,
       "max_line": 2600.0,
       "contacts": 0.0,
       "kinds": [],
@@ -40,11 +41,11 @@
       "unsafe_frames": 0.0,
       "frames": 390.0,
       "hazards": 2.0,
-      "moved": 111.0,
-      "max_beam": 2600.0,
-      "start_unsafe": true
+      "moved": 112.0,
+      "max_beam": 2600.0
     },
     {
+      "start_unsafe": true,
       "max_line": 2600.0,
       "contacts": 0.0,
       "kinds": [],
@@ -53,10 +54,10 @@
       "frames": 390.0,
       "hazards": 10.0,
       "moved": 152.0,
-      "max_beam": 2600.0,
-      "start_unsafe": true
+      "max_beam": 2600.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -65,10 +66,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": true,
       "max_line": 0.0,
       "contacts": 2.0,
       "kinds": [
@@ -79,10 +80,10 @@
       "frames": 390.0,
       "hazards": 15.0,
       "moved": 205.0,
-      "max_beam": 0.0,
-      "start_unsafe": true
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -91,10 +92,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 118.0,
       "contacts": 0.0,
       "kinds": [],
@@ -102,11 +103,11 @@
       "unsafe_frames": 0.0,
       "frames": 390.0,
       "hazards": 75.0,
-      "moved": 172.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "moved": 171.0,
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -115,10 +116,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 1.0,
       "kinds": [
@@ -129,10 +130,10 @@
       "frames": 390.0,
       "hazards": 28.0,
       "moved": 115.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -141,10 +142,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -153,10 +154,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -165,10 +166,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -177,10 +178,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -189,10 +190,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -201,10 +202,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -213,10 +214,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -225,10 +226,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -237,10 +238,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -249,10 +250,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -261,11 +262,11 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
-      "max_line": 282.04791259765625,
+      "start_unsafe": false,
+      "max_line": 282.0616760253906,
       "contacts": 0.0,
       "kinds": [],
       "label": "twins A1 P3",
@@ -273,10 +274,10 @@
       "frames": 390.0,
       "hazards": 3.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -285,10 +286,10 @@
       "frames": 390.0,
       "hazards": 2.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -297,10 +298,10 @@
       "frames": 390.0,
       "hazards": 2.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": true,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -309,10 +310,10 @@
       "frames": 390.0,
       "hazards": 8.0,
       "moved": 12.0,
-      "max_beam": 0.0,
-      "start_unsafe": true
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 118.0,
       "contacts": 0.0,
       "kinds": [],
@@ -321,11 +322,11 @@
       "frames": 390.0,
       "hazards": 50.0,
       "moved": 128.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
-      "max_line": 436.34033203125,
+      "start_unsafe": false,
+      "max_line": 436.3821105957031,
       "contacts": 1.0,
       "kinds": [
         "twins_link"
@@ -335,11 +336,11 @@
       "frames": 390.0,
       "hazards": 2.0,
       "moved": 61.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
-      "max_line": 392.855224609375,
+      "start_unsafe": false,
+      "max_line": 392.29583740234375,
       "contacts": 1.0,
       "kinds": [
         "twins_link"
@@ -349,10 +350,10 @@
       "frames": 390.0,
       "hazards": 2.0,
       "moved": 54.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -361,10 +362,10 @@
       "frames": 390.0,
       "hazards": 4.0,
       "moved": 33.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -373,11 +374,11 @@
       "frames": 390.0,
       "hazards": 4.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
-      "max_line": 2600.0,
+      "start_unsafe": false,
+      "max_line": 2600.000244140625,
       "contacts": 0.0,
       "kinds": [],
       "label": "twins A6 P1",
@@ -385,11 +386,11 @@
       "frames": 390.0,
       "hazards": 4.0,
       "moved": 24.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
-      "max_line": 2600.0,
+      "start_unsafe": false,
+      "max_line": 2600.000244140625,
       "contacts": 2.0,
       "kinds": [
         "twins_fire_cross"
@@ -398,11 +399,11 @@
       "unsafe_frames": 0.0,
       "frames": 390.0,
       "hazards": 12.0,
-      "moved": 128.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "moved": 129.0,
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": true,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -411,10 +412,10 @@
       "frames": 390.0,
       "hazards": 4.0,
       "moved": 120.0,
-      "max_beam": 0.0,
-      "start_unsafe": true
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": true,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -423,10 +424,10 @@
       "frames": 390.0,
       "hazards": 4.0,
       "moved": 120.0,
-      "max_beam": 0.0,
-      "start_unsafe": true
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -435,10 +436,10 @@
       "frames": 390.0,
       "hazards": 12.0,
       "moved": 42.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 1.0,
       "kinds": [
@@ -449,10 +450,10 @@
       "frames": 390.0,
       "hazards": 8.0,
       "moved": 75.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -461,10 +462,10 @@
       "frames": 390.0,
       "hazards": 6.0,
       "moved": 3.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -473,10 +474,10 @@
       "frames": 390.0,
       "hazards": 6.0,
       "moved": 2.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 4.0,
       "kinds": [
@@ -487,10 +488,10 @@
       "frames": 390.0,
       "hazards": 4.0,
       "moved": 22.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 4.0,
       "kinds": [
@@ -501,10 +502,10 @@
       "frames": 390.0,
       "hazards": 4.0,
       "moved": 22.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": true,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -513,10 +514,10 @@
       "frames": 390.0,
       "hazards": 6.0,
       "moved": 66.0,
-      "max_beam": 0.0,
-      "start_unsafe": true
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 1050.0,
       "contacts": 2.0,
       "kinds": [
@@ -527,10 +528,10 @@
       "frames": 390.0,
       "hazards": 14.0,
       "moved": 72.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": true,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -539,10 +540,10 @@
       "frames": 390.0,
       "hazards": 9.0,
       "moved": 84.0,
-      "max_beam": 0.0,
-      "start_unsafe": true
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -551,10 +552,10 @@
       "frames": 390.0,
       "hazards": 60.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -563,10 +564,10 @@
       "frames": 390.0,
       "hazards": 12.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -575,10 +576,10 @@
       "frames": 390.0,
       "hazards": 12.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": true,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -587,10 +588,10 @@
       "frames": 390.0,
       "hazards": 2.0,
       "moved": 57.0,
-      "max_beam": 0.0,
-      "start_unsafe": true
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -599,10 +600,10 @@
       "frames": 390.0,
       "hazards": 4.0,
       "moved": 57.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -611,10 +612,10 @@
       "frames": 390.0,
       "hazards": 0.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -623,10 +624,10 @@
       "frames": 390.0,
       "hazards": 2.0,
       "moved": 0.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": true,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -635,10 +636,10 @@
       "frames": 390.0,
       "hazards": 2.0,
       "moved": 59.0,
-      "max_beam": 0.0,
-      "start_unsafe": true
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": true,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -647,10 +648,10 @@
       "frames": 390.0,
       "hazards": 2.0,
       "moved": 68.0,
-      "max_beam": 365.0,
-      "start_unsafe": true
+      "max_beam": 365.0
     },
     {
+      "start_unsafe": true,
       "max_line": 1500.0,
       "contacts": 0.0,
       "kinds": [],
@@ -659,10 +660,10 @@
       "frames": 390.0,
       "hazards": 2.0,
       "moved": 106.0,
-      "max_beam": 0.0,
-      "start_unsafe": true
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": true,
       "max_line": 1500.0,
       "contacts": 0.0,
       "kinds": [],
@@ -671,10 +672,10 @@
       "frames": 390.0,
       "hazards": 2.0,
       "moved": 106.0,
-      "max_beam": 0.0,
-      "start_unsafe": true
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -683,10 +684,10 @@
       "frames": 390.0,
       "hazards": 7.0,
       "moved": 121.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
+      "start_unsafe": false,
       "max_line": 0.0,
       "contacts": 0.0,
       "kinds": [],
@@ -695,8 +696,7 @@
       "frames": 390.0,
       "hazards": 7.0,
       "moved": 121.0,
-      "max_beam": 0.0,
-      "start_unsafe": false
+      "max_beam": 0.0
     },
     {
       "reach_abilities": [
@@ -711,9 +711,9 @@
         "dragon_magma_cell",
         "dragon_cone"
       ],
-      "reach": 24.0,
-      "forced_catchup": false,
+      "reach": 23.0,
       "label": "storm_warden kite 560px",
+      "forced_catchup": false,
       "frames": 2700.0,
       "hazards": 65.0,
       "catchups": 2.0
@@ -732,8 +732,8 @@
         "twins_fire_flood"
       ],
       "reach": 15.0,
-      "forced_catchup": true,
       "label": "twins kite 560px",
+      "forced_catchup": true,
       "frames": 2700.0,
       "hazards": 47.0,
       "catchups": 1.0
@@ -753,15 +753,15 @@
         "swamp_closing"
       ],
       "reach": 16.0,
-      "forced_catchup": false,
       "label": "behemoth kite 560px",
+      "forced_catchup": false,
       "frames": 2700.0,
       "hazards": 47.0,
       "catchups": 2.0
     }
   ],
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\boss\\20261125-132556",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\boss\\20261125-135043",
   "exceptions": [],
   "captures": [
     "behemoth-A2-P3.png",

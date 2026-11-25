@@ -137,7 +137,11 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
   - Schwerkraftbrunnen: gestrichelter Rand, Pixelteilchen spiralen nach innen (Leere: Sog), kleiner Kern.
   - Donnersiegel und Sonnenurteil: Runenkreis und herabfallende Energie während der Aufladung, dann eine gestufte Pixelsäule zum Trefferzeitpunkt (Zickzack bei Blitz, gerade mit Strahlen bei Licht).
   - Glutfeld: schwaches Bodenglühen, flackernder Rand, aufsteigende Glutpixel, im Endgame Flammenzungen.
-- Noch ohne eigenen Effekt: Feuerball, Eiskugel, Frostnova, Arkansalve, Heilpuls (Altobjekte) sowie Irrlicht und Prismensamen (kleiner Kern).
+- **Ebenfalls 25.11.:**
+  - Feuerball, Eiskugel und Arkansalve: Kern-Sprite in ganzer Pixelgröße (nicht mehr gestreckt), weiches additives Glühen, Glutpixel bzw. Eissplitter bzw. Runenkern mit kreisenden Funken.
+  - Frostnova, Heilpuls und Feuerball-Explosion (`effect_add` mit Stil): Pixelring statt deckender Vektorscheibe, dazu Eissplitter, aufsteigende Pluszeichen bzw. Glut.
+  - Die Altaufrufe von `spell_fx_burst` übergeben jetzt das Band; vorher zeigten Nova, Heilung und Projektileinschläge auf jeder Stufe das Endgame-Sprite.
+- Noch ohne eigenen Effekt: Irrlicht und Prismensamen (kleiner gemalter Kern).
 
 **Zielbild je Band:**
 

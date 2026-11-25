@@ -108,12 +108,12 @@ function spell_projectile_hit(_projectile,_target) {
     if(sid==SPELL.FIREBALL) {
         var d=GetSpellData(sid);
         combat_area_hit(impact_x,impact_y,_projectile.explosion_radius,_projectile.damage,_projectile.owner,_projectile.burn_time,_projectile.burn_dps,0,1,sid);
-        effect_add(impact_x,impact_y,_projectile.explosion_radius,make_color_rgb(255,132,45),18);
-        spell_fx_burst(impact_x,impact_y,_projectile.explosion_radius*1.12,1);
+        effect_add(impact_x,impact_y,_projectile.explosion_radius,make_color_rgb(255,132,45),18,"fire");
+        spell_fx_burst(impact_x,impact_y,_projectile.explosion_radius*1.12,1,.4,vfx_spell_band(sid));
     } else {
         apply_attack_damage(_target,_projectile.damage,_projectile,sid);
         if(sid==SPELL.ICEBALL) {_target.slow_factor=min(_target.slow_time>0 ? _target.slow_factor : 1,_projectile.slow_factor);_target.slow_time=max(_target.slow_time,_projectile.slow_time);}
-        if(sid>0)spell_fx_burst(impact_x,impact_y,sid==102 ? 52 : 48,sid==102 ? 2 : 4);
+        if(sid>0)spell_fx_burst(impact_x,impact_y,sid==102 ? 52 : 48,sid==102 ? 2 : 4,.4,vfx_spell_band(sid));
     }
     if(!piercing)with(_projectile)instance_destroy();return true;
 }

@@ -14,14 +14,14 @@ function cast_spell(_spell,_target=undefined) {
     if(sid==SPELL.HEAL) {
         var before_heal=pl.hp;pl.hp=min(pl.max_hp,pl.hp+v.damage);
         run_stats_heal(sid,pl.hp-before_heal);
-        effect_add(pl.x,pl.y-10,62,make_color_rgb(111,239,151),24);
-        spell_fx_burst(pl.x,pl.y-10,76,6);
+        effect_add(pl.x,pl.y-10,62,make_color_rgb(111,239,151),24,"heal");
+        spell_fx_burst(pl.x,pl.y-10,76,6,.4,vfx_spell_band(sid));
     } else if(sid==SPELL.LIGHTNING) {
         cast_chain_lightning(_target,v.damage,v.chain_targets,v.chain_range,pl);
     } else if(sid==SPELL.FROST_NOVA) {
         combat_area_hit(pl.x,pl.y-10,v.radius,v.damage,pl,0,0,round(d.slow_time*pl.status_factor*spell_cold_duration_factor()),d.slow_factor,sid);
-        effect_add(pl.x,pl.y-10,v.radius,make_color_rgb(138,218,255),22);
-        spell_fx_burst(pl.x,pl.y-10,v.radius,2);
+        effect_add(pl.x,pl.y-10,v.radius,make_color_rgb(138,218,255),22,"nova");
+        spell_fx_burst(pl.x,pl.y-10,v.radius,2,.4,vfx_spell_band(sid));
     } else {
         var aim=point_direction(pl.x,pl.y-10,_target.x,_target.y-10);
         for(var i=0;i<v.count;i++) {

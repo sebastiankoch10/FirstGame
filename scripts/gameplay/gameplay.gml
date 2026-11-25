@@ -113,11 +113,11 @@ function player_receive_damage(_pl,_amount,_height="ground") {
     if(_pl.hp<=0) {_pl.death_time=current_time;fg_audio_stop_effects(); fg_sfx("game_over"); fg_music_set("none"); global.game_over=true; global.game_paused=true; global._pause_index=0;}
     return true;
 }
-function effect_add(_x,_y,_radius,_color,_life) {
+function effect_add(_x,_y,_radius,_color,_life,_style="") {
     light_pulse(_x,_y,max(90,_radius*2.8),_color,0.95,min(0.45,_life/60));
     if (!variable_global_exists("combat_effects")) global.combat_effects=[];
     if (array_length(global.combat_effects)>=96) array_delete(global.combat_effects,0,1);
-    array_push(global.combat_effects,{x:_x,y:_y,radius:_radius,color:_color,life:_life,total:_life});
+    array_push(global.combat_effects,{x:_x,y:_y,radius:_radius,color:_color,life:_life,total:_life,style:_style});
 }
 function effects_step() {
     if (!variable_global_exists("combat_effects")) global.combat_effects=[];
@@ -129,10 +129,7 @@ function effects_step() {
 function effects_draw() {
     if (!variable_global_exists("combat_effects")) return;
     for(var i=0;i<array_length(global.combat_effects);i++) {
-        var e=global.combat_effects[i], f=1-e.life/e.total;
-        draw_set_alpha(0.6*(1-f)); draw_set_color(e.color);
-        draw_circle(e.x,e.y,e.radius*(0.35+0.65*f),false);
-        draw_set_alpha(1-f); draw_circle(e.x,e.y,e.radius,true);
+        vfx_area_effect_draw(global.combat_effects[i]);
     }
     draw_set_alpha(1); draw_set_color(c_white);
 }

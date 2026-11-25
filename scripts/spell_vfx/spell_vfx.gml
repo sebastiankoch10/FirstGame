@@ -233,7 +233,7 @@ function vfx_glaive_draw(_f,_b,_fa) {
     var pal=vfx_palette(_f.element),spin=_f.age*900;
     var dir=(_f.age<.55 || !instance_exists(ObjectPlayer)) ? point_direction(_f.sx,_f.sy,_f.ex,_f.ey) : point_direction(_f.x,_f.y,ObjectPlayer.x,ObjectPlayer.y-10);
     var tl=_b==0 ? 22 : (_b==1 ? 34 : 48);
-    vfx_glow_line(_f.x-lengthdir_x(tl,dir),_f.y-lengthdir_y(tl,dir),_f.x,_f.y,10,pal[1],.12+.05*_b);
+    for(var g=0;g<3;g++)vfx_glow_disc(_f.x-lengthdir_x(tl*g/3,dir),_f.y-lengthdir_y(tl*g/3,dir),8-2*g,pal[1],(.12+.05*_b)*(1-.3*g));
     vfx_pixel_streak(_f.x-lengthdir_x(tl,dir),_f.y-lengthdir_y(tl,dir),_f.x,_f.y,pal[1],.6*_fa);
     for(var arm=0;arm<4;arm++) {
         var a=spin+arm*90,b2=a+28,mx=_f.x+lengthdir_x(9,a),my=_f.y+lengthdir_y(9,a),ex=mx+lengthdir_x(8,b2),ey=my+lengthdir_y(8,b2);
@@ -293,4 +293,44 @@ function vfx_ember_field_draw(_f,_b,_fa) {
         vfx_px(ex,ey,ph<.5 ? 2 : 1,ph<.3 ? pal[2] : (ph<.7 ? pal[1] : pal[0]),sin(ph*pi)*_fa);
     }
     if(_b==2)for(var t=0;t<5;t++){var a=t*72+_f.age*20,tx=_f.x+lengthdir_x(_f.radius*.45,a),ty=_f.y+lengthdir_y(_f.radius*.45,a),h=3+round(2*abs(vfx_hash(t,tick)));for(var s=0;s<h;s++)vfx_px(tx,ty-s*2,s==h-1 ? 1 : 2,s<1 ? pal[1] : pal[2],.85);}
+}
+
+/// Spell projectiles (Feuerball, Eiskugel, Arkansalve): soft additive trail and halo, the painted core sprite at
+/// whole-pixel scale 1 (no stretching), element details on the pixel grid; more detail per band.
+function vfx_projectile_draw(_kind,_x,_y,_dir,_radius,_band,_spr,_img,_tint=c_white) {
+    var el=_kind=="fire" ? 1 : (_kind=="ice" ? 2 : 4),pal=vfx_palette(el),tl=18+_band*10,t=current_time/1000;
+    for(var g=0;g<3;g++)vfx_glow_disc(_x-lengthdir_x(tl*g/3,_dir),_y-lengthdir_y(tl*g/3,_dir),_radius*(1-.28*g),pal[1],(.13+.05*_band)*(1-.3*g));
+    if(_kind=="arcane") {
+        // rune core: a pixel diamond with a light centre and motes circling it
+        var s=5+_band*2;
+        for(var r=s;r>=0;r--)vfx_pixel_line(_x-r,_y-(s-r),_x+r,_y-(s-r),1,r>s-2 ? pal[0] : pal[1],1);
+        for(var r=s-1;r>=0;r--)vfx_pixel_line(_x-r,_y+(s-r),_x+r,_y+(s-r),1,r>s-2 ? pal[0] : pal[1],1);
+        vfx_px(_x-1,_y-1,2,pal[2],1);
+        for(var m=0;m<2+_band;m++){var a=t*360+m*360/(2+_band);vfx_px(_x+lengthdir_x(s+5,a),_y+lengthdir_y(s+5,a)*.7,_band==2 ? 2 : 1,pal[2],.9);}
+        vfx_pixel_streak(_x-lengthdir_x(tl,_dir),_y-lengthdir_y(tl,_dir),_x,_y,pal[1],.7);
+    } else {
+        draw_sprite_ext(_spr,_img,round(_x),round(_y),1,1,_dir,_tint,1);
+        if(_kind=="fire")for(var f=0;f<2+_band;f++){var bk=8+f*6+3*vfx_hash(f,floor(t*20)),sd=vfx_hash(f+5,floor(t*20))*5;vfx_px(_x-lengthdir_x(bk,_dir)+lengthdir_x(sd,_dir+90),_y-lengthdir_y(bk,_dir)+lengthdir_y(sd,_dir+90)-f,f==0 ? 2 : 1,f==0 ? pal[2] : pal[1],.9);}
+        else for(var f=0;f<1+_band;f++){var bk=10+f*9,sx=_x-lengthdir_x(bk,_dir),sy=_y-lengthdir_y(bk,_dir);vfx_pixel_line(sx-lengthdir_x(3,_dir),sy-lengthdir_y(3,_dir),sx+lengthdir_x(3,_dir),sy+lengthdir_y(3,_dir),1,pal[2],.85);}
+    }
+}
+/// Legacy area effects from effect_add (frost nova, heal, fire explosion, boss pulse) as pixel effects:
+/// additive glow (never a dark or opaque disc), an expanding pixel ring and element details.
+function vfx_area_effect_draw(_e) {
+    var f=1-_e.life/_e.total,k=1-f,r=_e.radius,st=variable_struct_exists(_e,"style") ? _e.style : "";
+    vfx_glow_disc(_e.x,_e.y,r*(.35+.65*f),_e.color,.22*k);
+    vfx_pixel_ring(_e.x,_e.y,r*(.35+.65*f),_e.color,.9*k,f*60,0,2);
+    vfx_pixel_ring(_e.x,_e.y,r,merge_color(_e.color,c_black,.35),.55*k,-f*40,4,1);
+    if(st=="nova") {
+        // ice shards fly out with the ring and stay upright (crystal language)
+        var n=max(8,round(r/10));
+        for(var i=0;i<n;i++){var a=i*360/n+7*vfx_hash(i,3),rr=r*(.3+.7*f)*(0.92+.08*vfx_hash(i,4));vfx_pixel_shard(_e.x+lengthdir_x(rr,a),_e.y+lengthdir_y(rr,a)*.9,round(8+6*k),_e.color,k);}
+    } else if(st=="heal") {
+        // green plus signs rise around the player
+        for(var i=0;i<8;i++){var a=i*45+15*vfx_hash(i,9),rr=r*.55*(.6+.4*abs(vfx_hash(i,2))),px=_e.x+lengthdir_x(rr,a),py=_e.y+lengthdir_y(rr,a)*.6-f*26-6*abs(vfx_hash(i,5));
+            vfx_pixel_line(px-2,py,px+2,py,1,merge_color(_e.color,c_white,.5),k);vfx_pixel_line(px,py-2,px,py+2,1,merge_color(_e.color,c_white,.5),k);}
+    } else if(st=="fire") {
+        // embers rise from the blast edge
+        for(var i=0;i<10;i++){var a=i*36+20*vfx_hash(i,1),rr=r*(.5+.5*f),px=_e.x+lengthdir_x(rr,a),py=_e.y+lengthdir_y(rr,a)-f*14*abs(vfx_hash(i,2));vfx_px(px,py,f<.5 ? 2 : 1,f<.4 ? make_color_rgb(255,232,140) : _e.color,k);}
+    }
 }

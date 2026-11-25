@@ -3,6 +3,62 @@
   "checks": 811.0,
   "failures": [],
   "metrics": {
+    "dragon_abilities": [
+      {
+        "warning": 1.0526315789473684,
+        "key": "beam",
+        "ability": 1.0,
+        "damage": 68.39999999999418
+      },
+      {
+        "warning": 0.8771929824561403,
+        "key": "arc",
+        "ability": 2.0,
+        "damage": 60.80000000000291
+      },
+      {
+        "warning": 0.9210526315789473,
+        "key": "stomp",
+        "ability": 3.0,
+        "damage": 121.60000000000582
+      },
+      {
+        "warning": 1.5789473684210524,
+        "key": "meteor",
+        "ability": 4.0,
+        "damage": 72.19999999999709
+      },
+      {
+        "warning": 1.3157894736842104,
+        "key": "slam",
+        "ability": 5.0,
+        "damage": 79.80000000000291
+      },
+      {
+        "warning": 0.7894736842105262,
+        "key": "wind",
+        "ability": 6.0,
+        "damage": 26.60000000000582
+      },
+      {
+        "warning": 0.7017543859649122,
+        "key": "void",
+        "ability": 7.0,
+        "damage": 182.40000000002328
+      },
+      {
+        "warning": 1.4912280701754383,
+        "key": "vortex",
+        "ability": 8.0,
+        "damage": 60.80000000000291
+      },
+      {
+        "warning": 0.5701754385964912,
+        "key": "volley",
+        "ability": 9.0,
+        "damage": 38.0
+      }
+    ],
     "countdown_fps": [
       {
         "warning": 1.3,
@@ -183,6 +239,45 @@
         "combined_distance": 187.37813568115234
       }
     ],
+    "performance": {
+      "enemies": 150.0,
+      "frames": 60.0,
+      "mean_frame_ms": 16.671599999999998,
+      "max_frame_ms": 17.177,
+      "measurement": "Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement."
+    },
+    "random_selection": [
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "behemoth",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "storm_warden",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "behemoth",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "behemoth"
+    ],
     "twins_abilities": [
       {
         "ability": 1.0,
@@ -259,110 +354,15 @@
         "damage": 57.0
       }
     ],
-    "performance": {
-      "enemies": 150.0,
-      "frames": 60.0,
-      "mean_frame_ms": 16.66728333333333,
-      "max_frame_ms": 17.244,
-      "measurement": "Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement."
-    },
-    "random_selection": [
-      "twins",
-      "storm_warden",
-      "storm_warden",
-      "storm_warden",
-      "behemoth",
-      "storm_warden",
-      "twins",
-      "behemoth",
-      "storm_warden",
-      "storm_warden",
-      "twins",
-      "behemoth",
-      "twins",
-      "storm_warden",
-      "storm_warden",
-      "behemoth",
-      "behemoth",
-      "twins",
-      "storm_warden",
-      "behemoth",
-      "twins",
-      "storm_warden",
-      "storm_warden",
-      "storm_warden",
-      "twins",
-      "behemoth",
-      "storm_warden",
-      "storm_warden",
-      "storm_warden",
-      "behemoth"
-    ],
     "sword_combo": [
       11.0,
       13.0,
       19.0
-    ],
-    "dragon_abilities": [
-      {
-        "warning": 1.0526315789473684,
-        "key": "beam",
-        "ability": 1.0,
-        "damage": 68.39999999999418
-      },
-      {
-        "warning": 0.8771929824561403,
-        "key": "arc",
-        "ability": 2.0,
-        "damage": 60.80000000000291
-      },
-      {
-        "warning": 0.9210526315789473,
-        "key": "stomp",
-        "ability": 3.0,
-        "damage": 121.60000000000582
-      },
-      {
-        "warning": 1.5789473684210524,
-        "key": "meteor",
-        "ability": 4.0,
-        "damage": 72.19999999999709
-      },
-      {
-        "warning": 1.3157894736842104,
-        "key": "slam",
-        "ability": 5.0,
-        "damage": 79.80000000000291
-      },
-      {
-        "warning": 0.7894736842105262,
-        "key": "wind",
-        "ability": 6.0,
-        "damage": 26.60000000000582
-      },
-      {
-        "warning": 0.7017543859649122,
-        "key": "void",
-        "ability": 7.0,
-        "damage": 182.40000000002328
-      },
-      {
-        "warning": 1.4912280701754383,
-        "key": "vortex",
-        "ability": 8.0,
-        "damage": 60.80000000000291
-      },
-      {
-        "warning": 0.5701754385964912,
-        "key": "volley",
-        "ability": 9.0,
-        "damage": 38.0
-      }
     ]
   },
   "scope": "Current production functions and input-injected actual Player/Controller Steps in isolated native runner. Targeted regressions and short rendered150-enemy stress fixture; not full runs or human playtests.",
   "exit_code": 0,
-  "logs": "QA\\logs\\regression-20261125-132223",
+  "logs": "QA\\logs\\regression-20261125-134732",
   "screenshots": [
     "qacapture-crowd150-heavy-rain.png",
     "qacapture-hud-full-build-1280.png",

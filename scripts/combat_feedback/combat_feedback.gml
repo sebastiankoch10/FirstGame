@@ -119,8 +119,7 @@ function projectile_draw() {
         draw_set_color(c_white);var tipx=x+lengthdir_x(14,direction),tipy=y+lengthdir_y(14,direction);
         draw_triangle(tipx,tipy,tipx+lengthdir_x(7,direction+145),tipy+lengthdir_y(7,direction+145),tipx+lengthdir_x(7,direction-145),tipy+lengthdir_y(7,direction-145),false);
     } else {
-        draw_set_alpha(0.35);draw_set_color(col);draw_line_width(x-lengthdir_x(20,direction),y-lengthdir_y(20,direction),x,y,damage_radius*1.2);
-        draw_set_alpha(1);draw_sprite_ext(sprite_index,image_index,x,y,visual_width/sprite_get_width(sprite_index),visual_height/sprite_get_height(sprite_index),direction,col,1);
+        vfx_projectile_draw(kind,x,y,direction,damage_radius,variable_instance_exists(id,"spell_id") && spell_id>0 ? vfx_spell_band(spell_id) : 1,sprite_index,image_index,col);
     }
     draw_set_alpha(1);draw_set_color(c_white);
 }

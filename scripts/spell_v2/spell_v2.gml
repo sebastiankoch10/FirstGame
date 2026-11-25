@@ -146,7 +146,7 @@ function spell_v2_step(_dt) {
                 }break;
             case "summon":
                 f.x=pl.x+lengthdir_x(54,f.age*80);f.y=pl.y-45+lengthdir_y(20,f.age*80);
-                if(f.age>=f.next){var target=combat_nearest(pl,f.radius);if(instance_exists(target)){spell_v2_hit(target,f.damage,f.sid,f.level);spell_link(f.x,f.y,target.x,target.y-12,6);spell_fx_burst(target.x,target.y-12,42,6);f.angle=point_direction(f.x,f.y,target.x,target.y);f.ticks++;}f.next=f.age+max(.25,.65-f.level*.025);}
+                if(f.age>=f.next){var target=combat_nearest(pl,f.radius);if(instance_exists(target)){spell_v2_hit(target,f.damage,f.sid,f.level);spell_link(f.x,f.y,target.x,target.y-12,6);spell_fx_burst(target.x,target.y-12,42,6,.4,vfx_band(f.level));f.angle=point_direction(f.x,f.y,target.x,target.y);f.ticks++;}f.next=f.age+max(.25,.65-f.level*.025);}
                 break;
             case "spikes":case "meteor":
                 if(f.ticks<f.count && f.age>=.28+f.ticks*.35){
@@ -169,7 +169,7 @@ function spell_v2_step(_dt) {
                 f.x+=lengthdir_x(min(dist,speed_value),a);f.y+=lengthdir_y(min(dist,speed_value),a);
                 if(dist<=speed_value || f.age>2){
                     spell_v2_area(f.x,f.y,f.radius,f.damage,f.sid,f.level);
-                    var victims=spell_targets(f.x,f.y,f.radius+130);for(var n=0;n<min(f.count,array_length(victims));n++){spell_v2_hit(victims[n],f.damage*.65,f.sid,f.level);spell_link(f.x,f.y,victims[n].x,victims[n].y-12,4);spell_fx_burst(victims[n].x,victims[n].y-12,44,4);}
+                    var victims=spell_targets(f.x,f.y,f.radius+130);for(var n=0;n<min(f.count,array_length(victims));n++){spell_v2_hit(victims[n],f.damage*.65,f.sid,f.level);spell_link(f.x,f.y,victims[n].x,victims[n].y-12,4);spell_fx_burst(victims[n].x,victims[n].y-12,44,4,.4,vfx_band(f.level));}
                     spell_fx_burst(f.x,f.y,f.radius,4,.4,vfx_band(f.level));f.age=f.duration;
                 }break;
         }

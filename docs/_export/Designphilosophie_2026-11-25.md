@@ -1162,7 +1162,11 @@ Visuell relevante Fähigkeiten haben Phasen; siehe „Fähigkeiten, VFX & Audio�
   - 8 Richtungen × 8 Ausgangsposen je Klasse;
   - Laufen mit 8 Frames, Rennen als schneller abgespielter Lauf;
   - Sprung und Fall wählen Posen nach Fortschritt; Idle ist ein Frame mit Atembewegung;
-  - **keine** Sekundärbewegung für Haar und Umhang, **keine** Übergangsposen (Landung, Richtungswechsel).
+  - **Seit 25.11. Sekundärbewegung:** Haar und Umhang (Schwertmeister, Waldläufer) bzw. Haar (Arkanistin) schwingen gefedert nach: beim Laufen, Abbremsen, Richtungswechsel und mit einem Impuls bei der Landung.
+    - Pro Frame liefert die Pipeline je einen Knochen aus Haar-Label und Umhangmaske.
+    - Die Laufzeit verformt das Basismodell über den gemeinsamen Rig (`player_layers_draw` mit Pose, `eqv_bones`).
+    - Die Ausrüstungsebenen bleiben unverformt.
+  - **Noch keine** gezeichneten Übergangsposen (Landung und Richtungswechsel sind prozedural).
   - Ausrüstung als synchrone Ebenen.
 - **Skelette (Wald):** 8 Richtungen, 5 Aktionen, Frame-Animation.
 - **Sumpf- und Ruinengegner:** 104er-Sprites, 5 Aktionen in 8 Richtungen, generiert.
@@ -1174,7 +1178,7 @@ Visuell relevante Fähigkeiten haben Phasen; siehe „Fähigkeiten, VFX & Audio�
   - Bei Angriffen: Flügelschlag beim Flügelsturm, Aufrichten in der Vorbereitung, Rückstoß bei Treffern.
   - Keine Nähte, Original-PNGs unverändert.
   - In Feuerposen bleiben Kopf und Hals unbewegt, damit Maul-Anker und Strahl übereinstimmen.
-- **Hexen, Behemoth:** Einzelsprites je Aktion (2–4 Frames), Richtung durch Spiegeln, Atmung per Skalierung, Flug per Höhenversatz.
+- **Hexen, Behemoth:** Einzelsprites je Aktion (2–4 Frames), Richtung durch Spiegeln. Seit 25.11. ebenfalls über den gemeinsamen Rig (`rig_draw_frame`, `bv2_rig_*`): Hexen mit flatterndem Hut, Umhangzipfeln und Saum, Behemoth mit schwer wackelndem Pilzrücken und Kopf, Arme leicht, Klauen am Boden.
 - **Zaubereffekte:** 4-Frame-Sprite auf Wirkradius gestreckt, dazu Vektorlinien und -kreise; Partikel als Vektorformen.
 
 ---
@@ -1306,7 +1310,18 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
   - Lichtpuls;
   - Partikelzahl (Basis: halbe Emission).
 - Radien bleiben die Hitbox.
-- Eigene zusammengesetzte Effekte je Zauber (wie beim Blitz) sind noch offen.
+- **Seit 25.11. eigene zusammengesetzte Effekte** für 7 weitere Zauber; gestreckte Sprites und Vektorlinien sind dort ersetzt:
+  - Durchbohrende Lanze: schwaches Hitbox-Band, gestrichelte Pixelkanten, flackernder 2-px-Kern, Runen laufen zur Spitze.
+  - Orbitklingen: Pixel-Sicheln in Laufrichtung mit Nachbildern (1/2/3 je Band).
+  - Rückkehrende Gleve: vierarmige Pixelklinge mit Bewegungsspur.
+  - Schwerkraftbrunnen: gestrichelter Rand, Pixelteilchen spiralen nach innen (Leere: Sog), kleiner Kern.
+  - Donnersiegel und Sonnenurteil: Runenkreis und herabfallende Energie während der Aufladung, dann eine gestufte Pixelsäule zum Trefferzeitpunkt (Zickzack bei Blitz, gerade mit Strahlen bei Licht).
+  - Glutfeld: schwaches Bodenglühen, flackernder Rand, aufsteigende Glutpixel, im Endgame Flammenzungen.
+- **Ebenfalls 25.11.:**
+  - Feuerball, Eiskugel und Arkansalve: Kern-Sprite in ganzer Pixelgröße (nicht mehr gestreckt), weiches additives Glühen, Glutpixel bzw. Eissplitter bzw. Runenkern mit kreisenden Funken.
+  - Frostnova, Heilpuls und Feuerball-Explosion (`effect_add` mit Stil): Pixelring statt deckender Vektorscheibe, dazu Eissplitter, aufsteigende Pluszeichen bzw. Glut.
+  - Die Altaufrufe von `spell_fx_burst` übergeben jetzt das Band; vorher zeigten Nova, Heilung und Projektileinschläge auf jeder Stufe das Endgame-Sprite.
+- Noch ohne eigenen Effekt: Irrlicht und Prismensamen (kleiner gemalter Kern).
 
 **Zielbild je Band:**
 
@@ -1447,6 +1462,10 @@ Prüfregel: zuerst Bestehendes erweitern, nur bei echtem Defizit neu bauen. Kein
   - Das `master_combat`-Raster wird zur Schwert-Zeitachse.
   - Die `class_weapons`-Kombos werden zur Zeitachse je Kombostufe.
   - **Migration schrittweise; Verhalten und Werte bleiben gleich.** Die Telemetrie-Anker in `QA/tools/telemetry_injections.py` werden mitgezogen.
+- **Ist (25.11.), Kern:** `scripts/attack_timeline`.
+  - Schwertkette (`sword_chain`) und alle Kombostufen von Arkanistin und Waldläufer laufen als Zeitachse, mit unveränderten Werten.
+  - Uhr bleibt die des Besitzers (`sword_combo_clock` bzw. Countdown `class_release`); Einheit sind Spielschritte, wie bisher.
+  - Offen: VFX- und Ton-Ereignisse als eigene Ereignisarten, Boss-Angriffe (`bv2_*`, Drache) auf dieselben Definitionen, Auslösung nach Zeit statt Schritt.
 
 #### 4.2 Animation Controller (A4)
 - **Aufgabe:**
@@ -1722,6 +1741,13 @@ FirstGame_ArtPack/                 Name bleibt (bekannt bei Nutzer und Agenten)
 4. **Prüfen:** Static-Suite, ein Importer-Testlauf je Quelle, Visual-Suite. Links in den Notizen werden nachgezogen; historische Berichte bleiben unverändert (historisch).
 5. **Legacy:** `_legacy/` bleibt im Repo. Löschen nur auf ausdrücklichen Wunsch.
 
+**Erledigt am 25.11. (sicherer Teil, kein Werkzeug liest diese Ordner):**
+- `heroes/`, `monsters/`, `icons/`, `portraits/`, `previews/` und `effects/` liegen in `FirstGame_ArtPack/_legacy/`.
+- `monster_originals/` und die fünf losen Konzeptbilder liegen in `references/`; die zwei Audit-Werkzeuge sind nachgezogen.
+- Das ArtPack-README ist jetzt ein Index.
+
+**Offen:** die aktiven Quellen nach Schritt 1–4 (Pfadtabelle zuerst).
+
 **Sofort zulässig, ohne Migration:**
 - neue Quellen gleich in die Zielstruktur legen und in der Pfadtabelle eintragen;
 - das README des ArtPacks aktuell halten.
@@ -1906,10 +1932,10 @@ graph LR
 | Nr. | Auftrag (je ein eigener Prompt bzw. eine Aufgabe) | Größe | Abhängig von | Nutzerentscheidung |
 |---|---|---|---|---|
 | 1 | ~~R1 Verzerrung beheben~~ **erledigt 25.11.:** 960×540, Makros `VIEW_W`/`VIEW_H`, 16:9-Viewports | M | — | entschieden (b) |
-| 2 | *(A/B-Vergleich am 25.11. erstellt, Empfehlung Dichte 1,0)* **Umsetzung Pixeldichte:** Schwertkämpfer mit Faktor 1,0 aus den Quellatlanten (160er-Leinwand) neben dem heutigen 1,65; Varianten A und B des Feinrasters; Aufnahmen bei 720p und 1080p | M | 1 | **ja:** Auswahl nach Bildvergleich |
-| 3 | **S1 Attack Timeline (Kern)** plus Migration der Schwertkette ohne Wertänderung; Telemetrie-Anker anpassen | M | — | nein |
-| 4 | *(teilweise 25.11.: prozedurale Lebendigkeit der Spielfigur)* **S2 Animation Controller plus Federmodul**; Spieler: Übergangsposen (Landung, Richtungswechsel), Haar und Umhang als Ebenen (Segmentierung aus `tests/tools/characters/`) | L | 2, 3 | nein |
-| 5 | *(teilweise 25.11.: Pixelpartikel, Kettenblitz in 3 Bändern, Intensitäts-Bänder aller Zauber, Tonvariation, Musikabsenkung)* **S4 VFX-Profile** für alle Zauber, Qualitätsstufen; **S5** Band-Varianten und Musikabsenkung | M | 3 | nein |
+| 2 | *(erledigt 25.11. für Figuren und Ausrüstung: Dichte 1,0, 160-px-Frames; Gegner und Bosse offen)* **Umsetzung Pixeldichte:** Schwertkämpfer mit Faktor 1,0 aus den Quellatlanten (160er-Leinwand) neben dem heutigen 1,65; Varianten A und B des Feinrasters; Aufnahmen bei 720p und 1080p | M | 1 | **ja:** Auswahl nach Bildvergleich |
+| 3 | *(erledigt 25.11.: Kern, Schwertkette und Klassen-Kombos)* **S1 Attack Timeline (Kern)** plus Migration der Schwertkette ohne Wertänderung; Telemetrie-Anker anpassen | M | — | nein |
+| 4 | *(teilweise 25.11.: prozedurale Lebendigkeit, Haar und Umhang gefedert über Rig-Knochen)* **S2 Animation Controller plus Federmodul**; Spieler: Übergangsposen (Landung, Richtungswechsel), Haar und Umhang als Ebenen (Segmentierung aus `tests/tools/characters/`) | L | 2, 3 | nein |
+| 5 | *(teilweise 25.11.: Pixelpartikel, Kettenblitz in 3 Bändern, Intensitäts-Bänder aller Zauber, Tonvariation, Musikabsenkung; zusammengesetzte Effekte für 16 von 18 Zaubern, offen: Irrlicht, Prismensamen, Qualitätsstufen)* **S4 VFX-Profile** für alle Zauber, Qualitätsstufen; **S5** Band-Varianten und Musikabsenkung | M | 3 | nein |
 | 6 | **Vertical Slice bauen** (Abschnitt 4) | L | 1–5 | Abnahme |
 | 7 | *(Stufe 1 am 25.11.: Drachen-Skinning-Rig)* **S3 Ausbau:** Hitboxen an Knochen, Schweifschlag, Biss, Knochen für alle Posen | L | 3, 4 | entschieden: eigenes Rig in GML (kostenlos) |
 | 8 | Auswertung des Slice, Anpassung der Standards, dann **L3 Übertragung** je Inhaltsgruppe (Klassen → Gegner → Bosse → Zauber) | XL | 6, 7 | Reihenfolge |
