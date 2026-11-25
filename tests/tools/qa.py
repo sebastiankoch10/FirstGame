@@ -81,7 +81,7 @@ RULES = [
     (r'^scripts/player_artpack/|^objects/ObjectPlayer/Draw', 'Charakter & Ausruestungsgrafik', ['visual', 'classes']),
     (r'^scripts/(boss_|dragon_|attack_telegraph)|^objects/ObjectBossMonster/', 'Bosse', ['boss', 'regression']),
     (r'^scripts/(level_|survivor_balance|master_world|master_skeleton|weather)|^rooms/|^objects/(ObjectLevel|ObjectMaster|ObjectSpawner|ObjectEnvironment)', 'Level/Gegner', ['level']),
-    (r'^scripts/(class_weapons|master_combat)/|^objects/(ObjectSwordHitbox|ObjectLightningball)/', 'Klassen & Startwaffen', ['classes', 'regression']),
+    (r'^scripts/(class_weapons|master_combat|attack_timeline)/|^objects/(ObjectSwordHitbox|ObjectLightningball)/', 'Klassen & Startwaffen', ['classes', 'regression']),
     (r'^scripts/(spell|spell_v2|spell_v2_catalog|spell_choices_v2|apply_passives|cast_spell|get_spell_data|run_spell_stats|hotbar_assign|spell_world_v2|spell_ui_v2)/', 'Zauber & Passiva', ['regression', 'feature']),
     (r'^scripts/(gameplay|gameplay_polish|reset_round|progression_audit|hud|combat_feedback|audio_manager|atmosphere|handle_chest_selection)/', 'Kern/UI/Ablauf', ['regression']),
     (r'^objects/(ObjectController|ObjectMainMenu|ObjectPlayer)/', 'Kern/UI/Ablauf', ['regression']),

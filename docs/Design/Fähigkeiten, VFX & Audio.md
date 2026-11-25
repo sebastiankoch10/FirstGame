@@ -130,7 +130,14 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
   - Lichtpuls;
   - Partikelzahl (Basis: halbe Emission).
 - Radien bleiben die Hitbox.
-- Eigene zusammengesetzte Effekte je Zauber (wie beim Blitz) sind noch offen.
+- **Seit 25.11. eigene zusammengesetzte Effekte** für 7 weitere Zauber; gestreckte Sprites und Vektorlinien sind dort ersetzt:
+  - Durchbohrende Lanze: schwaches Hitbox-Band, gestrichelte Pixelkanten, flackernder 2-px-Kern, Runen laufen zur Spitze.
+  - Orbitklingen: Pixel-Sicheln in Laufrichtung mit Nachbildern (1/2/3 je Band).
+  - Rückkehrende Gleve: vierarmige Pixelklinge mit Bewegungsspur.
+  - Schwerkraftbrunnen: gestrichelter Rand, Pixelteilchen spiralen nach innen (Leere: Sog), kleiner Kern.
+  - Donnersiegel und Sonnenurteil: Runenkreis und herabfallende Energie während der Aufladung, dann eine gestufte Pixelsäule zum Trefferzeitpunkt (Zickzack bei Blitz, gerade mit Strahlen bei Licht).
+  - Glutfeld: schwaches Bodenglühen, flackernder Rand, aufsteigende Glutpixel, im Endgame Flammenzungen.
+- Noch ohne eigenen Effekt: Feuerball, Eiskugel, Frostnova, Arkansalve, Heilpuls (Altobjekte) sowie Irrlicht und Prismensamen (kleiner Kern).
 
 **Zielbild je Band:**
 

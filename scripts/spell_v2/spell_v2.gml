@@ -181,14 +181,15 @@ function spell_v2_draw() {
     for(var i=0;i<array_length(global.spell_links);i++){var link=global.spell_links[i];draw_set_alpha(link.life/.18);draw_set_color(spell_element_color(link.element));draw_line_width(link.ax,link.ay,link.bx,link.by,5);draw_set_color(c_white);draw_line_width(link.ax,link.ay,link.bx,link.by,1);}
     for(var i=0;i<array_length(global.spell_fields);i++) {
         var f=global.spell_fields[i],col=spell_element_color(f.element),fa=vfx_band_alpha(vfx_band(f.level));draw_set_color(col);draw_set_alpha(.5*fa);
-        if(f.kind=="lance"){draw_set_alpha((1-f.age/f.duration)*.5);draw_line_width(f.sx,f.sy,f.ex,f.ey,f.radius*2);draw_set_color(c_white);draw_line_width(f.sx,f.sy,f.ex,f.ey,3);}
-        else if(f.kind=="orbit")for(var n=0;n<f.count;n++){var a=f.age*190+n*360/f.count,xx=f.x+lengthdir_x(f.radius,a),yy=f.y+lengthdir_y(f.radius,a);draw_sprite_ext(spr_master_slash_1,1,xx,yy,.23,.23,a,c_white,1);}
-        else if(f.kind=="glaive"){draw_sprite_ext(spr_master_slash_3,1,f.x,f.y,.32,.32,f.age*900,c_white,1);}
+        var fb=vfx_field_band(f);
+        if(f.kind=="lance")vfx_lance_draw(f,fb,fa);
+        else if(f.kind=="orbit")vfx_orbit_draw(f,fb,fa);
+        else if(f.kind=="glaive")vfx_glaive_draw(f,fb,fa);
         else if(f.kind=="summon" || f.kind=="seed"){spell_fx_core_draw(f.x,f.y,42,f.element,(f.age mod .6)/.6,.9);}
-        else if(f.kind=="gravity") {
-            for(var arm=0;arm<5;arm++){var px=f.x,py=f.y;for(var part=1;part<=8;part++){var a=arm*72+f.age*180+part*25,xx=f.x+lengthdir_x(f.radius*part/8,a),yy=f.y+lengthdir_y(f.radius*part/8,a);draw_line_width(px,py,xx,yy,2);px=xx;py=yy;}}
-            spell_fx_core_draw(f.x,f.y,45,4,(f.age mod .6)/.6,.8);
-        } else if(f.kind=="prison") {
+        else if(f.kind=="gravity")vfx_gravity_draw(f,fb,fa);
+        else if(f.kind=="seal" || f.kind=="verdict")vfx_pillar_draw(f,fb,fa);
+        else if(f.kind=="field")vfx_ember_field_draw(f,fb,fa);
+        else if(f.kind=="prison") {
             var b=vfx_band(f.level);vfx_pixel_ring(f.x,f.y,f.radius,col,.75*fa,f.age*20,0,2);
             for(var n=0;n<(b==0 ? 6 : (b==1 ? 8 : 12));n++){var a=n*360/(b==0 ? 6 : (b==1 ? 8 : 12)),xx=f.x+lengthdir_x(f.radius,a),yy=f.y+lengthdir_y(f.radius,a);vfx_pixel_shard(xx,yy,b==2 ? 22 : 16,make_color_rgb(190,236,255),fa);}
         } else if(f.kind=="spikes" || f.kind=="meteor") {
@@ -202,7 +203,6 @@ function spell_v2_draw() {
             vfx_pixel_ring(f.x,f.y,f.radius,col,.7*fa,rot,b==0 ? 3 : (b==1 ? 4 : 0),b==2 ? 3 : 2);
             if(b>=1)vfx_pixel_ring(f.x,f.y,f.radius*.62,merge_color(col,c_white,.4),.45*fa,-rot*1.5,5,1);
             for(var n=0;n<(b==2 ? 8 : 6);n++){var a=n*360/(b==2 ? 8 : 6)+rot*2,px=round(f.x+lengthdir_x(f.radius*.85,a)),py=round(f.y+lengthdir_y(f.radius*.85,a));draw_set_alpha(.9*fa);draw_set_color(merge_color(col,c_white,.5));draw_rectangle(px-1,py-1,px+1,py+1,false);}
-            if(f.kind=="seal" || f.kind=="verdict")draw_line_width(f.x,f.y-230*(1-f.age/f.duration),f.x,f.y,f.age>(f.kind=="seal" ? .9 : .72) ? 20 : 3);
         }
     }
     for(var i=0;i<array_length(global.spell_bursts);i++){var e=global.spell_bursts[i];spell_fx_draw(e.x,e.y,e.radius,e.element,e.age/e.duration,vfx_band_alpha(variable_struct_exists(e,"band") ? e.band : 2));}

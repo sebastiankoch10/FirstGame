@@ -13,6 +13,8 @@ Multiplikatives Weltlicht, Wetter, Kampf-Feedback, Zauberpartikel.
   - Boss-Navigation und Notfall-Teleport
 - `scripts/weather`: Nebel, Regen und Wind je Level.
 - `scripts/spell_vfx`: begrenzter Partikelpool (420), Spuren, Feld-Emitter, dauerhafte Zauberlichter.
+  - Pixel-Bausteine `vfx_pixel_ring|shard|streak`, `vfx_px`, Elementpaletten `vfx_palette` (dunkler Rand, Körper, heller Kern).
+  - Seit 25.11. zusammengesetzte Effekte je Zauber, aufgerufen aus `spell_v2_draw`: `vfx_lance_draw`, `vfx_orbit_draw`, `vfx_glaive_draw`, `vfx_gravity_draw`, `vfx_pillar_draw` (Donnersiegel, Sonnenurteil), `vfx_ember_field_draw`. Band über `vfx_field_band`.
 - `scripts/combat_feedback`: Schadenszahlen, Einschläge, Trefferreaktion.
 - `scripts/attack_telegraph`: Warnflächen mit Countdown (zusammen mit [[Bosse]]).
 

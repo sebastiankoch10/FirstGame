@@ -18,6 +18,9 @@ function cd_sword_regression() {
     repeat(18){cd_weapon_tick();with(ObjectSwordHitbox)event_perform(ev_step,0);}var second=start-e.hp-first;
     repeat(20){cd_weapon_tick();with(ObjectSwordHitbox)event_perform(ev_step,0);}var third=start-e.hp-first-second;
     cd_check(first==11 && second==13 && third==19,"Sword original three-hit combo damage remains eleven/thirteen/nineteen");global.cd_metrics.sword_combo=[first,second,third];
+    var tl=atl_get("sword_chain"),grid=[atl_time(tl,"windup",1),atl_time(tl,"hitbox_on",1),atl_time(tl,"windup",2),atl_time(tl,"hitbox_on",2),atl_time(tl,"windup",3),atl_time(tl,"hitbox_on",3),atl_time(tl,"end")];
+    var frames_ok=master_sword_frame(1,3)==0 && master_sword_frame(1,4)==1 && master_sword_frame(2,21)==0 && master_sword_frame(2,22)==1 && master_sword_frame(3,41)==0 && master_sword_frame(3,42)==1 && master_sword_frame(3,49)==1 && master_sword_frame(3,50)==2 && master_sword_frame(1,-1)==0;
+    cd_check(array_equals(grid,[0,4,16,22,34,42,56]) && frames_ok,"Sword attack timeline reproduces the former event grid and contact poses");
 }
 function cd_mage_tests() {
     cd_reset("Mage");var pl=ObjectPlayer,e=cd_enemy(pl.x+105,pl.y),stages=[],outcomes=[];

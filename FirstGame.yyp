@@ -83,6 +83,7 @@
     {"id":{"name":"apply_passives","path":"scripts/apply_passives/apply_passives.yy",},},
     {"id":{"name":"atmosphere","path":"scripts/atmosphere/atmosphere.yy",},},
     {"id":{"name":"attack_telegraph","path":"scripts/attack_telegraph/attack_telegraph.yy",},},
+    {"id":{"name":"attack_timeline","path":"scripts/attack_timeline/attack_timeline.yy",},},
     {"id":{"name":"audio_manager","path":"scripts/audio_manager/audio_manager.yy",},},
     {"id":{"name":"boss_choreo","path":"scripts/boss_choreo/boss_choreo.yy",},},
     {"id":{"name":"boss_combat","path":"scripts/boss_combat/boss_combat.yy",},},

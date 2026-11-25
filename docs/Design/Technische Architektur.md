@@ -97,6 +97,10 @@ Prüfregel: zuerst Bestehendes erweitern, nur bei echtem Defizit neu bauen. Kein
   - Das `master_combat`-Raster wird zur Schwert-Zeitachse.
   - Die `class_weapons`-Kombos werden zur Zeitachse je Kombostufe.
   - **Migration schrittweise; Verhalten und Werte bleiben gleich.** Die Telemetrie-Anker in `QA/tools/telemetry_injections.py` werden mitgezogen.
+- **Ist (25.11.), Kern:** `scripts/attack_timeline`.
+  - Schwertkette (`sword_chain`) und alle Kombostufen von Arkanistin und Waldläufer laufen als Zeitachse, mit unveränderten Werten.
+  - Uhr bleibt die des Besitzers (`sword_combo_clock` bzw. Countdown `class_release`); Einheit sind Spielschritte, wie bisher.
+  - Offen: VFX- und Ton-Ereignisse als eigene Ereignisarten, Boss-Angriffe (`bv2_*`, Drache) auf dieselben Definitionen, Auslösung nach Zeit statt Schritt.
 
 ### 4.2 Animation Controller (A4)
 - **Aufgabe:**

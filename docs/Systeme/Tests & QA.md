@@ -19,6 +19,7 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
 | 3 | Kerndateien oder ≥3 Systeme | alle Suiten |
 | 4 | Simulationen | nie automatisch; Befehle werden nur angezeigt |
 
+- **`anchors`** (`QA/tools/check_telemetry_anchors.py`, Sekunden, ohne Build) läuft ab Stufe 1 immer: Alle Telemetrie-Anker der Simulationen müssen zum Code passen. Seit 25.11.
 - **`static`** (`validate_project`, 1–3 min) läuft nur bei geänderten `.yy`/`.yyp` und in Stufe 3. Jede Suite baut das Projekt ohnehin selbst, das ist der Compile-Check.
 - **Cache:** `%LOCALAPPDATA%\FirstGame-Tests\qa-cache.json`.
   - Schlüssel ist der SHA-256 aller Build-Eingaben plus Harness. Ein stat-Index hält den Hash bei etwa 1 s.
@@ -67,5 +68,5 @@ Alle Systeme, besonders [[Bosse]] · [[Talente]] · [[Ausrüstung]] · [[Level &
 
 ## Bekannte Probleme
 - Echtzeit-Harnesses nicht parallel unter Last laufen lassen (Level-Smoke 165/166 als Timing-Ausreißer).
-- Die Telemetrie-Anker in `QA/tools/telemetry_injections.py` sind empfindlich.
+- Die Telemetrie-Anker in `QA/tools/telemetry_injections.py` sind empfindlich. Die Suite `anchors` meldet Brüche jetzt sofort; am 25.11. waren zwei kaputt (Klassenprojektil nach den Waffen-Upgrades, Drachen-Nahangriff doppelter Anker) und sind repariert.
 - `audit_visual_preservation.py` vergleicht mit der alten QA-Baseline. Absichtlich neu erzeugte Figuren-PNGs melden dort Abweichungen.

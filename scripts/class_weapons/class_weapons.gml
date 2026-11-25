@@ -26,10 +26,15 @@ function class_weapon_auto_step() {
     class_combo_index=(class_combo_index mod (global.selected_character=="Mage" ? 4 : 12))+1;
     class_target=target;class_target_x=target.x;class_target_y=target.y-10;
     attack_direction=point_direction(x,y-10,class_target_x,class_target_y);
-    attack_stage=global.selected_character=="Mage" ? class_combo_index : (class_combo_index==12 ? 3 : (class_combo_index==3 || class_combo_index==9 ? 2 : 1));
-    attack_duration=global.selected_character=="Mage" ? (class_combo_index==4 ? 44 : 30) : (class_combo_index==12 ? 28 : 14);
-    attack_timer=attack_duration;class_pending=class_combo_index;class_release=global.selected_character=="Mage" ? (class_combo_index==4 ? 22 : 12) : (class_combo_index==12 ? 10 : (class_combo_index==3 || class_combo_index==9 ? 6 : 4));
+    var tl=class_weapon_timeline(class_combo_index),wind=tl.events[0];
+    attack_stage=wind.stage;attack_duration=wind.dur;
+    attack_timer=attack_duration;class_pending=class_combo_index;class_release=atl_time(tl,"release");
     weapon_cooldown=max(12,ceil(weapon.cooldown/(1+weapon_haste)));
+}
+/// Attack timeline of a combo step (attack_timeline.gml): Mage 1-4; Ranger 12 = finisher, 3 and 9 = heavy, else light.
+function class_weapon_timeline(_step) {
+    if(global.selected_character=="Mage")return atl_get("mage_"+string(_step));
+    return atl_get(_step==12 ? "ranger_finisher" : (_step==3 || _step==9 ? "ranger_heavy" : "ranger_light"));
 }
 function class_weapon_release(_pl,_step) {
     var mage=global.selected_character=="Mage",amount=round(_pl.weapon.damage+_pl.player_power*_pl.weapon.power_scale),tier=sword_visual_tier(global.current_level),radius;

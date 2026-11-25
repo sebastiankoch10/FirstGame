@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"attack_timeline",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"attack_timeline",
+  "parent":{
+    "name":"Kampf_und_Klassen",
+    "path":"folders/Skripte/Kampf_und_Klassen.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

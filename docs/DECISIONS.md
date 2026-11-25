@@ -18,6 +18,8 @@ updated: 2026-11-25
 - **2026-11-25 · Neue Designentscheidungen aus Aufträgen werden im selben Auftrag in den Kanon übernommen.** Grund: Entscheidungen dürfen nicht nur im Chat stehen.
 - **2026-11-25 · IDE-Ordner nach Kategorien, physische Quellordner bleiben vorerst.** Grund: Der IDE-Baum ist nur eine Ansicht (sicher). Das Verschieben von `FirstGame_ArtPack/` bräche über 30 Werkzeugpfade; erst eine Pfadtabelle, dann verschieben ([[Assets & Pipeline]]).
 - **2026-11-25 · Export des Kanons wird erzeugt, nicht gepflegt** (`tests/tools/export_design.py`). Grund: keine zweite Wahrheitsquelle.
+- **2026-11-25 · Telemetrie-Anker werden in jeder QA-Stufe geprüft (Suite `anchors`).** Grund: Zwei Anker waren nach Codeänderungen unbemerkt kaputt; die Simulationen wären erst spät gescheitert. Die Prüfung dauert Sekunden.
+- **2026-11-25 · Attack Timeline: Uhr und Einheit bleiben die des Besitzers** (Spielerwaffen in Spielschritten, Bosse in Sekunden auf `v2_clock`). Grund: Migration ohne jede Verhaltensänderung; Auslösung nach Zeit folgt, wenn alle Angriffe auf der Zeitachse laufen.
 
 ## Spieldesign
 - **2026-11-25 (2) · Nutzerentscheidungen:**

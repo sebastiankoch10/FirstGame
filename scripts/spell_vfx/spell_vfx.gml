@@ -153,3 +153,144 @@ function vfx_pixel_streak(_ax,_ay,_bx,_by,_col,_alpha) {
     var n=12;
     for(var i=0;i<n;i++){var t=i/(n-1),px=round(lerp(_ax,_bx,t)),py=round(lerp(_ay,_by,t));draw_set_alpha(clamp(_alpha*(.2+.8*t),0,1));draw_set_color(t>.8 ? c_white : _col);draw_rectangle(px,py,px+1,py+1,false);}
 }
+
+/// ---- S4: composed pixel effects per spell (Fähigkeiten, VFX & Audio 2 and 4) ----
+/// Every block sits on whole world pixels, uses the element palette (dark rim, body, light core) and grows with the
+/// band (0 basis, 1 middle, 2 endgame) in parts and detail, not in area: the visible area stays the hitbox (G6).
+/// No global RNG (vfx_hash), so seeded runs stay comparable.
+function vfx_palette(_element) {
+    static p=[
+        [make_color_rgb(118,98,66),make_color_rgb(242,213,145),make_color_rgb(255,248,228)],   // physical
+        [make_color_rgb(150,38,20),make_color_rgb(255,137,44),make_color_rgb(255,232,140)],    // fire
+        [make_color_rgb(44,112,170),make_color_rgb(108,225,255),make_color_rgb(236,252,255)],  // ice
+        [make_color_rgb(78,88,206),make_color_rgb(143,197,255),make_color_rgb(242,247,255)],   // lightning
+        [make_color_rgb(74,32,124),make_color_rgb(206,118,255),make_color_rgb(246,228,255)],   // arcane / void
+        [make_color_rgb(98,72,42),make_color_rgb(213,174,101),make_color_rgb(250,232,190)],    // earth
+        [make_color_rgb(32,112,62),make_color_rgb(116,239,153),make_color_rgb(228,255,234)],   // nature
+        [make_color_rgb(156,94,22),make_color_rgb(255,218,108),make_color_rgb(255,252,228)]    // holy
+    ];
+    return p[clamp(_element,0,7)];
+}
+/// Band of a spell field; honours the capture override like vfx_spell_band.
+function vfx_field_band(_f) {return variable_global_exists("vfx_band_override") ? global.vfx_band_override : vfx_band(_f.level);}
+/// One square art pixel block of size _s on the world grid.
+function vfx_px(_x,_y,_s,_col,_alpha) {
+    if(_alpha<=0)return;
+    var px=round(_x),py=round(_y);draw_set_color(_col);draw_set_alpha(min(1,_alpha));draw_rectangle(px,py,px+_s-1,py+_s-1,false);
+}
+/// Solid pixel line on the world grid (one _w x _w block per pixel step, Bresenham-like).
+function vfx_pixel_line(_ax,_ay,_bx,_by,_w,_col,_alpha) {
+    if(_alpha<=0)return;
+    var n=max(1,ceil(max(abs(_bx-_ax),abs(_by-_ay))));draw_set_color(_col);draw_set_alpha(min(1,_alpha));
+    var h=floor(_w/2);
+    for(var i=0;i<=n;i++){var px=round(lerp(_ax,_bx,i/n))-h,py=round(lerp(_ay,_by,i/n))-h;draw_rectangle(px,py,px+_w-1,py+_w-1,false);}
+}
+/// Soft additive glow (light layer of a composed effect); never darkens the ground.
+function vfx_glow_line(_ax,_ay,_bx,_by,_w,_col,_alpha) {
+    if(_alpha<=0)return;
+    gpu_set_blendmode(bm_add);draw_set_color(_col);draw_set_alpha(min(1,_alpha));draw_line_width(_ax,_ay,_bx,_by,_w);gpu_set_blendmode(bm_normal);
+}
+function vfx_glow_disc(_x,_y,_r,_col,_alpha) {
+    if(_alpha<=0)return;
+    gpu_set_blendmode(bm_add);draw_set_color(_col);draw_set_alpha(min(1,_alpha));draw_circle(_x,_y,_r,false);gpu_set_blendmode(bm_normal);
+}
+/// Piercing Lance: additive glow over the hitbox width, solid 1 px edges, a 3 px light core with a body-coloured
+/// rim, runes running to the tip (more with the band), sparks off the edges in the endgame band.
+function vfx_lance_draw(_f,_b,_fa) {
+    var pal=vfx_palette(_f.element),k=clamp(1-_f.age/max(.01,_f.duration),0,1),len=point_distance(_f.sx,_f.sy,_f.ex,_f.ey);
+    if(len<2)return;
+    var dir=point_direction(_f.sx,_f.sy,_f.ex,_f.ey),nx=lengthdir_x(1,dir+90),ny=lengthdir_y(1,dir+90),tick=floor(_f.age*40);
+    var edge=_f.radius*.92,ax=_f.sx,ay=_f.sy,bx=_f.ex,by=_f.ey;
+    vfx_glow_line(ax,ay,bx,by,_f.radius*2,pal[1],(.10+.06*_b)*k);
+    vfx_pixel_line(ax+nx*edge,ay+ny*edge,bx+nx*edge,by+ny*edge,1,pal[1],.75*k*_fa);
+    vfx_pixel_line(ax-nx*edge,ay-ny*edge,bx-nx*edge,by-ny*edge,1,pal[1],.75*k*_fa);
+    vfx_pixel_line(ax,ay,bx,by,_b==0 ? 3 : 4,pal[1],k);
+    vfx_pixel_line(ax,ay,bx,by,_b==0 ? 1 : 2,pal[2],k);
+    var runes=_b==0 ? 2 : (_b==1 ? 3 : 5);
+    for(var r=0;r<runes;r++) {
+        var q=frac(_f.age*3.2+r/runes),cx=lerp(ax,bx,q),cy=lerp(ay,by,q),s=_b==2 ? 5 : 4;
+        vfx_pixel_line(cx-s,cy,cx+s,cy,1,pal[2],k);vfx_pixel_line(cx,cy-s,cx,cy+s,1,pal[2],k);
+    }
+    if(_b==2)for(var s=0;s<8;s++){var q=(s+.5)/8,o=edge+3+3*vfx_hash(s,tick),sd=(s mod 2) ? 1 : -1,cx=lerp(ax,bx,q),cy=lerp(ay,by,q);vfx_pixel_line(cx+nx*edge*sd,cy+ny*edge*sd,cx+nx*o*sd,cy+ny*o*sd,1,pal[2],.8*k);}
+}
+/// Orbit Blades: solid pixel crescents facing their motion (2 px body, 1 px light inner edge), afterimages per band.
+function vfx_orbit_draw(_f,_b,_fa) {
+    var pal=vfx_palette(_f.element),ghosts=_b+1;
+    for(var n=0;n<_f.count;n++)for(var g=ghosts;g>=0;g--) {
+        var a=_f.age*190+n*360/_f.count-g*11,bx=_f.x+lengthdir_x(_f.radius,a),by=_f.y+lengthdir_y(_f.radius,a);
+        var mv=a+90,cx=bx-lengthdir_x(6,mv),cy=by-lengthdir_y(6,mv),al=g==0 ? 1 : .55/g;
+        for(var s=-60;s<=60;s+=6) {
+            var sa=mv+s,tip=abs(s)>=48;
+            if(g>0){vfx_px(cx+lengthdir_x(14,sa),cy+lengthdir_y(14,sa),1,pal[1],al*_fa);continue;}
+            vfx_px(cx+lengthdir_x(14,sa),cy+lengthdir_y(14,sa),tip ? 1 : 2,pal[1],1);
+            if(!tip)vfx_px(cx+lengthdir_x(12,sa),cy+lengthdir_y(12,sa),1,pal[2],1);
+        }
+        if(g==0)vfx_glow_disc(bx,by,10,pal[1],.10+.05*_b);
+    }
+}
+/// Returning Glaive: a spinning four-armed pixel blade (solid arms, light tips), a hub and a motion trail.
+function vfx_glaive_draw(_f,_b,_fa) {
+    var pal=vfx_palette(_f.element),spin=_f.age*900;
+    var dir=(_f.age<.55 || !instance_exists(ObjectPlayer)) ? point_direction(_f.sx,_f.sy,_f.ex,_f.ey) : point_direction(_f.x,_f.y,ObjectPlayer.x,ObjectPlayer.y-10);
+    var tl=_b==0 ? 22 : (_b==1 ? 34 : 48);
+    vfx_glow_line(_f.x-lengthdir_x(tl,dir),_f.y-lengthdir_y(tl,dir),_f.x,_f.y,10,pal[1],.12+.05*_b);
+    vfx_pixel_streak(_f.x-lengthdir_x(tl,dir),_f.y-lengthdir_y(tl,dir),_f.x,_f.y,pal[1],.6*_fa);
+    for(var arm=0;arm<4;arm++) {
+        var a=spin+arm*90,b2=a+28,mx=_f.x+lengthdir_x(9,a),my=_f.y+lengthdir_y(9,a),ex=mx+lengthdir_x(8,b2),ey=my+lengthdir_y(8,b2);
+        vfx_pixel_line(_f.x,_f.y,mx,my,2,pal[1],1);vfx_pixel_line(mx,my,ex,ey,2,pal[1],1);vfx_px(ex,ey,1,pal[2],1);
+        vfx_pixel_line(_f.x,_f.y,mx,my,1,pal[2],.8);
+    }
+    vfx_px(_f.x-1,_f.y-1,3,pal[0],1);vfx_px(_f.x,_f.y,1,pal[2],1);
+    if(_b==2)vfx_pixel_ring(_f.x,_f.y,20,pal[1],.4,spin*.5,3,1);
+}
+/// Gravity Well: dashed rim on the hitbox, pixel motes spiralling inwards (void moves inwards), small core sprite.
+function vfx_gravity_draw(_f,_b,_fa) {
+    var pal=vfx_palette(_f.element),arms=_b==0 ? 4 : (_b==1 ? 5 : 7),parts=_b==2 ? 10 : 8;
+    vfx_glow_disc(_f.x,_f.y,_f.radius*.55,pal[0],(.10+.04*_b)*_fa);
+    vfx_pixel_ring(_f.x,_f.y,_f.radius,pal[1],.6*_fa,-_f.age*25,4,2);
+    for(var arm=0;arm<arms;arm++)for(var p=0;p<parts;p++) {
+        var rf=frac(p/parts-_f.age*.7+arm*.13),a=arm*360/arms+_f.age*60+(1-rf)*210,rr=_f.radius*rf;
+        vfx_px(_f.x+lengthdir_x(rr,a),_f.y+lengthdir_y(rr,a),rf>.45 ? 2 : 1,rf<.3 ? pal[2] : (rf<.7 ? pal[1] : pal[0]),(.35+.65*(1-rf))*_fa);
+    }
+    spell_fx_core_draw(_f.x,_f.y,_b==2 ? 45 : 36,_f.element,(_f.age mod .6)/.6,.8);
+}
+/// Thunder Seal / Solar Verdict: rune circle on the ground while charging, energy falling into the centre, then a
+/// stepped pixel pillar at the hit time (zigzag for lightning, straight with side rays for holy light).
+function vfx_pillar_draw(_f,_b,_fa) {
+    var pal=vfx_palette(_f.element),th=_f.kind=="seal" ? .9 : .72,p=clamp(_f.age/th,0,1),rot=_f.age*(40+_b*25);
+    vfx_pixel_ring(_f.x,_f.y,_f.radius,pal[1],(.45+.4*p)*_fa,rot,_b==0 ? 3 : 4,2);
+    if(_b>=1)vfx_pixel_ring(_f.x,_f.y,_f.radius*.6,pal[2],.5*_fa,-rot*1.4,5,1);
+    var marks=_b==2 ? 8 : 6;
+    for(var m=0;m<marks;m++){var a=m*360/marks+rot*1.5,mx=_f.x+lengthdir_x(_f.radius*.82,a),my=_f.y+lengthdir_y(_f.radius*.82,a);vfx_px(mx-1,my-1,3,pal[2],(.5+.5*p)*_fa);}
+    if(_f.age<th) {
+        // charge: a thin column of light falling into the centre
+        var top=_f.y-230*(1-p),drops=_b+2;
+        vfx_pixel_line(_f.x,top,_f.x,_f.y,1,pal[1],.7*_fa);vfx_glow_line(_f.x,top,_f.x,_f.y,6,pal[1],.12+.05*_b);
+        for(var d=0;d<drops;d++){var dy=lerp(_f.y-230,_f.y,frac(_f.age*2.4+d/drops));vfx_px(_f.x-1,dy,2,pal[2],_fa);}
+        return;
+    }
+    var k=clamp(1-(_f.age-th)/.3,0,1);if(k<=0)return;
+    var w=(_b==0 ? 4 : (_b==1 ? 6 : 9))*(.5+.5*k),tick=floor(_f.age*30),seg=10;
+    for(var yy=round(_f.y-260);yy<_f.y;yy+=seg) {
+        var ox=_f.kind=="seal" ? round(vfx_hash(yy,tick)*(3+_b*2)) : 0;
+        draw_set_alpha(.55*k);draw_set_color(pal[0]);draw_rectangle(round(_f.x+ox-w-2),yy,round(_f.x+ox+w+1),yy+seg-1,false);
+        draw_set_alpha(.9*k);draw_set_color(pal[1]);draw_rectangle(round(_f.x+ox-w),yy,round(_f.x+ox+w-1),yy+seg-1,false);
+        draw_set_alpha(k);draw_set_color(pal[2]);draw_rectangle(round(_f.x+ox-max(1,w*.35)),yy,round(_f.x+ox+max(1,w*.35)),yy+seg-1,false);
+    }
+    if(_f.kind=="verdict" && _b>=1)for(var r=0;r<(_b==2 ? 8 : 4);r++){var a=r*360/(_b==2 ? 8 : 4)+22.5,l=_f.radius*(.5+.5*(1-k));vfx_pixel_streak(_f.x,_f.y,_f.x+lengthdir_x(l,a),_f.y+lengthdir_y(l,a)*.6,pal[1],.8*k);}
+    if(_f.kind=="seal" && _b>=1)for(var r=0;r<_b*2;r++){var a=vfx_hash(r,tick)*180+180,l=_f.radius*.7;var mx=_f.x+lengthdir_x(l*.5,a)+vfx_hash(r+7,tick)*8,my=_f.y+lengthdir_y(l*.5,a)*.6;vfx_px(mx,my,1,pal[2],k);vfx_pixel_streak(_f.x,_f.y-4,mx,my,pal[1],.7*k);}
+}
+/// Ember Field: faint ground glow inside the hitbox, flickering rim, embers rising from hashed spots.
+function vfx_ember_field_draw(_f,_b,_fa) {
+    var pal=vfx_palette(_f.element),tick=floor(_f.age*12);
+    vfx_glow_disc(_f.x,_f.y,_f.radius,pal[0],(.10+.04*_b)*_fa);
+    vfx_pixel_ring(_f.x,_f.y,_f.radius,pal[0],.7*_fa,_f.age*12,0,2);
+    for(var i=0;i<(_b==0 ? 10 : (_b==1 ? 16 : 24));i++)if(vfx_hash(i,tick)>.2)vfx_px(_f.x+lengthdir_x(_f.radius,i*29+_f.age*12),_f.y+lengthdir_y(_f.radius,i*29+_f.age*12)-2,1,pal[1],.8*_fa);
+    var embers=_b==0 ? 10 : (_b==1 ? 18 : 28);
+    for(var i=0;i<embers;i++) {
+        var a=vfx_hash(i,1)*180+180,rr=sqrt(abs(vfx_hash(i,2)))*_f.radius*.85,ph=frac(_f.age*(.8+.3*abs(vfx_hash(i,4)))+(vfx_hash(i,3)+1)*.5);
+        var ex=_f.x+lengthdir_x(rr,a)+sin(_f.age*6+i)*2,ey=_f.y+lengthdir_y(rr,a)-ph*(18+_b*8);
+        vfx_px(ex,ey,ph<.5 ? 2 : 1,ph<.3 ? pal[2] : (ph<.7 ? pal[1] : pal[0]),sin(ph*pi)*_fa);
+    }
+    if(_b==2)for(var t=0;t<5;t++){var a=t*72+_f.age*20,tx=_f.x+lengthdir_x(_f.radius*.45,a),ty=_f.y+lengthdir_y(_f.radius*.45,a),h=3+round(2*abs(vfx_hash(t,tick)));for(var s=0;s<h;s++)vfx_px(tx,ty-s*2,s==h-1 ? 1 : 2,s<1 ? pal[1] : pal[2],.85);}
+}

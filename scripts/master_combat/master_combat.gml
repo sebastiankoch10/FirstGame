@@ -10,39 +10,40 @@ function master_sword_start(_target) {
     sword_whirl_chain=talent_stat("sword_whirl")>0 && global.sword_combo_metrics.chains mod 4==0;
     master_sword_step();
 }
+/// The chain is the attack timeline "sword_chain" on the owner's clock sword_combo_clock (cursor sword_combo_event).
 function master_sword_step() {
-    var timings=[0,4,16,22,34,42,56];
-    while(sword_combo_event<7 && sword_combo_clock>=timings[sword_combo_event]) {
-        var event_index=sword_combo_event;sword_combo_event++;
-        if(event_index==6) {sword_combo_active=false;attack_timer=0;return;}
-        var stage=(event_index div 2)+1;
-        if(event_index mod 2==0) {
+    var tl=atl_get("sword_chain");
+    while(atl_due(tl,sword_combo_event,sword_combo_clock)) {
+        var ev=tl.events[sword_combo_event];sword_combo_event++;
+        if(ev.ev=="end") {sword_combo_active=false;attack_timer=0;return;}
+        if(ev.ev=="pose")continue;
+        var stage=ev.stage;
+        if(ev.ev=="windup") {
             var target=combat_nearest(id,150);
             if(instance_exists(target))sword_combo_direction=point_direction(x,y,target.x,target.y);
             attack_stage=stage;attack_direction=sword_combo_direction;
-            attack_duration=max(1,ceil((stage==1 ? 16 : (stage==2 ? 18 : 22))/(1+weapon_haste)));
+            attack_duration=max(1,ceil(ev.dur/(1+weapon_haste)));
             attack_timer=attack_duration;
         } else {
             var hit=instance_create_layer(x,y,"Instances",ObjectSwordHitbox);
-            var multipliers=[0.5,0.6,0.9];
             hit.owner=id;hit.direction=sword_combo_direction;hit.combo_stage=stage;
-            hit.damage=max(1,floor(round(weapon.damage+player_power*weapon.power_scale)*multipliers[stage-1]+.5));
-            hit.hit_radius=(stage==3 ? 130 : 116)*spell_area;hit.hit_half_angle=stage==3 ? 70 : 58;
+            hit.damage=max(1,floor(round(weapon.damage+player_power*weapon.power_scale)*ev.mult+.5));
+            hit.hit_radius=ev.radius*spell_area;hit.hit_half_angle=ev.span;
             // Talents and equipment (all neutral at rank 0 / without gear).
             var gear=variable_instance_exists(id,"weapon_damage_mult") ? weapon_damage_mult : 1,charge=variable_instance_exists(id,"sword_charge_mult") ? sword_charge_mult : 1;
             hit.damage=max(1,round(hit.damage*gear*(1+talent_stat("sword_dmg_pct"))*charge));
             hit.hit_radius*=1+talent_stat("sword_reach_pct");
-            if(stage==3) {
+            if(ev.finisher) {
                 if(variable_instance_exists(id,"sword_whirl_chain") && sword_whirl_chain){hit.hit_half_angle=180;hit.hit_radius*=1.08;light_pulse(x,y-12,220,make_color_rgb(255,214,140),.8,.25);}
                 if(talent_stat("sword_wave")>0)class_fx_add("sword_wave",x,y-10,hit.damage*talent_stat("sword_wave"),95*spell_area,.42);
                 if(talent_stat("sword_leech")>0 && array_length(spell_targets(x,y-10,hit.hit_radius))>0 && hp>0){var before=hp;hp=min(max_hp,hp+talent_stat("sword_leech"));if(hp>before)light_pulse(x,y-20,90,make_color_rgb(120,255,150),.5,.2);}
             }
-            hit.lifetime=10;hit.total_lifetime=10;
-            global.sword_combo_metrics.swings++;if(stage==3)global.sword_combo_metrics.finishers++;
+            hit.lifetime=ev.life;hit.total_lifetime=ev.life;
+            global.sword_combo_metrics.swings++;if(ev.finisher)global.sword_combo_metrics.finishers++;
             fg_sfx("sword_swing");with(hit)event_perform(ev_step,0);
             // Visual only: sparks along the swing arc (bounded spell particle pool).
-            for(var sp=0;sp<(stage==3 ? 10 : 6);sp++){var sa=hit.direction-hit.hit_half_angle+2*hit.hit_half_angle*(sp+.5)/(stage==3 ? 10 : 6),sr=hit.hit_radius*random_range(.55,.9);spell_particle(x+lengthdir_x(sr,sa),y-12+lengthdir_y(sr,sa),lengthdir_x(90,sa+90*(stage==2 ? -1 : 1)),lengthdir_y(90,sa+90*(stage==2 ? -1 : 1)),random_range(.12,.22),2,choose(make_color_rgb(255,214,140),c_white,make_color_rgb(255,170,90)),1,0);}
-            light_pulse(x+lengthdir_x(70,attack_direction),y-12+lengthdir_y(70,attack_direction),stage==3 ? 160 : 105,make_color_rgb(255,190,83),stage==3 ? .55 : .25,.16);
+            for(var sp=0;sp<ev.sparks;sp++){var sa=hit.direction-hit.hit_half_angle+2*hit.hit_half_angle*(sp+.5)/ev.sparks,sr=hit.hit_radius*random_range(.55,.9);spell_particle(x+lengthdir_x(sr,sa),y-12+lengthdir_y(sr,sa),lengthdir_x(90,sa+90*ev.sweep),lengthdir_y(90,sa+90*ev.sweep),random_range(.12,.22),2,choose(make_color_rgb(255,214,140),c_white,make_color_rgb(255,170,90)),1,0);}
+            light_pulse(x+lengthdir_x(70,attack_direction),y-12+lengthdir_y(70,attack_direction),ev.light_r,make_color_rgb(255,190,83),ev.light_a,.16);
         }
     }
     sword_combo_clock+=1+weapon_haste;
@@ -63,9 +64,5 @@ function master_slash_draw() {
     draw_sprite_ext(spr,frame,x,y,scale,scale,direction,c_white,alpha*.72);
     draw_set_color(c_white);draw_set_alpha(1);
 }
-/// Body contact poses use the same clock as the actual damage events, not an unrelated loop.
-function master_sword_frame(_stage,_clock) {
-    if(_stage==1)return _clock<4 ? 0 : 1;
-    if(_stage==2)return _clock<22 ? 0 : 1;
-    return _clock<42 ? 0 : (_clock<50 ? 1 : 2);
-}
+/// Body contact poses come from the same timeline as the damage events (frame keys of "sword_chain").
+function master_sword_frame(_stage,_clock) {return atl_frame(atl_get("sword_chain"),_stage,_clock);}
