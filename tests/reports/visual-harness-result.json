@@ -3,15 +3,21 @@
   "checks": 75.0,
   "failures": [],
   "metrics": {
+    "swordsmanv3_diff_t0": 43324.0,
+    "swordsmanv3_diff_t1": 51810.0,
+    "swordsmanv3_diff_t2": 51810.0,
+    "swordsmanv3_diff_t3": 52630.0,
+    "magev3_diff_t0": 42648.0,
+    "magev3_diff_t1": 42648.0,
+    "magev3_diff_t2": 42648.0,
+    "magev3_diff_t3": 43146.0,
     "rangerv3_diff_t0": 54410.0,
     "rangerv3_diff_t1": 54410.0,
     "rangerv3_diff_t2": 54410.0,
     "rangerv3_diff_t3": 55056.0,
     "swordsmanv3": {
+      "frames": 384.0,
       "filled": {
-        "hands0": 218.0,
-        "hands1": 218.0,
-        "hands2": 218.0,
         "hands3": 218.0,
         "feet0": 255.0,
         "feet1": 255.0,
@@ -29,16 +35,16 @@
         "chest0": 256.0,
         "chest1": 256.0,
         "chest2": 256.0,
-        "chest3": 256.0
+        "chest3": 256.0,
+        "hands0": 218.0,
+        "hands1": 218.0,
+        "hands2": 218.0
       },
-      "cells": 256.0,
-      "frames": 384.0
+      "cells": 256.0
     },
     "rangerv3": {
+      "frames": 424.0,
       "filled": {
-        "hands0": 236.0,
-        "hands1": 236.0,
-        "hands2": 236.0,
         "hands3": 236.0,
         "feet0": 256.0,
         "feet1": 256.0,
@@ -56,17 +62,16 @@
         "chest0": 256.0,
         "chest1": 256.0,
         "chest2": 256.0,
-        "chest3": 256.0
-      },
-      "cells": 256.0,
-      "frames": 424.0
-    },
-    "swordsmanv3_diff_t0": 43324.0,
-    "magev3": {
-      "filled": {
+        "chest3": 256.0,
         "hands0": 236.0,
         "hands1": 236.0,
-        "hands2": 236.0,
+        "hands2": 236.0
+      },
+      "cells": 256.0
+    },
+    "magev3": {
+      "frames": 432.0,
+      "filled": {
         "hands3": 236.0,
         "feet0": 234.0,
         "feet1": 234.0,
@@ -84,21 +89,16 @@
         "chest0": 256.0,
         "chest1": 256.0,
         "chest2": 256.0,
-        "chest3": 256.0
+        "chest3": 256.0,
+        "hands0": 236.0,
+        "hands1": 236.0,
+        "hands2": 236.0
       },
-      "cells": 256.0,
-      "frames": 432.0
-    },
-    "swordsmanv3_diff_t1": 51810.0,
-    "swordsmanv3_diff_t2": 51810.0,
-    "swordsmanv3_diff_t3": 52630.0,
-    "magev3_diff_t0": 42648.0,
-    "magev3_diff_t1": 42648.0,
-    "magev3_diff_t2": 42648.0,
-    "magev3_diff_t3": 43146.0
+      "cells": 256.0
+    }
   },
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\visual\\20261125-074135",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\visual\\20261125-082532",
   "exceptions": [],
   "captures": [
     "Mage-base.png",

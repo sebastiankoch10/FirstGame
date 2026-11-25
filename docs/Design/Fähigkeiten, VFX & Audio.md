@@ -93,6 +93,17 @@ Rang 2 unter [[Leitbild]]. Darstellungsregeln (Pixelraster, Animation): [[Visuel
 
 Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirken sie wie ein Blitz.
 
+**Ist (25.11.): umgesetzt für Lightning (Zauber 103)** in `scripts/gameplay_polish`.
+- Funktionen: `cast_chain_lightning`, `chain_segment_add`, `chain_visual_draw`, `vfx_band`, `vfx_spell_band`.
+- Der Kern wird alle 45 ms neu gezackt und liegt auf ganzen Welteinheiten.
+- **Bänder:**
+  - Basis: Kern 2 px, 1 Zweig, 3 Funken, kein gestrecktes Burst-Sprite, Licht 110.
+  - Mittel: Glühen, 2 Zweige, 6 Funken, kleiner Burst, Licht 150.
+  - Endgame: doppeltes Glühen, 4 Zweige, 10 Funken, Burst, Licht 185.
+- Die Pixelfunken sind die neue Partikelart 4 in `spell_vfx`.
+- Schaden, Ziele, Sprungweite und Takt sind unverändert.
+- Ohne Zufallszahlen aus dem globalen RNG (deterministischer Hash), seeded Runs bleiben vergleichbar.
+
 ## 3. Größendisziplin
 
 - **Sichtbare Schadensfläche = Hitbox (G6).** Dekoratives Glühen darf den Rand höchstens leicht überschreiten (Richtwert 10 %). Es darf nie wie Schaden aussehen.
@@ -110,7 +121,7 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
 - Zauber haben **keine** visuellen Stufen; die Darstellung wächst nur mit dem Radius.
 - Klassenwaffen haben drei Stufen nach Spielerstufe (1/34/68).
 
-**Soll: drei Bänder**, die zusätzlich durch Talente und Spezialisierungen verfeinert werden:
+**Soll: drei Bänder**, die zusätzlich durch Talente und Spezialisierungen verfeinert werden. Umgesetzt bisher nur für Lightning (Vorlage für die übrigen 17 aktiven Zauber):
 
 | Band | Zauberstufe (Vorschlag) | Charakter | Typische Merkmale |
 |---|---|---|---|
@@ -129,7 +140,9 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
 ## 5. Audio als Teil des Kampfgefühls
 
 **Ist:**
-- Zentraler Mixer `fg_sfx`: höchstens 16 Stimmen, 2 je Cue.
+- Zentraler Mixer `fg_sfx`: höchstens 16 Stimmen, 2 je Cue, Mindestabstand je Cue (70 ms, einige Cues eigene Werte), Vorrang für wichtige Ereignisse.
+  - Seit 25.11. kommt eine deterministische Tonhöhen-Variation ±5 % für wiederholte Cues dazu.
+  - Damit sind Drosselung, Priorität und Variation vorhanden. Es fehlen noch Band-Varianten und das Absenken der Musik.
 - Alle Klänge sind programmatisch synthetisierte Prototypen, eine Hörabnahme gab es nicht.
 - Musik für Menü, Level und Boss, Ambience für Sumpf und Ruinen.
 

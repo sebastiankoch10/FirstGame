@@ -108,6 +108,17 @@ Prüfregel: zuerst Bestehendes erweitern, nur bei echtem Defizit neu bauen. Kein
 - **Sekundärbewegung:** ein Federmodul (Feder-Dämpfer je Ebene bzw. Kettenglied), aus dem Bewegungsvektor gespeist. Ausgabe auf ganze Artpixel gerundet.
 
 ### 4.3 Rig-System für große Bosse (A5)
+
+**Ist (25.11.), erste Stufe für den Drachen:**
+- 2D-Skinning statt Teilen: Ein 24-px-Gitter über dem Original-Frame wird durch Knochen mit weichen Distanzgewichten verformt (FK, Eltern-Kind). Gezeichnet als texturierte Dreiecksstreifen.
+- Vorteile: Keine Zerlegung, keine verdeckten Lücken, keine Nähte, kein neues Artwork.
+- Grenzen:
+  - Knochenlage je Pose gemessen (Flügel links und Schweif überall, Kopf/Hals/Flügel rechts nur Ruhepose).
+  - Große Winkel verzerren Pixel; deshalb kleine Amplituden.
+  - Hitboxen hängen noch nicht an Knochen.
+- Schalter: `#macro DRAGON_RIG_ENABLED`.
+
+Ausbaustufe (Soll):
 - **Daten:**
   - Bones (Elternteil, Länge, Ruhewinkel), Teil-Sprites mit Drehpunkt;
   - Zeichenreihenfolge je Blickrichtung;
@@ -190,7 +201,16 @@ Vorhanden (`boss_choreo`). Künftig als Folge von Zeitachsen (4.1), damit Körpe
 - **Feinraster:**
   - **Variante A:** App-Surface in Ausgabeauflösung. Partikel dürfen auf halbe Welteinheiten (= 1 Bildschirmpixel bei 1080p).
   - **Variante B:** Welt in eine 960×540-Fläche rendern, ganzzahlig bzw. „sharp-bilinear“ hochskalieren, Effekte und Licht in Ausgabeauflösung darüber. Diese Variante ist rastertreuer bei 720p, kostet aber mehr Umbau.
-- **A/B-Prototyp** im Vertical Slice entscheidet zwischen Varianten und Dichte. Die Bildvergleiche legt der Nutzer ab.
+- **A/B-Vergleich (25.11., aus dem Schwertmeister-Quellatlas):**
+  - Heute: 52-px-Figur ×1,65; bei 1080p sind die Pixel 3,3 px breit und 1,65-mal gröber als der Boden.
+  - Mit Dichte 1,0: 86-px-Figur aus derselben Quelle, Pixel so groß wie der Boden, mehr Detail.
+  - **Empfehlung: Dichte 1,0.**
+  - Umsetzung offen, weil der Pipeline-Umbau groß ist:
+    - Leinwand 96 → 160 px, Ursprung (48,88) → (80,147);
+    - `atlas.py`/`render.py`/`build_characters.py` und alle Ausrüstungs-Atlanten neu bauen;
+    - `eqv_piece_draw`-Konstanten und `player_scale` 1,65 → 1,0 anpassen;
+    - Suite `visual` anpassen.
+  - Hitboxen bleiben in Welteinheiten unverändert.
 
 ### R3: Rotation von Pixel-Art (Rig, Waffen)
 Teile großer Rigs werden:

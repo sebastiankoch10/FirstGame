@@ -63,6 +63,8 @@ function fg_sfx(_event) {
     if(handle<0) return -1;
     var gain=important ? 0.8 : 0.55;
     audio_sound_gain(handle,gain*clamp(global.effects_volume,0,1),0);
+    // Repeated cues vary slightly in pitch (+-5 %) so rapid fire does not sound mechanical. Deterministic, no RNG.
+    if(!important)audio_sound_pitch(handle,1+((requests mod 5)-2)*.025);
     array_push(a.voices,{handle:handle,gain:gain,event:_event});
     variable_struct_set(a.last_sfx,_event,current_time);
     var played=variable_struct_exists(a.played,_event) ? variable_struct_get(a.played,_event) : 0;

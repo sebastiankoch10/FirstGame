@@ -210,6 +210,7 @@ Visuell relevante Fähigkeiten haben Phasen; siehe [[Fähigkeiten, VFX & Audio]]
 ## 6. Ist-Stand der Animation (Audit 25.11.)
 
 - **Spielerfiguren:**
+  - **Seit 25.11. prozedurale Lebendigkeit** (`player_motion_life` in `scripts/player_artpack`): Streckung beim Absprung, Abfedern bei der Landung, kurzes Stauchen beim Richtungswechsel, gefedertes Lehnen in Tempo und Beschleunigung (höchstens 2,8°). Die Ausrüstungsebenen drehen exakt mit. Rein visuell, keine Eingabeverzögerung.
   - 8 Richtungen × 8 Ausgangsposen je Klasse;
   - Laufen mit 8 Frames, Rennen als schneller abgespielter Lauf;
   - Sprung und Fall wählen Posen nach Fortschritt; Idle ist ein Frame mit Atembewegung;
@@ -218,5 +219,12 @@ Visuell relevante Fähigkeiten haben Phasen; siehe [[Fähigkeiten, VFX & Audio]]
 - **Skelette (Wald):** 8 Richtungen, 5 Aktionen, Frame-Animation.
 - **Sumpf- und Ruinengegner:** 104er-Sprites, 5 Aktionen in 8 Richtungen, generiert.
 - **Minibosse und ein Teil der Fallback-Gegner:** Streifen aus ArtPack 0.1 (64×64, ohne Richtungen), hochskaliert. **Stilbruch.**
-- **Drache, Hexen, Behemoth:** Einzelsprites je Aktion (2–4 Frames), Richtung durch Spiegeln, Atmung per Skalierung, Flug per Höhenversatz.
+- **Drache:**
+  - Seit 25.11. **Körper-Rig per 2D-Skinning** (`dragon_rig_*` in `scripts/dragon_boss`): ein Gitter über dem Original-Frame, verformt durch Knochen.
+  - In allen Posen: linker Flügel und zweigliedriger Schweif mit Nachlauf.
+  - In der Ruhepose zusätzlich: Hals, Kopf (folgt der Höhe des Spielers) und rechter Flügel.
+  - Bei Angriffen: Flügelschlag beim Flügelsturm, Aufrichten in der Vorbereitung, Rückstoß bei Treffern.
+  - Keine Nähte, Original-PNGs unverändert.
+  - In Feuerposen bleiben Kopf und Hals unbewegt, damit Maul-Anker und Strahl übereinstimmen.
+- **Hexen, Behemoth:** Einzelsprites je Aktion (2–4 Frames), Richtung durch Spiegeln, Atmung per Skalierung, Flug per Höhenversatz.
 - **Zaubereffekte:** 4-Frame-Sprite auf Wirkradius gestreckt, dazu Vektorlinien und -kreise; Partikel als Vektorformen.

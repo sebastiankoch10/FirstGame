@@ -92,7 +92,10 @@ function dragon_draw(_b) {
     var lift=0;if(_b.boss_cast=="slam" && _b.boss_state=="windup")lift=sin(pi*clamp(_b.dragon_state_age/_b.enc_cfg.warning,0,1))*140;
     if(variable_instance_exists(_b,"bc_lift"))lift=max(lift,_b.bc_lift);
     if(level_world_room())master_shadow_draw(_b.x,_b.y,100-lift*.25,25-lift*.08,.3);
-    draw_sprite_ext(a.sprite,a.frame,_b.x,_b.y-lift,sx*_b.dragon_facing,sy,0,_b.hurt_flash_timer>0 ? make_color_rgb(255,208,180) : element_tint(_b),alpha);
+    var col=_b.hurt_flash_timer>0 ? make_color_rgb(255,208,180) : element_tint(_b);
+    // Body rig on the original dragonboss frames (wings, tail, neck/head); extra poses keep the plain sprite.
+    if(DRAGON_RIG_ENABLED && sprite_exists(a.sprite) && string_pos("spr_fg_dragonboss_",sprite_get_name(a.sprite))==1)dragon_rig_draw(_b,a.sprite,a.frame,a.action,_b.x,_b.y-lift,sx*_b.dragon_facing,sy,col,alpha);
+    else draw_sprite_ext(a.sprite,a.frame,_b.x,_b.y-lift,sx*_b.dragon_facing,sy,0,col,alpha);
     _b.dragon_anim=a.action;_b.dragon_frame=a.frame;draw_set_color(c_white);draw_set_alpha(1);
 }
 function dragon_sector_outline(_x,_y,_radius,_start,_span) {
@@ -115,4 +118,123 @@ function dragon_art_anchor(_action,_frame) {
  static data={charge:[[160, -342.18], [170, -312.18]],breath_up:[[190, -362.18]],breath:[[200, -292.18], [225, -252.18]],breath_down:[[210, -230.8]]};
  if(!variable_struct_exists(data,_action))return [150,-300];
  var points=variable_struct_get(data,_action);return points[clamp(_frame,0,array_length(points)-1)];
+}
+
+#macro DRAGON_RIG_ENABLED true
+/// Dragon body rig: 2D skinning of the existing sprite frames (docs/Design/Technische Architektur.md 4.3, Boss-Design G2).
+/// A coarse grid over the frame is bent by a few bones (wings, tail, neck, head) with smooth distance weights,
+/// so the body stays one connected image: no cut parts, no seams, the original PNGs are untouched.
+/// Purely visual: hitboxes, mouth anchors used by attacks and all timings are unchanged. During fire poses the
+/// head/neck bones are not used, so the drawn mouth stays exactly on the annotated anchor (G1).
+/// Bone coordinates are sprite pixels of the 512x512 dragonboss frames (origin 256,480), measured on the frames.
+function dragon_rig_bones(_action) {
+    // Left wing and tail sit at the same place in every dragonboss pose; head, neck and right wing only in "idle".
+    static common=[
+        {id:"wingL",x:205,y:262,ex:60,ey:140,r:120,parent:-1},
+        {id:"tail1",x:205,y:385,ex:135,ey:410,r:48,parent:-1},
+        {id:"tail2",x:135,y:410,ex:55,ey:420,r:62,parent:1}
+    ];
+    static idle=[
+        {id:"wingL",x:205,y:262,ex:60,ey:140,r:120,parent:-1},
+        {id:"tail1",x:205,y:385,ex:135,ey:410,r:48,parent:-1},
+        {id:"tail2",x:135,y:410,ex:55,ey:420,r:62,parent:1},
+        {id:"neck",x:292,y:300,ex:312,ey:222,r:52,parent:-1},
+        {id:"head",x:312,y:222,ex:372,ey:178,r:78,parent:3},
+        {id:"wingR",x:362,y:250,ex:440,ey:135,r:96,parent:-1}
+    ];
+    return _action=="idle" ? idle : common;
+}
+/// Bone angles in degrees (positive = clockwise on screen with y down) from the boss state. Secondary motion:
+/// tail2 and head lag behind tail1 and neck, wings counter-swing.
+function dragon_rig_pose(_b,_action) {
+    var t=_b.dragon_clock,age=_b.dragon_state_age,p={wingL:-3*sin(t*1.25),wingR:3*sin(t*1.25),tail1:2.5*sin(t*1.4),neck:2*sin(t*1.1)};
+    p.tail2=p.tail1+6*sin(t*1.4-.9);
+    var look=0;
+    if(instance_exists(ObjectPlayer)) {
+        var size=_b.visual_height/430;
+        look=clamp((ObjectPlayer.y-(_b.y-300*size))/320,-1,1)*7;      // head tilts toward the player's height
+    }
+    p.head=2.5*sin(t*1.1-.5)+look;
+    if(!_b.dragon_dying) {
+        if(_b.boss_state=="windup") {
+            var k=sin(pi*clamp(age/max(.001,_b.enc_cfg.warning),0,1));  // rises and returns before the attack starts
+            p.wingL-=7*k;p.wingR+=7*k;p.tail1+=3*k;
+        }
+        if(_b.boss_cast=="wind" && _b.boss_state=="active"){var f=sin(age*2*pi*3.5);p.wingL+=-14*f;p.wingR+=14*f;}
+        if(_b.dragon_hit_age<0.18){var j=(1-_b.dragon_hit_age/.18);p.neck-=5*j;p.head-=6*j;p.tail2+=6*j;}
+    }
+    return p;
+}
+/// Weighted grid for one frame (cached): sprite-space vertices plus the uv of each vertex on the texture page.
+function dragon_rig_mesh(_spr,_frame,_action) {
+    if(!variable_global_exists("dragon_rig_cache"))global.dragon_rig_cache={};
+    var key=string(_spr)+":"+string(_frame);
+    if(variable_struct_exists(global.dragon_rig_cache,key))return global.dragon_rig_cache[$ key];
+    var uv=sprite_get_uvs(_spr,_frame),w=sprite_get_width(_spr),h=sprite_get_height(_spr);
+    // The grid covers the opaque part of the frame (crop rectangle reported by sprite_get_uvs, in pixels).
+    var x0=uv[4],y0=uv[5],x1=x0+w*uv[6],y1=y0+h*uv[7],step=24;
+    var cols=max(2,ceil((x1-x0)/step)+1),rows=max(2,ceil((y1-y0)/step)+1),bones=dragon_rig_bones(_action),nb=array_length(bones);
+    var m={cols:cols,rows:rows,px:[],py:[],w:[]};
+    for(var r=0;r<rows;r++)for(var c=0;c<cols;c++) {
+        var px=lerp(x0,x1,c/(cols-1)),py=lerp(y0,y1,r/(rows-1));
+        array_push(m.px,px);array_push(m.py,py);
+        var ws=array_create(nb,0),feet=clamp((458-py)/26,0,1);     // feet stay planted
+        for(var i=0;i<nb;i++) {
+            var bn=bones[i],d=dragon_rig_seg_dist(px,py,bn.x,bn.y,bn.ex,bn.ey);
+            ws[i]=sqr(1-clamp(d/bn.r,0,1))*feet;
+        }
+        array_push(m.w,ws);
+    }
+    global.dragon_rig_cache[$ key]=m;
+    return m;
+}
+function dragon_rig_seg_dist(_x,_y,_ax,_ay,_bx,_by) {
+    var dx=_bx-_ax,dy=_by-_ay,l=dx*dx+dy*dy,t=l>0 ? clamp(((_x-_ax)*dx+(_y-_ay)*dy)/l,0,1) : 0;
+    return point_distance(_x,_y,_ax+dx*t,_ay+dy*t);
+}
+/// Forward kinematics: every bone is a rotation about its pivot, applied after its parent's transform.
+function dragon_rig_matrices(_bones,_pose) {
+    var mats=[];
+    for(var i=0;i<array_length(_bones);i++) {
+        var bn=_bones[i],a=degtorad(variable_struct_exists(_pose,bn.id) ? _pose[$ bn.id] : 0),cs=cos(a),sn=sin(a);
+        // local: p' = R(p - pivot) + pivot  ->  [a b c; d e f]
+        var M=[cs,-sn,bn.x-cs*bn.x+sn*bn.y, sn,cs,bn.y-sn*bn.x-cs*bn.y];
+        if(bn.parent>=0) {
+            var P=mats[bn.parent];
+            M=[P[0]*M[0]+P[1]*M[3],P[0]*M[1]+P[1]*M[4],P[0]*M[2]+P[1]*M[5]+P[2],
+               P[3]*M[0]+P[4]*M[3],P[3]*M[1]+P[4]*M[4],P[3]*M[2]+P[4]*M[5]+P[5]];
+        }
+        array_push(mats,M);
+    }
+    return mats;
+}
+/// Draws the deformed frame. _ox/_oy: world position of the sprite origin; _sx/_sy: scale (facing in _sx).
+function dragon_rig_draw(_b,_spr,_frame,_action,_ox,_oy,_sx,_sy,_col,_alpha) {
+    var m=dragon_rig_mesh(_spr,_frame,_action),bones=dragon_rig_bones(_action),mats=dragon_rig_matrices(bones,dragon_rig_pose(_b,_action));
+    var nb=array_length(bones),n=m.cols*m.rows,wx=array_create(n),wy=array_create(n);
+    var xo=sprite_get_xoffset(_spr),yo=sprite_get_yoffset(_spr);
+    for(var k=0;k<n;k++) {
+        var px=m.px[k],py=m.py[k],ws=m.w[k],sum=0,qx=0,qy=0;
+        for(var i=0;i<nb;i++)if(ws[i]>0){var M=mats[i];sum+=ws[i];qx+=ws[i]*(M[0]*px+M[1]*py+M[2]);qy+=ws[i]*(M[3]*px+M[4]*py+M[5]);}
+        if(sum>1){qx/=sum;qy/=sum;} else {qx+=(1-sum)*px;qy+=(1-sum)*py;}
+        wx[k]=_ox+(qx-xo)*_sx;wy[k]=_oy+(qy-yo)*_sy;
+    }
+    // The frame is first drawn normally into its own surface: page uvs from sprite_get_uvs did not match the
+    // texture used by primitives for these frames (tested 25.11.), a surface gives exact pixel uvs.
+    var sw=sprite_get_width(_spr),sh=sprite_get_height(_spr);
+    if(!variable_global_exists("dragon_rig_surf") || !surface_exists(global.dragon_rig_surf) || surface_get_width(global.dragon_rig_surf)!=sw){
+        if(variable_global_exists("dragon_rig_surf") && surface_exists(global.dragon_rig_surf))surface_free(global.dragon_rig_surf);
+        global.dragon_rig_surf=surface_create(sw,sh);
+    }
+    surface_set_target(global.dragon_rig_surf);draw_clear_alpha(c_black,0);draw_sprite(_spr,_frame,xo,yo);surface_reset_target();
+    var tex=surface_get_texture(global.dragon_rig_surf),tu=texture_get_texel_width(tex),tv=texture_get_texel_height(tex);
+    for(var r=0;r<m.rows-1;r++) {
+        draw_primitive_begin_texture(pr_trianglestrip,tex);
+        for(var c=0;c<m.cols;c++) {
+            var a=r*m.cols+c,b=a+m.cols;
+            draw_vertex_texture_colour(wx[a],wy[a],m.px[a]*tu,m.py[a]*tv,_col,_alpha);
+            draw_vertex_texture_colour(wx[b],wy[b],m.px[b]*tu,m.py[b]*tv,_col,_alpha);
+        }
+        draw_primitive_end();
+    }
 }

@@ -1,6 +1,6 @@
 {
- "date": "2026-11-25 07:42",
- "commit": "c2699210",
+ "date": "2026-11-25 08:26",
+ "commit": "fcc27f13",
  "tier": 3,
  "dirty": true,
  "results": [
@@ -13,14 +13,14 @@
   {
    "suite": "regression",
    "status": "PASS",
-   "seconds": 101,
+   "seconds": 78,
    "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-regression.log",
    "checks": 811.0
   },
   {
    "suite": "feature",
    "status": "PASS",
-   "seconds": 110,
+   "seconds": 112,
    "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-feature.log",
    "checks": 141.0
   },
@@ -34,21 +34,21 @@
   {
    "suite": "level",
    "status": "PASS",
-   "seconds": 208,
+   "seconds": 203,
    "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-level.log",
    "checks": 166.0
   },
   {
    "suite": "classes",
    "status": "PASS",
-   "seconds": 123,
+   "seconds": 114,
    "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-classes.log",
    "checks": 150.0
   },
   {
    "suite": "visual",
    "status": "PASS",
-   "seconds": 81,
+   "seconds": 86,
    "log": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\qa-visual.log",
    "checks": 75.0
   }

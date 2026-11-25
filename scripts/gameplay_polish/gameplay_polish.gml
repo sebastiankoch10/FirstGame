@@ -106,10 +106,12 @@ function cast_chain_lightning(_first,_damage,_targets,_hop_range,_owner) {
         var bx=target.x,by=target.y-12;
         array_push(visited,target.id);
         apply_attack_damage(target,_damage,_owner,SPELL.LIGHTNING);target.shock_time=max(target.shock_time,round(GetSpellData(SPELL.LIGHTNING).shock_time*_owner.status_factor));impact_add(target.x,target.y-12,"arcane");
-        spell_fx_burst(bx,by,72,3,.3);light_pulse(bx,by,185,make_color_rgb(115,193,255),.8,.22);
-        if(array_length(visited)==1)array_push(global.chain_segments,{ax:bx-26,ay:by-220,bx:bx,by:by,life:.28});
-        if(array_length(global.chain_segments)>=96) array_delete(global.chain_segments,0,1);
-        array_push(global.chain_segments,{ax:ax,ay:ay,bx:bx,by:by,life:0.28});
+        // Visual band from the spell level (docs/Design/Fähigkeiten, VFX & Audio.md 4): compact at 1-3, full at 7-9.
+        var band=vfx_spell_band(SPELL.LIGHTNING);
+        if(band==2)spell_fx_burst(bx,by,56,3,.3); else if(band==1)spell_fx_burst(bx,by,34,3,.24);
+        light_pulse(bx,by,band==2 ? 185 : (band==1 ? 150 : 110),make_color_rgb(115,193,255),band==0 ? .6 : .8,.22);
+        if(array_length(visited)==1)chain_segment_add(bx-26,by-(band==0 ? 160 : 220),bx,by,band,true);
+        chain_segment_add(ax,ay,bx,by,band);
         ax=bx;ay=by;
         var next_target=noone,best=_hop_range+0.001,types=[ObjectMonster,ObjectBossMonster];
         for(var t=0;t<2;t++) for(var i=0;i<instance_number(types[t]);i++) {
@@ -128,20 +130,66 @@ function chain_visual_step(_dt) {
         if(global.chain_segments[i].life<=0) array_delete(global.chain_segments,i,1);
     }
 }
-function chain_visual_draw() {
-    for(var i=0;i<array_length(global.chain_segments);i++) {
-        var e=global.chain_segments[i],last_x=e.ax,last_y=e.ay;
-        draw_set_alpha(clamp(e.life/0.28,0,1));
-        for(var part=1;part<=7;part++) {
-            var next_x=lerp(e.ax,e.bx,part/7),next_y=lerp(e.ay,e.by,part/7);
-            if(part<7) {next_x+=((part+i) mod 2==0 ? 3 : -3);next_y+=((part*3+i) mod 2==0 ? 2 : -2);}
-            draw_set_color(make_color_rgb(61,117,234));draw_line_width(last_x,last_y,next_x,next_y,10);
-            draw_set_color(make_color_rgb(105,206,255));draw_line_width(last_x,last_y,next_x,next_y,5);
-            draw_set_color(make_color_rgb(242,254,255));draw_line_width(last_x,last_y,next_x,next_y,2);
-            last_x=next_x;last_y=next_y;
-        }
+/// Lightning (spell 103) as a composite pixel effect in three visual bands (docs/Design/Fähigkeiten, VFX & Audio.md 2/4).
+/// Purely visual: damage, targets, hop range and timing are unchanged.
+/// Band from the spell level: 1-3 basis, 4-6 middle, 7-9 endgame.
+function vfx_band(_level) {return _level>=7 ? 2 : (_level>=4 ? 1 : 0);}
+/// Band of a learned spell; global.vfx_band_override (0-2) forces a band for previews and capture tests.
+function vfx_spell_band(_sid) {return variable_global_exists("vfx_band_override") ? global.vfx_band_override : vfx_band(spell_level(_sid));}
+/// Deterministic hash in [-1,1] (no global RNG: seeded runs stay comparable).
+function vfx_hash(_a,_b) {var v=sin(_a*12.9898+_b*78.233)*43758.5453;return (v-floor(v))*2-1;}
+/// One chain segment: a jagged core regenerated every 45 ms, short branches, impact cross, sparks.
+function chain_segment_add(_ax,_ay,_bx,_by,_band,_strike=false) {
+    if(array_length(global.chain_segments)>=96)array_delete(global.chain_segments,0,1);
+    var life=_band==2 ? .3 : (_band==1 ? .26 : .22);
+    array_push(global.chain_segments,{ax:_ax,ay:_ay,bx:_bx,by:_by,life:life,total:life,band:_band,seed:random_seed_free(),strike:_strike});
+    // Sparks at the struck point (pixel particles, count by band).
+    var n=_band==2 ? 10 : (_band==1 ? 6 : 3);
+    for(var i=0;i<n;i++) {
+        var a=point_direction(_ax,_ay,_bx,_by)+180+vfx_hash(i,_bx)*80,sp=70+abs(vfx_hash(_by,i))*110;
+        spell_particle(_bx,_by,lengthdir_x(sp,a),lengthdir_y(sp,a)-20,.14+abs(vfx_hash(i,_by))*.16,1+(_band>=1 && i mod 3==0),i mod 2==0 ? c_white : make_color_rgb(140,214,255),4,160);
     }
-    draw_set_alpha(1);draw_set_color(c_white);
+}
+/// Seed without touching the global random state.
+function random_seed_free() {if(!variable_global_exists("vfx_seed_counter"))global.vfx_seed_counter=0;global.vfx_seed_counter=(global.vfx_seed_counter+1) mod 100000;return global.vfx_seed_counter*7.31;}
+function chain_bolt_points(_e,_tick,_amp) {
+    var len=point_distance(_e.ax,_e.ay,_e.bx,_e.by),n=clamp(round(len/20),4,14),dir=point_direction(_e.ax,_e.ay,_e.bx,_e.by);
+    var nx=lengthdir_x(1,dir+90),ny=lengthdir_y(1,dir+90),pts=[];
+    for(var p=0;p<=n;p++) {
+        var t=p/n,off=(p==0 || p==n) ? 0 : vfx_hash(_e.seed+p,_tick)*_amp*(1-abs(t-.5)*1.2);
+        array_push(pts,[round(lerp(_e.ax,_e.bx,t)+nx*off),round(lerp(_e.ay,_e.by,t)+ny*off)]);
+    }
+    return pts;
+}
+function chain_polyline(_pts,_w) {for(var p=1;p<array_length(_pts);p++)draw_line_width(_pts[p-1][0],_pts[p-1][1],_pts[p][0],_pts[p][1],_w);}
+function chain_visual_draw() {
+    if(!variable_global_exists("chain_segments"))return;
+    var tick=floor(current_time/45);gpu_set_blendmode(bm_add);
+    for(var i=0;i<array_length(global.chain_segments);i++) {
+        var e=global.chain_segments[i],b=variable_struct_exists(e,"band") ? e.band : 1,tot=variable_struct_exists(e,"total") ? e.total : .28;
+        if(!variable_struct_exists(e,"seed"))e.seed=i*3.7;
+        var k=clamp(e.life/tot,0,1),age=tot-e.life,amp=b==2 ? 9 : (b==1 ? 7 : 5);
+        var pts=chain_bolt_points(e,tick,amp);
+        // Glow: none at basis, soft at middle, wide double glow at endgame.
+        if(b>=1){draw_set_color(make_color_rgb(40,86,200));draw_set_alpha(.30*k);chain_polyline(pts,b==2 ? 9 : 6);}
+        if(b==2){draw_set_color(make_color_rgb(70,140,255));draw_set_alpha(.18*k);chain_polyline(pts,15);}
+        draw_set_color(make_color_rgb(120,206,255));draw_set_alpha(.95*k);chain_polyline(pts,b==2 ? 3 : 2);
+        if(b>=1){draw_set_color(c_white);draw_set_alpha(k);chain_polyline(pts,1);}
+        // Branches: short forks, only in the first 60 % of the life.
+        if(age<tot*.6) {
+            var forks=b==2 ? 4 : (b==1 ? 2 : 1);
+            for(var f=0;f<forks;f++) {
+                var at=1+floor(abs(vfx_hash(e.seed,f+tick))*(array_length(pts)-2)),p0=pts[at];
+                var dir=point_direction(e.ax,e.ay,e.bx,e.by)+(f mod 2==0 ? 1 : -1)*(40+abs(vfx_hash(f,e.seed))*35);
+                var l1=10+abs(vfx_hash(tick,f))*(8+b*6),q1=[round(p0[0]+lengthdir_x(l1,dir)),round(p0[1]+lengthdir_y(l1,dir))];
+                var q2=[round(q1[0]+lengthdir_x(l1*.6,dir+vfx_hash(f,tick)*40)),round(q1[1]+lengthdir_y(l1*.6,dir+vfx_hash(f,tick)*40))];
+                draw_set_color(make_color_rgb(150,220,255));draw_set_alpha(.8*k);chain_polyline([p0,q1,q2],1);
+            }
+        }
+        // Impact cross on the struck point for the first 80 ms.
+        if(age<.08){var s=b==2 ? 7 : (b==1 ? 5 : 3),cx=round(e.bx),cy=round(e.by);draw_set_color(c_white);draw_set_alpha(1);draw_rectangle(cx-s,cy,cx+s,cy,false);draw_rectangle(cx,cy-s,cx,cy+s,false);}
+    }
+    gpu_set_blendmode(bm_normal);draw_set_alpha(1);draw_set_color(c_white);
 }
 function draw_upgrade_orbs(_x,_y,_level,_spacing=9,_color=12642292) {
     var level=clamp(floor(_level),0,9);

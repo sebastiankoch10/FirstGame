@@ -56,13 +56,19 @@ function eqv_pieces_for(_equip) {
 }
 
 /// Draw one cell of a packed piece; offsets are relative to the 96x96 frame origin (48,88).
-function eqv_piece_draw(_pc, _cell, _x, _y, _xs, _ys, _col, _alpha) {
+function eqv_piece_draw(_pc, _cell, _x, _y, _xs, _ys, _col, _alpha, _rot = 0) {
     if (!is_struct(_pc) || _cell < 0 || _cell >= _pc.cells) return false;
     var o = _cell * 8, b = _pc.buf, w = buffer_peek(b, o + 4, buffer_u8);
     if (w == 0) return false;
     var ax = buffer_peek(b, o, buffer_u16), ay = buffer_peek(b, o + 2, buffer_u16);
     var h = buffer_peek(b, o + 5, buffer_u8), ox = buffer_peek(b, o + 6, buffer_u8), oy = buffer_peek(b, o + 7, buffer_u8);
-    draw_sprite_general(_pc.spr, 0, ax, ay, w, h, _x + (ox - 48) * _xs, _y + (oy - 88) * _ys, _xs, _ys, 0, _col, _col, _col, _col, _alpha);
+    var dx = (ox - 48) * _xs, dy = (oy - 88) * _ys;
+    if (_rot != 0) {
+        // Rotate the piece corner about the feet like draw_sprite_ext rotates the base about its origin.
+        var cs = dcos(_rot), sn = dsin(_rot), rx = dx * cs + dy * sn, ry = -dx * sn + dy * cs;
+        dx = rx; dy = ry;
+    }
+    draw_sprite_general(_pc.spr, 0, ax, ay, w, h, _x + dx, _y + dy, _xs, _ys, _rot, _col, _col, _col, _col, _alpha);
     return true;
 }
 
@@ -77,17 +83,17 @@ function eqv_cell(_actor, _spr, _frame) {
 
 /// Base model + all visible equipment. _equip defaults to the run's equipment (no struct = start weapon only).
 /// Returns the number of equipment layers drawn.
-function player_layers_draw(_actor, _spr, _frame, _x, _y, _xs, _ys, _col, _alpha, _equip = undefined) {
-    draw_sprite_ext(_spr, _frame, _x, _y, _xs, _ys, 0, _col, _alpha);
+function player_layers_draw(_actor, _spr, _frame, _x, _y, _xs, _ys, _col, _alpha, _equip = undefined, _rot = 0) {
+    draw_sprite_ext(_spr, _frame, _x, _y, _xs, _ys, _rot, _col, _alpha);
     var cell = eqv_cell(_actor, _spr, _frame);
     if (cell < 0) return 0;
     if (is_undefined(_equip)) _equip = variable_global_exists("equipment") ? global.equipment : {};
     var P = global.eqv[$ _actor].pieces, list = eqv_pieces_for(_equip), drawn = 0, flash = _col != c_white;
     for (var i = 0; i < array_length(list); i++) {
         var key = list[i].key;
-        if (variable_struct_exists(P, key)) drawn += eqv_piece_draw(P[$ key], cell, _x, _y, _xs, _ys, _col, _alpha);
+        if (variable_struct_exists(P, key)) drawn += eqv_piece_draw(P[$ key], cell, _x, _y, _xs, _ys, _col, _alpha, _rot);
         if (list[i].rarity >= 0 && variable_struct_exists(P, key + "_acc"))
-            eqv_piece_draw(P[$ key + "_acc"], cell, _x, _y, _xs, _ys, flash ? _col : eqv_accent_color(list[i].rarity), _alpha);
+            eqv_piece_draw(P[$ key + "_acc"], cell, _x, _y, _xs, _ys, flash ? _col : eqv_accent_color(list[i].rarity), _alpha, _rot);
     }
     return drawn;
 }

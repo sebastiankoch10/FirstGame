@@ -2,7 +2,7 @@
 /// Elements (spell_element_color): 0 neutral, 1 fire, 2 ice, 3 storm, 4 arcane, 5 earth, 6 nature/wisp, 7 holy.
 function spell_vfx_reset() {global.spell_particles=[];global.spell_vfx_clock=0;}
 function spell_vfx_cap() {return 420;}
-/// kind: 0 soft dot, 1 streak (velocity aligned), 2 diamond spark, 3 rising rune square
+/// kind: 0 soft dot (pixel star), 1 streak (velocity aligned), 2 diamond spark, 3 rising rune square, 4 pixel spark
 function spell_particle(_x,_y,_vx,_vy,_life,_size,_color,_kind=0,_grav=0) {
     if(!variable_global_exists("spell_particles"))spell_vfx_reset();
     if(array_length(global.spell_particles)>=spell_vfx_cap())array_delete(global.spell_particles,0,1);
@@ -99,8 +99,13 @@ function spell_vfx_draw() {
         switch(p.kind) {
             case 1:draw_set_alpha(.85*k);draw_line_width(p.x,p.y,p.x-p.vx*.05,p.y-p.vy*.05,max(1,s*.7));break;
             case 2:draw_set_alpha(.9*k);draw_triangle(p.x,p.y-s*1.4,p.x+s,p.y,p.x-s,p.y,false);draw_triangle(p.x,p.y+s*1.4,p.x+s,p.y,p.x-s,p.y,false);break;
-            case 3:draw_set_alpha(.8*k);draw_rectangle(p.x-s*.7,p.y-s*.7,p.x+s*.7,p.y+s*.7,true);break;
-            default:draw_set_alpha(.22*k);draw_circle(p.x,p.y,s*2.2,false);draw_set_alpha(.9*k);draw_circle(p.x,p.y,s*.8,false);break;
+            case 3:draw_set_alpha(.8*k);draw_rectangle(round(p.x-s*.7),round(p.y-s*.7),round(p.x+s*.7),round(p.y+s*.7),true);break;
+            // Pixel spark: a square on the world pixel grid (docs/Design/Fähigkeiten, VFX & Audio.md 2.4).
+            case 4:{draw_set_alpha(k);var px=round(p.x),py=round(p.y),ps=max(1,round(p.size));draw_rectangle(px,py,px+ps-1,py+ps-1,false);}break;
+            // Soft dot as pixel star: core square plus a faint cross glow, both on the grid (was two vector circles).
+            default:{var px=round(p.x),py=round(p.y),c=max(0,round(s*.6)),o=max(1,round(s*1.8));
+                draw_set_alpha(.25*k);draw_rectangle(px-o,py,px+o,py,false);draw_rectangle(px,py-o,px,py+o,false);
+                draw_set_alpha(.9*k);draw_rectangle(px-c,py-c,px+c,py+c,false);}break;
         }
     }
     gpu_set_blendmode(bm_normal);draw_set_alpha(1);draw_set_color(c_white);
