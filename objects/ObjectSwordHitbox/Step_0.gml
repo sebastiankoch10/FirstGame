@@ -1,7 +1,7 @@
 if(global.game_paused) exit;
 if(!instance_exists(owner) || lifetime<=0) {instance_destroy(); exit;}
 lifetime--;
-x=owner.x; y=owner.y-10; depth=-owner.y-1;
+x=owner.x; y=owner.y-10; depth=-owner.y-160; // the swing draws over enemies right in front of the player
 var types=[ObjectMonster,ObjectBossMonster];
 for(var t=0;t<2;t++) for(var j=0;j<instance_number(types[t]);j++) {
     var e=instance_find(types[t],j);

@@ -1,6 +1,6 @@
 /// Scene recorder harness (prefix sc, tag SCENE), driven by tests/tools/record_scene.py.
 /// The recorder prepends the macros SC_SCENE, SC_CLASS, SC_LEVEL_INDEX, SC_SPELL, SC_SPELL_LEVEL, SC_BOSS, SC_MINUTE,
-/// SC_START, SC_FRAMES and SC_EVERY, and replaces delta_time with a fixed 60 Hz step, so every saved frame is one game frame.
+/// SC_ABILITY (forced boss ability, -1 = rotation), SC_START, SC_FRAMES and SC_EVERY, and replaces delta_time with a fixed 60 Hz step, so every saved frame is one game frame.
 /// Scenes: walk, combat, spell, boss, horde. This is a capture tool, not a test: it only reports how many frames it saved.
 
 // Scripted input: global.sc_move is a screen direction in degrees (-1 = stand), global.sc_press one key for one frame.
@@ -33,7 +33,7 @@ function sc_menu_tick() {
     if(!variable_global_exists("sc_stage")){global.sc_stage=0;global.sc_frame=0;global.sc_shot=-1;global.sc_move=-1;global.sc_press=-1;global.sc_saved=0;global.sc_dummies=[];}
     if(global.sc_stage!=0)return;
     global.sc_stage=1;menu_mode="main";
-    if(SC_SCENE=="boss"){boss_test_start(SC_BOSS,15,SC_CLASS,1337,-1,false,1);return;}
+    if(SC_SCENE=="boss"){boss_test_start(SC_BOSS,15,SC_CLASS,1337,SC_ABILITY,false,1);return;}
     menu_activate(0);menu_activate(sc_class_index());menu_activate(SC_LEVEL_INDEX);
 }
 // Enemy from the level's own pool that stays alive and harmless (hit reactions stay visible).

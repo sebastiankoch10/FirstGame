@@ -3,12 +3,12 @@
   "checks": 162.0,
   "failures": [],
   "metrics": {
-    "Sword_particles_peak": 38.0,
-    "Mage_particles_peak": 36.0,
-    "Ranger_particles_peak": 42.0
+    "Ranger_particles_peak": 42.0,
+    "Mage_particles_peak": 35.0,
+    "Sword_particles_peak": 42.0
   },
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\feature\\20261125-184556",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\feature\\20261125-203309",
   "exceptions": [],
   "captures": [
     "character-Mage.png",

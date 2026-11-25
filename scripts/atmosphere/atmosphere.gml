@@ -147,7 +147,10 @@ function boss_body_mask(_radius,_height) {
 }
 function combat_body_distance(_target,_x,_y) {
     if(_target.object_index==ObjectBossMonster) {
-        return point_distance(_x,_y,clamp(_x,_target.bbox_left,_target.bbox_right),clamp(_y,_target.bbox_top,_target.bbox_bottom));
+        var d=point_distance(_x,_y,clamp(_x,_target.bbox_left,_target.bbox_right),clamp(_y,_target.bbox_top,_target.bbox_bottom));
+        // Composite bosses: head and neck are hit shapes of the same unit (dragon_parts).
+        if(variable_instance_exists(_target,"dp") && _target.dp.active)d=min(d,dragon_parts_distance(_target,_x,_y));
+        return d;
     }
     return max(0,point_distance(_x,_y,_target.x,_target.y-10)-_target.contact_radius);
 }

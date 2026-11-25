@@ -175,10 +175,7 @@ function dragon_encounter_draw(_b) {
     if(_b.boss_state=="active") {
         if(age<.08 && !array_contains(["meteor","stomp","void","volley","wind"],kind) && !(kind=="beam" && swept))telegraph_flash(g,col);
         if((kind=="beam" && !swept) || kind=="sweep") {var fire=dragon_attack_geometry(_b);dragon_fire_sprite(fire,_b.dragon_angle,fire.length,48,floor(_b.dragon_clock*12) mod 4,1);}
-        if(kind=="arc") {
-            var fire={x:g.x,y:g.y};for(var n=-6;n<=6;n++)dragon_fire_sprite(fire,g.angle+n*12,360,50,floor(_b.dragon_clock*12) mod 4,.65);
-            dragon_fx_sprite(1,clamp(age/c.active,0,1),g.x+lengthdir_x(180,g.angle),g.y+lengthdir_y(180,g.angle),220,g.angle);
-        }
+        if(kind=="arc")vfx_fire_cone(g.x,g.y,g.angle,g.span,g.radius,age,c.active); // fills exactly the telegraphed sector
         if(kind=="vortex" || kind=="slam") {
             var r=kind=="slam" ? max(45,320*age/c.active) : 100+210*age/c.active;
             if(kind=="vortex")dragon_fx_sprite(6,.25+frac(age)*.35,g.x,g.y,r,_b.dragon_clock*100);

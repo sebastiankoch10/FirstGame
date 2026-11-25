@@ -214,7 +214,7 @@ function menu_labels(_mode) {
         case "levels": return level_names();
         case "settings": return ["Vollbild: Ein/Aus","Gesamtlautstaerke","Musik","Effekte","Ton im Hintergrund abspielen","Effektqualitaet","Zurueck zum Titelbildschirm"];
         case "boss_test":return boss_test_menu_labels();
-        default: return boss_test_enabled() ? ["Neues Spiel","Einstellungen","Beenden","Boss testen"] : ["Neues Spiel","Einstellungen","Beenden"];
+        default: return boss_test_enabled() ? ["Neues Spiel","Einstellungen","Beenden","Testmodus"] : ["Neues Spiel","Einstellungen","Beenden"];
     }
 }
 function menu_geometry(_count,_characters=false) {

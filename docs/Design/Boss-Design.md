@@ -141,6 +141,15 @@ Große Bosse haben Körper, deren Teile gezielt für Angriffe und Bewegungen ein
 - **Noch offen:** Die Trefferzone ist ein angekündigter Sektor; eine Hitbox, die exakt der Schweifspitze folgt, kommt mit Rig-Stufe 2.
 - Funktionen: `dragon_melee_config` und `dragon_melee_try` in `scripts/dragon_encounter`.
 
+**Drache als Verbund aus Teilen (Nutzerentscheidung 25.11. abends, ersetzt das Skinning-Rig für den Drachen):**
+- Wunsch des Nutzers: wie bei Terranigma-Bossen eigenständige Teile mit eigenen Hitboxen, die als eine Einheit zusammenarbeiten. Der Hals zieht sich aus, der Kopf dreht sich zu dir, egal wo du stehst, und wirkt groß und präsent.
+- Umsetzung (`scripts/dragon_parts`):
+  - Körper ohne Kopf und Hals; Hals aus überlappenden Gliedern mit Rückenstacheln entlang einer Kurve; Kopf geschlossen und offen.
+  - Alle Teile vorab in Spielgröße gebacken; Drehungen als 32 vorberechnete Stufen (RotSprite), nie zur Laufzeit gedreht oder skaliert.
+  - Der Kopf blickt zum Spieler. Feueratem, Feuerbogen und Salven entstehen exakt am gezeichneten Maul (G1); beim Biss holt der Kopf zurück und stößt in den angekündigten Sektor.
+  - Kopf und Halsglieder sind Trefferformen des Bosses selbst. Fachlich besser als getrennte Objekte mit geteiltem Leben: Ein Flächenzauber, der Kopf und Rumpf berührt, trifft trotzdem nur einmal; Schaden und Balancing bleiben unverändert.
+- Grenzen: Die Kopfansichten entstehen durch Drehen einer Seitenansicht; extreme Winkel nach unten wirken dadurch flacher. Flügel, Beine und Schweif sind noch Teil der Körperframes. Nächste Schritte: Schweif als Gliederkette mit Hitbox an der Spitze, Flügel als eigene Teile.
+
 **Weg zum Soll:** Rig-System in [[Technische Architektur]], Drachen-Prototyp im [[Roadmap & Vertical Slice]].
 
 **Wichtig:** Das bestehende Drachenmodell bleibt erhalten. Die Zerlegung in Körperteile nutzt die vorhandene Gestaltung, ohne sie zu ersetzen.

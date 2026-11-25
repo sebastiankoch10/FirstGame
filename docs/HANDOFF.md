@@ -5,33 +5,32 @@ agent: Claude
 ---
 # Übergabe (wird nach jeder Aufgabe überschrieben, max. ~40 Zeilen)
 
-**Zuletzt dran:** Claude, 2026-11-25. Nutzer war unterwegs; autonom an testbaren Roadmap-Punkten gearbeitet, Bilder per Handy geschickt.
+**Zuletzt dran:** Claude, 2026-11-25 abends. Nutzer hat Generalfreigabe gegeben (höchster Standard, Push erlaubt), siehe AGENTS.md „Regeln“ und [[DECISIONS]].
 
 ## Stand
 - **Design-Kanon** `docs/Design/`, Vorrang im [[Leitbild]], Reihenfolge in [[Roadmap & Vertical Slice]].
-- **Heute umgesetzt und getestet:**
-  - Kamera 960×540, Klassennamen, dauerhafte Talente (R = zurücksetzen), langsamere Meta-Progression.
-  - Elitegegner, Drachen-Nahangriffe, Waffen-Upgrade-Karten.
-  - Pixeldichte 1:1 für Figuren, Ausrüstung und die 4 prozeduralen Kreaturen; Skelett-Gegner bleiben bis zu neuer Grafik.
-  - Rig (2D-Skinning) für Drache, Zwillingshexen, Sumpfbehemoth; Haar und Umhang der Spielfigur federn nach.
-  - **S1 Attack Timeline** (`scripts/attack_timeline`): Schwertkette und Klassen-Kombos, Werte unverändert.
-  - **Alle 18 Zauber** als zusammengesetzte Pixel-Effekte in 3 Bändern; Grafikoption **Effektqualität** Niedrig/Mittel/Hoch.
-  - QA-Suite `anchors` (Telemetrie-Anker); Pfadtabelle `tests/tools/assets/art_paths.py` (Asset-Migration Schritt 1).
-  - **Helme als Kopf-Komposit** (Kopf und Helm ein Bild, keine Haare mehr um den Helm) und **saubere Figurenkanten** (Nutzerauftrag 25.11. nachmittags).
-- **Tests:** zuletzt QA Stufe 3 PASS (anchors, static, regression 811, feature 162, boss 141, level 166, classes 151, visual 75).
+- **Heute abend umgesetzt:**
+  - **Pixelraster** (R2 Variante B): Welt in 960×540, Ausgabe ganzzahlig bzw. sharp-bilinear (`scripts/render_pipeline`, `ObjectRender`). Siehe [[Rendering & Pixelraster]].
+  - **Drache als Verbund aus Teilen** (`scripts/dragon_parts`): Kopf zielt auf den Spieler, Hals streckt sich, Feuer exakt am Maul, Kopf und Hals sind Trefferformen. Teile in Spielgröße gebacken (`tests/tools/bosses/build_dragon_parts.py`).
+  - **Behemoth** in Spielgröße gebacken (`build_boss_baked.py`).
+  - **Pixel-Effekte:** Feueratem, Feuerkegel, Schwerthiebe, alle Klasseneffekte; Schadenszahlen in Pixelschrift.
+  - **Testmodus** im Hauptmenü mit „Freie Szene“ ([[Boss-Testmodus]]).
+  - **Werkzeuge:** Szenen-Aufnahme `tests/tools/record_scene.py`, Aufräumen `clean_test_artifacts.py`, Pixel-Helfer `tests/tools/art/pixelize.py`.
+- **Git:** `entwicklung` liegt seit heute auf GitHub (`origin`); nach jedem Commit pushen.
+- **Tests:** Render-Umbau QA Stufe 3 PASS (`77f68e40`). Stand danach: siehe letzter Commit.
 
-## Offen (Reihenfolge in [[Roadmap & Vertical Slice]])
-1. **Spieltest durch den Nutzer** (F5): Helme und Kanten (Talente & Ausrüstung), Elitegegner, Waffen-Upgrades, Drachen-Nahangriffe, Haar/Umhang, Zauber in Stufe 1/5/9, Effektqualität im Einstellungsmenü. Werte von Elite und Waffen-Upgrades sind ungetestete Designwerte.
-2. **S2 Animation Controller** (Übergangsposen, Clip-Ereignisse) und für den Vertical Slice Trefferstopp und Körperrotation beim Schwerthieb (Gefühl, braucht Spieltest).
-3. **Drachen-Rig Stufe 2:** Kopf, Hals und rechter Flügel für alle Posen vermessen (über 15 Posen), Hitboxen an Knochen.
-4. **Asset-Migration** Schritte 2–4 (Probelauf, `git mv`, Prüfen). **Minibosse:** Codex-Auftrag liegt beim Nutzer.
-5. Skelett-Gegner und Bosse in Pixeldichte 1:1: braucht neue Grafik.
+## Offen (Reihenfolge)
+1. **Spieltest durch den Nutzer** (F5): Testmodus → Bosskampf Drache; Freie Szene mit Zauber Stufe 9; Vollbild (1080p = exakt 2×).
+2. **Zwillingshexen** werden noch 1,5-fach skaliert; Neubacken aus den Quellen braucht die Frame-Ausrichtung ([[Bugs & Ideen]]).
+3. **Restliche gemalte Effekte** der Bosse (Meteor, Wirbel, Bodeneinschlag, Flügelsturm, Hexen- und Sumpf-Effekte) als Pixel-Komposite.
+4. **Drache Stufe 2:** Schweif als Gliederkette mit Hitbox an der Spitze, Flügel als eigene Teile, Draufsicht-Variante des Kopfes.
+5. S2 Animation Controller, Trefferstopp; Skelett-Gegner in Pixeldichte 1:1 (neue Grafik); Minibosse (Codex-Auftrag beim Nutzer).
 
 ## Bekannte Bugs / Risiken
-- **MCP:** `MCP_TIMEOUT` wirkt nicht (gms-MCP bricht nach 30 s ab); für die Tests egal.
-- **Rig:** `sprite_get_uvs` passt nicht zur Primitive-Textur; das Rig rendert über eine Surface.
-- **Legacy-Werkzeuge:** `audit_boss_v2_assets.py` und mehrere alte Harnesses verweisen auf gelöschte Stände; sie laufen in keiner Suite. Siehe [[Bugs & Ideen]].
+- Vektorlinien (Warnflächen) liegen jetzt im Weltraster: dünne Linien wirken gröber. Beim Spieltest prüfen.
+- Rig der Spielfigur und der Hexen rendert weiter über eine Surface (Verformung resampelt leicht).
+- MCP-Zeitlimit und Legacy-Werkzeuge: siehe [[Bugs & Ideen]].
 
 ## Nächste Schritte
-1. **Nutzer:** F5 und die geschickten Bilder ansehen; künstlerische Abnahme bzw. Rückmeldung.
-2. **Danach:** Punkt 2 oder 3, je nach Rückmeldung.
+1. **Nutzer:** F5, Testmodus ausprobieren, Rückmeldung zu Drache, Effekten und Schärfe.
+2. **Danach:** Punkt 2 und 3, dann Drache Stufe 2.

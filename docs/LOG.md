@@ -4,6 +4,12 @@ updated: 2026-11-25
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-25 · Claude · Pixelraster, Drache als Verbund, Pixel-Effekte, Testmodus (`77f68e40` und folgende)
+- Rendering Variante B (`scripts/render_pipeline`, `ObjectRender`): Welt 960×540, Ausgabe ganzzahlig/sharp-bilinear; Szenen-Aufnahme `record_scene.py`, Aufräumen `clean_test_artifacts.py`; erster Push von `entwicklung`.
+- Drache aus Teilen (`scripts/dragon_parts`, `dragon_parts_data`, `tests/tools/bosses/build_dragon_parts.py`, `spr_drg_*`), Behemoth in Spielgröße (`build_boss_baked.py`, `spr_bv2b_*`), Pixel-Werkzeug `tests/tools/art/pixelize.py`.
+- Pixel-Komposite: Feueratem/Feuerkegel (`dragon_boss`), Schwerthiebe (`master_combat`), Klasseneffekte (`class_weapons`), Pixelschrift für Schadenszahlen (`spr_font_world`).
+- Testmodus mit „Freie Szene“ (`boss_test_mode`, Hauptmenü „Testmodus“). Figuren-Palette geprüft und verworfen (DECISIONS).
+
 ### 2026-11-25 · Claude · Helme als Kopf-Komposit, saubere Figurenkanten (Nutzerauftrag)
 - Kopf und Helm als ein Stück (`helmet_composite` in `build_characters.py`, Daten `hcut`); Laufzeit lässt die oberen Zeilen des Basismodells weg (`eqv_hcut`, `eqv_draw_base_cut`, `rig_draw_frame(..., _cut)`).
 - Kantenreinigung in `render.py`: `clean_fringe` (heller Saum → Konturton, alle Klassen), `clean_matte` (graue Hintergrundreste, nur Schwertmeister). Alle Figuren neu gebaut.

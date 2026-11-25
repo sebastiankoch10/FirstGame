@@ -366,14 +366,17 @@ function bv2_actor_draw(_b,_ice=false) {
     // draw_sprite_ext wraps excess indices, which replayed hurt frame 0 at the end.
     var draw_frame=(a.action=="hurt" || a.action=="death") ? clamp(a.frame,0,sprite_get_number(spr)-1) : a.frame;
     var hover=twin ? (_ice ? _b.v2_other_hover : _b.v2_hover) : 0,scale=twin ? 135/90 : 340/430;
+    // Behemoth frames baked at in-game size (tests/tools/bosses/build_boss_baked.py): drawn 1:1, rig bones scaled.
+    var baked=twin ? -1 : asset_get_index("spr_bv2b_behemoth_"+a.action),bk=1;
+    if(sprite_exists(baked)){bk=scale;spr=baked;scale=1;draw_frame=min(draw_frame,sprite_get_number(spr)-1);}
     var face=_ice ? _b.v2_other_facing : _b.v2_facing,alpha=_b.hp<=0 ? clamp(1-_b.v2_state_age/1.5,0,1) : 1;
     if(variable_instance_exists(_b,"bc_alpha"))alpha*=_b.bc_alpha;
     if(alpha<=.01)return;
     if(level_world_room())master_shadow_draw(actor.x,actor.y,twin ? 30 : 120,twin ? 9 : 28,twin ? .22 : .38);
-    var col=_b.hurt_flash_timer>0 ? make_color_rgb(255,205,196) : c_white,sy=scale*(1+sin(_b.v2_clock*2.1)*.006);
+    var col=_b.hurt_flash_timer>0 ? make_color_rgb(255,205,196) : c_white,sy=bk!=1 ? 1 : scale*(1+sin(_b.v2_clock*2.1)*.006);
     // Body rig (docs/Design/Boss-Design.md G2): flapping hat and cloak for the witches, heavy wobble for the behemoth.
-    if(BV2_RIG_ENABLED && vfx_secondary_motion() && a.action!="death")rig_draw_frame(spr,draw_frame,bv2_rig_bones(twin),bv2_rig_pose(_b,_ice,twin),twin ? "witch" : "behemoth",twin ? -1 : 455,actor.x,actor.y-hover,scale*face,sy,col,alpha,twin ? 8 : 24);
-    else draw_sprite_ext(spr,draw_frame,actor.x,actor.y-hover,scale*face,sy,0,col,alpha);
+    if(BV2_RIG_ENABLED && vfx_secondary_motion() && a.action!="death")rig_draw_frame(spr,draw_frame,bk!=1 ? rig_bones_scaled(bv2_rig_bones(twin),bk,"behemoth_b") : bv2_rig_bones(twin),bv2_rig_pose(_b,_ice,twin),twin ? "witch" : (bk!=1 ? "behemoth_b" : "behemoth"),twin ? -1 : 455*bk,round(actor.x),round(actor.y-hover),scale*face,sy,col,alpha,twin ? 8 : round(24*bk));
+    else draw_sprite_ext(spr,draw_frame,round(actor.x),round(actor.y-hover),scale*face,sy,0,col,alpha);
     if(twin && _b.hp>0){var col=_ice ? make_color_rgb(118,210,255) : make_color_rgb(255,134,70);draw_set_color(col);draw_set_alpha(.55);for(var i=0;i<3;i++){var phase=frac(_b.v2_clock*.6+i*.33);draw_circle(actor.x+sin(_b.v2_clock*2+i)*15,actor.y-hover+10+phase*28,2*(1-phase),false);}}
     draw_set_alpha(1);draw_set_color(c_white);
 }
@@ -410,4 +413,12 @@ function bv2_rig_pose(_b,_ice,_twin) {
     else {p.back=2.5*sin(t*.9-.7);p.head=2*sin(t*.9);p.armL=1.5*sin(t*.9+.4);p.armR=-1.5*sin(t*.9+.4);}
     if(_b.hurt_flash_timer>0){var j=_b.hurt_flash_timer/6;if(_twin){p.hat-=8*j;p.hem+=5*j;}else{p.back-=4*j;p.head-=4*j;}}
     return p;
+}
+/// Rig bones measured on the source frames, scaled for sprites baked at a different size (cached per key).
+function rig_bones_scaled(_bones,_k,_key) {
+    if(!variable_global_exists("rig_bones_scaled_cache"))global.rig_bones_scaled_cache={};
+    if(variable_struct_exists(global.rig_bones_scaled_cache,_key))return global.rig_bones_scaled_cache[$ _key];
+    var out=[];
+    for(var i=0;i<array_length(_bones);i++){var b=_bones[i];array_push(out,{id:b.id,x:b.x*_k,y:b.y*_k,ex:b.ex*_k,ey:b.ey*_k,r:b.r*_k,parent:b.parent});}
+    global.rig_bones_scaled_cache[$ _key]=out;return out;
 }

@@ -89,12 +89,12 @@ function feedback_draw() {
         }
         if(e.kind!="bolt")draw_circle(e.x,e.y,4+f*12,true);
     }
-    draw_set_halign(fa_center);draw_set_valign(fa_bottom);
+    draw_set_halign(fa_center);draw_set_valign(fa_bottom);draw_set_font(world_font());
     for(var i=0;i<array_length(global.damage_labels);i++) {
         var d=global.damage_labels[i];draw_set_alpha(min(1,(0.7-d.age)*4));draw_set_color(d.color);
-        draw_text(d.x,d.y-d.age*27,string_format(d.amount,0,d.amount<1 ? 2 : (d.status ? 1 : 0)));
+        draw_text(round(d.x),round(d.y-d.age*27),string_format(d.amount,0,d.amount<1 ? 2 : (d.status ? 1 : 0)));
     }
-    draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_alpha(1);draw_set_color(c_white);
+    draw_set_font(-1);draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_alpha(1);draw_set_color(c_white);
 }
 function projectile_setup() {
     hit_targets=[];hit_done=false;damage_radius=20;visual_width=104;visual_height=104;
@@ -129,4 +129,10 @@ function pickup_hint_draw() {
         if(instance_exists(ObjectPlayer) && point_distance(x,y,ObjectPlayer.x,ObjectPlayer.y)<100) {draw_set_halign(fa_center);draw_text(x,y-42,"MAGNET");draw_set_halign(fa_left);}
     }
     draw_set_color(c_white);
+}
+/// Pixel font for numbers in the world (tests/tools/art/build_pixel_font.py): 5x7 glyphs, white fill (tinted by the
+/// draw colour) and a dark outline, so labels stay crisp on the world grid (render_pipeline).
+function world_font() {
+    if(!variable_global_exists("world_font_id") || !font_exists(global.world_font_id))global.world_font_id=font_add_sprite_ext(spr_font_world,"0123456789.,+-%",true,1);
+    return global.world_font_id;
 }

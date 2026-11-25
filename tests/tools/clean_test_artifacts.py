@@ -5,7 +5,7 @@
   python tests/tools/clean_test_artifacts.py --probes   # also remove one-off probe folders right away
 
 Rules:
-- %LOCALAPPDATA%/FirstGame-Tests/<folder>/<stamp>: the newest 2 runs per folder stay (native-mc-*: 1). One-off probe
+- %LOCALAPPDATA%/FirstGame-Tests/<folder>/<stamp>: the newest 2 runs per folder stay (native-mc-*: 1, scene: 6). One-off probe
   folders (not a known suite) go when their newest run is older than 3 days, or at once with --probes. The QA cache
   (qa-cache.json) and the character segmentation cache (charcache) stay.
 - Capture PNGs (*capture-*.png) left in the build save folders %LOCALAPPDATA%/FirstGame<Name>/ are deleted.
@@ -28,6 +28,7 @@ SUITE_DIRS = {'feature', 'boss', 'visual', 'level-smoke', 'classes', 'scene', 'c
 KEEP_DIRS = {'charcache'}
 STAMP = re.compile(r'^\d{8}-\d{6}$')
 KEEP_RUNS, KEEP_MC, KEEP_LOGS, PROBE_DAYS = 2, 1, 3, 3
+KEEP_SPECIAL = {'scene': 6}  # recordings come in series; keep the newest six
 
 
 def size(p: Path) -> int:
@@ -53,7 +54,7 @@ def clean(dry: bool = False, probes: bool = False, quiet: bool = False) -> int:
             newest_age = (time.time() - runs[0].stat().st_mtime) / 86400 if runs else 999
             if probe and (probes or newest_age > PROBE_DAYS):
                 remove(d, dry, gone); continue
-            keep = KEEP_MC if d.name.startswith('native-mc') else KEEP_RUNS
+            keep = KEEP_MC if d.name.startswith('native-mc') else KEEP_SPECIAL.get(d.name, KEEP_RUNS)
             for r in runs[keep:]:
                 remove(r, dry, gone)
             if not dry and not any(d.iterdir()):

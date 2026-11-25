@@ -8,7 +8,7 @@ updated: 2026-11-25
 Hauptmenü, Charakter- und Levelauswahl, Pause, Level-up-Wahl, HUD, Charakterbildschirm.
 
 ## Wichtige Dateien
-- `objects/ObjectMainMenu`: Ablauf Neues Spiel → Charakter → Level, dazu Einstellungen und Boss testen. Einstellungen seit 25.11. mit „Effektqualitaet“ (Index 5, „Zurueck“ jetzt 6 bzw. im Pausenmenü 6/7).
+- `objects/ObjectMainMenu`: Ablauf Neues Spiel → Charakter → Level, dazu Einstellungen und „Testmodus“ (bis 25.11. „Boss testen“, siehe [[Boss-Testmodus]]). Einstellungen seit 25.11. mit „Effektqualitaet“ (Index 5, „Zurueck“ jetzt 6 bzw. im Pausenmenü 6/7).
 - `scripts/gameplay`:
   - Hauptmenü: `menu_labels`, `menu_activate`
   - Pausenmenü: `round_menu_labels`, `round_menu_activate`, `round_menu_draw`

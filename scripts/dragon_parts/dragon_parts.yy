@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"dragon_parts",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"dragon_parts",
+  "parent":{
+    "name":"Bosse",
+    "path":"folders/Skripte/Bosse.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

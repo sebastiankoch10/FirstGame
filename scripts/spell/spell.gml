@@ -124,7 +124,7 @@ function spell_projectile_step() {
     repeat(steps) {
         x+=lengthdir_x(projectile_speed/steps,direction);y+=lengthdir_y(projectile_speed/steps,direction);
         var nose=piercing ? 10 : visual_width*0.25,probe_x=x+lengthdir_x(nose,direction),probe_y=y+lengthdir_y(nose,direction);
-        ds_list_clear(hits);collision_circle_list(probe_x,probe_y,damage_radius,ObjectMonster,true,true,hits,false);collision_circle_list(probe_x,probe_y,damage_radius,ObjectBossMonster,true,true,hits,false);
+        ds_list_clear(hits);collision_circle_list(probe_x,probe_y,damage_radius,ObjectMonster,true,true,hits,false);collision_circle_list(probe_x,probe_y,damage_radius,ObjectBossMonster,true,true,hits,false);boss_parts_collide(probe_x,probe_y,damage_radius,hits);
         for(var i=0;i<ds_list_size(hits);i++) {
             var target=hits[| i];
             if(target.hp<=0 || array_contains(hit_targets,target.id))continue;
@@ -176,7 +176,7 @@ function spell_orbit_step(_pl) {
     var oy=_pl.y+lengthdir_y(d.shield_radius,_pl.orbit_angle);
     var hits=ds_list_create();
     collision_circle_list(ox,oy,10,ObjectMonster,false,true,hits,false);
-    collision_circle_list(ox,oy,10,ObjectBossMonster,false,true,hits,false);
+    collision_circle_list(ox,oy,10,ObjectBossMonster,false,true,hits,false);boss_parts_collide(ox,oy,10,hits);
     for(var i=0;i<ds_list_size(hits);i++) {
         var target=hits[| i];
         if (!variable_instance_exists(target,"orbit_last_hit")) target.orbit_last_hit=-d.shield_hit_interval;

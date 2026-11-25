@@ -102,14 +102,13 @@ function class_effects_draw() {
     var tier=weapon_visual_tier();
     for(var i=0;i<array_length(global.class_effects);i++) {
         var f=global.class_effects[i],p=f.age/f.duration;
-        if(string_pos("burst",f.kind)==1) {if(f.kind=="burst3")draw_sprite_ext(spr_mage_star_implosion,min(3,2+floor(p*2)),f.x,f.y,f.radius*2/256,f.radius*2/256,0,c_white,1);else class_fx_sprite(real(string_delete(f.kind,1,5)),p,f.x,f.y,f.radius);continue;}
+        if(string_pos("burst",f.kind)==1){vfx_class_burst(f.x,f.y,f.radius,p,real(string_delete(f.kind,1,5)),tier);continue;}
         if(f.kind=="mage_arc") {
-            class_fx_sprite(1,p,f.x+lengthdir_x(f.radius*.45,f.angle),f.y+lengthdir_y(f.radius*.45,f.angle),f.radius*.65,f.angle);
+            vfx_arc_sweep(f.x,f.y,f.angle,60,f.radius,p,4,tier);
             if(f.age>=.09 && f.age<.25){var arc=telegraph_make("sector",f.x,f.y,f.radius,1,f.angle,120);arc.elapsed=1;telegraph_draw(arc,make_color_rgb(147,117,255));}
         }
         if(f.kind=="mage_circle") {
-            class_fx_sprite(2,p,f.x,f.y,f.radius);draw_set_alpha(.5);draw_set_color(make_color_rgb(155,115,255));draw_circle(f.x,f.y,f.radius,true);
-            if(tier>1)for(var rune=0;rune<6+tier*2;rune++){var a=rune*360/(6+tier*2)+f.age*50;draw_sprite_ext(icon_v2_105,0,f.x+lengthdir_x(f.radius*.8,a),f.y+lengthdir_y(f.radius*.8,a),.13,.13,a,c_white,.6);}
+            vfx_magic_circle(f.x,f.y,f.radius,p,f.age,tier);
         }
         if(f.kind=="sword_wave") {
             var p2=clamp(f.age/f.duration,0,1);gpu_set_blendmode(bm_add);
@@ -118,15 +117,15 @@ function class_effects_draw() {
         }
         if(f.kind=="mage_star" || f.kind=="mage_star_nova") {
             var flight=clamp(f.age/.85,0,1),xx=lerp(f.sx,f.x,flight),ground_y=lerp(f.sy,f.y,flight),height=sin(pi*flight)*180;
-            if(f.age<1){var shrink=f.age>.85 ? 1-(f.age-.85)/.15*.7 : 1,orb_scale=(45+tier*7)*shrink*2/256;draw_sprite_ext(spr_mage_star_orb,floor(f.age*10) mod 4,xx,ground_y-height,orb_scale,orb_scale,0,c_white,1);draw_set_color(make_color_rgb(164,116,255));draw_set_alpha(.6);for(var trail=1;trail<=5;trail++){var prev=max(0,flight-trail*.018),tx=lerp(f.sx,f.x,prev),ty=lerp(f.sy,f.y,prev)-sin(pi*prev)*180;draw_circle(tx,ty,4-trail*.5,false);}}
+            if(f.age<1){var shrink=f.age>.85 ? 1-(f.age-.85)/.15*.7 : 1;vfx_star_orb(xx,ground_y-height,(20+tier*4)*shrink,f.age);var pal=vfx_palette(4);for(var trail=1;trail<=5;trail++){var prev=max(0,flight-trail*.018),tx=lerp(f.sx,f.x,prev),ty=lerp(f.sy,f.y,prev)-sin(pi*prev)*180;vfx_px(tx-1,ty-1,trail<3 ? 3 : 2,trail<3 ? pal[1] : pal[0],1-trail*.15);}}
             var mark=telegraph_make("circle",f.x,f.y,f.radius,.85);mark.elapsed=f.age;telegraph_draw(mark,make_color_rgb(156,118,255));
         }
         if(f.kind=="ranger_rain") {
             var mark=telegraph_make("circle",f.x,f.y,f.radius,.4);mark.elapsed=f.age;telegraph_draw(mark,make_color_rgb(150,232,113));
             if(f.age>=.25)for(var n=0;n<20+tier*4;n++) {
                 var a=n*137.5,r=f.radius*sqrt((n+.5)/(20+tier*4)),xx=f.x+lengthdir_x(r,a),yy=f.y+lengthdir_y(r,a),fall=frac(f.age*3+n*.137);
-                if(f.age>.4 && f.age<1.17)class_fx_sprite(4,.2,xx-40*(1-fall),yy-170*(1-fall),19,285);
-                if(fall>.8)class_fx_sprite(5,fall,xx,yy,16);
+                if(f.age>.4 && f.age<1.17)vfx_arrow_fall(xx-40*(1-fall),yy-170*(1-fall),285);
+                if(fall>.8)vfx_arrow_hit(xx,yy,(fall-.8)/.2,n);
             }
         }
     }
@@ -174,4 +173,70 @@ function weapon_upgrade_text(_level) {
     var names={sword_dmg_pct:"Schwertschaden",mage_dmg_pct:"Stabschaden",ranger_dmg_pct:"Pfeilschaden",sword_reach_pct:"Hiebreichweite",haste:"Angriffstempo",mage_star:"Sternenorb Radius und Schaden",range_pct:"Waffenreichweite",ranger_volley:"Pfeile je Salve"};
     for(var i=0;i<array_length(k);i++){var v=e[$ k[i]];s+=(s=="" ? "" : "\n")+"+"+(k[i]=="ranger_volley" ? string(v) : string(round(v*100))+"%")+" "+(variable_struct_exists(names,k[i]) ? names[$ k[i]] : k[i]);}
     return s;
+}
+// ---------------- Class weapon effects as pixel composites (render_pipeline: everything on the world grid) ----------------
+/// Arkanistin sweep: a violet crescent over the hit sector (same crescent as the sword swing, arcane palette).
+function vfx_arc_sweep(_x,_y,_dir,_half,_r,_p,_element,_tier) {
+    var pal=vfx_palette(_element),head=clamp(_p*1.6,0,1),tail=clamp(_p*1.6-.7,0,1),fade=_p<.6 ? 1 : (_p<.8 ? .7 : .4);
+    if(head-tail<.02)return;
+    var a0=_dir-_half,a1=_dir+_half,cy=_y-6,ro=_r*.55,band=ro*(.4+.04*_tier),n=max(10,ceil(_half*2*(head-tail)*ro/120)),k=.7+.1*_tier;
+    if(vfx_quality()>0){gpu_set_blendmode(bm_add);vfx_crescent(_x,cy,a0,a1,tail,head,ro,band,n,3,pal[1],.25*k*fade);gpu_set_blendmode(bm_normal);}
+    vfx_crescent(_x,cy,a0,a1,tail,head,ro,band,n,0,pal[0],.9*fade);
+    vfx_crescent(_x,cy,a0,a1,tail,head,ro,band,n,1,pal[1],fade);
+    vfx_crescent(_x,cy,a0,a1,tail,head,ro,band,n,2,pal[2],fade);
+    var tick=floor(_p*30),sp=4+_tier*2;
+    for(var s=0;s<sp;s++){var q=lerp(tail,head,(s+.5)/sp),a=lerp(a0,a1,q),rr=ro+3+5*abs(vfx_hash(s,tick));vfx_px(_x+lengthdir_x(rr,a),cy+lengthdir_y(rr,a),s mod 2 ? 1 : 2,pal[2],fade);}
+    draw_set_alpha(1);draw_set_color(c_white);
+}
+/// Arkanistin circle: two pixel rings turning in opposite directions, runes (pixel diamonds) on the outer ring,
+/// a soft fill; it charges up and flashes at the end of its life.
+function vfx_magic_circle(_x,_y,_r,_p,_age,_tier) {
+    var pal=vfx_palette(4),k=_p<.85 ? 1 : 1-(_p-.85)/.15,grow=min(1,_p*4);
+    if(vfx_quality()>0)vfx_glow_disc(_x,_y,_r*grow,pal[1],.10*k);
+    vfx_pixel_ring(_x,_y,_r*grow,pal[1],.9*k,_age*40,0,2);
+    vfx_pixel_ring(_x,_y,_r*grow*.72,pal[0],.8*k,-_age*70,3,1);
+    var runes=6+_tier*2;
+    for(var i=0;i<runes;i++) {
+        var a=i*360/runes+_age*50,rx=round(_x+lengthdir_x(_r*grow*.86,a)),ry=round(_y+lengthdir_y(_r*grow*.86,a));
+        vfx_px(rx-1,ry-2,2,pal[2],k);vfx_px(rx-2,ry-1,1,pal[1],k);vfx_px(rx+1,ry-1,1,pal[1],k);vfx_px(rx-1,ry,2,pal[1],k);
+    }
+    if(_p>.8){var fl=(_p-.8)/.2;vfx_pixel_ring(_x,_y,_r*(.3+.7*fl),pal[2],1-fl,0,0,2);}
+    draw_set_alpha(1);draw_set_color(c_white);
+}
+/// Falling star of the Arkanistin: layered pixel orb with a turning sparkle cross.
+function vfx_star_orb(_x,_y,_r,_age) {
+    var pal=vfx_palette(4),x0=round(_x),y0=round(_y),r=max(2,round(_r));
+    if(vfx_quality()>0)vfx_glow_disc(x0,y0,r*1.6,pal[1],.18);
+    draw_set_alpha(1);draw_set_color(pal[0]);draw_circle(x0,y0,r,false);
+    draw_set_color(pal[1]);draw_circle(x0-1,y0-1,max(1,r-2),false);
+    draw_set_color(pal[2]);draw_circle(x0-round(r*.3),y0-round(r*.3),max(1,round(r*.35)),false);
+    var s=r+4+2*sin(_age*20);
+    vfx_pixel_line(x0-s,y0,x0+s,y0,1,pal[2],.9);vfx_pixel_line(x0,y0-s,x0,y0+s,1,pal[2],.9);
+    draw_set_alpha(1);draw_set_color(c_white);
+}
+/// Class detonation (row 2: circle, row 3: star implosion): rings collapse, then a shock ring and sparks run out.
+function vfx_class_burst(_x,_y,_r,_p,_row,_tier) {
+    var pal=vfx_palette(4),k=1-_p,tick=floor(_p*30);
+    if(_row==3 && _p<.35){var q=_p/.35;vfx_pixel_ring(_x,_y,_r*(1-q),pal[1],1,q*90,0,2);vfx_pixel_ring(_x,_y,_r*(1-q)*.6,pal[2],1,-q*90,2,1);if(vfx_quality()>0)vfx_glow_disc(_x,_y,_r*.4*q,pal[2],.25);return;}
+    var q=_row==3 ? (_p-.35)/.65 : _p;
+    if(vfx_quality()>0)vfx_glow_disc(_x,_y,_r*(.3+.7*q),pal[1],.2*(1-q));
+    vfx_pixel_ring(_x,_y,_r*(.3+.7*q),pal[2],1-q,0,0,2);
+    vfx_pixel_ring(_x,_y,_r*(.2+.6*q),pal[1],.8*(1-q),q*40,4,1);
+    var sp=8+_tier*3;
+    for(var i=0;i<sp;i++){var a=i*360/sp+11*vfx_hash(i,_row),d=_r*(.25+.85*q)*(.8+.2*abs(vfx_hash(i,tick)));vfx_px(_x+lengthdir_x(d,a),_y+lengthdir_y(d,a),i mod 3 ? 1 : 2,i mod 2 ? pal[2] : pal[1],1-q);}
+    draw_set_alpha(1);draw_set_color(c_white);
+}
+/// Waldlaeufer arrow rain: one falling arrow as pixels (shaft, head, fletching) along its flight direction.
+function vfx_arrow_fall(_x,_y,_dir) {
+    var tx=_x-lengthdir_x(16,_dir),ty=_y-lengthdir_y(16,_dir);
+    vfx_pixel_line(tx,ty,_x,_y,1,make_color_rgb(214,178,120),1);
+    vfx_px(_x+lengthdir_x(1,_dir)-1,_y+lengthdir_y(1,_dir)-1,2,make_color_rgb(236,240,232),1);
+    vfx_px(tx-1,ty-1,2,make_color_rgb(116,239,153),1);
+    if(vfx_quality()>0)vfx_pixel_line(tx-lengthdir_x(10,_dir),ty-lengthdir_y(10,_dir),tx,ty,1,make_color_rgb(228,255,234),.25);
+}
+/// Arrow impact: a short cross and dust pixels.
+function vfx_arrow_hit(_x,_y,_q,_seed) {
+    var pal=vfx_palette(6),k=1-_q,s=2+round(_q*4);
+    vfx_pixel_line(_x-s,_y,_x+s,_y,1,pal[2],k);vfx_pixel_line(_x,_y-s,_x,_y+s,1,pal[1],k);
+    for(var i=0;i<3;i++){var a=i*120+40*vfx_hash(_seed,i);vfx_px(_x+lengthdir_x(3+_q*8,a),_y+lengthdir_y(2+_q*5,a),1,make_color_rgb(150,128,96),k);}
 }

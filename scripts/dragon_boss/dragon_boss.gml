@@ -15,6 +15,7 @@ function dragon_init(_b) {
     _b.dragon_last_hp=_b.hp;_b.dragon_anim="idle";_b.dragon_frame=0;
     _b.enc_zones=[];_b.enc_hits=0;_b.enc_waves=0;
     _b.boss_timer=2;_b.boss_state="intro";
+    dragon_parts_init(_b);
 }
 function dragon_state(_b,_state,_duration) {_b.boss_state=_state;_b.boss_timer=_duration;_b.dragon_state_age=0;}
 function dragon_fire_pose(_b) {
@@ -23,6 +24,8 @@ function dragon_fire_pose(_b) {
     return {action:vertical>0.38 ? "breath_up" : (vertical< -0.38 ? "breath_down" : "breath"),frame:vertical< -0.15 && vertical>=-0.38 ? 1 : 0};
 }
 function dragon_mouth(_b,_fire_pose=false) {
+    // Composite dragon: fire attacks use the fixed fire reach, otherwise the mouth of the drawn head.
+    if(DRAGON_PARTS_ENABLED && variable_instance_exists(_b,"dp"))return _fire_pose ? dragon_parts_fire_mouth(_b,_b.dragon_angle) : {x:_b.dp.mouth_x,y:_b.dp.mouth_y};
     var a=_fire_pose ? dragon_fire_pose(_b) : dragon_animation(_b),anchor=dragon_art_anchor(a.action,a.frame);
     var size=_b.visual_height/430,breath=sin(_b.dragon_clock*3.4);
     return {x:_b.x+_b.dragon_facing*anchor[0]*size*(1+breath*0.008),y:_b.y+anchor[1]*size*(1+breath*0.012)};
@@ -48,7 +51,7 @@ function dragon_player_in_fire(_b,_pl) {
     }
     return boss_point_segment_distance(_pl.x,_pl.y-10,g.x,g.y,g.ex,g.ey)<=g.width*0.5+_pl.contact_radius;
 }
-function dragon_step(_b,_dt) {dragon_encounter_step(_b,_dt);}
+function dragon_step(_b,_dt) {dragon_encounter_step(_b,_dt);dragon_parts_step(_b,_dt);}
 function dragon_die(_b) {
     if(_b.dragon_dying) return;
     _b.dragon_dying=true;_b.dragon_magma=[];_b.damage=0;
@@ -95,6 +98,17 @@ function dragon_draw(_b) {
     if(variable_instance_exists(_b,"bc_lift"))lift=max(lift,_b.bc_lift);
     if(level_world_room())master_shadow_draw(_b.x,_b.y,100-lift*.25,25-lift*.08,.3);
     var col=_b.hurt_flash_timer>0 ? make_color_rgb(255,208,180) : element_tint(_b);
+    // Composite dragon (dragon_parts) and whole poses baked at in-game size: drawn 1:1, never scaled or bent.
+    if(DRAGON_PARTS_ENABLED && variable_instance_exists(_b,"dp")) {
+        if(_b.dp.active && !_b.dragon_dying && dragon_parts_composite(a.action))dragon_parts_draw(_b,lift,col,alpha);
+        else {
+            var full=asset_get_index("spr_drg_full_"+a.action);
+            if(sprite_exists(full))draw_sprite_ext(full,min(a.frame,sprite_get_number(full)-1),round(_b.x),round(_b.y-lift),_b.dragon_facing,1,0,col,alpha);
+            else draw_sprite_ext(spr_drg_body_idle,0,round(_b.x),round(_b.y-lift),_b.dragon_facing,1,0,col,alpha);
+        }
+        _b.dragon_anim=a.action;_b.dragon_frame=a.frame;draw_set_color(c_white);draw_set_alpha(1);
+        return;
+    }
     // Body rig on the original dragonboss frames (wings, tail, neck/head); extra poses keep the plain sprite.
     if(DRAGON_RIG_ENABLED && vfx_secondary_motion() && sprite_exists(a.sprite) && string_pos("spr_fg_dragonboss_",sprite_get_name(a.sprite))==1)dragon_rig_draw(_b,a.sprite,a.frame,a.action,_b.x,_b.y-lift,sx*_b.dragon_facing,sy,col,alpha);
     else draw_sprite_ext(a.sprite,a.frame,_b.x,_b.y-lift,sx*_b.dragon_facing,sy,0,col,alpha);
@@ -111,8 +125,64 @@ function dragon_warning_edges(_g) {
     return {ax:_g.x+nx,ay:_g.y+ny,bx:_g.ex+nx,by:_g.ey+ny,cx:_g.x-nx,cy:_g.y-ny,dx:_g.ex-nx,dy:_g.ey-ny};
 }
 function dragon_fire_sprite(_g,_angle,_length,_width,_frame,_alpha) {
-    var cx=_g.x+lengthdir_x(_length*0.5,_angle),cy=_g.y+lengthdir_y(_length*0.5,_angle);
-    draw_sprite_ext(spr_fg_dragonboss_flame,_frame,cx,cy,_length/128,_width/64,_angle,c_white,_alpha);
+    // Pixel flame tongue on the world grid (render_pipeline) instead of the stretched painted flame sprite.
+    vfx_fire_tongue(_g.x,_g.y,_angle,_length,_width,current_time/1000,_alpha);
+}
+/// Fire tongue: dark-red edge, orange body, yellow core and a white-hot centre line as flat bands whose width
+/// breathes along the length (rolling flame), edge licks and embers from a deterministic hash, a muzzle burst at the
+/// origin. Width follows the hitbox width (_w), so what burns is what you see.
+function vfx_fire_tongue(_x,_y,_ang,_len,_w,_t,_alpha) {
+    if(_alpha<=0 || _len<4)return;
+    var n=max(6,ceil(_len/6)),tick=floor(_t*24),pal=vfx_palette(1),core=make_color_rgb(255,232,140),hot=make_color_rgb(255,250,226);
+    var bands=[[1,pal[0],.95],[.78,pal[1],1],[.42,core,1],[.14,hot,1]];
+    if(vfx_quality()>0){gpu_set_blendmode(bm_add);vfx_fire_strip(_x,_y,_ang,_len,_w*1.45,n,_t,tick,pal[1],.16*_alpha,0);gpu_set_blendmode(bm_normal);}
+    for(var b=0;b<4;b++)vfx_fire_strip(_x,_y,_ang,_len,max(b==3 ? 2 : 3,_w*bands[b][0]),n,_t,tick,bands[b][1],bands[b][2]*_alpha,b);
+    // embers drifting off the edges
+    var cnt=vfx_quality()==0 ? 6 : 14;
+    for(var e=0;e<cnt;e++) {
+        var q=frac(e*.618+_t*.9),d=_len*q,side=(e mod 2) ? 1 : -1,off=_w*.5*(.7+.6*abs(vfx_hash(e,tick div 3)))+q*10;
+        vfx_px(_x+lengthdir_x(d,_ang)+lengthdir_x(off*side,_ang+90),_y+lengthdir_y(d,_ang)+lengthdir_y(off*side,_ang+90),e mod 3==0 ? 2 : 1,e mod 2 ? core : pal[1],_alpha*(1-q));
+    }
+    // muzzle burst
+    var r=_w*.32+2*sin(_t*30);
+    draw_set_alpha(_alpha);draw_set_color(core);draw_circle(round(_x),round(_y),max(2,r),false);
+    draw_set_color(hot);draw_circle(round(_x),round(_y),max(1,r*.5),false);
+    draw_set_alpha(1);draw_set_color(c_white);
+}
+/// Fire cone (dragon "arc"): a glowing translucent sector shows the burning area, over it nine fire tongues of the
+/// same make as the breath (yellow core, orange body, dark-red edge) fan out with their own flickering lengths.
+/// Exactly the telegraphed sector (_span = full angle).
+function vfx_fire_cone(_x,_y,_ang,_span,_r,_age,_dur) {
+    var p=clamp(_age/max(.01,_dur),0,1),front=_r*min(1,.3+p*2.6),fade=p<.7 ? 1 : 1-(p-.7)/.3,pal=vfx_palette(1);
+    if(fade<=0 || front<4)return;
+    var a0=_ang-_span*.5,n=max(8,ceil(_span*front/150)),tt=_age*12,tk=floor(tt),fr=tt-tk;
+    gpu_set_blendmode(bm_add);vfx_cone_strip(_x,_y,a0,a0+_span,0,front,n,pal[1],.16*fade);vfx_cone_strip(_x,_y,a0,a0+_span,0,front*.45,n,pal[2],.12*fade);gpu_set_blendmode(bm_normal);
+    vfx_cone_strip(_x,_y,a0,a0+_span,max(0,front-2),front,n,pal[1],.5*fade);
+    var tongues=max(5,round(_span/17));
+    for(var i=0;i<tongues;i++) {
+        var h=lerp(abs(vfx_hash(i,tk)),abs(vfx_hash(i,tk+1)),fr),a=a0+_span*(i+.5)/tongues+4*vfx_hash(i+7,tk);
+        vfx_fire_tongue(_x,_y,a,front*(.7+.3*h),min(30,front*.16),_age+i*.37,.9*fade);
+    }
+    draw_set_alpha(1);draw_set_color(c_white);
+}
+function vfx_cone_strip(_x,_y,_a0,_a1,_ri,_ro,_n,_col,_alpha) {
+    if(_alpha<=0 || _ro<=_ri)return;
+    draw_set_color(_col);draw_set_alpha(min(1,_alpha));draw_primitive_begin(pr_trianglestrip);
+    for(var i=0;i<=_n;i++){var a=lerp(_a0,_a1,i/_n);draw_vertex(round(_x+lengthdir_x(_ri,a)),round(_y+lengthdir_y(_ri,a)));draw_vertex(round(_x+lengthdir_x(_ro,a)),round(_y+lengthdir_y(_ro,a)));}
+    draw_primitive_end();
+}
+/// One flat band of the tongue: width rises from the mouth, rolls with time and narrows towards the tip.
+function vfx_fire_strip(_x,_y,_ang,_len,_w,_n,_t,_tick,_col,_alpha,_layer) {
+    draw_set_color(_col);draw_set_alpha(min(1,_alpha));
+    draw_primitive_begin(pr_trianglestrip);
+    for(var i=0;i<=_n;i++) {
+        var u=i/_n,d=_len*u,prof=min(1,.35+u*2.6)*(1-.4*max(0,u-.7)/.3);
+        var roll=1+.14*sin(d*.045-_t*13+_layer)+.07*vfx_hash(i,_tick+_layer*7),hw=max(1,_w*.5*prof*roll);
+        var cx=_x+lengthdir_x(d,_ang),cy=_y+lengthdir_y(d,_ang);
+        draw_vertex(round(cx+lengthdir_x(hw,_ang+90)),round(cy+lengthdir_y(hw,_ang+90)));
+        draw_vertex(round(cx-lengthdir_x(hw,_ang+90)),round(cy-lengthdir_y(hw,_ang+90)));
+    }
+    draw_primitive_end();
 }
 function dragon_vfx_draw(_b) {dragon_encounter_draw(_b);}
 /// Editable mouth anchors from source pose annotations and import transform.
