@@ -79,9 +79,10 @@ function player_authored_actor(_actor) {return _actor=="swordsmanv3" || _actor==
 function player_motion_life() {
     var dt=clamp(delta_time/1000000,0,.05);
     if(!variable_instance_exists(id,"life_lean")){life_lean=0;life_land=0;life_turn=0;life_prev_x=x;life_vx=0;life_prev_air=false;life_prev_mirror=visual_mirror;}
+    if(!variable_instance_exists(id,"life_cape")){life_cape=0;life_cape_v=0;life_hair=0;life_hair_v=0;}
     var air=motion_state!=player_motion_state.grounded,vx=dt>0 ? (x-life_prev_x)/dt : 0;
     vx=clamp(vx,-600,600);
-    if(life_prev_air && !air)life_land=.14;
+    if(life_prev_air && !air){life_land=.14;life_cape_v+=90;life_hair_v+=110;}
     if(visual_mirror!=life_prev_mirror && !air)life_turn=.09;
     var ax=dt>0 ? (vx-life_vx)/dt : 0;
     var target=(hp>0 && dodge_timer<=0) ? clamp(vx/260,-1,1)*1.4+clamp(ax/2600,-1,1)*1.4 : 0;
@@ -92,5 +93,11 @@ function player_motion_life() {
     if(life_land>0){var k=sin(pi*life_land/.14);sx+=.07*k;sy-=.09*k;}
     else if(air && variable_instance_exists(id,"jump_time")){var jp=jump_time/max(.01,movement_config().jump_duration);if(jp<.15){var k=1-jp/.15;sx-=.05*k;sy+=.07*k;}}
     if(life_turn>0)sx*=1-.1*sin(pi*life_turn/.09);
-    return {sx:sx,sy:sy,rot:-life_lean};
+    // Hair and cape: damped springs that trail the movement (screen degrees; positive swings the tip to the left).
+    var trail=clamp(vx/260,-1,1),push=clamp(ax/2600,-1,1),sway=sin(current_time/620);
+    var tc=(trail*14+push*6)+sway*1.2,th=(trail*8+push*4)+sway*.8;
+    life_cape_v+=((tc-life_cape)*55-life_cape_v*8)*dt;life_cape+=life_cape_v*dt;
+    life_hair_v+=((th-life_hair)*85-life_hair_v*9)*dt;life_hair+=life_hair_v*dt;
+    life_cape=clamp(life_cape,-24,24);life_hair=clamp(life_hair,-16,16);
+    return {sx:sx,sy:sy,rot:-life_lean,cape:life_cape,hair:life_hair};
 }

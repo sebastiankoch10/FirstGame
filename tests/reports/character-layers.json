@@ -8,7 +8,9 @@
    "frames_over_20": 84
   },
   "halo_px": 19058,
-  "seconds": 188,
+  "hair_bones": 256,
+  "cape_bones": 256,
+  "seconds": 184,
   "atlas_px": 6075392,
   "atlases": 38
  },
@@ -21,7 +23,9 @@
    "frames_over_20": 129
   },
   "halo_px": 0,
-  "seconds": 186,
+  "hair_bones": 256,
+  "cape_bones": 0,
+  "seconds": 185,
   "atlas_px": 8628224,
   "atlases": 38
  },
@@ -34,9 +38,11 @@
    "frames_over_20": 186
   },
   "halo_px": 12074,
-  "seconds": 204,
+  "hair_bones": 256,
+  "cape_bones": 256,
+  "seconds": 203,
   "atlas_px": 12859392,
   "atlases": 38
  },
- "segment_code": "b64817ccaa"
+ "segment_code": "a7915f0adf"
 }

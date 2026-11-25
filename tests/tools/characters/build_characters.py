@@ -222,7 +222,7 @@ def build_actor(actor, ver, project, previews):
                 acc_frames[p][i] = crop(ac)
         stats['weapon_cells'] += bool((fr.lab == WEAPON).any())
         # secondary motion: hair from its label, cape from the segmentation's cape mask (swordsman, ranger)
-        hb = mask_bone(cell, sg.lab == HAIR)
+        hb = mask_bone(cell, sg.labels == HAIR)
         cape = sg.info.get('cape') if isinstance(sg.info, dict) else None
         cb = mask_bone(cell, cape, top=.20, bottom=.25, min_px=120) if cape is not None else None
         bones[i] = (hb, cb); stats['hair_bones'] += hb is not None; stats['cape_bones'] += cb is not None

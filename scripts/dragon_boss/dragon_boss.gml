@@ -223,7 +223,7 @@ function dragon_rig_draw(_b,_spr,_frame,_action,_ox,_oy,_sx,_sy,_col,_alpha) {
 }
 /// Generic skinned draw: the frame is first drawn normally into a surface of its size (page uvs from sprite_get_uvs
 /// did not match the primitive texture for large frames, tested 25.11.), then the bent grid is drawn as strips.
-function rig_draw_frame(_spr,_frame,_bones,_pose,_key,_feet_y,_ox,_oy,_sx,_sy,_col,_alpha,_step=24) {
+function rig_draw_frame(_spr,_frame,_bones,_pose,_key,_feet_y,_ox,_oy,_sx,_sy,_col,_alpha,_step=24,_rot=0) {
     var m=rig_mesh(_spr,_frame,_bones,_key,_feet_y,_step),mats=dragon_rig_matrices(_bones,_pose);
     var nb=array_length(_bones),n=m.cols*m.rows,wx=array_create(n),wy=array_create(n);
     var xo=sprite_get_xoffset(_spr),yo=sprite_get_yoffset(_spr),sw=sprite_get_width(_spr),sh=sprite_get_height(_spr);
@@ -231,7 +231,9 @@ function rig_draw_frame(_spr,_frame,_bones,_pose,_key,_feet_y,_ox,_oy,_sx,_sy,_c
         var px=m.px[k],py=m.py[k],ws=m.w[k],sum=0,qx=0,qy=0;
         for(var i=0;i<nb;i++)if(ws[i]>0){var M=mats[i];sum+=ws[i];qx+=ws[i]*(M[0]*px+M[1]*py+M[2]);qy+=ws[i]*(M[3]*px+M[4]*py+M[5]);}
         if(sum>1){qx/=sum;qy/=sum;} else {qx+=(1-sum)*px;qy+=(1-sum)*py;}
-        wx[k]=_ox+(qx-xo)*_sx;wy[k]=_oy+(qy-yo)*_sy;
+        var dx=(qx-xo)*_sx,dy=(qy-yo)*_sy;
+        if(_rot!=0){var cs=dcos(_rot),sn=dsin(_rot),rx=dx*cs+dy*sn;dy=-dx*sn+dy*cs;dx=rx;}
+        wx[k]=_ox+dx;wy[k]=_oy+dy;
     }
     if(!variable_global_exists("rig_surfs"))global.rig_surfs={};
     var sk=string(sw)+"x"+string(sh),s=variable_struct_exists(global.rig_surfs,sk) ? global.rig_surfs[$ sk] : -1;

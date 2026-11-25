@@ -20,7 +20,7 @@ function eqv_init() {
             var ps = asset_get_index("spr_eqv_" + a + "_" + pn[k]);
             if (sprite_exists(ps)) pieces[$ pn[k]] = {spr: ps, buf: buffer_base64_decode(src.rects[$ pn[k]]), cells: src.cells};
         }
-        out[$ a] = {map: map, pieces: pieces, cells: src.cells};
+        out[$ a] = {map: map, pieces: pieces, cells: src.cells, bones: variable_struct_exists(src, "bones") ? buffer_base64_decode(src.bones) : -1};
     }
     global.eqv = out;
     return out;
@@ -83,9 +83,15 @@ function eqv_cell(_actor, _spr, _frame) {
 
 /// Base model + all visible equipment. _equip defaults to the run's equipment (no struct = start weapon only).
 /// Returns the number of equipment layers drawn.
-function player_layers_draw(_actor, _spr, _frame, _x, _y, _xs, _ys, _col, _alpha, _equip = undefined, _rot = 0) {
-    draw_sprite_ext(_spr, _frame, _x, _y, _xs, _ys, _rot, _col, _alpha);
-    var cell = eqv_cell(_actor, _spr, _frame);
+/// _pose (optional): {hair, cape} screen angles in degrees from player_motion_life; bends hair and cape of the base
+/// model through the shared rig (bones per cell from the generated data). Without a pose the base is drawn as is.
+function player_layers_draw(_actor, _spr, _frame, _x, _y, _xs, _ys, _col, _alpha, _equip = undefined, _rot = 0, _pose = undefined) {
+    var cell = eqv_cell(_actor, _spr, _frame), bones = (is_struct(_pose) && cell >= 0) ? eqv_bones(_actor, cell) : [];
+    if (array_length(bones) > 0) {
+        // Angles are given on screen; mirrored frames turn the other way in sprite space.
+        var s = sign(_xs), p = {hair: _pose.hair * s, cape: _pose.cape * s};
+        rig_draw_frame(_spr, _frame, bones, p, "plr_" + _actor, eqv_frame().oy - 6, _x, _y, _xs, _ys, _col, _alpha, 8, _rot);
+    } else draw_sprite_ext(_spr, _frame, _x, _y, _xs, _ys, _rot, _col, _alpha);
     if (cell < 0) return 0;
     if (is_undefined(_equip)) _equip = variable_global_exists("equipment") ? global.equipment : {};
     var P = global.eqv[$ _actor].pieces, list = eqv_pieces_for(_equip), drawn = 0, flash = _col != c_white;
@@ -102,4 +108,19 @@ function eqv_frame() {
     static f = undefined;
     if (is_undefined(f)) {var d = equipment_visual_data(); f = variable_struct_exists(d, "frame") ? d.frame : {size: 96, ox: 48, oy: 88};}
     return f;
+}
+/// Secondary-motion bones of a cell (10 bytes: hair px,py,tx,ty,r then cape px,py,tx,ty,r; r=0 = none).
+function eqv_bones(_actor, _cell) {
+    var E = eqv_init();
+    if (!variable_struct_exists(E, _actor) || E[$ _actor].bones < 0) return [];
+    var b = E[$ _actor].bones, o = _cell * 10, out = [];
+    if (o + 10 > buffer_get_size(b)) return [];
+    var ids = ["hair", "cape"];
+    for (var k = 0; k < 2; k++) {
+        var r = buffer_peek(b, o + k * 5 + 4, buffer_u8);
+        if (r == 0) continue;
+        array_push(out, {id: ids[k], x: buffer_peek(b, o + k * 5, buffer_u8), y: buffer_peek(b, o + k * 5 + 1, buffer_u8),
+            ex: buffer_peek(b, o + k * 5 + 2, buffer_u8), ey: buffer_peek(b, o + k * 5 + 3, buffer_u8), r: r * 1.2, parent: -1});
+    }
+    return out;
 }

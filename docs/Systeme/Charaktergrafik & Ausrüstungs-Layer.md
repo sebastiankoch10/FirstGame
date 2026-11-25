@@ -17,7 +17,7 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
   - `eqv_pieces_for(equip)` liefert die sichtbaren Teile.
   - `eqv_cell` bildet einen Sprite-Frame auf die gemeinsame Zelle ab.
   - Reihenfolge: Füße → Brust → Hände → Kopf → Waffe. Akzente (Borten, Parierstange, Edelsteine) werden in der Seltenheitsfarbe eingefärbt.
-- **Generierte Daten:** `scripts/equipment_visual_data`, nicht von Hand ändern.
+- **Generierte Daten:** `scripts/equipment_visual_data`, nicht von Hand ändern. Enthält seit 25.11. auch `frame` (Größe und Ursprung) und `bones` (10 Byte je Zelle: Haar- und Umhang-Knochen für die Sekundärbewegung).
   - Enthält Frame → Zelle und je Teil eine Rechtecktabelle (base64, 8 Byte pro Zelle).
 - **Atlanten:**
   - `sprites/spr_eqv_<actor>_<teil>[ _acc]`: 41 pro Klasse, Texturgruppe `Equipment`.

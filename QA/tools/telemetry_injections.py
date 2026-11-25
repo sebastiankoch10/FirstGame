@@ -33,7 +33,7 @@ def apply_injections(code, path):
         code = _replace(code, 'kind:_kind,x:_x,y:_y,sx:_sx', 'kind:_kind,qa_weapon_stage:ObjectPlayer.class_combo_index,x:_x,y:_y,sx:_sx')
         code = _replace(code, 'function class_weapon_area(_x,_y,_radius,_damage)', 'function class_weapon_area(_x,_y,_radius,_damage,_stage=0)')
         code = _replace(code, 'apply_attack_damage(targets[i],_damage,ObjectPlayer,0);', 'qa_apply_weapon_damage(targets[i],_damage,ObjectPlayer,_stage);')
-        code = _replace(code, 'shot.class_tier=sword_visual_tier(global.current_level);return shot;', 'shot.class_tier=sword_visual_tier(global.current_level);qa_projectile_spawn(shot,0,_pl.class_combo_index);return shot;')
+        code = _replace(code, 'shot.class_tier=weapon_visual_tier();return shot;', 'shot.class_tier=weapon_visual_tier();qa_projectile_spawn(shot,0,_pl.class_combo_index);return shot;')
         code = _replace(code, 'function class_weapon_release(_pl,_step) {', 'function class_weapon_release(_pl,_step) {\n    qa_cast(0,_step);')
         code = _replace(code, 'apply_attack_damage(targets[j],f.damage,ObjectPlayer,0);', 'qa_apply_weapon_damage(targets[j],f.damage,ObjectPlayer,f.qa_weapon_stage);')
         code = _replace(code, 'class_weapon_area(f.x,f.y,f.radius,f.damage)', 'class_weapon_area(f.x,f.y,f.radius,f.damage,f.qa_weapon_stage)', count=2)
@@ -57,7 +57,9 @@ def apply_injections(code, path):
     elif p.endswith("scripts/dragon_encounter/dragon_encounter.gml"):
         code = _replace(code, 'owner:_b,x:g.x+', 'owner:_b,qa_source:qa_source_snapshot(_b,_b.boss_cast),x:g.x+')
         code = _replace(code, 'player_receive_damage(pl,c.damage,c.height)', 'qa_receive_from(pl,c.damage,c.height,qa_source_snapshot(_b,_b.boss_cast))', count=2)
-        code = _replace(code, '_b.enc_cfg=c;_b.enc_hits=0;', 'qa_source_seen(qa_source_snapshot(_b,_kind),c.warning);_b.enc_cfg=c;_b.enc_hits=0;')
+        code = _replace(code, '\n    _b.enc_cfg=c;_b.enc_hits=0;', '\n    qa_source_seen(qa_source_snapshot(_b,_kind),c.warning);_b.enc_cfg=c;_b.enc_hits=0;')
+        # Dragon melee (bite / tail sweep) announces its sector the same way.
+        code = _replace(code, '_b.dragon_pose_locked=false;_b.enc_cfg=c;_b.enc_hits=0;', '_b.dragon_pose_locked=false;qa_source_seen(qa_source_snapshot(_b,kind),c.warning);_b.enc_cfg=c;_b.enc_hits=0;')
         code = _replace(code, '_b.enc_geometry.elapsed=_b.dragon_state_age;', '_b.enc_geometry.elapsed=_b.dragon_state_age;qa_source_seen(qa_source_snapshot(_b,_b.boss_cast),_b.enc_cfg.warning,!array_contains(["meteor","stomp","void","volley","wind"],_b.boss_cast) && telegraph_contains(_b.enc_geometry,ObjectPlayer.x,ObjectPlayer.y-10),false);')
         code = _replace(code, 'z.g.elapsed=z.age;', 'z.g.elapsed=z.age;qa_source_seen(qa_source_snapshot(_b,_b.boss_cast),z.warning,telegraph_contains(z.g,pl.x,pl.y-10),z.erupted);')
         code = _replace(code, 'var age=_b.dragon_state_age,hit=false;', 'var age=_b.dragon_state_age,hit=false;qa_source_seen(qa_source_snapshot(_b,kind),c.warning,false,true);')

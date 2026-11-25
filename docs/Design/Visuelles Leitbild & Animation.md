@@ -214,7 +214,11 @@ Visuell relevante Fähigkeiten haben Phasen; siehe [[Fähigkeiten, VFX & Audio]]
   - 8 Richtungen × 8 Ausgangsposen je Klasse;
   - Laufen mit 8 Frames, Rennen als schneller abgespielter Lauf;
   - Sprung und Fall wählen Posen nach Fortschritt; Idle ist ein Frame mit Atembewegung;
-  - **keine** Sekundärbewegung für Haar und Umhang, **keine** Übergangsposen (Landung, Richtungswechsel).
+  - **Seit 25.11. Sekundärbewegung:** Haar und Umhang (Schwertmeister, Waldläufer) bzw. Haar (Arkanistin) schwingen gefedert nach: beim Laufen, Abbremsen, Richtungswechsel und mit einem Impuls bei der Landung.
+    - Pro Frame liefert die Pipeline je einen Knochen aus Haar-Label und Umhangmaske.
+    - Die Laufzeit verformt das Basismodell über den gemeinsamen Rig (`player_layers_draw` mit Pose, `eqv_bones`).
+    - Die Ausrüstungsebenen bleiben unverformt.
+  - **Noch keine** gezeichneten Übergangsposen (Landung und Richtungswechsel sind prozedural).
   - Ausrüstung als synchrone Ebenen.
 - **Skelette (Wald):** 8 Richtungen, 5 Aktionen, Frame-Animation.
 - **Sumpf- und Ruinengegner:** 104er-Sprites, 5 Aktionen in 8 Richtungen, generiert.

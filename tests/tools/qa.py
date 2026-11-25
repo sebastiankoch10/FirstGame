@@ -12,6 +12,7 @@ Tiers
   2  system change                                 -> all suites mapped to the touched systems
   3  architecture / >=3 systems / core files       -> every maintained suite (+ visual when art/drawing changed)
   static (validate_project, 1-3 min) is added only when resources (.yy/.yyp) were added/changed/removed, and always in tier 3.
+  anchors (telemetry anchors of the simulations, seconds, no build) runs in every tier >= 1.
   4  simulations (run_cohort, run_boss_mc)         -> never automatic; commands are printed, the user must order them
 
 A suite is skipped when its last PASS was produced from byte-identical build inputs (cache in
@@ -41,6 +42,9 @@ BUILD_DIRS = ('objects', 'scripts', 'rooms', 'sprites', 'sounds', 'tilesets', 'o
 SUITES = {
     'static': dict(cmd=['QA/tools/validate_project.py'], report=None, inputs=[], minutes=.1,
                    covers='Ressourcen/yyp-Konsistenz (ohne Build)'),
+    'anchors': dict(cmd=['QA/tools/check_telemetry_anchors.py'], report=None,
+                    inputs=['QA/tools/check_telemetry_anchors.py', 'QA/tools/telemetry_injections.py'], minutes=.02,
+                    covers='Telemetrie-Anker der Simulationen passen zum Code (ohne Build, Sekunden)'),
     'compile': dict(cmd=['tests/tools/levels/compile_check.py'], report=None, inputs=[], minutes=2,
                     covers='Igor-Build des echten Projekts (nur wenn keine Suite laeuft)'),
     'regression': dict(cmd=['QA/tools/run_qa_regression.py'], report='QA/data/regression.json',
@@ -149,7 +153,7 @@ def auto_tier(files, systems, gml_lines, core):
 
 def plan(tier, suites, art, res):
     """static (validate_project, 1-3 min) only when resources (.yy/.yyp) changed; every native suite build is itself a compile check."""
-    st = ['static'] if res or tier >= 3 else []
+    st = ['anchors'] + (['static'] if res or tier >= 3 else [])
     if tier <= 0:
         return []
     if tier == 1:

@@ -63,7 +63,7 @@ if (!sprite_exists(player_draw_sprite)) {
 }
 // Base model + visible equipment layers, all on the same frame (scripts/equipment_visual).
 var life = player_motion_life();
-player_layers_draw(visual_actor, player_draw_sprite, player_draw_frame, x, y - jump_height, draw_xscale * life.sx, draw_yscale * life.sy, hud_hit_flash>0 ? make_color_rgb(255,85,82) : c_white, 1, undefined, life.rot);
+player_layers_draw(visual_actor, player_draw_sprite, player_draw_frame, x, y - jump_height, draw_xscale * life.sx, draw_yscale * life.sy, hud_hit_flash>0 ? make_color_rgb(255,85,82) : c_white, 1, undefined, life.rot, {hair: life.hair, cape: life.cape});
 
 if (damage_reduction>0 && variable_instance_exists(id,"orbit_angle")) {
     var d=GetSpellData(SPELL.SHIELD);
