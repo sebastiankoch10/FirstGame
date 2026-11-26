@@ -34,4 +34,8 @@ Zwei Minibosse in Minute 1 und 3. Ab Minute 5 alle 5 Minuten ein zufälliger Hau
 ## Bekannte Probleme
 - Der Drache ist ab Minute 10 für Bots sehr schwer: 17 % bzw. 8 % Siege.
 - Der Doppelstampfer des Behemoth trifft bedrohte Bots zu 79 %.
-- Die älteren Drachenangriffe (Bogen, Bodeneinschlag, Flügelsturm, Void, Wirbel, Salven) nutzen das alte Encounter-System; das Orakel im Boss-Test sieht sie nicht.
+- Die älteren Drachenangriffe nutzen das alte Encounter-System: Treffertest und Darstellung laufen in `dragon_encounter_step` und `dragon_encounter_draw`, nicht über `bv2_*`. Stand nach dem Audit vom 26.11.:
+  - Der wachsende Ring von Bodenschlag und Wirbel kommt aus einer Funktion, `dragon_ring_geometry`, für Treffer, Bild und Test. Vorher stand die Formel doppelt im Code.
+  - Das Orakel der Boss-Suite sieht jetzt Fächer, Biss, Schweif, Stampf- und Meteorzonen und den Ring. Ergebnis: in allen 18 Drachenfällen 0 Bilder ohne erreichbare sichere Position.
+  - Weiterhin unsichtbar für das Orakel sind die drei Projektilangriffe Wind, Leere und Salve (`hostile_bullets`).
+  - Langfristig sollten diese Angriffe auf `bv2`-Gefahren umziehen, damit es nur einen Treffer- und Warnpfad gibt ([[Bugs & Ideen]]).

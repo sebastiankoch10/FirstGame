@@ -4,6 +4,12 @@ updated: 2026-11-26
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-26 · Claude · Qualitätsaudit: Münz-Culling, Ringgeometrie des Drachen, Orakel für Altangriffe
+- Spiel: `combat_feedback` (`coin_cull_step`) und `ObjectController/Step_0` (Aufruf); `dragon_encounter` (`dragon_ring_geometry` für Treffer und Bild).
+- Tests: `tests/boss_harness.gml` (Orakel sieht geometrische Altangriffe), `tests/perf_harness.gml` (Szenario `horde_coins`), `tests/level_harness.gml` (Münz-Culling in 3 Leveln), `profile_perf.py` (Anker).
+- Doku: Bosse, Progression & Level-up, Tests & QA, Bugs & Ideen (drei Boss-Codepfade, Gegnerzustand, Sequenz-Vielfalt, Waldläufer), DECISIONS.
+- Tests: QA Stufe 2 PASS (Regression 811, Boss 190, Level 174); perf: 2.500 Münzen 56,7 → 66,7 FPS unbegrenzt, übrige Szenarien unverändert.
+
 ### 2026-11-26 · Claude · Folgeauftrag: Drachen-Sequenzen, Nutzerentscheidungen, Trefferstopp, Grafik-Anforderungen
 - Spiel:
   - `boss_choreo` (Sequenzen), `dragon_encounter` (Anbindung), `boss_encounters_v2` (`bv2_motion_offset`), `combat_feedback` und `ObjectMonster/Draw_0` (Trefferstopp).

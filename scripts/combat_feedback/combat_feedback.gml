@@ -36,6 +36,20 @@ function magnet_collect(_orb,_pl=undefined,_collision_event=false) {
     fg_sfx("spell_upgrade");light_pulse(_orb.x,_orb.y-12,140,make_color_rgb(98,239,231),0.7,0.25);
     with(_orb)instance_destroy();return true;
 }
+/// Coins far outside the view are deactivated (no step, draw, depth sort or collision test) and reactivated when the
+/// view comes near again. Nothing changes for the player: a coin is only collected inside the pickup radius or when a
+/// boss magnet pulls it, and magnet_collect and reset_round activate every coin first. Value, position and number of
+/// coins stay identical. Reason (audit 26.11.): coins never expire and ranged kills leave them behind; 2500 coins on
+/// the ground cost 3.9 ms per frame and pushed the horde below 60 FPS (72.6 -> 56.7 uncapped; perf scenario horde_coins).
+#macro COIN_CULL_MARGIN 260
+function coin_cull_step() {
+    if(!instance_exists(ObjectPlayer))return;
+    if(!variable_global_exists("coin_cull_tick"))global.coin_cull_tick=0;
+    global.coin_cull_tick++;if(global.coin_cull_tick mod 10!=0)return;
+    var cam=view_camera[0],m=max(COIN_CULL_MARGIN,ObjectPlayer.pickup_radius),l=camera_get_view_x(cam)-m,t=camera_get_view_y(cam)-m,r=l+camera_get_view_width(cam)+2*m,b=t+camera_get_view_height(cam)+2*m;
+    instance_activate_region(l,t,r-l,b-t,true); // only coins are ever deactivated, so only coins come back
+    with(ObjectCoin)if(!magnetized && !coin_collected && (x<l || x>r || y<t || y>b))instance_deactivate_object(id);
+}
 function hit_reaction(_target,_source,_sid) {
     var cfg=combat_config();
     if(!variable_instance_exists(_target,"hit_stun")) {_target.hit_stun=0;_target.stun_lockout=0;_target.knock_vx=0;_target.knock_vy=0;}

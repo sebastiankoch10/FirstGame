@@ -49,13 +49,33 @@ function bh_relevant(_horizon) {
         if(g.shape=="checker"){cx=room_width*.5;cy=room_height*.5;r=room_width+room_height;} // field-wide board covers the arena
         array_push(out,{h:h,cx:cx,cy:cy,r:r});
     }
+    // Legacy dragon attacks outside bv2 (audit 26.11.): the oracle now sees them too. "geo" is the telegraphed geometry
+    // itself (arc, bite, tail, unswept beam, meteor and stomp zones); "ring" is the expanding slam / vortex ring through
+    // dragon_ring_geometry, the same function the hit test and the picture use.
+    var b=bh_boss();
+    if(instance_exists(b) && variable_instance_exists(b,"dragon_enabled") && b.dragon_enabled && (b.boss_state=="windup" || b.boss_state=="active") && variable_instance_exists(b,"enc_geometry") && is_struct(b.enc_geometry)) {
+        var kind=b.boss_cast,cfg=b.enc_cfg,age=b.dragon_state_age,act=b.boss_state=="active",near=act || cfg.warning-age<=_horizon;
+        var swept=variable_instance_exists(b,"enc_sweep") && is_struct(b.enc_sweep);
+        if(near && (kind=="arc" || kind=="tail" || kind=="bite" || (kind=="beam" && !swept)))array_push(out,{legacy:"geo",g:b.enc_geometry});
+        if(near && (kind=="slam" || kind=="vortex"))array_push(out,{legacy:"ring",g:b.enc_geometry,kind:kind,age:act ? age : 0,active:cfg.active,horizon:_horizon});
+        for(var i=0;i<array_length(b.enc_zones);i++){var z=b.enc_zones[i];if((!z.erupted && z.warning-z.age<=_horizon) || (z.erupted && z.age<z.warning+.45))array_push(out,{legacy:"geo",g:z.g});}
+    }
     return out;
 }
 /// Oracle danger test of a world point against the prefiltered hazards (12 px player margin on circles/rings).
 function bh_point_unsafe_list(_list,_px,_py) {
     var probe={x:_px,y:_py};
     for(var i=0;i<array_length(_list);i++) {
-        var e=_list[i];if(point_distance(e.cx,e.cy,_px,_py-10)>e.r)continue;
+        var e=_list[i];
+        if(variable_struct_exists(e,"legacy")) {
+            if(e.legacy=="geo"){if(telegraph_contains(e.g,_px,_py-10))return true;}
+            else { // band the ring sweeps from now until the horizon (12 px player margin)
+                var d=point_distance(e.g.x,e.g.y,_px,_py-10),r0=dragon_ring_geometry(e.kind,e.g,e.age,e.active),r1=dragon_ring_geometry(e.kind,e.g,min(e.active,e.age+e.horizon),e.active);
+                if(d>=r0.inner-12 && d<=r1.radius+12)return true;
+            }
+            continue;
+        }
+        if(point_distance(e.cx,e.cy,_px,_py-10)>e.r)continue;
         var h=e.h;
         if(variable_struct_exists(h,"sweep_from")) {
             var d=point_distance(h.g.x,h.g.y,_px,_py-10);

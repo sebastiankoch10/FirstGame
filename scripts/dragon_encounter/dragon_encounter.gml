@@ -159,8 +159,7 @@ function dragon_encounter_step(_b,_dt) {
             else if(kind=="beam" || kind=="arc" || kind=="tail" || kind=="bite")hit=telegraph_contains(g,pl.x,pl.y-10);
             if(kind=="sweep") {_b.dragon_angle=_b.dragon_base_angle-55+110*clamp(age/c.active,0,1);hit=dragon_player_in_fire(_b,pl);}
             if(kind=="slam" || kind=="vortex") {
-                var ring=telegraph_make("ring",g.x,g.y,kind=="slam" ? max(45,320*age/c.active) : 100+210*age/c.active,1,0,360,40);
-                ring.inner=max(0,ring.radius-40);hit=telegraph_contains(ring,pl.x,pl.y-10);
+                var ring=dragon_ring_geometry(kind,g,age,c.active);hit=telegraph_contains(ring,pl.x,pl.y-10);
                 if(kind=="slam" && age<.12 && point_distance(g.x,g.y,pl.x,pl.y-10)<80)hit=true;
                 if(_b.enc_hits==0){fg_sfx(kind=="slam" ? "dragon_slam" : "dragon_vortex");_b.enc_hits++;}
             }
@@ -178,6 +177,12 @@ function dragon_encounter_step(_b,_dt) {
     }
     _b.depth=-_b.y;
 }
+/// Expanding ring of the slam and the vortex at state age _age: the ONE geometry for the hit test (step), the picture
+/// (draw) and the boss suite's oracle. Before the audit of 26.11. the formula existed twice, linked only by a comment.
+function dragon_ring_geometry(_kind,_g,_age,_active) {
+    var r=_kind=="slam" ? max(45,320*_age/_active) : 100+210*_age/_active,ring=telegraph_make("ring",_g.x,_g.y,r,1,0,360,40);
+    ring.inner=max(0,r-40);return ring;
+}
 function dragon_encounter_draw(_b) {
     if(_b.dragon_dying || !variable_instance_exists(_b,"enc_geometry"))return;
     var kind=_b.boss_cast,g=_b.enc_geometry,c=_b.enc_cfg,age=_b.dragon_state_age,col=(kind=="void" || kind=="volley") ? make_color_rgb(181,104,251) : (kind=="wind" ? make_color_rgb(130,225,211) : ((kind=="tail" || kind=="bite") ? make_color_rgb(236,214,170) : make_color_rgb(255,115,58)));
@@ -192,10 +197,10 @@ function dragon_encounter_draw(_b) {
         if((kind=="beam" && !swept) || kind=="sweep") {var fire=dragon_attack_geometry(_b);vfx_beam_stream({shape:"line",x:fire.x,y:fire.y,angle:_b.dragon_angle,radius:fire.length,width:fire.width,inner:0,span:0},1,age,c.active,5);}
         if(kind=="arc")vfx_fire_cone(g.x,g.y,g.angle,g.span,g.radius,age,c.active); // fills exactly the telegraphed sector
         if(kind=="vortex" || kind=="slam") {
-            var r=kind=="slam" ? max(45,320*age/c.active) : 100+210*age/c.active;
+            var ring=dragon_ring_geometry(kind,g,age,c.active),r=ring.radius; // the hit test uses the same function
             if(kind=="vortex")dragon_fx_sprite(6,.25+frac(age)*.35,g.x,g.y,r,_b.dragon_clock*100);
             else {for(var dust=0;dust<12;dust++){var angle=dust*30;class_fx_sprite(7,clamp(age/c.active,0,1),g.x+lengthdir_x(r-20,angle),g.y+lengthdir_y(r-20,angle),28,angle);}if(age<.4)class_fx_sprite(7,age/.4,g.x,g.y,90);}
-            var ring=telegraph_make("ring",g.x,g.y,r,1,0,360,40);ring.inner=max(0,r-40);hz_area_draw(ring,kind=="slam" ? 5 : 1,col,age,c.active,kind=="slam" ? 2 : 8); // same ring as the hit test
+            hz_area_draw(ring,kind=="slam" ? 5 : 1,col,age,c.active,kind=="slam" ? 2 : 8);
         }
         if(kind=="wind")dragon_fx_sprite(3,.25+frac(age)*.4,g.x+lengthdir_x(160,g.angle),g.y+lengthdir_y(160,g.angle),150,g.angle);
     }

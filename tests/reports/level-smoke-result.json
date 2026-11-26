@@ -1,6 +1,12 @@
 {
+  "passed": true,
+  "checks": 174.0,
   "failures": [],
   "metrics": {
+    "L1_crowd_minute10": 82.0,
+    "L1_frame_ms_avg": 16.66699999999999,
+    "L1_frame_ms_max": 16.667,
+    "L2_crowd_minute10": 80.0,
     "L2_frame_ms_avg": 16.66699999999999,
     "L2_props": 957.0,
     "L2_frame_ms_max": 16.667,
@@ -20,16 +26,10 @@
     "L2_boss10": "twins",
     "L1_slow_move_px": 40.4306640625,
     "L2_slow_move_px": 67.033447265625,
-    "L2_boss15": "storm_warden",
-    "L1_crowd_minute10": 82.0,
-    "L1_frame_ms_avg": 16.66699999999999,
-    "L1_frame_ms_max": 16.667,
-    "L2_crowd_minute10": 80.0
+    "L2_boss15": "storm_warden"
   },
-  "passed": true,
-  "checks": 168.0,
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\level-smoke\\20261126-144043",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\level-smoke\\20261126-153617",
   "exceptions": [],
   "captures": [
     "boss15-ashfrost.png",

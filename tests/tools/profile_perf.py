@@ -79,7 +79,7 @@ def main() -> None:
     funcs = sys.argv[sys.argv.index('--funcs') + 1].split(',') if '--funcs' in sys.argv else DEFAULT_FUNCS
     harness = (ROOT / 'tests/perf_harness.gml').read_text(encoding='utf-8-sig')
     for old, new in (('if (global.pf_frame > 120 && global.pf_frame <= 720) {', 'if (global.pf_frame == 121) __pf_reset();\n    if (global.pf_frame > 120 && global.pf_frame <= 720) {'),
-                     ('spikes_over_50ms: acc.spikes};', 'spikes_over_50ms: acc.spikes, prof: __pf_report(n)};')):
+                     ('active_coins: acc.coins / n};', 'active_coins: acc.coins / n, prof: __pf_report(n)};')):
         if old not in harness:
             raise SystemExit(f'Anker im perf_harness fehlt: {old}')
         harness = harness.replace(old, new, 1)

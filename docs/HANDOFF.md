@@ -5,31 +5,30 @@ agent: Claude
 ---
 # Übergabe (wird nach jeder Aufgabe überschrieben, max. ~40 Zeilen)
 
-**Zuletzt dran:** Claude, 2026-11-26 abends. Folgeauftrag „offene Punkte nach Phase 1/2A/2B und QA-Auftrag“ abgeschlossen, committet und nach `origin/entwicklung` gepusht (Nutzerfreigabe).
+**Zuletzt dran:** Claude, 2026-11-26 spätabends. Qualitätsaudit abgeschlossen. **Commit lokal, nicht gepusht** (im Auftrag war der Push nicht angekreuzt); für andere Geräte `git push origin entwicklung`.
 
 ## Stand
-- **Review-Center:** 36 Szenarien offen (11 neu: mehrphasige Zauber, Wald-Skelette, MAGNET, Ankerpunkte, Trefferstopp, Drachen-Sequenzen P1/P3, Hexen- und Behemoth-Bewegung). Keine persönliche Freigabe bisher ([[Review-Center]]).
-- **Neu am 26.11. abends:**
-  - **Drachen-Sequenzen** ([[Boss-Design]] H2): 11 Sequenzen in 4 Phasen, nach je 2 regulären Angriffen, mit fairer Pause und Ruhe. Daten in `bc_sequences`.
-  - **Trefferstopp** als Bild (2 Bilder, physische Grundwaffe); Bewegungsidentität von Hexen und Behemoth beim Aufladen und Einschlag.
-  - **Nutzerentscheidungen:** Texturen im Menü verteilt laden (Run-Start 0 statt 5,1 s, Menü ruckelt anfangs), Effekt-Zufall getrennt (`vfx_random`), `boss_test_preset` kalibriert, `.obsidian` versioniert (ohne workspace), „c“ in `CHARACTER_ART.md` entfernt.
-  - **Performance:** Skelett-Sprite gecacht. Horde unbegrenzt 72–75 FPS, Bosse mit 60 Gegnern 96–102.
-  - **Teil B:** Anforderungen für neue Grafik in [[Assets & Pipeline]] 7. Vorbereitet sind Skelett-Rollen-Sets (automatisch, 1:1) und die Basisfigur (Ordner, `atlas.base_neutral_path`, `check_base_neutral.py`).
-  - **Werkzeuge:** `record_scene.py spellsheet`, Boss-Suite-Lauf `sequences`, Feature-Suite mit fester Bildzeit.
-- **Tests (26.11. abends):**
-  - QA Stufe 3 PASS: docs, anchors, static, Regression 811, Feature 195, Boss 190, Level 168, Klassen 151, Visual 86, Review-E2E 12.
-  - perf PASS, keine Ausreißer.
+- **Review-Center:** 36 Szenarien offen, keine persönliche Freigabe bisher ([[Review-Center]]).
+- **Audit 26.11. (behoben, mit Messung bzw. Test):**
+  - **Münzen:** Sie verfallen nie und hatten keine Obergrenze. 2.500 liegende Münzen drückten die Horde von 72,6 auf 56,7 FPS unbegrenzt. Jetzt schlafen Münzen außerhalb des Bildausschnitts (`coin_cull_step`), Ergebnis 66,7 FPS; Wert, Position und Anzahl bleiben gleich ([[Progression & Level-up]]).
+  - **Drache:** Die Ringformel von Bodenschlag und Wirbel stand doppelt im Code (Treffer und Bild). Jetzt gibt es eine Funktion `dragon_ring_geometry` ([[Bosse]]).
+  - **Boss-Suite:** Das Orakel sieht jetzt auch die geometrischen Altangriffe des Drachen: 12 statt 6 von 18 Fällen, überall 0 Bilder ohne sichere Position.
+- **Audit bestätigt (nicht angefasst):** zentrale Schadensberechnung (`apply_attack_damage`), Stapelwerte mit Deckeln (`talent_equipment_apply`), gedeckelte Laufzeitlisten, keine Ressourcenlecks, Kiting-Druck (4–5 Aufholbewegungen in 45 s).
+- **Davor am 26.11.:** Drachen-Sequenzen, Trefferstopp, Texturen im Menü, `vfx_random`, Preset kalibriert, Anforderungen für neue Grafik (siehe [[LOG]]).
+- **Tests (26.11. spätabends):**
+  - QA Stufe 2 PASS: docs, anchors, Regression 811, Boss 190, Level 174.
+  - perf PASS mit 4 Szenarien.
+  - Feature 195, Klassen 151, Visual 86 und Review 12 zuletzt am Abend PASS; vom Audit laut `qa.py` nicht betroffen.
 
 ## Offen (Reihenfolge)
-1. **Nutzer:**
-   - F5 → Review-Center: 36 Szenarien prüfen und freigeben, besonders die Drachen-Sequenzen und den Trefferstopp.
-   - Grafikquelle entscheiden (Roadmap 9, 11, 12).
-2. **Animation Controller S2:** nicht umgesetzt (großer Umbau von Spieler, Skeletten und Drachen); nächster eigener Schritt nach [[Technische Architektur]] 4.2.
-3. **Sequenzen** für Hexen und Behemoth nach dem Spieltest des Drachen-Piloten (gleiche Datenstruktur).
-4. **Grundstufen:** Mehrere Zauber auf Stufe 1 sind kaum sichtbar (Blitz, Lanze, Siegel, Sternenfall, Brunnen, Gefängnis, Urteil); künstlerisches Urteil des Nutzers ([[Zauber & Passiva]]).
+1. **Nutzer:** F5 → Review-Center (36 Szenarien); Grafikquelle entscheiden; Zusammenstellung der Drachen-Sequenzen nach dem Spieltest (zwei sind identisch, [[Bugs & Ideen]]).
+2. **Größtes Wartungsrisiko:** drei Boss-Codepfade. Vorschlag: Altangriffe des Drachen einzeln auf `bv2` umziehen, abgesichert durch das Orakel ([[Bugs & Ideen]]).
+3. **Animation Controller S2** ([[Technische Architektur]] 4.2) und Gegnerzustand ohne Existenzprüfungen (`ObjectMonster`).
+4. **Balancing-Beobachtung:** Waldläufer räumt in Bot-Händen deutlich langsamer; nur dokumentiert.
 
 ## Bekannte Bugs / Risiken
-- Bossdruck-Werte (`bc_config`) und Sequenz-Takt (`seq_every`, `seq_gap`, `seq_rest`) sind Startwerte; nach dem Spieltest feinjustieren.
-- Im Hauptmenü ruckelt das Bild in den ersten etwa 3 s (Textur-Entpacken, längstes Bild etwa 0,55 s).
-- Visuell nicht belegt: Öffnungen der kontrahierenden Ringe (Aufnahme verfehlt); geprüft nur über Geometrie und Orakel.
-- GML: `all` ist ein Schlüsselwort (keine Variable so nennen); Array-Literale nicht direkt indizieren.
+- Sequenz-Takt und Bossdruck (`bc_config`) sind Startwerte; nach dem Spieltest feinjustieren.
+- Im Hauptmenü ruckelt das Bild in den ersten etwa 3 s (Textur-Entpacken).
+- Das Orakel sieht die Projektilangriffe des Drachen nicht (Wind, Leere, Salve).
+- Neuer Code: `instance_number(ObjectCoin)` und `with(ObjectCoin)` sehen nur aktive Münzen.
+- GML: `all` ist ein Schlüsselwort; Array-Literale nicht direkt indizieren.

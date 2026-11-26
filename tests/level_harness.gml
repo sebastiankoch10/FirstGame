@@ -84,6 +84,26 @@ function lv_scenery_grid_check() {
     lv_metric("scenery_grid_points",n);lv_metric("scenery_grid_blocked",blocked);
     lv_check(bad==0 && blocked>100,"collision cell index matches the full scan ("+string(n)+" points, "+string(blocked)+" blocked, "+string(bad)+" differ)");
 }
+/// Coin culling (combat_feedback coin_cull_step): far coins sleep, near coins stay, activation restores every coin with
+/// its value and position. Deactivation takes effect at the end of an event, so the check spans three frames (42-44).
+function lv_coin_cull_check(_f) {
+    var pl=ObjectPlayer;
+    if(_f==42) {
+        global.lv_cc_n=instance_number(ObjectCoin);
+        global.lv_cc_far=instance_create_layer(pl.x<room_width*.5 ? pl.x+1600 : pl.x-1600,pl.y,"Instances",ObjectCoin);global.lv_cc_far.coin_value=7;
+        global.lv_cc_near=instance_create_layer(pl.x+150,pl.y,"Instances",ObjectCoin);
+        global.lv_cc_x=global.lv_cc_far.x;global.coin_cull_tick=9; // the controller's own call this frame runs the cull
+    }
+    if(_f==43) {
+        lv_check(instance_number(ObjectCoin)==global.lv_cc_n+1 && instance_exists(global.lv_cc_near) && !instance_exists(global.lv_cc_far),"coin culling: the far coin sleeps, the near coin stays active ("+string(instance_number(ObjectCoin)-global.lv_cc_n)+" of 2 active)");
+        global.coin_cull_tick=0;instance_activate_object(ObjectCoin); // what magnet_collect and reset_round do first
+    }
+    if(_f==44) {
+        var ok=instance_number(ObjectCoin)==global.lv_cc_n+2 && instance_exists(global.lv_cc_far) && global.lv_cc_far.coin_value==7 && global.lv_cc_far.x==global.lv_cc_x;
+        lv_check(ok,"coin culling: activation restores every coin with value and position");
+        with(global.lv_cc_far)instance_destroy();with(global.lv_cc_near)instance_destroy();
+    }
+}
 function lv_kill(_e) {if(instance_exists(_e)){_e.hp=0;}}
 function lv_resolve_choice() {
     if(!(global.levelup_active || global.chest_collected))return false;
@@ -135,6 +155,7 @@ function lv_controller_tick() {
         }
         if(f==40)lv_capture("start-"+lv.id);
         if(f==41 && room==Room1)lv_scenery_grid_check();
+        lv_coin_cull_check(f);
         if(f==44 && gen && array_length(ObjectLevelWorld.data.sites)>0) {
             // Scenic preview at the first landmark: the level-select image is a real native frame.
             var site=ObjectLevelWorld.data.sites[0];lv_place(site.x,site.y+190);

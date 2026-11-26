@@ -11,7 +11,13 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
 - **Minibosse nutzen 0.1-Gegnerstreifen** (Eber, Golem; 64×64, ohne Blickrichtungen), Stilbruch. Anforderungen für neue Grafik: [[Assets & Pipeline]] 7.6. → [[Roadmap & Vertical Slice]] Schritt 9.
 - **MCP-Zeitlimit:** `MCP_TIMEOUT` in `.claude/settings.json` wirkt nicht (25.11. geprüft). Abhilfe per `setx` nur mit Zustimmung des Nutzers. → [[Tests & QA]]
 - **Boss-Testmenü im Release:** `#macro BOSS_TEST_MENU_ENABLED true` in `scripts/boss_test_mode`. Vor einer Veröffentlichung auf `false` setzen. → [[Boss-Testmodus]]
-- **Alte Drachenangriffe** (Bogen, Bodeneinschlag, Flügelsturm, Void, Wirbel, Salven) laufen nicht über bv2. Das Ausweich-Orakel im Boss-Test prüft sie nicht. → [[Bosse]]
+- **Drei Boss-Codepfade** (Audit 26.11., größtes Wartungsrisiko): `boss_combat` (Minibosse, alte Muster), `dragon_encounter` (eigener Treffertest und eigene Darstellung) und `boss_encounters_v2` auf den gemeinsamen `bv2`-Gefahren.
+  - Entschärft: gemeinsame Ringgeometrie `dragon_ring_geometry`; das Orakel prüft jetzt auch die geometrischen Altangriffe des Drachen.
+  - Offen: Wind, Leere und Salve (Projektile) sieht das Orakel nicht.
+  - Vorschlag: die Altangriffe des Drachen einzeln auf `bv2_sector`/`bv2_zone`/Ring umziehen, je Angriff mit dem vorhandenen Orakel-Fall als Absicherung; zuerst Fächer und Bodenschlag (rein geometrisch), zuletzt die Projektile.
+  → [[Bosse]]
+- **Gegnerzustand per Existenzprüfung:** `ObjectMonster` unterscheidet Art und Zustand über etwa 12 `variable_instance_exists`-Abfragen je Gegner und Bild (`boss_twin`, `boss_minion`, `lvl_kind`, `hit_stun`, `lvl_hover` …). Das ist fehleranfällig bei neuen Gegnerarten und kostet Zeit. Vorschlag: alle Felder in `ObjectMonster/Create_0` mit Standardwerten anlegen und die Abfragen schrittweise durch Feldvergleiche ersetzen, abgesichert durch Level- und Regression-Suite. → [[Gegner & Spawns]]
+- **Sequenz-Vielfalt des Drachen** (Datenbefund, Designfrage): „Feuersturm“ (Phase 3) und „Inferno“ (Phase 4) sind identisch, und drei weitere Sequenzen sind Umstellungen derselben drei Fähigkeiten (Feueratem, Fächer, Stampfen). Feueratem kommt in 8, Stampfen in 7 von 11 Sequenzen vor, Salve und Leere nur je einmal. Entscheidung über die Zusammenstellung beim Nutzer nach dem Spieltest. → [[Boss-Design]]
 - **Drachenkopf bei steilen Winkeln:** Die Kopfansichten entstehen durch Drehen der Seitenansicht; nach unten gerichtet wirkt der Kopf flach. Besser: eigene Draufsicht-Variante des Kopfes; Anforderungen in [[Assets & Pipeline]] 7.4. → [[Bosse]]
 
 - **Performance bei vielen Gegnern** (26.11., `tests/tools/profile_perf.py`): Szenerie-Kollision mit Zellindex, Skelett-Sprite gecacht, Texturen im Menü vorgeladen. 148 Gegner unbegrenzt etwa 73–75 FPS (vorher 64–66), Bosskämpfe mit 60 Gegnern 87–100. Bewusst nicht optimiert, weil Pixel oder Review-Inhalte betroffen wären: Schatten in `enemy_draw` (4 Ellipsen je Gegner, etwa 0,5 ms) und `bv2_hazards_draw` im Drachenkampf (etwa 2,4 ms). Weitere Optimierung nur bei Bedarf; das Verhalten darf sich nicht ändern. → [[Gegner & Spawns]]
@@ -20,6 +26,7 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
 
 ## Balancing-Beobachtungen (nur Empfehlungen, keine Zahlen geändert)
 - **Drache ab Minute 10** für Bots sehr schwer: 17 % bzw. 8 % Siege. → [[Bosse]]
+- **Waldläufer räumt in Bot-Händen deutlich langsamer** (Audit 26.11., 1.188 Bot-Läufe): Kills bis Minute 10 im Median 2.954 gegenüber 4.596 (Schwertkämpfer) und 5.160 (Arkanistin); Level in Minute 5 bei 12–14 statt 17–18. Der Boss-Schaden der drei Klassen liegt dagegen nah beieinander (97,5 bis 109,2 pro Sekunde, stehendes Ziel, Klassen-Suite). Der Rückstand entsteht also bei den Horden, nicht am Einzelziel. Bots sind keine Menschen; vor einer Zahlenänderung mit echten Läufen gegenprüfen. → [[Klassen & Startwaffen]]
 - **Behemoth-Doppelstampfer:** trifft bedrohte Bots zu 79 %. Mehr Reaktionszeit oder deutlichere Warnung prüfen. → [[Bosse]]
 - **Zauber-DPS-Spreizung:** Lightning, Iceball, Arcane Barrage und Wisp liegen weit hinter Ice Prison, Ember Field und Gravity Well (`QA/V3_SIMULATION_REPORT.md`). → [[Zauber & Passiva]]
 - **Talent- und Ausrüstungswerte** sind neue Designwerte, nicht ausbalanciert. → [[Talente]] · [[Ausrüstung]]

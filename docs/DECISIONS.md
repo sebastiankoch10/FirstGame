@@ -46,6 +46,8 @@ updated: 2026-11-26
   - **Obsidian:** `docs/.obsidian/` wird versioniert, ohne `workspace*.json`.
   - **Grafikquelle:** bleibt offen; die Anforderungen in [[Assets & Pipeline]] 7 taugen für beide Wege.
 - **2026-11-26 · Choreografierte Angriffssequenzen ergänzen die dynamische Auswahl** (bestätigte Designentscheidung, [[Boss-Design]] H2). Daten in `bc_sequences`; Pilot ist der Drache, Hexen und Behemoth folgen nach dem Spieltest.
+- **2026-11-26 · Münzen außerhalb des Bildausschnitts werden deaktiviert statt zusammengefasst oder gedeckelt** (Qualitätsaudit). Grund: Münzen sind die Erfahrungspunkte. Zusammenfassen oder Verfallen würde Wirtschaft oder Bild verändern; Deaktivieren erhält Wert, Position und Anzahl exakt und holt die Bildrate zurück (56,7 → 66,7 FPS bei 2.500 Münzen).
+- **2026-11-26 · Alte Drachenangriffe werden zuerst testbar gemacht, nicht sofort portiert** (Qualitätsaudit). Grund: Der Umzug auf `bv2` ändert Treffer- und Warncode eines funktionierenden Bosses. Die gemeinsame Ringgeometrie und das erweiterte Orakel beseitigen das belegte Risiko (doppelte Formel, ungeprüfte Fairness) ohne Verhaltensänderung und sichern den späteren Umzug ab.
 - **2026-11-26 · Trefferstopp nur als Bild, nicht als Spielpause.** Grund: Die Vorgabe verlangt „nur Gegner und Effekt, nie die Spielersteuerung“ und unveränderten Angriffstakt. Ein eingefrorenes Gegnerbild über 2 Bilder erfüllt das, ohne Positionen, Stun oder Bot-Ergebnisse zu verändern.
 
 ## Spieldesign
