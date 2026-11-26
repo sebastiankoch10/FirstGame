@@ -5,6 +5,11 @@
 /// Draw order: base -> feet -> chest -> hands -> head -> weapon (pieces are cut from the visible body, so the
 /// order only matters at their borders). Accent layers (trims, guards, gems) are tinted with the rarity colour.
 
+/// Armour layers (head, chest, hands, feet) are hidden since 26.11. (user decision: the pixel figures stay as they
+/// are, armour does not read well on them). Items, stats, inventory and the layer art stay; true shows them again.
+/// Weapons are not armour: the start weapon and weapon items are still drawn.
+#macro EQUIPMENT_ARMOR_VISIBLE false
+
 /// Build the lookup tables once (sprite index -> cell array, piece -> {sprite, rect buffer}).
 function eqv_init() {
     if (variable_global_exists("eqv") && is_struct(global.eqv)) return global.eqv;
@@ -90,6 +95,7 @@ function player_layers_draw(_actor, _spr, _frame, _x, _y, _xs, _ys, _col, _alpha
     var cell = eqv_cell(_actor, _spr, _frame), bones = (is_struct(_pose) && cell >= 0 && vfx_secondary_motion()) ? eqv_bones(_actor, cell) : [];
     if (is_undefined(_equip)) _equip = variable_global_exists("equipment") ? global.equipment : {};
     var list = eqv_pieces_for(_equip), cut = 0;
+    if (!EQUIPMENT_ARMOR_VISIBLE) {var weapons = []; for (var i = 0; i < array_length(list); i++) if (string_copy(list[i].key, 1, 3) == "wpn") array_push(weapons, list[i]); list = weapons;} // armour hidden, weapon stays
     // A helmet piece is head and helmet in one: the base's rows above the brow are left out (no hair around it).
     if (cell >= 0) for (var h = 0; h < array_length(list); h++) if (string_copy(list[h].key, 1, 4) == "head") cut = eqv_hcut(_actor, cell);
     if (array_length(bones) > 0) {

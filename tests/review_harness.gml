@@ -1,8 +1,9 @@
 // Review Center end-to-end harness (prefix rv, tag REVIEW), driven by tests/tools/review/review_e2e.py.
 // Runs three times against the save folder of the test project (FirstGameReviewE2E, never the real FirstGame folder):
-//   phase a: open the Review Center, start test scenarios, close the pause menu without approving, approve through
-//            real scripted clicks on the green button (first click arms, second saves) -> TEST approvals only.
-//   phase b: same exe restarted -> approvals persisted, entries listed as approved.
+//   phase a: open the Review Center, start test scenarios, close the pause menu without a verdict, cancel a dialog with
+//            Esc, then give verdicts through real scripted clicks, typing and Enter: entry one "Gut" with a comment,
+//            entry two "Nicht gut" (komplett weg) with a comment -> TEST verdicts only.
+//   phase b: same exe restarted -> verdicts, decision and comments persisted, entries listed under their tabs.
 //   phase c: rebuilt after review.py sync/bump on a registry copy -> processed entry archived, bumped entry open again,
 //            archived scenario still starts the productive boss attack.
 global.rv_press = []; global.rv_click = false; global.rv_gx = -100; global.rv_gy = -100;
@@ -41,7 +42,7 @@ function rv_result() {
 function rv_row_of(_id) {var r = review_center_rows(); for (var i = 0; i < array_length(r); i++) if (!r[i].header && r[i].entry.id == _id) return i; return -1;}
 function rv_label_index(_pred) {var l = round_menu_labels(); for (var i = 0; i < array_length(l); i++) if (_pred(l[i])) return i; return -1;}
 /// Click the centre of pause-list row _i (same geometry as round_menu_step).
-function rv_click_pause_row(_i) {var ui = pause_geometry(); global.rv_gx = ui.x + ui.w * .5; global.rv_gy = ui.y + _i * 62 + ui.h * .5; global.rv_click = true;}
+function rv_click_pause_row(_i) {var ui = pause_geometry(); global.rv_gx = ui.x + ui.w * .5; global.rv_gy = ui.y + _i * pause_row_pitch(array_length(round_menu_labels())) + ui.h * .5; global.rv_click = true;}
 function rv_approvals_in_file() {var t = review_read_text(REVIEW_APPROVAL_FILE); if (t == "") return []; try {return json_parse(t).approvals;} catch (_e) {return [];}}
 
 function rv_menu_tick() {
@@ -63,7 +64,9 @@ function rv_menu_tick() {
                 rv_check(menu_mode == "review", "Review-Center screen opens");
                 if (global.rv_target == "test.e2e.one") {
                     rv_check(rv_row_of("test.e2e.one") >= 0 && rv_row_of("test.e2e.two") >= 0, "test entries listed as open");
-                    rv_check(rv_row_of("boss.dragon.beam") >= 0, "registry entries are listed dynamically");
+                    var reg = review_entries(), open_id = undefined; // first real open entry: real approvals move entries out of this tab
+                    for (var i = 0; i < array_length(reg); i++) if (string_copy(reg[i].id, 1, 5) != "test." && review_state(reg[i]) == "open") {open_id = reg[i].id; break;}
+                    rv_check(!is_undefined(open_id) && rv_row_of(open_id) >= 0, "registry entries are listed dynamically");
                 } else rv_check(rv_row_of("test.e2e.one") < 0, "approved entry left the open list at once");
                 if (global.rv_frame == 10) global.rv_shot = "a1-review-center";
                 if (global.rv_frame < 14) return;
@@ -79,8 +82,10 @@ function rv_menu_tick() {
             }
             if (global.rv_step == 1) {
                 var e1 = review_find("test.e2e.one"), e2 = review_find("test.e2e.two");
-                rv_check(is_struct(e1) && review_state(e1) == "local", "approval of entry one survived the restart");
-                rv_check(is_struct(e2) && review_state(e2) == "local", "approval of entry two survived the restart");
+                rv_check(is_struct(e1) && review_state(e1) == "local", "good verdict of entry one survived the restart");
+                rv_check(is_struct(e2) && review_state(e2) == "local_bad", "not-good verdict of entry two survived the restart");
+                var v2 = review_local_verdict("test.e2e.two", 1);
+                rv_check(is_struct(v2) && v2.decision == "remove" && v2.comment == "Bitte komplett entfernen", "decision and comment survived the restart");
                 rv_check(rv_row_of("test.e2e.one") < 0, "approved entry no longer in the open list");
                 var a = rv_approvals_in_file(), all_test = array_length(a) >= 2;
                 for (var i = 0; i < array_length(a); i++) if (!review_s(a[i], "test", false)) all_test = false;
@@ -88,8 +93,11 @@ function rv_menu_tick() {
                 global.review_ui.filter = 1; rv_next(2); return;
             }
             if (global.rv_step == 2) {
-                if (global.rv_frame == 4) {rv_check(rv_row_of("test.e2e.one") >= 0, "approved entry listed under Freigegeben"); global.rv_shot = "b1-approved-tab";}
-                if (global.rv_frame > 8) {rv_finish();}
+                // rv_menu_tick returns before frame 8, so every step here starts at frame 8
+                if (global.rv_frame == 8) {rv_check(rv_row_of("test.e2e.one") >= 0 && rv_row_of("test.e2e.two") < 0, "good entry listed under Freigegeben"); global.rv_shot = "b1-approved-tab";}
+                if (global.rv_frame == 12) global.review_ui.filter = 2;
+                if (global.rv_frame == 16) {rv_check(rv_row_of("test.e2e.two") >= 0 && rv_row_of("test.e2e.one") < 0, "not-good entry listed under Nicht gut"); global.rv_shot = "b2-not-good-tab";}
+                if (global.rv_frame > 20) {rv_finish();}
             }
             return;
         case "c":
@@ -97,7 +105,7 @@ function rv_menu_tick() {
                 var e1 = review_find("test.e2e.one"), e2 = review_find("test.e2e.two");
                 rv_check(is_struct(e1) && e1.status == "processed" && review_state(e1) == "processed", "synced approval -> processed");
                 rv_check(is_struct(e2) && e2.revision == 2 && review_state(e2) == "open", "bumped revision is open again");
-                rv_check(review_local_approved("test.e2e.two", 1) && !review_local_approved("test.e2e.two", 2), "old approval not transferred to the new revision");
+                rv_check(review_local_rejected("test.e2e.two", 1) && !is_struct(review_local_verdict("test.e2e.two", 2)), "old verdict not transferred to the new revision");
                 menu_mode = "main"; var labels = menu_labels("main");
                 for (var i = 0; i < array_length(labels); i++) if (string_pos("Review-Center", labels[i]) == 1) menu_activate(i);
                 rv_check(rv_row_of("test.e2e.one") < 0 && rv_row_of("test.e2e.two") >= 0, "open list: processed entry gone, new revision present");
@@ -138,27 +146,38 @@ function rv_controller_tick() {
                     rv_check(!global.game_paused, "Weiter closes the menu");
                     rv_check(!review_local_approved(global.review.id, global.review.revision), "closing the menu does not approve");
                     rv_next(5); return;
-                case 5:
+                case 5: // reopen the pause menu, open "Nicht gut" and cancel it with Esc: only the dialog closes, nothing saved
                     if (global.rv_frame == 2) global.rv_press = [vk_escape];
-                    if (global.rv_frame < 6) return;
+                    if (global.rv_frame == 8) rv_click_pause_row(rv_label_index(function(_l) {return review_verdict_of_label(_l) == "bad";}));
+                    if (global.rv_frame == 12) {rv_check(review_feedback_active() && global.review.fb.verdict == "bad", "Nicht gut opens the verdict dialog"); global.rv_press = [vk_escape];}
+                    if (global.rv_frame < 16) return;
+                    rv_check(!review_feedback_active() && global.game_paused, "Esc closes only the dialog, the pause menu stays open");
+                    rv_check(!is_struct(review_local_verdict(global.review.id, global.review.revision)), "cancelling the dialog saves nothing");
                     rv_next(6); return;
-                case 6: case 22: // first click arms the button
-                    var ai = rv_label_index(function(_l) {return review_is_approve_label(_l);});
-                    rv_check(ai >= 0, "green approval button present");
-                    if (global.rv_frame == 2) rv_click_pause_row(ai);
-                    if (global.rv_frame < 5) return;
-                    rv_check(global.review.confirm_t > 0 && !review_local_approved(global.review.id, global.review.revision), "first click only arms the button");
-                    if (global.rv_step == 6) global.rv_shot = "a4-approve-armed";
+                case 6: case 22: // open the dialog by a real click, choose (bad: Tab -> "komplett weg"), type the comment
+                    var want = global.rv_step == 6 ? "good" : "bad", ai = rv_label_index(function(_l) {return review_verdict_of_label(_l) != "";});
+                    rv_check(ai >= 0, "verdict rows present in the pause menu");
+                    if (global.rv_frame == 2) rv_click_pause_row(rv_label_index(want == "good" ? function(_l) {return review_verdict_of_label(_l) == "good";} : function(_l) {return review_verdict_of_label(_l) == "bad";}));
+                    if (global.rv_frame == 6) {rv_check(review_feedback_active() && global.review.fb.verdict == want, want + " row opens the dialog"); if (want == "bad") global.rv_press = [vk_tab];}
+                    if (global.rv_frame == 8) keyboard_string = want == "good" ? "Genau so, nur etwas schneller und härter" : "Bitte komplett entfernen";
+                    if (global.rv_frame < 10) return;
+                    rv_check(review_feedback_active() && global.review.fb.text == keyboard_string, "typed text arrives in the comment field");
+                    if (want == "bad") rv_check(global.review.fb.decision == "remove", "Tab switches the decision to komplett weg");
+                    rv_check(!is_struct(review_local_verdict(global.review.id, global.review.revision)), "opening and typing saves nothing yet");
+                    global.rv_shot = want == "good" ? "a4-verdict-good" : "a4b-verdict-bad";
                     rv_next(global.rv_step + 1); return;
-                case 7: case 23:
-                    var ai2 = rv_label_index(function(_l) {return review_is_approve_label(_l);});
-                    if (global.rv_frame == 2) rv_click_pause_row(ai2);
+                case 7: case 23: // Enter saves verdict, decision and comment
+                    if (global.rv_frame == 2) global.rv_press = [vk_enter];
                     if (global.rv_frame < 6) return;
-                    rv_check(review_local_approved(global.review.id, global.review.revision), global.review.id + ": approval saved by the second click");
+                    var good = global.rv_step == 7, v = review_local_verdict(global.review.id, global.review.revision);
+                    rv_check(!review_feedback_active(), "the dialog closes after saving");
+                    rv_check(is_struct(v) && v.verdict == (good ? "good" : "bad") && v.comment == (good ? "Genau so, nur etwas schneller und härter" : "Bitte komplett entfernen")
+                        && v.decision == (good ? "keep" : "remove"), global.review.id + ": verdict, decision and comment saved");
+                    rv_check(good == review_local_approved(global.review.id, global.review.revision), "only a good verdict counts as approval");
                     var recs = rv_approvals_in_file(), last = array_length(recs) > 0 ? recs[array_length(recs) - 1] : undefined;
-                    rv_check(is_struct(last) && last.test == true && last.id == global.review.id && last.source == "pause_menu_button", "stored record is a technical test approval");
-                    rv_check(file_exists(REVIEW_APPROVAL_LOG), "append-only approval log written");
-                    if (global.rv_step == 7) global.rv_shot = "a5-approve-saved";
+                    rv_check(is_struct(last) && last.test == true && last.id == global.review.id && last.source == "pause_menu_dialog", "stored record is a technical test verdict");
+                    rv_check(file_exists(REVIEW_APPROVAL_LOG), "append-only verdict log written");
+                    if (good) global.rv_shot = "a5-verdict-saved";
                     rv_next(global.rv_step + 1); return;
                 case 8: // review actions do not throw and keep state consistent
                     if (global.rv_frame == 2) {review_pause_activate("Leben & Abklingzeiten auffuellen"); rv_check(pl.hp == pl.max_hp, "restore fills hp");}

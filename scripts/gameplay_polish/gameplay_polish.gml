@@ -212,6 +212,9 @@ function pause_geometry() {
     return {x:18,y:84,w:w*0.22,h:48,gap:14,character_x:w*0.36,ability_x:w*0.55,
         ability_w:w*0.45-18,ability_y:76,row:min(35,(h-140)/12)};
 }
+/// Row pitch of the pause list: 62 px, compressed only when _count rows would reach the help lines at the bottom
+/// (review scenarios with both verdict rows). The normal pause menu keeps 62.
+function pause_row_pitch(_count) {var ui=pause_geometry(),bottom=display_get_gui_height()-80;return (_count<2 || ui.y+(_count-1)*62+ui.h<=bottom) ? 62 : max(ui.h+4,floor((bottom-ui.h-ui.y)/(_count-1)));}
 function pause_inventory_draw(){spell_pause_draw();}
 
 function hud_minimap() {

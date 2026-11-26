@@ -10,9 +10,9 @@
       "goal": "Ausholbewegung: Kopf und Hals ziehen sich beim Aufladen zurueck und stossen vor dem Zuenden vor. Glut stroemt zum Maul, lebendiger Feuerstrom ohne Spritewiederholung, klar erkennbare Seitengrenzen, Strom und Treffer schwenken gemeinsam, Reichweite ueber den Bildrand. Die Attacke wiederholt sich; Esc -> Attacke erneut ausloesen.",
       "task": "Phase 2A",
       "revision": 2,
-      "status": "pending",
+      "status": "processed",
       "created": "2026-11-26",
-      "approved_at": null,
+      "approved_at": "2026-11-26T17:11:09",
       "scenario": {
         "type": "boss",
         "boss": "storm_warden",
@@ -30,7 +30,29 @@
           "until": "2026-11-26T07:37:49",
           "reason": "Phase 2A: Feueratem neu (Aufladung, Feuerstrom, Licht)"
         }
-      ]
+      ],
+      "approvals": [
+        {
+          "uid": "boss.dragon.beam@2@2026-11-26T17:11:09@42918",
+          "revision": 2.0,
+          "approved_at": "2026-11-26T17:11:09",
+          "source": "pause_menu_button",
+          "test": false,
+          "imported_at": "2026-11-26T17:19:11",
+          "verdict": "good",
+          "decision": "keep",
+          "comment": "",
+          "result": "processed"
+        }
+      ],
+      "processed_at": "2026-11-26T17:19:11",
+      "feedback": {
+        "verdict": "good",
+        "decision": "keep",
+        "comment": "",
+        "revision": 2,
+        "at": "2026-11-26T17:11:09"
+      }
     },
     {
       "id": "boss.twins.ring",
@@ -67,7 +89,7 @@
       "title": "Charakter - Laufen, Sprung, Ausweichrolle (Schwertmeister)",
       "category": "Charakter",
       "content": "Schwertmeister im Testraum ohne Gegner: Bewegung in 8 Richtungen, Sprung (Leertaste), Ausweichrolle (Strg), Schwertkette",
-      "goal": "Bewegungsgefuehl, Richtungswechsel, Sprung: Haare und Umhang schwingen beim Absprung zurueck, haengen beim Steigen nach, heben sich beim Fallen, Landung mit Stauchung. Ausweichrolle (Strg), Schwertkette. Ausruestung angelegt, Alternativen im Rucksack ([T]).",
+      "goal": "Bewegungsgefuehl, Richtungswechsel, Sprung: Haare und Umhang schwingen beim Absprung zurueck, haengen beim Steigen nach, heben sich beim Fallen, Landung mit Stauchung. Ausweichrolle (Strg), Schwertkette. Ausruestung angelegt (Ruestung ist unsichtbar, nur die Waffe ist zu sehen), Alternativen im Rucksack ([T]).",
       "task": "Phase 1 Review-Center",
       "revision": 1,
       "status": "pending",
@@ -276,9 +298,31 @@
         "boss_hp": 0.7
       },
       "revision": 1,
-      "status": "pending",
+      "status": "processed",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": "2026-11-26T17:12:59",
+      "approvals": [
+        {
+          "uid": "boss.twins.checker@1@2026-11-26T17:12:59@16216",
+          "revision": 1.0,
+          "approved_at": "2026-11-26T17:12:59",
+          "source": "pause_menu_button",
+          "test": false,
+          "imported_at": "2026-11-26T17:19:11",
+          "verdict": "good",
+          "decision": "keep",
+          "comment": "",
+          "result": "processed"
+        }
+      ],
+      "processed_at": "2026-11-26T17:19:11",
+      "feedback": {
+        "verdict": "good",
+        "decision": "keep",
+        "comment": "",
+        "revision": 1,
+        "at": "2026-11-26T17:12:59"
+      }
     },
     {
       "id": "boss.dragon.stomp_checker",
@@ -500,7 +544,7 @@
       "title": "UI - Inventar: Ziehen, Rechtsklick, Tooltips, Shift-Vergleich",
       "category": "UI",
       "content": "Charakterbildschirm [T]: Drag-and-drop zwischen Rucksack und Plaetzen, Tausch, Rechtsklick legt ab, voller Rucksack wird abgelehnt, Tooltips aus echten Daten, Shift zeigt den angelegten Gegenstand daneben",
-      "goal": "Druecke T. Ziehe Gegenstaende, tausche, lege per Rechtsklick ab, fahre ueber Rucksack-Gegenstaende und halte Shift. Geht nie etwas verloren oder doppelt? Sind die Vergleiche sofort lesbar? Aendert sich der Charakter sofort mit?",
+      "goal": "Druecke T. Ziehe Gegenstaende, tausche, lege per Rechtsklick ab, fahre ueber Rucksack-Gegenstaende und halte Shift. Geht nie etwas verloren oder doppelt? Sind die Vergleiche sofort lesbar? Wechselt die Waffe sofort an der Figur mit? Ruestung bleibt seit 26.11. unsichtbar.",
       "task": "Phase 1",
       "scenario": {
         "type": "showroom",
@@ -831,6 +875,48 @@
       "status": "pending",
       "created": "2026-11-26",
       "approved_at": null
+    },
+    {
+      "id": "char.armor.hidden",
+      "title": "Charakter - Ruestung unsichtbar, nur die Waffe sichtbar (Schwertmeister)",
+      "category": "Charakter",
+      "content": "Schwertmeister mit voller Ausruestung der Stufe 3 (Helm, Brust, Haende, Fuesse, Waffe) und Alternativen im Rucksack. Ruestung wirkt nur ueber Werte, an der Figur ist nur die Waffe zu sehen. Gilt fuer alle Klassen.",
+      "goal": "Druecke T und wechsle Helm, Brust, Haende und Fuesse: die Figur bleibt gleich, kein Helm, keine Reste. Wechsle die Waffe: sie aendert sich sofort an der Figur. Laufe in alle Richtungen, springe und greife an.",
+      "task": "Nutzerentscheidung 26.11. abends",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {
+        "type": "showroom",
+        "class": "Sword",
+        "minute": 10,
+        "arena": 0,
+        "gear": 3,
+        "backpack": [
+          {
+            "slot": "head",
+            "rarity": 2
+          },
+          {
+            "slot": "chest",
+            "rarity": 1
+          },
+          {
+            "slot": "hands",
+            "rarity": 2
+          },
+          {
+            "slot": "feet",
+            "rarity": 1
+          },
+          {
+            "slot": "weapon",
+            "rarity": 2
+          }
+        ],
+        "invulnerable": true
+      }
     },
     {
       "id": "char.attach.anchors",

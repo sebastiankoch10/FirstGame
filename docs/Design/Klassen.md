@@ -31,7 +31,7 @@ Rang 2 unter [[Leitbild]]. Technischer Ist-Stand: [[Klassen & Startwaffen]], [[C
   - Schaden nur bei echtem Treffer.
 - **Weitere Fortschrittsquellen:**
   - ein eigener Talentbaum, der die Identität vertieft statt die Klassen anzugleichen;
-  - sichtbare Ausrüstung auf einem Basismodell ohne fest eingebaute austauschbare Rüstung (siehe [[Progression & Builds]]).
+  - sichtbare Waffe als eigene Ebene; Rüstung wirkt nur über Werte und ändert das Aussehen nicht (seit 26.11., [[Visuelles Leitbild & Animation]] 5.5a).
 - **Angriffe sperren nie die Bewegung.** Automatische Angriffe laufen beim Laufen, Springen und Sliden weiter.
 
 ### Darstellung (G7, G8)
@@ -42,7 +42,7 @@ Rang 2 unter [[Leitbild]]. Technischer Ist-Stand: [[Klassen & Startwaffen]], [[C
   - Ausweichen, Slide, Treffer, Tod;
   - jede Kombostufe mit Vorbereitung, Treffer und Nachschwung.
 - **Sekundärbewegung:** Haare, Kleidung, Umhang und angelegte Ausrüstung reagieren zeitversetzt auf Bewegung, Richtungswechsel, Sprung und Landung.
-- **Ebenen:** Grundkleidung als Basis, Ausrüstung als synchrone Ebenen, Startwaffe als eigene Ebene. Die Reihenfolge der Ebenen ist in allen Richtungen korrekt.
+- **Ebenen:** die Figur als Grundbild, Startwaffe und Waffengegenstände als eigene, synchrone Ebene. Die Reihenfolge ist in allen Richtungen korrekt.
 - **Schatten:** ein passender Bodenschatten, der sich bei Sprunghöhe anpasst.
 - **Klassenfarbe:** eine eigene Licht- und Effektfarbe als Akzent (siehe Profile).
 
@@ -58,7 +58,7 @@ Rang 2 unter [[Leitbild]]. Technischer Ist-Stand: [[Klassen & Startwaffen]], [[C
 ### Checkliste für eine neue Klasse
 Abnahme nach [[Qualitätsstandard]]:
 - Rolle, Kombofolge, Finisher, Klassenfarbe und Talentbaum-Richtung sind schriftlich in diesem Dokument festgelegt.
-- Basismodell, acht Richtungen, alle Zustände, Sekundärbewegung, Ausrüstungsebenen und Startwaffen-Ebene sind vorhanden.
+- Figur in acht Richtungen, alle Zustände, Sekundärbewegung und Waffen-Ebene sind vorhanden.
 - Für jede Kombostufe ist die Zeitachse (Attack Timeline) mit Gameplay-, Effekt- und Ton-Ereignissen definiert.
 - Die Suiten `classes` und `visual` sind um die neue Klasse erweitert.
 
@@ -68,11 +68,7 @@ Abnahme nach [[Qualitätsstandard]]:
 - **Rolle:** Nahkampf, Bewegung, kontrollierte Fläche. Robust (Ist: 120 HP, Tempo 3,2, Power 2).
 - **Startwaffe:** Kette aus drei Hieben mit festem Ablauf (`master_combat`, `ObjectSwordHitbox`). Slash-Effekte mit drei visuellen Stufen.
 - **Talentrichtung:** Druckwelle am Finale, Rundumhieb, Sturmangriff nach Ausweichrolle, Heilung beim Finale.
-- **Aussehen** (Basemodel ohne Ausrüstung, Regel in [[Visuelles Leitbild & Animation]] 5.5a):
-  - Identität: blondes, kurzes, wildes Haar und eine kämpferische, breitbeinige Haltung mit tiefem Schwerpunkt.
-  - Basis: schlichte, dunkle, eng anliegende Kleidung, Stoffschuhe.
-  - Ausrüstung: Waffenrock oder Kettenhemd (Brust), roter Umhang (Rücken) und Schal (Accessoire) sind Ausrüstung, nicht Basis.
-  - Klassenfarbe warm (Stahl, Glut).
+- **Aussehen** (die heutige Figur, [[Visuelles Leitbild & Animation]] 5.5a): blondes Haar, navyblauer Waffenrock, roter Umhang und Schal. Angelegte Rüstung ändert das Aussehen nicht, die Waffe schon. Klassenfarbe warm (Stahl, Glut).
 - **Soll (Auftrag 25.11.):**
   - Hiebe mit sichtbarer Körperrotation und Gewichtsverlagerung.
   - Ausholen, Treffer und Nachschwung mit Verwischungsbild (Smear) statt eines einzelnen Slash-Sprites.
@@ -87,11 +83,7 @@ Abnahme nach [[Qualitätsstandard]]:
   3. Runenkreis
   4. ballistischer Sternenorb mit Implosion
 - **Talentrichtung:** Fläche (Weite Glyphen), Sternenorb, Bannkreis, Elementarfokus, Supernova.
-- **Aussehen** (Basemodel ohne Ausrüstung):
-  - Identität: langes, silber-lavendelfarbenes Haar und eine aufrechte, elegante Haltung mit ruhigen Gesten.
-  - Basis: schlichte, eng anliegende Tunika und Hose, Stoffschuhe.
-  - Ausrüstung: Die Robe gehört auf die Ebenen Brust und Beine, der Sternenstab ist die Waffen-Ebene; beides ist nicht Basis.
-  - Klassenfarbe violett-blau.
+- **Aussehen** (die heutige Figur): silber-lavendelfarbenes Haar, violett-blaue Robe, Sternenstab als Waffen-Ebene. Klassenfarbe violett-blau.
 - **Soll (Auftrag 25.11.):**
   - „Wuchtig“ heißt **Macht durch Phasen und Klarheit**: Aufladen, Entladung, Implosion. Bildschirmfläche ist kein Maßstab.
   - Auf niedriger Stufe sind die Effekte kompakt, der Sternenorb wird mit der Entwicklung sichtbar größer.
@@ -108,11 +100,7 @@ Abnahme nach [[Qualitätsstandard]]:
   - Eine Salve zählt als ein Schritt.
   - Ein Pfeil trifft dasselbe Ziel nur einmal.
 - **Talentrichtung:** Tempo, Salvenbreite, Pfeilhagel, Sturmköcher.
-- **Aussehen** (Basemodel ohne Ausrüstung):
-  - Identität: helles Haar und eine leichtfüßige, federnde Haltung.
-  - Basis: schlichtes Leinenhemd, eng anliegende Hose, Stoffschuhe.
-  - Ausrüstung: Der grüne Kapuzenmantel liegt auf der Rücken-Ebene, Lederrüstung und Armschienen auf Brust und Händen, der Bogen auf der Waffen-Ebene. Vorschlag: Der Köcher gehört zur Bogen-Ausrüstung und wird auf der Rücken-Ebene gezeichnet. Nichts davon ist Basis.
-  - Klassenfarbe grün mit Naturakzenten.
+- **Aussehen** (die heutige Figur): helles Haar, grüner Kapuzenmantel, Lederkleidung, Köcher; Bogen als Waffen-Ebene. Klassenfarbe grün mit Naturakzenten.
 - **Soll (Auftrag 25.11.):**
   - Hohe Frequenz verlangt **kleine, präzise Projektile** mit feiner Spur.
   - Die Wucht steckt in Salve und Hagel, nicht im Einzelpfeil.
@@ -121,6 +109,4 @@ Abnahme nach [[Qualitätsstandard]]:
 ## 4. Offene Entscheidungen
 1. ~~Klassennamen~~: entschieden am 25.11.: Schwertmeister, Arkanistin, Waldläufer (im Spiel umgesetzt).
 2. ~~Waffen-Upgrade-System~~: entschieden und umgesetzt am 25.11. (Karten in der Level-up-Auswahl).
-3. **Neue Ausrüstungsplätze** (statt „Umhang-Slot“; seit der Nutzer-Klarstellung vom 26.11. ist ein Umhang Ausrüstung):
-   - Umhang bzw. Mantel liegt auf der Rücken-Ebene.
-   - Offen ist, ob Rücken, Schultern, Beine und Nebenhand eigene Spielplätze werden (mehr Werte, also Balancing) oder Teil vorhandener Gegenstände sind ([[Visuelles Leitbild & Animation]] 5.5a, Ebenen-Stapel).
+3. ~~Umhang-Slot / neue Ausrüstungsplätze~~: entfällt am 26.11. abends. Umhänge gehören zur Figur, Rüstung ist unsichtbar ([[Visuelles Leitbild & Animation]] 5.5a).

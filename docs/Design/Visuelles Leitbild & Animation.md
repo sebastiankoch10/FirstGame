@@ -221,66 +221,30 @@ Rang 2 unter [[Leitbild]]. Die Technik (wie es gebaut wird) steht in [[Technisch
 - **Ausrüstung** ist synchron zum Körper (Ist) und bekommt dieselbe Sekundärbewegung wie Kleidung (Soll, z. B. Schulterstücke, Umhangsaum).
 - **Beschworene Kreaturen** folgen denselben Gegnerregeln. Ihr Erscheinen und Verschwinden ist inszeniert.
 
-### 5.5a Modulare Charakterdarstellung (Soll, Auftrag 26.11., Phase 1; gilt für alle Klassen)
-- **Basemodel ohne Ausrüstung (verbindlich, Nutzer-Klarstellung 26.11., Priorität 1):**
-  - **Regel:** Ein Sprite mit sichtbaren Ausrüstungsbestandteilen ist kein Basemodel. Jede Klasse hat ein Basemodel ohne Ausrüstung. Gefundene oder angelegte Ausrüstung kommt als separate Ebene darauf.
-  - **Nicht im Basemodel:**
-    - Schulter-, Brust- oder Plattenteile;
-    - Armschienen oder Handschuhe als Ausrüstung;
-    - Stiefel-Rüstung;
-    - Umhang, Cape, Mantel oder Robe;
-    - Schal;
-    - Gürtel-, Platten- oder Metallteile;
-    - Taschen, Köcher, Holster;
-    - Waffen;
-    - jede andere als Ausrüstung lesbare Klassenkleidung.
-  - **Erlaubt:** Körper, Kopf, Haare und Gesicht; sehr einfache, neutrale, eng anliegende Unter- bzw. Basiskleidung; einfache Stoffschuhe. Nichts davon darf als Ausrüstung lesbar sein.
-  - **Prüfstein:** Das Basemodel muss ohne jede angelegte Ausrüstung vollständig und sauber funktionieren, in allen Richtungen und Animationen. Die Hände sind leer, Griffhaltung und Griffposition bleiben aber gleich, damit die Waffen-Ebene am Ankerpunkt sitzt.
-  - **Klassenidentität ohne Ausrüstung:** über Körperhaltung, Silhouette, Frisur, Bewegung, Idle-Verhalten und Persönlichkeit. Beispiele: Der Schwertkämpfer steht kämpferisch, die Arkanistin wirkt elegant, der Waldläufer leichtfüßig. Modular heißt nicht gleich aussehend.
-  - **Reihenfolge:** erst saubere Basemodels, dann modulare Ausrüstung, erst danach weitere optische Ausbauten. Mischformen („halb Basemodel, halb Ausrüstung“) sind ausgeschlossen.
-- **Ebenen-Stapel (Soll, 26.11.).** Jede Ebene ist ein eigenes Bild je Pose im selben 160 × 160-Raster wie das Basemodel und enthält nur ihre in dieser Pose sichtbaren Pixel. Deshalb reicht eine feste Zeichenreihenfolge:
-
-  | Nr. | Ebene | Inhalt | Spielplatz heute (`equipment_slots`) |
-  |---|---|---|---|
-  | 0 | Basemodel | Körper, Kopf, Haare, Basiskleidung | – |
-  | 1 | Rücken | Umhang, Mantel, Köcher (nur der sichtbare Teil je Pose) | **fehlt (offen)** |
-  | 2 | Beine | Hose, Beinschutz, Rock einer Robe | **fehlt (offen)**; heute Teil von „Brust“ bei langen Rüstungen |
-  | 3 | Schuhe | Stiefel, Beinschienen | `feet` |
-  | 4 | Brust | Rumpf, Oberteil einer Robe | `chest` |
-  | 5 | Schultern | Schulterteile, Kragen | **fehlt (offen)**; Vorschlag: Teil des Brust-Gegenstands |
-  | 6 | Hände | Handschuhe, Armschienen | `hands` |
-  | 7 | Kopf | Helm, Kapuze, Hut (schneidet Haar über `eqv_hcut`) | `head` |
-  | 8 | Nebenhand | Schild, Fokus, Fackel (Ankerpunkt) | **fehlt (offen)** |
-  | 9 | Hauptwaffe | Schwert, Stab, Bogen (Ankerpunkt bzw. Waffen-Ebene) | `weapon` |
-  | – | Accessoire | meist ohne eigenes Bild | `trinket` |
-
-  Welche der fehlenden Ebenen eigene Spielplätze werden (mehr Plätze bedeuten mehr Werte, also Balancing) und welche Teil eines vorhandenen Gegenstands sind, ist eine **offene Designentscheidung** ([[Progression & Builds]]).
-- **Ebenen ersetzen statt überlagern:**
-  - Ausrüstungsteile belegen dieselben Pixel wie die Körperzone, die sie verdecken.
-  - Verdeckte Teile werden ausgeblendet oder ersetzt (Beispiel Helm: `eqv_hcut` schneidet Haar und Kopf des Basismodells ab).
-  - Reihenfolge je Richtung (Draw Order); ein einziger Zustand für Werte und Darstellung.
+### 5.5a Charakterdarstellung und Ausrüstung (Nutzerentscheidung 26.11. abends; gilt für alle Klassen)
+- **Die heutigen Figuren sind die Figuren.**
+  - Schwertkämpfer, Arkanistin und Waldläufer behalten ihr Aussehen (`spr_fg_<klasse>v3_*`).
+  - Umhang, Schal, Robe, Mantel und Köcher gehören zur Figur.
+  - Basemodels ohne Ausrüstung gibt es nicht. Der Plan vom selben Tag ist verworfen ([[DECISIONS]]).
+- **Rüstung ist unsichtbar:**
+  - Kopf, Brust, Hände und Füße verändern das Aussehen nicht. Grund: Aufgesetzte Rüstungsebenen wirken auf der Pixel-Grafik nicht gut.
+  - Umgesetzt über den Schalter `EQUIPMENT_ARMOR_VISIBLE` (false) in `scripts/equipment_visual`.
+  - Gegenstände, Werte, Inventar, Icons und die Ebenen-Grafik bleiben erhalten. Es ist nichts gelöscht, der Schalter holt die Ebenen zurück.
+  - Rüstung wieder sichtbar zu machen braucht eine neue Entscheidung des Nutzers.
+- **Waffen bleiben sichtbar:**
+  - Startwaffe und Waffengegenstände, als Waffen-Ebene je Stufe.
+  - Die Grundstufe ist hochwertig, aber zurückhaltend; höhere Stufen sind komplexer. Seltenheit färbt nur Akzente, keine abweichenden Pixelgrößen.
 - **Ankerpunkte:**
   - Waffen und künftige Nebenhand-Gegenstände hängen an Griffpunkten je Animationsbild: `eqv_attach`, Daten aus `tests/tools/characters/build_attach_points.py`.
   - Der Griff ist die Projektion der Hand auf die Waffenachse (Schwertheft, Stab- und Bogenmitte).
   - Bei verdeckter Hand (Konfidenz 0) bleibt ein angehängter Gegenstand verborgen.
   - Nie frei schwebend.
-- **Visuelle Progression der Ausrüstung:**
-  - Grundausrüstung hochwertig, aber zurückhaltend; höhere Stufen komplexer und eigenständiger.
-  - Keine überdimensionierte Grundausrüstung, keine abweichenden Pixelgrößen.
-  - Seltenheit färbt nur Akzente.
 - **Bewegung:**
-  - Haare, Umhang, Körper und Ausrüstung reagieren gemeinsam: Neigung, Absprung, Steigen, Fallen, Landung, Wende (`player_motion_life`).
+  - Haare, Umhang, Körper und Waffe reagieren gemeinsam: Neigung, Absprung, Steigen, Fallen, Landung, Wende (`player_motion_life`).
   - Ohne Eingabeverzögerung (nur Darstellung).
-- **Ist-Stand 26.11. (ehrlich):**
-  - Ebenen ersetzen bereits pixelgenau, daher gibt es kein Doppel-Rüstungs-Clipping.
-  - Helme sind Kopf-Komposite.
-  - Ankerpunkte für 222/212/230 von 256 Zellen (Schwert, Stab, Bogen) sind vorbereitet, werden aber noch von keiner Zeichenstelle genutzt.
-  - **Kein Basemodel im Spiel (korrigiert 26.11.):** Die heutigen Spielfiguren (`spr_fg_<klasse>v3_*`) sind **ausgerüstete Startfiguren** und kein Basemodel. Die Segmentierung behält ausdrücklich Umhang, Schal, Köcher und Robenrock im Körper (Label `KEEP` in `tests/tools/characters/segment.py`). Die Rüstungszonen werden nur umgefärbt, die Rüstungssilhouette bleibt. Eingebrannt sind:
-    - Schwertkämpfer: Umhang mit Wappen, Kettenhemd mit Schulterpartie, Schal, Stiefel mit Beinschutz, Gürtel;
-    - Arkanistin: bodenlange Robe mit Goldbesatz;
-    - Waldläufer: Kapuzenmantel, Lederrüstung, Armschienen, Gürtel mit Taschen, Köcher.
-    Die Startwaffe ist eine eigene Ebene, wird aber immer mitgezeichnet. Bis neue Quellen da sind, bleiben die Startfiguren im Spiel, damit es spielbar bleibt; sie werden nicht weiter als Basis ausgebaut.
-  - **Was ein Basemodel braucht:** neue Quellgrafik für 3 Klassen × 256 Posen (Anforderungen in [[Assets & Pipeline]] 7.1). Ein Umhang oder eine Robe lässt sich nicht herausrechnen: Darunter gibt es keine Bildinformation, Rückansichten und Beine würden zu Löchern. Prozedurales Entfernen oder Ausdünnen ist deshalb verworfen.
+- **Ist-Stand 26.11.:**
+  - Die Ebenen-Architektur (Zellen, Rüstungsebenen, Helm-Kopfschnitt `eqv_hcut`) bleibt im Code. Rüstungsebenen werden nur nicht gezeichnet, also auch kein Helm-Kopfschnitt.
+  - Ankerpunkte für 222/212/230 von 256 Zellen (Schwert, Stab, Bogen) sind vorbereitet, aber noch an keine Zeichenstelle angeschlossen.
 
 ### 5.6 Fähigkeiten
 Visuell relevante Fähigkeiten haben Phasen; siehe [[Fähigkeiten, VFX & Audio]].

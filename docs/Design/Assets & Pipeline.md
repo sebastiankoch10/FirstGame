@@ -41,7 +41,7 @@ Rang 2 unter [[Leitbild]].
 
 | Unterordner | PNGs | im Projekt | Werkzeuge | Einordnung |
 |---|---|---|---|---|
-| `swordsman_v3` | 388 | 0 | `atlas.py`, `import_swordsman_art.py`, `prepare_swordsman_art.ps1` | **Quelle** des Schwertkämpfers (Originalframes). Die Spielframes daraus sind ausgerüstete Startfiguren, **kein Basemodel** (Korrektur 26.11., [[Visuelles Leitbild & Animation]] 5.5a) |
+| `swordsman_v3` | 388 | 0 | `atlas.py`, `import_swordsman_art.py`, `prepare_swordsman_art.ps1` | **Quelle** des Schwertkämpfers (Originalframes). Die Spielframes daraus sind die Spielfigur ([[Visuelles Leitbild & Animation]] 5.5a) |
 | `class_overhaul` | 1.021 | 152 | `atlas.py`, `import_class_*`, `prepare_class_*` | **Quelle** Zaubermeisterin, Waldläufer, Klasseneffekte |
 | `character_layers` | 3 | 0 | `build_characters.py` | **Generiert** (Vorschauen) |
 | `dragon_boss` | 35 | 32 | `import_dragon_art.py`, `prepare_dragon_art.ps1` | **Quelle**, Drache, **nicht verändern** |
@@ -197,44 +197,8 @@ Die Quelle (KI-Atlanten oder Pixel-Artist) entscheidet der Nutzer (Roadmap Zeile
 
 Nichts wird prozedural zurechtgeschnitten, wenn das die Qualität senkt. Fehlt eine Quelle, bleibt der heutige Stand.
 
-### 7.1 Basemodel ohne Ausrüstung (Roadmap 11, Priorität 1 seit 26.11.)
-- **Regel:** [[Visuelles Leitbild & Animation]] 5.5a.
-  - **Nicht enthalten:** Rüstungs- oder Schulterteile, Umhang, Mantel, Robe, Schal, Gürtel- und Metallteile, Taschen, Köcher, Waffen und jede als Ausrüstung lesbare Klassenkleidung.
-  - **Enthalten:** Körper, Kopf, Haare, Gesicht, sehr einfache, eng anliegende Basiskleidung, Stoffschuhe.
-- **Umfang:** 3 Klassen × 4 Atlanten (`walk`, `combat`, `mobility`, `reaction`) × 8 Spalten × 8 Richtungen, also 256 Posen je Klasse.
-  - Abgedeckt sind Idle, Laufen und Rennen, Angriffsbewegungen (Autoattack-Basis), Sprung, Fall, Landung, Ausweichen, Slide, Dive, Treffer und Tod.
-  - Neu und wünschenswert ist ein 5. Atlas `transitions` mit gezeichneten Übergängen: Richtungswechsel 3, Landung 2, Ausweich-Start 1, Erholung nach Treffer 2. Heute laufen diese Übergänge prozedural (`player_motion_life`). Für diesen Atlas muss `atlas.SETS` bei der Lieferung um eine Quelle ergänzt werden.
-- **Maße (korrigiert 26.11., gemessen):** exakt die Pixelgröße des jeweiligen Originalatlas. Jede Figur steht an derselben Stelle wie in der Originalzelle (Original als Unterlage zeichnen), weil Import und Prüfung die Zellgrenzen des Originals verwenden.
-
-  | Klasse | walk | combat | mobility | reaction |
-  |---|---|---|---|---|
-  | Schwertkämpfer (`swordsman_v3/sources/<atlas>.png`) | 1254 × 1254 | 1254 × 1254 | 1254 × 1254 | 1254 × 1254 |
-  | Arkanistin (`class_overhaul/sources/mage_<atlas>.png`) | 1254 × 1254 | 1254 × 1254 | 1261 × 1247 | 1258 × 1250 |
-  | Waldläufer (`class_overhaul/sources/ranger_<atlas>.png`) | 1254 × 1254 | 1263 × 1245, **9 Reihen** (die 9. ist ungenutzt) | 1261 × 1247 | 1259 × 1249 |
-
-  - Spalten: 8 gleich breite.
-  - Reihen: beim Schwertkämpfer 8 gleich hohe. Bei Arkanistin und Waldläufer liegen die Reihengrenzen an den Lücken im Originalbild (`atlas.row_cuts`).
-- **Pose:**
-  - Jede Zelle zeigt dieselbe Pose, Blickrichtung, Körpergröße und denselben Fußpunkt wie die Originalzelle. Nur die Ausrüstung fehlt.
-  - Wo Umhang oder Robe den Körper bisher verdeckten (Rücken, Beine der Arkanistin), wird der Körper neu gezeichnet.
-  - Die Hände sind leer, behalten aber Griffhaltung und Griffposition der Originalpose, damit die Waffen-Ebene am Ankerpunkt sitzt.
-- **Ebenen:** eine Ebene je Atlas.
-  - Die heutigen Ausrüstungsebenen (`spr_eqv_*`) sind für die gepanzerte Silhouette der Startfiguren gemalt und passen nicht auf das Basemodel. Sie werden auf dem Basemodel neu erzeugt (Abschnitt 7.7).
-- **Dateien:** `FirstGame_ArtPack/characters/base_neutral/<klasse>_<atlas>_base.png` mit `swordsman` / `mage` / `ranger`, z. B. `mage_combat_base.png`. Der Ordner existiert, Pfadkonstante `CHARACTER_BASE_NEUTRAL`.
-- **Einlesen ohne Umbau:**
-  - `atlas.base_neutral_path()` liefert die Datei.
-  - Sie wird mit derselben Abbildung wie die Originale in die 160 × 160-Frames geschnitten: Ursprung 80,145, Dichte 1:1, Alpha-Schnitt 128 beim Schwertkämpfer und 180 bei Arkanistin und Waldläufer. Der Hintergrund muss deshalb vollständig transparent und die Figur voll deckend sein.
-  - **Achtung beim Bau des Importers:** `atlas.Cell.to_frame` schneidet Ebenen mit der Freistellungsmaske der **Original**zelle. Für das Basemodel gelten Zellgrenzen, Maßstab und Fußpunkt des Originals, die Freistellung aber aus dem Basemodel selbst. Sonst gehen Pixel außerhalb der alten Silhouette verloren, etwa Beine, die bisher unter der Robe lagen.
-  - Ankerpunkte (`equipment_attach_data`) passen, weil Griffpositionen gleich bleiben; `build_attach_points.py` wird trotzdem neu ausgeführt.
-- **Technische Abnahme:** `python tests/tools/characters/check_base_neutral.py` prüft:
-  - gleiche Größe;
-  - Fußpunkt ±2 px;
-  - mindestens 90 % innerhalb der Original-Silhouette (um 3 px erweitert);
-  - mindestens 20 % Deckung der Original-Silhouette (niedrig, weil Umhang und Robe wegfallen).
-  - Ob wirklich keine Ausrüstung mehr eingebrannt ist, lässt sich nicht automatisch prüfen. Das ist Teil der Sichtprüfung mit den Kontaktbögen der Suite `visual`; die künstlerische Abnahme macht der Nutzer.
-- **Vorlage für die Quelle** (KI-Atlas oder Pixel-Artist):
-  - Je Atlas die Originalzelle als Posen-Vorlage.
-  - Auftrag: „dieselbe Figur, dieselbe Pose und Blickrichtung, ohne Umhang, Robe, Schal, Rüstung, Gürtel, Taschen, Köcher und Waffe; schlichte, eng anliegende Basiskleidung; leere Hand in Griffhaltung; Pixel-Art im Stil der Vorlage; transparenter Hintergrund“.
+### 7.1 ~~Basemodel ohne Ausrüstung~~ (verworfen 26.11. abends)
+Nutzerentscheidung: Die heutigen Figuren bleiben, Rüstung ist unsichtbar ([[Visuelles Leitbild & Animation]] 5.5a, [[DECISIONS]]). Anforderungen, Ablageordner `characters/base_neutral/` und `check_base_neutral.py` sind ohne Auftrag; Verlauf in Git.
 
 ### 7.2 Drachenschweif als Gliederkette (Roadmap 12)
 - **Umfang:**
@@ -282,31 +246,4 @@ Nichts wird prozedural zurechtgeschnitten, wenn das die Qualität senkt. Fehlt e
 - **Dateien:** Quellen unter `FirstGame_ArtPack/bosses/minibosses/<name>/`, Sprites `spr_mb_<name>_<aktion>_<richtung>`.
 - **Noch zu tun bei Lieferung:** Anbindung im Code (klein, analog zum Präfix der Levelgegner).
 
-### 7.7 Umstieg auf Basemodel plus modulare Ausrüstung (26.11., ohne Mischbetrieb)
-**Bleibt (wiederverwendet):**
-- **Posen-Raster und Abbildung** (`atlas.py`: 4 Atlanten, 8 × 8, 160 × 160, Ursprung 80,145).
-- **Animationsauswahl, Zeitverhalten und Richtungslogik** (`player_artpack`), prozedurale Lebendigkeit (`player_motion_life`).
-- **Laufzeit der Ebenen:** `eqv_*`, Zellen, Kopfschnitt `eqv_hcut`, Spiegelung.
-- **Ankerpunkte:** `eqv_attach`, `eqv_attach_draw`, Werkzeug `build_attach_points.py`.
-- **Materialien und Muster** in `render.py` (Rampen, Kettenhemd, Schuppen, Platte, Leder, Seltenheitsakzente) als Malwerkzeug für neue Ebenen.
-- **Startwaffen-Ebenen:** Schwert, Stab, Bogen (`wpn_s`).
-
-**Verworfen als Basis:**
-- **Spielframes** `spr_fg_<klasse>v3_*` als Basemodel. Sie bleiben nur als spielbare Übergangsfigur, bis das Basemodel geliefert ist.
-- **Regel `KEEP` in `segment.py`**, die Umhang, Schal, Köcher und Robenrock im Körper behält.
-- **Umfärben der Rüstungszonen** zu „Grundkleidung“.
-
-**Umgebaut, wenn das Basemodel da ist (Reihenfolge, ohne Zwischenstand mit Mischformen):**
-1. **Importieren und prüfen:** Basemodel-Atlanten über `atlas.base_neutral_path` einlesen, `check_base_neutral.py` laufen lassen, dann Sichtprüfung je Klasse, Richtung und Animation. Das Spiel bleibt dabei unverändert.
-2. **Neue Ebenen erzeugen:** Ankerpunkte und Ausrüstungsebenen auf den Basemodel-Atlanten erzeugen, je Platz und Stufe.
-   - Der Umhang wird erstmals eine eigene Ebene (Rücken), die Robe wird Brust plus Beine.
-   - Quelle: wie das Basemodel (KI-Atlas oder Pixel-Artist) oder gemalt mit `render.py` dort, wo die Form aus dem Basemodel folgt (Handschuhe, Stiefel).
-   - **Quellformat einer Ebene:** ein Atlas je Ebene, Stufe und Animations-Atlas im selben 8 × 8-Raster wie das Basemodel. Er enthält nur die Pixel dieser Ebene, transparent überall sonst, und ist deckungsgleich zur Basemodel-Zelle gezeichnet.
-   - **Ablage:** `FirstGame_ArtPack/characters/equipment_layers/<klasse>/<ebene>_t<stufe>_<atlas>.png`, z. B. `swordsman/back_t0_walk.png` für den Umhang der Grundstufe. Ebenennamen: `back`, `legs`, `feet`, `chest`, `shoulders`, `hands`, `head`, `offhand`, `weapon`.
-   - **Einlesen:** dieselbe Abbildung wie beim Basemodel (`atlas.py`), Ergebnis `spr_eqv_<actor>_<ebene><stufe>_*` wie heute. Der Importer dafür entsteht mit der ersten Lieferung, weil er ohne echte Ebenen nicht prüfbar ist.
-3. **Umschalten in einem Schritt (ein Commit):**
-   - Spielframes `spr_fg_<klasse>v3_*` durch das Basemodel ersetzen.
-   - Die neuen Ebenen und Ankerpunkte einspielen.
-   - Die alten `spr_eqv_*` der Rüstungsplätze entfernen.
-   - Ab hier zeigt ein Run ohne Ausrüstung das Basemodel mit Startwaffe; alte Rüstungsebenen liegen nie auf dem neuen Basemodel.
-4. **Prüfen:** Suiten `visual`, `classes` und `feature`, Kontaktbögen aller Klassen mit und ohne Ausrüstung, Review-Szenarien `char.equipment.*` neu registrieren (Revision).
+### 7.7 ~~Umstieg auf Basemodel plus modulare Ausrüstung~~ (verworfen 26.11. abends, siehe 7.1)

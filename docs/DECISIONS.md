@@ -77,8 +77,13 @@ updated: 2026-11-26
 - **2026-11-24 · Komplexe Varianten der Fähigkeiten 1–3 erst bei Bossen ab Minute 10.** Grund: Der erste Boss in Minute 5 soll zugänglich bleiben (laut `docs/Design/Boss-Design.md` Abschnitt H: „später komplexere Varianten“).
 - **2026-11-24 · Aufholattacken ersetzen den Teleport.** Der Teleport bleibt nur als Notfall (über 850 px außerhalb des Bildes, nach 6 s).
 - **2026-11-24 · Charaktere aus Basismodell plus sichtbaren Ausrüstungsebenen.** Basis = Grundkleidung ohne Waffe. Die Startwaffe ist eine eigene Ebene, solange keine Waffe angelegt ist. Siehe [[Charaktergrafik & Ausrüstungs-Layer]].
-- ~~**2026-11-24 · Umhänge bleiben im Basismodell.**~~ Ersetzt am 26.11. durch die Nutzer-Klarstellung „Basemodel ohne Ausrüstung“ (siehe unten).
-- **2026-11-26 · Basemodel ohne Ausrüstung, Ausrüstung modular** (verbindliche Klarstellung des Nutzers, Priorität 1; Regel in [[Visuelles Leitbild & Animation]] 5.5a).
+- **2026-11-24 · Umhänge bleiben Teil der Figur.** Am 26.11. kurz durch „Basemodel ohne Ausrüstung“ ersetzt, am selben Abend durch die Nutzerentscheidung „Basemodels verworfen“ wieder gültig.
+- **2026-11-26 abends · Basemodels verworfen, Rüstung unsichtbar** (Nutzerentscheidung nach eigenem Test: „macht keinen Sinn mit der Ausrüstung … geht mit der Pixel-Grafik nicht so gut“).
+  - Die heutigen Figuren bleiben die Figuren.
+  - Rüstungsebenen (Kopf, Brust, Hände, Füße) werden nicht gezeichnet (`EQUIPMENT_ARMOR_VISIBLE` false). Nichts ist gelöscht, Werte und Inventar bleiben.
+  - Waffen bleiben sichtbar.
+  - Ersetzt die beiden folgenden Zeilen; der Basemodel-Auftrag an Codex ist zurückgezogen.
+- ~~**2026-11-26 · Basemodel ohne Ausrüstung, Ausrüstung modular**~~ (ersetzt am selben Abend, siehe oben).
   - Ein Sprite mit sichtbaren Ausrüstungsbestandteilen (Umhang, Robe, Schal, Köcher, Rüstungssilhouette, Waffe) ist kein Basemodel.
   - Die heutigen Spielfiguren sind ausgerüstete Startfiguren und bleiben nur, bis neue Quellen da sind. Sie werden nicht weiter als Basis ausgebaut.
   - Grund für die Fehlrichtung: Die Pipeline hat Umhang, Schal, Köcher und Robenrock bewusst im Körper behalten (`KEEP`) und Rüstung nur umgefärbt.

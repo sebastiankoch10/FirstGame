@@ -2,7 +2,14 @@
 tags: [log]
 updated: 2026-11-26
 ---
-# Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
+# Änderungslog (neueste Einträge oben, je 2–5 Zeilen). Ältere Einträge: [[LOG_2026]]
+
+### 2026-11-26 abends · Claude · Basemodels verworfen, Rüstung unsichtbar, Review-Urteil mit Kommentar
+- Spiel: `equipment_visual` (`EQUIPMENT_ARMOR_VISIBLE false`, nur Waffe gezeichnet), `review_center` (Urteilsdialog „Gut“ / „Nicht gut“ mit Kommentar, „komplett weg“ / „anders“, Reiter „Nicht gut“), `gameplay` und `ObjectController/Step_0` (Dialog besitzt Eingabe, Esc schließt nur ihn).
+- Werkzeuge und Tests: `review.py` (Status `rejected`, `feedback`, Kommentare in `status`), `review_e2e.py` und `review_harness.gml` (Dialog, Kommentar, Abbruch), `visual_harness.gml` (Rüstung pixelgleich unsichtbar, Waffe sichtbar). Review: `char.armor.hidden` neu; die ersten beiden Nutzerfreigaben sind verarbeitet.
+- Doku: Visuelles Leitbild 5.5a, Klassen, Assets & Pipeline 7.1/7.7, Roadmap 11, Progression & Builds, DECISIONS, AGENTS „Review-Workflow“, Systemnotizen (Charaktergrafik, Ausrüstung, Review-Center, Tests & QA), ArtPack-READMEs, HANDOFF; LOG bis 24.11. nach `_archive/LOG_2026.md`.
+- Nachgebessert: Pausenliste mit beiden Urteilszeilen rückt zusammen (`pause_row_pitch` in `gameplay_polish`, normales Pausenmenü unverändert), weil „Einstellungen“ sonst unter den Hilfezeilen lag. Testcode `review_harness` (Bildtakt, kein Funktionsname `real`).
+- Tests: QA Stufe 3 PASS (docs, anchors, static, Regression 811, Feature 195, Boss 190, Level 174, Klassen 151, Visual 77, Review 18).
 
 ### 2026-11-26 · Claude · Orakel für Drachen-Projektile, Codex-Übergabe geprüft
 - `tests/boss_harness.gml`: Das Orakel sieht die Projektile des Drachen (gleiche Trefferregel wie `boss_hazards_step`), Zählung `bullets` und `bullet_frames` je Fall. Spielcode unverändert.
@@ -105,46 +112,3 @@ updated: 2026-11-26
 - Audit früherer Aufträge (15 Codex-Anhänge, Claude-Prompts) gegen Doku und Code; Widersprüche aufgelöst (Leitbild Abschnitt 6). Gemessen: Bild um 33 % verzerrt (800×600 auf 1280×720), Pixeldichte 0,25–1,65.
 - IDE-Ressourcenbaum nach Kategorien (1.381 `.yy`-`parent`, `tests/tools/assets/ide_folders.py`, `gm_project.py` sortiert neue Ressourcen ein). Keine Datei verschoben.
 - `AGENTS.md`, `CLAUDE.md`, QA-Agenten, README, Index, Systemnotizen aktualisiert; Export `tests/tools/export_design.py` → `docs/_export/`; 47 versionierte `.pyc` aus Git entfernt.
-
-### 2026-11-24 · Claude · Charaktermodelle + sichtbare Ausrüstung
-- Basismodelle aller 3 Klassen ohne Rüstung/Waffe (Frames in `spr_fg_<actor>_*` ersetzt, Originale im ArtPack); Saum der Walk-Frames entfernt.
-- 4 Stufen × Kopf/Brust/Hände/Füße/Waffe je Klasse als gepackte Atlanten `spr_eqv_*`, Startwaffe als Ebene, Seltenheit als Akzentfarbe, Item-Icons `spr_eqv_icons_*`.
-- Laufzeit `scripts/equipment_visual` (+ generiert `equipment_visual_data`), Pipeline `tests/tools/characters/`, Suite `visual` (75). Details: [[Charaktergrafik & Ausrüstungs-Layer]].
-
-### 2026-11-24 · Claude · QA-Agent modernisiert (Meilenstein 1)
-- Neu `tests/tools/qa.py`: Stufen 0–4 aus dem Diff, Suiten-Auswahl je System, PASS-Cache über Eingabe-Hash, Einzeilen-Ausgabe.
-- `.codex/agents/qa.toml` aktualisiert, `.claude/agents/qa.md` neu. Suite `classes` repariert (baut außerhalb, Drachen-Altteil optional, Warnflächen-Check aktuell): PASS 150.
-- 6 Alias-Runner entfernt; `MCP_TIMEOUT=60000` in `.claude/settings.json`. Details: [[Tests & QA]].
-
-### 2026-11-24 · Claude · Token-Regeln für Claude und Codex
-- `AGENTS.md`: neuer Abschnitt „Synchron bleiben und Token sparen“ (Lesereihenfolge, Lese-Sperrliste, Tests je Änderung, Schreibpflichten a–f, Commit pro Aufgabe).
-- Architekturteil auf einen Verweis auf `docs/Systeme/` gekürzt; der Levelindex steht jetzt in [[Level & Welten]]. Einstiegs-Prompt für Codex an den Nutzer übergeben.
-
-### 2026-11-24 · Claude · Doku- und Übergabestruktur
-- `AGENTS.md` angelegt als einzige Hauptquelle. `CLAUDE.md` ist jetzt nur noch Import plus 3 Claude-Zeilen; das Original liegt in `docs/_archive/`.
-- `docs/` als Obsidian-Vault angelegt: Index, HANDOFF, LOG, DECISIONS, 16 Systemnotizen, Bugs & Ideen, [[SETUP_REPORT]].
-- Hooks: `.claude/settings.json` (SessionStart, Stop) und `.claude/hooks/log-activity.sh`, direkt getestet (Testzeile `Stop TEST` in `docs/ai-activity.log`). Kein Spielcode geändert, kein Commit.
-
-### 2026-11-24 · Claude · Tests und Simulationen (Commits `f46d9fde`…`40e446bb`)
-- 1.080 vollständige Bot-Runs und 270 isolierte Bosskämpfe, Auswertung in `QA/V3_SIMULATION_REPORT.md`.
-- Abschlusstests: Regression 811, Boss 141, Feature 129 und Level 166, alle PASS.
-
-### 2026-11-24 · Claude · Boss-Fairness (Commits `b3a1a7d1`…`b5b216d8`)
-- Schwenks treffen nur einmal, Mehrwellen-Muster haben mehr Reaktionszeit, das Drachen-Schachbrett ist überspringbar.
-- Komplexe Varianten der Fähigkeiten 1–3 erst ab Minute 10. Dateien: `scripts/boss_choreo`, `dragon_encounter`, `boss_encounters_v2`.
-
-### 2026-11-24 · Claude · Bosskampf-Philosophie (Commit `0af8993e` und folgende)
-- Neu `scripts/boss_choreo`: Schachbrett, Streifen, Quadranten, innen/außen, Schwenkstrahlen (2.600 px), Aufholattacken.
-- Warnungen mit Rand-Countdown. Boss-Testmodus F6–F9. Test `tests/boss_harness.gml`.
-
-### 2026-11-24 · Claude · Talente, Ausrüstung, Zauber-Effekte (Commit `086862c0` und folgende)
-- Neu: `scripts/talents`, `scripts/equipment`, `scripts/spell_vfx`, Sprite `spr_eq_icons`. Charakterbildschirm mit Taste T.
-- Test `tests/feature_harness.gml`. Doku `DESIGN/TALENTS_AND_EQUIPMENT.md`.
-
-### 2026-11-23/24 · Claude · Level-Erweiterung (in Commit `055cf95c`)
-- Neu: Verfluchter Sumpf, Aschenfrost-Ruinen, Levelauswahl. Dateien: `scripts/level_worlds`, `scripts/level_world`, `rooms/RoomSwamp`, `rooms/RoomAshfrost`.
-- Doku `LEVEL_EXPANSION_PROGRESS.md`.
-
-### 2026-11-12…23 · Codex · Gesamter Ausbau vor Claude (in Commit `055cf95c` gesammelt)
-- ArtPack-Grafik, Klassen v3, Zauber v2, Bosse v2, Drache, Atmosphäre, QA mit 811 Regressionsprüfungen und 192 Bot-Runs.
-- Berichte: Root-`*_REPORT.md`, `QA/QA_SUMMARY.md`.

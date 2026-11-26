@@ -7,7 +7,6 @@ updated: 2026-11-26
 Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Doku (Claude, 24.–26.11.2026). Status: offen, wenn nicht anders vermerkt. Größere Arbeiten stehen geordnet in [[Roadmap & Vertical Slice]].
 
 ## Mögliche Bugs und Aufräumpunkte
-- **Helm fehlt in einzelnen Frames:** Wo die Segmentierung kaum Haar findet (manche Rückansichten), entsteht kein Helm und das Haar bleibt sichtbar. Abhilfe: Helmform aus dem Nachbarframe derselben Animation übernehmen. → [[Charaktergrafik & Ausrüstungs-Layer]]
 - **Minibosse nutzen 0.1-Gegnerstreifen** (Eber, Golem; 64×64, ohne Blickrichtungen), Stilbruch. Anforderungen für neue Grafik: [[Assets & Pipeline]] 7.6. → [[Roadmap & Vertical Slice]] Schritt 9.
 - **MCP-Zeitlimit:** `MCP_TIMEOUT` in `.claude/settings.json` wirkt nicht (25.11. geprüft). Abhilfe per `setx` nur mit Zustimmung des Nutzers. → [[Tests & QA]]
 - **Boss-Testmenü im Release:** `#macro BOSS_TEST_MENU_ENABLED true` in `scripts/boss_test_mode`. Vor einer Veröffentlichung auf `false` setzen. → [[Boss-Testmodus]]
@@ -21,6 +20,7 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
   - Ursache nicht geprüft. Verdacht: Die Zielrichtung folgt dem Kopf in 32 festen Drehstufen (`dragon_parts`), die Mittelachse des Fächers läge dann bis zu etwa 5,6° neben der Figur.
   - Nächster Schritt: im Boss-Test (F5, Fähigkeit 7) prüfen, ob die Leere eine ruhende Figur trifft. Das ist eine Frage der Lesbarkeit, keine Unfairness.
   → [[Bosse]]
+- **Pausenansicht in Review- und Testszenarien:** Die Zeile „Klasse | Leben“ des Pausen-Inventars (unten, etwa y 673) liegt auf den Statuszeilen von Review- und Boss-Testmodus. Nur Lesbarkeit; im normalen Spiel ohne Statuszeilen tritt es nicht auf. → [[UI, HUD & Menüs]]
 - **Gegnerzustand per Existenzprüfung:** `ObjectMonster` unterscheidet Art und Zustand über etwa 12 `variable_instance_exists`-Abfragen je Gegner und Bild (`boss_twin`, `boss_minion`, `lvl_kind`, `hit_stun`, `lvl_hover` …). Das ist fehleranfällig bei neuen Gegnerarten und kostet Zeit. Vorschlag: alle Felder in `ObjectMonster/Create_0` mit Standardwerten anlegen und die Abfragen schrittweise durch Feldvergleiche ersetzen, abgesichert durch Level- und Regression-Suite. → [[Gegner & Spawns]]
 - **Sequenz-Vielfalt des Drachen** (Datenbefund, Designfrage): „Feuersturm“ (Phase 3) und „Inferno“ (Phase 4) sind identisch, und drei weitere Sequenzen sind Umstellungen derselben drei Fähigkeiten (Feueratem, Fächer, Stampfen). Feueratem kommt in 8, Stampfen in 7 von 11 Sequenzen vor, Salve und Leere nur je einmal. Entscheidung über die Zusammenstellung beim Nutzer nach dem Spieltest. → [[Boss-Design]]
 - **Drachenkopf bei steilen Winkeln:** Die Kopfansichten entstehen durch Drehen der Seitenansicht; nach unten gerichtet wirkt der Kopf flach. Besser: eigene Draufsicht-Variante des Kopfes; Anforderungen in [[Assets & Pipeline]] 7.4. → [[Bosse]]

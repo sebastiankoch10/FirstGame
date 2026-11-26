@@ -5,9 +5,9 @@ Quell-, Referenz- und generierte Grafik. Rolle jedes Ordners, Werkzeuge und Ziel
 | Ordner | Rolle |
 |---|---|
 | `references/` | Konzepttafeln und Referenzen (Zaubermeisterin, Waldläufer, Drachenangriffe, Hexen und Behemoth = die früheren losen `ChatGPT-Bild …`-Dateien, `monster_originals/`) |
-| `characters/swordsman_v3/`, `characters/class_overhaul/` | Quellen der heutigen Spielerfiguren (Atlanten, Originalframes). Das sind ausgerüstete Startfiguren, **keine Basemodels**; sie dienen nur noch als Posen-Vorlage |
+| `characters/swordsman_v3/`, `characters/class_overhaul/` | Quellen der Spielerfiguren (Atlanten, Originalframes) |
 | `characters/character_layers/` | generierte Vorschauen der Figuren-Pipeline |
-| `characters/base_neutral/` | Ablage der **Basemodels ohne Ausrüstung** (noch leer, Priorität 1; Regel und Anforderungen im README des Ordners) |
+| `characters/base_neutral/` | leer, ohne Auftrag (Basemodels am 26.11. abends verworfen) |
 | `bosses/dragon_boss/` | Drachen-Quellen, **nicht verändern** |
 | `bosses/boss_v2/` | Quellen Hexen und Behemoth |
 | `bosses/atmosphere_v2/` | Quellen der Miniboss-Modelle (Waldgolem, Drache), Magnetkugel und Münze; die Krieger-v2-Bögen darin sind ungenutzt. Als Ganzes behalten, weil der Importer den Ordner als Ganzes liest |

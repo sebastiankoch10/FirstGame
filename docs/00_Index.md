@@ -70,4 +70,5 @@ Momentaufnahme des ganzen Kanons als ein Text: [[Designphilosophie_2026-11-25]] 
 
 ## Archiv und Export im Vault (nicht verbindlich)
 - [[CLAUDE_2026-11-24]]: frühere `CLAUDE.md` (Ordner `_archive/`)
+- [[LOG_2026]]: ältere Einträge des Änderungslogs bis 24.11. (Ordner `_archive/`)
 - [[Designphilosophie_2026-11-25]]: Export des Design-Kanons (Ordner `_export/`)

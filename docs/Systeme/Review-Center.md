@@ -5,14 +5,26 @@ updated: 2026-11-26
 # Review-Center (Development Review Center)
 
 ## Zweck
-Dynamische To-do-Liste im Hauptmenü („Review-Center (N offen)“). Jeder Eintrag startet ein spielbares Szenario mit den echten Spielsystemen. Der Nutzer prüft es und gibt es im Escape-Menü mit dem grünen Haken frei. Agenten lesen die Freigaben beim nächsten Auftrag automatisch ein. Verbindlicher Ablauf: AGENTS.md, Abschnitt „Review-Workflow“.
+Dynamische To-do-Liste im Hauptmenü („Review-Center (N offen)“). Jeder Eintrag startet ein spielbares Szenario mit den echten Spielsystemen.
+
+**Urteil seit 26.11. abends:** Im Escape-Menü stehen zwei Zeilen:
+- „Gut – freigeben“ (grüner Haken): Kommentarfeld für Wünsche, z. B. „genau so, nur etwas schneller“.
+- „Nicht gut“ (rotes Kreuz): Auswahl „Komplett weg“ oder „Anders umsetzen“ (Pfeile, Tab oder Klick) plus Kommentar.
+
+Bedienung des Dialogs:
+- Enter oder „Speichern“ speichert, Esc schließt nur den Dialog.
+- Diktieren mit der Windows-Spracheingabe (Win+H) schreibt direkt ins Feld, weil das Feld normale Tastatureingaben (`keyboard_string`) annimmt. Das ist nicht automatisch getestet.
+- Umlaute werden unverändert gespeichert und in der Pixelschrift als ae/oe/ue angezeigt.
+- Ein späteres Urteil derselben Revision ersetzt das frühere.
+
+Agenten lesen Urteile und Kommentare beim nächsten Auftrag automatisch ein. Verbindlicher Ablauf: AGENTS.md, Abschnitt „Review-Workflow“.
 
 ## Datenfluss und Speicherorte
 | Was | Wo | Wer schreibt |
 |---|---|---|
 | Szenarien (einzige Quelle) | `review/registry.json` im Projekt | Agenten, nur über `tests/tools/review/review.py` (`build`, `bump`, `sync`) |
 | Spieldaten | `scripts/review_registry_data` (generiert, nicht von Hand ändern) | `review.py build` |
-| Persönliche Freigaben | `%LOCALAPPDATA%\FirstGame\review_approvals.json` plus Protokoll `review_approvals.log` (nur anhängen) | ausschließlich das Spiel, beim Klick des Nutzers |
+| Persönliche Urteile | `%LOCALAPPDATA%\FirstGame\review_approvals.json` plus Protokoll `review_approvals.log` (nur anhängen). Je Datensatz `verdict` (good/bad), `decision` (keep/remove/change), `comment`, `at` | ausschließlich das Spiel, beim Speichern des Nutzers |
 | Testfreigaben | Speicherordner der Testkopie, z. B. `%LOCALAPPDATA%\FirstGameReviewE2E\` (Feld `test: true`) | nur technische Tests |
 
 - **GameMaker-Sandbox (geprüft 26.11.):** Das Spiel schreibt nur in seinen Speicherordner `%LOCALAPPDATA%\<Projektname>\`, nicht in den Projektordner. Deshalb liest `review.py sync` die Freigaben dort und überträgt sie in die Registry.
@@ -26,19 +38,22 @@ Dynamische To-do-Liste im Hauptmenü („Review-Center (N offen)“). Jeder Eint
   - `approved`: freigegeben, Übernahme läuft.
   - `processed`: verarbeitet, archiviert, bleibt für Regressionstests startbar.
   - `superseded`: durch eine neue Revision ersetzt.
-  - Im Spiel zeigt der Reiter „Freigegeben“ eigene, noch nicht synchronisierte Freigaben.
+  - `rejected` (seit 26.11.): „Nicht gut“, mit `feedback` (Entscheidung, Kommentar). Der Agent entfernt den Inhalt oder setzt ihn um und erhöht dann die Revision (`bump`); Urteil und Kommentar wandern dabei in `revisions`.
+  - Reiter im Spiel: „Offen“, „Freigegeben“ (auch eigene, noch nicht synchronisierte), „Nicht gut“, „Archiv“.
+  - Verlauf und Kommentare gehen nicht in die generierten Spieldaten (`game_entry` in `review.py`), weil freier Text Apostrophe enthalten kann.
 - **Revisionen:** Eine Freigabe gilt nur für die freigegebene Revision. `review.py bump ID --reason …` erhöht die Revision bei wesentlichen Änderungen. Der Eintrag ist danach wieder offen; alte Freigaben werden nicht übertragen.
 
 ## Wichtige Dateien
 - `scripts/review_center`:
   - Registry-Zugriff: `review_entries`, `review_find`, `review_state`.
-  - Lokale Freigaben: `review_local_load`, `review_local_approved`, `review_approve_current`.
+  - Lokale Urteile: `review_local_load`, `review_local_verdict`, `review_local_approved`, `review_local_rejected`, `review_save_verdict`.
   - Szenariostart: `review_start` → `boss_test_pending_start` → `review_after_start` (Overrides).
-  - Pausenmenü: `review_pause_labels`, `review_pause_activate`, `review_approve_button_draw`.
+  - Pausenmenü: `review_pause_labels`, `review_pause_activate`, `review_approve_button_draw` (Haken bzw. Kreuz).
+  - Urteilsdialog: `review_feedback_open`, `review_feedback_step` (aufgerufen aus `round_menu_step`), `review_feedback_draw`, `review_ascii`. Esc-Sperre im `ObjectController`-Step.
   - Listenbildschirm: `review_center_step`, `review_center_draw`.
   - Abschalten für öffentliche Builds: `#macro REVIEW_CENTER_ENABLED`.
 - `tests/tools/review/review.py`: `status`, `sync`, `build`, `bump`, `check`.
-- `tests/tools/review/review_e2e.py` und `tests/review_harness.gml`: End-to-End-Test mit Testfreigaben.
+- `tests/tools/review/review_e2e.py` und `tests/review_harness.gml`: End-to-End-Test mit Testurteilen (Dialog abbrechen, „Gut“ mit Kommentar und Umlaut, „Nicht gut / komplett weg“ mit Kommentar, Neustart, Sync, Bump).
 - Claude: Der SessionStart-Hook führt `review.py sync --brief` aus (`.claude/settings.json`). Codex führt den Befehl laut AGENTS.md selbst aus.
 
 ## Szenario-Konfiguration (`scenario`)

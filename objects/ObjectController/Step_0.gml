@@ -7,7 +7,7 @@ if(talent_menu_step()) return; // character screen (talents + equipment) owns th
 
 // Escape oeffnet/verlaesst die normale Pause; Auswahl-Menues haben Vorrang.
 if (!global.levelup_active && !global.chest_collected) {
-    if (keyboard_check_pressed(vk_escape) && !global.game_over) {
+    if (keyboard_check_pressed(vk_escape) && !global.game_over && !review_feedback_active()) { // Esc in the verdict dialog only closes the dialog
         if (global.settings_active) {global.settings_active=false; global._pause_index=0; return;}
         if (global.game_paused && global.normal_pause_active) {
             global.game_paused = false;

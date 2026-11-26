@@ -292,25 +292,26 @@ function round_end_to_title() {
 }
 function round_menu_step() {
     review_pause_tick();
+    if(review_feedback_active()){review_feedback_step();return;} // verdict dialog owns keyboard and mouse while open
     var previous_index=global._pause_index;
-    var labels=round_menu_labels(), count=array_length(labels), ui=(!global.game_over && !global.settings_active) ? pause_geometry() : menu_geometry(count);
+    var labels=round_menu_labels(), count=array_length(labels), pausing=!global.game_over && !global.settings_active, ui=pausing ? pause_geometry() : menu_geometry(count), pitch=pausing ? pause_row_pitch(count) : 62;
     if (keyboard_check_pressed(vk_up)) global._pause_index=(global._pause_index+count-1) mod count;
     if (keyboard_check_pressed(vk_down)) global._pause_index=(global._pause_index+1) mod count;
     var hover=-1, mx=device_mouse_x_to_gui(0),my=device_mouse_y_to_gui(0);
-    for(var i=0;i<count;i++) if(point_in_rectangle(mx,my,ui.x,ui.y+i*62,ui.x+ui.w,ui.y+i*62+ui.h)) hover=i;
+    for(var i=0;i<count;i++) if(point_in_rectangle(mx,my,ui.x,ui.y+i*pitch,ui.x+ui.w,ui.y+i*pitch+ui.h)) hover=i;
     if (hover>=0) global._pause_index=hover;
     fg_audio_hover(previous_index,global._pause_index);
     if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(vk_space) || (mouse_check_button_pressed(mb_left) && hover>=0)) round_menu_activate(global._pause_index);
 }
 function round_menu_draw() {
     var inventory=!global.game_over && !global.settings_active;
-    var labels=round_menu_labels(),ui=inventory ? pause_geometry() : menu_geometry(array_length(labels));
+    var labels=round_menu_labels(),ui=inventory ? pause_geometry() : menu_geometry(array_length(labels)),pitch=inventory ? pause_row_pitch(array_length(labels)) : 62;
     draw_set_alpha(0.88);draw_set_color(make_color_rgb(8,12,21));
     draw_rectangle(0,0,display_get_gui_width(),display_get_gui_height(),false);
     draw_set_alpha(1);draw_set_color(make_color_rgb(239,211,158));draw_set_halign(inventory ? fa_left : fa_center);draw_set_valign(fa_top);
     draw_text(inventory ? 18 : display_get_gui_width()/2,inventory ? 24 : ui.y-46,global.game_over ? "GAME OVER" : (global.settings_active ? "EINSTELLUNGEN" : "PAUSE"));
     for(var i=0;i<array_length(labels);i++) {
-        var yy=ui.y+i*62;
+        var yy=ui.y+i*pitch;
         spell_ui_panel(ui.x,yy,ui.w,ui.h,i==global._pause_index);
         draw_set_halign(fa_center);draw_set_valign(fa_middle);
         var label=labels[i];
@@ -326,6 +327,7 @@ function round_menu_draw() {
     draw_set_halign(fa_left);draw_set_valign(fa_top);
     if(inventory) pause_inventory_draw();
     if(inventory) review_pause_extra_draw();
+    if(review_feedback_active()) review_feedback_draw();
 }
 
 function combat_area_hit(_x,_y,_radius,_damage,_owner,_burn_time,_burn_dps,_slow_time,_slow_factor,_sid=0) {

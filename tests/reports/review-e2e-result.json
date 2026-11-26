@@ -1,41 +1,44 @@
 {
   "passed": true,
-  "checks": 12,
+  "checks": 18,
   "failures": [],
   "phases": {
     "a": {
+      "metrics": {},
       "phase": "a",
       "passed": true,
-      "checks": 60.0,
-      "failures": [],
-      "metrics": {}
+      "checks": 82.0,
+      "failures": []
     },
     "b": {
+      "metrics": {},
       "phase": "b",
       "passed": true,
-      "checks": 4.0,
-      "failures": [],
-      "metrics": {}
+      "checks": 7.0,
+      "failures": []
     },
     "c": {
-      "phase": "c",
-      "passed": true,
-      "checks": 5.0,
-      "failures": [],
       "metrics": {
         "archived_start": true,
         "attack_after_frames": 2.0
-      }
+      },
+      "phase": "c",
+      "passed": true,
+      "checks": 5.0,
+      "failures": []
     }
   },
-  "evidence": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\review-e2e\\20261126-160727",
+  "evidence": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\review-e2e\\20261126-185101",
   "captures": [
     "a0-main-menu.png",
     "a1-review-center.png",
     "a2-scenario.png",
     "a3-pause-approve.png",
-    "a4-approve-armed.png",
-    "a5-approve-saved.png",
+    "a4-verdict-good.png",
+    "a4b-verdict-bad.png",
+    "a5-verdict-saved.png",
+    "b1-approved-tab.png",
+    "b2-not-good-tab.png",
     "c1-review-center.png"
   ],
   "test_type": "native Windows build, scripted input, technical test approvals only"

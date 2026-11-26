@@ -87,19 +87,30 @@ def main() -> None:
             check(bool(res) and res.get('passed') and code == 0 and not exc, f'phase {phase}: {res and res.get("failures")} exc={exc[:2]} exit={code}')
             if phase == 'a':
                 recs = json.loads((TEST_SAVE / 'review_approvals.json').read_text(encoding='utf-8'))['approvals'] if (TEST_SAVE / 'review_approvals.json').exists() else []
-                check(len(recs) == 2 and all(r.get('test') is True for r in recs), f'two technical test approvals stored ({len(recs)})')
+                check(len(recs) == 2 and all(r.get('test') is True for r in recs), f'two technical test verdicts stored ({len(recs)})')
+                by = {r.get('id'): r for r in recs}
+                check(by.get('test.e2e.one', {}).get('verdict') == 'good' and by['test.e2e.one'].get('comment') == 'Genau so, nur etwas schneller und härter',
+                      'verdict file: entry one good with its comment (umlaut kept)')
+                check(by.get('test.e2e.two', {}).get('verdict') == 'bad' and by['test.e2e.two'].get('decision') == 'remove',
+                      'verdict file: entry two not good, komplett weg')
                 check((TEST_SAVE / 'review_approvals.log').exists(), 'append-only log exists')
                 check(not (TEST_SAVE / 'firstgame_talents.ini').exists(), 'review session wrote no talent save')
         # agent side: read status, process (test approvals only on the registry copy), idempotence, revision bump
         out = review('status', '--registry', str(tmp_reg), '--save-dir', str(TEST_SAVE))
         check('Testfreigabe' not in out, 'status lists no test approvals as personal')
         out = review('sync', '--registry', str(tmp_reg), '--save-dir', str(TEST_SAVE), '--include-test', '--out', str(data))
-        check('test.e2e.one' in out and 'test.e2e.two' in out, 'sync processed both test approvals')
+        check('test.e2e.one' in out and 'test.e2e.two' in out, 'sync processed both test verdicts')
+        check('nur etwas schneller' in out and 'KOMPLETT WEG' in out and 'Bitte komplett entfernen' in out, 'sync shows the comments and the decision to the agent')
         out2 = review('sync', '--registry', str(tmp_reg), '--save-dir', str(TEST_SAVE), '--include-test', '--out', str(data))
         check('Keine neuen' in out2, 'second sync processes nothing twice')
         reg2 = json.loads(tmp_reg.read_text(encoding='utf-8'))
         e1 = next(e for e in reg2['entries'] if e['id'] == 'test.e2e.one')
+        e2 = next(e for e in reg2['entries'] if e['id'] == 'test.e2e.two')
         check(e1['status'] == 'processed' and len(e1.get('approvals', [])) == 1, 'registry copy: entry one processed exactly once')
+        check(e1.get('feedback', {}).get('comment') == 'Genau so, nur etwas schneller und härter', 'registry copy: the wish of the good verdict is kept')
+        check(e2['status'] == 'rejected' and e2.get('feedback', {}).get('decision') == 'remove', 'registry copy: entry two rejected, komplett weg')
+        st = review('status', '--registry', str(tmp_reg), '--save-dir', str(TEST_SAVE))
+        check('NICHT GUT: test.e2e.two' in st and 'GUT MIT WUNSCH: test.e2e.one' in st, 'status lists the work orders from the comments')
         out3 = review('sync', '--registry', str(tmp_reg), '--save-dir', str(TEST_SAVE), '--out', str(data))
         review('bump', 'test.e2e.two', '--reason', 'E2E: wesentliche Aenderung simuliert', '--registry', str(tmp_reg), '--out', str(data))
         exe = rn.build_copy('review-e2e', work, project, NAME)

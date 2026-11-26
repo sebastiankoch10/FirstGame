@@ -226,7 +226,7 @@ Die 12er-Kombo des Waldläufers bleibt ohne Talente exakt: 1, 1, 3, 1, 1, 1, 1, 
   - Drops mit Lichtsäule in Rarity-Farbe, eigener Lichtquelle und Punkt auf der Minimap
   - HUD-Leiste mit den sechs Slots über den Zauberslots
 - **Sichtbarkeit am Charakter (seit 24.11.2026):**
-  - Kopf, Brust, Hände, Füße und Waffe erscheinen als Ebenen, heute noch auf den ausgerüsteten Startfiguren. Das Soll ist ein Basemodel ohne Ausrüstung mit dem Ebenen-Stapel aus [[Visuelles Leitbild & Animation]] 5.5a. Offen ist die Entscheidung über neue Spielplätze (Rücken, Schultern, Beine, Nebenhand). Das Aussehen hängt an der Stufe aus der Gegenstandsstufe, die Seltenheit färbt die Akzente.
+  - Seit 26.11. abends (Nutzerentscheidung) ist nur die Waffe als Ebene sichtbar. Kopf, Brust, Hände und Füße wirken über ihre Werte, ändern das Aussehen der Figur aber nicht ([[Visuelles Leitbild & Animation]] 5.5a). Im Inventar bleiben alle Gegenstände mit Icon sichtbar. Das Aussehen hängt an der Stufe aus der Gegenstandsstufe, die Seltenheit färbt die Akzente.
   - Der Talisman ist nicht sichtbar.
   - Details und Grenzen: [[Charaktergrafik & Ausrüstungs-Layer]].
 

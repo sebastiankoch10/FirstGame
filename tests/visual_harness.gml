@@ -145,12 +145,23 @@ function vh_same(_a, _b) {return buffer_md5(_a, 0, buffer_get_size(_a)) == buffe
 function vh_render_checks(_actor, _cls) {
     var none = vh_sheet(_actor, {}, _cls + "-base"), sets = [];
     for (var t = 0; t < 4; t++) array_push(sets, vh_sheet(_actor, vh_set(t), _cls + "-tier" + string(t)));
-    for (var t = 0; t < 4; t++) {
-        var d = vh_diff(none, sets[t]);
-        vh_check(d > 3000, "tier " + string(t) + " set visibly changes the character (" + string(d) + " px differ)");
-        global.vh_metrics[$ _actor + "_diff_t" + string(t)] = d;
+    if (EQUIPMENT_ARMOR_VISIBLE) {
+        for (var t = 0; t < 4; t++) {
+            var d = vh_diff(none, sets[t]);
+            vh_check(d > 3000, "tier " + string(t) + " set visibly changes the character (" + string(d) + " px differ)");
+            global.vh_metrics[$ _actor + "_diff_t" + string(t)] = d;
+        }
+        vh_check(vh_diff(sets[1], sets[2]) > 1500, "tier 1 and tier 2 sets look different");
+    } else {
+        // armour hidden (user decision 26.11.): a full armour set without weapon draws exactly the figure without gear,
+        // a weapon item still shows its own look
+        var armour = vh_set(3); armour[$ "weapon"] = undefined;
+        var arm = vh_sheet(_actor, armour, "");
+        vh_check(vh_same(arm, none), "armour layers hidden: a full tier-3 armour set leaves the figure pixel-identical");
+        var d = vh_diff(none, sets[3]);global.vh_metrics[$ _actor + "_diff_weapon_t3"] = d;
+        vh_check(d > 0, "weapon items stay visible while armour is hidden (" + string(d) + " px differ)");
+        buffer_delete(arm);
     }
-    vh_check(vh_diff(sets[1], sets[2]) > 1500, "tier 1 and tier 2 sets look different");
     var again = vh_sheet(_actor, vh_set(2), "");
     vh_check(vh_same(again, sets[2]), "rendering is deterministic (same set -> identical pixels)");
     var after = vh_sheet(_actor, {}, "");

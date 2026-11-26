@@ -103,10 +103,15 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 - **Größere Umbauten** an Rendering, Animation oder Kampfsystem nur nach `docs/Design/Technische Architektur.md` und `Roadmap & Vertical Slice.md`. Mit „Offen“ markierte Entscheidungen trifft der Agent nach bestem Standard (Generalfreigabe 25.11.) und begründet sie in `docs/DECISIONS.md`.
 
 ## Review-Workflow (Development Review Center, verbindlich seit 26.11.)
-Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft neue Inhalte im Spiel (Hauptmenü → Review-Center) und gibt sie im Escape-Menü mit dem grünen Haken frei.
+Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft neue Inhalte im Spiel (Hauptmenü → Review-Center) und urteilt im Escape-Menü mit **„Gut“** oder **„Nicht gut“**, jeweils mit Kommentar (seit 26.11. abends). Bei „Nicht gut“ wählt er „komplett weg“ oder „anders umsetzen“.
 1. **Vor der Arbeit:** `python tests/tools/review/review.py sync`. Claude erledigt das per SessionStart-Hook, Codex führt den Befehl selbst aus.
-   - Der Befehl überträgt neue persönliche Freigaben aus `%LOCALAPPDATA%\FirstGame\` in `review/registry.json` (Status `processed`).
-   - Mit `status` siehst du, was offen ist.
+   - Der Befehl überträgt neue Urteile aus `%LOCALAPPDATA%\FirstGame\` in `review/registry.json`: „Gut“ wird Status `processed`, „Nicht gut“ wird Status `rejected` (Feld `feedback`).
+   - `status` zeigt Offenes und alle Kommentare: „NICHT GUT“ und „GUT MIT WUNSCH“.
+   - **Kommentare sind Arbeitsaufträge des Nutzers:**
+     - „Nicht gut, komplett weg“: den Inhalt entfernen oder abschalten.
+     - „Nicht gut, anders umsetzen“: nach dem Kommentar überarbeiten, dann `bump`.
+     - „Gut“ mit Wunsch (z. B. „genau so, nur schneller“): umsetzen, dann `bump`, weil sich ein freigegebener Inhalt sichtbar ändert.
+     - Ist ein Kommentar unklar, beim Nutzer nachfragen, statt zu raten.
 2. **Freigegebene Inhalte sind die verbindliche Qualitätsreferenz.**
    - Ohne nachvollziehbaren Grund nicht wesentlich verändern.
    - Erlaubt: Fehlerkorrekturen, Performance, interne Refactorings ohne sichtbare Wirkung, ausdrücklich neue Anforderungen.
@@ -119,7 +124,7 @@ Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft neue Inhalte im Spie
 4. **Danach `review.py build` und QA.** Das Szenario muss mit den echten Systemen starten, mit realistischer Ausrüstung, Level und Talenten (Konfiguration siehe Systemnotiz).
    - Keine Einträge für nicht Umgesetztes.
    - Ein Eintrag für eine Einzelattacke gibt nicht den ganzen Boss frei.
-5. **Persönliche Freigaben setzt ausschließlich der Nutzer per Klick.** Agenten schreiben nie in `review_approvals.*` und simulieren keine Freigabe.
+5. **Persönliche Urteile („Gut“ und „Nicht gut“) setzt ausschließlich der Nutzer im Spiel.** Agenten schreiben nie in `review_approvals.*` und simulieren keine Freigabe.
    - Technische QA ist keine Freigabe.
    - Tests nutzen nur gekennzeichnete Testfreigaben in Testkopien (`review_e2e.py`). `--include-test` ist nur mit einer Registry-Kopie erlaubt.
 6. **Entfernen aus der offenen Liste geschieht nur über den Status.**
@@ -133,7 +138,7 @@ Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft neue Inhalte im Spie
 - **Kommentare** im Code auf Englisch, UI-Texte auf Deutsch ohne Umlaute (ae/oe/ue).
 - **Asset-Namen sind globale Bezeichner.** Ein bloßes `if(master_skeleton)` liefert die Skript-Referenz, nicht die Instanzvariable. Deshalb `self.<name>` verwenden oder solche Namen meiden.
   - Auch jede Skriptfunktion ist eine globale Variable: `global.vfx_quality` ist die Funktion `vfx_quality`, und `variable_global_exists("vfx_quality")` ist immer wahr. Globale Werte nie wie eine Funktion benennen (z. B. `global.vfx_quality_level`).
-- **Reservierte Namen** wie `other`, `speed`, `score`, `mean` nicht als Variablen nutzen. Folgefehler zeigen sonst irreführende Zeilen („Unknown token eArrayRef“).
+- **Reservierte Namen** wie `other`, `speed`, `score`, `mean`, `all` (Schlüsselwort) und eingebaute Funktionsnamen wie `real` nicht als Variablen nutzen. Folgefehler zeigen sonst irreführende Zeilen („Unknown token eArrayRef“).
 - **Neue Skripte, Sprites und Objekte** in `FirstGame.yyp` registrieren, z. B. mit `tests/tools/levels/gm_project.py`. Unbekannte Funktionen kompilieren sonst als Variablen und scheitern erst zur Laufzeit.
 - **Die IDE-Diagnose** meldet bei einzeiligen `if(...)return` und Komma-`var`-Listen viele Fehlalarme („unreachable“, „argument-count“).
 - **Telemetrie-Anker:** `QA/tools/telemetry_injections.py` braucht exakte Code-Anker. Nach Änderungen an `class_weapons`, `spell`, `boss_hazards_v2` usw. die Anker prüfen.

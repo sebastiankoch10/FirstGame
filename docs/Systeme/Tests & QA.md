@@ -33,7 +33,7 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
 | `boss` | `run_native_harness.py boss` | Muster, Orakel, Kiting, Aufholattacken |
 | `level` | `tests/tools/run_level_smoke.py` | 3 Level inklusive Neustart |
 | `classes` | `tests/tools/run_class_dragon_smoke.py` | Startwaffen und Kombos, Warnflächen-Rendering, Klassen-DPS (150) |
-| `visual` | `run_native_harness.py visual` | Charakter- und Ausrüstungs-Layer (75): Datenintegrität, Anlegen/Ablegen/Wechsel, Pixelvergleich, Kontaktbögen 8 Richtungen × 11 Zustände × 5 Sets, Weltbild |
+| `visual` | `run_native_harness.py visual` | Charakter- und Ausrüstungs-Layer: Datenintegrität, Anlegen/Ablegen/Wechsel, Pixelvergleich (seit 26.11. abends: volle Rüstung ohne Waffe ist pixelgleich zur Figur ohne Ausrüstung, die Waffe bleibt sichtbar), Kontaktbögen 8 Richtungen × 11 Zustände × 5 Sets, Weltbild |
 
 - **QA-Prüfer** (nur lesend, gleicher Inhalt): `.codex/agents/qa.toml` und `.claude/agents/qa.md`. `.github/agents/qa.agent.md` ist Legacy (Copilot).
 - **Abnahme von Inhalten:** Statusskala und Kriterien Q1–Q11 in [[Qualitätsstandard]].
@@ -67,7 +67,7 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
 - `run_boss_v2_smoke.py`: doppelt zu `regression`
 - `run_player_animation_legacy.py`: vor v3
 
-- **Review-Center End-to-End** (seit 26.11.): `python tests/tools/review/review_e2e.py`. Zwei Builds und drei Starts mit Testfreigaben: Freigabe per Klick, Persistenz nach Neustart, Sync genau einmal, Revision erneut offen, Archiv startbar, echter Speicherordner und Registry unverändert. Ergebnis in `tests/reports/review-e2e-result.json`, Nachweise unter `%LOCALAPPDATA%\FirstGame-Tests\review-e2e\`. Die Feature-Suite prüft seit 26.11. auch das Inventar (Ziehen, Tausch, ungültige Plätze, Abbruch, Rechtsklick, voller Rucksack, Vergleich).
+- **Review-Center End-to-End** (seit 26.11.): `python tests/tools/review/review_e2e.py`. Zwei Builds und drei Starts mit Testurteilen: Dialog per Esc abbrechen, „Gut“ mit Kommentar (Umlaut) und „Nicht gut / komplett weg“ mit Kommentar per Klick und Enter, Persistenz nach Neustart, Sync genau einmal, Revision erneut offen, Archiv startbar, echter Speicherordner und Registry unverändert. Ergebnis in `tests/reports/review-e2e-result.json`, Nachweise unter `%LOCALAPPDATA%\FirstGame-Tests\review-e2e\`. Die Feature-Suite prüft seit 26.11. auch das Inventar (Ziehen, Tausch, ungültige Plätze, Abbruch, Rechtsklick, voller Rucksack, Vergleich).
 
 - **Seit 26.11.:**
   - `record_scene.py --boss-hp` (Bossphase in Aufnahmen).
@@ -78,11 +78,10 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
   - Boss-Suite seit 26.11. mit dem Lauf `sequences` (Drache): Jede choreografierte Sequenz jeder Phase wird mit dem Orakel erzwungen. Geprüft wird: läuft vollständig und in Reihenfolge, jeder Schritt startet und erreicht die Aktivierung, sichere Position erreichbar. Danach ein natürlicher Lauf über 40 s: Sequenzen ergänzen, reguläre Angriffe bleiben.
   - Audit 26.11.:
     - Das Orakel der Boss-Suite sieht auch die geometrischen Altangriffe und die Projektile des Drachen (`legacy` in `bh_relevant`: Geometrie, Ring über `dragon_ring_geometry`, Flugbahn bis zum Horizont). Je Fall stehen `bullets` und `bullet_frames` im Bericht.
-  - `check_base_neutral.py` nutzt seit 26.11. die echten Zellgrenzen und den Alpha-Schnitt des Importers (`atlas.Atlas`), mit `--dir` auch für Entwürfe außerhalb des Übergabeordners.
     - Die Perf-Suite hat das Szenario `horde_coins` (Horde plus 2.500 liegende Münzen, Kennzahl `active_coins`).
     - Die Level-Suite prüft das Münz-Culling in allen drei Leveln (`lv_coin_cull_check`).
   - `record_scene.py spellsheet --spell-level N`: alle 18 aktiven Zauber in einem Build, je 3 Zeitpunkte, beschriftetes Raster `spellsheet.png`.
-  - `tests/tools/characters/check_base_neutral.py`: technische Abnahme gelieferter Basisfigur-Atlanten ([[Assets & Pipeline]] 7.1).
+  - `tests/tools/characters/check_base_neutral.py`: technische Abnahme von Basisfigur-Atlanten (echte Zellgrenzen und Alpha-Schnitt des Importers, `--dir` für Entwürfe). Seit 26.11. abends ohne Auftrag, weil die Basemodels verworfen sind ([[DECISIONS]]).
 
 - **QA-Runner seit 26.11.:** Suiten `docs` (immer, Sekunden, `tests/tools/vault_check.py`), `review` (nur bei Review-Änderungen, Regeln `REVIEW_RX`/`REVIEW_TOUCH` in `qa.py`) und `perf` (`run_native_harness.py perf`, Lastmessung ohne parallele Last; GameMaker liefert weder Draw Calls noch Prozessspeicher an GML, Ersatz: `fps_real`, Lichtpass-Zeit, Instanzzahl). Level-Auswertung der Bots: `QA/tools/analyze_levels.py`.
   - `perf` meldet seit 26.11. zusätzlich Ausreißer über 50 ms (`spikes_over_50ms`, Logzeile `PERF SPIKE` mit Bildnummer). Mit `texture_debug_messages` stehen Texturlade-Meldungen im Log; `PERF WINDOW <Szenario>` markiert den Beginn jedes Messfensters. Ladezeit des Vorladens beim Run-Start: Logzeile `TEXTURE_PREFETCH ms`.
