@@ -1,8 +1,13 @@
 ---
 tags: [log]
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
+
+### 2026-11-26 · Claude · Vault-Prüfung (nur Doku, Code nur gelesen, nicht committet)
+- 12 Systemnotizen an den Code-Stand angeglichen: Audio, Ausrüstung, Level & Welten, Progression & Level-up, Spielablauf & Zustände, Zauber & Passiva, Talente, Gegner & Spawns, Licht/Wetter/Effekte, Klassen & Startwaffen, Speichern & Einstellungen, Spieler & Bewegung.
+- Frontmatter für `_archive/CLAUDE_2026-11-24.md` und `_export/Designphilosophie_2026-11-25.md`; beide im `00_Index` verlinkt. Nachtrag in `SETUP_REPORT`, zwei Einträge in `Bugs & Ideen`.
+- `AGENTS.md`: Vault-Satz im Abschnitt „Schreiben“, Regel zum Finden betroffener Notizen, `docs/.obsidian/` nicht anfassen.
 
 ### 2026-11-25 · Claude · Zwillingshexen gebacken, alle Boss-Effekte als Pixel-Komposite, deterministische Boss-Tests
 - Hexen aus den Quellbögen in Spielgröße (`build_boss_baked.py twins`); `dragon_fx_sprite`, `class_fx_sprite`, `bv2_fx` und Hexen-Projektile als Pixel-Komposite (`dragon_encounter`, `class_weapons`, `boss_hazards_v2`, `boss_combat`).

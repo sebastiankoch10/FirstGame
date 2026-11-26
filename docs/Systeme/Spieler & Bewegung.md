@@ -1,6 +1,6 @@
 ---
 tags: [system, spieler]
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 # Spieler & Bewegung
 
@@ -26,4 +26,5 @@ Steuerung, Bewegung, Sprung, Sturz, Slide und Ausweichrolle, Treffer am Spieler,
 - Ausrüstung ist seit 2026-11-24 als Ebenen sichtbar ([[Charaktergrafik & Ausrüstungs-Layer]]).
 - Keine Sekundärbewegung (Haar, Umhang) und keine Übergangsposen; Idle ist ein Frame mit Atembewegung. Soll: [[Visuelles Leitbild & Animation]].
 - Kamera seit 2026-11-25: `VIEW_W`×`VIEW_H` = 960×540 (16:9, Makros in `scripts/gameplay`). Vorher 800×600, horizontal um 33 % verzerrt. Siehe R1 in [[Technische Architektur]].
+- Die Kamera steht seit 25.11. abends auf ganzen Weltpixeln (`round` in `ObjectPlayer` Step), damit Ebenen nicht gegeneinander flimmern. Ausgabe über [[Rendering & Pixelraster]].
 - Die Treffer-Höhen (`ground`, `high`, `all`) entscheiden über Sprung, Slide und Ausweichen. Bei neuen Angriffen bewusst wählen.

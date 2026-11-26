@@ -1,11 +1,11 @@
 ---
 tags: [index, start]
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 # FirstGame – Startseite
 
 Pixel-Art-Action-RPG im Run-Format in GameMaker 2024: 30-Minuten-Runs, 3 Klassen, 3 Level, Talente, Ausrüstung, Bosse mit 9 Fähigkeiten.
-Die Arbeitsregeln für KI-Agenten stehen in `AGENTS.md` im Projektordner, außerhalb dieses Vaults.
+Die Arbeitsregeln für KI-Agenten stehen in `AGENTS.md` im Projektordner, außerhalb dieses Vaults. Dort steht auch, wie der Vault gepflegt wird (Abschnitt „Synchron bleiben“).
 
 ## Design-Kanon (verbindlich, Soll)
 **Einstieg und Vorrangregeln:** [[Leitbild]]
@@ -23,7 +23,7 @@ Die Arbeitsregeln für KI-Agenten stehen in `AGENTS.md` im Projektordner, außer
 | Statusskala, Abnahme, Review | [[Qualitätsstandard]] |
 | Reihenfolge und Vertical Slice | [[Roadmap & Vertical Slice]] |
 
-Momentaufnahme des ganzen Kanons als ein Text: `docs/_export/` (nicht verbindlich, erzeugt mit `python tests/tools/export_design.py`).
+Momentaufnahme des ganzen Kanons als ein Text: [[Designphilosophie_2026-11-25]] in `_export/` (nicht verbindlich, erzeugt mit `python tests/tools/export_design.py`).
 
 ## Übergabe zwischen Claude Code und Codex
 - [[HANDOFF]]: aktueller Stand, wird nach jeder Aufgabe überschrieben. **Hier anfangen.**
@@ -65,4 +65,7 @@ Momentaufnahme des ganzen Kanons als ein Text: `docs/_export/` (nicht verbindlic
 ## Historische Dokumente außerhalb des Vaults (nicht verbindlich)
 - `DEVELOPMENT_PROGRESS.md`, `TODO.md`, `QA/CURRENT_STATUS.md`, `QA/V3_SIMULATION_REPORT.md`
 - `LEVEL_EXPANSION_PROGRESS.md`, `QA/QA_SUMMARY.md`, ältere Root-`*_REPORT.md`
-- Archiv: `_archive/CLAUDE_2026-11-24.md` (frühere `CLAUDE.md`)
+
+## Archiv und Export im Vault (nicht verbindlich)
+- [[CLAUDE_2026-11-24]]: frühere `CLAUDE.md` (Ordner `_archive/`)
+- [[Designphilosophie_2026-11-25]]: Export des Design-Kanons (Ordner `_export/`)

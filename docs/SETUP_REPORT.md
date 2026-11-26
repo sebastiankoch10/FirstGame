@@ -1,6 +1,6 @@
 ---
 tags: [setup, report, hooks, obsidian]
-updated: 2026-11-24
+updated: 2026-11-26
 agent: Claude
 ---
 # Setup-Bericht: Doku, Übergabe und Obsidian (2026-11-24)
@@ -11,6 +11,14 @@ agent: Claude
 - `docs/` ist als Obsidian-Vault vorbereitet.
 
 **Kein Spielcode, keine Assets, keine Build- oder Projektdateien geändert.** Nichts gelöscht, nichts committet, nichts installiert, kein Build, kein Spielstart. Start: [[00_Index]].
+
+## Nachtrag 2026-11-26: Vault-Prüfung
+- **Geprüft:** alle 36 Notizen (Frontmatter, Links, Index) und der Code (49 Skripte, 22 Objekte, 6 Räume) gegen die Systemnotizen. Code nur gelesen.
+- **Ergebnis:** keine kaputten Links, jede Notiz im Index, jedes Skript und jeder Raum in mindestens einer Systemnotiz.
+- **Angeglichen:** 12 Systemnotizen an den Code-Stand vom 25.11. (u. a. Waffen-Upgrades, Elitegegner, Effektqualität, Intensitätsbänder, Musikabsenkung, Vollbild-Einstellung, zwei Talent-Töpfe). `ObjectFireball` und `ObjectIceball` stehen jetzt in [[Zauber & Passiva]].
+- **Archiv und Export** haben Frontmatter und sind im [[00_Index]] verlinkt.
+- **Aus Abschnitt 5 erledigt:** Die Doku ist committet; es gibt 18 statt 16 Systemnotizen.
+- **Weiter offen:** `.gitignore`-Einträge für `docs/.obsidian/workspace*.json` und `docs/ai-activity.log` (siehe [[Bugs & Ideen]]).
 
 ## 1. Angelegte und geänderte Dateien
 | Datei | Neu / geändert | Grund |

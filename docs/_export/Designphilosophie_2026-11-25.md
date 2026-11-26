@@ -1,3 +1,7 @@
+---
+tags: [export, design, momentaufnahme]
+updated: 2026-11-25
+---
 # FirstGame – Designphilosophie (konsolidierter Export, Stand 2026-11-25)
 
 > **Momentaufnahme, nicht verbindlich.** Maßgeblich sind die einzelnen Dateien unter `docs/Design/` (Vorrang: Leitbild). Dieser Text wurde mit `python tests/tools/export_design.py` erzeugt und wird bei Änderungen neu erzeugt, nicht von Hand bearbeitet. Verweise in „Anführungszeichen“ nennen Dokumente des Kanons bzw. Systemnotizen unter `docs/Systeme/`.

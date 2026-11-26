@@ -1,10 +1,10 @@
 ---
 tags: [bugs, ideen, backlog]
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 # Bugs & Ideen
 
-Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Doku (Claude, 24./25.11.2026). Status: offen, wenn nicht anders vermerkt. Größere Arbeiten stehen geordnet in [[Roadmap & Vertical Slice]].
+Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Doku (Claude, 24.–26.11.2026). Status: offen, wenn nicht anders vermerkt. Größere Arbeiten stehen geordnet in [[Roadmap & Vertical Slice]].
 
 ## Mögliche Bugs und Aufräumpunkte
 - **Helm fehlt in einzelnen Frames:** Wo die Segmentierung kaum Haar findet (manche Rückansichten), entsteht kein Helm und das Haar bleibt sichtbar. Abhilfe: Helmform aus dem Nachbarframe derselben Animation übernehmen. → [[Charaktergrafik & Ausrüstungs-Layer]]
@@ -23,6 +23,8 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
 - **`run_combat_smoke.py` veraltet** (FAIL schon vor 2026-11-24). → [[Tests & QA]]
 - **Schrift im Weltraum:** „MAGNET“ über Magnetkugeln nutzt noch die Standardschrift (nur Ziffern haben eine Pixelschrift). → [[Rendering & Pixelraster]]
 - **Drachenkopf bei steilen Winkeln:** Die Kopfansichten entstehen durch Drehen der Seitenansicht; nach unten gerichtet wirkt der Kopf flach. Besser: eigene Draufsicht-Variante des Kopfes. → [[Bosse]]
+- **Export ohne Frontmatter:** `tests/tools/export_design.py` schreibt die Exportdatei ohne Frontmatter. Am 26.11. von Hand ergänzt; beim nächsten Export geht es verloren. Generator anpassen. → [[00_Index]]
+- **`docs/.obsidian/` ist nicht ignoriert** und erscheint in `git status`. Vorschlag: `docs/.obsidian/workspace*.json` in die `.gitignore`. → [[SETUP_REPORT]]
 - **`docs/ai-activity.log`** wächst mit jedem Stop-Hook-Lauf. Gelegentlich kürzen; prüfen, ob die Datei in die `.gitignore` gehört. → [[SETUP_REPORT]]
 
 ## Balancing-Beobachtungen (nur Empfehlungen, keine Zahlen geändert)
@@ -33,6 +35,6 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
 
 ## Ideen
 - Eigene Talent-Icons; derzeit werden Zauber-Icons wiederverwendet. → [[Talente]]
-- Eigene Meta-Punkte für ein langsameres Fortschrittstempo zwischen Runs (Zahlenentscheidung). → [[Progression & Builds]]
+- ~~Eigene Meta-Punkte für ein langsameres Fortschrittstempo zwischen Runs~~ umgesetzt am 25.11. (zwei Punkte-Töpfe, siehe [[Talente]]). → [[Progression & Builds]]
 - Lautstärken in der ini speichern. → [[Audio]]
 - Menschliche Spieltests der neuen Bossmuster und Rückmeldungen hier sammeln. → [[HANDOFF]]

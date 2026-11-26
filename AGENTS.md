@@ -152,6 +152,7 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 - **QA-Prüfer** (nur lesend): `.codex/agents/qa.toml` (Codex) und `.claude/agents/qa.md` (Claude), mit demselben Inhalt.
 
 ### Schreiben: am Ende jeder abgeschlossenen Aufgabe, nicht nach jeder Nachricht
+`docs/` ist der Obsidian-Vault des Nutzers. Nach jeder abgeschlossenen Aufgabe kurz die betroffenen Systemnotizen, HANDOFF und LOG aktualisieren und neue Notizen im Index verlinken:
 - a) `docs/HANDOFF.md` **überschreiben**, höchstens 40 Zeilen:
   - Stand, zuletzt gearbeitet an, halb fertig, Bugs, nächste Schritte
   - `Zuletzt dran: Claude/Codex, Datum`
@@ -160,6 +161,7 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 - d) Eine Systemnotiz nur ändern, wenn sich Dateien, Funktionen, Abhängigkeiten oder bekannte Probleme des Systems geändert haben.
   - Nur die betroffenen Zeilen ändern und `updated:` anpassen.
   - Neues System: neue Notiz nach dem Muster der bestehenden und einen Link in `docs/00_Index.md`.
+  - Betroffen ist jede Notiz, die eine geänderte Datei nennt: `grep -l <name> docs/Systeme/*.md`.
 - e) Neue Bugs und Ideen als eine Zeile in `docs/Bugs & Ideen.md`. Erledigtes dort entfernen.
 - f) Committen, die Nachricht beginnt mit `[Claude]` oder `[Codex]`; danach `entwicklung` pushen ist erlaubt.
 
@@ -176,4 +178,4 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 - **Nicht gegeneinander arbeiten:** Fremde, nicht committete Änderungen (`git status`) nicht überschreiben. Wer zuletzt dran war, steht in HANDOFF.
 - **Pflege:**
   - Wächst `docs/LOG.md` über ~150 Zeilen, ältere Einträge nach `docs/_archive/LOG_<Jahr>.md` verschieben.
-  - Jede Notiz unter `docs/` hat Frontmatter (`tags`, `updated`) und verlinkt mit `[[Notiz]]`.
+  - Jede Notiz unter `docs/` hat Frontmatter (`tags`, `updated`) und verlinkt mit `[[Notiz]]`. `docs/.obsidian/` nicht anfassen.

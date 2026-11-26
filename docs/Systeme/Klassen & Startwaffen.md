@@ -1,6 +1,6 @@
 ---
 tags: [system, klassen]
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 # Klassen & Startwaffen
 
@@ -17,10 +17,11 @@ Drei Klassen mit eigener automatischer Startwaffe: Schwertmeister (`Sword`), Ark
   - Waldläufer-Kombo: 1,1,3,1,1,1,1,1,5,1,1,Hagel
   - Klasseneffekte (`class_effects_*`), seit 25.11. als Pixel-Komposite: `vfx_arc_sweep` (Bogen), `vfx_magic_circle` (Kreis), `vfx_star_orb` und `vfx_class_burst` (Sternenorb, Detonation), `vfx_arrow_fall`/`vfx_arrow_hit` (Hagel). `class_fx_sprite` wird von den Klassen nicht mehr benutzt.
   - Kombostufe → Zeitachse über `class_weapon_timeline` (Stufe, Körperdauer, Auslösezeitpunkt)
+- **Waffen-Upgrades** (seit 25.11., `weapon_upgrade_*` in `scripts/class_weapons`): 5 Stufen je Klasse (Klinge, Sternenstab, Jagdbogen), angeboten als Karten im Level-up ([[Progression & Level-up]]), unabhängig von den 6 Zauberslots. Jede Stufe addiert Werte auf die bestehenden Waffen-Hooks (Schaden in %, Reichweite, Tempo, Sternenorb, Salve), gelesen über `talent_stat` ([[Talente]]). `weapon_visual_tier` (Stufe 1/2/3 ab Upgrade 0/2/4) bestimmt das Aussehen von Hieben und Geschossen. Zurückgesetzt mit jedem Run. Werte sind neue, ungetestete Designwerte.
 - Projektile laufen über `ObjectLightningball` (Stab und Pfeil).
 
 ## Abhängigkeiten
-[[Spieler & Bewegung]] · [[Talente]] (Klassenbäume) · [[Ausrüstung]] (Waffenschaden %) · [[Licht, Wetter & Effekte]]
+[[Spieler & Bewegung]] · [[Talente]] (Klassenbäume) · [[Ausrüstung]] (Waffenschaden %) · [[Licht, Wetter & Effekte]] · [[Progression & Level-up]] (Waffenkarten)
 
 ## Bekannte Probleme
 - Die QA-Telemetrie braucht exakte Code-Anker in `class_weapons` und `master_combat` (siehe AGENTS.md).
