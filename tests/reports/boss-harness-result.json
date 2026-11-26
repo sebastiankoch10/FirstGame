@@ -1,735 +1,739 @@
 {
   "passed": true,
-  "checks": 141.0,
+  "checks": 190.0,
   "failures": [],
   "metrics": {
+    "storm_warden_kite_mean_distance": 525.6329627482096,
     "behemoth_oracle_contacts": 10.0,
-    "storm_warden_cases_with_movement": 6.0,
+    "storm_warden_natural_catchups": 5.0,
     "behemoth_cases": 18.0,
+    "storm_warden_kite_contacts": 7.0,
+    "storm_warden_kite_reach": 19.0,
     "behemoth_cases_with_movement": 13.0,
-    "storm_warden_hazard_cases": 6.0,
     "behemoth_hazard_cases": 17.0,
-    "behemoth_kite_mean_distance": 510.3206477073387,
-    "behemoth_natural_catchups": 4.0,
-    "behemoth_kite_contacts": 3.0,
-    "behemoth_kite_reach": 16.0,
-    "behemoth_catchups": 4.0,
-    "twins_oracle_contacts": 3.0,
-    "twins_cases": 18.0,
-    "twins_cases_with_movement": 9.0,
-    "twins_hazard_cases": 17.0,
+    "storm_warden_catchups": 5.0,
+    "seq_natural_sequences": 2.0,
+    "seq_natural_regular": 5.0,
     "twins_kite_mean_distance": 450.3064646713822,
     "twins_natural_catchups": 4.0,
     "twins_kite_contacts": 4.0,
     "twins_kite_reach": 15.0,
     "twins_catchups": 4.0,
-    "storm_warden_kite_mean_distance": 526.0413051689995,
-    "storm_warden_natural_catchups": 5.0,
-    "storm_warden_kite_contacts": 7.0,
-    "storm_warden_kite_reach": 17.0,
-    "storm_warden_catchups": 5.0,
     "storm_warden_oracle_contacts": 4.0,
-    "storm_warden_cases": 18.0
+    "storm_warden_cases": 18.0,
+    "storm_warden_cases_with_movement": 6.0,
+    "storm_warden_hazard_cases": 6.0,
+    "behemoth_kite_mean_distance": 510.3206477073387,
+    "behemoth_natural_catchups": 4.0,
+    "behemoth_kite_contacts": 3.0,
+    "behemoth_kite_reach": 16.0,
+    "behemoth_catchups": 4.0,
+    "seq_P1_0_seconds": 4.95,
+    "seq_P1_1_seconds": 4.85,
+    "seq_P2_2_seconds": 8.783333333333333,
+    "seq_P2_3_seconds": 9.833333333333334,
+    "seq_P2_4_seconds": 8.433333333333334,
+    "seq_P3_5_seconds": 15.0,
+    "seq_P3_6_seconds": 10.083333333333334,
+    "seq_P3_7_seconds": 9.816666666666666,
+    "seq_P4_8_seconds": 15.0,
+    "seq_P4_9_seconds": 10.283333333333333,
+    "seq_P4_10_seconds": 9.9,
+    "twins_oracle_contacts": 3.0,
+    "twins_cases": 18.0,
+    "twins_cases_with_movement": 9.0,
+    "twins_hazard_cases": 17.0
   },
   "rows": [
     {
+      "max_line": 2600.0,
+      "label": "storm_warden A1 P1",
+      "contacts": 1.0,
+      "moved": 119.0,
       "kinds": [
         "dragon_beam"
       ],
-      "start_unsafe": true,
-      "max_beam": 2600.0,
-      "max_line": 2600.0,
-      "contacts": 1.0,
-      "moved": 119.0,
-      "label": "storm_warden A1 P1",
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 2.0
+      "hazards": 2.0,
+      "start_unsafe": true,
+      "max_beam": 2600.0
     },
     {
-      "kinds": [],
-      "start_unsafe": true,
-      "max_beam": 2600.0,
       "max_line": 2600.0,
+      "label": "storm_warden A1 P3",
       "contacts": 0.0,
       "moved": 132.0,
-      "label": "storm_warden A1 P3",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 10.0
+      "hazards": 10.0,
+      "start_unsafe": true,
+      "max_beam": 2600.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
+      "label": "storm_warden A2 P1",
       "contacts": 0.0,
       "moved": 0.0,
-      "label": "storm_warden A2 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 0.0
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
+      "max_line": 0.0,
+      "label": "storm_warden A2 P3",
+      "contacts": 1.0,
+      "moved": 131.0,
       "kinds": [
         "dragon_cone"
       ],
-      "start_unsafe": true,
-      "max_beam": 0.0,
-      "max_line": 0.0,
-      "contacts": 1.0,
-      "moved": 131.0,
-      "label": "storm_warden A2 P3",
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 15.0
+      "hazards": 15.0,
+      "start_unsafe": true,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
+      "label": "storm_warden A3 P1",
       "contacts": 0.0,
       "moved": 0.0,
-      "label": "storm_warden A3 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 0.0
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
+      "label": "storm_warden A3 P3",
       "contacts": 0.0,
       "moved": 75.0,
-      "label": "storm_warden A3 P3",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 6.0
+      "hazards": 6.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
+      "label": "storm_warden A4 P1",
       "contacts": 0.0,
       "moved": 0.0,
-      "label": "storm_warden A4 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 0.0
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
+      "max_line": 0.0,
+      "label": "storm_warden A4 P3",
+      "contacts": 1.0,
+      "moved": 119.0,
       "kinds": [
         "dragon_meteor_ring"
       ],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
-      "contacts": 1.0,
-      "moved": 119.0,
-      "label": "storm_warden A4 P3",
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 28.0
+      "hazards": 28.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
-      "contacts": 0.0,
-      "moved": 0.0,
       "label": "storm_warden A5 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 0.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
       "label": "storm_warden A5 P3",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 0.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
       "label": "storm_warden A6 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 0.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
       "label": "storm_warden A6 P3",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 0.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
       "label": "storm_warden A7 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 0.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
       "label": "storm_warden A7 P3",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 0.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
-      "label": "storm_warden A8 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 0.0
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
+      "max_line": 0.0,
+      "label": "storm_warden A8 P1",
+      "contacts": 0.0,
+      "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
+      "label": "storm_warden A8 P3",
+      "contacts": 1.0,
+      "moved": 33.0,
       "kinds": [
         "dragon_fire_ring"
       ],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
-      "contacts": 1.0,
-      "moved": 33.0,
-      "label": "storm_warden A8 P3",
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 6.0
+      "hazards": 6.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
-      "contacts": 0.0,
-      "moved": 0.0,
       "label": "storm_warden A9 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 0.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
       "label": "storm_warden A9 P3",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 0.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
       "label": "twins A1 P1",
+      "contacts": 0.0,
+      "moved": 0.0,
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 0.0
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 281.9593505859375,
-      "contacts": 0.0,
-      "moved": 0.0,
       "label": "twins A1 P3",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 3.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 3.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
       "label": "twins A2 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 2.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
-      "label": "twins A2 P3",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 2.0
+      "hazards": 2.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": true,
-      "max_beam": 0.0,
       "max_line": 0.0,
+      "label": "twins A2 P3",
+      "contacts": 0.0,
+      "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 2.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
+      "label": "twins A3 P1",
       "contacts": 0.0,
       "moved": 12.0,
-      "label": "twins A3 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 8.0
+      "hazards": 8.0,
+      "start_unsafe": true,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
+      "label": "twins A3 P3",
       "contacts": 0.0,
       "moved": 47.0,
-      "label": "twins A3 P3",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 4.0
+      "hazards": 4.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [
-        "twins_link"
-      ],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 435.55023193359375,
+      "label": "twins A4 P1",
       "contacts": 1.0,
       "moved": 60.0,
-      "label": "twins A4 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 2.0
-    },
-    {
       "kinds": [
         "twins_link"
       ],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 2.0,
       "start_unsafe": false,
-      "max_beam": 0.0,
+      "max_beam": 0.0
+    },
+    {
       "max_line": 391.5364074707031,
+      "label": "twins A4 P3",
       "contacts": 1.0,
       "moved": 52.0,
-      "label": "twins A4 P3",
+      "kinds": [
+        "twins_link"
+      ],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 2.0
+      "hazards": 2.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
+      "label": "twins A5 P1",
       "contacts": 0.0,
       "moved": 32.0,
-      "label": "twins A5 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 4.0
+      "hazards": 4.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
+      "label": "twins A5 P3",
       "contacts": 0.0,
       "moved": 0.0,
-      "label": "twins A5 P3",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 4.0
+      "hazards": 4.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 2600.0,
+      "label": "twins A6 P1",
       "contacts": 0.0,
       "moved": 26.0,
-      "label": "twins A6 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 4.0
+      "hazards": 4.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 2600.000244140625,
+      "label": "twins A6 P3",
       "contacts": 0.0,
       "moved": 64.0,
-      "label": "twins A6 P3",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 10.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": true,
-      "max_beam": 0.0,
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "moved": 120.0,
-      "label": "twins A7 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 4.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": true,
-      "max_beam": 0.0,
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "moved": 120.0,
-      "label": "twins A7 P3",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 4.0
-    },
-    {
-      "kinds": [],
+      "hazards": 10.0,
       "start_unsafe": false,
-      "max_beam": 0.0,
+      "max_beam": 0.0
+    },
+    {
       "max_line": 0.0,
+      "label": "twins A7 P1",
+      "contacts": 0.0,
+      "moved": 120.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 4.0,
+      "start_unsafe": true,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
+      "label": "twins A7 P3",
+      "contacts": 0.0,
+      "moved": 120.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 4.0,
+      "start_unsafe": true,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
+      "label": "twins A8 P1",
       "contacts": 0.0,
       "moved": 18.0,
-      "label": "twins A8 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 12.0
+      "hazards": 12.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
+      "max_line": 0.0,
+      "label": "twins A8 P3",
+      "contacts": 1.0,
+      "moved": 75.0,
       "kinds": [
         "twins_fire_flood"
       ],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
-      "contacts": 1.0,
-      "moved": 75.0,
-      "label": "twins A8 P3",
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 8.0
+      "hazards": 8.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
+      "label": "twins A9 P1",
       "contacts": 0.0,
       "moved": 2.0,
-      "label": "twins A9 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 6.0
+      "hazards": 6.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
+      "label": "twins A9 P3",
       "contacts": 0.0,
       "moved": 4.0,
-      "label": "twins A9 P3",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 6.0
-    },
-    {
-      "kinds": [
-        "swamp_spit"
-      ],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
-      "contacts": 4.0,
-      "moved": 22.0,
-      "label": "behemoth A1 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 4.0
-    },
-    {
-      "kinds": [
-        "swamp_spit"
-      ],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
-      "contacts": 4.0,
-      "moved": 22.0,
-      "label": "behemoth A1 P3",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 4.0
-    },
-    {
       "kinds": [],
-      "start_unsafe": true,
-      "max_beam": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 6.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
       "max_line": 0.0,
+      "label": "behemoth A1 P1",
+      "contacts": 4.0,
+      "moved": 22.0,
+      "kinds": [
+        "swamp_spit"
+      ],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 4.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
+      "label": "behemoth A1 P3",
+      "contacts": 4.0,
+      "moved": 22.0,
+      "kinds": [
+        "swamp_spit"
+      ],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 4.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
+      "label": "behemoth A2 P1",
       "contacts": 0.0,
       "moved": 66.0,
-      "label": "behemoth A2 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 6.0
+      "hazards": 6.0,
+      "start_unsafe": true,
+      "max_beam": 0.0
     },
     {
+      "max_line": 1050.0,
+      "label": "behemoth A2 P3",
+      "contacts": 2.0,
+      "moved": 72.0,
       "kinds": [
         "swamp_acid"
       ],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 1050.0,
-      "contacts": 2.0,
-      "moved": 72.0,
-      "label": "behemoth A2 P3",
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 14.0
+      "hazards": 14.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": true,
-      "max_beam": 0.0,
       "max_line": 0.0,
+      "label": "behemoth A3 P1",
       "contacts": 0.0,
       "moved": 84.0,
-      "label": "behemoth A3 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 9.0
+      "hazards": 9.0,
+      "start_unsafe": true,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
-      "contacts": 0.0,
-      "moved": 0.0,
       "label": "behemoth A3 P3",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 60.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 60.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
       "label": "behemoth A4 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 12.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 12.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
       "label": "behemoth A4 P3",
+      "contacts": 0.0,
+      "moved": 0.0,
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 12.0
+      "hazards": 12.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": true,
-      "max_beam": 0.0,
       "max_line": 0.0,
-      "contacts": 0.0,
-      "moved": 57.0,
       "label": "behemoth A5 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 2.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 57.0,
-      "label": "behemoth A5 P3",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 4.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "moved": 0.0,
-      "label": "behemoth A6 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 0.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "moved": 0.0,
-      "label": "behemoth A6 P3",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 2.0
-    },
-    {
-      "kinds": [],
+      "hazards": 2.0,
       "start_unsafe": true,
-      "max_beam": 0.0,
+      "max_beam": 0.0
+    },
+    {
       "max_line": 0.0,
+      "label": "behemoth A5 P3",
+      "contacts": 0.0,
+      "moved": 57.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 4.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
+      "label": "behemoth A6 P1",
+      "contacts": 0.0,
+      "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 0.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
+      "label": "behemoth A6 P3",
+      "contacts": 0.0,
+      "moved": 0.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 2.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 0.0,
+      "label": "behemoth A7 P1",
       "contacts": 0.0,
       "moved": 59.0,
-      "label": "behemoth A7 P1",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 2.0
+      "hazards": 2.0,
+      "start_unsafe": true,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": true,
-      "max_beam": 365.0,
       "max_line": 0.0,
+      "label": "behemoth A7 P3",
       "contacts": 0.0,
       "moved": 81.0,
-      "label": "behemoth A7 P3",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 2.0
+      "hazards": 2.0,
+      "start_unsafe": true,
+      "max_beam": 365.0
     },
     {
-      "kinds": [],
-      "start_unsafe": true,
-      "max_beam": 0.0,
       "max_line": 1500.0,
-      "contacts": 0.0,
-      "moved": 106.0,
       "label": "behemoth A8 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 2.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": true,
-      "max_beam": 0.0,
-      "max_line": 1500.0,
       "contacts": 0.0,
       "moved": 106.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 2.0,
+      "start_unsafe": true,
+      "max_beam": 0.0
+    },
+    {
+      "max_line": 1500.0,
       "label": "behemoth A8 P3",
+      "contacts": 0.0,
+      "moved": 106.0,
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 2.0
+      "hazards": 2.0,
+      "start_unsafe": true,
+      "max_beam": 0.0
     },
     {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
       "max_line": 0.0,
-      "contacts": 0.0,
-      "moved": 121.0,
       "label": "behemoth A9 P1",
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "hazards": 7.0
-    },
-    {
-      "kinds": [],
-      "start_unsafe": false,
-      "max_beam": 0.0,
-      "max_line": 0.0,
       "contacts": 0.0,
       "moved": 121.0,
-      "label": "behemoth A9 P3",
+      "kinds": [],
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "hazards": 7.0
+      "hazards": 7.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
     },
     {
-      "catchups": 5.0,
-      "kinds": [
-        "dragon_fire_ring",
-        "dragon_magma_cell",
-        "dragon_cone"
-      ],
-      "reach": 17.0,
+      "max_line": 0.0,
+      "label": "behemoth A9 P3",
+      "contacts": 0.0,
+      "moved": 121.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "hazards": 7.0,
+      "start_unsafe": false,
+      "max_beam": 0.0
+    },
+    {
+      "reach": 19.0,
       "reach_abilities": [
         "vortex",
-        "meteor",
-        "stomp",
         "beam",
-        "arc",
-        "wind"
+        "stomp",
+        "meteor",
+        "volley"
       ],
-      "contacts": 7.0,
       "label": "storm_warden kite 560px",
+      "contacts": 7.0,
       "forced_catchup": false,
+      "kinds": [
+        "dragon_fire_ring",
+        "dragon_magma_cell"
+      ],
       "frames": 2700.0,
-      "hazards": 37.0
+      "hazards": 48.0,
+      "catchups": 5.0
     },
     {
-      "catchups": 4.0,
-      "kinds": [
-        "twins_meteor_cell",
-        "twins_ice_cell",
-        "twins_ice_flood",
-        "twins_fire_flood"
-      ],
       "reach": 15.0,
       "reach_abilities": [
         "4",
@@ -740,18 +744,20 @@
         "8",
         "7"
       ],
-      "contacts": 4.0,
       "label": "twins kite 560px",
+      "contacts": 4.0,
       "forced_catchup": false,
+      "kinds": [
+        "twins_meteor_cell",
+        "twins_ice_cell",
+        "twins_ice_flood",
+        "twins_fire_flood"
+      ],
       "frames": 2700.0,
-      "hazards": 28.0
+      "hazards": 28.0,
+      "catchups": 4.0
     },
     {
-      "catchups": 4.0,
-      "kinds": [
-        "swamp_acid",
-        "swamp_closing"
-      ],
       "reach": 16.0,
       "reach_abilities": [
         "3",
@@ -762,15 +768,189 @@
         "8",
         "9"
       ],
-      "contacts": 3.0,
       "label": "behemoth kite 560px",
+      "contacts": 3.0,
       "forced_catchup": false,
+      "kinds": [
+        "swamp_acid",
+        "swamp_closing"
+      ],
       "frames": 2700.0,
-      "hazards": 49.0
+      "hazards": 49.0,
+      "catchups": 4.0
+    },
+    {
+      "label": "dragon sequence P1 Feuerschneise",
+      "contacts": 1.0,
+      "steps": [
+        "beam",
+        "arc"
+      ],
+      "moved": 82.0,
+      "kinds": [
+        "dragon_beam"
+      ],
+      "unsafe_frames": 0.0,
+      "frames": 297.0,
+      "hazards": 1.0
+    },
+    {
+      "label": "dragon sequence P1 Glutboden",
+      "contacts": 0.0,
+      "steps": [
+        "stomp",
+        "beam"
+      ],
+      "moved": 61.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 291.0,
+      "hazards": 1.0
+    },
+    {
+      "label": "dragon sequence P2 Glutfaecher",
+      "contacts": 1.0,
+      "steps": [
+        "arc",
+        "stomp",
+        "beam"
+      ],
+      "moved": 89.0,
+      "kinds": [
+        "dragon_beam"
+      ],
+      "unsafe_frames": 0.0,
+      "frames": 527.0,
+      "hazards": 3.0
+    },
+    {
+      "label": "dragon sequence P2 Sternenbahn",
+      "contacts": 0.0,
+      "steps": [
+        "meteor",
+        "beam",
+        "wind"
+      ],
+      "moved": 85.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 590.0,
+      "hazards": 13.0
+    },
+    {
+      "label": "dragon sequence P2 Erdbeben",
+      "contacts": 0.0,
+      "steps": [
+        "slam",
+        "stomp",
+        "arc"
+      ],
+      "moved": 21.0,
+      "kinds": [],
+      "unsafe_frames": 0.0,
+      "frames": 506.0,
+      "hazards": 2.0
+    },
+    {
+      "label": "dragon sequence P3 Feuersturm",
+      "contacts": 3.0,
+      "steps": [
+        "beam",
+        "stomp",
+        "vortex"
+      ],
+      "moved": 217.0,
+      "kinds": [
+        "dragon_fire_ring"
+      ],
+      "unsafe_frames": 0.0,
+      "frames": 900.0,
+      "hazards": 15.0
+    },
+    {
+      "label": "dragon sequence P3 Meteorhagel",
+      "contacts": 1.0,
+      "steps": [
+        "meteor",
+        "volley",
+        "slam"
+      ],
+      "moved": 63.0,
+      "kinds": [
+        "dragon_meteor_ring"
+      ],
+      "unsafe_frames": 0.0,
+      "frames": 605.0,
+      "hazards": 14.0
+    },
+    {
+      "label": "dragon sequence P3 Feuerwand",
+      "contacts": 1.0,
+      "steps": [
+        "stomp",
+        "arc",
+        "beam"
+      ],
+      "moved": 149.0,
+      "kinds": [
+        "dragon_cone"
+      ],
+      "unsafe_frames": 0.0,
+      "frames": 589.0,
+      "hazards": 12.0
+    },
+    {
+      "label": "dragon sequence P4 Inferno",
+      "contacts": 2.0,
+      "steps": [
+        "beam",
+        "stomp",
+        "vortex"
+      ],
+      "moved": 197.0,
+      "kinds": [
+        "dragon_fire_ring"
+      ],
+      "unsafe_frames": 0.0,
+      "frames": 900.0,
+      "hazards": 15.0
+    },
+    {
+      "label": "dragon sequence P4 Sturmauge",
+      "contacts": 1.0,
+      "steps": [
+        "wind",
+        "void",
+        "meteor"
+      ],
+      "moved": 95.0,
+      "kinds": [
+        "dragon_meteor_ring"
+      ],
+      "unsafe_frames": 0.0,
+      "frames": 617.0,
+      "hazards": 14.0
+    },
+    {
+      "label": "dragon sequence P4 Letzte Glut",
+      "contacts": 2.0,
+      "steps": [
+        "arc",
+        "beam",
+        "stomp"
+      ],
+      "moved": 152.0,
+      "kinds": [
+        "dragon_cone",
+        "dragon_beam"
+      ],
+      "unsafe_frames": 0.0,
+      "frames": 594.0,
+      "hazards": 12.0
     }
   ],
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\boss\\20261126-125551",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\boss\\20261126-142811",
   "exceptions": [],
   "captures": [
     "behemoth-A2-P3.png",

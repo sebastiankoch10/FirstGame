@@ -29,7 +29,16 @@ function pf_menu_tick() {
         game_end(); return;
     }
     if (global.pf_started) return;
-    global.pf_frame++; if (global.pf_frame < 10) return;
+    global.pf_frame++;
+    // First scenario: stay in the menu until the texture warm-up is done (render_pipeline), measuring its cost there.
+    if (global.pf_i == 0 && !variable_global_exists("pf_menu")) global.pf_menu = {frames: 0, max_ms: 0, done: false};
+    if (global.pf_i == 0 && !global.pf_menu.done) {
+        global.pf_menu.frames++; global.pf_menu.max_ms = max(global.pf_menu.max_ms, delta_time / 1000);
+        if (!texture_warmup_done() && global.pf_menu.frames < 900) return;
+        global.pf_menu.done = true; global.pf_menu.pages = array_length(texture_warmup_pages()); global.pf_metrics[$ "menu_warmup"] = global.pf_menu;
+        show_debug_message("PERF menu_warmup " + json_stringify(global.pf_menu));
+    }
+    if (global.pf_frame < 10) return;
     var s = global.pf_scn[global.pf_i]; global.pf_started = true; global.pf_frame = 0; global.pf_dt = []; global.pf_fps = [];
     global.pf_acc = {enemies: 0, bullets: 0, hazards: 0, particles: 0, hz: 0, lights: 0, light_ms: 0, instances: 0, n: 0, spikes: 0};
     texture_debug_messages(true);

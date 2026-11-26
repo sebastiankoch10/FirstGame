@@ -4,31 +4,31 @@
   "failures": [],
   "phases": {
     "a": {
-      "checks": 60.0,
       "failures": [],
-      "metrics": {},
       "phase": "a",
-      "passed": true
+      "metrics": {},
+      "passed": true,
+      "checks": 60.0
     },
     "b": {
-      "checks": 4.0,
       "failures": [],
-      "metrics": {},
       "phase": "b",
-      "passed": true
+      "metrics": {},
+      "passed": true,
+      "checks": 4.0
     },
     "c": {
-      "checks": 5.0,
       "failures": [],
+      "phase": "c",
       "metrics": {
         "archived_start": true,
         "attack_after_frames": 2.0
       },
-      "phase": "c",
-      "passed": true
+      "passed": true,
+      "checks": 5.0
     }
   },
-  "evidence": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\review-e2e\\20261126-094315",
+  "evidence": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\review-e2e\\20261126-144702",
   "captures": [
     "a0-main-menu.png",
     "a1-review-center.png",

@@ -105,6 +105,16 @@ function vh_api_checks(_actor) {
     var at = eqv_attach(_actor, pl.visual_sprite_index, pl.visual_frame_index, 100, 100, 1, 1), am = eqv_attach(_actor, pl.visual_sprite_index, pl.visual_frame_index, 100, 100, -1, 1);
     vh_check(eqv_attach_draw(pl.visual_sprite_index, 0, _actor, pl.visual_sprite_index, pl.visual_frame_index, -9000, -9000, 1, 1) == (at.ok && at.conf >= 1), "eqv_attach_draw draws exactly when the hand anchor is reliable");
     vh_check(!at.ok || (abs((at.x - 100) + (am.x - 100)) < .01 && abs(angle_difference(at.angle, 180 - am.angle)) < .01), "eqv_attach mirrors grip and angle with the facing");
+    if (_actor == "swordsmanv3") { // hitstop (combat_feedback): physical base-weapon hits freeze the enemy picture, visual only
+        var e = instance_create_layer(pl.x + 60, pl.y, "Instances", ObjectMonster), keep = global.selected_character, ok_pic = false, ok_back = false;
+        global.selected_character = "Sword"; hit_reaction(e, pl, 0);
+        var hs_set = variable_instance_exists(e, "hitstop_t") && abs(e.hitstop_t - HITSTOP_FRAMES / 60) < .001;
+        with (e) {var rx = x, s = enemy_hitstop_begin(); ok_pic = is_struct(s) && abs(x - hitstop_x) <= 1 && image_index == hitstop_img; enemy_hitstop_end(s); ok_back = x == rx;}
+        vh_check(hs_set && ok_pic && ok_back, "hitstop: a sword hit freezes the enemy picture for 2 frames and restores the real state");
+        var m = instance_create_layer(pl.x - 60, pl.y, "Instances", ObjectMonster); global.selected_character = "Mage"; hit_reaction(m, pl, 0);
+        vh_check(!variable_instance_exists(m, "hitstop_t"), "hitstop: never for the arcanist's magic base weapon");
+        global.selected_character = keep; with (e) instance_destroy(); with (m) instance_destroy();
+    }
 }
 
 /// Contact sheet: rows = 8 directions, columns = 11 states, one sheet per equipment set. Returns a buffer of the pixels.

@@ -74,6 +74,10 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
   - Die Klassen-Suite leert die Warteschlange (`telegraph_flush`) vor dem Pixeltest.
   - Die Boss-Suite zählt Feld-Gefahren (`field`) als Musterzellen.
   - `run_level_smoke.py` läuft mit fester Bildzeit (60 Hz), weil die Gegnerprüfungen zeitabhängig flackerten.
+  - Seit 26.11. auch die Feature-Suite (`FIXED_DT_SUITES` in `run_native_harness.py`). Die Klassen-Suite hat mit `cd_sim_dt` schon eine simulierte Bildzeit.
+  - Boss-Suite seit 26.11. mit dem Lauf `sequences` (Drache): Jede choreografierte Sequenz jeder Phase wird mit dem Orakel erzwungen. Geprüft wird: läuft vollständig und in Reihenfolge, jeder Schritt startet und erreicht die Aktivierung, sichere Position erreichbar. Danach ein natürlicher Lauf über 40 s: Sequenzen ergänzen, reguläre Angriffe bleiben.
+  - `record_scene.py spellsheet --spell-level N`: alle 18 aktiven Zauber in einem Build, je 3 Zeitpunkte, beschriftetes Raster `spellsheet.png`.
+  - `tests/tools/characters/check_base_neutral.py`: technische Abnahme gelieferter Basisfigur-Atlanten ([[Assets & Pipeline]] 7.1).
 
 - **QA-Runner seit 26.11.:** Suiten `docs` (immer, Sekunden, `tests/tools/vault_check.py`), `review` (nur bei Review-Änderungen, Regeln `REVIEW_RX`/`REVIEW_TOUCH` in `qa.py`) und `perf` (`run_native_harness.py perf`, Lastmessung ohne parallele Last; GameMaker liefert weder Draw Calls noch Prozessspeicher an GML, Ersatz: `fps_real`, Lichtpass-Zeit, Instanzzahl). Level-Auswertung der Bots: `QA/tools/analyze_levels.py`.
   - `perf` meldet seit 26.11. zusätzlich Ausreißer über 50 ms (`spikes_over_50ms`, Logzeile `PERF SPIKE` mit Bildnummer). Mit `texture_debug_messages` stehen Texturlade-Meldungen im Log; `PERF WINDOW <Szenario>` markiert den Beginn jedes Messfensters. Ladezeit des Vorladens beim Run-Start: Logzeile `TEXTURE_PREFETCH ms`.

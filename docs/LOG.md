@@ -4,6 +4,18 @@ updated: 2026-11-26
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-26 · Claude · Folgeauftrag: Drachen-Sequenzen, Nutzerentscheidungen, Trefferstopp, Grafik-Anforderungen
+- Spiel:
+  - `boss_choreo` (Sequenzen), `dragon_encounter` (Anbindung), `boss_encounters_v2` (`bv2_motion_offset`), `combat_feedback` und `ObjectMonster/Draw_0` (Trefferstopp).
+  - `render_pipeline`, `ObjectMainMenu/Step_0` und `ObjectController/Create_0` (Texturen im Menü).
+  - `spell_vfx`, `weather`, `level_world` und `master_combat` (`vfx_random`); `boss_test_mode` (Preset, Sequenzanzeige); `master_skeleton` und `player_artpack` (Cache, Rollen-Präfix); `level_worlds` (`monster_art_div`); `review_center` (`sequence`, `magnet_orb`).
+- Tests und Werkzeuge:
+  - `tests/boss_harness.gml` (Lauf `sequences`), `tests/visual_harness.gml` (Trefferstopp), `tests/perf_harness.gml` (Menü-Vorladen), `tests/scene_harness.gml` und `record_scene.py` (`spellsheet`), `run_native_harness.py` (Feature mit fester Bildzeit).
+  - `tests/tools/characters/check_base_neutral.py`, `atlas.base_neutral_path`, `art_paths.CHARACTER_BASE_NEUTRAL`, `profile_perf.py`.
+  - `review/registry.json` (+11), `.gitignore` (Obsidian workspace), `docs/.obsidian/` versioniert.
+- Doku: Boss-Design H2, Assets & Pipeline 7, Kampf & Begegnungen 9, Roadmap 4/9/11/12, DECISIONS, Systemnotizen (Bosse, Boss-Testmodus, Review-Center, Spielablauf, Gegner & Spawns, Licht/Effekte, Zauber & Passiva, Tests & QA), Bugs & Ideen.
+- Tests: QA Stufe 3 PASS (Regression 811, Feature 195, Boss 190, Level 168, Klassen 151, Visual 86, Review 12); perf: Horde 72 FPS unbegrenzt, Hexen 102, Drache 96, keine Ausreißer.
+
 ### 2026-11-26 · Claude · Performance bei vielen Gegnern, Textur-Vorladen, ArtPack-Pfade
 - Spiel: `spell_world_v2` (Zellindex `scenery_grid_build` für die Wald-Kollision, Ergebnis identisch), `master_world` und `ObjectMasterWorld` (Index mitbauen und zurücksetzen), `gameplay` (gemeinsame Nachbarliste in `enemy_pursue`), `ObjectController/Create_0` (Texturgruppen vorladen, vorläufig, etwa 5,1 s beim ersten Run).
 - Werkzeuge und Tests: `tests/tools/profile_perf.py` (neu), `tests/perf_harness.gml` (Ausreißer, Texturlog), `tests/level_harness.gml` (Raster gegen Vollsuche), `QA/tools/native_mc_harness.gml`; `art_paths.py --check` prüft `.ps1`-Pfade, 12 PowerShell-Skripte auf die Zielstruktur gezogen; `atmosphere_v2` → `FirstGame_ArtPack/bosses/`.

@@ -17,6 +17,8 @@ Zwei Minibosse in Minute 1 und 3. Ab Minute 5 alle 5 Minuten ein zufälliger Hau
 - Behemoth und Zwillingshexen werden seit 25.11. aus in Spielgröße gebackenen Frames gezeichnet (`spr_bv2b_*`, `tests/tools/bosses/build_boss_baked.py behemoth|twins`); die Rig-Knochen werden mit dem Backfaktor skaliert (`rig_bones_scaled`). Die Hexen kommen dabei aus den Quellbögen (Faktor ≈0,69 statt 0,46 × 1,5) und sind an den alten Frames ausgerichtet.
 - `scripts/boss_hazards_v2` und `scripts/attack_telegraph`: gemeinsame Gefahren, eine Uhr `v2_clock` je Boss, Countdown am Zonenrand.
 - `scripts/boss_choreo`: Muster, Schwenkstrahlen mit 2.600 px, Aufholattacken und die Eskalationsregel `bc_complex`.
+  - Seit 26.11. choreografierte Sequenzen ([[Boss-Design]] H2): Daten in `bc_sequences`, Entscheidung über `bc_seq_decide`. Der Boss spielt nach je 2 regulären Angriffen eine Sequenz, als faire Pause dient `bc_owner_busy` plus `seq_gap`, nach der Sequenz ruht er `seq_rest` (`bc_seq_recovery`). Pilot ist der Drache, angebunden in `dragon_encounter_step`. Die Testanzeige zeigt „Sequenz Name n/m“, das Review-Szenario-Feld `sequence` erzwingt eine Sequenz.
+  - Bewegungsidentität von Hexen und Behemoth beim Aufladen und Einschlag: `bv2_motion_offset` in `scripts/boss_encounters_v2`. Das ist nur Darstellung.
 - Objekt: `ObjectBossMonster`. Regeln: [[Boss-Design]] und [[Kampf & Begegnungen]] (verbindlich). Test: `tests/boss_harness.gml`.
 
 - **Seit 26.11. (Phase 2A/2B):**

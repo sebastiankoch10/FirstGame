@@ -27,7 +27,7 @@ function level_world_create() {
         var inst=instance_create_layer(px,py,"Instances",ObjectLevelProp);
         inst.sprite_index=data.sprites[mi];inst.image_xscale=flip;inst.image_speed=0;inst.image_index=0;
         inst.prop_sway=m[3];inst.prop_glow_col=m[4];inst.prop_glow_r=m[5];inst.prop_glow_s=m[6];inst.prop_ground=m[7]==1;
-        inst.prop_fade_w=m[8];inst.prop_fade_h=m[9];inst.prop_alpha=1;inst.prop_phase=random(10);
+        inst.prop_fade_w=m[8];inst.prop_fade_h=m[9];inst.prop_alpha=1;inst.prop_phase=vfx_random(10);
         inst.prop_shadow=!inst.prop_ground;inst.prop_block=m[0];inst.prop_ba=m[1];inst.prop_bb=m[2];
         inst.depth=inst.prop_ground ? 90000 : -py;inst.visible=false;
         if(m[0]==1)level_block_add(1,px,py,m[1],m[1]*LEVEL_FOOT_Y);
@@ -40,8 +40,8 @@ function level_world_create() {
     for(var i=0;i+5<array_length(hl);i+=6)array_push(global.level_hazards,{kind:data.hazard_kinds[hl[i]],x:hl[i+1],y:hl[i+2],r:18,phase:hl[i+5],x2:hl[i+3],y2:hl[i+4],line:true,state:"idle",hit:false,tick:0,cycle_prev:0});
     water=data.water;water_count=array_length(water) div 2;
     // Bounded camera-relative ambient particles.
-    motes=[];for(var i=0;i<(level_id=="swamp" ? 26 : 34);i++)array_push(motes,{x:random(1000),y:random(800),p:random(10),s:random_range(.6,1.4)});
-    flakes=[];for(var i=0;i<(level_id=="swamp" ? 0 : 90);i++)array_push(flakes,{x:random(1000),y:random(800),s:random_range(.5,1.5),k:irandom(2)});
+    motes=[];for(var i=0;i<(level_id=="swamp" ? 26 : 34);i++)array_push(motes,{x:vfx_random(1000),y:vfx_random(800),p:vfx_random(10),s:vfx_random_range(.6,1.4)});
+    flakes=[];for(var i=0;i<(level_id=="swamp" ? 0 : 90);i++)array_push(flakes,{x:vfx_random(1000),y:vfx_random(800),s:vfx_random_range(.5,1.5),k:vfx_irandom(2)});
     pulse_timer=2;
     // One quiet ambient loop per world (own synthesized prototype), tied to the effects volume.
     ambient_handle=-1;var amb=asset_get_index(def.ambient_loop);
@@ -126,11 +126,11 @@ function level_world_step(_dt) {
     // Sporadic ambient light impulses: toxic gas or magical flicker near the camera.
     pulse_timer-=_dt;
     if(pulse_timer<=0) {
-        pulse_timer=random_range(2.2,4.5);
+        pulse_timer=vfx_random_range(2.2,4.5);
         var r=combat_view_rect(),best=noone;
         for(var i=0;i<array_length(global.level_hazards);i++){var h=global.level_hazards[i];if(point_in_rectangle(h.x,h.y,r.left-100,r.top-100,r.right+100,r.bottom+100)){best=h;break;}}
         if(is_struct(best))light_pulse(best.x,best.y,220,level_hazard_color(best.kind),.55,.6);
-        else light_pulse(random_range(r.left,r.right),random_range(r.top,r.bottom),260,level_id=="swamp" ? make_color_rgb(110,190,120) : make_color_rgb(140,170,255),.35,.8);
+        else light_pulse(vfx_random_range(r.left,r.right),vfx_random_range(r.top,r.bottom),260,level_id=="swamp" ? make_color_rgb(110,190,120) : make_color_rgb(140,170,255),.35,.8);
     }
 }
 function level_puff_add(_x,_y,_r,_warning,_damage,_kind) {

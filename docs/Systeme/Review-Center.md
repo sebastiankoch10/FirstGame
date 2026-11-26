@@ -55,6 +55,7 @@ Dynamische To-do-Liste im Hauptmenü („Review-Center (N offen)“). Jeder Eint
 | `gear` (Seltenheit 0–3), `gear_items`, `backpack` | Ausrüstung über `equipment_generate` und `equipment_equip` |
 | `enemies` (`none`, `normal`), `enemy_pack` {count, radius} | Gegner über `population_spawn_enemy` |
 | `invulnerable`, `hp`, `boss_hp`, `boss_offset`, `arena` | Ausgangslage |
+| `sequence` (Index), `magnet_orb` (true) | seit 26.11.: erzwingt die choreografierte Sequenz der Bossphase (`bc_seq_force`) bzw. legt eine Magnetkugel neben die Figur |
 
 ## Isolation
 - Während eines Review- oder Testmodus-Laufs liefert `dev_session_active()` true.

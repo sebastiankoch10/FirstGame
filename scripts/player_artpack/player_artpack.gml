@@ -61,7 +61,7 @@ function player_visual_asset(_actor,_action,_direction,_stage=1) {
 function player_visual_direction(_actor,_angle) {
     var angle=((_angle mod 360)+360) mod 360;
     if(player_authored_actor(_actor)) {
-        var dirs=["right","up_right","up","up_left","left","down_left","down","down_right"];
+        static dirs=["right","up_right","up","up_left","left","down_left","down","down_right"]; // static: no array per call
         return dirs[floor((angle+22.5)/45) mod 8];
     }
     if(angle>=45 && angle<135)return "up";

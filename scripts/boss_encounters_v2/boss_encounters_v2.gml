@@ -359,6 +359,21 @@ function bv2_actor_animation(_b,_ice=false) {
     else if(_b.v2_move_speed>1){action="walk";frame=floor(_b.v2_clock*5) mod 4;}
     return {action:action,frame:frame};
 }
+/// Motion identity on charge and impact (analog to the dragon's wind-up, Visuelles Leitbild 5.1): whole-pixel offset
+/// [dx,dy]. Charging pulls the body back from the player (witches rise, the behemoth crouches); the first 0.15 s of the
+/// activation lunge forward. Drawing only: hitboxes, timing and the boss position are unchanged.
+function bv2_motion_offset(_b,_face,_twin) {
+    if(_b.hp<=0)return [0,0];
+    if(_b.boss_state=="windup") {
+        var p=clamp(_b.v2_attack_age/max(.1,_b.v2_warning),0,1),e=p*p*(3-2*p);
+        return [-_face*round(e*(_twin ? 4 : 6)),round(e*(_twin ? -5 : 3))];
+    }
+    if(_b.boss_state=="active" && _b.v2_state_age<.15) {
+        var k=1-_b.v2_state_age/.15;
+        return [_face*round(k*(_twin ? 5 : 8)),_twin ? 0 : -round(k*2)];
+    }
+    return [0,0];
+}
 function bv2_actor_draw(_b,_ice=false) {
     if(!instance_exists(_b))return;
     var twin=_b.v2_kind=="twins",actor=_ice && instance_exists(_b.v2_child) ? _b.v2_child : _b,a=bv2_actor_animation(_b,_ice);
@@ -374,11 +389,12 @@ function bv2_actor_draw(_b,_ice=false) {
     var face=_ice ? _b.v2_other_facing : _b.v2_facing,alpha=_b.hp<=0 ? clamp(1-_b.v2_state_age/1.5,0,1) : 1;
     if(variable_instance_exists(_b,"bc_alpha"))alpha*=_b.bc_alpha;
     if(alpha<=.01)return;
-    if(level_world_room())master_shadow_draw(actor.x,actor.y,twin ? 30 : 120,twin ? 9 : 28,twin ? .22 : .38);
+    var mo=bv2_motion_offset(_b,face,twin),mx=round(actor.x)+mo[0],my=round(actor.y-hover)+mo[1]; // charge / impact motion
+    if(level_world_room())master_shadow_draw(actor.x+mo[0],actor.y,twin ? 30 : 120,twin ? 9 : 28,twin ? .22 : .38);
     var col=_b.hurt_flash_timer>0 ? make_color_rgb(255,205,196) : c_white,sy=bk!=1 ? 1 : scale*(1+sin(_b.v2_clock*2.1)*.006);
     // Body rig (docs/Design/Boss-Design.md G2): flapping hat and cloak for the witches, heavy wobble for the behemoth.
-    if(BV2_RIG_ENABLED && vfx_secondary_motion() && a.action!="death")rig_draw_frame(spr,draw_frame,bk!=1 ? rig_bones_scaled(bv2_rig_bones(twin),bk,twin ? "witch_b" : "behemoth_b") : bv2_rig_bones(twin),bv2_rig_pose(_b,_ice,twin),(twin ? "witch" : "behemoth")+(bk!=1 ? "_b" : ""),twin ? -1 : 455*bk,round(actor.x),round(actor.y-hover),scale*face,sy,col,alpha,round((twin ? 8 : 24)*bk));
-    else draw_sprite_ext(spr,draw_frame,round(actor.x),round(actor.y-hover),scale*face,sy,0,col,alpha);
+    if(BV2_RIG_ENABLED && vfx_secondary_motion() && a.action!="death")rig_draw_frame(spr,draw_frame,bk!=1 ? rig_bones_scaled(bv2_rig_bones(twin),bk,twin ? "witch_b" : "behemoth_b") : bv2_rig_bones(twin),bv2_rig_pose(_b,_ice,twin),(twin ? "witch" : "behemoth")+(bk!=1 ? "_b" : ""),twin ? -1 : 455*bk,mx,my,scale*face,sy,col,alpha,round((twin ? 8 : 24)*bk));
+    else draw_sprite_ext(spr,draw_frame,mx,my,scale*face,sy,0,col,alpha);
     if(twin && _b.hp>0){var col=_ice ? make_color_rgb(118,210,255) : make_color_rgb(255,134,70);draw_set_color(col);draw_set_alpha(.55);for(var i=0;i<3;i++){var phase=frac(_b.v2_clock*.6+i*.33);draw_circle(actor.x+sin(_b.v2_clock*2+i)*15,actor.y-hover+10+phase*28,2*(1-phase),false);}}
     draw_set_alpha(1);draw_set_color(c_white);
 }

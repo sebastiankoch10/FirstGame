@@ -42,7 +42,7 @@ function master_sword_step() {
             global.sword_combo_metrics.swings++;if(ev.finisher)global.sword_combo_metrics.finishers++;
             fg_sfx("sword_swing");with(hit)event_perform(ev_step,0);
             // Visual only: sparks along the swing arc (bounded spell particle pool).
-            for(var sp=0;sp<ev.sparks;sp++){var sa=hit.direction-hit.hit_half_angle+2*hit.hit_half_angle*(sp+.5)/ev.sparks,sr=hit.hit_radius*random_range(.55,.9);spell_particle(x+lengthdir_x(sr,sa),y-12+lengthdir_y(sr,sa),lengthdir_x(90,sa+90*ev.sweep),lengthdir_y(90,sa+90*ev.sweep),random_range(.12,.22),2,choose(make_color_rgb(255,214,140),c_white,make_color_rgb(255,170,90)),1,0);}
+            for(var sp=0;sp<ev.sparks;sp++){var sa=hit.direction-hit.hit_half_angle+2*hit.hit_half_angle*(sp+.5)/ev.sparks,sr=hit.hit_radius*vfx_random_range(.55,.9);spell_particle(x+lengthdir_x(sr,sa),y-12+lengthdir_y(sr,sa),lengthdir_x(90,sa+90*ev.sweep),lengthdir_y(90,sa+90*ev.sweep),vfx_random_range(.12,.22),2,vfx_choose(make_color_rgb(255,214,140),c_white,make_color_rgb(255,170,90)),1,0);}
             light_pulse(x+lengthdir_x(70,attack_direction),y-12+lengthdir_y(70,attack_direction),ev.light_r,make_color_rgb(255,190,83),ev.light_a,.16);
         }
     }

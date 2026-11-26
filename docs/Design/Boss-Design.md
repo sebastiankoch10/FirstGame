@@ -196,6 +196,28 @@ Große Bosse haben Körper, deren Teile gezielt für Angriffe und Bewegungen ein
 - **Warnungen zeigen** Fläche, Zeitpunkt, die danach sicheren Flächen und die bereits vorbereitete nächste Gefahr. Sie bleiben dezent, ohne grelle Vollflächen.
 - **Überlappende Phasen** (A aktiv, B angekündigt, A endet, B aktiv) sind ausdrücklich möglich. Es dürfen nie versehentlich alle sicheren Positionen gleichzeitig verschwinden.
 
+### H2 – Choreografierte Angriffssequenzen (bestätigte Designentscheidung des Nutzers, 26.11.2026)
+- **Ergänzen, nicht ersetzen:** Dynamische Auswahl (Rotation, Distanzdruck, Nahangriff, Aufholattacke) und HP-Phasen bleiben. Zusätzlich gibt es feste, lernbare Sequenzen aus den vorhandenen neun Fähigkeiten, also keine neuen Angriffe.
+- **Lernbar:** Je Phase 2–3 Sequenzen mit fester Reihenfolge. Der Boss spielt sie der Reihe nach, immer nach zwei regulären Angriffen. So erkennt man nach einigen Begegnungen „Strahl → Schachbrett → Ringe“ wieder.
+- **Fair:**
+  - Jeder Schritt ist die vollständige Fähigkeit mit Warnung, Countdown und Aktivierung.
+  - Der nächste Schritt beginnt erst, wenn alle Gefahren des vorigen vorbei sind, plus eine Pause von 0,5 s.
+  - Nach dem letzten Schritt ruht der Boss 2,2 s.
+  - Es gibt immer eine machbare Überlebensstrategie; die Boss-Suite prüft das für jede Sequenz mit dem Ausweich-Orakel.
+- **Nie abbrechen:** Ein angekündigter Schritt läuft immer zu Ende. Ein Phasenwechsel beendet eine Sequenz nur zwischen zwei Schritten.
+- **Freischaltung:** Eine Sequenz wird nur genutzt, wenn alle ihre Fähigkeiten freigeschaltet sind. In jeder Phase gibt es mindestens eine Sequenz aus den Fähigkeiten 1–3, damit auch die Begegnung in Minute 5 Sequenzen hat.
+- **Technik:** Daten in `bc_sequences` (`scripts/boss_choreo`), ausgewertet über `bc_seq_decide` in der bestehenden Entscheidung des Bosses. Es gibt kein Parallelsystem.
+- **Pilot Drache:**
+
+| Phase | Sequenzen (Schritte) |
+|---|---|
+| 1 | Feuerschneise (Feueratem → Fächer) · Glutboden (Stampfen → Feueratem) |
+| 2 | Glutfächer (Fächer → Stampfen → Feueratem) · Sternenbahn (Meteore → Feueratem → Wind) · Erdbeben (Bodenschlag → Stampfen → Fächer) |
+| 3 | Feuersturm (Feueratem → Magma-Schachbrett → kontrahierende Ringe) · Meteorhagel (Meteore → Salve → Bodenschlag) · Feuerwand (Stampfen → Fächer → Feueratem) |
+| 4 | Inferno (Feueratem → Schachbrett → Ringe) · Sturmauge (Wind → Leere → Meteore) · Letzte Glut (Fächer → Feueratem → Stampfen) |
+
+- **Offen:** Sequenzen für Zwillingshexen und Behemoth (gleiche Datenstruktur), nach dem Spieltest des Drachen-Piloten.
+
 ## I – Verbindliche Tests
 
 - **Max-Range-Tests:** Reichen Strahlen? Funktionieren Bodenattacken auf Distanz? Funktioniert das Aufholen? Bleibt Kiting sinnvoll?

@@ -45,10 +45,25 @@ function hit_reaction(_target,_source,_sid) {
     if(instance_exists(_source) && variable_instance_exists(_source,"projectile_speed"))dir=_source.direction;
     _target.knock_vx=clamp(_target.knock_vx+lengthdir_x(cfg.knockback*(1-resistance),dir),-190,190);
     _target.knock_vy=clamp(_target.knock_vy+lengthdir_y(cfg.knockback*(1-resistance),dir),-190,190);
+    // Hitstop (Kampf & Begegnungen 9): physical base-weapon hits freeze the enemy's picture for HITSTOP_FRAMES.
+    // Visual only: position, stun and knockback keep running underneath, the player is never affected.
+    if(!boss && _sid<=0 && (!variable_global_exists("selected_character") || global.selected_character!="Mage") &&(!variable_instance_exists(_target,"hitstop_t") || _target.hitstop_t<=-.1)) {
+        _target.hitstop_t=HITSTOP_FRAMES/60;_target.hitstop_x=_target.x;_target.hitstop_y=_target.y;_target.hitstop_img=_target.image_index;
+    }
 }
+#macro HITSTOP_FRAMES 2
+/// Draw-time swap for the hitstop picture: returns the real state to restore with enemy_hitstop_end (or undefined).
+function enemy_hitstop_begin() {
+    if(!variable_instance_exists(id,"hitstop_t") || hitstop_t<=0)return undefined;
+    var real_state={x:x,y:y,img:image_index},shake=(current_time div 33) mod 2==0 ? 1 : -1;
+    x=hitstop_x+shake;y=hitstop_y;image_index=hitstop_img;
+    return real_state;
+}
+function enemy_hitstop_end(_s) {if(is_struct(_s)){x=_s.x;y=_s.y;image_index=_s.img;}}
 function enemy_reaction_step(_dt) {
     if(!variable_instance_exists(id,"hit_stun")) {hit_stun=0;stun_lockout=0;knock_vx=0;knock_vy=0;}
     hit_stun=max(0,hit_stun-_dt);stun_lockout=max(0,stun_lockout-_dt);
+    if(variable_instance_exists(id,"hitstop_t"))hitstop_t-=_dt; // visual hitstop timer (runs to -0.1: short lockout)
     x=clamp(x+knock_vx*_dt,12,room_width-12);y=clamp(y+knock_vy*_dt,12,room_height-12);
     var decay=exp(-combat_config().knockback_decay*_dt);knock_vx*=decay;knock_vy*=decay;
 }

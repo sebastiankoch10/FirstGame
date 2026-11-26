@@ -1,9 +1,8 @@
 reset_round();
 hotbar_init();
-// Unpack the shared texture groups at run start (no-op once resident): bz2 pages unpacked on first use mid-fight
-// cost up to ~350 ms in one frame (perf suite, 26.11.). Level groups are prefetched by level_world_create.
-var _tp=get_timer();texture_prefetch("Default");texture_prefetch("Equipment");
-show_debug_message("TEXTURE_PREFETCH ms "+string((get_timer()-_tp)/1000));
+// Shared texture pages are unpacked in the main menu (texture_warmup_step); this completes whatever is still missing,
+// so no page is unpacked mid-fight (up to ~350 ms per frame, perf suite 26.11.).
+texture_warmup_finish();
 
 global._ui_hover_index = -1;
 

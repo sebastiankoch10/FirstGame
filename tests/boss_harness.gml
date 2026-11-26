@@ -20,7 +20,7 @@ function bh_init() {
     global.bh_ready=true;global.bh_checks=0;global.bh_failed=false;global.bh_failures=[];global.bh_metrics={};global.bh_rows=[];
     // runs: [boss, class, mode]
     global.bh_runs=[["storm_warden","Mage","patterns"],["twins","Mage","patterns"],["behemoth","Mage","patterns"],
-        ["storm_warden","Ranger","kite"],["twins","Ranger","kite"],["behemoth","Ranger","kite"]];
+        ["storm_warden","Ranger","kite"],["twins","Ranger","kite"],["behemoth","Ranger","kite"],["storm_warden","Mage","sequences"]];
     global.bh_run=0;global.bh_stage=0;global.bh_frame=0;global.bh_case=0;global.bh_done=false;global.bh_shot="";global.bh_world_shot="";
 }
 function bh_menu_tick() {
@@ -103,11 +103,13 @@ function bh_controller_tick() {
         if(!instance_exists(b) || global.bh_frame<20)return;
         bh_check(b.boss_id==run[0],run[0]+" spawned in boss test mode");
         bh_check(b.v2_unlocked==9,run[0]+" minute 15 unlocks 9 abilities");
-        global.bh_stage=run[2]=="patterns" ? 2 : 5;global.bh_frame=0;global.bh_case=0;
-        global.bh_cases=bh_case_list(run[0]);
+        global.bh_stage=run[2]=="patterns" ? 2 : (run[2]=="sequences" ? 6 : 5);global.bh_frame=0;global.bh_case=0;
+        global.bh_cases=run[2]=="sequences" ? bh_sequence_cases(b) : bh_case_list(run[0]);
+        if(run[2]=="sequences")bh_check(array_length(global.bh_cases)>=10,"dragon has 2-3 sequences per phase ("+string(array_length(global.bh_cases))+" with 9 abilities)");
         return;
     }
     if(!instance_exists(b)) {bh_check(false,run[0]+" boss vanished during "+run[2]);bh_next_run();return;}
+    if(global.bh_stage>=6){bh_sequence_tick(pl,b,dt);return;} // choreographed sequences (own HP per phase)
     b.hp=max(b.hp,b.max_hp*.3);
     if(global.bh_stage==2) { // start a forced case
         var c=global.bh_cases[global.bh_case],ab=c[0],ph=c[1];
@@ -124,19 +126,8 @@ function bh_controller_tick() {
         return;
     }
     if(global.bh_stage==3) { // oracle dodger: move to the nearest point that stays safe for the next 0.9 s
-        var rec=global.bh_rec;global.bh_case_frame++;rec.frames++;
-        var spd=pl.moveSpeed*60,best=-1,bx=pl.x,by=pl.y,any=false,soon=bh_relevant(1.3),now=bh_relevant(.35);
-        if(!bh_point_unsafe_list(soon,pl.x,pl.y)){best=0;}
-        else {
-            if(global.bh_case_frame<5)rec.start_unsafe=true;
-            for(var r=45;r<=450 && best<0;r+=45)for(var k=0;k<16;k++){var px=pl.x+lengthdir_x(r,k*22.5),py=pl.y+lengthdir_y(r,k*22.5);if(px<30 || py<30 || px>room_width-30 || py>room_height-30)continue;if(!bh_point_unsafe_list(soon,px,py)){best=r;bx=px;by=py;break;}}
-        }
-        if(bh_point_unsafe_list(now,pl.x,pl.y)) {
-            for(var r=45;r<=315 && !any;r+=45)for(var k=0;k<16;k++)if(!bh_point_unsafe_list(now,pl.x+lengthdir_x(r,k*22.5),pl.y+lengthdir_y(r,k*22.5))){any=true;break;}
-            if(!any)rec.unsafe_frames++;
-        }
-        if(best>0){bh_move_toward(pl,bx,by,spd,dt);rec.moved+=1;}
-        bh_contacts(pl,rec);
+        var rec=global.bh_rec;global.bh_case_frame++;
+        bh_oracle_tick(pl,rec,dt);
         if(global.bh_case==4 && global.bh_case_frame==70 && run[0]=="storm_warden")global.bh_world_shot="dragon-beam-sweep";
         if(global.bh_case_frame==72){var c=global.bh_cases[global.bh_case];if(c[1]==3 && ((run[0]=="storm_warden" && c[0]==3) || (run[0]=="twins" && (c[0]==3 || c[0]==4 || c[0]==8)) || (run[0]=="behemoth" && (c[0]==2 || c[0]==5 || c[0]==6))))global.bh_world_shot=string_replace_all(rec.label," ","-");}
         if(global.bh_case_frame>=390) {
@@ -176,6 +167,80 @@ function bh_controller_tick() {
             global.bh_metrics[$ run[0]+"_natural_catchups"]=rec.natural;
             bh_check(rec.reach>=3,rec.label+": mechanics still reach the 560 px kiting ring ("+string(rec.reach)+" hazards)");
             global.bh_metrics[$ run[0]+"_kite_contacts"]=rec.contacts;global.bh_metrics[$ run[0]+"_kite_reach"]=rec.reach;global.bh_metrics[$ run[0]+"_catchups"]=rec.catchups;
+            bh_next_run();
+        }
+    }
+}
+/// One frame of the oracle dodger: move to the nearest point that stays safe for the next 1.3 s; count frames in which
+/// no point within reach is safe right now (unsafe_frames) and real hazard contacts.
+function bh_oracle_tick(_pl,_rec,_dt) {
+    _rec.frames++;
+    var spd=_pl.moveSpeed*60,best=-1,bx=_pl.x,by=_pl.y,any=false,soon=bh_relevant(1.3),now=bh_relevant(.35);
+    if(!bh_point_unsafe_list(soon,_pl.x,_pl.y)){best=0;}
+    else {
+        if(global.bh_case_frame<5)_rec.start_unsafe=true;
+        for(var r=45;r<=450 && best<0;r+=45)for(var k=0;k<16;k++){var px=_pl.x+lengthdir_x(r,k*22.5),py=_pl.y+lengthdir_y(r,k*22.5);if(px<30 || py<30 || px>room_width-30 || py>room_height-30)continue;if(!bh_point_unsafe_list(soon,px,py)){best=r;bx=px;by=py;break;}}
+    }
+    if(bh_point_unsafe_list(now,_pl.x,_pl.y)) {
+        for(var r=45;r<=315 && !any;r+=45)for(var k=0;k<16;k++)if(!bh_point_unsafe_list(now,_pl.x+lengthdir_x(r,k*22.5),_pl.y+lengthdir_y(r,k*22.5))){any=true;break;}
+        if(!any)_rec.unsafe_frames++;
+    }
+    if(best>0){bh_move_toward(_pl,bx,by,spd,_dt);_rec.moved+=1;}
+    bh_contacts(_pl,_rec);
+}
+/// Choreographed dragon sequences (boss_choreo bc_sequences): every sequence of every phase forced once with the oracle.
+function bh_sequence_cases(_b) {
+    var out=[];
+    for(var ph=1;ph<=4;ph++){var n=array_length(bc_seq_available(_b,"dragon",ph));for(var i=0;i<n;i++)array_push(out,[ph,i]);}
+    return out;
+}
+function bh_sequence_tick(_pl,_b,_dt) {
+    if(global.bh_stage==6) { // start a forced sequence case
+        var c=global.bh_cases[global.bh_case],ph=c[0];
+        bv2_clear_owner(_b);global.hostile_bullets=[];_b.enc_zones=[];_b.dragon_magma=[];
+        var hp_start=[0,.95,.7,.45,.2];_b.hp=_b.max_hp*hp_start[ph];_b.boss_phase=ph;
+        if(variable_instance_exists(_b,"bc_catch")){_b.bc_catch=undefined;_b.bc_far_time=0;_b.bc_catch_cd=999;_b.bc_alpha=1;_b.bc_lift=0;}
+        bc_seq_init(_b);_b.bc_seq=undefined;_b.bc_seq_done=undefined;_b.bc_seq_log=[];_b.bc_seq_force=c[1];
+        global.boss_test.ability=-1;dragon_state(_b,"recovery",0);
+        var cen=bh_center(_b);_pl.x=clamp(cen.x+(cen.x>room_width/2 ? -330 : 330),200,room_width-200);_pl.y=clamp(cen.y+60,250,room_height-200);
+        var def=bc_seq_available(_b,"dragon",ph)[c[1]];
+        global.bh_rec=bh_new_rec("sequence","dragon sequence P"+string(ph)+" "+def.name);global.bh_rec.expect=def.steps;global.bh_rec.activations=0;global.bh_rec.phase=ph;global.bh_rec.log0=array_length(_b.v2_attack_log);
+        global.bh_seq_prev="";global.bh_case_frame=0;global.bh_stage=7;return;
+    }
+    if(global.bh_stage==7) { // run it with the oracle until the sequence is logged and its hazards are over
+        var rec=global.bh_rec;global.bh_case_frame++;
+        var hp_floor=[0,.8,.55,.3,.05];_b.hp=max(_b.hp,_b.max_hp*hp_floor[rec.phase]); // stay in the case's phase
+        bh_oracle_tick(_pl,rec,_dt);
+        if(global.bh_seq_prev=="windup" && _b.boss_state=="active")rec.activations++;
+        global.bh_seq_prev=_b.boss_state;
+        var done=array_length(_b.bc_seq_log)>=1 && _b.boss_state=="recovery" && !bc_owner_busy(_b);
+        if(done || global.bh_case_frame>=60*30) {
+            _b.bc_seq_force=-1;
+            var ran=array_length(_b.bc_seq_log)>=1 ? _b.bc_seq_log[0].steps : [],same=array_length(ran)==array_length(rec.expect),defs=boss_v2_definition(_b.boss_id),logged=[];
+            for(var i=0;i<array_length(ran) && same;i++)if(ran[i]!=rec.expect[i])same=false;
+            for(var i=rec.log0;i<array_length(_b.v2_attack_log);i++)array_push(logged,defs.abilities[_b.v2_attack_log[i].ability-1].key);
+            var begun=array_length(logged)>=array_length(rec.expect);
+            for(var i=0;i<array_length(rec.expect) && begun;i++)if(logged[i]!=rec.expect[i])begun=false;
+            bh_check(done && same,rec.label+": runs completely in order ("+string(ran)+")");
+            bh_check(begun,rec.label+": every step starts its ability ("+string(logged)+")");
+            bh_check(rec.activations>=array_length(rec.expect),rec.label+": no announced step is cut short ("+string(rec.activations)+" activations)");
+            bh_check(rec.unsafe_frames<=6,rec.label+": a safe position stays reachable (unsafe frames "+string(rec.unsafe_frames)+")");
+            array_push(global.bh_rows,{label:rec.label,hazards:rec.hazards,contacts:rec.contacts,kinds:rec.contact_kinds,unsafe_frames:rec.unsafe_frames,frames:rec.frames,moved:rec.moved,steps:ran});
+            global.bh_metrics[$ "seq_P"+string(_b.boss_phase)+"_"+string(global.bh_case)+"_seconds"]=rec.frames/60;
+            global.bh_case++;global.bh_stage=global.bh_case<array_length(global.bh_cases) ? 6 : 8;global.bh_frame=0;
+        }
+        return;
+    }
+    if(global.bh_stage==8) { // natural run: sequences complement the dynamic selection instead of replacing it
+        if(global.bh_frame==1){bv2_clear_owner(_b);_b.hp=_b.max_hp*.45;_b.boss_phase=3;bc_seq_init(_b);_b.bc_seq_force=-1;_b.bc_seq=undefined;_b.bc_seq_log=[];_b.bc_seq_count=0;global.bh_rec=bh_new_rec("natural","dragon natural P3");global.bh_rec.log0=array_length(_b.v2_attack_log);dragon_state(_b,"recovery",0);}
+        _b.hp=max(_b.hp,_b.max_hp*.3);
+        global.bh_case_frame=global.bh_frame;bh_oracle_tick(_pl,global.bh_rec,_dt);
+        if(global.bh_frame>=60*40) {
+            var seqs=array_length(_b.bc_seq_log),steps=0,attacks=array_length(_b.v2_attack_log)-global.bh_rec.log0;
+            for(var i=0;i<seqs;i++)steps+=array_length(_b.bc_seq_log[i].steps);
+            bh_check(seqs>=1,"dragon natural run: at least one choreographed sequence ("+string(seqs)+")");
+            bh_check(attacks>steps,"dragon natural run: regular attacks remain between sequences ("+string(attacks-steps)+" regular, "+string(steps)+" sequence steps)");
+            global.bh_metrics[$ "seq_natural_sequences"]=seqs;global.bh_metrics[$ "seq_natural_regular"]=attacks-steps;
             bh_next_run();
         }
     }

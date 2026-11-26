@@ -5,31 +5,31 @@ agent: Claude
 ---
 # Übergabe (wird nach jeder Aufgabe überschrieben, max. ~40 Zeilen)
 
-**Zuletzt dran:** Claude, 2026-11-26 nachmittags. Performance bei vielen Gegnern, Ruckler durch Textur-Entpacken und ArtPack-Pfade erledigt. **Zwei Commits lokal, nicht gepusht**; für andere Geräte `git push origin entwicklung`.
+**Zuletzt dran:** Claude, 2026-11-26 abends. Folgeauftrag „offene Punkte nach Phase 1/2A/2B und QA-Auftrag“ abgeschlossen, committet und nach `origin/entwicklung` gepusht (Nutzerfreigabe).
 
 ## Stand
-- **Review-Center:** 25 Szenarien offen, keine persönliche Freigabe bisher ([[Review-Center]]). Die heutigen Änderungen sind entweder unsichtbar (Performance) oder ohne Review-Eintrag ([[Bugs & Ideen]]).
-- **Neu am 26.11. nachmittags:**
-  - **Performance:** Die Wald-Kollision nutzt einen Zellindex (Ergebnis identisch, geprüft an 16.200 Punkten), die Gegner-Trennung eine gemeinsame Nachbarliste. 148 Gegner: unbegrenzt 73–75 statt 64–66 FPS. Werkzeug `tests/tools/profile_perf.py` ([[Tests & QA]]).
-  - **Ruckler:** Texturgruppen `Default` und `Equipment` werden beim Run-Start vorgeladen. Vorher gab es Einzelbilder bis etwa 350 ms beim ersten Auftauchen. **Vorläufig**, weil es etwa 5,1 s beim ersten Run der Sitzung kostet ([[Spielablauf & Zustände]]).
-  - **ArtPack:** `atmosphere_v2` ist eine aktive Quelle (Minibosse, Magnet, Münze) und liegt jetzt unter `bosses/`. 12 PowerShell-Skripte zeigten noch auf die alten Ordner und sind korrigiert; `art_paths.py --check` prüft jetzt auch `.ps1` ([[Assets & Pipeline]]).
-  - **Geprüft, ohne Änderung:** `progression_audit` (gewollte Messdaten) und `RoomCrypt`/`RoomRuins` (nur Rückfallebene).
-- **Vormittags/mittags:** Messungen (Last, Level je Minute), mehrphasige Zauber, Wald-Skelette, Ankerpunkte, Aufräumen, QA-Suiten `docs`/`review`/`perf` (siehe [[LOG]]).
-- **Tests (26.11. nachmittags):** QA Stufe 3 PASS (docs, anchors, static, regression 811, feature 195, boss 141, level 168, classes 151); perf dreimal ohne Ausreißer über 50 ms. Visual (84) zuletzt mittags PASS; heute Nachmittag nicht betroffen.
+- **Review-Center:** 36 Szenarien offen (11 neu: mehrphasige Zauber, Wald-Skelette, MAGNET, Ankerpunkte, Trefferstopp, Drachen-Sequenzen P1/P3, Hexen- und Behemoth-Bewegung). Keine persönliche Freigabe bisher ([[Review-Center]]).
+- **Neu am 26.11. abends:**
+  - **Drachen-Sequenzen** ([[Boss-Design]] H2): 11 Sequenzen in 4 Phasen, nach je 2 regulären Angriffen, mit fairer Pause und Ruhe. Daten in `bc_sequences`.
+  - **Trefferstopp** als Bild (2 Bilder, physische Grundwaffe); Bewegungsidentität von Hexen und Behemoth beim Aufladen und Einschlag.
+  - **Nutzerentscheidungen:** Texturen im Menü verteilt laden (Run-Start 0 statt 5,1 s, Menü ruckelt anfangs), Effekt-Zufall getrennt (`vfx_random`), `boss_test_preset` kalibriert, `.obsidian` versioniert (ohne workspace), „c“ in `CHARACTER_ART.md` entfernt.
+  - **Performance:** Skelett-Sprite gecacht. Horde unbegrenzt 72–75 FPS, Bosse mit 60 Gegnern 96–102.
+  - **Teil B:** Anforderungen für neue Grafik in [[Assets & Pipeline]] 7. Vorbereitet sind Skelett-Rollen-Sets (automatisch, 1:1) und die Basisfigur (Ordner, `atlas.base_neutral_path`, `check_base_neutral.py`).
+  - **Werkzeuge:** `record_scene.py spellsheet`, Boss-Suite-Lauf `sequences`, Feature-Suite mit fester Bildzeit.
+- **Tests (26.11. abends):**
+  - QA Stufe 3 PASS: docs, anchors, static, Regression 811, Feature 195, Boss 190, Level 168, Klassen 151, Visual 86, Review-E2E 12.
+  - perf PASS, keine Ausreißer.
 
 ## Offen (Reihenfolge)
 1. **Nutzer:**
-   - Ladezeit des Textur-Vorladens entscheiden: so lassen, im Menü verteilt laden (Empfehlung), Kompression umstellen oder entfernen ([[Bugs & Ideen]]).
-   - F5 → Review-Center prüfen und freigeben.
-   - Über den `boss_test_preset`-Vorschlag entscheiden.
-2. **Vorschläge, noch nicht freigegeben:**
-   - A: den Effekt-Zufall vom Spielzufall trennen (`spell_vfx`, Wetter, Ambiente, Trefferfunken auf eigenen Generator).
-   - B: Sichtprüfung der mehrphasigen Zauber, Wald-Skelette und „MAGNET“ per `record_scene.py`.
-3. **Grafik-Entscheidungen** ([[Roadmap & Vertical Slice]] Zeilen 11–13): neutrale Basisfigur; Drachenschweif und Flügel als Teile.
-4. **Performance** nur bei Bedarf: restliche Posten in [[Bugs & Ideen]].
+   - F5 → Review-Center: 36 Szenarien prüfen und freigeben, besonders die Drachen-Sequenzen und den Trefferstopp.
+   - Grafikquelle entscheiden (Roadmap 9, 11, 12).
+2. **Animation Controller S2:** nicht umgesetzt (großer Umbau von Spieler, Skeletten und Drachen); nächster eigener Schritt nach [[Technische Architektur]] 4.2.
+3. **Sequenzen** für Hexen und Behemoth nach dem Spieltest des Drachen-Piloten (gleiche Datenstruktur).
+4. **Grundstufen:** Mehrere Zauber auf Stufe 1 sind kaum sichtbar (Blitz, Lanze, Siegel, Sternenfall, Brunnen, Gefängnis, Urteil); künstlerisches Urteil des Nutzers ([[Zauber & Passiva]]).
 
 ## Bekannte Bugs / Risiken
-- Die Bossdruck-Werte (`bc_config`) sind Startwerte; nach dem Spieltest feinjustieren.
-- `FirstGame_ArtPack/characters/class_overhaul/CHARACTER_ART.md` enthält ein fremdes „c“ in Zeile 1 (uncommittet, nicht angefasst).
-- Beim Schreiben von Patches über die Shell werden doppelte Backslashes zu einfachen; in Skripten `chr(92)` verwenden.
-- Arbeitsweise: Auf eine offene Frage („Was kann man machen?“) erst einen Plan vorschlagen und auf das Go des Nutzers warten.
+- Bossdruck-Werte (`bc_config`) und Sequenz-Takt (`seq_every`, `seq_gap`, `seq_rest`) sind Startwerte; nach dem Spieltest feinjustieren.
+- Im Hauptmenü ruckelt das Bild in den ersten etwa 3 s (Textur-Entpacken, längstes Bild etwa 0,55 s).
+- Visuell nicht belegt: Öffnungen der kontrahierenden Ringe (Aufnahme verfehlt); geprüft nur über Geometrie und Orakel.
+- GML: `all` ist ein Schlüsselwort (keine Variable so nennen); Array-Literale nicht direkt indizieren.

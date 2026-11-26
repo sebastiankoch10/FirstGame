@@ -36,7 +36,7 @@ SUITES = {
 EXTRA_REPLACEMENTS: list[tuple[str, str]] = []
 # Suites whose checks compare boss and hazard timing with a bot that steps 1/60 s run on a fixed 60 Hz frame time, so
 # frame-rate jitter of the test machine cannot move the results (twins repositioning metric drifted 10/9/8 of 17).
-FIXED_DT_SUITES = {'boss'}
+FIXED_DT_SUITES = {'boss', 'feature'}   # feature since 26.11.: 16 frame-count checks (the classes runner has cd_sim_dt)
 
 
 def write(p, s):

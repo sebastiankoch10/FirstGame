@@ -57,3 +57,31 @@ function render_present() {
     gpu_set_texfilter(false);gpu_set_blendenable(true);
     global.render_info={scale:s,mode:whole ? "ganzzahlig" : (s<1 ? "verkleinert" : "sharp-bilinear"),x:dx,y:dy,w:dw,h:dh};
 }
+
+/// Texture warm-up (26.11., user decision: load while the menu is open). The shared groups Default and Equipment are bz2
+/// pages that GameMaker otherwise unpacks on first use, mid-fight (single frames up to ~350 ms). The main menu unpacks one
+/// page every TEXTURE_WARMUP_GAP frames, so it stays usable in between; texture_warmup_finish() at run start completes
+/// whatever is still missing (logged as TEXTURE_PREFETCH). Level groups are prefetched by level_world_create.
+#macro TEXTURE_WARMUP_GAP 8
+function texture_warmup_pages() {
+    if(!variable_global_exists("texture_warmup_list")) {
+        var l=[],groups=["Default","Equipment"];
+        for(var g=0;g<array_length(groups);g++){var t=texturegroup_get_textures(groups[g]);for(var i=0;i<array_length(t);i++)array_push(l,t[i]);}
+        global.texture_warmup_list=l;global.texture_warmup_index=0;global.texture_warmup_tick=0;
+    }
+    return global.texture_warmup_list;
+}
+function texture_warmup_done() {var l=texture_warmup_pages();return global.texture_warmup_index>=array_length(l);} // pages() first: it creates the index
+function texture_warmup_step() {
+    if(texture_warmup_done())return;
+    global.texture_warmup_tick++;if(global.texture_warmup_tick<TEXTURE_WARMUP_GAP)return;
+    global.texture_warmup_tick=0;
+    var tex=global.texture_warmup_list[global.texture_warmup_index];global.texture_warmup_index++;
+    if(!texture_is_ready(tex))texture_prefetch(tex);
+}
+function texture_warmup_finish() {
+    var l=texture_warmup_pages(),t=get_timer(),n=0;
+    while(global.texture_warmup_index<array_length(l)){var tex=l[global.texture_warmup_index];global.texture_warmup_index++;if(!texture_is_ready(tex)){texture_prefetch(tex);n++;}}
+    texture_prefetch("Default");texture_prefetch("Equipment"); // safety net for whole groups, no-op when resident
+    show_debug_message("TEXTURE_PREFETCH ms "+string((get_timer()-t)/1000)+" pages "+string(n)+" of "+string(array_length(l)));
+}

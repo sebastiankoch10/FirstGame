@@ -26,10 +26,10 @@ Entwicklermenü „Testmodus“ im Hauptmenü (bis 25.11. „Boss testen“). Zw
 
 ## Bekannte Probleme
 - Der Menüpunkt ist auch in normalen Builds sichtbar, solange das Makro auf `true` steht.
-- Die Build-Voreinstellungen (`boss_test_preset`) sind Entwicklungswerte und weichen von der gemessenen Progression ab.
+- Die Build-Voreinstellungen (`boss_test_preset`) sind **seit 26.11. auf die gemessene Bot-Progression kalibriert** (Nutzerfreigabe). Level 17/33/51/70/87/100 und `decisions` 19/38/53/77/95/108 für Minute 5/10/15/20/25/30. Es sind Bot-Werte; sobald echte Läufe vorliegen (`progression_audit`), mit ihnen gegenprüfen.
 - **Messung 26.11.** (`QA/tools/analyze_levels.py`; 1080 Bot-Läufe vom 24.11. und 108 Läufe mit aktuellem Code; nur Läufe, die den Zeitpunkt erreichen, daher wenige Fälle ab Minute 15):
 
-  | Minute | Level gemessen (Median alt / neu) | Preset heute | **Vorschlag Level** | Zauberstufen gemessen | Preset `decisions` | **Vorschlag `decisions`** |
+  | Minute | Level gemessen (Median alt / neu) | Preset bis 26.11. | **Vorschlag Level (umgesetzt)** | Zauberstufen gemessen | Preset `decisions` bis 26.11. | **Vorschlag `decisions` (umgesetzt)** |
   |---|---|---|---|---|---|---|
   | 5 | 18 / 17 | 13 | **17** | ≈19 | 15 | **19** |
   | 10 | 34 / 33 | 23 | **33** | ≈38 | 26 | **38** |
@@ -40,4 +40,4 @@ Entwicklermenü „Testmodus“ im Hauptmenü (bis 25.11. „Boss testen“). Zw
 
   - Klassen: Schwertmeister und Arkanistin liegen gleichauf, der Waldläufer deutlich darunter (Minute 5: 12–14, Minute 10: 20–26). Anfänger-Bots erreichen Minute 5 praktisch nie.
   - Ausrüstung und Talente der Bots: um Minute 5–7 etwa 4 Gegenstände und 4 Talentpunkte, um Minute 10–12 etwa 11 und 10, um Minute 15–17 etwa 13 und 14. Vorschlag für Testcharaktere: ab Minute 10 alle sechs Plätze belegt, Talentpunkte ≈ 0,9 je Minute.
-  - **Nicht umgesetzt:** Die Zahlen ändert nur der Nutzer (Balancing-Regel). Das Review-Center übernimmt neue Werte automatisch, weil es dieselbe Tabelle liest.
+  - **Umgesetzt am 26.11.** (Nutzerfreigabe, Folgeauftrag Teil C, Punkt 11): die Vorschlagsspalten Level und `decisions`. Der Zusatzvorschlag zu Ausrüstung und Talenten der Testfiguren ist nicht umgesetzt. Das Review-Center übernimmt die neuen Werte automatisch, weil es dieselbe Tabelle liest.

@@ -1,4 +1,5 @@
 fg_audio_tick(max(0,delta_time/1000000));
+texture_warmup_step(); // unpack shared texture pages while the menu is open (render_pipeline)
 if(menu_mode=="boss_test"){boss_test_menu_step();exit;}
 if(menu_mode=="review"){review_center_step();exit;}
 var previous_menu_index=menu_index;

@@ -10,7 +10,8 @@ function bc_config() {
         catchup_cooldown:9,             // was 20 s: distance alone must not stay a risk-free strategy
         far_recovery_cut:.45,far_speed_dragon:230,far_speed_behemoth:170,far_follow_twins:1.0, // twins already aim at the player; a faster centre shifted their beam origins away (boss suite 26.11.)
         dive_warning:1.6,dive_radius:170,emerge_warning:1.7,emerge_radius:190,reform_warning:1.1,reform_radius:85,
-        cell:118,grid:5};
+        cell:118,grid:5,
+        seq_every:2,seq_gap:.5,seq_rest:2.2}; // choreographed sequences: regular attacks between two, fair pause between steps, rest after
     return cfg;
 }
 /// Complex variants of the early abilities (1-3, unlocked at minute 5) only appear in later encounters
@@ -236,4 +237,73 @@ function bc_catchup_run(_b,_kind,_dt) {
     if(p>=1){if(c.stage<2){c.stage=2;spell_vfx_burst(c.fx,c.fy-60,90,1);spell_vfx_burst(c.ix,c.iy-60,90,2);}_b.bc_alpha=clamp((c.age-c.warning)/.35,0,1);}
     if(c.age>=c.warning+.4){_b.bc_catch=undefined;_b.bc_alpha=1;bv2_encounter_state(_b,"recovery",.7);}
     return true;
+}
+
+/// Choreographed sequences (Boss-Design.md "Choreografierte Sequenzen", user decision 26.11.): fixed, learnable chains of
+/// the boss's existing abilities. They complement the dynamic selection (rotation, distance pressure, melee, catch-up)
+/// instead of replacing it: after every seq_every regular attacks the boss runs the next sequence of its current phase,
+/// in list order. Every step is the complete ability (warning, countdown, activation). The next step starts only when
+/// every hazard of the previous step has ended plus seq_gap (fair pause); after the last step the boss rests seq_rest.
+/// Only sequences whose abilities are all unlocked are used. A phase change ends a sequence between steps; an announced
+/// step always runs out. Data only: twins and behemoth can add their lists here (pilot: dragon).
+function bc_sequences(_kind,_phase) {
+    if(_kind!="dragon")return [];
+    switch(_phase) {
+        case 1:return [{name:"Feuerschneise",steps:["beam","arc"]},{name:"Glutboden",steps:["stomp","beam"]}];
+        case 2:return [{name:"Glutfaecher",steps:["arc","stomp","beam"]},{name:"Sternenbahn",steps:["meteor","beam","wind"]},{name:"Erdbeben",steps:["slam","stomp","arc"]}];
+        case 3:return [{name:"Feuersturm",steps:["beam","stomp","vortex"]},{name:"Meteorhagel",steps:["meteor","volley","slam"]},{name:"Feuerwand",steps:["stomp","arc","beam"]}];
+        default:return [{name:"Inferno",steps:["beam","stomp","vortex"]},{name:"Sturmauge",steps:["wind","void","meteor"]},{name:"Letzte Glut",steps:["arc","beam","stomp"]}];
+    }
+}
+function bc_seq_available(_b,_kind,_phase=-1) {
+    var seqs=bc_sequences(_kind,_phase<0 ? _b.boss_phase : _phase),out=[]; // ("all" is a GML keyword)
+    for(var i=0;i<array_length(seqs);i++){var ok=true;for(var s=0;s<array_length(seqs[i].steps);s++)if(!boss_v2_attack_allowed(_b,seqs[i].steps[s]))ok=false;if(ok)array_push(out,seqs[i]);}
+    return out;
+}
+function bc_seq_init(_b) {if(!variable_instance_exists(_b,"bc_seq")){_b.bc_seq=undefined;_b.bc_seq_done=undefined;_b.bc_seq_count=0;_b.bc_seq_next=0;_b.bc_seq_log=[];_b.bc_seq_force=-1;_b.bc_seq_wait=0;}}
+/// Any hazard of this owner still warning or active (the next step of a sequence waits for it).
+function bc_owner_busy(_b) {
+    if(!variable_global_exists("bv2_hazards"))return false;
+    for(var i=0;i<array_length(global.bv2_hazards);i++){var h=global.bv2_hazards[i];if(h.owner==_b && h.age<h.warning+h.active)return true;}
+    return false;
+}
+/// Called when the boss decides its next attack. Returns true if a sequence owns this decision (a step started, or the
+/// boss waits out the fair pause); false lets the normal selection run. _begin(_b,_kind) starts one ability.
+function bc_seq_decide(_b,_kind,_begin,_dt) {
+    if(!variable_instance_exists(_b,"v2_enabled") || !_b.v2_enabled)return false;
+    bc_seq_init(_b);
+    if(is_struct(_b.bc_seq) && _b.bc_seq.phase!=_b.boss_phase)_b.bc_seq=undefined; // phase change between steps ends it
+    if(!is_struct(_b.bc_seq)) {
+        var list=bc_seq_available(_b,_kind);
+        if(array_length(list)==0 || (_b.bc_seq_force<0 && _b.bc_seq_count<bc_config().seq_every))return false;
+        var idx=(_b.bc_seq_force>=0 ? _b.bc_seq_force : _b.bc_seq_next) mod array_length(list);
+        if(_b.bc_seq_force<0)_b.bc_seq_next++;
+        _b.bc_seq={def:list[idx],step:0,phase:_b.boss_phase,started:global.round_seconds,ran:[]};_b.bc_seq_count=0;_b.bc_seq_wait=0;
+    }
+    var s=_b.bc_seq;
+    if(s.step>0) { // fair pause: all hazards of the previous step have ended, then seq_gap
+        if(bc_owner_busy(_b)){_b.bc_seq_wait=0;return true;}
+        _b.bc_seq_wait+=_dt;if(_b.bc_seq_wait<bc_config().seq_gap)return true;
+    }
+    var kind=s.def.steps[s.step];s.step++;_b.bc_seq_wait=0;array_push(s.ran,kind);
+    _begin(_b,kind);
+    if(s.step>=array_length(s.def.steps)) {
+        array_push(_b.bc_seq_log,{name:s.def.name,phase:s.phase,steps:s.ran,started:s.started});if(array_length(_b.bc_seq_log)>32)array_delete(_b.bc_seq_log,0,1);
+        _b.bc_seq_done=s;_b.bc_seq=undefined;
+    }
+    return true;
+}
+/// A regular (non-sequence) attack was chosen: counts toward the next sequence.
+function bc_seq_regular(_b) {bc_seq_init(_b);_b.bc_seq_count++;}
+/// Recovery after an attack: minimal inside a sequence (the step gate adds the fair pause), long after its last step.
+function bc_seq_recovery(_b,_default) {
+    bc_seq_init(_b);
+    if(is_struct(_b.bc_seq))return .1;
+    if(is_struct(_b.bc_seq_done)){_b.bc_seq_done=undefined;return bc_config().seq_rest;}
+    return _default;
+}
+/// Name of the running sequence and step ("" if none), for the boss test HUD and review notes.
+function bc_seq_label(_b) {
+    if(!variable_instance_exists(_b,"bc_seq") || !is_struct(_b.bc_seq))return "";
+    return _b.bc_seq.def.name+" "+string(_b.bc_seq.step)+"/"+string(array_length(_b.bc_seq.def.steps));
 }

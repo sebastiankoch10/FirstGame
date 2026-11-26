@@ -239,7 +239,7 @@ Rangfolge, was bei Konflikten sichtbar bleiben muss (1 = höchste):
 
 - **Treffer sind spürbar:** Trefferreaktion des Gegners, Einschlagseffekt, Ton, Schadenszahlen.
 - **Vorschlag für physische Treffer:**
-  - kurzer Trefferstopp (Hitstop) von 1–3 Frames nur für Gegner und Effekt, nie für die Spielersteuerung;
+  - kurzer Trefferstopp (Hitstop) von 1–3 Frames nur für Gegner und Effekt, nie für die Spielersteuerung. Ist seit 26.11.: 2 Frames, nur das Gegnerbild bei physischen Grundwaffen-Treffern, Spielwerte unverändert ([[Gegner & Spawns]]);
   - kleiner Rückstoß;
   - Materialklang (Knochen, Rüstung, Fleisch, Stein).
 - **Der Spieler** bekommt beim eigenen Treffer klares rotes Feedback. Ist: Trefferblitz und HUD.

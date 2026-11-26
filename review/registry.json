@@ -684,6 +684,274 @@
       "status": "pending",
       "created": "2026-11-26",
       "approved_at": null
+    },
+    {
+      "id": "spell.spikes.phases",
+      "title": "Faehigkeit - Steinstacheln: Sammelphase und Einschlagslicht (Stufe 5)",
+      "category": "Faehigkeiten: Progression",
+      "content": "Energie sammelt sich am naechsten Einschlagspunkt, Licht beim Schadensereignis nach Stufe; Dauer, Zeitpunkt und Trefferflaeche unveraendert",
+      "goal": "Ankuendigung am richtigen Ort lesbar, Einschlag mit Gewicht, kein Bildschirmflackern.",
+      "task": "Folgeauftrag 26.11.",
+      "scenario": {
+        "type": "scene",
+        "class": "Mage",
+        "minute": 10,
+        "arena": 1,
+        "build": "empty",
+        "spells": [
+          {
+            "id": 110,
+            "level": 5
+          }
+        ],
+        "invulnerable": true,
+        "enemy_pack": {
+          "count": 8,
+          "radius": 260
+        }
+      },
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null
+    },
+    {
+      "id": "spell.starfall.phases",
+      "title": "Faehigkeit - Sternenfall: Sammelphase und Einschlagslicht (Stufe 5)",
+      "category": "Faehigkeiten: Progression",
+      "content": "Sternsplitter sammeln Energie am kommenden Einschlag, Licht beim Treffer nach Stufe; Timing unveraendert",
+      "goal": "Reihenfolge der Einschlaege erkennbar, Licht dezent statt grell.",
+      "task": "Folgeauftrag 26.11.",
+      "scenario": {
+        "type": "scene",
+        "class": "Mage",
+        "minute": 10,
+        "arena": 1,
+        "build": "empty",
+        "spells": [
+          {
+            "id": 113,
+            "level": 5
+          }
+        ],
+        "invulnerable": true,
+        "enemy_pack": {
+          "count": 8,
+          "radius": 260
+        }
+      },
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null
+    },
+    {
+      "id": "spell.seed.phases",
+      "title": "Faehigkeit - Prismensamen: Einschlagslicht (Stufe 5)",
+      "category": "Faehigkeiten: Progression",
+      "content": "Reisender Kern zerbricht mit Lichtimpuls nach Stufe; Timing unveraendert",
+      "goal": "Zerbrechen als klarer Hoehepunkt, Licht passt zur Stufe.",
+      "task": "Folgeauftrag 26.11.",
+      "scenario": {
+        "type": "scene",
+        "class": "Mage",
+        "minute": 10,
+        "arena": 1,
+        "build": "empty",
+        "spells": [
+          {
+            "id": 117,
+            "level": 5
+          }
+        ],
+        "invulnerable": true,
+        "enemy_pack": {
+          "count": 8,
+          "radius": 260
+        }
+      },
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null
+    },
+    {
+      "id": "enemy.motion.forest",
+      "title": "Gegner - Bewegungsidentitaeten der Wald-Skelette",
+      "category": "Gegner",
+      "content": "Krieger steif-ruckig, Spaeher schnell und vorgebeugt, Wache schwer; Ausholen und Vorstoss beim Schlag, Klappern bei Treffern, Laufrate je Rolle",
+      "goal": "Die drei Rollen sind an der Bewegung unterscheidbar, ohne zu zappeln.",
+      "task": "Folgeauftrag 26.11.",
+      "scenario": {
+        "type": "scene",
+        "class": "Sword",
+        "minute": 10,
+        "arena": 0,
+        "build": "balanced",
+        "invulnerable": true
+      },
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null
+    },
+    {
+      "id": "ui.font.magnet",
+      "title": "UI - Pixelschrift MAGNET beim Einsammeln der Magnetkugel",
+      "category": "UI",
+      "content": "Welt-Pixelschrift mit Buchstaben (5x7), MAGNET auf ganzen Pixeln",
+      "goal": "In die Kugel laufen: Schrift scharf, lesbar, im Stil der Schadenszahlen.",
+      "task": "Folgeauftrag 26.11.",
+      "scenario": {
+        "type": "scene",
+        "class": "Ranger",
+        "minute": 10,
+        "arena": 0,
+        "build": "balanced",
+        "invulnerable": true,
+        "magnet_orb": true
+      },
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null
+    },
+    {
+      "id": "char.attach.anchors",
+      "title": "Charakter - Waffen-Ankerpunkte (F10-Anzeige)",
+      "category": "Charakter",
+      "content": "Griffpunkt und Waffenrichtung je Animationsbild (eqv_attach); F10 zeigt Griff (tuerkis, orange bei verdeckter Hand) und Richtung",
+      "goal": "Mit F10 bewegen und angreifen: der Griff sitzt in der Hand, die Richtung folgt der Waffe.",
+      "task": "Folgeauftrag 26.11.",
+      "scenario": {
+        "type": "scene",
+        "class": "Sword",
+        "minute": 10,
+        "arena": 0,
+        "build": "balanced",
+        "gear": 2,
+        "invulnerable": true
+      },
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null
+    },
+    {
+      "id": "combat.hitstop",
+      "title": "Combat Feeling - Trefferstopp bei physischen Treffern",
+      "category": "Klassen: Grundangriffe",
+      "content": "Gegnerbild friert bei Treffern der Grundwaffe (Schwert, Pfeile) 2 Bilder ein und zittert 1 Pixel; Spielersteuerung, Takt und Schaden unveraendert",
+      "goal": "Treffer fuehlen sich wuchtiger an, ohne dass etwas haengt.",
+      "task": "Folgeauftrag 26.11.",
+      "scenario": {
+        "type": "scene",
+        "class": "Sword",
+        "minute": 10,
+        "arena": 0,
+        "build": "balanced",
+        "invulnerable": true,
+        "enemy_pack": {
+          "count": 8,
+          "radius": 160
+        }
+      },
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null
+    },
+    {
+      "id": "boss.dragon.seq_p1",
+      "title": "Drache - Sequenz Feuerschneise (Phase 1: Feueratem, Faecher)",
+      "category": "Bosse: Drache",
+      "content": "Choreografierte Sequenz aus vorhandenen Faehigkeiten, faire Pause zwischen den Schritten, Ruhe danach; wiederholt sich im Review",
+      "goal": "Reihenfolge lernbar, Ueberlebensweg immer erkennbar, kein Schritt bricht ab.",
+      "task": "Folgeauftrag 26.11.",
+      "scenario": {
+        "type": "boss",
+        "boss": "storm_warden",
+        "minute": 15,
+        "class": "Mage",
+        "ability": -1,
+        "seed": 1337,
+        "build": "balanced",
+        "gear": 2,
+        "boss_hp": 0.95,
+        "sequence": 0
+      },
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null
+    },
+    {
+      "id": "boss.dragon.seq_p3",
+      "title": "Drache - Sequenz Feuersturm (Phase 3: Feueratem, Magma-Schachbrett, kontrahierende Ringe)",
+      "category": "Bosse: Drache",
+      "content": "Feueratem, dann Schachbrett und invertiertes Brett, dann Feuerringe von aussen nach innen; Pausen zwischen den Schritten",
+      "goal": "Lesbar, fair und lernbar; jeder Schritt hat einen klaren sicheren Weg.",
+      "task": "Folgeauftrag 26.11.",
+      "scenario": {
+        "type": "boss",
+        "boss": "storm_warden",
+        "minute": 15,
+        "class": "Mage",
+        "ability": -1,
+        "seed": 1337,
+        "build": "balanced",
+        "gear": 2,
+        "boss_hp": 0.45,
+        "sequence": 0
+      },
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null
+    },
+    {
+      "id": "boss.twins.motion",
+      "title": "Zwillingshexen - Aufladen und Einschlag (Bewegungsidentitaet)",
+      "category": "Bosse: Zwillingshexen",
+      "content": "Beim Aufladen ziehen sich die Hexen zurueck und steigen leicht, beim Ausloesen stossen sie vor; nur Darstellung",
+      "goal": "Ankuendigung am Koerper lesbar, Bewegung ganzpixelig ohne Zittern.",
+      "task": "Folgeauftrag 26.11.",
+      "scenario": {
+        "type": "boss",
+        "boss": "twins",
+        "minute": 15,
+        "class": "Mage",
+        "ability": -1,
+        "seed": 1337,
+        "build": "balanced",
+        "gear": 2
+      },
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null
+    },
+    {
+      "id": "boss.behemoth.motion",
+      "title": "Sumpfbehemoth - Aufladen und Einschlag (Bewegungsidentitaet)",
+      "category": "Bossverhalten",
+      "content": "Beim Aufladen duckt sich der Behemoth zurueck, beim Einschlag stoesst er schwer vor; nur Darstellung",
+      "goal": "Gewicht spuerbar, Ankuendigung am Koerper lesbar.",
+      "task": "Folgeauftrag 26.11.",
+      "scenario": {
+        "type": "boss",
+        "boss": "behemoth",
+        "minute": 15,
+        "class": "Mage",
+        "ability": -1,
+        "seed": 1337,
+        "build": "balanced",
+        "gear": 2
+      },
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null
     }
   ]
 }

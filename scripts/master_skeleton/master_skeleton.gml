@@ -25,7 +25,11 @@ function master_skeleton_step(_dt) {
     if(!skeleton_attacking || skeleton_attack_time<.12)skeleton_direction=player_visual_direction("swordsmanv3",angle);
     if(action!=skeleton_action){skeleton_clock=0;skeleton_action=action;}
     skeleton_clock+=_dt;
-    sprite_index=player_artpack_sprite("spr_master_skeleton_"+action+"_"+skeleton_direction);
+    // Same sprite as before; looked up by name only when action or facing changes (was a string lookup per frame).
+    if(!variable_instance_exists(id,"skeleton_sprite_key_a") || skeleton_sprite_key_a!=action || skeleton_sprite_key_d!=skeleton_direction) {
+        skeleton_sprite_key_a=action;skeleton_sprite_key_d=skeleton_direction;skeleton_sprite_cached=player_artpack_sprite(master_skeleton_prefix(id)+action+"_"+skeleton_direction);
+    }
+    sprite_index=skeleton_sprite_cached;
     var count=sprite_get_number(sprite_index);
     image_xscale=1;image_yscale=1;image_speed=0;
     if(action=="attack")image_index=skeleton_attack_time<.20 ? 0 : 1;
@@ -36,9 +40,20 @@ function master_skeleton_step(_dt) {
         image_index=floor(skeleton_clock*(action=="walk" ? walk_rate : 3)) mod count;
     }
 }
+/// Sprite prefix of a forest skeleton. Prepared for new art in pixel density 1:1 (docs/Design/Assets & Pipeline.md,
+/// "Anforderungen für neue Grafik"): if a role set spr_master_skeleton_<role>_<action>_<dir> exists (drawn at the role's
+/// on-screen size), it is used and drawn unscaled (skeleton_baked -> monster_art_div). Without it nothing changes.
+function master_skeleton_prefix(_e) {
+    if(!variable_instance_exists(_e,"skeleton_prefix")) {
+        var role_prefix="spr_master_skeleton_"+_e.skeleton_role+"_";
+        _e.skeleton_baked=sprite_exists(asset_get_index(role_prefix+"idle_down"));
+        _e.skeleton_prefix=_e.skeleton_baked ? role_prefix : "spr_master_skeleton_";
+    }
+    return _e.skeleton_prefix;
+}
 function master_skeleton_remains(_enemy) {
     if(instance_number(ObjectSkeletonRemains)>=32)with(instance_find(ObjectSkeletonRemains,0))instance_destroy();
     var rem=instance_create_layer(_enemy.x,_enemy.y,"Instances",ObjectSkeletonRemains);
-    rem.sprite_index=player_artpack_sprite("spr_master_skeleton_death_"+_enemy.skeleton_direction);
-    rem.remains_scale=_enemy.monster_scale;rem.depth=-_enemy.y;rem.life=0;
+    rem.sprite_index=player_artpack_sprite(master_skeleton_prefix(_enemy)+"death_"+_enemy.skeleton_direction);
+    rem.remains_scale=_enemy.monster_scale;rem.remains_art=monster_art_div(_enemy);rem.depth=-_enemy.y;rem.life=0;
 }

@@ -21,6 +21,18 @@ updated: 2026-11-26
 
 - Seit 26.11. ebenfalls mehrphasig, ohne Timing-Änderung: Steinstacheln, Sternenfall (Sammeln am nächsten Einschlagspunkt während der bestehenden Wartezeit) und Prismensamen; Licht am Schadensereignis über `spell_impact_light` (Band 0 Puls, 1–2 Blitz).
 
+- **Grundstufe gegen Leitbild G17 geprüft (26.11.):**
+  - Aufnahme: `record_scene.py spellsheet --spell-level 1 --level 0`, je Zauber 0,25 / 0,75 / 1,25 s nach dem Wirken.
+  - Ergebnis: Keine Grundstufe ist zu dominant, keine Darstellung wurde zurückgenommen. Das ist eine technische Prüfung; das künstlerische Urteil macht der Nutzer.
+
+  | Zauber | Stufe 1 |
+  |---|---|
+  | Feuerball, Eisball, Arkane Salve, Kreisklingen, Irrlicht, Glaive, Prismensamen | klein und kompakt (Projektil, Funken, Einschlag unter ~60 px) |
+  | Frostnova | größte Fläche: weiche Scheibe ~200 px um die Figur (~7 % des Bilds), nach unter 0,75 s verblasst; vertretbar |
+  | Heilpuls, Glutfeld | schwacher Ring bzw. warmer Fleck am Ziel, kompakt |
+  | Steinstacheln | kleine Sammelfunken und Einschlag, sehr dezent |
+  | Blitz, Durchbohrende Lanze, Donnersiegel, Sternenfall, Gravitationsbrunnen, Eisgefängnis, Sonnenurteil | zu den Messzeitpunkten kaum sichtbar (kurz oder sehr zurückhaltend). Eher zu wenig als zu viel; zur künstlerischen Beurteilung durch den Nutzer |
+
 ## Abhängigkeiten
 [[Progression & Level-up]] · [[Licht, Wetter & Effekte]] (`spell_vfx`) · [[UI, HUD & Menüs]] · [[Bosse]] · [[Klassen & Startwaffen]]
 

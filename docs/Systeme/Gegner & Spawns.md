@@ -10,6 +10,9 @@ Normale Gegner, Bevölkerungssteuerung und Tod (Münze, Ausrüstungs-Drop).
 ## Wichtige Dateien
 - `objects/ObjectMonster`: Tod, Brennen, Schritt. `Room1` nutzt `master_skeleton`, die anderen Level `lvl_kind`.
 - `scripts/master_skeleton`: die Skelettfamilie des Walds (Krieger, Späher, Wache).
+  - Seit 26.11. wird das Sprite nur neu gesucht, wenn Aktion oder Richtung wechseln (vorher Textsuche je Bild), und `player_visual_direction` nutzt ein statisches Richtungs-Array.
+  - Vorbereitet für neue Grafik in Pixeldichte 1:1: `master_skeleton_prefix` nutzt Rollen-Sets `spr_master_skeleton_<rolle>_*`, sobald sie existieren, und zeichnet sie unskaliert (`skeleton_baked` → `monster_art_div`, auch für Überreste). Anforderungen in [[Assets & Pipeline]] 7.5.
+- **Trefferstopp** (seit 26.11., `hit_reaction` und `enemy_hitstop_begin`/`_end` in `scripts/combat_feedback`): Bei physischen Treffern der Grundwaffe (nicht Arkanistin, nicht Bosse) friert das Gegnerbild `HITSTOP_FRAMES` = 2 Bilder ein und zittert 1 px. Das ist rein visuell; Position, Stun und Rückstoß laufen weiter. Nach jedem Trefferstopp folgt eine Sperre von 0,1 s.
 - `scripts/level_worlds`: Gegnerarten von Sumpf und Ruinen (`level_enemy_kinds`, `level_enemy_step`).
   - Seit 25.11. Pixeldichte 1:1 für Kriecher, Pilzkreatur, Eisgeist, Konstrukt: Feld `baked` in der Gegnerart, Pipeline `tests/tools/levels/enemies.py` (`creature_spec` liest `scale` aus `level_worlds`), Zeichnen mit `monster_scale/monster_art_div()` (`enemy_draw`, `elite_outline_draw`, Überreste). Skelettbasierte Gegner bleiben gestreckt, bis es neue Grafik gibt.
 - `scripts/survivor_balance`: `population_profile` und `population_step`, Zielanzahl über die Zeit, technisches Limit 180.

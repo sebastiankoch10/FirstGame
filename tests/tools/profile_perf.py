@@ -98,6 +98,8 @@ def main() -> None:
     if not result:
         raise SystemExit(f'Kein PERF_RESULT; Logs: {work}')
     for scn, m in result['metrics'].items():
+        if 'prof' not in m:   # e.g. menu_warmup
+            continue
         print(f"\n## {scn}: fps_real {m['fps_real_mean']:.0f} (min {m['fps_real_min']:.0f}), Bildzeit {m['frame_ms_mean']:.1f} ms, Gegner {m['enemies']:.0f}")
         for k, (ms, n) in sorted(m['prof'].items(), key=lambda kv: -kv[1][0])[:20]:
             print(f'  {ms:7.3f} ms  x{n:7.1f}  {k}')

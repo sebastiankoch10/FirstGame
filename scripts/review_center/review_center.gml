@@ -134,12 +134,14 @@ function review_after_start(_ok) {
     if(is_array(bp))for(var i=0;i<array_length(bp) && array_length(global.equipment_backpack)<equipment_config().backpack_size;i++)
         array_push(global.equipment_backpack,equipment_generate(bp[i].slot,review_s(bp[i],"rarity",1),equipment_item_level()+review_s(bp[i],"bonus",0)));
     global.boss_test.invulnerable=review_s(s,"invulnerable",false);
+    if(review_s(s,"magnet_orb",false))instance_create_layer(pl.x+90,pl.y,"Instances",ObjectMagnetOrb); // walk into it: MAGNET pixel text
     var pk=review_s(s,"enemy_pack",undefined);
     if(is_struct(pk))for(var i=0;i<review_s(pk,"count",6);i++){var a=i*360/max(1,review_s(pk,"count",6)),d=review_s(pk,"radius",220);population_spawn_enemy(pl.x+lengthdir_x(d,a),pl.y+lengthdir_y(d,a));}
     if(review_s(s,"type","")=="boss" && instance_exists(global.active_boss)) {
         var b=global.active_boss,off=review_s(s,"boss_offset",undefined);
         if(is_array(off)){b.x=pl.x+off[0];b.y=pl.y+off[1];}
         if(variable_struct_exists(s,"boss_hp"))b.hp=max(1,b.max_hp*s.boss_hp);
+        if(variable_struct_exists(s,"sequence")){bc_seq_init(b);b.bc_seq_force=s.sequence;} // choreographed sequence index of the boss phase (boss_choreo)
     }
     apply_passives(pl);pl.hp=pl.max_hp*review_s(s,"hp",1);pl.hud_hp_trail=pl.hp;
     global.review.start={px:pl.x,py:pl.y,bx:instance_exists(global.active_boss) ? global.active_boss.x : 0,by:instance_exists(global.active_boss) ? global.active_boss.y : 0};

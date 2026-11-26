@@ -132,12 +132,18 @@ function dragon_encounter_step(_b,_dt) {
             else light_pulse(_b.enc_geometry.x,_b.enc_geometry.y,280,make_color_rgb(255,146,66),1,.3);
         }
     } else if(_b.boss_timer<=0) {
-        if(_b.boss_state=="active") { _b.enc_zones=[];_b.dragon_magma=[];dragon_state(_b,"recovery",bc_recovery(_b,_b.boss_phase>=3 ? .85 : 1.2)); }
+        if(_b.boss_state=="active") { _b.enc_zones=[];_b.dragon_magma=[];dragon_state(_b,"recovery",bc_seq_recovery(_b,bc_recovery(_b,_b.boss_phase>=3 ? .85 : 1.2))); }
         else if(_b.boss_state=="intro" || _b.boss_state=="transition")dragon_state(_b,"recovery",.8);
         else {
             var phase=dragon_phase_for_hp(_b);
             if(phase!=_b.boss_phase){_b.boss_phase=phase;_b.dragon_cycle=0;dragon_state(_b,"transition",1.2);fg_sfx("boss_phase");}
-            else {if(variable_global_exists("boss_test") && global.boss_test.active && global.boss_test.ability!=-1)boss_v2_force_attack(_b,global.boss_test.ability);else if(!dragon_melee_try(_b)){var rotation=boss_v2_dragon_rotation(_b);dragon_encounter_begin(_b,bc_dragon_far_pick(_b,rotation[_b.dragon_cycle mod array_length(rotation)]));_b.dragon_cycle++;}}
+            else {
+                if(variable_global_exists("boss_test") && global.boss_test.active && global.boss_test.ability!=-1)boss_v2_force_attack(_b,global.boss_test.ability);
+                else if(!bc_seq_decide(_b,"dragon",dragon_encounter_begin,_dt)) { // learnable sequences (boss_choreo) between regular attacks
+                    if(!dragon_melee_try(_b)){var rotation=boss_v2_dragon_rotation(_b);dragon_encounter_begin(_b,bc_dragon_far_pick(_b,rotation[_b.dragon_cycle mod array_length(rotation)]));_b.dragon_cycle++;}
+                    bc_seq_regular(_b);
+                }
+            }
         }
     }
     if(_b.boss_state=="windup" || _b.boss_state=="active") {

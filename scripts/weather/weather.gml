@@ -34,10 +34,10 @@ function weather_step(_dt) {
     w.fog=lerp(w.fog,w.target_fog,blend);w.rain=lerp(w.rain,w.target_rain,blend);
     w.wind=lerp(w.wind,w.target_wind,blend);w.sun=lerp(w.sun,w.target_sun,blend);
     var target_rain=round(160*w.rain);
-    while(array_length(w.rain_particles)<target_rain)array_push(w.rain_particles,{x:random(1000),y:random(800)});
+    while(array_length(w.rain_particles)<target_rain)array_push(w.rain_particles,{x:vfx_random(1000),y:vfx_random(800)});
     while(array_length(w.rain_particles)>target_rain)array_delete(w.rain_particles,array_length(w.rain_particles)-1,1);
     for(var i=0;i<array_length(w.rain_particles);i++) {var p=w.rain_particles[i];p.x=(p.x+_dt*(45+w.wind*180)) mod 1000;p.y=(p.y+_dt*620) mod 800;}
-    if(w.type=="gust" && array_length(w.leaves)<24)array_push(w.leaves,{x:-80,y:random(700),spin:random(360),life:0});
+    if(w.type=="gust" && array_length(w.leaves)<24)array_push(w.leaves,{x:-80,y:vfx_random(700),spin:vfx_random(360),life:0});
     for(var i=array_length(w.leaves)-1;i>=0;i--) {
         var p=w.leaves[i];p.life+=_dt;p.x+=_dt*(100+180*w.wind);p.y+=sin(w.clock*2+i)*_dt*18;p.spin+=_dt*110;
         if(p.x>1000 || p.life>7)array_delete(w.leaves,i,1);

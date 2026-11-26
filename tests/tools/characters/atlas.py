@@ -64,6 +64,14 @@ def source_path(actor: str, source: str) -> Path:
     return AP.CLASS_OVERHAUL / 'sources' / f'{actor[:-2]}_{source}.png'
 
 
+def base_neutral_path(actor: str, source: str) -> Path:
+    """Delivered slim base clothing atlas for this actor and source (same grid, poses and feet as source_path), see
+    docs/Design/Assets & Pipeline.md 7.1. Cut with the same Atlas mapping, it lands pixel-aligned in the 160x160 frames,
+    so equipment layers and attach points keep fitting. The file may not exist yet."""
+    name = {'swordsmanv3': 'swordsman', 'magev3': 'mage', 'rangerv3': 'ranger'}[actor]
+    return AP.CHARACTER_BASE_NEUTRAL / f'{name}_{source}_base.png'
+
+
 def load_rgba(p: Path) -> np.ndarray:
     return np.asarray(Image.open(p).convert('RGBA')).copy()
 

@@ -37,8 +37,16 @@ updated: 2026-11-26
 - **2026-11-26 · Verwaiste Kollisions-Events der Altprojektile entfernt statt registriert.** Grund: Der Schaden läuft über `spell_projectile_step` (Kollisionslisten); registrierte Events hätten doppelt getroffen.
 - **2026-11-26 · Asset-Migration abgeschlossen** (Zielstruktur `characters/`, `enemies/`, `bosses/`, `vfx/`, `environment/` im ArtPack; nur die Pfadtabelle geändert). Die Skelett-Frames bleiben in `environment/master_world/`, weil der Welt-Importer den Ordner als Ganzes liest.
 - **2026-11-26 · `atmosphere_v2/` bleibt Quelle und liegt unter `bosses/`, nicht in `_legacy/`.** Grund: Minibosse, Magnetkugel und Münze stammen daraus, und der Importer liest den Ordner als Ganzes. PowerShell-Werkzeuge behalten Literalpfade; `art_paths.py --check` prüft deren Existenz.
-- **2026-11-26 · Texturgruppen `Default` und `Equipment` werden vorläufig beim Run-Start vorgeladen.** Grund: Entpacken beim ersten Gebrauch mitten im Kampf ergab Einzelbilder bis etwa 350 ms. Der Preis sind etwa 5,1 s beim ersten Run-Start der Sitzung. Die endgültige Variante ist offen und wird vom Nutzer entschieden: so lassen, im Menü verteilt laden, Kompression umstellen oder entfernen.
-- **2026-11-26 · `boss_test_preset` wird nicht eigenmächtig geändert.** Messung und Vorschlag stehen in [[Boss-Testmodus]]; die Zahlen setzt der Nutzer frei (Balancing-Regel).
+- ~~**2026-11-26 · Texturgruppen werden vorläufig beim Run-Start vorgeladen.**~~ Ersetzt am selben Tag durch die Nutzerentscheidung „im Hauptmenü verteilt laden“, siehe unten.
+- ~~**2026-11-26 · `boss_test_preset` wird nicht eigenmächtig geändert.**~~ Ersetzt am selben Tag: Der Nutzer hat die Kalibrierung freigegeben, siehe unten.
+- **2026-11-26 · Nutzerentscheidungen aus dem Folgeauftrag (Teil C):**
+  - **Texturen:** Die Seiten der Gruppen `Default` und `Equipment` werden im Hauptmenü verteilt entpackt (eine Seite alle 8 Bilder), beim Run-Start wird nur der Rest nachgeladen. Ergebnis: Run-Start 0 statt 5,1 s, kein Entpacken im Kampf; das Menü ruckelt in den ersten Sekunden (längstes Bild etwa 0,55 s).
+  - **Effekt-Zufall:** Effekt-Zufall ist vom Spielzufall getrennt (`vfx_random`). Bot-Ergebnisse von davor sind einmalig nicht direkt vergleichbar.
+  - **`boss_test_preset`:** auf die gemessene Bot-Progression kalibriert (Level und `decisions`); der Zusatzvorschlag zu Ausrüstung und Talenten der Testfiguren ist nicht Teil der Freigabe.
+  - **Obsidian:** `docs/.obsidian/` wird versioniert, ohne `workspace*.json`.
+  - **Grafikquelle:** bleibt offen; die Anforderungen in [[Assets & Pipeline]] 7 taugen für beide Wege.
+- **2026-11-26 · Choreografierte Angriffssequenzen ergänzen die dynamische Auswahl** (bestätigte Designentscheidung, [[Boss-Design]] H2). Daten in `bc_sequences`; Pilot ist der Drache, Hexen und Behemoth folgen nach dem Spieltest.
+- **2026-11-26 · Trefferstopp nur als Bild, nicht als Spielpause.** Grund: Die Vorgabe verlangt „nur Gegner und Effekt, nie die Spielersteuerung“ und unveränderten Angriffstakt. Ein eingefrorenes Gegnerbild über 2 Bilder erfüllt das, ohne Positionen, Stun oder Bot-Ergebnisse zu verändern.
 
 ## Spieldesign
 - **2026-11-25 · Helm = Kopf und Helm als ein Bild** (Auftrag des Nutzers): Das Kopfteil ersetzt die oberen Zeilen des Basismodells, statt darüber zu liegen. Grund: Haare standen um die Helmkuppel heraus. Haare unterhalb des Helmrands bleiben sichtbar.

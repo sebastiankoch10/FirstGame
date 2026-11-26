@@ -95,3 +95,5 @@ review/*.tmp
 
 # Local Stop-hook activity log (not versioned since 2026-11-26; history up to then stays in git)
 docs/ai-activity.log
+# Obsidian: settings and plugins are versioned (same on every device); the per-device window layout is not.
+docs/.obsidian/workspace*.json

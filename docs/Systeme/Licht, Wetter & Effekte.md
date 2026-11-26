@@ -34,4 +34,4 @@ Multiplikatives Weltlicht, Wetter, Kampf-Feedback, Zauberpartikel.
 [[Zauber & Passiva]] · [[Bosse]] · [[Level & Welten]] · [[Klassen & Startwaffen]] · [[Rendering & Pixelraster]] · [[Speichern & Einstellungen]]
 
 ## Bekannte Probleme
-- Partikel nutzen das globale `random()`. Das ändert die Zufallsfolge geseedeter Runs gegenüber älteren Ständen (siehe [[Bugs & Ideen]]).
+- Seit 26.11. (Nutzerentscheidung) nutzen rein visuelle Zufallswerte einen eigenen Generator: `vfx_random`, `vfx_random_range`, `vfx_irandom` und `vfx_choose` (xorshift32 in `scripts/spell_vfx`). Das betrifft Zauberpartikel, Wetter, Umgebungspartikel und Lichtpulse in `level_world` sowie Trefferfunken. Effekte, Effektqualität und Bildrate verschieben damit die Zufallsfolge des Spiels nicht mehr. Bot-Ergebnisse von davor sind einmalig nicht direkt vergleichbar.

@@ -7,13 +7,14 @@ function boss_test_settings() {
     return global.boss_test_menu_config;
 }
 function boss_test_preset(_minute) {
-    // These are explicit development presets, not a claim about measured human progression.
-    if(_minute<=5)return {level:13,decisions:15};
-    if(_minute<=10)return {level:23,decisions:26};
-    if(_minute<=15)return {level:36,decisions:40};
-    if(_minute<=20)return {level:84,decisions:96};
-    if(_minute<=25)return {level:94,decisions:104};
-    return {level:102,decisions:108};
+    // Calibrated 26.11. to the measured bot cohorts (median level per minute, QA/tools/analyze_levels.py; user approved).
+    // decisions = spell steps at that minute. Bots, not humans: re-check with real run samples (progression_audit).
+    if(_minute<=5)return {level:17,decisions:19};
+    if(_minute<=10)return {level:33,decisions:38};
+    if(_minute<=15)return {level:51,decisions:53};
+    if(_minute<=20)return {level:70,decisions:77};
+    if(_minute<=25)return {level:87,decisions:95};
+    return {level:100,decisions:108};
 }
 function boss_test_bosses() {
     var source=boss_v2_catalog(),out=[];
@@ -132,7 +133,8 @@ function boss_test_draw_gui() {
     if(review_active())draw_text_transformed(12,display_get_gui_height()-62,"REVIEW | "+global.review.title+" | Rev. "+string(global.review.revision)+" | Esc: pruefen und freigeben",.7,.7,0);
     if(review_active() && global.review.note_t>0){draw_set_color(make_color_rgb(126,224,140));draw_text_transformed(12,display_get_gui_height()-82,global.review.note,.75,.75,0);draw_set_color(make_color_rgb(167,222,220));}
     draw_text_transformed(12,display_get_gui_height()-43,scene ? "TESTSZENE | "+lnames[clamp(global.selected_level,0,array_length(lnames)-1)]+" | ab Minute "+string(state.minute)+" | Seed "+string(state.seed)
-        : "BOSSTEST | "+state.boss+" | Min "+string(state.minute)+" | Seed "+string(state.seed)+" | "+(state.ability==-1 ? "Rotation" : "Attacke "+string(state.ability)),.7,.7,0);
+        : "BOSSTEST | "+state.boss+" | Min "+string(state.minute)+" | Seed "+string(state.seed)+" | "+(state.ability==-1 ? "Rotation" : "Attacke "+string(state.ability))
+        +(instance_exists(global.active_boss) && bc_seq_label(global.active_boss)!="" ? " | Sequenz "+bc_seq_label(global.active_boss) : ""),.7,.7,0);
     draw_text_transformed(12,display_get_gui_height()-24,"F1 Schutz "+(state.invulnerable ? "EIN" : "AUS")+" | F2 Heilen | F3 Phase | F4 HP25% | F5 Attacke | F6 Attacke wechseln | F7 Aufholen | F8 Talente | F9 Gegenstand | F10 Koerperboxen",.65,.65,0);
     if(state.debug_hitboxes && instance_exists(ObjectPlayer)) {
         var camera=ObjectPlayer.camera,view_x=camera_get_view_x(camera),view_y=camera_get_view_y(camera),sx=display_get_gui_width()/camera_get_view_width(camera),sy=display_get_gui_height()/camera_get_view_height(camera);

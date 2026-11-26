@@ -36,7 +36,32 @@ SCENES = {
     'spell': dict(start=0, frames=150, every=2, crop='560x315', scale=2.0),
     'boss': dict(start=90, frames=180, every=2, crop='0', scale=1.0),
     'horde': dict(start=60, frames=150, every=2, crop='0', scale=1.0),
+    # all 18 active spells at --spell-level in one build: 3 frames each (0.25 / 0.75 / 1.25 s after the cast)
+    'spellsheet': dict(start=20, frames=54, every=30, crop='560x315', scale=1.0),
 }
+SPELL_NAMES = ['Fireball', 'Iceball', 'Lightning', 'Frost Nova', 'Arcane Barrage', 'Healing Pulse', 'Ember Field', 'Piercing Lance', 'Orbit Blades',
+               'Stone Spikes', 'Wisp Sentinel', 'Thunder Seal', 'Starfall', 'Gravity Well', 'Ice Prison', 'Returning Glaive', 'Prismatic Seed', 'Solar Verdict']
+
+
+def spell_grid(frames: list[Path], out: Path, crop: str, level: int) -> str:
+    """Labelled grid for the spellsheet scene: one row per two spells, three moments each (ids 101-118)."""
+    from PIL import ImageDraw
+    w, h = (int(v) for v in crop.split('x'))
+    tw, th = w // 2, h // 2
+    sheet = Image.new('RGB', (tw * 6, (th + 14) * 9), (20, 20, 20))
+    d = ImageDraw.Draw(sheet)
+    for i, p in enumerate(frames[:54]):
+        im = Image.open(p).convert('RGB')
+        x0, y0 = max(0, (im.width - w) // 2), max(0, (im.height - h) // 2)
+        im = im.crop((x0, y0, x0 + w, y0 + h)).resize((tw, th), Image.NEAREST)
+        k, m = i // 3, i % 3
+        x, y = ((k % 2) * 3 + m) * tw, (k // 2) * (th + 14)
+        sheet.paste(im, (x, y + 14))
+        if m == 0:
+            d.text((x + 3, y + 1), f'{101 + k} {SPELL_NAMES[k]} L{level}', fill=(240, 220, 150))
+    p = out / 'spellsheet.png'
+    sheet.save(p)
+    return str(p)
 CLASSES = {'sword': 'Sword', 'schwertmeister': 'Sword', 'mage': 'Mage', 'arkanistin': 'Mage', 'ranger': 'Ranger', 'waldlaeufer': 'Ranger'}
 
 
@@ -133,6 +158,8 @@ def main():
         print(json.dumps({'scene': a.scene, 'status': 'FAIL', 'reason': 'no frames', 'result': result}, indent=2))
         raise SystemExit(1)
     info = assemble(frames, work, cfg['crop'], cfg['scale'], max(1, cfg['every']), a.gif)
+    if a.scene == 'spellsheet':
+        info['spellsheet'] = spell_grid(frames, work, cfg['crop'], max(1, min(9, a.spell_level)))
     for p in frames:
         p.unlink()
     info.update(scene=a.scene, macros=macros, seconds=round(time.time() - started), status='PASS', exceptions=result.get('exceptions'))

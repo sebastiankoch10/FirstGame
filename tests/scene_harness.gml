@@ -48,6 +48,7 @@ function sc_setup() {
     // combat: six approaching enemies, every third one can die (death and remains on film)
     if(SC_SCENE=="combat")for(var i=0;i<6;i++)sc_dummy(pl.x+lengthdir_x(170+(i mod 2)*60,i*60+15),pl.y+lengthdir_y(150+(i mod 2)*50,i*60+15),true,i mod 3!=0);
     if(SC_SCENE=="spell"){global.vfx_band_override=vfx_band(SC_SPELL_LEVEL);for(var i=0;i<3;i++)sc_dummy(pl.x+170+i*55,pl.y-50+i*50,false);}
+    if(SC_SCENE=="spellsheet"){global.vfx_band_override=vfx_band(SC_SPELL_LEVEL);for(var i=0;i<3;i++)sc_dummy(pl.x+120+i*40,pl.y-30+i*30,false);} // targets inside the 560x315 crop
     if(SC_SCENE=="horde"){global.round_seconds=SC_MINUTE*60;if(instance_exists(ObjectSpawner))ObjectSpawner.population_timer=0;}
 }
 function sc_cast(_t) {
@@ -67,6 +68,14 @@ function sc_drive(_t) {
         if(_t==192)global.sc_press=vk_space;
     } else if(SC_SCENE=="spell") {
         pl.weapon_cooldown=99999;pl.class_pending=0;sc_cast(_t);
+    } else if(SC_SCENE=="spellsheet") {
+        // all 18 active spells (101-118) at SC_SPELL_LEVEL, one per 90 frames: cleared at 0, cast at 5
+        pl.weapon_cooldown=99999;pl.class_pending=0;
+        var k=_t div 90,o=_t mod 90;if(k>=18)return;
+        if(o==0){global.spell_fields=[];global.spell_bursts=[];global.spell_particles=[];with(ObjectFireball)instance_destroy();with(ObjectIceball)instance_destroy();with(ObjectLightningball)instance_destroy();}
+        if(o==5){var target=noone;for(var i=0;i<array_length(global.sc_dummies);i++)if(instance_exists(global.sc_dummies[i])){target=global.sc_dummies[i];break;}
+            if(101+k==SPELL.HEAL)pl.hp=pl.max_hp*.5;
+            cast_spell({id:101+k,level:SC_SPELL_LEVEL,cooldown:0,cooldown_timer:0},101+k==SPELL.HEAL ? undefined : target);}
     } else if(SC_SCENE=="boss" || SC_SCENE=="horde") {
         // Circle-strafe: around the boss at ~300 px, in the horde around the start point.
         var cx=global.sc_cx,cy=global.sc_cy,r=SC_SCENE=="boss" ? 300 : 160;

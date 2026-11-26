@@ -188,3 +188,69 @@ FirstGame_ArtPack/                 Name bleibt (bekannt bei Nutzer und Agenten)
 - generierte GameMaker-Frames von Hand nachbearbeiten (stattdessen die Quelle bzw. das Werkzeug ändern);
 - Grafik ohne Quelle einchecken;
 - alte Projektgrafiken als Ersatz verwenden.
+
+## 7. Anforderungen für neue Grafik (Stand 26.11.2026, Quelle noch offen)
+
+Die Quelle (KI-Atlanten oder Pixel-Artist) entscheidet der Nutzer (Roadmap Zeilen 9, 11, 12). Die Anforderungen unten gelten für beide Wege.
+- **KI-Atlanten:** Jede Zelle wird gegen die Originalzelle als Vorlage erzeugt und mit dem jeweiligen Prüfwerkzeug abgenommen.
+- **Pixel-Artist:** Dieser Abschnitt und die Originalatlanten als Unterlage sind das Briefing.
+
+Nichts wird prozedural zurechtgeschnitten, wenn das die Qualität senkt. Fehlt eine Quelle, bleibt der heutige Stand.
+
+### 7.1 Neutrale Basisfigur (Roadmap 11)
+- **Umfang:** 3 Klassen × 4 Atlanten (`walk`, `combat`, `mobility`, `reaction`) × 8 Spalten × 8 Richtungen, also 256 Posen je Klasse.
+- **Maße:** wie die Originalatlanten, 1254 × 1254 px (Waldläufer `combat` 1263 × 1245) mit 8 × 8 Zellen.
+- **Pose:** Jede Zelle zeigt dieselbe Pose, Blickrichtung, Größe und denselben Fußpunkt wie die Originalzelle. Nur die Kleidung ist schlank und eng anliegend, ohne Rüstung und ohne Schulterplatten. Gesicht, Haare und Haut bleiben als Identität erhalten.
+- **Ebenen:** eine Ebene je Atlas. Die Ausrüstung kommt als bestehende Ebenen darüber (`spr_eqv_*`, ersetzen statt überlagern).
+- **Dateien:** `FirstGame_ArtPack/characters/base_neutral/<klasse>_<atlas>_base.png` mit `swordsman` / `mage` / `ranger`, z. B. `mage_combat_base.png`. Der Ordner existiert, Pfadkonstante `CHARACTER_BASE_NEUTRAL`.
+- **Einlesen ohne Umbau:**
+  - `atlas.base_neutral_path()` liefert die Datei.
+  - Sie wird mit derselben Abbildung wie die Originale in die 160 × 160-Frames geschnitten (Ursprung 80,145, Dichte 1:1, Alpha-Schnitt 128).
+  - Ausrüstungsebenen und Ankerpunkte (`equipment_attach_data`) passen dadurch weiter.
+- **Technische Abnahme:** `python tests/tools/characters/check_base_neutral.py` prüft gleiche Größe, Fußpunkt ±2 px, mindestens 95 % innerhalb der Original-Silhouette und mindestens 45 % Deckung. Die künstlerische Abnahme macht der Nutzer.
+
+### 7.2 Drachenschweif als Gliederkette (Roadmap 12)
+- **Umfang:**
+  - 4–6 Schweifglieder mit abnehmender Größe und eine Schweifspitze. Die Spitze bekommt eine eigene Trefferfläche.
+  - Dazu Körperposen ohne Schweif für alle heutigen Körperposen (`spr_drg_body_*`, idle und walk, 8 Bilder).
+- **Maße:** im Maßstab und in der Ansicht der Drachen-Originale (`bosses/dragon_boss/frames`). `build_dragon_parts.py` backt sie wie Körper und Kopf auf Spielgröße (Körperbild 357 × 357, Ursprung 179,335) mit der gemeinsamen 48-Farben-Palette.
+- **Drehung:** Jedes Glied wird in Seitenansicht und ungedreht geliefert, nach rechts zeigend. Die 32 Drehstufen erzeugt das Werkzeug (RotSprite wie bei Hals und Kopf); gedreht wird nie zur Laufzeit.
+- **Gelenke:** Vorder- und Hintergelenk je Glied als Pixelkoordinaten in `parts.json`.
+- **Dateien:** `FirstGame_ArtPack/bosses/dragon_parts_v2/tail_1.png … tail_n.png`, `tail_tip.png`, `body_notail_<pose>_<n>.png`, `parts.json`. Der Ordner `dragon_boss` bleibt unverändert.
+- **Noch zu tun bei Lieferung:** Kettenphysik und Treffer-Anbindung in `dragon_parts` (Gliederfolge wie beim Hals).
+
+### 7.3 Drachenflügel als eigene Teile (Roadmap 12)
+- **Umfang:** naher und ferner Flügel mit mindestens 4 Schlüsselposen (angelegt, halb, gespreizt, Abschlag). Dazu Körperposen ohne Flügel.
+- **Maße und Dateien:** wie 7.2, mit Gelenk an der Schulter in `parts.json`. Dateien `wing_near_<pose>.png` und `wing_far_<pose>.png`.
+- **Animation:** Flügel schlagen über Bildfolgen. Nachschwingen und Verzögerung gegenüber dem Körper laufen nach [[Visuelles Leitbild & Animation]] 5.1.
+
+### 7.4 Draufsicht des Drachenkopfs
+- **Heute:** Der Kopf entsteht aus 32 gedrehten Stufen der Seitenansicht und wirkt nach unten flach.
+- **Umfang:** drei Kopfansichten (Seite, 45° von oben, von oben), jeweils geschlossen und offen.
+- **Maße und Dateien:** Maßstab wie die heutigen Kopfbilder (206–216 px, Ursprung Mitte). Das Gelenk zum Hals steht in `parts.json`. Dateien `head_<side|down45|top>_<closed|open>.png` in `dragon_parts_v2/`.
+- **Anbindung:** Das Werkzeug wählt je Drehstufe die nächste Ansicht. Das Maul bleibt Ursprung des Feueratems.
+
+### 7.5 Wald-Skelette in Pixeldichte 1:1
+- **Umfang:** 3 Rollen (`warrior`, `scout`, `guard`) × 5 Aktionen × 8 Richtungen.
+- **Bilder je Aktion:** wie heute (idle 2, walk 4, attack 2, hurt 3, death 5) oder mehr. Attack braucht eine klare Ausholpose.
+- **Maße:** in der Bildschirmgröße der Rolle statt gestreckter 96er-Bilder.
+
+  | Rolle | Bildgröße | Ursprung (Füße) |
+  |---|---|---|
+  | warrior | 134 × 134 | 67, 123 |
+  | scout | 120 × 120 | 60, 110 |
+  | guard | 158 × 158 | 79, 145 |
+
+- **Namen:** GameMaker-Sprites `spr_master_skeleton_<rolle>_<aktion>_<richtung>`. Die Quellen liegen in `FirstGame_ArtPack/enemies/forest_skeletons/`.
+- **Einlesen ohne Umbau:** `master_skeleton_prefix` nutzt diese Sprites automatisch, sobald `spr_master_skeleton_<rolle>_idle_down` existiert, und zeichnet sie unskaliert (`skeleton_baked` → `monster_art_div`). Überreste werden gleich behandelt. Ohne Lieferung bleibt alles wie heute.
+
+### 7.6 Minibosse (Roadmap 9)
+- **Heute:**
+  - Waldwächter (Art `golem`, Minute 1) und Runenwächter (Art `boar`, Minute 3) nutzen die 0.1-Streifen `spr_fg_<art>_<aktion>`: 64 × 64, 5 Aktionen, ohne Richtungen.
+  - Die Bossbilder `spr_fg_boss_golem` und `spr_fg_boss_dragon` (384 × 384, 3 Posen) stammen aus `bosses/atmosphere_v2`.
+- **Umfang:**
+  - je Miniboss 5 Aktionen in 8 Richtungen (oder 5 Richtungen plus Spiegelung);
+  - Ausholpose für jeden Spezialangriff (Blitz, Wurf);
+  - Pixeldichte 1:1 in Bildschirmgröße.
+- **Dateien:** Quellen unter `FirstGame_ArtPack/bosses/minibosses/<name>/`, Sprites `spr_mb_<name>_<aktion>_<richtung>`.
+- **Noch zu tun bei Lieferung:** Anbindung im Code (klein, analog zum Präfix der Levelgegner).

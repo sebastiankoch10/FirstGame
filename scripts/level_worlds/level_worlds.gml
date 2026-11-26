@@ -140,6 +140,7 @@ function enemy_motion_offset() {
     if(motion_forest && skeleton_action=="hurt"){var hk=clamp(1-skeleton_clock*5,0,1);motion_dx=-face*round(3*hk)+((floor(skeleton_clock*30) mod 2==0) ? 1 : -1)*(hk>0 ? 1 : 0);motion_dy=-round(hk);}
 }
 function monster_art_div(_e) {
+    if(variable_instance_exists(_e,"skeleton_baked") && _e.skeleton_baked)return _e.monster_scale; // forest skeletons drawn 1:1 (role sets)
     return (variable_instance_exists(_e,"lvl_cfg") && is_struct(_e.lvl_cfg) && variable_struct_exists(_e.lvl_cfg,"baked")) ? _e.lvl_cfg.scale : 1;
 }
 function level_enemy_create(_x,_y,_kind) {
