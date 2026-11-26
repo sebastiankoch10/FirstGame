@@ -1,6 +1,6 @@
 ---
 tags: [system, bosse]
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 # Boss-Testmodus
 
@@ -16,6 +16,8 @@ Entwicklermenü „Testmodus“ im Hauptmenü (bis 25.11. „Boss testen“). Zw
   - F6 Attacke wechseln, F7 Aufholattacke, F8 +5 Talentpunkte, F9 Testgegenstand, F10 Körperboxen
   - In der freien Szene gelten F1, F2, F8, F9, F10.
 - Schalter: `#macro BOSS_TEST_MENU_ENABLED true`.
+
+- Seit 26.11. nutzt auch das [[Review-Center]] diese Start-Pipeline (`boss_test_pending_start` → `review_after_start`). Test- und Review-Sitzungen lesen und schreiben keine Talente mehr (`dev_session_active`).
 
 ## Abhängigkeiten
 [[Bosse]] · [[Talente]] · [[Ausrüstung]] · [[Zauber & Passiva]] · [[UI, HUD & Menüs]]

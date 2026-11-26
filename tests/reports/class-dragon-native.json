@@ -1,56 +1,8 @@
 {
-  "status": "PASS",
   "passed": true,
   "checks": 151.0,
   "failures": [],
   "metrics": {
-    "controlled_target_defeats": [
-      {
-        "dps": 86.24001851637541,
-        "variant": "scripted_70_percent_attack_uptime",
-        "measurement_seconds": 144.01666666666668,
-        "actual_damage": 12420.0,
-        "configured_boss_hp": 12420.0,
-        "estimated_seconds": 144.01666666666668,
-        "measured_target_defeat_seconds": 144.01666666666668,
-        "stationary_target": true,
-        "class_name": "Sword",
-        "hostile_rotation_disabled": true,
-        "real_runtime_damage": true,
-        "human_playtest": false,
-        "build_decisions": 15.0
-      },
-      {
-        "dps": 85.83275742916379,
-        "variant": "scripted_70_percent_attack_uptime",
-        "measurement_seconds": 144.7,
-        "actual_damage": 12420.0,
-        "configured_boss_hp": 12420.0,
-        "estimated_seconds": 144.7,
-        "measured_target_defeat_seconds": 144.7,
-        "stationary_target": true,
-        "class_name": "Mage",
-        "hostile_rotation_disabled": true,
-        "real_runtime_damage": true,
-        "human_playtest": false,
-        "build_decisions": 15.0
-      },
-      {
-        "dps": 77.44751610891706,
-        "variant": "scripted_70_percent_attack_uptime",
-        "measurement_seconds": 160.36666666666667,
-        "actual_damage": 12420.0,
-        "configured_boss_hp": 12420.0,
-        "estimated_seconds": 160.36666666666667,
-        "measured_target_defeat_seconds": 160.36666666666667,
-        "stationary_target": true,
-        "class_name": "Ranger",
-        "hostile_rotation_disabled": true,
-        "real_runtime_damage": true,
-        "human_playtest": false,
-        "build_decisions": 15.0
-      }
-    ],
     "rendered_fill": [
       {
         "filled_pixel_samples": [
@@ -138,6 +90,21 @@
         ]
       }
     ],
+    "performance": {
+      "class_weapon_effects": true,
+      "enemy_ai_stepped": true,
+      "measurement": "real get_timer intervals between native frames; short sample, not a long-term benchmark",
+      "enemies": 150.0,
+      "frames": 60.0,
+      "mean_frame_ms": 21.203683333333338,
+      "max_frame_ms": 295.604,
+      "weather": "heavy_rain"
+    },
+    "sword_combo": [
+      11.0,
+      13.0,
+      19.0
+    ],
     "mage": {
       "stages": [
         1.0,
@@ -168,21 +135,6 @@
           "step": 1.0
         }
       ]
-    },
-    "sword_combo": [
-      11.0,
-      13.0,
-      19.0
-    ],
-    "performance": {
-      "weather": "heavy_rain",
-      "class_weapon_effects": true,
-      "enemy_ai_stepped": true,
-      "measurement": "real get_timer intervals between native frames; short sample, not a long-term benchmark",
-      "enemies": 150.0,
-      "frames": 60.0,
-      "mean_frame_ms": 22.57681666666667,
-      "max_frame_ms": 378.284
     },
     "ranger": {
       "outcomes": [
@@ -360,8 +312,8 @@
         "estimated_seconds": 114.04958677481125,
         "measured_target_defeat_seconds": -1.0,
         "stationary_target": true,
-        "class_name": "Sword",
         "hostile_rotation_disabled": true,
+        "class_name": "Sword",
         "real_runtime_damage": true,
         "human_playtest": false,
         "build_decisions": 15.0
@@ -375,8 +327,8 @@
         "estimated_seconds": 145.9173683152009,
         "measured_target_defeat_seconds": -1.0,
         "stationary_target": true,
-        "class_name": "Sword",
         "hostile_rotation_disabled": true,
+        "class_name": "Sword",
         "real_runtime_damage": true,
         "human_playtest": false,
         "build_decisions": 15.0
@@ -390,8 +342,8 @@
         "estimated_seconds": 118.4361093429914,
         "measured_target_defeat_seconds": -1.0,
         "stationary_target": true,
-        "class_name": "Mage",
         "hostile_rotation_disabled": true,
+        "class_name": "Mage",
         "real_runtime_damage": true,
         "human_playtest": false,
         "build_decisions": 15.0
@@ -405,8 +357,8 @@
         "estimated_seconds": 149.51845906608725,
         "measured_target_defeat_seconds": -1.0,
         "stationary_target": true,
-        "class_name": "Mage",
         "hostile_rotation_disabled": true,
+        "class_name": "Mage",
         "real_runtime_damage": true,
         "human_playtest": false,
         "build_decisions": 15.0
@@ -420,8 +372,8 @@
         "estimated_seconds": 128.01924067771472,
         "measured_target_defeat_seconds": -1.0,
         "stationary_target": true,
-        "class_name": "Ranger",
         "hostile_rotation_disabled": true,
+        "class_name": "Ranger",
         "real_runtime_damage": true,
         "human_playtest": false,
         "build_decisions": 15.0
@@ -435,8 +387,55 @@
         "estimated_seconds": 163.24205914217674,
         "measured_target_defeat_seconds": -1.0,
         "stationary_target": true,
-        "class_name": "Ranger",
         "hostile_rotation_disabled": true,
+        "class_name": "Ranger",
+        "real_runtime_damage": true,
+        "human_playtest": false,
+        "build_decisions": 15.0
+      }
+    ],
+    "controlled_target_defeats": [
+      {
+        "dps": 86.24001851637541,
+        "variant": "scripted_70_percent_attack_uptime",
+        "measurement_seconds": 144.01666666666668,
+        "actual_damage": 12420.0,
+        "configured_boss_hp": 12420.0,
+        "estimated_seconds": 144.01666666666668,
+        "measured_target_defeat_seconds": 144.01666666666668,
+        "stationary_target": true,
+        "hostile_rotation_disabled": true,
+        "class_name": "Sword",
+        "real_runtime_damage": true,
+        "human_playtest": false,
+        "build_decisions": 15.0
+      },
+      {
+        "dps": 85.83275742916379,
+        "variant": "scripted_70_percent_attack_uptime",
+        "measurement_seconds": 144.7,
+        "actual_damage": 12420.0,
+        "configured_boss_hp": 12420.0,
+        "estimated_seconds": 144.7,
+        "measured_target_defeat_seconds": 144.7,
+        "stationary_target": true,
+        "hostile_rotation_disabled": true,
+        "class_name": "Mage",
+        "real_runtime_damage": true,
+        "human_playtest": false,
+        "build_decisions": 15.0
+      },
+      {
+        "dps": 77.44751610891706,
+        "variant": "scripted_70_percent_attack_uptime",
+        "measurement_seconds": 160.36666666666667,
+        "actual_damage": 12420.0,
+        "configured_boss_hp": 12420.0,
+        "estimated_seconds": 160.36666666666667,
+        "measured_target_defeat_seconds": 160.36666666666667,
+        "stationary_target": true,
+        "hostile_rotation_disabled": true,
+        "class_name": "Ranger",
         "real_runtime_damage": true,
         "human_playtest": false,
         "build_decisions": 15.0
@@ -444,8 +443,9 @@
     ]
   },
   "scope": "Native production functions; deterministic fixtures and short scripted damage windows. Not human gameplay E2E.",
+  "status": "PASS",
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\classes\\20261125-225745",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\classes\\20261126-071736",
   "rendered": [
     "crowd-class-rain.png",
     "mage-arc.png",

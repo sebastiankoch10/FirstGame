@@ -1,6 +1,6 @@
 fg_audio_tick(max(0,delta_time/1000000));
 boss_test_pending_start();
-boss_test_tick(max(0,delta_time/1000000));
+boss_test_tick(max(0,delta_time/1000000));review_tick(max(0,delta_time/1000000));
 if(talent_menu_step()) return; // character screen (talents + equipment) owns the frame while open
 /// Step Event for ObjectController
 

@@ -10,6 +10,11 @@
             "type": "command",
             "command": "cat \"${CLAUDE_PROJECT_DIR:-.}/docs/HANDOFF.md\" 2>/dev/null || cat docs/HANDOFF.md 2>/dev/null || true",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PROJECT_DIR:-.}/tests/tools/review/review.py\" sync --brief 2>/dev/null || true",
+            "timeout": 30
           }
         ]
       }

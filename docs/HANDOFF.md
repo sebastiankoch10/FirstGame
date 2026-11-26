@@ -5,32 +5,23 @@ agent: Claude
 ---
 # Übergabe (wird nach jeder Aufgabe überschrieben, max. ~40 Zeilen)
 
-**Zuletzt dran:** Claude, 2026-11-26: Vault-Prüfung in `docs/` (nur Doku, Code nur gelesen). **Nicht committet** (Auftrag: kein Commit). Davor Claude, 25.11. abends, Generalfreigabe siehe AGENTS.md „Regeln“ und [[DECISIONS]].
+**Zuletzt dran:** Claude, 2026-11-26. **In Arbeit:** Aufträge Phase 1, 2A und 2B des Nutzers (siehe Chat). Reihenfolge: Review-Center → Inventar → Telegraphs, Geometrie, VFX, Licht (2A) → Bossverhalten, Schachbrett, Ringe (2B) → artikulierte Bosse und Gegner → Grundangriffe und Progression → modulare Charaktere → Assets → Doku und Bericht.
 
 ## Stand
-- **Design-Kanon** `docs/Design/`, Vorrang im [[Leitbild]], Reihenfolge in [[Roadmap & Vertical Slice]].
-- **Vault (26.11.):** 18 Systemnotizen auf Code-Stand, alle Notizen mit Frontmatter und im [[00_Index]] verlinkt; Details im Nachtrag von [[SETUP_REPORT]].
-- **Zuletzt am Spiel (25.11.):**
-  - **Pixelraster** (R2 Variante B): Welt in 960×540, Ausgabe ganzzahlig bzw. sharp-bilinear ([[Rendering & Pixelraster]]).
-  - **Drache als Verbund aus Teilen** (`scripts/dragon_parts`): Kopf zielt auf den Spieler, Feuer exakt am Maul, Kopf und Hals sind Trefferformen.
-  - **Behemoth und Zwillingshexen** in Spielgröße gebacken, 1:1 gezeichnet.
-  - **Pixel-Effekte** für alle Boss-, Klassen- und Zaubereffekte; Schadenszahlen in Pixelschrift.
-  - **Testmodus** im Hauptmenü mit „Freie Szene“ ([[Boss-Testmodus]]).
-  - **Werkzeuge:** `tests/tools/record_scene.py`, `clean_test_artifacts.py`, `tests/tools/art/pixelize.py`.
-- **Git:** `entwicklung` auf GitHub (`origin`), letzter Commit `6124c0d7`. Die Doku-Änderungen vom 26.11. liegen uncommittet im Arbeitsbaum.
-- **Tests:** zuletzt QA Stufe 3 PASS (25.11.: anchors, static, regression 811, feature 162, boss 141, level 166, classes 151). Heute keine Tests, weil kein Code geändert wurde (NOT RUN).
+- **Fertig und getestet (Commit 26.11.):**
+  - **Review-Center:** [[Review-Center]], Ablauf in AGENTS.md „Review-Workflow“.
+  - **Inventar:** Drag-and-drop, Rechtsklick, Tooltips, Shift-Vergleich.
+  - QA Stufe 3 PASS, Review-E2E PASS.
+- **Vorbereitet im Scratchpad, noch nicht eingespielt:** `hazard_fx` (Telegraphs v2, Flächen, Strahl, Aufladung, Schachbrett), Licht-Blitze, Aggression und Ringe.
+- **Review-Registry:** 3 Einträge offen (Drache Feuerstrahl, Hexen Ring, Charakter Bewegung).
 
 ## Offen (Reihenfolge)
-1. **Nutzer:** Doku-Änderungen durchsehen und committen (z. B. `git add docs AGENTS.md`). `docs/.obsidian/` bewusst entscheiden ([[Bugs & Ideen]]).
-2. **Spieltest durch den Nutzer** (F5): Testmodus → Bosskampf Drache; Freie Szene mit Zauber Stufe 9; Vollbild (1080p = exakt 2×).
-3. **Drache Stufe 2:** Schweif als Gliederkette mit Hitbox an der Spitze, Flügel als eigene Teile, Draufsicht-Variante des Kopfes.
-4. S2 Animation Controller, Trefferstopp; Skelett-Gegner in Pixeldichte 1:1 (neue Grafik); Minibosse (Codex-Auftrag beim Nutzer).
+1. Phase 2A einspielen, prüfen, Review-Fälle registrieren.
+2. Phase 2B: spielfeldweites Schachbrett, Druck nach Entfernung, kontrahierende Ringe, artikulierter Drache (Schweif, Flügel), Gegnerbewegung, Waldläufer-Grundpfeile, Fähigkeitsprogression.
+3. Phase 1 Rest: modulare Charakterdarstellung (neutrale Basis, Ebenen, Waffen-Ankerpunkte).
+4. **Nutzer:** F5 → Review-Center, prüfen und mit dem grünen Haken freigeben.
 
 ## Bekannte Bugs / Risiken
-- Vektorlinien (Warnflächen) liegen im Weltraster: dünne Linien wirken gröber. Beim Spieltest prüfen.
-- Rig der Spielfigur und der Hexen rendert weiter über eine Surface (Verformung resampelt leicht).
-- Export-Generator schreibt kein Frontmatter; MCP-Zeitlimit und Legacy-Werkzeuge: siehe [[Bugs & Ideen]].
-
-## Nächste Schritte
-1. **Nutzer:** Commit der Doku, dann F5 und Rückmeldung zu Drache, Effekten und Schärfe.
-2. **Danach:** Drache Stufe 2 (Schweif, Flügel).
+- GameMaker-IDE war offen und sortiert `FirstGame.yyp` beim Speichern um (inhaltlich gleich).
+- `FirstGame_ArtPack/class_overhaul/CHARACTER_ART.md` hat ein fremdes „c“ in Zeile 1; nicht angefasst.
+- Spielerlevel je Minute ist nicht gemessen (`boss_test_preset`), siehe [[Bugs & Ideen]].

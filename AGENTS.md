@@ -102,6 +102,30 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 - **Grafik-, Animations-, Effekt- und Tonarbeit** folgt `docs/Design/Visuelles Leitbild & Animation.md` und `Fähigkeiten, VFX & Audio.md`. Bewegungsreferenz Terranigma nur für Bewegungsqualität, nie Assets oder Stil kopieren.
 - **Größere Umbauten** an Rendering, Animation oder Kampfsystem nur nach `docs/Design/Technische Architektur.md` und `Roadmap & Vertical Slice.md`. Mit „Offen“ markierte Entscheidungen trifft der Agent nach bestem Standard (Generalfreigabe 25.11.) und begründet sie in `docs/DECISIONS.md`.
 
+## Review-Workflow (Development Review Center, verbindlich seit 26.11.)
+Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft neue Inhalte im Spiel (Hauptmenü → Review-Center) und gibt sie im Escape-Menü mit dem grünen Haken frei.
+1. **Vor der Arbeit:** `python tests/tools/review/review.py sync`. Claude erledigt das per SessionStart-Hook, Codex führt den Befehl selbst aus.
+   - Der Befehl überträgt neue persönliche Freigaben aus `%LOCALAPPDATA%\FirstGame\` in `review/registry.json` (Status `processed`).
+   - Mit `status` siehst du, was offen ist.
+2. **Freigegebene Inhalte sind die verbindliche Qualitätsreferenz.**
+   - Ohne nachvollziehbaren Grund nicht wesentlich verändern.
+   - Erlaubt: Fehlerkorrekturen, Performance, interne Refactorings ohne sichtbare Wirkung, ausdrücklich neue Anforderungen.
+   - Ändert sich ein freigegebener Inhalt sichtbar oder spielerisch wesentlich: `review.py bump ID --reason "…"` (neue Revision, wieder offen). Nie eine alte Freigabe übertragen.
+3. **Nach der Arbeit:** Für jede Änderung an den folgenden Inhalten einen Eintrag in `review/registry.json` anlegen oder per `bump` erneuern:
+   - Charaktergrafik und Animation, Ausrüstung und Waffen
+   - Gegner, Bosse, Bossattacken und Fähigkeiten
+   - VFX und Telegraphs, Licht, UI
+   - Combat Feeling, wesentliches Balancing, visuelle Progression
+4. **Danach `review.py build` und QA.** Das Szenario muss mit den echten Systemen starten, mit realistischer Ausrüstung, Level und Talenten (Konfiguration siehe Systemnotiz).
+   - Keine Einträge für nicht Umgesetztes.
+   - Ein Eintrag für eine Einzelattacke gibt nicht den ganzen Boss frei.
+5. **Persönliche Freigaben setzt ausschließlich der Nutzer per Klick.** Agenten schreiben nie in `review_approvals.*` und simulieren keine Freigabe.
+   - Technische QA ist keine Freigabe.
+   - Tests nutzen nur gekennzeichnete Testfreigaben in Testkopien (`review_e2e.py`). `--include-test` ist nur mit einer Registry-Kopie erlaubt.
+6. **Entfernen aus der offenen Liste geschieht nur über den Status.**
+   - Die produktive Implementierung wird dabei nie gelöscht.
+   - Verarbeitete Szenarien bleiben startbar (Reiter „Archiv“).
+
 ## Code-Konventionen (GML)
 - **Stil:** dichtes GML, kurze Hilfsfunktionen.
 - **Präfixe je System:** `talent_`, `equipment_`, `bc_` (Choreografie), `bv2_` (Bossgefahren), `dragon_`, `level_`, `spell_v2_`, `spell_vfx_`, `boss_test_`.
@@ -120,6 +144,7 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
 ### Lesen: nur so viel wie nötig, in dieser Reihenfolge
 1. **Start:**
    - `docs/HANDOFF.md` (Claude bekommt sie per Hook eingeblendet, Codex liest sie selbst)
+   - Review-Freigaben: `python tests/tools/review/review.py sync` (Claude: per Hook; siehe „Review-Workflow“)
    - `git log --oneline -5` und `git status --short`
    - **Nicht** die ganze Doku.
 2. **Bei Design-, Inhalts- oder Grafikaufgaben:** `docs/Design/Leitbild.md` (Abschnitte 4–5 genügen meist) plus das **eine** passende Designdokument und `Qualitätsstandard.md`. Nicht den ganzen Kanon lesen.

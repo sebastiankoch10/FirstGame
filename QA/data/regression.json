@@ -2,6 +2,76 @@
   "checks": 811.0,
   "failures": [],
   "metrics": {
+    "twins_abilities": [
+      {
+        "damage": 26.60000000000582,
+        "ability": 1.0
+      },
+      {
+        "damage": 41.80000000000291,
+        "ability": 2.0
+      },
+      {
+        "damage": 47.5,
+        "ability": 3.0
+      },
+      {
+        "damage": 41.80000000000291,
+        "ability": 4.0
+      },
+      {
+        "damage": 91.20000000001164,
+        "ability": 5.0
+      },
+      {
+        "damage": 53.19999999999709,
+        "ability": 6.0
+      },
+      {
+        "damage": 68.39999999999418,
+        "ability": 7.0
+      },
+      {
+        "damage": 41.80000000000291,
+        "ability": 8.0
+      },
+      {
+        "damage": 76.0,
+        "ability": 9.0
+      }
+    ],
+    "random_selection": [
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "behemoth",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "storm_warden",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "behemoth",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "behemoth",
+      "twins",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "twins",
+      "behemoth",
+      "storm_warden",
+      "storm_warden",
+      "storm_warden",
+      "behemoth"
+    ],
     "behemoth_abilities": [
       {
         "damage": 34.19999999999709,
@@ -39,38 +109,6 @@
         "damage": 57.0,
         "ability": 9.0
       }
-    ],
-    "random_selection": [
-      "twins",
-      "storm_warden",
-      "storm_warden",
-      "storm_warden",
-      "behemoth",
-      "storm_warden",
-      "twins",
-      "behemoth",
-      "storm_warden",
-      "storm_warden",
-      "twins",
-      "behemoth",
-      "twins",
-      "storm_warden",
-      "storm_warden",
-      "behemoth",
-      "behemoth",
-      "twins",
-      "storm_warden",
-      "behemoth",
-      "twins",
-      "storm_warden",
-      "storm_warden",
-      "storm_warden",
-      "twins",
-      "behemoth",
-      "storm_warden",
-      "storm_warden",
-      "storm_warden",
-      "behemoth"
     ],
     "sword_combo": [
       11.0,
@@ -316,53 +354,15 @@
     "performance": {
       "frames": 60.0,
       "enemies": 150.0,
-      "mean_frame_ms": 16.667866666666672,
-      "max_frame_ms": 18.764,
+      "mean_frame_ms": 16.66561666666667,
+      "max_frame_ms": 17.77,
       "measurement": "Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement."
-    },
-    "twins_abilities": [
-      {
-        "damage": 26.60000000000582,
-        "ability": 1.0
-      },
-      {
-        "damage": 41.80000000000291,
-        "ability": 2.0
-      },
-      {
-        "damage": 47.5,
-        "ability": 3.0
-      },
-      {
-        "damage": 41.80000000000291,
-        "ability": 4.0
-      },
-      {
-        "damage": 91.20000000001164,
-        "ability": 5.0
-      },
-      {
-        "damage": 53.19999999999709,
-        "ability": 6.0
-      },
-      {
-        "damage": 68.39999999999418,
-        "ability": 7.0
-      },
-      {
-        "damage": 41.80000000000291,
-        "ability": 8.0
-      },
-      {
-        "damage": 76.0,
-        "ability": 9.0
-      }
-    ]
+    }
   },
   "scope": "Current production functions and input-injected actual Player/Controller Steps in isolated native runner. Targeted regressions and short rendered150-enemy stress fixture; not full runs or human playtests.",
   "passed": true,
   "exit_code": 0,
-  "logs": "QA\\logs\\regression-20261125-223327",
+  "logs": "QA\\logs\\regression-20261126-072117",
   "screenshots": [
     "qacapture-crowd150-heavy-rain.png",
     "qacapture-hud-full-build-1280.png",

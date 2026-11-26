@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, vfx, audio, faehigkeiten, progression]
-updated: 2026-11-25
+updated: 2026-11-26
 status: verbindlich (Fachgebiet Fähigkeiten-Inszenierung, Effekte, visuelle Progression, Ton)
 ---
 # Fähigkeiten, VFX & Audio
@@ -78,6 +78,24 @@ Rang 2 unter [[Leitbild]]. Darstellungsregeln (Pixelraster, Animation): [[Visuel
    | Physisch | Weiß bis Stahl | Verwischungsbogen, Staub | Schwung |
 
    Statuseffekte bleiben in der Monster-Silhouette, ohne deckenden Farbüberzug (Auftrag 22.11.).
+
+### Dynamisches Licht für mächtige Angriffe (Phase 2A, seit 26.11.)
+- Das bestehende multiplikative Licht bleibt. Die normale Beleuchtung bleibt zurückhaltend, damit besondere Angriffe Kontrast erzeugen.
+- **`light_flash`** (`scripts/atmosphere`) wird immer am Schadensereignis ausgelöst. Er besteht aus drei Teilen:
+  - einer starken, kurzen Lichtquelle;
+  - einem additiven Glanz auf der Welt;
+  - bei Bedarf einer kurzen Anhebung der Umgebungsdunkelheit (`lift`).
+- **Zuordnung:**
+  - Blitze: weiß-blauer Impuls mit Anhebung.
+  - Große Bossflächen: Element-Blitz ohne bzw. mit wenig Anhebung.
+  - Kleine Flächen: weiter `light_pulse`.
+  - Feueratem: warmer Blitz am Maul beim Zünden, davor steigt das Licht am Maul mit der Aufladung.
+  - Spieler-Kettenblitz: ab Band 1, Anhebung nur im Endgame-Band.
+- **Grenzen:**
+  - höchstens 8 gleichzeitige Blitze, Dauer 0,2–0,35 s, quadratisches Abklingen;
+  - Umgebungsanhebung höchstens 85 %;
+  - kein dauerhaftes Überstrahlen.
+- **Barrierefreiheit:** Einstellung „Lichtblitze: Normal/Reduziert“ (`firstgame_settings.ini` [Grafik] `blitze`) senkt Stärke, Glanz und Anhebung auf 35 %.
 
 ### Beispiel Blitz (Spezifikation des Vertical Slice)
 

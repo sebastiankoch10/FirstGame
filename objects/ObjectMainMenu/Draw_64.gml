@@ -1,5 +1,6 @@
 var gw = display_get_gui_width();
 if(menu_mode=="boss_test"){boss_test_menu_draw();exit;}
+if(menu_mode=="review"){review_center_draw();exit;}
 var gh = display_get_gui_height();
 draw_set_alpha(1);
 draw_set_color(make_color_rgb(10, 16, 22));

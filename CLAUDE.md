@@ -4,5 +4,6 @@ Design-Kanon (verbindlich, mit Vorrangregeln): `docs/Design/`, Einstieg `docs/De
 
 ## Nur für Claude Code
 - Der SessionStart-Hook (`.claude/settings.json`) blendet `docs/HANDOFF.md` automatisch ein. Sie muss nicht noch einmal gelesen werden.
+- Ein zweiter SessionStart-Hook führt `tests/tools/review/review.py sync --brief` aus und meldet neue persönliche Review-Freigaben. Sie sind verbindlich (AGENTS.md „Review-Workflow“). Freigaben setzt nie der Agent.
 - Der Stop-Hook `.claude/hooks/log-activity.sh` schreibt ohne KI-Aufruf eine Zeile nach `docs/ai-activity.log`. Das ersetzt **nicht** das Übergabe-Protokoll in AGENTS.md.
 - Bisherige Fassung dieser Datei: `docs/_archive/CLAUDE_2026-11-24.md`. Ihr Inhalt steht vollständig in AGENTS.md.

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"review_center",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"review_center",
+  "parent":{
+    "name":"Welt_und_Atmosphaere",
+    "path":"folders/Skripte/Welt_und_Atmosphaere.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,6 +1,6 @@
 ---
 tags: [system, ui]
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 # UI, HUD & Menüs
 
@@ -16,6 +16,8 @@ Hauptmenü, Charakter- und Levelauswahl, Pause, Level-up-Wahl, HUD, Charakterbil
 - `scripts/hud`: Zauberslots mit Abklingzeit, XP-Leiste, Timer, Bossleiste, Talenthinweis, Ausrüstungsleiste.
 - `scripts/spell_ui_v2`: Level-up-Karten, Tooltips, Pausen-Inventar mit Run-Statistiken.
 - Weitere Bildschirme: der Charakterbildschirm in `scripts/talents` und `scripts/equipment`, die Levelvorschau in `scripts/level_worlds`. Objekte: `ObjectOverlay`, `ObjectSpellHUD`.
+
+- **Review-Center** (seit 26.11.): Hauptmenüpunkt „Review-Center (N offen)“, Listenbildschirm mit Reitern und Detailfeld; im Szenario erweitert sich das Pausenmenü um Review-Aktionen und den grünen Freigabeknopf. Siehe [[Review-Center]].
 
 ## Abhängigkeiten
 [[Spielablauf & Zustände]] · [[Talente]] · [[Ausrüstung]] · [[Zauber & Passiva]] · [[Boss-Testmodus]]

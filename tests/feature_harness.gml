@@ -162,7 +162,73 @@ function ft_controller_tick() {
             if(global.ft_frame==12){var L=talent_menu_layout(),G=equipment_panel_geometry(L),r=equipment_bag_rect(G,0);global.ft_mx=r.x+5;global.ft_my=r.y+5;}
             if(global.ft_frame==16)global.ft_shot="character-"+cls;
             if(global.ft_frame==22){global.ft_press_key=vk_escape;}
-            if(global.ft_frame==26){ft_check(!global.talent_menu_active && !global.game_paused,"Escape closes the screen and resumes");global.ft_stage=8;global.ft_frame=0;}
+            if(global.ft_frame==26){ft_check(!global.talent_menu_active && !global.game_paused,"Escape closes the screen and resumes");global.ft_stage=30;global.ft_frame=0;}
+            break;
+        case 30: // inventory: drag and drop, swap, invalid slot, cancel, right-click unequip, full backpack, Shift comparison
+            var L=talent_menu_layout(),G=equipment_panel_geometry(L),f=global.ft_frame;
+            var at=function(_r){global.ft_mx=_r.x+_r.w*.5;global.ft_my=_r.y+_r.h*.5;};
+            if(f==1)global.ft_press_key=ord("T");
+            if(f==3) {
+                equipment_reset_run();
+                global.ft_inv={a:equipment_generate("chest",1,5),b:equipment_generate("chest",3,6),c:equipment_generate("head",2,5),d:equipment_generate("feet",1,5),w:equipment_generate("weapon",1,5)};
+                equipment_equip(global.ft_inv.a);equipment_equip(global.ft_inv.w);
+                global.equipment_backpack=[global.ft_inv.b,global.ft_inv.c,global.ft_inv.d];equipment_rebuild_cache();apply_passives(pl);
+                global.ft_inv_count=equipment_item_count();
+            }
+            // 1) drag backpack chest B onto the chest slot: swap, A takes B's backpack cell
+            if(f==5){at(equipment_bag_rect(G,0));}
+            if(f==6){global.ft_mouse_press=mb_left;global.ft_mouse_hold=mb_left;}
+            if(f>=7 && f<=9){global.ft_mouse_hold=mb_left;var r=equipment_slot_rect(G,2);global.ft_mx=lerp(global.ft_mx,r.x+r.w*.5,.6);global.ft_my=lerp(global.ft_my,r.y+r.h*.5,.6);}
+            if(f==10){at(equipment_slot_rect(G,2));global.ft_mouse_hold=mb_left;}
+            if(f==11)global.ft_mouse_hold=-1;
+            if(f==13) {
+                ft_check(global.equipment.chest==global.ft_inv.b && global.equipment_backpack[0]==global.ft_inv.a,"drag bag->slot swaps the items in place");
+                ft_check(equipment_item_count()==global.ft_inv_count,"drag keeps the item count (no loss, no duplicate)");
+                var ok=true,s=equipment_slots(),sum={};
+                for(var i=0;i<6;i++){var it=global.equipment[$ s[i]];if(!is_struct(it))continue;var k=variable_struct_get_names(it.stats);for(var j=0;j<array_length(k);j++)sum[$ k[j]]=(variable_struct_exists(sum,k[j]) ? sum[$ k[j]] : 0)+it.stats[$ k[j]];}
+                var ks=variable_struct_get_names(sum);for(var j=0;j<array_length(ks);j++)if(abs(equipment_stat(ks[j])-sum[$ ks[j]])>.0001)ok=false;
+                ft_check(ok,"stat cache equals the equipped items after the swap");
+            }
+            // 2) drag head C to the head slot and capture mid-drag (highlight + item at the cursor)
+            if(f==15){at(equipment_bag_rect(G,1));}
+            if(f==16){global.ft_mouse_press=mb_left;global.ft_mouse_hold=mb_left;}
+            if(f>=17 && f<=21){global.ft_mouse_hold=mb_left;var r=equipment_slot_rect(G,1);global.ft_mx=lerp(global.ft_mx,r.x+r.w*.5+40,.35);global.ft_my=lerp(global.ft_my,r.y+r.h*.5+30,.35);}
+            if(f==20)global.ft_shot="inventory-drag-"+cls;
+            if(f==22){at(equipment_slot_rect(G,1));global.ft_mouse_hold=mb_left;}
+            if(f==23)global.ft_mouse_hold=-1;
+            if(f==25)ft_check(global.equipment.head==global.ft_inv.c && equipment_item_count()==global.ft_inv_count,"drag into an empty slot equips");
+            // 3) invalid target: feet D onto the weapon slot is refused, nothing changes
+            if(f==27){var k=-1;for(var i=0;i<array_length(global.equipment_backpack);i++)if(global.equipment_backpack[i]==global.ft_inv.d)k=i;global.ft_inv_k=k;at(equipment_bag_rect(G,k));}
+            if(f==28){global.ft_mouse_press=mb_left;global.ft_mouse_hold=mb_left;}
+            if(f==29 || f==30){global.ft_mouse_hold=mb_left;at(equipment_slot_rect(G,0));global.ft_mx+=(f==29 ? -30 : 0);}
+            if(f==31)global.ft_mouse_hold=-1;
+            if(f==33)ft_check(global.equipment.weapon==global.ft_inv.w && array_contains(global.equipment_backpack,global.ft_inv.d) && equipment_item_count()==global.ft_inv_count,"invalid slot refused, state unchanged");
+            // 4) cancel: drop outside every cell
+            if(f==35){at(equipment_bag_rect(G,0));}
+            if(f==36){global.ft_mouse_press=mb_left;global.ft_mouse_hold=mb_left;global.ft_inv_snap=json_stringify(global.equipment_backpack);}
+            if(f==37 || f==38){global.ft_mouse_hold=mb_left;global.ft_mx=L.w*.5;global.ft_my=L.h-60;}
+            if(f==39)global.ft_mouse_hold=-1;
+            if(f==41)ft_check(json_stringify(global.equipment_backpack)==global.ft_inv_snap && equipment_item_count()==global.ft_inv_count,"drop outside cancels without changes");
+            // 5) right click on an equipped item unequips into the backpack
+            if(f==43){at(equipment_slot_rect(G,1));}
+            if(f==44)global.ft_mouse_press=mb_right;
+            if(f==46)ft_check(!is_struct(global.equipment.head) && array_contains(global.equipment_backpack,global.ft_inv.c) && equipment_item_count()==global.ft_inv_count,"right click unequips into the backpack");
+            // 6) full backpack: right click on the weapon is refused, nothing lost
+            if(f==48){while(!equipment_bag_full())array_push(global.equipment_backpack,equipment_generate("hands",0,1));global.ft_inv_count=equipment_item_count();at(equipment_slot_rect(G,0));}
+            if(f==49)global.ft_mouse_press=mb_right;
+            if(f==51)ft_check(global.equipment.weapon==global.ft_inv.w && equipment_item_count()==global.ft_inv_count,"full backpack: unequip refused, nothing lost");
+            // 7) backpack move (swap two cells)
+            if(f==53){var x0=global.equipment_backpack[0],x1=global.equipment_backpack[1];equipment_tx_bag_move(0,1);ft_check(global.equipment_backpack[0]==x1 && global.equipment_backpack[1]==x0,"backpack cells swap");}
+            // 8) tooltip with Shift comparison: hover backpack chest A while chest B is equipped
+            if(f==55){var k=0;for(var i=0;i<array_length(global.equipment_backpack);i++)if(global.equipment_backpack[i]==global.ft_inv.a)k=i;at(equipment_bag_rect(G,k));global.ft_hold_key=vk_shift;}
+            if(f==57){
+                var lines=equipment_tooltip_lines(global.ft_inv.a,global.equipment.chest),diff=false;
+                for(var i=0;i<array_length(lines);i++)if(string_pos("   (",lines[i].t)>0 || string_pos("entfaellt",lines[i].t)>0 || string_pos("(neu)",lines[i].t)>0)diff=true;
+                ft_check(diff,"comparison marks stat differences");
+                global.ft_shot="inventory-compare-"+cls;
+            }
+            if(f==60){global.ft_hold_key=-1;global.ft_press_key=vk_escape;}
+            if(f==63){ft_check(!global.talent_menu_active,"screen closed after the inventory checks");global.ft_stage=8;global.ft_frame=0;}
             break;
         case 8: // class mechanics with talents
             ft_clear();

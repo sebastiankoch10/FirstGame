@@ -59,8 +59,9 @@ Momentaufnahme des ganzen Kanons als ein Text: [[Designphilosophie_2026-11-25]] 
 - [[Audio]]
 - [[Speichern & Einstellungen]]
 
-**Qualität**
+**Qualität und Entwicklung**
 - [[Tests & QA]]
+- [[Review-Center]] (To-do-Liste im Hauptmenü, persönliche Freigaben)
 
 ## Historische Dokumente außerhalb des Vaults (nicht verbindlich)
 - `DEVELOPMENT_PROGRESS.md`, `TODO.md`, `QA/CURRENT_STATUS.md`, `QA/V3_SIMULATION_REPORT.md`

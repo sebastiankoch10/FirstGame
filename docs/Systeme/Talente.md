@@ -16,6 +16,8 @@ Datengetriebene Talentbäume: ein allgemeiner Baum mit 9 Talenten und je 8 pro K
 - Klassenmechaniken in `scripts/master_combat` und `scripts/class_weapons`.
 - Design und vollständige Doku: [[Progression & Builds]]. Test: `tests/feature_harness.gml`.
 
+- Seit 26.11. liefert `talent_persistent()` in Test- und Review-Sitzungen false (`dev_session_active`), damit dort nichts in `firstgame_talents.ini` landet.
+
 ## Abhängigkeiten
 [[Zauber & Passiva]] (`apply_passives`) · [[Klassen & Startwaffen]] · [[Ausrüstung]] (gemeinsamer Bildschirm) · [[UI, HUD & Menüs]] · [[Progression & Level-up]]
 

@@ -76,6 +76,7 @@ function talent_applies(_def) {return _def.tree=="general" || _def.tree==talent_
 /// global.talent_persist_override (true/false) lets a harness test the save/load path explicitly.
 function talent_persistent() {
     if(variable_global_exists("talent_persist_override"))return global.talent_persist_override;
+    if(dev_session_active())return false; // review scenarios and test mode never read or write the real talent save
     return talent_config().persistent && game_project_name=="FirstGame";
 }
 /// Two pools (user decision 25.11.2026, slower meta progression): main-boss points are permanent ("meta"),
@@ -224,7 +225,7 @@ function talent_last_stand(_pl) {
 // ---------------- Character screen (talents + equipment) ----------------
 function talent_menu_open() {
     if(global.talent_menu_active || global.game_over || !global.round_active)return;
-    global.talent_menu_active=true;global.game_paused=true;global.talent_mouse_armed=false;global.talent_hover="";
+    global.talent_menu_active=true;global.game_paused=true;global.talent_mouse_armed=false;global.talent_hover="";equipment_drag_cancel();
     global.equipment_hover=-1;fg_sfx("ui_click");
 }
 function talent_menu_close() {

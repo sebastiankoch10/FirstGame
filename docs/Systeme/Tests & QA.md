@@ -1,6 +1,6 @@
 ---
 tags: [system, qa]
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 # Tests & QA
 
@@ -66,6 +66,8 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
 - `run_combat_smoke.py`: Absturz
 - `run_boss_v2_smoke.py`: doppelt zu `regression`
 - `run_player_animation_legacy.py`: vor v3
+
+- **Review-Center End-to-End** (seit 26.11.): `python tests/tools/review/review_e2e.py`. Zwei Builds und drei Starts mit Testfreigaben: Freigabe per Klick, Persistenz nach Neustart, Sync genau einmal, Revision erneut offen, Archiv startbar, echter Speicherordner und Registry unverändert. Ergebnis in `tests/reports/review-e2e-result.json`, Nachweise unter `%LOCALAPPDATA%\FirstGame-Tests\review-e2e\`. Die Feature-Suite prüft seit 26.11. auch das Inventar (Ziehen, Tausch, ungültige Plätze, Abbruch, Rechtsklick, voller Rucksack, Vergleich).
 
 ## Abhängigkeiten
 Alle Systeme, besonders [[Bosse]] · [[Talente]] · [[Ausrüstung]] · [[Level & Welten]] · [[Klassen & Startwaffen]]

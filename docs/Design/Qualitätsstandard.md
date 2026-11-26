@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, qualitaet, abnahme, qa]
-updated: 2026-11-25
+updated: 2026-11-26
 status: verbindlich (Abnahme aller neuen und überarbeiteten Inhalte)
 ---
 # Qualitätsstandard und Abnahme
@@ -15,7 +15,8 @@ Rang 2 unter [[Leitbild]]. Gilt für Entwickler-Agenten (Claude, Codex) und die 
 | **technisch implementiert** | Code und Ressourcen existieren, der Build läuft | Entwickler-Agent |
 | **funktional geprüft** | Native Tests bestehen (PASS), Gameplay-Werte stimmen (Treffer, Schaden, Timing) | Entwickler- oder QA-Agent mit Testnachweis |
 | **visuell geprüft** | Laufzeitaufnahmen bzw. Kontaktbögen angesehen, die messbaren Kriterien unten erfüllt | Agent mit Bildnachweis |
-| **künstlerisch abgenommen** | Der Nutzer hat Aussehen, Bewegung und Ton im Spiel (F5) beurteilt und freigegeben | **nur der Nutzer** |
+| **reviewbereit** | Szenario im Review-Center registriert und startbar ([[Review-Center]]) | Entwickler-Agent |
+| **künstlerisch abgenommen** (= persönlich freigegeben) | Der Nutzer hat Aussehen, Bewegung und Ton im Spiel (F5, Review-Center) beurteilt und mit dem grünen Haken freigegeben; gilt nur für die freigegebene Revision | **nur der Nutzer** (Klick im Spiel) |
 | **vollständig** | alle Punkte der Checkliste, inklusive künstlerischer Abnahme und Doku | **nur der Nutzer** |
 
 - Testergebnisse immer als **PASS / FAIL / BLOCKED / NOT RUN**.
@@ -91,7 +92,7 @@ Rang 2 unter [[Leitbild]]. Gilt für Entwickler-Agenten (Claude, Codex) und die 
    - prüft die Kriterien Q1–Q11 und die typspezifischen Punkte gegen die Nachweise;
    - meldet Befunde mit Datei, Zeile bzw. Bild und Reproduktion.
    - Er setzt höchstens „visuell geprüft“.
-3. **Nutzer:** spielt mit F5 und gibt „künstlerisch abgenommen“ bzw. „vollständig“ frei oder schickt Korrekturen.
+3. **Nutzer:** spielt mit F5 das Szenario im Review-Center und gibt mit dem grünen Haken im Escape-Menü frei („künstlerisch abgenommen“) oder verlässt es ohne Freigabe bzw. schickt Korrekturen. Ablauf und Revisionsschutz: AGENTS.md „Review-Workflow“, [[Review-Center]] (seit 26.11.).
    - Korrekturen fließen als Entscheidung in das Designdokument ein.
 4. **Abweichungen vom Standard** sind erlaubt, wenn sie begründet und im Designdokument als Ausnahme vermerkt sind.
 

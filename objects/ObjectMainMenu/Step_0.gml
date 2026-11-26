@@ -1,5 +1,6 @@
 fg_audio_tick(max(0,delta_time/1000000));
 if(menu_mode=="boss_test"){boss_test_menu_step();exit;}
+if(menu_mode=="review"){review_center_step();exit;}
 var previous_menu_index=menu_index;
 var labels=menu_labels(menu_mode), count=array_length(labels);
 if (keyboard_check_pressed(vk_up) || keyboard_check_pressed(ord("W"))) menu_index=(menu_index+count-1) mod count;

@@ -1,19 +1,25 @@
 {
   "passed": true,
-  "checks": 162.0,
+  "checks": 195.0,
   "failures": [],
   "metrics": {
-    "Mage_particles_peak": 37.0,
-    "Sword_particles_peak": 42.0,
-    "Ranger_particles_peak": 40.0
+    "Sword_particles_peak": 40.0,
+    "Mage_particles_peak": 36.0,
+    "Ranger_particles_peak": 43.0
   },
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\feature\\20261125-223636",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\feature\\20261126-070223",
   "exceptions": [],
   "captures": [
     "character-Mage.png",
     "character-Ranger.png",
     "character-Sword.png",
+    "inventory-compare-Mage.png",
+    "inventory-compare-Ranger.png",
+    "inventory-compare-Sword.png",
+    "inventory-drag-Mage.png",
+    "inventory-drag-Ranger.png",
+    "inventory-drag-Sword.png",
     "world-loot-Mage.png",
     "world-loot-Ranger.png",
     "world-loot-Sword.png",

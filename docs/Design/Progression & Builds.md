@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, progression, talente, ausruestung]
-updated: 2026-11-25
+updated: 2026-11-26
 status: verbindlich (Fachgebiet Progression); Talent- und Ausrüstungsteil bis 24.11. unter DESIGN/TALENTS_AND_EQUIPMENT.md
 ---
 # Progression & Builds
@@ -202,7 +202,26 @@ Die 12er-Kombo des Waldläufers bleibt ohne Talente exakt: 1, 1, 3, 1, 1, 1, 1, 
   - normale Gegner: 0,3 % (75 % gewöhnlich, 20 % magisch, 5 % selten)
 - **Aufnahme:**
   - Man läuft darüber (34 px). Ein leerer Slot wird angelegt. Ist der Fund **klar besser** als das Angelegte (höhere Seltenheit oder mindestens 20 % höhere Wertsumme), wird er direkt angelegt und das alte Teil kommt in den Rucksack. Ein gewöhnliches altes Teil wird bei vollem Rucksack verworfen. Alles andere geht in den Rucksack (8 Plätze). Ist der voll, bleibt der Gegenstand liegen und es erscheint ein Hinweis.
-  - Im Charakterbildschirm legt Linksklick an oder tauscht, Rechtsklick wirft weg. Der Tooltip vergleicht Wert für Wert mit dem angelegten Gegenstand.
+  - **Inventarbedienung (Soll, Auftrag 26.11., umgesetzt in `scripts/equipment_ui`):**
+    - **Ziehen und Ablegen mit Linksklick:**
+      - Inventar ↔ Ausrüstungsplatz und Tausch angelegter Gegenstände; der alte Gegenstand nimmt den frei gewordenen Rucksackplatz ein.
+      - Verschieben zwischen Rucksackplätzen (Tausch).
+      - Gültige Ziele werden dezent hervorgehoben; der gezogene Gegenstand folgt der Maus.
+      - Ein einfacher Klick ohne Ziehen legt an bzw. legt in den Rucksack.
+    - **Transaktionen:** Jede Aktion gelingt vollständig oder ändert nichts.
+      - Während des Ziehens wird nichts verändert. Ungültige Ziele, Ablegen außerhalb, Rechtsklick oder Esc brechen ab.
+      - Kein Verlust, keine Duplikation: Die Gesamtzahl der Gegenstände bleibt gleich (Feature-Suite).
+      - Geprüft werden kompatible Plätze (`equipment_compatible_slots`, vorbereitet für Ringe und Nebenhand) sowie Anforderungen (`req_level`, `req_class`; vorbereitet, noch ohne Gegenstand).
+    - **Rechtsklick:**
+      - Auf einen angelegten Gegenstand: ablegen in einen freien Rucksackplatz. Bei vollem Rucksack wird die Aktion mit Hinweis abgelehnt; der Gegenstand wird nie gelöscht oder fallen gelassen.
+      - Im Rucksack: wegwerfen (bestehende Funktion).
+    - **Tooltip:** Name, Seltenheit, Platz, Gegenstandsstufe, Aussehen-Stufe, Anforderungen und alle Werte, immer aus den echten Gegenstandsdaten.
+    - **Shift-Vergleich** (wie in World of Warcraft):
+      - Beim Überfahren eines Rucksack-Gegenstands mit gehaltener Shift-Taste erscheint daneben der angelegte Gegenstand desselben Platzes.
+      - Unterschiede sind farbig mit Differenz markiert; wegfallende Eigenschaften heißen „entfaellt“, neue „(neu)“.
+      - Beide Tooltips überlappen sich nicht und bleiben im Bild.
+      - Bei mehreren kompatiblen Plätzen zählt der erste belegte in der Reihenfolge von `equipment_compatible_slots`.
+    - **Konsistenz:** Nach jeder Aktion `equipment_rebuild_cache` und `apply_passives`. Werte, Darstellung am Charakter und Tooltips kommen aus demselben Zustand.
 - **Darstellung:**
   - Drops mit Lichtsäule in Rarity-Farbe, eigener Lichtquelle und Punkt auf der Minimap
   - HUD-Leiste mit den sechs Slots über den Zauberslots

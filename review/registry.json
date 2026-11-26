@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "about": "Development Review Center - einzige Quelle fuer Review-Szenarien. Pflege: tests/tools/review/review.py (build, sync, bump, status). Regeln: AGENTS.md Abschnitt Review-Workflow, docs/Systeme/Review-Center.md. Persoenliche Freigaben setzt ausschliesslich der Nutzer im Spiel.",
+  "entries": [
+    {
+      "id": "boss.dragon.beam",
+      "title": "Drache - Feuerstrahl (Attacke 1)",
+      "category": "Bosse: Drache",
+      "content": "Aschenfluegel, Faehigkeit 1 Feuerstrahl: Aufladung am Maul, Strahl, Schwenk, Trefferzeitpunkt",
+      "goal": "Kopf zielt auf dich, Feuer kommt aus dem Maul, Warnung und Treffer passen zeitlich zusammen, die Trefferflaeche entspricht dem sichtbaren Strahl, Ausweichen ist moeglich. Die Attacke wiederholt sich automatisch; Esc -> Attacke erneut ausloesen.",
+      "task": "Phase 1 Review-Center (Systemvalidierung)",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {"type": "boss", "boss": "storm_warden", "minute": 15, "class": "Sword", "ability": 1, "seed": 1337, "build": "balanced", "gear": 2}
+    },
+    {
+      "id": "boss.twins.ring",
+      "title": "Hexen - Rotierender Feuer-Eis-Ring (Attacke 2)",
+      "category": "Bosse: Zwillingshexen",
+      "content": "Zwillingshexen, Faehigkeit 2: rotierender Ring aus Feuer- und Eiszonen",
+      "goal": "Lesbarkeit der Ringzonen, sichere Luecken, Countdown, Treffer. Die Attacke wiederholt sich automatisch.",
+      "task": "Phase 1 Review-Center (Systemvalidierung)",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {"type": "boss", "boss": "twins", "minute": 15, "class": "Mage", "ability": 2, "seed": 4242, "build": "balanced", "gear": 2}
+    },
+    {
+      "id": "char.motion.sword",
+      "title": "Charakter - Laufen, Sprung, Ausweichrolle (Schwertmeister)",
+      "category": "Charakter",
+      "content": "Schwertmeister im Testraum ohne Gegner: Bewegung in 8 Richtungen, Sprung (Leertaste), Ausweichrolle (Strg), Schwertkette",
+      "goal": "Bewegungsgefuehl, Richtungswechsel, Sprungvorbereitung, Flug und Landung, Haar- und Umhangbewegung, Angriffsanimation. Ausruestung angelegt, Alternativen im Rucksack ([T]).",
+      "task": "Phase 1 Review-Center",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {"type": "showroom", "class": "Sword", "minute": 5, "arena": 0, "gear": 1, "backpack": [{"slot": "chest", "rarity": 2}, {"slot": "head", "rarity": 3}, {"slot": "weapon", "rarity": 3}], "invulnerable": true}
+    }
+  ]
+}

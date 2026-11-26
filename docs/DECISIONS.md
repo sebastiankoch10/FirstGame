@@ -1,6 +1,6 @@
 ---
 tags: [decisions, architektur, design]
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 # Entscheidungen (kurz: Datum · Entscheidung · Grund)
 
@@ -22,6 +22,10 @@ updated: 2026-11-25
 - **2026-11-25 · Attack Timeline: Uhr und Einheit bleiben die des Besitzers** (Spielerwaffen in Spielschritten, Bosse in Sekunden auf `v2_clock`). Grund: Migration ohne jede Verhaltensänderung; Auslösung nach Zeit folgt, wenn alle Angriffe auf der Zeitachse laufen.
 - **2026-11-25 · Generalfreigabe und Qualitätsanspruch:** Der Nutzer will alles auf den höchsten fachlichen Standard, auch frühe Festlegungen aus der Zeit vor der KI-Nutzung. Umsetzungsentscheidungen trifft der Agent selbst und begründet sie hier; vorher gefragt werden nur kostenpflichtige Dienste, Balancing-Zahlen und die künstlerische Abnahme.
 - **2026-11-25 · Szenen-Aufnahme statt Einzelbilder** (`tests/tools/record_scene.py`, feste 60-Hz-Bildzeit) und automatisches Aufräumen der Testartefakte (`clean_test_artifacts.py`, nach `qa.py` und Aufnahmen). Grund: Bewegung und Timing lassen sich nur in Folgen beurteilen; der Nutzer will keinen wachsenden Speicherverbrauch.
+- **2026-11-26 · Development Review Center:** Die Registry steht im Projekt (`review/registry.json`), das Spiel liest sie als generierten Datenbaustein. Freigaben schreibt das Spiel in seinen Speicherordner (JSON per Temp-Datei und Umbenennen, plus ein Protokoll, an das nur angehängt wird). `review.py sync` überträgt sie in die Registry. Grund: Die GameMaker-Sandbox erlaubt kein Schreiben in den Projektordner. Die Sandbox abzuschalten wäre unsicher und für öffentliche Builds unbrauchbar. Szenarien nutzen die Start-Pipeline des Testmodus statt eigener Kopien.
+- **2026-11-26 · Freigabe in zwei Schritten** (erster Klick schärft den Knopf für 4 s, der zweite speichert), nur im Escape-Menü, nie beim bloßen Schließen. Testkopien (anderer Projektname) schreiben ausschließlich gekennzeichnete Testfreigaben in ihren eigenen Speicherordner. Grund: Keine versehentlichen oder simulierten persönlichen Freigaben.
+- **2026-11-26 · Entwicklungssitzungen sind vom Spielstand isoliert** (`dev_session_active`: kein Talent-Laden oder -Speichern, kein Fortschrittsprotokoll). Grund: Ein im Testmodus besiegter Hauptboss schrieb bisher dauerhafte Talentpunkte in den echten Spielstand.
+- **2026-11-26 · Inventar als Transaktionen:** Ziehen verändert nichts, erst ein gültiges Ablegen führt aus. Tausch über den frei gewordenen Rucksackplatz, Rechtsklick auf Angelegtes legt ab (bei vollem Rucksack abgelehnt), Shift-Vergleich nebeneinander. Grund: kein Verlust und keine Duplikation, ein einziger Zustand für Werte und Darstellung.
 
 ## Spieldesign
 - **2026-11-25 · Helm = Kopf und Helm als ein Bild** (Auftrag des Nutzers): Das Kopfteil ersetzt die oberen Zeilen des Basismodells, statt darüber zu liegen. Grund: Haare standen um die Helmkuppel heraus. Haare unterhalb des Helmrands bleiben sichtbar.

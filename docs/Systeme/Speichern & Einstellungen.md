@@ -15,6 +15,8 @@ Es gibt **keinen Spielstand**. Jeder Run beginnt neu. Gespeichert wird nur wenig
 - `firstgame_progression_current.json`: Messpunkte des Runs (`scripts/progression_audit`); schreibt in jedem Run.
 - `boss-dev-errors.log`: nur im Boss-Entwicklermodus.
 
+- `review_approvals.json`, `review_approvals.log` (seit 26.11.): persönliche Freigaben aus dem [[Review-Center]], nur per Klick im Spiel geschrieben. Test- und Review-Sitzungen schreiben keine Talente und kein Fortschrittsprotokoll.
+
 ## Abhängigkeiten
 [[Audio]] · [[Talente]] · [[Progression & Level-up]] · [[Rendering & Pixelraster]] · [[Licht, Wetter & Effekte]] (Effektqualität)
 

@@ -27,6 +27,8 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
 - **`docs/.obsidian/` ist nicht ignoriert** und erscheint in `git status`. Vorschlag: `docs/.obsidian/workspace*.json` in die `.gitignore`. → [[SETUP_REPORT]]
 - **`docs/ai-activity.log`** wächst mit jedem Stop-Hook-Lauf. Gelegentlich kürzen; prüfen, ob die Datei in die `.gitignore` gehört. → [[SETUP_REPORT]]
 
+- **Spielerlevel je Minute ist nicht gemessen:** Testmodus und Review-Center nutzen `boss_test_preset` (Minute 15 → Level 36). Mit einer Bot-Kohorte die echten Level je Minute messen und die Tabelle kalibrieren (Zahlenänderung nur mit Freigabe). → [[Review-Center]]
+
 ## Balancing-Beobachtungen (nur Empfehlungen, keine Zahlen geändert)
 - **Drache ab Minute 10** für Bots sehr schwer: 17 % bzw. 8 % Siege. → [[Bosse]]
 - **Behemoth-Doppelstampfer:** trifft bedrohte Bots zu 79 %. Mehr Reaktionszeit oder deutlichere Warnung prüfen. → [[Bosse]]

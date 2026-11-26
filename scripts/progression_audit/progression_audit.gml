@@ -1,5 +1,6 @@
 /// Actual future run samples, not inferred kill rates. Saved only in GameMaker's local sandbox.
 function progression_audit_step() {
+    if(dev_session_active())return; // development sessions do not write run measurements
     var points=[60,180,300,420,600,900,1200,1500,1680,1740,1800];
     while(global.progression_sample_index<array_length(points) && global.round_seconds>=points[global.progression_sample_index]) {
         var upgrades=0;

@@ -244,19 +244,10 @@ function equipment_panel_geometry(_L) {
 function equipment_slot_rect(_G,_i) {var col=_i mod 2,row=_i div 2;return {x:_G.x0+col*(_G.slot_w+12),y:_G.y0+row*(_G.cell+12),w:_G.slot_w,h:_G.cell};}
 function equipment_bag_rect(_G,_i) {var col=_i mod 4,row=_i div 4;return {x:_G.x0+col*(_G.bag_cell+6),y:_G.bag_y+row*(_G.bag_cell+6),w:_G.bag_cell,h:_G.bag_cell};}
 function equipment_menu_step(_L,_mx,_my) {
-    var G=equipment_panel_geometry(_L),s=equipment_slots();global.equipment_hover=-1;
+    var G=equipment_panel_geometry(_L);global.equipment_hover=-1;
     for(var i=0;i<6;i++){var r=equipment_slot_rect(G,i);if(point_in_rectangle(_mx,_my,r.x,r.y,r.x+r.w,r.y+r.h))global.equipment_hover=i;}
     for(var i=0;i<equipment_config().backpack_size;i++){var r=equipment_bag_rect(G,i);if(point_in_rectangle(_mx,_my,r.x,r.y,r.x+r.w,r.y+r.h))global.equipment_hover=100+i;}
-    if(!global.talent_mouse_armed || global.equipment_hover<0)return;
-    var h=global.equipment_hover;
-    if(mouse_check_button_pressed(mb_left)) {
-        global.talent_mouse_armed=false;
-        if(h>=100 && h-100<array_length(global.equipment_backpack)){var it=global.equipment_backpack[h-100];array_delete(global.equipment_backpack,h-100,1);equipment_equip(it);fg_sfx("spell_select");}
-        else if(h<6 && is_struct(global.equipment[$ s[h]]) && array_length(global.equipment_backpack)<equipment_config().backpack_size){array_push(global.equipment_backpack,global.equipment[$ s[h]]);global.equipment[$ s[h]]=undefined;equipment_rebuild_cache();if(instance_exists(ObjectPlayer))apply_passives(ObjectPlayer);fg_sfx("ui_click");}
-    } else if(mouse_check_button_pressed(mb_right)) {
-        global.talent_mouse_armed=false;
-        if(h>=100 && h-100<array_length(global.equipment_backpack)){array_delete(global.equipment_backpack,h-100,1);fg_sfx("ui_back");}
-    }
+    equipment_input(_mx,_my); // drag and drop, click, right click (scripts/equipment_ui)
 }
 /// Item icon: per-class, per-tier icon rendered from the visible piece (spr_eqv_icons_<actor>, frame slot*4+tier);
 /// talismans and missing art fall back to the slot icons in spr_eq_icons.
@@ -303,34 +294,7 @@ function equipment_panel_draw(_L) {
     if(array_length(keys)==0){draw_set_color(make_color_rgb(96,108,122));draw_text_ext_transformed(G.x0,yy,"Keine Ausruestung angelegt. Bosse lassen garantiert Gegenstaende fallen, normale Gegner selten.",17,(_L.eq_w-30)/.78,.78,.78,0);}
     else for(var k=0;k<array_length(keys) && yy<_L.eq_y+_L.eq_h-18;k++){draw_set_color(make_color_rgb(198,214,226));draw_text_transformed(G.x0,yy,equipment_stat_text(keys[k],global.equipment_cache[$ keys[k]]),.78,.78,0);yy+=17;}
 }
-function equipment_tooltip_draw(_L) {
-    var h=variable_global_exists("equipment_hover") ? global.equipment_hover : -1;if(h<0)return;
-    var s=equipment_slots(),item=undefined,bag=h>=100;
-    if(bag){if(h-100<array_length(global.equipment_backpack))item=global.equipment_backpack[h-100];}
-    else item=global.equipment[$ s[h]];
-    if(!is_struct(item))return;
-    var col=equipment_rarity_color(item.rarity),body="",info=equipment_stat_info();
-    for(var i=0;i<array_length(item.order);i++)body+=(i>0 ? "\n" : "")+equipment_stat_text(item.order[i],item.stats[$ item.order[i]]);
-    if(bag) {
-        var cur=global.equipment[$ item.slot];
-        if(is_struct(cur)) {
-            body+="\n\nGEGENUEBER ANGELEGT ("+cur.name+")";
-            var keys=[];for(var i=0;i<array_length(item.order);i++)array_push(keys,item.order[i]);
-            for(var i=0;i<array_length(cur.order);i++)if(!array_contains(keys,cur.order[i]))array_push(keys,cur.order[i]);
-            for(var i=0;i<array_length(keys);i++) {
-                var k=keys[i],a=variable_struct_exists(item.stats,k) ? item.stats[$ k] : 0,b=variable_struct_exists(cur.stats,k) ? cur.stats[$ k] : 0;
-                if(abs(a-b)<.0001)continue;
-                body+="\n"+(a>b ? "[+] " : "[-] ")+equipment_stat_text(k,a-b);
-            }
-        } else body+="\n\nPlatz ist frei.";
-        body+="\n\nLinksklick: anlegen | Rechtsklick: wegwerfen";
-    } else body+="\n\nLinksklick: in den Rucksack legen";
-    var w=min(320,_L.w*.3),tw=w-24,hh=66+string_height_ext(body,18,tw),xx=_L.eq_x+_L.eq_w+8,yy=clamp(device_mouse_y_to_gui(0)-20,8,_L.h-hh-8);
-    spell_ui_panel(xx,yy,w,hh,false);draw_set_color(col);draw_rectangle(xx,yy,xx+w,yy+hh,true);
-    draw_text(xx+12,yy+10,item.name);draw_set_color(make_color_rgb(170,182,196));
-    draw_text_transformed(xx+12,yy+32,equipment_rarity_name(item.rarity)+" | "+equipment_slot_label(item.slot)+" | Gegenstandsstufe "+string(item.ilvl),.8,.8,0);
-    draw_set_color(c_white);draw_text_ext(xx+12,yy+56,body,18,tw);
-}
+function equipment_tooltip_draw(_L) {equipment_drag_draw(_L);equipment_tooltips_draw(_L);} // scripts/equipment_ui
 /// Compact HUD strip above the spell slots: equipped items with rarity frames, empty slots dimmed.
 function equipment_hud_draw(_x,_y) {
     if(!variable_global_exists("equipment"))return;

@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, kampf, gegner, bosse, lesbarkeit]
-updated: 2026-11-25
+updated: 2026-11-26
 status: verbindlich (Fachgebiet Kampf, Begegnungen, Lesbarkeit)
 ---
 # Kampf & Begegnungen
@@ -75,12 +75,31 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
 2. **Nicht jeder Angriff braucht eine Bodenwarnung.**
    - Normale Projektile haben eine sichtbare Flugbahn und Höhe (Schatten), aber keine Bodenwarnung.
    - Schnelle physische Angriffe werden über den Körper angekündigt.
-3. **Flächen- und Spezialangriffe:**
-   - voller Umriss ab 0 %;
-   - dezenter Countdown am Rand;
-   - kontrollierte Intensivierung zum Ende hin;
-   - präzises Aufleuchten im Treffermoment.
-   - Keine großen, deckenden Vollflächen.
+3. **Flächen- und Spezialangriffe** (Formsprache seit 26.11., Phase 2A, Renderer `scripts/hazard_fx`):
+   - **Ganze Fläche ab 0 %:** eine dezente, transparente Grundfärbung zeigt den vollständigen künftigen Gefahrenbereich, dazu ein 1-px-Rand. Der Rand unterstützt, ist aber nie das einzige Element.
+   - **Integrierter Countdown statt Uhrzeiger:**
+     - Dieselbe Form füllt sich vom Ursprung aus: Kreis und Kegel vom Zentrum bzw. von der Spitze, Strahl und Rechteck entlang der Länge, Ring über die Bandbreite.
+     - Die Füllfront ist ein schmales, helleres Band.
+     - Weil die Grundfärbung von Anfang an die ganze Fläche zeigt, erzeugt die Füllung keine scheinbar sicheren Bereiche.
+   - **Zeitabhängige Intensität:** Grundfärbung und Sättigung nehmen mit dem Fortschritt zu.
+     - In den letzten 25 % (Commitment) wird der Rand hell und pulsiert.
+     - Bei 100 % blitzt die ganze Fläche auf, im selben Update wie der Schaden.
+   - **Innere Energie:** spärliche Elementpartikel innerhalb der Form, die zur Mitte hin driften, gegen Ende dichter (Verdichtung).
+   - Keine großen, deckenden Vollflächen. Farben unterscheiden sich nach Element und Boss; die zeitliche Sprache ist überall gleich.
+3a. **WYSIWYG – gemeinsame Schadensgeometrie (verbindlich):**
+   - Sichtbare Gefahrenfläche = tatsächliche Schadensfläche.
+   - Warnung, aktive Fläche, Partikel und Treffertest lesen dasselbe Geometrie-Struct `g` (`telegraph_make`/`telegraph_contains`): Kreis, Ring mit optionaler Lücke, Kegel, Linie bzw. Rechteck.
+   - Bewegte, rotierende, schrumpfende oder wachsende Formen ändern `g` vor Zeichnung und Treffertest im selben Update.
+   - **Aktive Flächen sind zusammenhängend** (`hz_area_draw`): transparente Elementgrundfläche über genau der Geometrie, heller Rand, dichte Pixelpartikel strikt innerhalb der Form (jede Position wird gegen `telegraph_contains` geprüft).
+     - Keine aneinandergereihten oder gestapelten Einzelsprites mit Lücken.
+     - Explosionseffekte dürfen zusätzlich auf der Fläche liegen, ersetzen sie aber nicht.
+   - **Abklingen:** Nach der aktiven Zeit wird die Fläche entsättigt und grau, Partikel steigen auf und verblassen (etwa 0,3 s). So sieht eine abgeklungene Fläche nicht mehr gefährlich aus.
+3b. **Überlappende Mechaniken, zeitliche Priorität** (wie in Final Fantasy XIV):
+   - Alle Gegnerwarnungen eines Bildes werden gesammelt und nach verbleibender Zeit bis zum Einschlag sortiert gezeichnet (`telegraph_flush`). Die nächste Mechanik liegt immer oben.
+   - Warnungen, die mehr als 0,45 s nach der nächsten einschlagen, erscheinen als halbtransparente Vorschau ohne Partikel. So bleibt erkennbar, was zuerst und was danach kommt.
+   - Countdown und Intensität laufen pro Mechanik unabhängig.
+   - Keine additive Mischung von Warnflächen.
+   - Warnungen werden nach allen Spieler- und Welteffekten gezeichnet; eigene Effekte verdecken sie nicht.
 4. **Strahlen:**
    - Konzeptionell unbegrenzte Reichweite (Geometrie, kein weltlanges Sprite).
    - Der Schwenk-Sektor wird angekündigt; der Schwenk ist erkennbar und nicht schneller als nötig.
@@ -100,8 +119,17 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
 
    Später kürzere Warnzeiten sind erlaubt, solange sie lesbar bleiben.
 7. **Gegnerwarnung und Spielereffekt haben verschiedene Formsprachen.**
-   - Die Kombination aus vollem Umriss und Rand-Countdown ist Gegnergefahren vorbehalten.
-   - Spielerflächen (z. B. das Zielmal des Pfeilhagels) nutzen eine eigene Markierung.
+   - Getönte Fläche mit Füll-Countdown ist ausschließlich Gegnern, Eliten, Minibossen, Bossen und Levelgefahren vorbehalten.
+   - Eigene Fähigkeiten zeigen nie solche Warnungen (seit 26.11.: Kegelwarnung des Magierbogens entfernt). Zielhilfen sind `vfx_player_target_mark`: dünne, drehende Runenstriche in Spielerfarbe, ohne Füllung und ohne Countdown, etwa für Sternenorb und Pfeilhagel.
+8. **Mehrphasige Angriffe** (Phase 2A): Anticipation → Energy Gathering → Shape Formation → Commitment → Execution/Impact → Recovery/Dissipation.
+   - **Zuordnung auf der Warnuhr:** Sammeln am Ursprung (`vfx_charge`: Partikel strömen zum Maul bzw. zur Hand, der Kern wächst, das Licht steigt), Formbildung mit Füll-Countdown, Commitment in den letzten 25 %, Einschlag bei 100 % mit Lichtimpuls.
+   - Nicht jede Fähigkeit braucht alle Phasen. Schnelle physische Angriffe (Biss, Hieb, Schweif) bleiben direkt und werden über den Körper angekündigt.
+   - Elementprofile (`vfx_palette`, `hz_particles`): Feuer (aufsteigende Glut, Flackern, warmes Licht), Eis (Kristallfunken, kühle Lichtimpulse), Blitz (Funken, kurze verästelte Bögen, weiß-blauer Lichtblitz), Arkan (wirbelnde Punkte, Runen), Gift (aufsteigende Blasen, klar begrenzt).
+9. **Strahlen** (`vfx_beam_stream`): zusammenhängender, flackernder Strom statt eines gestreckten Sprites.
+   - Kern, Körper und Rand in Schichten; Partikel fließen vom Ursprung nach außen.
+   - Die seitlichen Grenzen liegen genau auf der Trefferbreite (1-px-Linie).
+   - Gezeichnet wird bis zum Bildrand, die Trefferlinie darf weiter reichen; Entfernung allein schützt nicht.
+   - Schwenk und Kopfdrehung verändern Bild und Hitbox gemeinsam.
 
 ## 6. Fairness und Dichte
 

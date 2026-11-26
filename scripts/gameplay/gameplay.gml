@@ -214,7 +214,11 @@ function menu_labels(_mode) {
         case "levels": return level_names();
         case "settings": return ["Vollbild: Ein/Aus","Gesamtlautstaerke","Musik","Effekte","Ton im Hintergrund abspielen","Effektqualitaet","Zurueck zum Titelbildschirm"];
         case "boss_test":return boss_test_menu_labels();
-        default: return boss_test_enabled() ? ["Neues Spiel","Einstellungen","Beenden","Testmodus"] : ["Neues Spiel","Einstellungen","Beenden"];
+        default: {
+            var l=boss_test_enabled() ? ["Neues Spiel","Einstellungen","Beenden","Testmodus"] : ["Neues Spiel","Einstellungen","Beenden"];
+            if(review_enabled())array_push(l,"Review-Center ("+string(review_open_count())+" offen)"); // dynamic to-do list (review_center)
+            return l;
+        }
     }
 }
 function menu_geometry(_count,_characters=false) {
@@ -244,11 +248,14 @@ function menu_activate(_choice) {
         if (_choice==0) {menu_mode="characters"; menu_index=0; pending_new_game=true;}
         if (_choice==1) {menu_mode="settings"; menu_index=0;}
         if (_choice==2) game_end();
-        if (_choice==3 && boss_test_enabled()) {menu_mode="boss_test";menu_index=0;boss_test_settings();}
+        var main_label=menu_labels("main")[_choice];
+        if (main_label=="Testmodus" && boss_test_enabled()) {menu_mode="boss_test";menu_index=0;boss_test_settings();}
+        if (string_pos("Review-Center",main_label)==1 && review_enabled()) {menu_mode="review";review_center_open();}
     }
 }
 function round_menu_labels() {
-    if (global.game_over) return ["Neustart","Zurueck zum Hauptmenue"];
+    if (global.game_over) return review_active() ? ["Szenario neu starten","Zurueck zum Review-Center"] : ["Neustart","Zurueck zum Hauptmenue"];
+    if (review_active() && !global.settings_active) return review_pause_labels();
     if (global.settings_active) return ["Vollbild: Ein/Aus","Gesamtlautstaerke","Musik","Effekte","Ton im Hintergrund abspielen","Effektqualitaet","Zurueck zur Runde","Zurueck zum Titelbildschirm"];
     return ["Weiter","Talente & Ausruestung","Neues Spiel","Einstellungen","Zurueck zum Titelbildschirm","Beenden"];
 }
@@ -264,6 +271,7 @@ function round_menu_activate(_choice) {
         return;
     }
     var action=round_menu_labels()[_choice];
+    if (review_active() && action!="Weiter" && string_pos("Talente",action)!=1 && action!="Einstellungen") {review_pause_activate(action);return;}
     if (action=="Weiter") {
         instance_activate_all(); global.game_paused=false; global.normal_pause_active=false; global.pause_initialized=false;
         if (instance_exists(ObjectPlayer)) ObjectPlayer.mouse_move_armed=false; ObjectPlayer.menu_input_guard=1;
@@ -274,11 +282,12 @@ function round_menu_activate(_choice) {
     else round_end_to_title();
 }
 function round_end_to_title() {
-    boss_test_end();
+    boss_test_end();review_end();
     fg_sfx("ui_back");
     instance_activate_all(); reset_round(); global.round_active=false; room_goto(RoomMenu);
 }
 function round_menu_step() {
+    review_pause_tick();
     var previous_index=global._pause_index;
     var labels=round_menu_labels(), count=array_length(labels), ui=(!global.game_over && !global.settings_active) ? pause_geometry() : menu_geometry(count);
     if (keyboard_check_pressed(vk_up)) global._pause_index=(global._pause_index+count-1) mod count;
@@ -301,6 +310,7 @@ function round_menu_draw() {
         spell_ui_panel(ui.x,yy,ui.w,ui.h,i==global._pause_index);
         draw_set_halign(fa_center);draw_set_valign(fa_middle);
         var label=labels[i];
+        if(review_active() && review_is_approve_label(label)) {review_approve_button_draw(ui.x,yy,ui.w,ui.h,label,i==global._pause_index);continue;}
         if(global.settings_active && i>=1 && i<=3) label+=fg_audio_volume_label(i);
         if(global.settings_active && i==4) label+=global.audio_background ? ": Ein" : ": Aus";
         if(global.settings_active && i==5) label+=vfx_quality_label();
@@ -310,6 +320,7 @@ function round_menu_draw() {
     }
     draw_set_halign(fa_left);draw_set_valign(fa_top);
     if(inventory) pause_inventory_draw();
+    if(inventory) review_pause_extra_draw();
 }
 
 function combat_area_hit(_x,_y,_radius,_damage,_owner,_burn_time,_burn_dps,_slow_time,_slow_factor,_sid=0) {

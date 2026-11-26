@@ -17,6 +17,8 @@ Start ohne Ausrüstung. Gegenstände fallen, werden durch Darüberlaufen aufgeno
 - Nicht verwechseln: Die Waffen-Upgrades der Startwaffe (Level-up-Karten) sind keine Ausrüstung, siehe [[Klassen & Startwaffen]].
 - Sichtbarkeit am Charakter und Item-Icons: [[Charaktergrafik & Ausrüstungs-Layer]] (`scripts/equipment_visual`, `equipment_item_icon`).
 
+- **Bedienung seit 26.11.** (`scripts/equipment_ui`): Transaktionen `equipment_tx_*`, Ziehen und Ablegen (`equipment_input`, `equipment_drag_draw`), Rechtsklick legt ab, Tooltips aus echten Daten mit Shift-Vergleich (`equipment_tooltip_lines`, `equipment_tooltips_draw`). `equipment_menu_step` und `equipment_tooltip_draw` leiten dorthin weiter. Regeln: [[Progression & Builds]].
+
 ## Abhängigkeiten
 [[Talente]] (gemeinsamer Bildschirm, `talent_equipment_apply`) · [[Bosse]] (garantierte Drops) · [[Gegner & Spawns]] (0,3 %) · [[Licht, Wetter & Effekte]] · [[Charaktergrafik & Ausrüstungs-Layer]]
 

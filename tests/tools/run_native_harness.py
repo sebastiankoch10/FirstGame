@@ -42,11 +42,9 @@ def write(p, s):
     p.write_text(s, encoding='utf-8')
 
 
-def main():
-    suite = sys.argv[1] if len(sys.argv) > 1 else 'feature'
-    harness, px, tag, name, timeout = SUITES[suite]
-    extra = list(EXTRA_REPLACEMENTS) + ([(r'\bdelta_time\b', '16667')] if suite in FIXED_DT_SUITES else [])
-    work = Path(os.environ['LOCALAPPDATA']) / 'FirstGame-Tests' / suite / time.strftime('%Y%m%d-%H%M%S')
+def prepare_copy(suite, harness, px, tag, name, extra, work=None, menu_draw_suffix=''):
+    """Copy the project to work/project with the harness injected; returns (work, project)."""
+    work = work or Path(os.environ['LOCALAPPDATA']) / 'FirstGame-Tests' / suite / time.strftime('%Y%m%d-%H%M%S')
     project = work / 'project'
     project.mkdir(parents=True)
     for d in ('objects', 'scripts', 'sprites', 'sounds', 'tilesets', 'rooms', 'options'):
@@ -64,6 +62,10 @@ def main():
         p = project / rel; write(p, prefix + p.read_text(encoding='utf-8-sig'))
     p = project / 'objects/ObjectController/Draw_64.gml'
     write(p, f'{px}_world_capture();{px}_gui_capture_begin();\n' + p.read_text(encoding='utf-8-sig') + f'\n{px}_gui_capture_end();\n')
+    if menu_draw_suffix:
+        p = project / 'objects/ObjectMainMenu/Draw_64.gml'
+        # Draw_64 exits early in sub-menus, so the hook goes first and only arms a capture taken in the next frame's end.
+        write(p, p.read_text(encoding='utf-8-sig').replace('var gw = display_get_gui_width();', 'var gw = display_get_gui_width();' + menu_draw_suffix, 1))
     for path in project.rglob('*.gml'):
         code = path.read_text(encoding='utf-8-sig')
         for src, dst in (('keyboard_check_pressed', 'gp_key_pressed'), ('keyboard_check', 'gp_key_down'), ('mouse_check_button_pressed', 'gp_mouse_pressed'),
@@ -75,9 +77,15 @@ def main():
         for pattern, repl in extra:
             code = re.sub(pattern, repl, code)
         write(path, code)
+    return work, project
+
+
+def build_copy(suite, work, project, name):
+    """Igor Windows build of the prepared copy; returns the exe path (raises on failure, copy removed)."""
     runner = GameMakerRunner(project, runtime_version='2024.14.4.268')
     igor = runner.find_gamemaker_runtime(); lic = runner.find_license_file()
     for n in ('build', 'cache', 'temp'):
+        shutil.rmtree(work / n, ignore_errors=True)
         (work / n).mkdir()
     cmd = [str(igor), f'/lf={lic}', f'/uf={lic.parent}', f'/rp={runner.runtime_path}', f'/project={project / (name + ".yyp")}', f'/cache={work / "cache"}',
            f'/temp={work / "temp"}', f'/of={work / "build" / name}', f'--tf={work / "build" / (name + ".zip")}', '--', 'Windows', 'PackageZip']
@@ -90,19 +98,27 @@ def main():
     if 'Final Compile finished.' not in blog or not exe.is_file():
         errs = [l for l in blog.splitlines() if 'error' in l.lower()][:30]
         print('\n'.join(errs))
-        for n in ('project', 'build', 'cache', 'temp'):
-            shutil.rmtree(work / n, ignore_errors=True)
+        cleanup(work)
         raise RuntimeError(f'Build failed: {work / "build.log"}')
+    return exe
+
+
+def run_exe(work, exe, tag, timeout, log_name='runtime'):
+    """Run the built game once; returns (exit_code, log_texts, started)."""
     print('Running native harness...', flush=True)
     started = time.time()
     si = subprocess.STARTUPINFO(); si.dwFlags |= subprocess.STARTF_USESHOWWINDOW; si.wShowWindow = 4
-    with (work / 'runtime.log').open('w', encoding='utf-8') as log:
-        proc = subprocess.Popen([str(exe), '-output', str(work / 'runner.log')], cwd=exe.parent, stdout=log, stderr=subprocess.STDOUT, startupinfo=si)
+    with (work / f'{log_name}.log').open('w', encoding='utf-8') as log:
+        proc = subprocess.Popen([str(exe), '-output', str(work / f'{log_name}-runner.log')], cwd=exe.parent, stdout=log, stderr=subprocess.STDOUT, startupinfo=si)
         try:
             code = proc.wait(timeout=timeout)
         except subprocess.TimeoutExpired:
             proc.kill(); proc.wait(); code = -1
-    texts = [p.read_text(encoding='utf-8', errors='replace') for p in (work / 'runtime.log', work / 'runner.log') if p.exists()]
+    texts = [p.read_text(encoding='utf-8', errors='replace') for p in (work / f'{log_name}.log', work / f'{log_name}-runner.log') if p.exists()]
+    return code, texts, started
+
+
+def parse_result(texts, tag):
     result = None
     for text in texts:
         m = re.search(tag + r'_RESULT (\{[^\r\n]+\})', text)
@@ -110,19 +126,38 @@ def main():
             result = json.loads(m.group(1)); break
     exc = [line for text in texts for line in text.splitlines() if f'{tag}_EXCEPTION' in line]
     fails = [line for text in texts for line in text.splitlines() if f'{tag} FAIL' in line]
+    return result, exc, fails
+
+
+def collect_captures(work, px, started):
     for save in Path(os.environ['LOCALAPPDATA']).glob('FirstGame*'):
         if save.is_dir() and save != work:
             for c in save.rglob(f'{px}capture-*.png'):
                 if c.stat().st_mtime >= started:
                     shutil.move(c, work / c.name.removeprefix(f'{px}capture-'))  # move: no copies pile up in the save folder
+
+
+def cleanup(work):
+    for n in ('project', 'build', 'cache', 'temp'):
+        shutil.rmtree(work / n, ignore_errors=True)
+
+
+def main():
+    suite = sys.argv[1] if len(sys.argv) > 1 else 'feature'
+    harness, px, tag, name, timeout = SUITES[suite]
+    extra = list(EXTRA_REPLACEMENTS) + ([(r'\bdelta_time\b', '16667')] if suite in FIXED_DT_SUITES else [])
+    work, project = prepare_copy(suite, harness, px, tag, name, extra)
+    exe = build_copy(suite, work, project, name)
+    code, texts, started = run_exe(work, exe, tag, timeout)
+    result, exc, fails = parse_result(texts, tag)
+    collect_captures(work, px, started)
     if result is None:
         result = {'passed': False, 'checks': 0, 'failures': fails, 'error': f'no {tag}_RESULT'}
     result.update(exit_code=code, logs=str(work), exceptions=exc[:5], captures=sorted(p.name for p in work.glob('*.png')),
                   test_type='native Windows VM, injected input; not manual play')
     result['passed'] = bool(result.get('passed')) and code == 0 and not exc
     write(ROOT / f'tests/reports/{suite}-harness-result.json', json.dumps(result, indent=2) + '\n')
-    for n in ('project', 'build', 'cache', 'temp'):
-        shutil.rmtree(work / n, ignore_errors=True)
+    cleanup(work)
     print(json.dumps({k: result.get(k) for k in ('passed', 'checks', 'failures', 'exceptions', 'metrics', 'captures', 'logs')}, indent=2), flush=True)
     if not result['passed']:
         raise SystemExit(1)

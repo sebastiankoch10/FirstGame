@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "checks": 12,
+  "failures": [],
+  "phases": {
+    "a": {
+      "phase": "a",
+      "passed": true,
+      "checks": 60.0,
+      "failures": [],
+      "metrics": {}
+    },
+    "b": {
+      "phase": "b",
+      "passed": true,
+      "checks": 4.0,
+      "failures": [],
+      "metrics": {}
+    },
+    "c": {
+      "phase": "c",
+      "passed": true,
+      "checks": 5.0,
+      "failures": [],
+      "metrics": {
+        "archived_start": true,
+        "attack_after_frames": 2.0
+      }
+    }
+  },
+  "evidence": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\review-e2e\\20261126-065111",
+  "captures": [
+    "a0-main-menu.png",
+    "a1-review-center.png",
+    "a2-scenario.png",
+    "a3-pause-approve.png",
+    "a4-approve-armed.png",
+    "a5-approve-saved.png",
+    "c1-review-center.png"
+  ],
+  "test_type": "native Windows build, scripted input, technical test approvals only"
+}

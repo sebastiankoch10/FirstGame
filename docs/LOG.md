@@ -4,6 +4,12 @@ updated: 2026-11-26
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-26 · Claude · Phase 1: Review-Center und Inventar
+- Review-Center (`scripts/review_center`, `review/registry.json`, generiert `scripts/review_registry_data`, Werkzeuge `tests/tools/review/review.py` und `review_e2e.py`, `tests/review_harness.gml`). Hauptmenü, Pausenmenü mit grünem Freigabeknopf, Hook in `.claude/settings.json`.
+- Inventar (`scripts/equipment_ui`): Drag-and-drop, Rechtsklick legt ab, Tooltips, Shift-Vergleich. `equipment_menu_step` und `equipment_tooltip_draw` leiten weiter.
+- Isolation: `dev_session_active` in `talent_persistent` und `progression_audit_step`. `run_native_harness.py` in Bausteine zerlegt.
+- Tests: QA Stufe 3 PASS (Regression 811, Feature 195 mit 33 Inventarprüfungen, Boss 141, Level 166, Klassen 151, Visual 75); Review-E2E PASS 12/12.
+
 ### 2026-11-26 · Claude · Vault-Prüfung (nur Doku, Code nur gelesen, nicht committet)
 - 12 Systemnotizen an den Code-Stand angeglichen: Audio, Ausrüstung, Level & Welten, Progression & Level-up, Spielablauf & Zustände, Zauber & Passiva, Talente, Gegner & Spawns, Licht/Wetter/Effekte, Klassen & Startwaffen, Speichern & Einstellungen, Spieler & Bewegung.
 - Frontmatter für `_archive/CLAUDE_2026-11-24.md` und `_export/Designphilosophie_2026-11-25.md`; beide im `00_Index` verlinkt. Nachtrag in `SETUP_REPORT`, zwei Einträge in `Bugs & Ideen`.

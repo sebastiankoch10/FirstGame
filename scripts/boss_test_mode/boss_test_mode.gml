@@ -79,7 +79,7 @@ function boss_test_apply_build(_minute,_random_build,_seed) {
 function boss_test_pending_start() {
     if(!variable_global_exists("boss_test_pending") || !is_struct(global.boss_test_pending) || !instance_exists(ObjectPlayer))return false;
     var request=global.boss_test_pending;global.boss_test_pending=undefined;
-    if(variable_struct_exists(request,"scene") && request.scene)return scene_test_pending_start(request);
+    if(variable_struct_exists(request,"scene") && request.scene){var scene_ok=scene_test_pending_start(request);review_after_start(scene_ok);return scene_ok;}
     with(ObjectBossMonster)instance_destroy();with(ObjectMonster)instance_destroy();with(ObjectChest)instance_destroy();with(ObjectCoin)instance_destroy();with(ObjectMagnetOrb)instance_destroy();
     with(ObjectFireball)instance_destroy();with(ObjectIceball)instance_destroy();with(ObjectLightningball)instance_destroy();with(ObjectSwordHitbox)instance_destroy();
     global.boss_test={active:true,boss:request.boss,minute:request.minute,class_name:request.class_name,seed:request.seed,ability:request.ability,invulnerable:false,difficulty_multiplier:request.difficulty_multiplier,restore_character:request.restore_character,restore_level:request.restore_level,attack_log:[],debug_hitboxes:false};
@@ -93,6 +93,7 @@ function boss_test_pending_start() {
     var boss=boss_spawn(request.boss);if(!instance_exists(boss)){boss_test_end();return false;}
     if(request.ability!=-1)boss_v2_force_attack(boss,request.ability);
     show_debug_message("BOSS_TEST_START "+json_stringify({boss:request.boss,minute:request.minute,seed:request.seed,class_name:request.class_name,ability:request.ability,difficulty_multiplier:request.difficulty_multiplier}));
+    review_after_start(true); // review scenario overrides (no-op outside the Review Center)
     return true;
 }
 function boss_test_end() {
@@ -128,6 +129,8 @@ function boss_test_draw_gui() {
     var state=global.boss_test;draw_set_font(-1);draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_color(make_color_rgb(167,222,220));
     var scene=variable_struct_exists(state,"scene") && state.scene;
     var lnames=level_names();
+    if(review_active())draw_text_transformed(12,display_get_gui_height()-62,"REVIEW | "+global.review.title+" | Rev. "+string(global.review.revision)+" | Esc: pruefen und freigeben",.7,.7,0);
+    if(review_active() && global.review.note_t>0){draw_set_color(make_color_rgb(126,224,140));draw_text_transformed(12,display_get_gui_height()-82,global.review.note,.75,.75,0);draw_set_color(make_color_rgb(167,222,220));}
     draw_text_transformed(12,display_get_gui_height()-43,scene ? "TESTSZENE | "+lnames[clamp(global.selected_level,0,array_length(lnames)-1)]+" | ab Minute "+string(state.minute)+" | Seed "+string(state.seed)
         : "BOSSTEST | "+state.boss+" | Min "+string(state.minute)+" | Seed "+string(state.seed)+" | "+(state.ability==-1 ? "Rotation" : "Attacke "+string(state.ability)),.7,.7,0);
     draw_text_transformed(12,display_get_gui_height()-24,"F1 Schutz "+(state.invulnerable ? "EIN" : "AUS")+" | F2 Heilen | F3 Phase | F4 HP25% | F5 Attacke | F6 Attacke wechseln | F7 Aufholen | F8 Talente | F9 Gegenstand | F10 Koerperboxen",.65,.65,0);
