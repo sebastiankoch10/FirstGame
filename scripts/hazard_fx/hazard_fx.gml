@@ -244,6 +244,7 @@ function hz_area_draw(_g,_el,_col,_age,_active,_seed=0) {
 /// inside the hit width; a 1-px boundary marks the sides; particles flow from the origin outward. Drawn only up to the
 /// view edge (the hitbox may continue off screen). _age/_active on the hazard clock; after _active it dissipates.
 function vfx_beam_stream(_g,_el,_age,_active,_seed=0) {
+    if(_el==1 && FX_HD_HAZARDS){vfx_beam_fire_hd(_g,_age,_active,_seed);return;}
     var pal=vfx_palette(_el),t=current_time/1000,r=combat_view_rect(),vis=200,corners=[[r.left,r.top],[r.right,r.top],[r.left,r.bottom],[r.right,r.bottom]];
     for(var i=0;i<4;i++)vis=max(vis,(corners[i][0]-_g.x)*lengthdir_x(1,_g.angle)+(corners[i][1]-_g.y)*lengthdir_y(1,_g.angle)+40);
     var len=min(_g.radius,vis),fade=_age<=_active ? 1 : clamp(1-(_age-_active)/.25,0,1);if(fade<=0 || len<4)return;
@@ -278,6 +279,66 @@ function vfx_beam_stream(_g,_el,_age,_active,_seed=0) {
     var fl=hw*(.55+.08*sin(t*33));
     draw_set_alpha(.8*fade);draw_set_color(pal[1]);draw_circle(round(_g.x),round(_g.y),max(3,fl),false);
     draw_set_color(pal[2]);draw_circle(round(_g.x),round(_g.y),max(2,fl*.55),false);
+    draw_set_alpha(1);draw_set_color(c_white);
+}
+/// Graphics overhaul (26.11. Ergänzung): danger surfaces may be redesigned in the HD-2D style. Fire beams first (showcase);
+/// false shows the previous stream for an A/B comparison.
+#macro FX_HD_HAZARDS true
+/// Fire beam in the HD-2D style over the exact line geometry (WYSIWYG, G15):
+/// - the full hit width carries a clear warm tint (semi-transparent, the fire light on the ground shows through);
+/// - both sides have a 1-px bright inner edge plus a 1-px dark outline just outside, readable on dark and on lit ground;
+/// - inside: licking flame tongues (noise along the beam, never wider than the hit width), a white-hot flickering core,
+///   hot spots that race outward; at the mouth a flare with short pixel rays.
+/// Glow, heat shimmer, ground light and sparks come from fx_attacks (world layer and FXP_TOP).
+function vfx_beam_fire_hd(_g,_age,_active,_seed=0) {
+    var t=current_time/1000,len=fx_beam_visible_len(_g.x,_g.y,_g.angle,_g.radius),fade=_age<=_active ? 1 : clamp(1-(_age-_active)/.25,0,1);
+    if(fade<=0 || len<4)return;
+    // after the active time it dissipates like the previous stream: shrinks to 35 % width, turns grey, loses its edges
+    var dis=_age>_active,hw=_g.width*.5*(dis ? .35+.65*fade : 1),ux=lengthdir_x(1,_g.angle),uy=lengthdir_y(1,_g.angle),nx=-uy,ny=ux,seg=4,n=max(2,ceil(len/seg)),flash=dis ? 0 : clamp(1-_age/.1,0,1);
+    var ramp=fxp_ramp(1),deep=make_color_rgb(150,36,18);
+    if(dis){var gr=c_gray;ramp=[merge_color(ramp[0],gr,.6),merge_color(ramp[1],gr,.6),merge_color(ramp[2],gr,.6),merge_color(ramp[3],gr,.6),merge_color(ramp[4],gr,.6)];deep=merge_color(deep,gr,.6);}
+    // 1) the whole hit width: warm tint, a little stronger in the first frames
+    draw_set_color(deep);draw_set_alpha((.65+.2*flash)*fade);draw_primitive_begin(pr_trianglestrip);
+    draw_vertex(_g.x+nx*hw,_g.y+ny*hw);draw_vertex(_g.x-nx*hw,_g.y-ny*hw);draw_vertex(_g.x+ux*len+nx*hw,_g.y+uy*len+ny*hw);draw_vertex(_g.x+ux*len-nx*hw,_g.y+uy*len-ny*hw);
+    draw_primitive_end();
+    // 2) flame tongues: three layers whose width wavers with travelling noise, always inside the hit width
+    var layers=[[.95,ramp[3],.8],[.66,ramp[2],.9],[.38,ramp[1],.95]];
+    for(var L=0;L<3;L++) {
+        var wl=layers[L][0];draw_set_color(layers[L][1]);draw_set_alpha(layers[L][2]*fade);draw_primitive_begin(pr_trianglestrip);
+        for(var i=0;i<=n;i++) {
+            var d=min(len,i*seg),grow=clamp(d/36,.35,1);
+            // the outer layer never drops below ~75 % of the hit width, so the whole width stays clearly hot
+            var lo=L==0 ? .78 : .55;
+            var w1=lo+(1-lo)*(.5+.5*sin(d*.07-t*17+L*1.9+_seed))*(.6+.4*sin(d*.19-t*29+L*.7));
+            var w2=lo+(1-lo)*(.5+.5*sin(d*.07-t*17+L*1.9+_seed+2.1))*(.6+.4*sin(d*.23-t*31+L*1.3));
+            var cx=_g.x+ux*d,cy=_g.y+uy*d,wa=hw*wl*grow*min(1,w1+flash*.3),wb=hw*wl*grow*min(1,w2+flash*.3);
+            draw_vertex(cx+nx*wa,cy+ny*wa);draw_vertex(cx-nx*wb,cy-ny*wb);
+        }
+        draw_primitive_end();
+    }
+    // 3) white-hot core: flickering, strongest near the mouth
+    var cw=max(1,round(hw*.16*(1+.25*sin(t*41))));
+    draw_set_color(ramp[0]);draw_set_alpha(.95*fade);draw_line_width(round(_g.x),round(_g.y),round(_g.x+ux*len*.7),round(_g.y+uy*len*.7),cw);
+    // 4) hot spots racing outward (pixel clusters)
+    var cnt=min(40,round(len/16))*(vfx_quality()==0 ? .5 : 1);
+    for(var i=0;i<cnt;i++) {
+        var h1=vfx_hash(i,_seed+3)*.5+.5,h2=vfx_hash(i,_seed+9)*.5+.5,d=frac(h1+t*(1.6+h2))*len,o=(h2-.5)*1.2*hw*.8;
+        var px=round(_g.x+ux*d+nx*o),py=round(_g.y+uy*d+ny*o),s=h2>.7 ? 2 : 1;
+        draw_set_alpha(fade*(1-d/len*.6));draw_set_color(d<len*.3 ? ramp[0] : ramp[1]);draw_rectangle(px,py,px+s-1,py+s-1,false);
+    }
+    // 5) edges exactly at the hit width: bright inner line, dark outline just outside (contrast on any ground)
+    var ec=merge_color(ramp[1],c_white,.35),oc=make_color_rgb(40,10,6);
+    if(dis){draw_set_alpha(1);draw_set_color(c_white);return;} // no edges, no flare once it no longer hurts
+    vfx_pixel_line(_g.x+nx*(hw+1),_g.y+ny*(hw+1),_g.x+ux*len+nx*(hw+1),_g.y+uy*len+ny*(hw+1),1,oc,.75*fade);
+    vfx_pixel_line(_g.x-nx*(hw+1),_g.y-ny*(hw+1),_g.x+ux*len-nx*(hw+1),_g.y+uy*len-ny*(hw+1),1,oc,.75*fade);
+    vfx_pixel_line(_g.x+nx*hw,_g.y+ny*hw,_g.x+ux*len+nx*hw,_g.y+uy*len+ny*hw,1,ec,.95*fade);
+    vfx_pixel_line(_g.x-nx*hw,_g.y-ny*hw,_g.x+ux*len-nx*hw,_g.y+uy*len-ny*hw,1,ec,.95*fade);
+    // 6) mouth flare with short pixel rays
+    // flare rays stay inside the hit width (r1 <= 95 % of the half width)
+    var fl=hw*(.6+.1*sin(t*33));
+    draw_set_alpha(.85*fade);draw_set_color(ramp[2]);draw_circle(round(_g.x),round(_g.y),max(3,round(fl)),false);
+    draw_set_color(ramp[0]);draw_circle(round(_g.x),round(_g.y),max(2,round(fl*.55)),false);
+    for(var k=0;k<6;k++){var a=k*60+t*140,r0=fl*.9,r1=min(hw*.95,fl*(1.35+.25*sin(t*23+k)));vfx_pixel_line(_g.x+lengthdir_x(r0,a),_g.y+lengthdir_y(r0,a),_g.x+lengthdir_x(r1,a),_g.y+lengthdir_y(r1,a),1,ramp[1],.8*fade);}
     draw_set_alpha(1);draw_set_color(c_white);
 }
 /// Energy gathering at an origin (mouth, hand, staff): particles converge, the core grows and brightens with p (0..1).

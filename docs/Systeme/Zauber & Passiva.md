@@ -33,6 +33,11 @@ updated: 2026-11-26
   | Steinstacheln | kleine Sammelfunken und Einschlag, sehr dezent |
   | Blitz, Durchbohrende Lanze, Donnersiegel, Sternenfall, Gravitationsbrunnen, Eisgefängnis, Sonnenurteil | zu den Messzeitpunkten kaum sichtbar (kurz oder sehr zurückhaltend). Eher zu wenig als zu viel; zur künstlerischen Beurteilung durch den Nutzer |
 
+- **Grafik-Overhaul (26.11. abends, Schaustück):** Feuerball, Eisball und Kettenblitz nutzen die neuen Bausteine.
+  - Spuren über `fxp_trail` in `spell_projectile_step`.
+  - Einschläge über `fxp_impact` in `spell_projectile_hit` bzw. `chain_segment_add`. Im Endgame-Band kommen Farbumschlag (Feuerball) bzw. Farbversatz (Blitz) dazu.
+  - Die übrigen 15 Zauber folgen nach dem Urteil des Nutzers ([[Visuelles Leitbild & Animation]] 7.4).
+
 ## Abhängigkeiten
 [[Progression & Level-up]] · [[Licht, Wetter & Effekte]] (`spell_vfx`) · [[UI, HUD & Menüs]] · [[Bosse]] · [[Klassen & Startwaffen]]
 

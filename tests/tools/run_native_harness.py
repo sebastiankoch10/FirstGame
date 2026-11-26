@@ -49,7 +49,7 @@ def prepare_copy(suite, harness, px, tag, name, extra, work=None, menu_draw_suff
     work = work or Path(os.environ['LOCALAPPDATA']) / 'FirstGame-Tests' / suite / time.strftime('%Y%m%d-%H%M%S')
     project = work / 'project'
     project.mkdir(parents=True)
-    for d in ('objects', 'scripts', 'sprites', 'sounds', 'tilesets', 'rooms', 'options'):
+    for d in ('objects', 'scripts', 'sprites', 'sounds', 'tilesets', 'rooms', 'options', 'shaders'):
         shutil.copytree(ROOT / d, project / d)
     yyp = loads((ROOT / 'FirstGame.yyp').read_text(encoding='utf-8'))
     yyp['name'] = yyp['%Name'] = name

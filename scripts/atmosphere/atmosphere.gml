@@ -1,4 +1,8 @@
-/// Bounded, half-resolution multiplicative world lighting. HUD/telegraphs stay above it.
+/// Bounded, half-resolution world lighting. HUD/telegraphs stay above it.
+/// Overbright since 26.11. (Grafik-Overhaul): the light map is applied twice (2 * light * world), so 0.5 in the map is
+/// neutral and light sources can brighten the world up to double instead of only lifting the darkness. Every source
+/// therefore writes half its strength (LIGHT_SCALE); the ambient comes from the level profile (fx_level_profile).
+#macro LIGHT_SCALE .5
 function atmosphere_init() {
     light_surface=-1; light_sprite=-1; light_width=0; light_height=0;
     light_camera=camera_create_view(0,0,128,128,0,noone,-1,-1,-1,-1);
@@ -42,7 +46,8 @@ function atmosphere_step(_dt) {
 function atmosphere_source(_x,_y,_radius,_color,_strength,_rect) {
     if(global.light_metrics.sources>=72 || _radius<=0) return;
     if(_x+_radius<_rect.left || _x-_radius>_rect.right || _y+_radius<_rect.top || _y-_radius>_rect.bottom) return;
-    draw_sprite_ext(light_sprite,0,(_x-_rect.left)*0.5,(_y-_rect.top)*0.5,_radius/128,_radius/128,0,_color,_strength);
+    draw_sprite_ext(light_sprite,0,(_x-_rect.left)*0.5,(_y-_rect.top)*0.5,_radius/128,_radius/128,0,_color,_strength*LIGHT_SCALE);
+    fx_probe_add(_x,_y,_radius,_color,_strength*LIGHT_SCALE); // key light of the figure (rim light, shadow direction)
     global.light_metrics.sources++;
 }
 function atmosphere_draw() {
@@ -63,17 +68,20 @@ function atmosphere_draw() {
     if(!surface_exists(light_surface)) return;
     var old_world=matrix_get(matrix_world);matrix_set(matrix_world,matrix_build_identity());
     surface_set_target(light_surface);camera_set_view_size(light_camera,ww,hh);camera_apply(light_camera);
-    var lift=light_flash_lift();draw_clear(merge_color(weather_ambient(),lift.col,clamp(lift.k,0,.85)));
+    fx_probe_reset();
+    var lift=light_flash_lift(),amb=merge_color(weather_ambient(),lift.col,clamp(lift.k,0,.85)),ak=LIGHT_SCALE*(lift.k>0 ? lerp(fx_level_profile().ambient_k,1,clamp(lift.k,0,1)) : fx_level_profile().ambient_k);
+    draw_clear(make_color_rgb(color_get_red(amb)*ak,color_get_green(amb)*ak,color_get_blue(amb)*ak));
     global.light_metrics.sources=0;gpu_set_blendmode(bm_add);
     atmosphere_source(ObjectPlayer.x,ObjectPlayer.y-18,180,make_color_rgb(167,181,183),0.60,r);
     if(room==Room1)master_scenery_lights(r);
     else level_world_lights(r);
-    equipment_lights(r);spell_vfx_lights(r);
+    equipment_lights(r);spell_vfx_lights(r);fx_attacks_lights(r);atmos_lights(r);
     for(var i=0;i<array_length(global.light_pulses);i++) {
         var p=global.light_pulses[i];atmosphere_source(p.x,p.y,p.radius,p.color,p.strength*p.life/p.total,r);
     }
     if(variable_global_exists("light_flashes"))for(var i=0;i<array_length(global.light_flashes);i++) {
-        var f=global.light_flashes[i],k=power(f.life/f.total,1.5);atmosphere_source(f.x,f.y,f.radius,f.color,f.strength*k,r);atmosphere_source(f.x,f.y,f.radius*.45,c_white,f.strength*k*.8,r);
+        // overbright light: flashes write less into the map than before (they clipped at 1x, now they could reach 2x)
+        var f=global.light_flashes[i],k=power(f.life/f.total,1.5)*.6;atmosphere_source(f.x,f.y,f.radius,f.color,f.strength*k,r);atmosphere_source(f.x,f.y,f.radius*.45,c_white,f.strength*k*.6,r);
     }
     // Charge light: the dragon's mouth brightens while fire gathers (synchronised with vfx_charge).
     if(instance_exists(global.active_boss) && global.active_boss.dragon_enabled && global.active_boss.boss_state=="windup" && (global.active_boss.boss_cast=="beam" || global.active_boss.boss_cast=="arc" || global.active_boss.boss_cast=="sweep")) {
@@ -82,8 +90,8 @@ function atmosphere_draw() {
     }
     if(instance_exists(global.active_boss) && global.active_boss.dragon_enabled && global.active_boss.boss_state=="active") {
         var g=dragon_attack_geometry(global.active_boss);
-        atmosphere_source(g.x,g.y,230,make_color_rgb(255,142,47),1.1,r);
-        atmosphere_source((g.x+g.ex)/2,(g.y+g.ey)/2,240,make_color_rgb(255,132,40),0.8,r);
+        atmosphere_source(g.x,g.y,230,make_color_rgb(255,142,47),.5,r); // overbright light: lower than before, the ground beside the beam stays darker than its tint
+        atmosphere_source((g.x+g.ex)/2,(g.y+g.ey)/2,240,make_color_rgb(255,132,40),0.45,r);
         atmosphere_source(g.ex,g.ey,190,make_color_rgb(255,105,35),0.7,r);
     }
     var types=[ObjectFireball,ObjectIceball,ObjectLightningball];
@@ -105,7 +113,7 @@ function atmosphere_draw() {
     }
     gpu_set_blendmode(bm_normal);surface_reset_target();matrix_set(matrix_world,old_world);
     matrix_set(matrix_view,old_view);matrix_set(matrix_projection,old_projection);
-    gpu_set_texfilter(true);gpu_set_blendmode_ext(bm_dest_colour,bm_zero);draw_set_alpha(1);draw_set_color(c_white);
+    gpu_set_texfilter(true);gpu_set_blendmode_ext(bm_dest_colour,bm_src_colour);draw_set_alpha(1);draw_set_color(c_white); // 2 * light * world
     draw_surface_stretched(light_surface,r.left,r.top,r.right-r.left,r.bottom-r.top);
     // Additive glare of flashes on top of the lit world (short; never a permanent overexposure).
     if(variable_global_exists("light_flashes") && array_length(global.light_flashes)>0) {

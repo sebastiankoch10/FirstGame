@@ -44,7 +44,7 @@ def build(work, phase):
     snapshot = ROOT / 'QA/baseline/project' if phase == 'baseline' else ROOT
     # The baseline checkpoint owns gameplay and room data; unchanged bitmap/audio
     # resources come from the original workspace and are copied, never modified.
-    for name in ('objects', 'scripts', 'sprites', 'sounds', 'tilesets', 'rooms', 'options'):
+    for name in ('objects', 'scripts', 'sprites', 'sounds', 'tilesets', 'rooms', 'options', 'shaders'):
         src = snapshot / name
         if not src.exists(): src = ROOT / name
         shutil.copytree(src, project / name)

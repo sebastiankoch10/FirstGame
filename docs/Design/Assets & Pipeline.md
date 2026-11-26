@@ -53,6 +53,7 @@ Rang 2 unter [[Leitbild]].
 | `atmosphere_v2` (seit 26.11. unter `bosses/`) | 56 | 52 | `import_atmosphere_art.py`, `prepare_atmosphere_art.ps1` | **Quelle** der Miniboss-Modelle (`spr_fg_boss_golem`, `spr_fg_boss_dragon`), der Magnetkugel und der Münze; die Krieger-v2-Bögen darin sind ungenutzt |
 | `environment` | 21 | 17 | `finish_art_migration.py` | Quelle Umgebung (frühe Migration) |
 | `references` | 9 | 0 | — | **Referenz** (Konzepttafeln, u. a. Zaubermeisterin, Waldläufer, Drachenangriffe) |
+| `reference/octopath` (seit 26.11. abends, **nur lokal**, `.gitignore`) | 24 | 0 | — | **Fremdreferenz**: Bildschirmfotos aus Octopath Traveler als Qualitätsmaßstab für Licht und Effekte ([[Visuelles Leitbild & Animation]] 7). Nie committen, nie pushen, nie ins Spiel einbinden. |
 | `heroes` | 120 | 0 | — | **Legacy** (ArtPack 0.1, Helden in 4 Richtungen) |
 | `monsters`, `monster_originals` | 80 / 16 | 0 / 0 | — | **Legacy bzw. Referenz** (0.1-Gegner; die Projekt-Sprites `spr_fg_<art>_*` stammen daraus und werden von Minibossen noch genutzt) |
 | `icons`, `portraits`, `previews`, `effects` | 8 / 5 / 4 / 1 | 0 | — | **Legacy** bzw. Menü-Altbestand |
@@ -115,6 +116,7 @@ Skripte/
 FirstGame_ArtPack/                 Name bleibt (bekannt bei Nutzer und Agenten)
   README.md                        Index: Ordner, Rolle, Werkzeug, Status
   references/                      Konzepttafeln, Stil- und Bewegungsreferenzen (inkl. der losen Wurzel-PNGs)
+  reference/octopath/              nur lokal (gitignored): fremde Bildschirmfotos als Maßstab, nie im Spiel
   characters/  swordsman_v3/ · class_overhaul/ · character_layers/(generiert)
   enemies/     level_enemies/ · master_world_enemies/
   bosses/      dragon_boss/(unveränderlich) · boss_v2/ · atmosphere_v2/ · <neue Rigs>/
@@ -247,3 +249,16 @@ Nutzerentscheidung: Die heutigen Figuren bleiben, Rüstung ist unsichtbar ([[Vis
 - **Noch zu tun bei Lieferung:** Anbindung im Code (klein, analog zum Präfix der Levelgegner).
 
 ### 7.7 ~~Umstieg auf Basemodel plus modulare Ausrüstung~~ (verworfen 26.11. abends, siehe 7.1)
+
+### 7.8 Figuren auf HD-2D-Niveau: was nur neue Grafik leisten kann (Grafik-Overhaul, 26.11. abends)
+Shader und Effekte decken Randlicht, Lichtfarbe, Schatten, Auren, Aufblitzen, Waffenglühen, Staub und Funken ab ([[Visuelles Leitbild & Animation]] 7.5). Folgendes lässt sich damit **nicht** ehrlich erreichen und braucht gezeichnete Quellen (Format jeweils wie die heutigen Atlanten, 1:1-Pixeldichte, gleiche Zellen):
+1. **Licht-Normalen je Frame** (Normal Map im Pixelstil, 8 Richtungen aus ganzen Werten) für alle drei Klassen und alle Atlanten.
+   - Ohne sie bleibt die Schattierung im Sprite fest von oben links gemalt. Licht von unten oder hinten kann die Figur nur am Rand färben, nicht die Flächen modellieren.
+   - Alternative mit weniger Aufwand: je Frame eine Höhen- oder Wölbungsmaske (Graustufen).
+2. **Emissionsmasken der Waffen** (welche Pixel einer Klinge, Stabkugel oder Sehne leuchten dürfen).
+   - Heute glüht nur ein Punkt bzw. ein wandernder Lichtfunke.
+3. **Schmier- und Ausholbilder für Angriffe** (2–3 zusätzliche Frames je Schlag, Smear-Frames wie in den Referenzbildern), Treffer-Reaktion und eine echte Ausweichrolle.
+   - Heute wird die Rolle nur über Stauchen und Staub gezeigt.
+4. **Gemalte Schlagbögen** (Sichel-Slashes in 3 Größen × 8 Richtungen, je Klasse in ihrer Farbe) als Pixel-Sprites. Prozedurale Bögen sind möglich, erreichen aber nicht die Form der Referenz.
+
+Abnahme: technische Prüfung wie bei 7.1 (Zellen, Alpha), danach Review-Eintrag; die Quelle (Bildwerkzeug oder Pixel-Artist) entscheidet der Nutzer.

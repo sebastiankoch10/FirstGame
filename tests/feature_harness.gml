@@ -138,6 +138,22 @@ function ft_controller_tick() {
                 global.vfx_quality_level=1;var mid_ok=spell_vfx_cap()==280 && vfx_secondary_motion();
                 global.vfx_quality_level=q0;repeat(3)vfx_quality_cycle();
                 ft_check(cnt[0]==14 && cnt[1]==26 && cnt[2]==40 && low_ok && mid_ok && vfx_quality()==q0,"effect quality keeps 35/65/100 % of particles, smaller pool and no secondary motion on Niedrig");
+                // Graphics overhaul (26.11.): pools and post effects per quality, flash setting, gameplay RNG untouched.
+                var fq=[];for(var q=0;q<=2;q++){global.vfx_quality_level=q;array_push(fq,{cap:fxp_cap(),rate:fxp_rate(),f:fx_quality_flags()});}
+                global.vfx_quality_level=q0;
+                ft_check(fq[0].cap==420 && fq[1].cap==1000 && fq[2].cap==1800 && fq[0].rate==.3 && fq[2].rate==1,"overhaul particle pool 420/1000/1800 and rate 30/60/100 % per effect quality");
+                ft_check(!fq[0].f.bloom && !fq[0].f.dof && !fq[0].f.heat && fq[1].f.bloom && fq[1].f.heat && !fq[1].f.dof && fq[2].f.dof && fq[2].f.wide && fq[2].f.ca,"post effects per quality: Niedrig grading only, Mittel plus glow and heat, Hoch everything");
+                var fr0=light_flash_reduced();global.flash_reduced_level=true;fx_init();global.fx.tint.k=0;global.fx.tint.life=0;fx_scene_tint(c_white,.5,.3);
+                ft_check(abs(fx_flash_k()-.35)<.001 && abs(global.fx.tint.k-.175)<.001,"Lichtblitze reduced scales the scene colour shift to 35 %");
+                global.flash_reduced_level=fr0;global.fx.tint.k=0;global.fx.tint.life=0;
+                repeat(6)fx_shock(pl.x,pl.y,80,3,.3);
+                ft_check(array_length(global.fx.shocks)<=FX_MAX_SHOCKS,"shock rings are capped at "+string(FX_MAX_SHOCKS));
+                random_set_seed(4242);var rr1=random(1000);random_set_seed(4242);
+                fxp_reset();fxp_impact(pl.x+60,pl.y,1,1);fxp_impact(pl.x-60,pl.y,2,1);fxp_flame_line(pl.x,pl.y,0,300,40,1);fxp_trail(pl.x,pl.y,0,1);atmos_fill();
+                var rr2=random(1000);
+                ft_check(rr1==rr2,"overhaul effects never touch the gameplay random generator");
+                var kinds=[0,0,0,0,0,0];for(var i=0;i<array_length(global.fxp);i++)kinds[global.fxp[i].kind]++;
+                ft_check(kinds[FXP_FLASH]>=2 && kinds[FXP_STREAK]>=10 && kinds[FXP_SHARD]>0 && kinds[FXP_PUFF]>0 && array_length(global.fxp_decals)>=2,"impacts build core flash, speed lines, ice shards, smoke and ground marks ("+string(array_length(global.fxp))+" particles)");
                 spell_vfx_reset();
                 var d=ft_spawn_dummy(pl.x+140,pl.y);
                 spell_fx_burst(pl.x+140,pl.y,60,1);spell_fx_burst(pl.x-120,pl.y+40,70,2);spell_fx_burst(pl.x,pl.y-110,60,3);
@@ -145,6 +161,11 @@ function ft_controller_tick() {
                 array_push(global.spell_fields,{sid:107,level:5,kind:"field",element:1,x:pl.x-150,y:pl.y-40,sx:pl.x,sy:pl.y,ex:pl.x,ey:pl.y,age:0,next:99,ticks:0,radius:70,damage:0,duration:3,count:1,angle:0,hit_ids:[],return_done:false});
             }
             if(global.ft_frame==24){global.ft_world_shot="world-vfx-"+cls;ft_check(array_length(global.spell_particles)>5,"active field keeps emitting ("+string(array_length(global.spell_particles))+")");}
+            if(global.ft_frame==26) {
+                var sh_ok=shader_is_compiled(sh_fx_composite) && shader_is_compiled(sh_fx_blur) && shader_is_compiled(sh_fx_bright);
+                ft_check(sh_ok && global.fx.metrics.active,"post pass shaders compiled and active on the world layer ("+string_format(global.fx.metrics.ms,1,2)+" ms CPU)");
+                ft_check(variable_global_exists("atmos") && array_length(global.atmos.motes)>0,"level atmosphere motes exist ("+string(array_length(global.atmos.motes))+")");
+            }
             if(global.ft_frame<30)return;
             ft_clear();global.ft_stage=6;global.ft_frame=0;break;
         case 6: // open the character screen with T, buy a node with the mouse, capture it

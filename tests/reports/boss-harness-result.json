@@ -1,781 +1,792 @@
 {
   "passed": true,
+  "checks": 190.0,
+  "failures": [],
   "rows": [
     {
-      "max_line": 2600.0,
-      "contacts": 1.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": true,
-      "label": "storm_warden A1 P1",
-      "moved": 119.0,
       "kinds": [
         "dragon_beam"
       ],
       "hazards": 2.0,
-      "max_beam": 2600.0
+      "label": "storm_warden A1 P1",
+      "max_beam": 2600.0,
+      "max_line": 2600.0,
+      "contacts": 1.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 119.0,
+      "start_unsafe": true
     },
     {
+      "kinds": [],
+      "hazards": 10.0,
+      "label": "storm_warden A1 P3",
+      "max_beam": 2600.0,
       "max_line": 2600.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": true,
-      "label": "storm_warden A1 P3",
       "moved": 132.0,
-      "kinds": [],
-      "hazards": 10.0,
-      "max_beam": 2600.0
+      "start_unsafe": true
     },
     {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": true,
-      "label": "storm_warden A2 P1",
-      "moved": 217.0,
       "kinds": [],
       "hazards": 0.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "storm_warden A2 P1",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": true,
-      "label": "storm_warden A2 P3",
-      "moved": 200.0,
+      "moved": 217.0,
+      "start_unsafe": true
+    },
+    {
       "kinds": [],
       "hazards": 15.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "storm_warden A2 P3",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": true,
-      "label": "storm_warden A3 P1",
-      "moved": 135.0,
+      "moved": 200.0,
+      "start_unsafe": true
+    },
+    {
       "kinds": [],
       "hazards": 0.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "storm_warden A3 P1",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A3 P3",
-      "moved": 82.0,
+      "moved": 135.0,
+      "start_unsafe": true
+    },
+    {
       "kinds": [],
       "hazards": 6.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "storm_warden A3 P3",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A4 P1",
-      "moved": 54.0,
-      "kinds": [],
-      "hazards": 0.0,
-      "max_beam": 0.0
+      "moved": 82.0,
+      "start_unsafe": false
     },
     {
+      "kinds": [],
+      "hazards": 0.0,
+      "label": "storm_warden A4 P1",
+      "max_beam": 0.0,
       "max_line": 0.0,
-      "contacts": 1.0,
+      "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A4 P3",
-      "moved": 119.0,
+      "moved": 54.0,
+      "start_unsafe": false
+    },
+    {
       "kinds": [
         "dragon_meteor_ring"
       ],
       "hazards": 28.0,
-      "max_beam": 0.0
-    },
-    {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A5 P1",
-      "moved": 28.0,
-      "kinds": [],
-      "hazards": 0.0,
-      "max_beam": 0.0
-    },
-    {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A5 P3",
-      "moved": 28.0,
-      "kinds": [],
-      "hazards": 0.0,
-      "max_beam": 0.0
-    },
-    {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 12.0,
-      "bullet_frames": 343.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A6 P1",
-      "moved": 41.0,
-      "kinds": [],
-      "hazards": 0.0,
-      "max_beam": 0.0
-    },
-    {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 16.0,
-      "bullet_frames": 343.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A6 P3",
-      "moved": 0.0,
-      "kinds": [],
-      "hazards": 0.0,
-      "max_beam": 0.0
-    },
-    {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 12.0,
-      "bullet_frames": 348.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A7 P1",
-      "moved": 0.0,
-      "kinds": [],
-      "hazards": 0.0,
-      "max_beam": 0.0
-    },
-    {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 16.0,
-      "bullet_frames": 348.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A7 P3",
-      "moved": 0.0,
-      "kinds": [],
-      "hazards": 0.0,
-      "max_beam": 0.0
-    },
-    {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A8 P1",
-      "moved": 24.0,
-      "kinds": [],
-      "hazards": 0.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "storm_warden A4 P3",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 1.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A8 P3",
-      "moved": 19.0,
+      "moved": 119.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 0.0,
+      "label": "storm_warden A5 P1",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 28.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 0.0,
+      "label": "storm_warden A5 P3",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 28.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 0.0,
+      "label": "storm_warden A6 P1",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 12.0,
+      "bullet_frames": 343.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 41.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 0.0,
+      "label": "storm_warden A6 P3",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 16.0,
+      "bullet_frames": 343.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 0.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 0.0,
+      "label": "storm_warden A7 P1",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 12.0,
+      "bullet_frames": 348.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 0.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 0.0,
+      "label": "storm_warden A7 P3",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 16.0,
+      "bullet_frames": 348.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 0.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 0.0,
+      "label": "storm_warden A8 P1",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 24.0,
+      "start_unsafe": false
+    },
+    {
       "kinds": [
         "dragon_fire_ring"
       ],
       "hazards": 6.0,
-      "max_beam": 0.0
+      "label": "storm_warden A8 P3",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 1.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 19.0,
+      "start_unsafe": false
     },
     {
+      "kinds": [],
+      "hazards": 0.0,
+      "label": "storm_warden A9 P1",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 17.0,
       "bullet_frames": 356.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A9 P1",
       "moved": 116.0,
-      "kinds": [],
-      "hazards": 0.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
+      "kinds": [],
+      "hazards": 0.0,
+      "label": "storm_warden A9 P3",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 16.0,
       "bullet_frames": 356.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "storm_warden A9 P3",
       "moved": 54.0,
-      "kinds": [],
-      "hazards": 0.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
+      "kinds": [],
+      "hazards": 0.0,
+      "label": "twins A1 P1",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "twins A1 P1",
       "moved": 0.0,
-      "kinds": [],
-      "hazards": 0.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
+      "kinds": [],
+      "hazards": 3.0,
+      "label": "twins A1 P3",
+      "max_beam": 0.0,
       "max_line": 281.9593505859375,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "twins A1 P3",
       "moved": 0.0,
-      "kinds": [],
-      "hazards": 3.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
+      "kinds": [],
+      "hazards": 2.0,
       "label": "twins A2 P1",
-      "moved": 0.0,
-      "kinds": [],
-      "hazards": 2.0,
-      "max_beam": 0.0
-    },
-    {
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
+      "moved": 0.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 2.0,
       "label": "twins A2 P3",
-      "moved": 0.0,
-      "kinds": [],
-      "hazards": 2.0,
-      "max_beam": 0.0
-    },
-    {
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": true,
-      "label": "twins A3 P1",
-      "moved": 12.0,
+      "moved": 0.0,
+      "start_unsafe": false
+    },
+    {
       "kinds": [],
       "hazards": 8.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "twins A3 P1",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "twins A3 P3",
-      "moved": 47.0,
-      "kinds": [],
-      "hazards": 4.0,
-      "max_beam": 0.0
+      "moved": 12.0,
+      "start_unsafe": true
     },
     {
+      "kinds": [],
+      "hazards": 4.0,
+      "label": "twins A3 P3",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 47.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [
+        "twins_link"
+      ],
+      "hazards": 2.0,
+      "label": "twins A4 P1",
+      "max_beam": 0.0,
       "max_line": 435.55023193359375,
       "contacts": 1.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "twins A4 P1",
       "moved": 60.0,
+      "start_unsafe": false
+    },
+    {
       "kinds": [
         "twins_link"
       ],
       "hazards": 2.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "twins A4 P3",
+      "max_beam": 0.0,
       "max_line": 391.5364074707031,
       "contacts": 1.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "twins A4 P3",
       "moved": 52.0,
-      "kinds": [
-        "twins_link"
-      ],
-      "hazards": 2.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
+      "kinds": [],
+      "hazards": 4.0,
       "label": "twins A5 P1",
-      "moved": 32.0,
-      "kinds": [],
-      "hazards": 4.0,
-      "max_beam": 0.0
-    },
-    {
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "twins A5 P3",
-      "moved": 0.0,
-      "kinds": [],
-      "hazards": 4.0,
-      "max_beam": 0.0
+      "moved": 32.0,
+      "start_unsafe": false
     },
     {
+      "kinds": [],
+      "hazards": 4.0,
+      "label": "twins A5 P3",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 0.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 4.0,
+      "label": "twins A6 P1",
+      "max_beam": 0.0,
       "max_line": 2600.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "twins A6 P1",
       "moved": 26.0,
-      "kinds": [],
-      "hazards": 4.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
+      "kinds": [],
+      "hazards": 10.0,
+      "label": "twins A6 P3",
+      "max_beam": 0.0,
       "max_line": 2600.000244140625,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "twins A6 P3",
       "moved": 64.0,
-      "kinds": [],
-      "hazards": 10.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": true,
+      "kinds": [],
+      "hazards": 4.0,
       "label": "twins A7 P1",
-      "moved": 120.0,
-      "kinds": [],
-      "hazards": 4.0,
-      "max_beam": 0.0
-    },
-    {
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": true,
+      "moved": 120.0,
+      "start_unsafe": true
+    },
+    {
+      "kinds": [],
+      "hazards": 4.0,
       "label": "twins A7 P3",
-      "moved": 120.0,
-      "kinds": [],
-      "hazards": 4.0,
-      "max_beam": 0.0
-    },
-    {
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "twins A8 P1",
-      "moved": 18.0,
+      "moved": 120.0,
+      "start_unsafe": true
+    },
+    {
       "kinds": [],
       "hazards": 12.0,
-      "max_beam": 0.0
+      "label": "twins A8 P1",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 18.0,
+      "start_unsafe": false
     },
     {
+      "kinds": [
+        "twins_fire_flood"
+      ],
+      "hazards": 8.0,
+      "label": "twins A8 P3",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 1.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "twins A8 P3",
       "moved": 75.0,
-      "kinds": [
-        "twins_fire_flood"
-      ],
-      "hazards": 8.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
+      "kinds": [],
+      "hazards": 6.0,
       "label": "twins A9 P1",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
       "moved": 2.0,
-      "kinds": [],
-      "hazards": 6.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
+      "kinds": [],
+      "hazards": 6.0,
       "label": "twins A9 P3",
-      "moved": 4.0,
-      "kinds": [],
-      "hazards": 6.0,
-      "max_beam": 0.0
-    },
-    {
-      "max_line": 0.0,
-      "contacts": 4.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
-      "label": "behemoth A1 P1",
-      "moved": 22.0,
-      "kinds": [
-        "swamp_spit"
-      ],
-      "hazards": 4.0,
-      "max_beam": 0.0
-    },
-    {
-      "max_line": 0.0,
-      "contacts": 4.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": false,
-      "label": "behemoth A1 P3",
-      "moved": 22.0,
-      "kinds": [
-        "swamp_spit"
-      ],
-      "hazards": 4.0,
-      "max_beam": 0.0
-    },
-    {
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": true,
-      "label": "behemoth A2 P1",
-      "moved": 66.0,
-      "kinds": [],
-      "hazards": 6.0,
-      "max_beam": 0.0
+      "moved": 4.0,
+      "start_unsafe": false
     },
     {
+      "kinds": [
+        "swamp_spit"
+      ],
+      "hazards": 4.0,
+      "label": "behemoth A1 P1",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 4.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 22.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [
+        "swamp_spit"
+      ],
+      "hazards": 4.0,
+      "label": "behemoth A1 P3",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 4.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 22.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 6.0,
+      "label": "behemoth A2 P1",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 66.0,
+      "start_unsafe": true
+    },
+    {
+      "kinds": [
+        "swamp_acid"
+      ],
+      "hazards": 14.0,
+      "label": "behemoth A2 P3",
+      "max_beam": 0.0,
       "max_line": 1050.0,
       "contacts": 2.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "behemoth A2 P3",
       "moved": 72.0,
-      "kinds": [
-        "swamp_acid"
-      ],
-      "hazards": 14.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": true,
-      "label": "behemoth A3 P1",
-      "moved": 84.0,
       "kinds": [],
       "hazards": 9.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "behemoth A3 P1",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "behemoth A3 P3",
-      "moved": 0.0,
+      "moved": 84.0,
+      "start_unsafe": true
+    },
+    {
       "kinds": [],
       "hazards": 60.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "behemoth A3 P3",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
+      "moved": 0.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 12.0,
       "label": "behemoth A4 P1",
-      "moved": 0.0,
-      "kinds": [],
-      "hazards": 12.0,
-      "max_beam": 0.0
-    },
-    {
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
+      "moved": 0.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 12.0,
       "label": "behemoth A4 P3",
-      "moved": 0.0,
-      "kinds": [],
-      "hazards": 12.0,
-      "max_beam": 0.0
-    },
-    {
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": true,
-      "label": "behemoth A5 P1",
-      "moved": 57.0,
+      "moved": 0.0,
+      "start_unsafe": false
+    },
+    {
       "kinds": [],
       "hazards": 2.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "behemoth A5 P1",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "behemoth A5 P3",
       "moved": 57.0,
+      "start_unsafe": true
+    },
+    {
       "kinds": [],
       "hazards": 4.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "behemoth A5 P3",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "behemoth A6 P1",
-      "moved": 0.0,
+      "moved": 57.0,
+      "start_unsafe": false
+    },
+    {
       "kinds": [],
       "hazards": 0.0,
-      "max_beam": 0.0
-    },
-    {
+      "label": "behemoth A6 P1",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "behemoth A6 P3",
       "moved": 0.0,
-      "kinds": [],
-      "hazards": 2.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
+      "kinds": [],
+      "hazards": 2.0,
+      "label": "behemoth A6 P3",
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": true,
+      "moved": 0.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [],
+      "hazards": 2.0,
       "label": "behemoth A7 P1",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
       "moved": 59.0,
-      "kinds": [],
-      "hazards": 2.0,
-      "max_beam": 0.0
+      "start_unsafe": true
     },
     {
-      "max_line": 0.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": true,
+      "kinds": [],
+      "hazards": 2.0,
       "label": "behemoth A7 P3",
+      "max_beam": 365.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
       "moved": 81.0,
-      "kinds": [],
-      "hazards": 2.0,
-      "max_beam": 365.0
+      "start_unsafe": true
     },
     {
-      "max_line": 1500.0,
-      "contacts": 0.0,
-      "bullets": 0.0,
-      "bullet_frames": 0.0,
-      "unsafe_frames": 0.0,
-      "frames": 390.0,
-      "start_unsafe": true,
+      "kinds": [],
+      "hazards": 2.0,
       "label": "behemoth A8 P1",
-      "moved": 106.0,
-      "kinds": [],
-      "hazards": 2.0,
-      "max_beam": 0.0
-    },
-    {
+      "max_beam": 0.0,
       "max_line": 1500.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": true,
-      "label": "behemoth A8 P3",
       "moved": 106.0,
+      "start_unsafe": true
+    },
+    {
       "kinds": [],
       "hazards": 2.0,
-      "max_beam": 0.0
-    },
-    {
-      "max_line": 0.0,
+      "label": "behemoth A8 P3",
+      "max_beam": 0.0,
+      "max_line": 1500.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
+      "moved": 106.0,
+      "start_unsafe": true
+    },
+    {
+      "kinds": [],
+      "hazards": 7.0,
       "label": "behemoth A9 P1",
-      "moved": 121.0,
-      "kinds": [],
-      "hazards": 7.0,
-      "max_beam": 0.0
-    },
-    {
+      "max_beam": 0.0,
       "max_line": 0.0,
       "contacts": 0.0,
       "bullets": 0.0,
       "bullet_frames": 0.0,
       "unsafe_frames": 0.0,
       "frames": 390.0,
-      "start_unsafe": false,
-      "label": "behemoth A9 P3",
       "moved": 121.0,
-      "kinds": [],
-      "hazards": 7.0,
-      "max_beam": 0.0
+      "start_unsafe": false
     },
     {
+      "kinds": [],
+      "hazards": 7.0,
+      "label": "behemoth A9 P3",
+      "max_beam": 0.0,
+      "max_line": 0.0,
+      "contacts": 0.0,
+      "bullets": 0.0,
+      "bullet_frames": 0.0,
+      "unsafe_frames": 0.0,
+      "frames": 390.0,
+      "moved": 121.0,
+      "start_unsafe": false
+    },
+    {
+      "kinds": [
+        "dragon_fire_ring",
+        "dragon_magma_cell"
+      ],
+      "forced_catchup": false,
+      "hazards": 48.0,
+      "reach": 19.0,
+      "label": "storm_warden kite 560px",
+      "frames": 2700.0,
       "catchups": 5.0,
       "reach_abilities": [
         "vortex",
@@ -784,18 +795,20 @@
         "meteor",
         "volley"
       ],
-      "label": "storm_warden kite 560px",
-      "contacts": 7.0,
-      "reach": 19.0,
-      "forced_catchup": false,
-      "kinds": [
-        "dragon_fire_ring",
-        "dragon_magma_cell"
-      ],
-      "hazards": 48.0,
-      "frames": 2700.0
+      "contacts": 7.0
     },
     {
+      "kinds": [
+        "twins_meteor_cell",
+        "twins_ice_cell",
+        "twins_ice_flood",
+        "twins_fire_flood"
+      ],
+      "forced_catchup": false,
+      "hazards": 28.0,
+      "reach": 15.0,
+      "label": "twins kite 560px",
+      "frames": 2700.0,
       "catchups": 4.0,
       "reach_abilities": [
         "4",
@@ -806,20 +819,18 @@
         "8",
         "7"
       ],
-      "label": "twins kite 560px",
-      "contacts": 4.0,
-      "reach": 15.0,
-      "forced_catchup": false,
-      "kinds": [
-        "twins_meteor_cell",
-        "twins_ice_cell",
-        "twins_ice_flood",
-        "twins_fire_flood"
-      ],
-      "hazards": 28.0,
-      "frames": 2700.0
+      "contacts": 4.0
     },
     {
+      "kinds": [
+        "swamp_acid",
+        "swamp_closing"
+      ],
+      "forced_catchup": false,
+      "hazards": 49.0,
+      "reach": 16.0,
+      "label": "behemoth kite 560px",
+      "frames": 2700.0,
       "catchups": 4.0,
       "reach_abilities": [
         "3",
@@ -830,208 +841,190 @@
         "8",
         "9"
       ],
-      "label": "behemoth kite 560px",
-      "contacts": 3.0,
-      "reach": 16.0,
-      "forced_catchup": false,
-      "kinds": [
-        "swamp_acid",
-        "swamp_closing"
-      ],
-      "hazards": 49.0,
-      "frames": 2700.0
+      "contacts": 3.0
     },
     {
-      "frames": 297.0,
-      "label": "dragon sequence P1 Feuerschneise",
-      "steps": [
-        "beam",
-        "arc"
-      ],
-      "contacts": 1.0,
-      "moved": 113.0,
       "kinds": [
         "dragon_beam"
       ],
+      "hazards": 1.0,
       "unsafe_frames": 0.0,
-      "hazards": 1.0
+      "label": "dragon sequence P1 Feuerschneise",
+      "frames": 297.0,
+      "moved": 113.0,
+      "contacts": 1.0,
+      "steps": [
+        "beam",
+        "arc"
+      ]
     },
     {
-      "frames": 291.0,
+      "kinds": [],
+      "hazards": 1.0,
+      "unsafe_frames": 0.0,
       "label": "dragon sequence P1 Glutboden",
+      "frames": 291.0,
+      "moved": 86.0,
+      "contacts": 0.0,
       "steps": [
         "stomp",
         "beam"
-      ],
-      "contacts": 0.0,
-      "moved": 86.0,
-      "kinds": [],
-      "unsafe_frames": 0.0,
-      "hazards": 1.0
+      ]
     },
     {
-      "frames": 527.0,
+      "kinds": [
+        "dragon_beam"
+      ],
+      "hazards": 3.0,
+      "unsafe_frames": 0.0,
       "label": "dragon sequence P2 Glutfaecher",
+      "frames": 527.0,
+      "moved": 132.0,
+      "contacts": 1.0,
       "steps": [
         "arc",
         "stomp",
         "beam"
-      ],
-      "contacts": 1.0,
-      "moved": 132.0,
-      "kinds": [
-        "dragon_beam"
-      ],
-      "unsafe_frames": 0.0,
-      "hazards": 3.0
+      ]
     },
     {
-      "frames": 590.0,
+      "kinds": [],
+      "hazards": 13.0,
+      "unsafe_frames": 0.0,
       "label": "dragon sequence P2 Sternenbahn",
+      "frames": 590.0,
+      "moved": 88.0,
+      "contacts": 0.0,
       "steps": [
         "meteor",
         "beam",
         "wind"
-      ],
-      "contacts": 0.0,
-      "moved": 88.0,
-      "kinds": [],
-      "unsafe_frames": 0.0,
-      "hazards": 13.0
+      ]
     },
     {
-      "frames": 506.0,
+      "kinds": [],
+      "hazards": 2.0,
+      "unsafe_frames": 0.0,
       "label": "dragon sequence P2 Erdbeben",
+      "frames": 506.0,
+      "moved": 78.0,
+      "contacts": 0.0,
       "steps": [
         "slam",
         "stomp",
         "arc"
-      ],
-      "contacts": 0.0,
-      "moved": 78.0,
-      "kinds": [],
-      "unsafe_frames": 0.0,
-      "hazards": 2.0
+      ]
     },
     {
-      "frames": 900.0,
+      "kinds": [
+        "dragon_fire_ring"
+      ],
+      "hazards": 15.0,
+      "unsafe_frames": 0.0,
       "label": "dragon sequence P3 Feuersturm",
+      "frames": 900.0,
+      "moved": 272.0,
+      "contacts": 2.0,
       "steps": [
         "beam",
         "stomp",
         "vortex"
-      ],
-      "contacts": 2.0,
-      "moved": 272.0,
-      "kinds": [
-        "dragon_fire_ring"
-      ],
-      "unsafe_frames": 0.0,
-      "hazards": 15.0
+      ]
     },
     {
-      "frames": 605.0,
+      "kinds": [
+        "dragon_meteor_ring"
+      ],
+      "hazards": 14.0,
+      "unsafe_frames": 0.0,
       "label": "dragon sequence P3 Meteorhagel",
+      "frames": 605.0,
+      "moved": 128.0,
+      "contacts": 1.0,
       "steps": [
         "meteor",
         "volley",
         "slam"
-      ],
-      "contacts": 1.0,
-      "moved": 128.0,
-      "kinds": [
-        "dragon_meteor_ring"
-      ],
-      "unsafe_frames": 0.0,
-      "hazards": 14.0
+      ]
     },
     {
-      "frames": 589.0,
+      "kinds": [],
+      "hazards": 12.0,
+      "unsafe_frames": 0.0,
       "label": "dragon sequence P3 Feuerwand",
+      "frames": 589.0,
+      "moved": 153.0,
+      "contacts": 0.0,
       "steps": [
         "stomp",
         "arc",
         "beam"
-      ],
-      "contacts": 0.0,
-      "moved": 153.0,
-      "kinds": [],
-      "unsafe_frames": 0.0,
-      "hazards": 12.0
+      ]
     },
     {
-      "frames": 900.0,
+      "kinds": [
+        "dragon_fire_ring"
+      ],
+      "hazards": 15.0,
+      "unsafe_frames": 0.0,
       "label": "dragon sequence P4 Inferno",
+      "frames": 900.0,
+      "moved": 279.0,
+      "contacts": 2.0,
       "steps": [
         "beam",
         "stomp",
         "vortex"
-      ],
-      "contacts": 2.0,
-      "moved": 279.0,
-      "kinds": [
-        "dragon_fire_ring"
-      ],
-      "unsafe_frames": 0.0,
-      "hazards": 15.0
+      ]
     },
     {
-      "frames": 617.0,
+      "kinds": [
+        "dragon_meteor_ring"
+      ],
+      "hazards": 14.0,
+      "unsafe_frames": 0.0,
       "label": "dragon sequence P4 Sturmauge",
+      "frames": 617.0,
+      "moved": 95.0,
+      "contacts": 1.0,
       "steps": [
         "wind",
         "void",
         "meteor"
-      ],
-      "contacts": 1.0,
-      "moved": 95.0,
-      "kinds": [
-        "dragon_meteor_ring"
-      ],
-      "unsafe_frames": 0.0,
-      "hazards": 14.0
+      ]
     },
     {
-      "frames": 594.0,
+      "kinds": [],
+      "hazards": 12.0,
+      "unsafe_frames": 0.0,
       "label": "dragon sequence P4 Letzte Glut",
+      "frames": 594.0,
+      "moved": 239.0,
+      "contacts": 0.0,
       "steps": [
         "arc",
         "beam",
         "stomp"
-      ],
-      "contacts": 0.0,
-      "moved": 239.0,
-      "kinds": [],
-      "unsafe_frames": 0.0,
-      "hazards": 12.0
+      ]
     }
   ],
-  "checks": 190.0,
-  "failures": [],
   "metrics": {
-    "seq_P4_8_seconds": 15.0,
-    "seq_P4_9_seconds": 10.283333333333333,
-    "seq_P4_10_seconds": 9.9,
-    "twins_oracle_contacts": 3.0,
-    "twins_cases": 18.0,
-    "twins_cases_with_movement": 9.0,
-    "twins_hazard_cases": 17.0,
-    "seq_natural_sequences": 2.0,
-    "seq_natural_regular": 5.0,
     "storm_warden_kite_mean_distance": 525.6329627482096,
-    "storm_warden_natural_catchups": 5.0,
     "behemoth_oracle_contacts": 10.0,
-    "storm_warden_kite_contacts": 7.0,
+    "storm_warden_natural_catchups": 5.0,
     "behemoth_cases": 18.0,
-    "behemoth_cases_with_movement": 13.0,
+    "storm_warden_kite_contacts": 7.0,
     "storm_warden_kite_reach": 19.0,
-    "storm_warden_catchups": 5.0,
+    "behemoth_cases_with_movement": 13.0,
     "behemoth_hazard_cases": 17.0,
+    "storm_warden_catchups": 5.0,
     "twins_kite_mean_distance": 450.3064646713822,
     "twins_natural_catchups": 4.0,
     "twins_kite_contacts": 4.0,
     "twins_kite_reach": 15.0,
     "twins_catchups": 4.0,
+    "seq_natural_sequences": 2.0,
+    "seq_natural_regular": 5.0,
     "behemoth_kite_mean_distance": 510.3206477073387,
     "storm_warden_oracle_contacts": 3.0,
     "behemoth_natural_catchups": 4.0,
@@ -1048,10 +1041,17 @@
     "seq_P2_4_seconds": 8.433333333333334,
     "seq_P3_5_seconds": 15.0,
     "seq_P3_6_seconds": 10.083333333333334,
-    "seq_P3_7_seconds": 9.816666666666666
+    "seq_P3_7_seconds": 9.816666666666666,
+    "seq_P4_8_seconds": 15.0,
+    "seq_P4_9_seconds": 10.283333333333333,
+    "seq_P4_10_seconds": 9.9,
+    "twins_oracle_contacts": 3.0,
+    "twins_cases": 18.0,
+    "twins_cases_with_movement": 9.0,
+    "twins_hazard_cases": 17.0
   },
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\boss\\20261126-182451",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\boss\\20261126-235256",
   "exceptions": [],
   "captures": [
     "behemoth-A2-P3.png",

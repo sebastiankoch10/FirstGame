@@ -5,12 +5,18 @@ updated: 2026-11-26
 # Licht, Wetter & Effekte
 
 ## Zweck
-Multiplikatives Weltlicht, Wetter, Kampf-Feedback, Zauberpartikel.
+Verstärkbares Weltlicht, Wetter, Atmosphäre je Level, Kampf-Feedback, Zauber- und Angriffspartikel. Seit 26.11. abends Grafik-Overhaul auf HD-2D-Maßstab ([[Visuelles Leitbild & Animation]] 7).
 
 ## Wichtige Dateien
 - `scripts/atmosphere`:
   - Lichtoberfläche in halber Auflösung, `light_pulse`, `atmosphere_source` (Budget 72 Quellen)
+  - Seit 26.11. abends **verstärkbar**: Die Lichtkarte wirkt doppelt (`2 · Licht · Welt`), jede Quelle schreibt halbe Stärke (`LIGHT_SCALE`). Die Umgebung kommt aus `fx_level_profile().ambient_k`. Licht kann jetzt bis aufs Doppelte aufhellen.
   - Boss-Navigation und Notfall-Teleport
+- **Grafik-Overhaul (26.11. abends):**
+  - `scripts/fx_particles`: gemeinsames Pixel-Partikelsystem (`fxp_add`, `fxp_step`, `fxp_draw(FXP_LIT|FXP_EMIT)`). Pool 420 / 1.000 / 1.800, Farbverläufe `fxp_ramp`, Formen Pixel, Speed-Line, Splitter, Glut, Rauch, Kernblitz. Bausteine `fxp_impact`, `fxp_trail`, `fxp_aura`, `fxp_gather`, `fxp_flame_line`; Bodenmale `fxp_decal`, `fxp_decals_glow`.
+  - `scripts/atmos_fx`: Schwebeteilchen je Level (`atmos_profile`, `atmos_step`, `atmos_draw`), Lichtstrahlen (`atmos_shafts`, Lichtfleck über `atmos_lights`, Dunst über `atmos_haze_draw`), Glühwürmchen mit eigenem kleinen Licht.
+  - `scripts/fx_attacks`: Angriffsdekor auf der Weltebene unter der Gefahrenfläche (`fx_fire_beams`, `fx_attacks_step`, `fx_attacks_draw`, `fx_attacks_lights`). Bisher nur der Drachen-Feueratem.
+  - Nachbearbeitung und Ebenen: [[Rendering & Pixelraster]] (`scripts/render_fx`).
 - `scripts/weather`: Nebel, Regen und Wind je Level.
 - `scripts/spell_vfx`: begrenzter Partikelpool (420), Spuren, Feld-Emitter, dauerhafte Zauberlichter.
   - Pixel-Bausteine `vfx_pixel_ring|shard|streak`, `vfx_px`, Elementpaletten `vfx_palette` (dunkler Rand, Körper, heller Kern).

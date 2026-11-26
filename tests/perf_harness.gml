@@ -75,6 +75,9 @@ function pf_controller_tick() {
         acc.lights += variable_global_exists("light_metrics") ? global.light_metrics.sources : 0;
         acc.light_ms += (variable_global_exists("light_metrics") && variable_struct_exists(global.light_metrics, "draw_ms")) ? global.light_metrics.draw_ms : 0;
         acc.instances += instance_count; acc.coins += instance_number(ObjectCoin); // active coins only
+        // graphics overhaul: pixel particles, post pass CPU time
+        acc.fxp = (variable_struct_exists(acc, "fxp") ? acc.fxp : 0) + (variable_global_exists("fxp") ? array_length(global.fxp) : 0);
+        acc.post_ms = (variable_struct_exists(acc, "post_ms") ? acc.post_ms : 0) + ((variable_global_exists("fx") && is_struct(global.fx)) ? global.fx.metrics.ms : 0);
     }
     if (global.pf_frame == 721) {
         var acc = global.pf_acc, n = max(1, acc.n), dt = global.pf_dt, fp = global.pf_fps, sum = 0, fsum = 0, fmin = 99999;
@@ -83,7 +86,8 @@ function pf_controller_tick() {
         for (var i = 0; i < array_length(fp); i++) {fsum += fp[i]; fmin = min(fmin, fp[i]);}
         global.pf_metrics[$ s.name] = {frames: n, frame_ms_mean: sum / n, frame_ms_p95: dt[floor(.95 * (array_length(dt) - 1))], frame_ms_max: dt[array_length(dt) - 1],
             fps_real_mean: fsum / n, fps_real_min: fmin, enemies: acc.enemies / n, hostile_bullets: acc.bullets / n, hazards: acc.hazards / n,
-            spell_particles: acc.particles / n, hazard_particles: acc.hz / n, lights: acc.lights / n, light_pass_ms: acc.light_ms / n, instances: acc.instances / n, spikes_over_50ms: acc.spikes, active_coins: acc.coins / n};
+            spell_particles: acc.particles / n, hazard_particles: acc.hz / n, lights: acc.lights / n, light_pass_ms: acc.light_ms / n, instances: acc.instances / n, spikes_over_50ms: acc.spikes, active_coins: acc.coins / n,
+            fx_particles: (variable_struct_exists(acc, "fxp") ? acc.fxp : 0) / n, post_ms: (variable_struct_exists(acc, "post_ms") ? acc.post_ms : 0) / n};
         show_debug_message("PERF " + s.name + " " + json_stringify(global.pf_metrics[$ s.name]));
         global.pf_i++; global.pf_started = false; global.pf_frame = 0;
         if (global.pf_i >= array_length(global.pf_scn)) global.pf_done = true;

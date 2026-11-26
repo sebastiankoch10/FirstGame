@@ -74,6 +74,13 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
 
 - **`eqv_attach_draw` (seit 26.11.):** zeichnet ein beliebiges Gegenstands-Sprite (nach rechts zeigend, Ursprung am Griff) an der Hand des aktuellen Bildes, mit Winkel und Spiegelung; liefert false bei verdeckter Hand. Kontrollanzeige im Testmodus mit F10. Die Waffenebenen der Startwaffen und Waffen-Items bleiben pixelgenaue Ebenen; die Ankerpunkte sind für zusätzliche Modelle (weitere Waffentypen, Nebenhand, Schild) gedacht.
 
+- **Figuren-Effekte (Grafik-Overhaul, 26.11. abends):** `scripts/fx_character` mit dem Shader `sh_fx_char`.
+  - `fx_char_begin`/`fx_char_end` legen den Shader um `player_layers_draw`: 1-px-Randlicht zur stärksten Lichtquelle (Lichtmessung `fx_probe_add` in `atmosphere_source`) und weißes Trefferaufblitzen.
+  - `fx_char_shadow`: weicher Schatten, bei starkem Licht ein zweiter Schatten vom Licht weg.
+  - `fx_char_step`: Staub und Funken bei Laufen, Sprung, Landung und Rolle; Aura bei schweren Angriffen.
+  - `fx_char_glow_draw`: Waffenglühen über `eqv_attach`.
+  - Grenzen und nötige neue Grafik: [[Assets & Pipeline]] 7.8.
+
 ## Abhängigkeiten
 [[Ausrüstung]] (Slots, Gegenstandsstufe, Seltenheit) · [[Spieler & Bewegung]] (Animationszustände, ein Frame-Takt) · [[Klassen & Startwaffen]] (Startwaffe als Ebene) · [[UI, HUD & Menüs]] (Porträt, Icons) · [[Tests & QA]] (Suite `visual`)
 

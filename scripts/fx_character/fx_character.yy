@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"fx_character",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"fx_character",
+  "parent":{
+    "name":"Kern_und_Spieler",
+    "path":"folders/Skripte/Kern_und_Spieler.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

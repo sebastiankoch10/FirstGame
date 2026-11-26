@@ -9,10 +9,10 @@
       "content": "Glut stroemt zum Maul, Maul und Licht werden heller; zusammenhaengender Feuerstrom ueber die ganze Trefferlinie, Schwenk mit angekuendigtem Faecher, Lichtblitz beim Zuenden",
       "goal": "Ausholbewegung: Kopf und Hals ziehen sich beim Aufladen zurueck und stossen vor dem Zuenden vor. Glut stroemt zum Maul, lebendiger Feuerstrom ohne Spritewiederholung, klar erkennbare Seitengrenzen, Strom und Treffer schwenken gemeinsam, Reichweite ueber den Bildrand. Die Attacke wiederholt sich; Esc -> Attacke erneut ausloesen.",
       "task": "Phase 2A",
-      "revision": 2,
-      "status": "processed",
+      "revision": 3,
+      "status": "pending",
       "created": "2026-11-26",
-      "approved_at": "2026-11-26T17:11:09",
+      "approved_at": null,
       "scenario": {
         "type": "boss",
         "boss": "storm_warden",
@@ -29,6 +29,19 @@
           "status": "pending",
           "until": "2026-11-26T07:37:49",
           "reason": "Phase 2A: Feueratem neu (Aufladung, Feuerstrom, Licht)"
+        },
+        {
+          "revision": 2,
+          "status": "superseded",
+          "until": "2026-11-26T20:10:14",
+          "reason": "Grafik-Overhaul 26.11. abends: verstaerkbares Licht, Gluehen, Hitzeflimmern, Funken und neu gestaltete Gefahrenflaeche des Feueratems (Trefferbreite unveraendert); Nutzerauftrag: freigegebene Eintraege erneuern",
+          "feedback": {
+            "verdict": "good",
+            "decision": "keep",
+            "comment": "",
+            "revision": 2,
+            "at": "2026-11-26T17:11:09"
+          }
         }
       ],
       "approvals": [
@@ -42,17 +55,10 @@
           "verdict": "good",
           "decision": "keep",
           "comment": "",
-          "result": "processed"
+          "result": "processed",
+          "superseded_by": 3
         }
-      ],
-      "processed_at": "2026-11-26T17:19:11",
-      "feedback": {
-        "verdict": "good",
-        "decision": "keep",
-        "comment": "",
-        "revision": 2,
-        "at": "2026-11-26T17:11:09"
-      }
+      ]
     },
     {
       "id": "boss.twins.ring",
@@ -297,10 +303,10 @@
         "gear": 2,
         "boss_hp": 0.7
       },
-      "revision": 1,
-      "status": "processed",
+      "revision": 2,
+      "status": "pending",
       "created": "2026-11-26",
-      "approved_at": "2026-11-26T17:12:59",
+      "approved_at": null,
       "approvals": [
         {
           "uid": "boss.twins.checker@1@2026-11-26T17:12:59@16216",
@@ -312,17 +318,25 @@
           "verdict": "good",
           "decision": "keep",
           "comment": "",
-          "result": "processed"
+          "result": "processed",
+          "superseded_by": 2
         }
       ],
-      "processed_at": "2026-11-26T17:19:11",
-      "feedback": {
-        "verdict": "good",
-        "decision": "keep",
-        "comment": "",
-        "revision": 1,
-        "at": "2026-11-26T17:12:59"
-      }
+      "revisions": [
+        {
+          "revision": 1,
+          "status": "superseded",
+          "until": "2026-11-26T20:10:14",
+          "reason": "Grafik-Overhaul 26.11. abends: verstaerkbares Licht, Farbgebung, Tiefenunschaerfe und Vignette der Weltebene (Gefahrenflaechen unveraendert); Nutzerauftrag: freigegebene Eintraege erneuern",
+          "feedback": {
+            "verdict": "good",
+            "decision": "keep",
+            "comment": "",
+            "revision": 1,
+            "at": "2026-11-26T17:12:59"
+          }
+        }
+      ]
     },
     {
       "id": "boss.dragon.stomp_checker",
@@ -1054,6 +1068,213 @@
       "status": "pending",
       "created": "2026-11-26",
       "approved_at": null
+    },
+    {
+      "id": "vfx.overhaul.dragon_breath",
+      "title": "Grafik-Overhaul - Drachen-Feueratem im Wald (Licht, Glut, Hitzeflimmern)",
+      "category": "VFX",
+      "content": "Schaustueck mit neu gestalteter Gefahrenflaeche: Aufladen mit einstroemender Glut und Aura, Zuendung mit Druckwelle und warmem Farbumschlag; Strahl mit zuengelnden Flammen, weissgluehendem Kern, hellem Innenrand und dunkler Kontur genau an der Trefferbreite, Funken im Strahl, Hitzeflimmern, Lichtbahn auf dem Boden, Rauch und Brandspuren",
+      "goal": "Massstab Octopath Traveler: Wirkt der Feueratem wie echtes Feuer im Raum? Leuchten Boden, Baeume und Figur im Feuerlicht? Ist die Trefferbreite (Rand) mindestens so klar wie vorher?",
+      "task": "Grafik-Overhaul 26.11. (Schaustueck)",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {
+        "type": "boss",
+        "boss": "storm_warden",
+        "minute": 15,
+        "class": "Sword",
+        "ability": 1,
+        "seed": 1337,
+        "build": "balanced",
+        "gear": 2,
+        "arena": 0
+      }
+    },
+    {
+      "id": "vfx.overhaul.sword_fireball",
+      "title": "Grafik-Overhaul - Feuerball (Schwertmeister, Stufe 9)",
+      "category": "VFX",
+      "content": "Feuerball mit Glutspur und Rauch, Einschlag mit weissem Kern, Funkenstrahlen, Druckwelle, Rauch, Brandmal und Licht auf Boden und Gegnern",
+      "goal": "Ist der Einschlag wuchtig und lebendig (viele Pixel, Aufblitzen, Druckwelle), ohne die Figur zu verdecken?",
+      "task": "Grafik-Overhaul 26.11. (Schaustueck)",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {
+        "type": "scene",
+        "class": "Sword",
+        "minute": 10,
+        "arena": 0,
+        "build": "empty",
+        "spells": [
+          {
+            "id": 101,
+            "level": 9
+          }
+        ],
+        "spells_replace": true,
+        "enemies": "normal",
+        "enemy_pack": {
+          "count": 14,
+          "radius": 250
+        },
+        "invulnerable": true,
+        "gear": 2
+      }
+    },
+    {
+      "id": "vfx.overhaul.mage_lightning",
+      "title": "Grafik-Overhaul - Kettenblitz (Arkanistin, Stufe 9)",
+      "category": "VFX",
+      "content": "Kettenblitz mit Glimmen, Funkenlinien je Sprung, Einschlag mit Kern, Druckwelle, Farbversatz im Endgame und blauem Licht auf dem Boden",
+      "goal": "Knistert der Blitz sichtbar, leuchtet er die Umgebung aus, und bleibt er trotzdem kurz und lesbar?",
+      "task": "Grafik-Overhaul 26.11. (Schaustueck)",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {
+        "type": "scene",
+        "class": "Mage",
+        "minute": 10,
+        "arena": 0,
+        "build": "empty",
+        "spells": [
+          {
+            "id": 103,
+            "level": 9
+          }
+        ],
+        "spells_replace": true,
+        "enemies": "normal",
+        "enemy_pack": {
+          "count": 14,
+          "radius": 250
+        },
+        "invulnerable": true,
+        "gear": 2
+      }
+    },
+    {
+      "id": "vfx.overhaul.ranger_ice",
+      "title": "Grafik-Overhaul - Eisball (Waldlaeufer, Stufe 9)",
+      "category": "VFX",
+      "content": "Eisball mit Frostglitzer, Einschlag mit Glassplittern, Frostnebel, Raureif am Boden und kaltem Licht",
+      "goal": "Splittert das Eis wie Glas (Referenz Dagger Dance), ohne zu ueberladen?",
+      "task": "Grafik-Overhaul 26.11. (Schaustueck)",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {
+        "type": "scene",
+        "class": "Ranger",
+        "minute": 10,
+        "arena": 0,
+        "build": "empty",
+        "spells": [
+          {
+            "id": 102,
+            "level": 9
+          }
+        ],
+        "spells_replace": true,
+        "enemies": "normal",
+        "enemy_pack": {
+          "count": 14,
+          "radius": 250
+        },
+        "invulnerable": true,
+        "gear": 2
+      }
+    },
+    {
+      "id": "char.overhaul.sword",
+      "title": "Grafik-Overhaul - Figur im Licht: Schwertmeister im Wald",
+      "category": "Charakter",
+      "content": "Randlicht in der Farbe der staerksten Lichtquelle, weicher Bodenschatten, der vom Feuer weg faellt, Staub beim Laufen, Springen, Landen und bei der Ausweichrolle, Funken bei der Rolle, Gluehen und Lichtfunkeln an der Klinge, weisses Trefferaufblitzen, Aura beim Wirbelangriff",
+      "goal": "Laufe zu Fackeln und Gegnern, springe (Leertaste) und rolle (Strg): Wirkt die Figur wie im Licht stehend (Massstab Octopath)? Bleibt sie gut lesbar?",
+      "task": "Grafik-Overhaul 26.11. (Schaustueck)",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {
+        "type": "scene",
+        "class": "Sword",
+        "minute": 10,
+        "arena": 0,
+        "build": "balanced",
+        "gear": 2,
+        "enemies": "normal",
+        "enemy_pack": {
+          "count": 10,
+          "radius": 260
+        }
+      }
+    },
+    {
+      "id": "light.overhaul.forest",
+      "title": "Grafik-Overhaul - Licht und Atmosphaere: Wald",
+      "category": "Licht",
+      "content": "Verstaerkbares Weltlicht, Lichtstrahlen von oben links mit Lichtfleck, Staub und Pollen, die im Licht aufleuchten, Gluehwuermchen, Farbgebung, Tiefenunschaerfe am oberen und unteren Rand, Vignette, Gluehen heller Kerne",
+      "goal": "Laufe herum: Wirkt der Wald tief und atmosphaerisch (Massstab Octopath)? Ist nichts zu dunkel oder zu unscharf?",
+      "task": "Grafik-Overhaul 26.11. (Schaustueck)",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {
+        "type": "showroom",
+        "class": "Sword",
+        "minute": 5,
+        "arena": 0,
+        "gear": 1,
+        "invulnerable": true
+      }
+    },
+    {
+      "id": "light.overhaul.swamp",
+      "title": "Grafik-Overhaul - Licht und Atmosphaere: Sumpf",
+      "category": "Licht",
+      "content": "Sumpf mit gruenlicher Farbgebung, Sporen, Gluehwuermchen, schwachen Lichtstrahlen, Tiefenunschaerfe und Vignette",
+      "goal": "Laufe herum: Passt die Stimmung zum Sumpf? Ist nichts zu dunkel?",
+      "task": "Grafik-Overhaul 26.11. (Schaustueck)",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {
+        "type": "showroom",
+        "class": "Mage",
+        "minute": 5,
+        "arena": 1,
+        "gear": 1,
+        "invulnerable": true
+      }
+    },
+    {
+      "id": "light.overhaul.ashfrost",
+      "title": "Grafik-Overhaul - Licht und Atmosphaere: Aschenfrost-Ruinen",
+      "category": "Licht",
+      "content": "Kalte Farbgebung, Asche und Schnee im Wind, aufsteigende Glut, kalte Lichtstrahlen, Tiefenunschaerfe und Vignette",
+      "goal": "Laufe herum: Wirken die Ruinen kalt und verbrannt zugleich? Ist nichts zu dunkel?",
+      "task": "Grafik-Overhaul 26.11. (Schaustueck)",
+      "revision": 1,
+      "status": "pending",
+      "created": "2026-11-26",
+      "approved_at": null,
+      "scenario": {
+        "type": "showroom",
+        "class": "Ranger",
+        "minute": 5,
+        "arena": 2,
+        "gear": 1,
+        "invulnerable": true
+      }
     }
   ]
 }

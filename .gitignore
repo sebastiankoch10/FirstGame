@@ -97,3 +97,6 @@ review/*.tmp
 docs/ai-activity.log
 # Obsidian: settings and plugins are versioned (same on every device); the per-device window layout is not.
 docs/.obsidian/workspace*.json
+
+# Local style references (third-party screenshots, never commit, never ship): FirstGame_ArtPack/reference/octopath/
+FirstGame_ArtPack/reference/octopath/

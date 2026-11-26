@@ -158,7 +158,7 @@ Rang 2 unter [[Leitbild]]. Die Technik (wie es gebaut wird) steht in [[Technisch
 
 - **Weitere Ist-Punkte:**
   - **Partikel und viele Zaubereffekte** sind Vektorformen (Linien, Kreise, Dreiecke) mit beliebiger Position. Sie liegen auf keinem Pixelraster.
-  - Keine Shader. Texturfilterung aus (außer der weichen Lichtfläche in halber Auflösung).
+  - Keine Shader. Texturfilterung aus (außer der weichen Lichtfläche in halber Auflösung). *Seit 26.11. abends gibt es eine Nachbearbeitung mit Shadern auf der Weltebene, siehe Abschnitt 7.*
 
 **Folge:** Das Bild kann trotz guter Einzel-Assets nicht „aus einem Guss“ wirken.
 
@@ -169,7 +169,7 @@ Rang 2 unter [[Leitbild]]. Die Technik (wie es gebaut wird) steht in [[Technisch
 3. **Genau zwei erlaubte Detailebenen** (Hybrid):
    - **Sprite-Raster:** Figuren, Gegner, Bosse, Umgebung, Projektile.
    - **Feinraster:** halbe Artpixel, nur für Effektpartikel, Funken, Blitzverästelungen und Spuren. Das sorgt für mehr Detailtiefe ohne Stilbruch.
-   - **Weiche Lichtebene** (additives Licht, Glühen) in Ausgabeauflösung. Sie ist kein Pixel-Art-Element und darf weich sein.
+   - **Weiche Lichtebene** (additives Licht, Glühen, seit 26.11. auch Bloom, Dunst und Tiefenunschärfe am Bildrand, Abschnitt 7) in Ausgabeauflösung. Sie ist kein Pixel-Art-Element und darf weich sein.
 4. **Rotation und Skalierung** von Pixel-Art nur:
    - in ganzzahligen Schritten, oder
    - in einem Render-Ziel auf dem Sprite-Raster, sodass das Ergebnis wieder auf dem Raster liegt.
@@ -274,3 +274,49 @@ Visuell relevante Fähigkeiten haben Phasen; siehe [[Fähigkeiten, VFX & Audio]]
   - In Feuerposen bleiben Kopf und Hals unbewegt, damit Maul-Anker und Strahl übereinstimmen.
 - **Hexen, Behemoth:** Einzelsprites je Aktion (2–4 Frames), Richtung durch Spiegeln. Seit 25.11. ebenfalls über den gemeinsamen Rig (`rig_draw_frame`, `bv2_rig_*`): Hexen mit flatterndem Hut, Umhangzipfeln und Saum, Behemoth mit schwer wackelndem Pilzrücken und Kopf, Arme leicht, Klauen am Boden.
 - **Zaubereffekte:** 4-Frame-Sprite auf Wirkradius gestreckt, dazu Vektorlinien und -kreise; Partikel als Vektorformen.
+
+## 7. Licht, Atmosphäre und Effekte: Maßstab HD-2D (Grafik-Overhaul, Auftrag 26.11.)
+
+**Maßstab:** Octopath Traveler (HD-2D) für Licht, Effekte, Tiefe und Atmosphäre. Referenzen: 24 Bildschirmfotos des Nutzers in `FirstGame_ArtPack/reference/octopath/` (nur lokal, nicht versioniert, nie im Spiel; [[Assets & Pipeline]]). Keine Assets, Figuren, Szenen oder Farbschemata kopieren; eigener Stil auf diesem Niveau (G10). Gameplay, Bewegung und Angriffsabläufe bleiben unverändert. ~~Figuren bleiben unverändert.~~ *Ergänzung 26.11. abends: Die Figuren gehören zum Overhaul (7.5); ihre Sprites bleiben die Grundlage, die Rüstung bleibt unsichtbar.* Frühere zurückhaltende Licht- und VFX-Vorgaben gelten nur noch, soweit sie hier nicht ersetzt sind ([[DECISIONS]] 26.11. abends).
+
+### 7.1 Was die Referenzen zeigen (Auswertung 26.11.)
+- **Licht im Raum:** dunkle Grundstimmung, starke farbige Lichtinseln (Lampen, Feuer, Zauber) auf Boden, Wänden und Figuren; Lichtstrahlen schräg von oben; helle Kerne glühen weich nach (Bloom).
+- **Tiefe:** Vordergrund und oberer Bildrand unscharf (Tilt-Shift), dunkle Bildecken (Vignette), Lichter im Hintergrund als weiche Kreise.
+- **Atmosphäre:** Staub, Pollen, Glühwürmchen und Schnee schweben und leuchten nur im Licht auf; Dunst in Lichtstrahlen.
+- **Angriffe aus vielen Pixeln:** Dutzende bis Hunderte 1–3-px-Partikel statt weniger großer Formen. Weich ist nur das Licht um sie herum.
+
+### 7.2 Aufbau eines Angriffs (abgeleitet aus den Angriffsbildern, verbindlich für alle neuen Effekte)
+1. **Sammeln:** Der Kern wächst, Partikel strömen ein, eine Aura steigt um den Wirker oder Boss auf (Lichtsäule, Ringe). Uhr und Timing wie bisher (G1).
+2. **Zünden:** weißer, überstrahlter Kern für wenige Bilder, Druckwelle (Verzerrungsring), bei großen Angriffen kurzer Farbumschlag der ganzen Szene in die Angriffsfarbe und leichter Farbversatz (RGB) an den Bildrändern.
+3. **Tragen:** eine klare, helle Kernform (Linie, Kugel, Sichel) und darum herum Bewegung: Funken, Glut, Splitter, Lichtbänder, Hitzeflimmern, Licht auf dem Boden.
+4. **Einschlagen:** weißer Kern mit Zacken, radialer Funkenstrahl aus länglichen Glutsplittern (Speed-Lines), Druckwelle, Boden leuchtet in der Angriffsfarbe, Rauch oder Splitter je Element; Gewicht über Trefferstopp und Bildschirmwackeln.
+5. **Nachglühen:** Funken steigen oder fallen mit Schwerkraft, Splitter fallen, Rauch steigt im Licht auf, Brand- oder Frostmal am Boden verblasst.
+
+### 7.3 Regeln
+- **Zwei Ebenen:** Die Weltebene (Gelände, Figuren, eigene Effekte, Angriffsdekor) bekommt Licht, Glühen, Hitzeflimmern, Druckwellen, Farbversatz, Tiefenunschärfe, Farbgebung und Vignette. Die **Lesbarkeitsebene** (Warnungen, Gefahrenflächen mit Rändern, Boss-Geschosse, Marker, Schadenszahlen) wird danach gezeichnet und von keinem dieser Effekte verändert. ~~Neues Dekor eines gegnerischen Angriffs liegt immer unter seiner Gefahrenfläche.~~ *Seit der Ergänzung 26.11. abends:* Auch die Gefahrenflächen selbst (Warnungen, Strahlen, Flächen) dürfen im HD-2D-Stil neu gestaltet werden. Harte Bedingungen: Form = Trefferfläche, sichere Bereiche eindeutig, die nächste Mechanik liegt oben, mindestens so klar wie vorher; je umgestalteter Gefahr eine visual-qa-Zweitmeinung. Funken und Glut **innerhalb** einer deckenden Gefahrenfläche liegen über ihrer Füllung, aber unter jeder Warnung (`FXP_TOP`) (G5, G15).
+- **Licht:** verstärkbares Weltlicht (eine Lichtquelle kann bis aufs Doppelte aufhellen). Die Umgebung je Level ist dafür dunkler; jede Flamme, jeder Zauber und jedes Geschoss beleuchtet Boden und Figuren.
+- **Pixel:** Partikel, Splitter und Funken liegen auf ganzen Weltpixeln; Hitzeflimmern und Druckwellen verschieben ganze Pixel. Weich sind nur Licht, Glühen, Dunst und die Tiefenunschärfe am Rand.
+- **Tiefenunschärfe** nur am oberen und unteren Rand, der Bereich um die Spielfigur bleibt scharf; Gefahren sind davon ausgenommen (Lesbarkeitsebene). Gegner und Bosse bleiben über eine Schutzmaske scharf und werden von der Vignette kaum abgedunkelt; unscharf wird nur Gelände.
+- **Atmosphäre je Level:** Wald warm-golden (Staub, Pollen, Glühwürmchen, Lichtstrahlen), Sumpf grünlich (Sporen, Glühwürmchen, schwache Strahlen), Aschenfrost kalt (Asche, Schnee, aufsteigende Glut, kalte Strahlen).
+- **Einstellungen:** „Effektqualität“ skaliert alles Neue (Niedrig: nur Farbgebung und Vignette, 30 % Partikel; Mittel: plus Glühen und Hitzeflimmern, 60 %; Hoch: alles). „Lichtblitze: Reduziert“ senkt Farbumschlag, Farbversatz und Blitze auf 35 %.
+- **Leistung:** 60 FPS bei voller Horde und im Bosskampf (perf-Suite) bleiben Pflicht. Entlastung bei großen Horden (über 110 Gegner): Tiefenunschärfe und weites Glühen pausieren, Schwebeteilchen dünnen aus; Gegnerschatten sind ein einziges weiches Sprite statt vier Ellipsen.
+
+### 7.5 Figuren (Ergänzung 26.11. abends)
+Ziel: dasselbe HD-2D-Niveau wie Licht und Effekte. Die vorhandenen Sprites bleiben die Grundlage, die Rüstung bleibt unsichtbar. Verbessert wird über Shader, Licht und Effekte:
+- **Randlicht** (1 px, auf ganzen Pixeln) auf der Seite zur stärksten Lichtquelle in deren Farbe; ohne nahe Quelle ein schwaches Himmelslicht von oben links;
+- **farbiges Licht** von Zaubern und Angriffen über das verstärkbare Weltlicht;
+- **weicher Bodenschatten**, bei starkem Licht zusätzlich ein längerer Schatten vom Licht weg;
+- **Auren** beim Aufladen schwerer Angriffe und bei starken Fähigkeiten;
+- **weißes Trefferaufblitzen** (skaliert mit „Lichtblitze“);
+- **Waffenglühen:** ein Lichtfunke läuft über die Klinge, die Stabkugel pulsiert; stärker beim Angriff;
+- **Staub und Funken** bei Laufen, Absprung, Landung und Ausweichrolle, je Level in passender Farbe (Erde, Sumpf, Asche).
+
+Wo echte neue Pixel-Grafik nötig wäre (z. B. eigene Lichtseiten-Schattierung, Normal Maps, neue Posen), wird nichts vorgetäuscht; die Anforderungen stehen in [[Assets & Pipeline]] 7.8.
+
+### 7.4 Ist-Stand (26.11. abends)
+- **Grundlage umgesetzt:**
+  - `scripts/render_fx` mit den Shadern `sh_fx_bright`, `sh_fx_blur` und `sh_fx_composite`;
+  - `scripts/fx_particles` (gemeinsames Partikelsystem), `scripts/atmos_fx` (Atmosphäre), `scripts/fx_attacks` (Angriffsdekor);
+  - verstärkbares Licht in `atmosphere_draw`.
+- **Schaustück** (Review, wartet auf das Urteil des Nutzers): Drachen-Feueratem im Wald mit neu gestalteter Gefahrenfläche (`vfx_beam_fire_hd`), Feuerball (Schwertmeister), Kettenblitz (Arkanistin), Eisball (Waldläufer), Schwertmeister mit den Figuren-Effekten (`scripts/fx_character`, Shader `sh_fx_char`), Licht und Atmosphäre der drei Level.
+- **Noch nicht umgestellt** (nach dem Urteil, Level für Level und Boss für Boss): alle übrigen Zauber und Passiva, die Startwaffen, alle übrigen Boss-, Miniboss- und Gegnerangriffe samt ihrer Gefahrenflächen, Gegnertreffer und -tode, Figuren-Effekte für Arkanistin und Waldläufer im Review, Münzen, Pickups, Level-up, sanft bewegte Vegetation. Liste in [[Roadmap & Vertical Slice]].

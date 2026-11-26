@@ -84,8 +84,20 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
   - `tests/tools/characters/check_base_neutral.py`: technische Abnahme von Basisfigur-Atlanten (echte Zellgrenzen und Alpha-Schnitt des Importers, `--dir` für Entwürfe). Seit 26.11. abends ohne Auftrag, weil die Basemodels verworfen sind ([[DECISIONS]]).
 
 - **QA-Runner seit 26.11.:** Suiten `docs` (immer, Sekunden, `tests/tools/vault_check.py`), `review` (nur bei Review-Änderungen, Regeln `REVIEW_RX`/`REVIEW_TOUCH` in `qa.py`) und `perf` (`run_native_harness.py perf`, Lastmessung ohne parallele Last; GameMaker liefert weder Draw Calls noch Prozessspeicher an GML, Ersatz: `fps_real`, Lichtpass-Zeit, Instanzzahl). Level-Auswertung der Bots: `QA/tools/analyze_levels.py`.
-  - `perf` meldet seit 26.11. zusätzlich Ausreißer über 50 ms (`spikes_over_50ms`, Logzeile `PERF SPIKE` mit Bildnummer). Mit `texture_debug_messages` stehen Texturlade-Meldungen im Log; `PERF WINDOW <Szenario>` markiert den Beginn jedes Messfensters. Ladezeit des Vorladens beim Run-Start: Logzeile `TEXTURE_PREFETCH ms`.
   - CPU-Profil ohne Projektänderung: `python tests/tools/profile_perf.py [--funcs a,b]` umhüllt in einer Testkopie jedes Step-/Draw-Ereignis und die genannten Funktionen mit `get_timer()` und meldet ms und Aufrufe je Bild und Szenario (`tests/reports/perf-profile.json`). Die Hüllen kosten etwa 1 µs je Aufruf; nur Läufe dieses Werkzeugs untereinander vergleichen. Veraltete Harnesses und Runner liegen in `tests/_legacy/`. Prüf-Agenten: `qa` und `visual-qa` (je Claude und Codex).
+  - `perf` meldet seit 26.11. zusätzlich Ausreißer über 50 ms (`spikes_over_50ms`, Logzeile `PERF SPIKE` mit Bildnummer). Mit `texture_debug_messages` stehen Texturlade-Meldungen im Log; `PERF WINDOW <Szenario>` markiert den Beginn jedes Messfensters. Ladezeit des Vorladens beim Run-Start: Logzeile `TEXTURE_PREFETCH ms`.
+- **Grafik-Overhaul (26.11. abends):**
+  - Die Testkopien aller Runner übernehmen jetzt auch `shaders/` (`run_native_harness`, `run_level_smoke`, `run_class_dragon_smoke`, `run_qa_regression`, `run_native_mc`; Hash-Eingaben in `qa.py`). Ohne den Ordner scheitert jeder Build.
+  - `qa.py` ordnet `render_fx`, `fx_particles`, `atmos_fx`, `fx_attacks`, `render_pipeline` und `shaders/` den Suiten feature, visual und regression zu.
+  - Die Feature-Suite prüft:
+    - Partikelpool und Rate je Effektqualität;
+    - die Nachbearbeitung je Stufe;
+    - Lichtblitze reduziert auf 35 %;
+    - die Obergrenze für Druckwellen;
+    - dass die neuen Effekte den Spiel-Zufallsgenerator nicht berühren;
+    - die Bausteine eines Einschlags;
+    - kompilierte und aktive Shader sowie die Atmosphäre.
+  - `clean_test_artifacts.py` behält `overhaul/` (Vorher-Nachher-Aufnahmen) und `reference/`.
 
 ## Abhängigkeiten
 Alle Systeme, besonders [[Bosse]] · [[Talente]] · [[Ausrüstung]] · [[Level & Welten]] · [[Klassen & Startwaffen]]

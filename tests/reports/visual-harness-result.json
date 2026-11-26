@@ -5,7 +5,6 @@
   "metrics": {
     "swordsmanv3_diff_weapon_t3": 17616.0,
     "magev3_diff_weapon_t3": 20672.0,
-    "rangerv3_diff_weapon_t3": 12806.0,
     "swordsmanv3": {
       "filled": {
         "wpn_s": 223.0,
@@ -30,8 +29,8 @@
         "feet2": 256.0,
         "feet3": 256.0
       },
-      "cells": 256.0,
-      "frames": 384.0
+      "frames": 384.0,
+      "cells": 256.0
     },
     "rangerv3": {
       "filled": {
@@ -57,9 +56,10 @@
         "feet2": 256.0,
         "feet3": 256.0
       },
-      "cells": 256.0,
-      "frames": 424.0
+      "frames": 424.0,
+      "cells": 256.0
     },
+    "rangerv3_diff_weapon_t3": 12806.0,
     "magev3": {
       "filled": {
         "wpn_s": 212.0,
@@ -84,12 +84,12 @@
         "feet2": 241.0,
         "feet3": 241.0
       },
-      "cells": 256.0,
-      "frames": 432.0
+      "frames": 432.0,
+      "cells": 256.0
     }
   },
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\visual\\20261126-184805",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\visual\\20261127-001645",
   "exceptions": [],
   "captures": [
     "Mage-base.png",

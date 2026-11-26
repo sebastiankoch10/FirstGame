@@ -147,6 +147,9 @@ function chain_segment_add(_ax,_ay,_bx,_by,_band,_strike=false) {
     array_push(global.chain_segments,{ax:_ax,ay:_ay,bx:_bx,by:_by,life:life,total:life,band:_band,seed:random_seed_free(),strike:_strike});
     // Player lightning: a strike flashes with the band (basis small, endgame lifts the scene a little); never every hop.
     if(_strike && _band>=1)light_flash(_bx,_by,_band==2 ? 260 : 170,make_color_rgb(190,215,255),_band==2 ? 1.5 : 1.1,.22,_band==2 ? .22 : 0);
+    // graphics overhaul: a strike lands with a white core, crackling spark lines and a shock ring; every hop sparks
+    if(_strike){fxp_impact(_bx,_by,3,.35+.25*_band);if(_band>=2)fx_aberration(1.5,.12);}
+    else repeat(fxp_n(2+_band)){var a2=vfx_random(360);fxp_add(_bx,_by,lengthdir_x(180,a2),lengthdir_y(180,a2),vfx_random_range(.06,.14),3,1,FXP_STREAK,FXP_EMIT,0,4,0);}
     // Sparks at the struck point (pixel particles, count by band).
     var n=_band==2 ? 10 : (_band==1 ? 6 : 3);
     for(var i=0;i<n;i++) {

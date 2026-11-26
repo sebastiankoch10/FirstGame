@@ -51,20 +51,22 @@ SPRITE_RULES = [
 ]
 
 SCRIPT_RULES = [
-    (r'^(gameplay|gameplay_polish|reset_round|player_artpack|apply_passives|hud|progression_audit|render_pipeline)$', 'Skripte/Kern_und_Spieler'),
+    (r'^(gameplay|gameplay_polish|reset_round|player_artpack|apply_passives|hud|progression_audit|render_pipeline|render_fx|fx_character)$', 'Skripte/Kern_und_Spieler'),
     (r'^(review_center|review_registry_data)$', 'Skripte/Entwicklung_Review'),
-    (r'^hazard_fx$', 'Skripte/Kampf_und_Klassen'),
+    (r'^(hazard_fx|fx_attacks)$', 'Skripte/Kampf_und_Klassen'),
     (r'^(master_combat|class_weapons|combat_feedback|attack_telegraph|attack_timeline)$', 'Skripte/Kampf_und_Klassen'),
     (r'^(spell|spell_v2|spell_v2_catalog|spell_vfx|spell_world_v2|spell_choices_v2|spell_ui_v2|cast_spell|get_spell_data|hotbar_assign|run_spell_stats|handle_chest_selection)$',
      'Skripte/Zauber'),
     (r'^(boss_|dragon_)', 'Skripte/Bosse'),
     (r'^(master_skeleton|survivor_balance)$', 'Skripte/Gegner'),
-    (r'^(level_|master_world|atmosphere|weather)', 'Skripte/Welt_und_Atmosphaere'),
+    (r'^(level_|master_world|atmosphere|weather|atmos_fx|fx_particles)', 'Skripte/Welt_und_Atmosphaere'),
     (r'^(talents|equipment|equipment_visual|equipment_visual_data|equipment_ui|equipment_attach_data)$', 'Skripte/Fortschritt_und_Ausruestung'),
     (r'^audio_manager$', 'Skripte/Audio'),
 ]
 
-RULES = {'sprites': SPRITE_RULES, 'scripts': SCRIPT_RULES}
+SHADER_RULES = [(r'^sh_', 'Shader')]
+
+RULES = {'sprites': SPRITE_RULES, 'scripts': SCRIPT_RULES, 'shaders': SHADER_RULES}
 # Two .yy dialects exist in the project ("parent":{"name":"x","path":"y",} and "parent": {"name": "x", "path": "y"}).
 PARENT_RE = re.compile(r'("parent":\s*\{\s*"name":\s*")([^"]*)(",\s*"path":\s*")([^"]*)("\s*,?\s*\})')
 

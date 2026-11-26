@@ -1,5 +1,5 @@
 effects_draw();
-if(level_world_room())master_shadow_draw(x-4,y+3,17-jump_height*.12,6-jump_height*.04,jump_height>0 ? .2 : .4);
+if(level_world_room())fx_char_shadow(x-4,y+3,17-jump_height*.12,6-jump_height*.04,jump_height>0 ? .2 : .4); // soft, leans away from strong light
 equipment_player_aura_draw(id);
 // Draw-Event von ObjectPlayer oder ObjectMonster
 
@@ -63,7 +63,11 @@ if (!sprite_exists(player_draw_sprite)) {
 }
 // Base model + visible equipment layers, all on the same frame (scripts/equipment_visual).
 var life = player_motion_life();
+// Graphics overhaul: rim light in the colour of the strongest light and a white hit flash (fx_character)
+var fx_char_on = fx_char_begin(id, player_draw_sprite, draw_xscale);
 player_layers_draw(visual_actor, player_draw_sprite, player_draw_frame, x, y - jump_height, draw_xscale * life.sx, draw_yscale * life.sy, hud_hit_flash>0 ? make_color_rgb(255,85,82) : c_white, 1, undefined, life.rot, {hair: life.hair, cape: life.cape});
+fx_char_end(fx_char_on);
+fx_draw = {actor: visual_actor, spr: player_draw_sprite, frame: player_draw_frame, x: x, y: y - jump_height, xs: draw_xscale * life.sx, ys: draw_yscale * life.sy}; // weapon glow (fx_char_glow_draw)
 
 if (damage_reduction>0 && variable_instance_exists(id,"orbit_angle")) {
     var d=GetSpellData(SPELL.SHIELD);

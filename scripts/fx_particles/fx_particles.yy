@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"fx_particles",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"fx_particles",
+  "parent":{
+    "name":"Welt_und_Atmosphaere",
+    "path":"folders/Skripte/Welt_und_Atmosphaere.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

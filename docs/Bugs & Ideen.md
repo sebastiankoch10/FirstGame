@@ -21,6 +21,15 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
   - Nächster Schritt: im Boss-Test (F5, Fähigkeit 7) prüfen, ob die Leere eine ruhende Figur trifft. Das ist eine Frage der Lesbarkeit, keine Unfairness.
   → [[Bosse]]
 - **Pausenansicht in Review- und Testszenarien:** Die Zeile „Klasse | Leben“ des Pausen-Inventars (unten, etwa y 673) liegt auf den Statuszeilen von Review- und Boss-Testmodus. Nur Lesbarkeit; im normalen Spiel ohne Statuszeilen tritt es nicht auf. → [[UI, HUD & Menüs]]
+- **Grafik-Overhaul, Leistung im Münz-Belastungstest** (`perf`, Szenario `horde_coins`: Horde plus 2.500 liegende Münzen, 26.11. nachts, je zwei Läufe direkt hintereinander):
+  - Bildzeit im Mittel vorher 17,2–17,5 ms, nachher 18,4–18,6 ms (etwa 57 → 54 FPS). Horde ohne Münzen und Bosskämpfe sind gleich (16,7–17,3 ms).
+  - Mit Profil-Hüllen ist kein Unterschied messbar (17,9 gegen 17,5 ms). Ursache offen, Verdacht: Treiberkosten der Nachbearbeitung bei vielen kleinen Zeichenaufrufen.
+  - Nächster Schritt: GPU-Zeit messen oder die Nachbearbeitung probeweise abschalten (`global.fx.off`). → [[Rendering & Pixelraster]]
+- **Grafik-Overhaul, Restpunkte der visual-qa-Zweitmeinung (26.11.):**
+  - Rauch über einem waagerechten Feuerstrahl könnte die Fläche nach oben verlassen; nicht geprüft, weil die Aufnahme nur senkrechte und schräge Strahlen zeigt.
+  - Die 1-px-Ränder der Gefahrenflächen sind feiner als die Weltgrafik; das war schon vorher so.
+  - Der getönte Strahlbereich ist auf hell beleuchtetem Boden nur über Farbton und Rand vom Boden abgesetzt (Tönung inzwischen 0,65).
+  → [[Visuelles Leitbild & Animation]] 7
 - **Gegnerzustand per Existenzprüfung:** `ObjectMonster` unterscheidet Art und Zustand über etwa 12 `variable_instance_exists`-Abfragen je Gegner und Bild (`boss_twin`, `boss_minion`, `lvl_kind`, `hit_stun`, `lvl_hover` …). Das ist fehleranfällig bei neuen Gegnerarten und kostet Zeit. Vorschlag: alle Felder in `ObjectMonster/Create_0` mit Standardwerten anlegen und die Abfragen schrittweise durch Feldvergleiche ersetzen, abgesichert durch Level- und Regression-Suite. → [[Gegner & Spawns]]
 - **Sequenz-Vielfalt des Drachen** (Datenbefund, Designfrage): „Feuersturm“ (Phase 3) und „Inferno“ (Phase 4) sind identisch, und drei weitere Sequenzen sind Umstellungen derselben drei Fähigkeiten (Feueratem, Fächer, Stampfen). Feueratem kommt in 8, Stampfen in 7 von 11 Sequenzen vor, Salve und Leere nur je einmal. Entscheidung über die Zusammenstellung beim Nutzer nach dem Spieltest. → [[Boss-Design]]
 - **Drachenkopf bei steilen Winkeln:** Die Kopfansichten entstehen durch Drehen der Seitenansicht; nach unten gerichtet wirkt der Kopf flach. Besser: eigene Draufsicht-Variante des Kopfes; Anforderungen in [[Assets & Pipeline]] 7.4. → [[Bosse]]

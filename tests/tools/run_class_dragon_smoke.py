@@ -15,7 +15,7 @@ def main():
   for n in ('project','build','cache','temp'):shutil.rmtree(work/n,ignore_errors=True)
 def run(work):
  _unused=Path(os.environ['LOCALAPPDATA'])/'FirstGame-Tests'/'classes'/time.strftime('%Y%m%d-%H%M%S');project=work/'project';project.mkdir(parents=True)
- for name in ('objects','scripts','sprites','sounds','tilesets','rooms','options'):shutil.copytree(ROOT/name,project/name)
+ for name in ('objects','scripts','sprites','sounds','tilesets','rooms','options','shaders'):shutil.copytree(ROOT/name,project/name)
  yyp=loads((ROOT/'FirstGame.yyp').read_text(encoding='utf-8'));yyp['name']=yyp['%Name']='FirstGameClassDragonSmoke';write(project/'FirstGameClassDragonSmoke.yyp',dumps(yyp))
  p=project/'options/main/options_main.yy';d=loads(p.read_text(encoding='utf-8'));d['option_gameguid']='8dab69de-9a58-4144-a259-78948fb4caf6';write(p,dumps(d))
  p=project/'options/windows/options_windows.yy';d=loads(p.read_text(encoding='utf-8'));d['option_windows_display_name']='FirstGame Class Dragon Native Check';write(p,dumps(d))

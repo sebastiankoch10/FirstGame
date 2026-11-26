@@ -83,6 +83,16 @@ updated: 2026-11-26
   - Rüstungsebenen (Kopf, Brust, Hände, Füße) werden nicht gezeichnet (`EQUIPMENT_ARMOR_VISIBLE` false). Nichts ist gelöscht, Werte und Inventar bleiben.
   - Waffen bleiben sichtbar.
   - Ersetzt die beiden folgenden Zeilen; der Basemodel-Auftrag an Codex ist zurückgezogen.
+- **2026-11-26 abends · Grafik-Overhaul: Maßstab Octopath Traveler (HD-2D) für Licht, Effekte, Tiefe und Atmosphäre** (Nutzerauftrag mit 24 Referenzbildern, nur lokal). Regeln in [[Visuelles Leitbild & Animation]] 7 und [[Fähigkeiten, VFX & Audio]]. Gameplay, Timing, Trefferflächen und Angriffsabläufe bleiben. ~~Figuren bleiben.~~ (ersetzt durch die Ergänzung unten)
+  - **Zwei Ebenen:** Die Nachbearbeitung (Glühen, Hitzeflimmern, Druckwellen, Farbversatz, Tiefenunschärfe, Farbgebung, Vignette) wirkt nur auf die Weltebene; Warnungen und Gefahren werden danach unverändert gezeichnet. Grund: Der Nutzer verlangt, dass Licht, Partikel und Unschärfe nie eine Gefahr verdecken; so ist das durch die Reihenfolge garantiert statt nur durch Abstimmung.
+  - **Verstärkbares Licht ersetzt das rein multiplikative Licht** (Lichtkarte doppelt angewandt, Quellen halbe Stärke, Umgebung je Level dunkler). Grund: Vorher konnte Licht nur Dunkelheit wegnehmen, nie aufhellen; farbige Lichtinseln wie in den Referenzen waren unmöglich. Ersetzt „Die normale Beleuchtung bleibt zurückhaltend“ (Phase 2A).
+  - **Shader werden für die Nachbearbeitung genutzt** (Technische Architektur R4, bisher nur Vorschlag). Ohne kompilierte Shader bleibt die Welt wie beleuchtet (Rückfall).
+  - **Glühen über den Gefahrenrand:** Hartes Dekor bleibt innerhalb der Schadensfläche, weiches Licht darf hinausreichen, wenn es klar schwächer als der Rand ist. Ersetzt den Richtwert „Glühen höchstens 10 % über den Rand“.
+  - **Vorgehen:** erst ein Schaustück (Drachen-Feueratem im Wald, je ein Zauber je Klasse, Licht der drei Level), dann Pause bis zum Urteil des Nutzers im Review-Center, danach Ausrollen auf alle Inhalte.
+- **2026-11-26 abends · Ergänzung zum Grafik-Overhaul: Figuren und Gefahrenflächen gehören dazu** (Nutzerauftrag).
+  - Figuren: Die Sprites bleiben die Grundlage (Rüstung unsichtbar); Randlicht, farbiges Licht, weiche Schatten, Auren, Trefferaufblitzen, Waffenglühen, Staub und Funken über Shader und Effekte ([[Visuelles Leitbild & Animation]] 7.5). Echte neue Pixel-Grafik wird nicht vorgetäuscht, sondern als Anforderung in [[Assets & Pipeline]] 7.8 geführt.
+  - Alle Angriffe (eigene, Klassen, Bosse, Minibosse, Gegner) bekommen Aufbau und Wucht der Referenz; auch die Gefahrenflächen selbst dürfen neu gestaltet werden. Bedingung: mindestens so klar wie vorher (Form = Trefferfläche, sichere Bereiche eindeutig, nächste Mechanik oben), je Gefahr eine visual-qa-Zweitmeinung.
+  - Ersetzt: „Figuren bleiben“ und „Neues Dekor liegt immer unter der Gefahrenfläche“ (beide vom selben Abend).
 - ~~**2026-11-26 · Basemodel ohne Ausrüstung, Ausrüstung modular**~~ (ersetzt am selben Abend, siehe oben).
   - Ein Sprite mit sichtbaren Ausrüstungsbestandteilen (Umhang, Robe, Schal, Köcher, Rüstungssilhouette, Waffe) ist kein Basemodel.
   - Die heutigen Spielfiguren sind ausgerüstete Startfiguren und bleiben nur, bis neue Quellen da sind. Sie werden nicht weiter als Basis ausgebaut.

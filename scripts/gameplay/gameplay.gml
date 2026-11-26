@@ -178,7 +178,7 @@ function enemy_draw(_scale,_boss) {
     // Status illumination is batched by atmosphere_draw, without per-enemy blend passes.
     draw_set_alpha(1);
     var hover=variable_instance_exists(id,"lvl_hover") ? lvl_hover*(1+sin(current_time/260+lvl_weave_phase)*.25) : 0;
-    if(level_world_room())master_shadow_draw(x-3,y+2,(hover>0 ? 10 : 14)*_scale,(hover>0 ? 3.5 : 5)*_scale,hover>0 ? .22 : .36);
+    if(level_world_room())fx_soft_shadow(x-3,y+2,(hover>0 ? 10 : 14)*_scale,(hover>0 ? 3.5 : 5)*_scale,hover>0 ? .22 : .36); // graphics overhaul: one soft sprite
     if(ENEMY_MOTION_ENABLED)enemy_motion_offset();else{motion_dx=0;motion_dy=0;} // species movement identity (level_worlds), allocation-free
     var art=monster_art_div(id);draw_sprite_ext(sprite_index,image_index,x+motion_dx,y-hover+motion_dy,_scale/art*image_xscale,_scale/art*image_yscale,0,hurt_flash_timer>0 ? make_color_rgb(255,200,170) : element_tint(id),1);
     var w=_boss ? 76 : 38, h=_boss ? 8 : 5;

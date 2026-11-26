@@ -4,6 +4,22 @@ updated: 2026-11-26
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen). Ältere Einträge: [[LOG_2026]]
 
+### 2026-11-26 nachts · Claude · Grafik-Overhaul HD-2D, Schritte 0–3 (Grundlage und Schaustück) plus Ergänzung Figuren und Gefahrenflächen
+- Neu:
+  - `scripts/render_fx` mit den Shadern `sh_fx_bright`, `sh_fx_blur`, `sh_fx_composite`: Nachbearbeitung nur der Weltebene, die Lesbarkeitsebene bleibt unverändert;
+  - `scripts/fx_particles` (Pixelpartikel), `scripts/atmos_fx` (Atmosphäre je Level), `scripts/fx_attacks` (Feueratem-Dekor);
+  - `scripts/fx_character` mit `sh_fx_char` (Randlicht, Trefferaufblitzen, Schatten, Staub, Aura, Waffenglühen);
+  - `vfx_beam_fire_hd` (neue Gefahrenfläche des Feuerstrahls).
+- Geändert:
+  - `atmosphere` (verstärkbares Licht, Lichtmessung für die Figur);
+  - `ObjectController` Step und Draw End (Weltebene, Nachbearbeitung, Lesbarkeitsebene, `FXP_TOP`);
+  - `ObjectPlayer/Draw_0`;
+  - `spell`, `gameplay_polish` (Feuerball, Eisball, Kettenblitz);
+  - `reset_round`.
+- Werkzeuge: `shaders/` in allen Testkopien und den `qa.py`-Eingaben, `gm_project.shader`, IDE-Ordnerregeln, Aufräumer behält `overhaul/` und `reference/`. Referenzbilder lokal unter `FirstGame_ArtPack/reference/octopath/` (gitignored).
+- Doku: Leitbild G10, Visuelles Leitbild 7, Fähigkeiten/VFX, Technische Architektur, Assets & Pipeline (Referenzordner, 7.8), Roadmap 14, DECISIONS, Systemnotizen. Review: 8 neue Einträge, `boss.dragon.beam` Rev. 3 und `boss.twins.checker` Rev. 2 per bump.
+- Tests: QA Stufe 3 PASS (docs, anchors, static, Regression 811, Feature 219, Boss 190, Level 174, Klassen 151, Visual 77, Review 18); perf PASS laut Suite; Bosskämpfe und Horde wie vorher (16,7–17,3 ms), Münz-Belastungstest 17,2–17,5 → 18,4–18,6 ms (FAIL gegen 60 FPS, war schon vorher knapp darunter); visual-qa: Strahlrand PASS (klarer als vorher); Gegner am Rand nach Korrektur der Schutzmaske wieder scharf (±9 % Helligkeit). Messung der Gegner am Rand nach visual-qa-Hinweis korrigiert (Schutzmaske als feste Körperform). Spar-Maßnahmen: ein Weichzeichner-Durchgang je Kette, Schwebeteilchen gruppenweise und bei Horden ausgedünnt, Gegnerschatten als ein Sprite, Feuerstrahl gröber segmentiert.
+
 ### 2026-11-26 abends · Claude · Basemodels verworfen, Rüstung unsichtbar, Review-Urteil mit Kommentar
 - Spiel: `equipment_visual` (`EQUIPMENT_ARMOR_VISIBLE false`, nur Waffe gezeichnet), `review_center` (Urteilsdialog „Gut“ / „Nicht gut“ mit Kommentar, „komplett weg“ / „anders“, Reiter „Nicht gut“), `gameplay` und `ObjectController/Step_0` (Dialog besitzt Eingabe, Esc schließt nur ihn).
 - Werkzeuge und Tests: `review.py` (Status `rejected`, `feedback`, Kommentare in `status`), `review_e2e.py` und `review_harness.gml` (Dialog, Kommentar, Abbruch), `visual_harness.gml` (Rüstung pixelgleich unsichtbar, Waffe sichtbar). Review: `char.armor.hidden` neu; die ersten beiden Nutzerfreigaben sind verarbeitet.

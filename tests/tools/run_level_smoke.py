@@ -33,7 +33,7 @@ def main():
     work = Path(os.environ['LOCALAPPDATA']) / 'FirstGame-Tests/level-smoke' / time.strftime('%Y%m%d-%H%M%S')
     project = work / 'project'
     project.mkdir(parents=True)
-    for name in ('objects', 'scripts', 'sprites', 'sounds', 'tilesets', 'rooms', 'options'):
+    for name in ('objects', 'scripts', 'sprites', 'sounds', 'tilesets', 'rooms', 'options', 'shaders'):
         shutil.copytree(ROOT / name, project / name)
     yyp = loads((ROOT / 'FirstGame.yyp').read_text(encoding='utf-8'))
     yyp['name'] = yyp['%Name'] = NAME

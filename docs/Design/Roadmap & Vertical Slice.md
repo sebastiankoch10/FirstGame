@@ -54,6 +54,7 @@ graph LR
 | 11 | ~~Basemodel ohne Ausrüstung~~ **verworfen 26.11. abends (Nutzer):** Die heutigen Figuren bleiben, Rüstung ist unsichtbar, Waffen bleiben sichtbar ([[Visuelles Leitbild & Animation]] 5.5a). | – | – | entschieden |
 | 12 | **Drache Stufe 2:** Schweif als Gliederkette mit Trefferfläche an der Spitze und Flügel als eigene Teile. Braucht eigene Quellsegmente; der Schweif liegt in der Dreiviertelansicht eingerollt zwischen den Beinen (Phase 2B, 4). Anforderungen für Schweif, Flügel und Kopf-Draufsicht: [[Assets & Pipeline]] 7.2–7.4. | L | neue Quellsegmente | offen |
 | 13 | **Ankerpunkte nutzen:** weitere Waffentypen, Nebenhand und Schilde über `eqv_attach` (Daten seit 26.11. vorbereitet). | M | 11 | vorbereitet |
+| 14 | **Grafik-Overhaul HD-2D (Auftrag 26.11. abends, aktuelle Priorität):** Maßstab Octopath Traveler für Licht, Atmosphäre und Angriffseffekte ([[Visuelles Leitbild & Animation]] 7). *Schritt 1–3 am 26.11.:* Grundlage (Nachbearbeitung, verstärkbares Licht, Pixelpartikel, Atmosphäre je Level) und Schaustück (Drachen-Feueratem, Feuerball, Kettenblitz, Eisball, Licht der drei Level). *Danach, je Sitzung mit Stand in der HANDOFF:* übrige 15 Zauber und Passiva, Startwaffen der drei Klassen, alle Boss- und Miniboss-Angriffe samt Warnflächen-Dekor, Gegnertreffer und -tode, Münzen, Pickups, Level-up, bewegte Vegetation. | XL | Urteil zum Schaustück | **ja:** Urteil im Review-Center vor dem Ausrollen |
 
 ## 4. Vertical Slice: Spezifikation
 

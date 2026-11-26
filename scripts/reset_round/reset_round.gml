@@ -11,7 +11,7 @@ function reset_round()
     global.coin_xp_earned=0;global.damage_labels=[];global.impact_fx=[];
     global.sword_combo_metrics={chains:0,swings:0,finishers:0};
     spell_v2_init();global.class_effects=[];global.choice_rng=irandom(1000000000)+1;global.next_levelup_time=0;
-    talent_reset_run();equipment_reset_run();spell_vfx_reset();
+    talent_reset_run();equipment_reset_run();spell_vfx_reset();fxp_reset();atmos_reset();fx_init();global.fx.shocks=[];global.fx.heats=[];
     with(ObjectSkeletonRemains)instance_destroy();
     global.choice_mouse_armed=false;global.choice_open=false;
     instance_activate_object(ObjectMagnetOrb);instance_activate_object(ObjectCoin);

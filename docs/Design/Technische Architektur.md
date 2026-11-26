@@ -239,12 +239,24 @@ Trefferblitz (statt Farbmultiplikation), Kontur bzw. Randlicht zur Lesbarkeit de
 
 Alles optional und einzeln abschaltbar (Qualitätsstufen).
 
+**Ist seit 26.11. abends (Grafik-Overhaul):** Nachbearbeitung der Weltebene in `scripts/render_fx` mit drei Shadern:
+- `sh_fx_bright`: Helligkeitsauszug, viertel Auflösung, 4 Abtastungen je Bildpunkt; kein einzelnes helles Pixel geht verloren.
+- `sh_fx_blur`: trennbarer Weichzeichner.
+- `sh_fx_composite`: Hitzeflimmern, Druckwellen, Farbversatz, Tiefenunschärfe, Glühen, Farbgebung, Vignette.
+
+Ablauf in `ObjectController` Draw End:
+1. Weltebene zeichnen.
+2. `fx_post_world()` kopiert die Weltfläche, bearbeitet sie und schreibt sie zurück.
+3. Danach folgt die Lesbarkeitsebene (Warnungen, Gefahren), unbearbeitet.
+
+Rückfall: Sind die Shader nicht kompiliert, entfällt die Nachbearbeitung.
+
 ## 6. Leistungsbudgets (Vorschlag, gemessen und angepasst im Vertical Slice)
 
 | Budget | Ist | Ziel |
 |---|---|---|
 | Bildzeit bei 150 Gegnern und Bosskampf | 16,7 ms (VSync) | ≤ 12 ms CPU+GPU ohne VSync auf dem Entwicklungsrechner |
-| Partikel gleichzeitig | 420 (Grenze) | 420 „Hoch“, 200 „Mittel“, 80 „Niedrig“ |
+| Partikel gleichzeitig | 420 (Grenze); seit 26.11. abends zusätzlich `fx_particles` 420 / 1.000 / 1.800 (Niedrig / Mittel / Hoch) | Messung in der perf-Suite |
 | Lichtquellen | 72 | unverändert |
 | Stimmen | 16 (2 je Cue) | unverändert plus Ereignisschicht |
 | Gegner (technische Grenze) | 180 | unverändert |

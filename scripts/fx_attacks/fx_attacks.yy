@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"fx_attacks",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"fx_attacks",
+  "parent":{
+    "name":"Kampf_und_Klassen",
+    "path":"folders/Skripte/Kampf_und_Klassen.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

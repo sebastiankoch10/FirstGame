@@ -79,8 +79,15 @@ Rang 2 unter [[Leitbild]]. Darstellungsregeln (Pixelraster, Animation): [[Visuel
 
    Statuseffekte bleiben in der Monster-Silhouette, ohne deckenden Farbüberzug (Auftrag 22.11.).
 
+### Bausteine des Grafik-Overhauls (seit 26.11. abends)
+Aufbau eines Angriffs in fünf Phasen (Sammeln, Zünden, Tragen, Einschlagen, Nachglühen) nach [[Visuelles Leitbild & Animation]] 7.2. Gemeinsame Bausteine statt Einzelanfertigungen (Säule 8):
+- **Pixelpartikel** (`scripts/fx_particles`): Pool 420 / 1.000 / 1.800 je Effektqualität; Farbverlauf über die Lebenszeit je Element (heißer Kern, Körper, dunkler Rand, Rauch); Formen Pixel, Speed-Line, Kristallsplitter, flackernde Glut, Rauchwolke, Kernblitz. Ebene „beleuchtet“ (Staub, Asche, Rauch, Bodenmale) oder „selbstleuchtend“ (Feuer, Funken, Magie).
+- **Zusammengesetzte Bausteine:** `fxp_impact` (Einschlag), `fxp_trail` (Spur), `fxp_aura` (Aura), `fxp_gather` (Einströmen), `fxp_flame_line` (Flammen entlang eines Strahls), `fxp_decal` (Brand- und Frostmal).
+- **Nachbearbeitung** (`scripts/render_fx`): `fx_shock` (Druckwelle), `fx_heat_line` / `fx_heat_disc` (Hitzeflimmern), `fx_scene_tint` (Farbumschlag), `fx_aberration` (Farbversatz). Alle rein visuell, skaliert über „Effektqualität“ und „Lichtblitze“.
+- **Angriffsdekor** (`scripts/fx_attacks`) liegt auf der Weltebene unter der Gefahrenfläche; die Gefahrenfläche selbst (Warnung, Strahl mit Rändern) bleibt unverändert.
+
 ### Dynamisches Licht für mächtige Angriffe (Phase 2A, seit 26.11.)
-- Das bestehende multiplikative Licht bleibt. Die normale Beleuchtung bleibt zurückhaltend, damit besondere Angriffe Kontrast erzeugen.
+- **Seit 26.11. abends (Grafik-Overhaul) verstärkbares Weltlicht** ([[Visuelles Leitbild & Animation]] 7): Die Umgebung ist dunkler, und jede Flamme, jeder Zauber und jedes Projektil beleuchtet Boden und Figuren farbig. Besondere Angriffe heben sich zusätzlich durch Blitz, Farbumschlag, Glühen und Druckwelle ab. *Ersetzt: „Die normale Beleuchtung bleibt zurückhaltend“.*
 - **`light_flash`** (`scripts/atmosphere`) wird immer am Schadensereignis ausgelöst. Er besteht aus drei Teilen:
   - einer starken, kurzen Lichtquelle;
   - einem additiven Glanz auf der Welt;
@@ -134,7 +141,7 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
 
 ## 3. Größendisziplin
 
-- **Sichtbare Schadensfläche = Hitbox (G6).** Dekoratives Glühen darf den Rand höchstens leicht überschreiten (Richtwert 10 %). Es darf nie wie Schaden aussehen.
+- **Sichtbare Schadensfläche = Hitbox (G6).** Hartes, deckendes Dekor (Partikel, Formen, Funken) bleibt innerhalb der Schadensfläche; Partikel eines Strahls starten innerhalb von 80 % seiner Breite. Weiches Licht (Bodenlicht, Glühen, Dunst) darf über den Rand reichen, muss aber deutlich weicher und schwächer sein als der Gefahrenrand und darf nie wie Schaden aussehen. *Seit 26.11. abends; vorher galt für jedes Glühen ein Richtwert von 10 % über den Rand.*
 - **Kompaktheit ohne Balancing-Änderung (G12):** Radien und Werte bleiben unverändert. Gestaltet werden Füllung, Deckkraft, Rand, Partikelzahl und Licht.
   - Eine große Fläche auf Stufe 1 bekommt z. B. einen feinen Rand und eine schwache Füllung statt einer leuchtenden Vollfläche.
 - **Obergrenzen eigener Effekte** (Richtwerte, Vorschlag):

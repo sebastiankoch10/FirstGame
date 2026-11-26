@@ -108,6 +108,16 @@ class Project:
         (ROOT / 'scripts' / name / f'{name}.gml').write_text(code, encoding='utf-8')
         self._register(name, f'scripts/{name}/{name}.yy')
 
+    def shader(self, name, vsh, fsh):
+        """GLSL ES shader resource (type 1) with its vertex and fragment source."""
+        data = {'$GMShader': '', '%Name': name, 'name': name, 'parent': {'name': 'Shader', 'path': 'folders/Shader.yy'},
+                'resourceType': 'GMShader', 'resourceVersion': '2.0', 'type': 1}
+        self._file_under(data, 'shaders', name)
+        write(f'shaders/{name}/{name}.yy', data)
+        (ROOT / 'shaders' / name / f'{name}.vsh').write_text(vsh, encoding='utf-8')
+        (ROOT / 'shaders' / name / f'{name}.fsh').write_text(fsh, encoding='utf-8')
+        self._register(name, f'shaders/{name}/{name}.yy')
+
     def object(self, name, events, persistent=False, sprite=None):
         """events: list of (eventType, eventNum) -> created as empty files if missing."""
         data = read('objects/ObjectMasterScenery/ObjectMasterScenery.yy')
