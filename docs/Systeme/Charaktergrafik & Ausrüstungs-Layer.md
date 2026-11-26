@@ -5,7 +5,9 @@ updated: 2026-11-26
 # Charaktergrafik & Ausrüstungs-Layer
 
 ## Zweck
-Jede Klasse besteht aus einem **Basismodell** in einfacher Grundkleidung ohne Waffe sowie **sichtbaren Ausrüstungsteilen**:
+> **Korrektur 26.11. (verbindlich):** Die heutigen Spielfiguren sind **ausgerüstete Startfiguren, kein Basemodel**. Umhang, Schal, Köcher und Robenrock bleiben über das Label `KEEP` im Körper (`segment.py`), Rüstungszonen werden nur umgefärbt. Soll und Regel: [[Visuelles Leitbild & Animation]] 5.5a, Umstieg: [[Assets & Pipeline]] 7.7. Die Beschreibung unten ist der Ist-Stand dieser Übergangsfiguren.
+
+Jede Klasse besteht heute aus einer Startfigur (bisher „Basismodell“ genannt) ohne Waffe sowie **sichtbaren Ausrüstungsteilen**:
 - **Ebenen:** Kopf, Brust, Hände, Füße und Waffe, jeweils in 4 Stufen.
 - **Startwaffe:** eine eigene Ebene, solange keine Waffe angelegt ist.
 
@@ -22,7 +24,7 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
 - **Atlanten:**
   - `sprites/spr_eqv_<actor>_<teil>[ _acc]`: 41 pro Klasse, Texturgruppe `Equipment`.
   - Icons: `spr_eqv_icons_<actor>` mit 20 Frames, Frame = Slot·4 + Stufe.
-- **Basismodelle:** die bestehenden `spr_fg_<actor>_<aktion>_<richtung>`, Frames an Ort und Stelle ersetzt. Die Originale liegen unverändert in `FirstGame_ArtPack/characters/swordsman_v3/frames` und `class_overhaul/frames`.
+- **Startfiguren** (bisher „Basismodelle“, kein Basemodel im Sinn der Regel): die bestehenden `spr_fg_<actor>_<aktion>_<richtung>`, Frames an Ort und Stelle ersetzt. Die Originale liegen unverändert in `FirstGame_ArtPack/characters/swordsman_v3/frames` und `class_overhaul/frames`.
 - **Pipeline:** `tests/tools/characters/`
   - `atlas.py`: exakter Port des Atlas-Imports.
   - `segment.py`: Zerlegung in hoher Auflösung.
@@ -61,7 +63,7 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
 
 - **Seltenheit:** färbt die Akzente: gewöhnlich Bronze, magisch Blau, selten Gold, episch Violett.
 - **Talisman:** nicht sichtbar am Körper.
-- **Umhänge:** kein Ausrüstungsslot. Der rote Umhang (Schwertkämpfer) und der grüne Umhang (Waldläufer) bleiben Teil der Klassenidentität im Basismodell.
+- **Umhänge:** heute noch in die Startfigur eingebrannt. Das ist nach der Korrektur vom 26.11. falsch: Ein Umhang ist Ausrüstung (Rücken-Ebene), siehe [[Visuelles Leitbild & Animation]] 5.5a.
 
 - **Ankerpunkte seit 26.11.:**
   - `tests/tools/characters/build_attach_points.py` erzeugt `scripts/equipment_attach_data`: je Klasse und Zelle Griffpunkt, Winkel, Länge und Konfidenz, aus Startwaffen- und Handebene.
@@ -80,6 +82,6 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
 - **Waffenerkennung ist nicht in jedem Frame vollständig:** Schwert 223/256, Stab 212/256, Bogen 230/256 Zellen (`tests/reports/character-layers.json`).
   - Wo die Waffe nicht erkannt wurde, zeigt der Frame auch mit Item-Waffe die Originalwaffe. Nicht erkannte Klingenreste bleiben original statt umgefärbt.
   - Meist betroffen: verdeckte Waffen in Rückansichten, Todesposen und senkrecht nach unten gehaltene Klingen.
-- **Basis der Magierin:** Originalrobe ohne Goldornamente. Schwertkämpfer und Waldläufer bekommen dagegen neue Grundkleidung (Waffenrock bzw. Leinenhemd).
+- **Startfigur der Arkanistin:** Originalrobe ohne Goldornamente; Schwertkämpfer und Waldläufer tragen umgefärbte Grundkleidung (Waffenrock bzw. Leinenhemd) in der Rüstungssilhouette. Alle drei sind deshalb kein Basemodel (Korrektur 26.11.).
 - **Kollisionsmaske:** `combat_mask()` (`scripts/gameplay`) dupliziert ein Schwertmeister-Sprite. Die Box wird seit 25.11. aus dessen Ursprung berechnet; vorher feste 96er-Koordinaten, die bei der Umstellung auf 160 px die Projektiltreffer verschoben hätten (von der Suite `classes` gefunden).
 - **Startwaffe:** Basis plus Startwaffe ergibt das Original. Ausnahmen sind der entfernte Saum und einzelne Umrisspixel der Waffe.

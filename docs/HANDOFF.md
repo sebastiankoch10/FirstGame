@@ -5,30 +5,34 @@ agent: Claude
 ---
 # Übergabe (wird nach jeder Aufgabe überschrieben, max. ~40 Zeilen)
 
-**Zuletzt dran:** Claude, 2026-11-26 spätabends. Qualitätsaudit abgeschlossen. **Commit lokal, nicht gepusht** (im Auftrag war der Push nicht angekreuzt); für andere Geräte `git push origin entwicklung`.
+**Zuletzt dran:** Claude, 2026-11-26 nachts. Kurskorrektur „Basemodel ohne Ausrüstung“ (Priorität 1 des Nutzers). **Commits lokal, nicht gepusht**; für andere Geräte `git push origin entwicklung`.
 
-## Stand
-- **Review-Center:** 36 Szenarien offen, keine persönliche Freigabe bisher ([[Review-Center]]).
-- **Audit 26.11. (behoben, mit Messung bzw. Test):**
-  - **Münzen:** Sie verfallen nie und hatten keine Obergrenze. 2.500 liegende Münzen drückten die Horde von 72,6 auf 56,7 FPS unbegrenzt. Jetzt schlafen Münzen außerhalb des Bildausschnitts (`coin_cull_step`), Ergebnis 66,7 FPS; Wert, Position und Anzahl bleiben gleich ([[Progression & Level-up]]).
-  - **Drache:** Die Ringformel von Bodenschlag und Wirbel stand doppelt im Code (Treffer und Bild). Jetzt gibt es eine Funktion `dragon_ring_geometry` ([[Bosse]]).
-  - **Boss-Suite:** Das Orakel sieht jetzt auch die geometrischen Altangriffe des Drachen: 12 statt 6 von 18 Fällen, überall 0 Bilder ohne sichere Position.
-- **Audit bestätigt (nicht angefasst):** zentrale Schadensberechnung (`apply_attack_damage`), Stapelwerte mit Deckeln (`talent_equipment_apply`), gedeckelte Laufzeitlisten, keine Ressourcenlecks, Kiting-Druck (4–5 Aufholbewegungen in 45 s).
-- **Davor am 26.11.:** Drachen-Sequenzen, Trefferstopp, Texturen im Menü, `vfx_random`, Preset kalibriert, Anforderungen für neue Grafik (siehe [[LOG]]).
-- **Tests (26.11. spätabends):**
-  - QA Stufe 2 PASS: docs, anchors, Regression 811, Boss 190, Level 174.
-  - perf PASS mit 4 Szenarien.
-  - Feature 195, Klassen 151, Visual 86 und Review 12 zuletzt am Abend PASS; vom Audit laut `qa.py` nicht betroffen.
+## PRIORITÄT 1: Basemodels ohne Ausrüstung – BLOCKIERT an fehlender Quellgrafik
+- **Regel (verbindlich):** Ein Sprite mit sichtbarer Ausrüstung ist kein Basemodel ([[Visuelles Leitbild & Animation]] 5.5a).
+- **Ist:** Die Spielfiguren `spr_fg_<klasse>v3_*` sind ausgerüstete Startfiguren.
+  - Schwertkämpfer: Umhang, Kettenhemd, Schal, Stiefel-Rüstung.
+  - Arkanistin: Robe.
+  - Waldläufer: Kapuzenmantel, Lederrüstung, Köcher.
+  - Sie bleiben nur als spielbare Übergangsfigur und werden nicht weiter ausgebaut.
+- **Blocker:** Die Basemodels brauchen neue gemalte Atlanten. Claude Code hat kein Bildwerkzeug, lokal ist keins installiert. Herausrechnen geht nicht, weil unter Umhang und Robe keine Bildinformation liegt.
+- **Auftrag für den Agenten mit Bildwerkzeug (oder Pixel-Artist):**
+  1. Brief und Maße lesen: [[Assets & Pipeline]] 7.1, je Atlas die Originalzelle als Posen-Vorlage.
+  2. 12 Atlanten erzeugen (3 Klassen × `walk`, `combat`, `mobility`, `reaction`) nach `FirstGame_ArtPack/characters/base_neutral/<klasse>_<atlas>_base.png`.
+  3. `python tests/tools/characters/check_base_neutral.py` muss PASS melden; danach Sichtprüfung gegen die Verbotsliste.
+  4. Erst dann Ebenen und Umschalten nach [[Assets & Pipeline]] 7.7, ohne Mischbetrieb.
+- **Vorbereitet:** Regel und Ebenen-Stapel (10 Ebenen), Ablage, `atlas.base_neutral_path`, Abnahmeprüfung, Quellformat der Ebenen, Umstiegsplan.
+- **Offene Designentscheidung (Nutzer):** Werden Rücken, Schultern, Beine und Nebenhand eigene Spielplätze (mehr Werte, also Balancing) oder Teil vorhandener Gegenstände?
 
-## Offen (Reihenfolge)
-1. **Nutzer:** F5 → Review-Center (36 Szenarien); Grafikquelle entscheiden; Zusammenstellung der Drachen-Sequenzen nach dem Spieltest (zwei sind identisch, [[Bugs & Ideen]]).
-2. **Größtes Wartungsrisiko:** drei Boss-Codepfade. Vorschlag: Altangriffe des Drachen einzeln auf `bv2` umziehen, abgesichert durch das Orakel ([[Bugs & Ideen]]).
-3. **Animation Controller S2** ([[Technische Architektur]] 4.2) und Gegnerzustand ohne Existenzprüfungen (`ObjectMonster`).
-4. **Balancing-Beobachtung:** Waldläufer räumt in Bot-Händen deutlich langsamer; nur dokumentiert.
+## Stand sonst
+- **Review-Center:** 34 offen, 2 ersetzt (`char.equipment.mage` und `.ranger`, weil sie Ausrüstung auf der falschen Basis zeigen).
+- **Tagesstand 26.11.:** Drachen-Sequenzen, Trefferstopp, Münz-Culling, Texturen im Menü, `vfx_random`, Preset kalibriert (siehe [[LOG]]).
+- **Tests:** zuletzt QA Stufe 2 PASS (Regression 811, Boss 190, Level 174) und abends Stufe 3 PASS. Diese Korrektur ändert nur Doku, Registry-Status und ein Prüfwerkzeug.
+
+## Offen danach
+1. Zusammenstellung der Drachen-Sequenzen nach dem Spieltest; Sequenzen für Hexen und Behemoth.
+2. Drei Boss-Codepfade zusammenführen; Animation Controller S2 ([[Bugs & Ideen]]).
 
 ## Bekannte Bugs / Risiken
-- Sequenz-Takt und Bossdruck (`bc_config`) sind Startwerte; nach dem Spieltest feinjustieren.
+- Weitere Ausrüstungs- und Optikarbeit an Figuren erst nach den Basemodels (Roadmap 11 vor 13).
 - Im Hauptmenü ruckelt das Bild in den ersten etwa 3 s (Textur-Entpacken).
-- Das Orakel sieht die Projektilangriffe des Drachen nicht (Wind, Leere, Salve).
-- Neuer Code: `instance_number(ObjectCoin)` und `with(ObjectCoin)` sehen nur aktive Münzen.
 - GML: `all` ist ein Schlüsselwort; Array-Literale nicht direkt indizieren.

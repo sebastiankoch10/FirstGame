@@ -23,5 +23,5 @@ Start ohne Ausrüstung. Gegenstände fallen, werden durch Darüberlaufen aufgeno
 [[Talente]] (gemeinsamer Bildschirm, `talent_equipment_apply`) · [[Bosse]] (garantierte Drops) · [[Gegner & Spawns]] (0,3 %) · [[Licht, Wetter & Effekte]] · [[Charaktergrafik & Ausrüstungs-Layer]]
 
 ## Bekannte Probleme
-- Ausrüstung ist sichtbar (Basismodell + Layer; seit 25.11. Pixeldichte 1:1 und Helme als Kopf-Komposit). Grenzen siehe [[Charaktergrafik & Ausrüstungs-Layer]].
+- Ausrüstung ist sichtbar (Startfigur + Layer; die Startfigur ist kein Basemodel, Korrektur 26.11. in [[Charaktergrafik & Ausrüstungs-Layer]]; seit 25.11. Pixeldichte 1:1 und Helme als Kopf-Komposit). Grenzen siehe [[Charaktergrafik & Ausrüstungs-Layer]].
 - Drop-Raten und Werte sind neue, ungetestete Designwerte.

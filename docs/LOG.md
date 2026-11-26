@@ -4,6 +4,12 @@ updated: 2026-11-26
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-26 · Claude · Kurskorrektur: Basemodel ohne Ausrüstung (Priorität 1), Erzeugung blockiert
+- Regel zentral verankert: `Visuelles Leitbild & Animation.md` 5.5a (Verbots- und Erlaubnisliste, Ebenen-Stapel mit 10 Ebenen). Die heutigen Figuren sind als ausgerüstete Startfiguren eingestuft.
+- Widersprüche bereinigt: `Klassen.md` (Aussehen ohne Umhang, Robe, Köcher als Identität), `DECISIONS.md` („Umhänge bleiben im Basismodell“ ersetzt), `Assets & Pipeline.md` 7.1 und 7.7, `Progression & Builds.md`, Roadmap 11, Systemnotizen Charaktergrafik und Ausrüstung, ArtPack-README, `base_neutral/README.md`.
+- Werkzeuge: `check_base_neutral.py` (Schwellen für Figuren ohne Umhang und Robe), `atlas.py` und `art_paths.py` (Beschreibung). Review: `char.equipment.mage` und `.ranger` ersetzt (34 offen).
+- Nicht erzeugt: die Basemodels selbst (kein Bildwerkzeug in dieser Umgebung). Tests: docs PASS, Registry gültig.
+
 ### 2026-11-26 · Claude · Qualitätsaudit: Münz-Culling, Ringgeometrie des Drachen, Orakel für Altangriffe
 - Spiel: `combat_feedback` (`coin_cull_step`) und `ObjectController/Step_0` (Aufruf); `dragon_encounter` (`dragon_ring_geometry` für Treffer und Bild).
 - Tests: `tests/boss_harness.gml` (Orakel sieht geometrische Altangriffe), `tests/perf_harness.gml` (Szenario `horde_coins`), `tests/level_harness.gml` (Münz-Culling in 3 Leveln), `profile_perf.py` (Anker).

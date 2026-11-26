@@ -65,9 +65,10 @@ def source_path(actor: str, source: str) -> Path:
 
 
 def base_neutral_path(actor: str, source: str) -> Path:
-    """Delivered slim base clothing atlas for this actor and source (same grid, poses and feet as source_path), see
-    docs/Design/Assets & Pipeline.md 7.1. Cut with the same Atlas mapping, it lands pixel-aligned in the 160x160 frames,
-    so equipment layers and attach points keep fitting. The file may not exist yet."""
+    """Delivered base model WITHOUT equipment for this actor and source (same grid, poses, feet and grip positions as
+    source_path; no cape, robe, scarf, quiver, armour or weapon), see docs/Design/Assets & Pipeline.md 7.1 and
+    Visuelles Leitbild & Animation.md 5.5a. Cut with the same Atlas mapping, it lands pixel-aligned in the 160x160
+    frames, so attach points keep fitting; armour layers are rebuilt on it (7.7). The file may not exist yet."""
     name = {'swordsmanv3': 'swordsman', 'magev3': 'mage', 'rangerv3': 'ranger'}[actor]
     return AP.CHARACTER_BASE_NEUTRAL / f'{name}_{source}_base.png'
 

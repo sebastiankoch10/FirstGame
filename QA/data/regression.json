@@ -353,8 +353,8 @@
     ],
     "performance": {
       "frames": 60.0,
-      "mean_frame_ms": 16.66495,
-      "max_frame_ms": 17.187,
+      "mean_frame_ms": 16.664916666666667,
+      "max_frame_ms": 16.862,
       "measurement": "Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement.",
       "enemies": 150.0
     }
@@ -362,7 +362,7 @@
   "scope": "Current production functions and input-injected actual Player/Controller Steps in isolated native runner. Targeted regressions and short rendered150-enemy stress fixture; not full runs or human playtests.",
   "passed": true,
   "exit_code": 0,
-  "logs": "QA\\logs\\regression-20261126-152204",
+  "logs": "QA\\logs\\regression-20261126-160524",
   "screenshots": [
     "qacapture-crowd150-heavy-rain.png",
     "qacapture-hud-full-build-1280.png",

@@ -591,9 +591,17 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "superseded",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "revisions": [
+        {
+          "revision": 1,
+          "status": "superseded",
+          "until": "2026-11-26T23:00:00",
+          "reason": "Basemodel-Korrektur 26.11.: Die Figuren sind ausgeruestete Startfiguren, kein Basemodel. Ausruestungsebenen werden auf dem Basemodel neu erzeugt und dann neu registriert."
+        }
+      ]
     },
     {
       "id": "char.equipment.ranger",
@@ -641,9 +649,17 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "superseded",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "revisions": [
+        {
+          "revision": 1,
+          "status": "superseded",
+          "until": "2026-11-26T23:00:00",
+          "reason": "Basemodel-Korrektur 26.11.: Die Figuren sind ausgeruestete Startfiguren, kein Basemodel. Ausruestungsebenen werden auf dem Basemodel neu erzeugt und dann neu registriert."
+        }
+      ]
     },
     {
       "id": "enemy.motion.swamp",

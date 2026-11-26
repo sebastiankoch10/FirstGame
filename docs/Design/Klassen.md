@@ -68,7 +68,11 @@ Abnahme nach [[Qualitätsstandard]]:
 - **Rolle:** Nahkampf, Bewegung, kontrollierte Fläche. Robust (Ist: 120 HP, Tempo 3,2, Power 2).
 - **Startwaffe:** Kette aus drei Hieben mit festem Ablauf (`master_combat`, `ObjectSwordHitbox`). Slash-Effekte mit drei visuellen Stufen.
 - **Talentrichtung:** Druckwelle am Finale, Rundumhieb, Sturmangriff nach Ausweichrolle, Heilung beim Finale.
-- **Aussehen:** blondes Haar, navyblauer Waffenrock, **roter Umhang und Schal** (Klassenidentität, bleibt im Basismodell). Klassenfarbe warm (Stahl, Glut).
+- **Aussehen** (Basemodel ohne Ausrüstung, Regel in [[Visuelles Leitbild & Animation]] 5.5a):
+  - Identität: blondes, kurzes, wildes Haar und eine kämpferische, breitbeinige Haltung mit tiefem Schwerpunkt.
+  - Basis: schlichte, dunkle, eng anliegende Kleidung, Stoffschuhe.
+  - Ausrüstung: Waffenrock oder Kettenhemd (Brust), roter Umhang (Rücken) und Schal (Accessoire) sind Ausrüstung, nicht Basis.
+  - Klassenfarbe warm (Stahl, Glut).
 - **Soll (Auftrag 25.11.):**
   - Hiebe mit sichtbarer Körperrotation und Gewichtsverlagerung.
   - Ausholen, Treffer und Nachschwung mit Verwischungsbild (Smear) statt eines einzelnen Slash-Sprites.
@@ -83,7 +87,11 @@ Abnahme nach [[Qualitätsstandard]]:
   3. Runenkreis
   4. ballistischer Sternenorb mit Implosion
 - **Talentrichtung:** Fläche (Weite Glyphen), Sternenorb, Bannkreis, Elementarfokus, Supernova.
-- **Aussehen:** silber-lavendelfarbenes Haar, violett-blaue Robe (Basis ohne Goldornamente), Sternenstab. Klassenfarbe violett-blau.
+- **Aussehen** (Basemodel ohne Ausrüstung):
+  - Identität: langes, silber-lavendelfarbenes Haar und eine aufrechte, elegante Haltung mit ruhigen Gesten.
+  - Basis: schlichte, eng anliegende Tunika und Hose, Stoffschuhe.
+  - Ausrüstung: Die Robe gehört auf die Ebenen Brust und Beine, der Sternenstab ist die Waffen-Ebene; beides ist nicht Basis.
+  - Klassenfarbe violett-blau.
 - **Soll (Auftrag 25.11.):**
   - „Wuchtig“ heißt **Macht durch Phasen und Klarheit**: Aufladen, Entladung, Implosion. Bildschirmfläche ist kein Maßstab.
   - Auf niedriger Stufe sind die Effekte kompakt, der Sternenorb wird mit der Entwicklung sichtbar größer.
@@ -100,7 +108,11 @@ Abnahme nach [[Qualitätsstandard]]:
   - Eine Salve zählt als ein Schritt.
   - Ein Pfeil trifft dasselbe Ziel nur einmal.
 - **Talentrichtung:** Tempo, Salvenbreite, Pfeilhagel, Sturmköcher.
-- **Aussehen:** helles Haar, **grüner Umhang** (Klassenidentität), Leinenhemd als Basis, Bogen und Köcher. Klassenfarbe grün mit Naturakzenten.
+- **Aussehen** (Basemodel ohne Ausrüstung):
+  - Identität: helles Haar und eine leichtfüßige, federnde Haltung.
+  - Basis: schlichtes Leinenhemd, eng anliegende Hose, Stoffschuhe.
+  - Ausrüstung: Der grüne Kapuzenmantel liegt auf der Rücken-Ebene, Lederrüstung und Armschienen auf Brust und Händen, der Bogen auf der Waffen-Ebene. Vorschlag: Der Köcher gehört zur Bogen-Ausrüstung und wird auf der Rücken-Ebene gezeichnet. Nichts davon ist Basis.
+  - Klassenfarbe grün mit Naturakzenten.
 - **Soll (Auftrag 25.11.):**
   - Hohe Frequenz verlangt **kleine, präzise Projektile** mit feiner Spur.
   - Die Wucht steckt in Salve und Hagel, nicht im Einzelpfeil.
@@ -109,4 +121,6 @@ Abnahme nach [[Qualitätsstandard]]:
 ## 4. Offene Entscheidungen
 1. ~~Klassennamen~~: entschieden am 25.11.: Schwertmeister, Arkanistin, Waldläufer (im Spiel umgesetzt).
 2. ~~Waffen-Upgrade-System~~: entschieden und umgesetzt am 25.11. (Karten in der Level-up-Auswahl).
-3. **Umhang-Slot:** Ein Umhang ist derzeit Klassenidentität und kein Ausrüstungsteil (DECISIONS 24.11.).
+3. **Neue Ausrüstungsplätze** (statt „Umhang-Slot“; seit der Nutzer-Klarstellung vom 26.11. ist ein Umhang Ausrüstung):
+   - Umhang bzw. Mantel liegt auf der Rücken-Ebene.
+   - Offen ist, ob Rücken, Schultern, Beine und Nebenhand eigene Spielplätze werden (mehr Werte, also Balancing) oder Teil vorhandener Gegenstände sind ([[Visuelles Leitbild & Animation]] 5.5a, Ebenen-Stapel).

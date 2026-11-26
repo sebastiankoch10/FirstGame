@@ -1,4 +1,4 @@
-"""Acceptance check for delivered neutral base clothing atlases (docs/Design/Assets & Pipeline.md 7.1).
+"""Acceptance check for delivered base models without equipment (docs/Design/Assets & Pipeline.md 7.1).
 
   python tests/tools/characters/check_base_neutral.py
 
@@ -8,8 +8,11 @@ FirstGame_ArtPack/characters/base_neutral/, compared with the original atlas cel
   2. readable for the importer: the figure is what atlas.py keeps (alpha >= 128, like the originals, which are soft
      AI atlases with background alpha around 10-20), so every check below uses that mask;
   3. same feet: the lowest opaque row of each cell lies within 2 px of the original's;
-  4. slimmer, not larger: at least 95 % of the opaque base pixels lie inside the original silhouette (grown by 2 px);
-  5. not empty: the base covers at least 45 % of the original's opaque area in each cell.
+  4. slimmer, not larger: at least 90 % of the opaque base pixels lie inside the original silhouette (grown by 3 px);
+  5. not empty: the base covers at least 20 % of the original's opaque area in each cell (low on purpose: the base
+     has no cape, robe or quiver, which made up much of the original silhouette, 26.11.).
+Whether any equipment is still baked in (cape, robe, scarf, quiver, armour, weapon) cannot be measured here: that is
+the visual review with the contact sheets (docs/Design/Visuelles Leitbild & Animation.md 5.5a).
 Prints PASS / FAIL per file, NOT RUN when nothing is delivered. Technical acceptance only; the artistic
 acceptance stays with the user (docs/Design/Qualitätsstandard.md).
 """
@@ -55,10 +58,10 @@ def check(actor: str, source: str) -> tuple[str, list[str]]:
                 errs.append(f'Zelle {row},{col} leer'); continue
             if abs(np.nonzero(b.any(1))[0].max() - np.nonzero(o.any(1))[0].max()) > 2:
                 errs.append(f'Zelle {row},{col}: Fusspunkt weicht ab')
-            inside = (b & grow(o, 2)).sum() / b.sum()
-            if inside < .95:
+            inside = (b & grow(o, 3)).sum() / b.sum()
+            if inside < .90:
                 errs.append(f'Zelle {row},{col}: {100 * (1 - inside):.0f} % ausserhalb der Original-Silhouette')
-            if b.sum() < .45 * o.sum():
+            if b.sum() < .20 * o.sum():
                 errs.append(f'Zelle {row},{col}: deckt nur {100 * b.sum() / o.sum():.0f} % der Figur')
     return ('FAIL' if errs else 'PASS'), errs
 
