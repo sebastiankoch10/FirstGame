@@ -32,6 +32,7 @@ function qa_world_collision_cache() {
     // Draw. Headless tests must retain that nonvisual prerequisite explicitly.
     global.master_collision_props=[];
     with(ObjectMasterScenery)if(master_prop>=8 && master_prop<=10)array_push(global.master_collision_props,id);
+    scenery_grid_build(); // same cell index as master_world_ground (identical results, faster queries)
 }
 function qa_bot_observed(_entity,_reaction) {
     if(!variable_struct_exists(_entity,"qa_bot_first_seen"))_entity.qa_bot_first_seen=global.qa_ticks;

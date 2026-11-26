@@ -31,7 +31,8 @@ function pf_menu_tick() {
     if (global.pf_started) return;
     global.pf_frame++; if (global.pf_frame < 10) return;
     var s = global.pf_scn[global.pf_i]; global.pf_started = true; global.pf_frame = 0; global.pf_dt = []; global.pf_fps = [];
-    global.pf_acc = {enemies: 0, bullets: 0, hazards: 0, particles: 0, hz: 0, lights: 0, light_ms: 0, instances: 0, n: 0};
+    global.pf_acc = {enemies: 0, bullets: 0, hazards: 0, particles: 0, hz: 0, lights: 0, light_ms: 0, instances: 0, n: 0, spikes: 0};
+    texture_debug_messages(true);
     if (s.boss == "") scene_test_start({level: 0, scene_minute: 15, class_name: "Mage", seed: 1337, build: 1, spell: 0, spell_level: 9, gear: 2, enemies: 0});
     else boss_test_start(s.boss, 20, "Mage", 1337, -1, false, 1);
 }
@@ -48,9 +49,12 @@ function pf_controller_tick() {
         var have = instance_number(ObjectMonster);
         for (var k = have; k < min(s.enemies, have + 12); k++) {var a = k * 37 + global.pf_frame, d = 260 + (k mod 5) * 60; population_spawn_enemy(clamp(pl.x + lengthdir_x(d, a), 80, room_width - 80), clamp(pl.y + lengthdir_y(d, a), 80, room_height - 80));}
     }
+    if (global.pf_frame == 121) show_debug_message("PERF WINDOW " + s.name); // texture loads logged after this line fall inside the window
     if (global.pf_frame > 120 && global.pf_frame <= 720) {
         var acc = global.pf_acc; acc.n++;
         array_push(global.pf_dt, delta_time / 1000); array_push(global.pf_fps, fps_real);
+        // spikes: logged with frame and counts; texture page loads (texture_debug_messages) appear just before them in the log
+        if (delta_time > 50000) {acc.spikes++; show_debug_message("PERF SPIKE " + s.name + " frame " + string(global.pf_frame) + " ms " + string(delta_time / 1000) + " enemies " + string(instance_number(ObjectMonster)) + " instances " + string(instance_count));}
         acc.enemies += instance_number(ObjectMonster); acc.bullets += array_length(global.hostile_bullets);
         acc.hazards += variable_global_exists("bv2_hazards") ? array_length(global.bv2_hazards) : 0;
         acc.particles += variable_global_exists("spell_particles") ? array_length(global.spell_particles) : 0;
@@ -66,7 +70,7 @@ function pf_controller_tick() {
         for (var i = 0; i < array_length(fp); i++) {fsum += fp[i]; fmin = min(fmin, fp[i]);}
         global.pf_metrics[$ s.name] = {frames: n, frame_ms_mean: sum / n, frame_ms_p95: dt[floor(.95 * (array_length(dt) - 1))], frame_ms_max: dt[array_length(dt) - 1],
             fps_real_mean: fsum / n, fps_real_min: fmin, enemies: acc.enemies / n, hostile_bullets: acc.bullets / n, hazards: acc.hazards / n,
-            spell_particles: acc.particles / n, hazard_particles: acc.hz / n, lights: acc.lights / n, light_pass_ms: acc.light_ms / n, instances: acc.instances / n};
+            spell_particles: acc.particles / n, hazard_particles: acc.hz / n, lights: acc.lights / n, light_pass_ms: acc.light_ms / n, instances: acc.instances / n, spikes_over_50ms: acc.spikes};
         show_debug_message("PERF " + s.name + " " + json_stringify(global.pf_metrics[$ s.name]));
         global.pf_i++; global.pf_started = false; global.pf_frame = 0;
         if (global.pf_i >= array_length(global.pf_scn)) global.pf_done = true;

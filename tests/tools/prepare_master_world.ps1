@@ -73,7 +73,7 @@ public static class MasterAtlas {
  }
 }
 '@
-$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/master_world'))
+$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/environment/master_world'))
 $ground=[Drawing.Bitmap]::new((Join-Path $root 'sources/ground.png'));[MasterAtlas]::Resize($ground,512,512,(Join-Path $root 'frames/ground.png'));$ground.Dispose()
 $props=@('oak','maple','pine','ancient','ferns','redshrub','blueflowers','goldbush','pillar','arch','wall','brazier','rocks','stump','paving','leaves')
 $heights=@(230,224,245,238,64,74,60,72,148,212,132,122,64,72,64,54)

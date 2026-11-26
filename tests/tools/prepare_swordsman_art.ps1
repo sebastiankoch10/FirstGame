@@ -46,7 +46,7 @@ public static class SwordsmanAtlas {
  }
 }
 '@
-$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/swordsman_v3'))
+$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/characters/swordsman_v3'))
 $dirs=@('right','up_right','up','up_left','left','down_left','down','down_right')
 $walk=[Drawing.Bitmap]::new((Join-Path $root 'sources/walk.png'))
 $reference=[SwordsmanAtlas]::Cell($walk,0,6)

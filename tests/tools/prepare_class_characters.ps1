@@ -59,7 +59,7 @@ public static class ClassAtlas {
  }
 }
 '@
-$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/class_overhaul'))
+$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/characters/class_overhaul'))
 $dirs=@('right','up_right','up','up_left','left','down_left','down','down_right')
 $manifest=@()
 foreach($actor in @('mage','ranger')) {

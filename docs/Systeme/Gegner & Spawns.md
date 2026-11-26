@@ -15,6 +15,7 @@ Normale Gegner, Bevölkerungssteuerung und Tod (Münze, Ausrüstungs-Drop).
 - `scripts/survivor_balance`: `population_profile` und `population_step`, Zielanzahl über die Zeit, technisches Limit 180.
   - **Elitegegner** (seit 25.11., `elite_*`): `population_spawn_enemy` macht ab Minute 3 jeden 60. Gegner zur Elite (mehr Leben, Schaden und Größe, goldener Umriss `elite_outline_draw`). Abwechselnd mit Sprungangriff oder Giftlache beim Tod, beide über die gemeinsamen Bossgefahren `bv2_*` (Warnung und Countdown wie bei Bossen, [[Bosse]]). Beim Tod 10 % Chance auf Ausrüstung ([[Ausrüstung]]). Werte in `elite_config`.
 - `scripts/gameplay`: `enemy_pursue` (Verfolgung, Trennung, Schweben).
+  - Leistung (26.11.): Die Trennung nutzt eine gemeinsame Nachbarliste (`global.enemy_neighbors`, je Abfrage geleert) statt einer neuen `ds_list` pro Gegner und Bild. Der größte Posten war die Szenerie-Kollision (`scenery_resolve`, zweimal je Gegner), jetzt mit Zellindex ([[Spieler & Bewegung]]). Messung mit 148 Gegnern: unbegrenzt 64–66 → 73–75 FPS, P95 der Bildzeit 19,5 → 17,0 ms. Verhalten unverändert.
 - Objekte: `ObjectSpawner`, `ObjectSkeletonRemains`.
 
 - **Bewegungsidentität** (seit 26.11., Schalter `#macro ENEMY_MOTION_ENABLED`): `enemy_motion_profile` und `enemy_motion_offset` (`scripts/level_worlds`), ganzpixelige Versätze je Art mit Ausholen und Vorstoß. Wird in `enemy_draw` und `elite_outline_draw` angewendet (`motion_dx`, `motion_dy`).

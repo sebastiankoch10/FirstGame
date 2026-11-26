@@ -36,6 +36,8 @@ updated: 2026-11-26
 - **2026-11-26 · QA-Auswahl:** `docs` läuft immer mit (Sekunden, Skript statt Agent), `review` nur bei Review-Änderungen, `perf` und Simulationen nur auf Anlass. Grund: verlässliche Prüfung ohne unnötige Laufzeit und Tokens.
 - **2026-11-26 · Verwaiste Kollisions-Events der Altprojektile entfernt statt registriert.** Grund: Der Schaden läuft über `spell_projectile_step` (Kollisionslisten); registrierte Events hätten doppelt getroffen.
 - **2026-11-26 · Asset-Migration abgeschlossen** (Zielstruktur `characters/`, `enemies/`, `bosses/`, `vfx/`, `environment/` im ArtPack; nur die Pfadtabelle geändert). Die Skelett-Frames bleiben in `environment/master_world/`, weil der Welt-Importer den Ordner als Ganzes liest.
+- **2026-11-26 · `atmosphere_v2/` bleibt Quelle und liegt unter `bosses/`, nicht in `_legacy/`.** Grund: Minibosse, Magnetkugel und Münze stammen daraus, und der Importer liest den Ordner als Ganzes. PowerShell-Werkzeuge behalten Literalpfade; `art_paths.py --check` prüft deren Existenz.
+- **2026-11-26 · Texturgruppen `Default` und `Equipment` werden vorläufig beim Run-Start vorgeladen.** Grund: Entpacken beim ersten Gebrauch mitten im Kampf ergab Einzelbilder bis etwa 350 ms. Der Preis sind etwa 5,1 s beim ersten Run-Start der Sitzung. Die endgültige Variante ist offen und wird vom Nutzer entschieden: so lassen, im Menü verteilt laden, Kompression umstellen oder entfernen.
 - **2026-11-26 · `boss_test_preset` wird nicht eigenmächtig geändert.** Messung und Vorschlag stehen in [[Boss-Testmodus]]; die Zahlen setzt der Nutzer frei (Balancing-Regel).
 
 ## Spieldesign

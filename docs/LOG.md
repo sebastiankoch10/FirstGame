@@ -4,6 +4,11 @@ updated: 2026-11-26
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-26 · Claude · Performance bei vielen Gegnern, Textur-Vorladen, ArtPack-Pfade
+- Spiel: `spell_world_v2` (Zellindex `scenery_grid_build` für die Wald-Kollision, Ergebnis identisch), `master_world` und `ObjectMasterWorld` (Index mitbauen und zurücksetzen), `gameplay` (gemeinsame Nachbarliste in `enemy_pursue`), `ObjectController/Create_0` (Texturgruppen vorladen, vorläufig, etwa 5,1 s beim ersten Run).
+- Werkzeuge und Tests: `tests/tools/profile_perf.py` (neu), `tests/perf_harness.gml` (Ausreißer, Texturlog), `tests/level_harness.gml` (Raster gegen Vollsuche), `QA/tools/native_mc_harness.gml`; `art_paths.py --check` prüft `.ps1`-Pfade, 12 PowerShell-Skripte auf die Zielstruktur gezogen; `atmosphere_v2` → `FirstGame_ArtPack/bosses/`.
+- Tests: QA Stufe 3 PASS (docs, anchors, static, Regression 811, Feature 195, Boss 141, Level 168, Klassen 151); perf: Horde 148 Gegner 73–75 FPS unbegrenzt (vorher 64–66), keine Ausreißer über 50 ms.
+
 ### 2026-11-26 · Claude · Offene Aufgaben, QA-Optimierung, Dokumentationsregel
 - Messungen: `tests/perf_harness.gml` (Suite `perf`), `QA/tools/analyze_levels.py`, Kohorte `QA/data/level-cohort-2026-11-26/`; Vorschlag für `boss_test_preset` in der Notiz Boss-Testmodus.
 - Spiel: `spell_v2` (`spell_impact_light`, Sammelphase), `level_worlds` und `master_skeleton` (Wald-Skelette, allokationsfreie Bewegung), `equipment_visual` (`eqv_attach_draw`), `boss_test_mode` (F10-Anker), `audio_manager` (Lautstärken speichern), `combat_feedback` und `build_pixel_font.py` (Buchstaben, „MAGNET“).

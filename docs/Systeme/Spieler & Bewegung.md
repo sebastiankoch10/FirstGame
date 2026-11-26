@@ -18,6 +18,7 @@ Steuerung, Bewegung, Sprung, Sturz, Slide und Ausweichrolle, Treffer am Spieler,
   - `player_contact`
 - `scripts/player_artpack`: Sprites `swordsmanv3`, `magev3`, `rangerv3` in 8 Richtungen.
 - `scripts/spell_world_v2`: `scenery_resolve` und `scenery_point_blocked` (Kollision mit der Szenerie).
+  - Seit 26.11. im Wald (`Room1`) über einen Zellindex (`scenery_grid_build`, Zellen 128 × 32 px, gebaut zusammen mit `global.master_collision_props` in `master_world_ground`). Jede Zelle enthält eine Obermenge der Requisiten, die eine Abfrage treffen kann (Abstand bis 16 px). Das Ergebnis ist identisch mit der Vollsuche, geprüft in der Level-Suite an 16.200 Punkten (615 davon blockiert, keine Abweichung). Größerer Abstand, Punkte außerhalb des Raums oder ein Index aus einer anderen Liste fallen auf die Vollsuche zurück. Sumpf und Ruinen nutzen weiter `level_point_blocked` mit eigenem Raster.
 
 ## Abhängigkeiten
 [[Klassen & Startwaffen]] · [[Talente]] (Ausweich-Abklingzeit, Überlebenswille) · [[Ausrüstung]] · [[Level & Welten]] (Schlamm und Eis bremsen) · [[Bosse]] (Wurzeln, Gift)

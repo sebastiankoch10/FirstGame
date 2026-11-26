@@ -1,9 +1,9 @@
 $ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.Drawing
 $root=[IO.Path]::GetFullPath("$PSScriptRoot/../..")
-$tiles=[Drawing.Bitmap]::FromFile("$root/FirstGame_ArtPack/environment/ground_tiles_v2.png")
+$tiles=[Drawing.Bitmap]::FromFile("$root/FirstGame_ArtPack/environment/environment/ground_tiles_v2.png")
 $frames=@()
-for($i=0;$i-lt 13;$i++) {$frames += [Drawing.Bitmap]::FromFile(("$root/FirstGame_ArtPack/environment/detail_{0:00}.png" -f $i))}
+for($i=0;$i-lt 13;$i++) {$frames += [Drawing.Bitmap]::FromFile(("$root/FirstGame_ArtPack/environment/environment/detail_{0:00}.png" -f $i))}
 foreach($name in @('Room1','RoomCrypt','RoomRuins')) {
     $room=(Get-Content -LiteralPath "$root/rooms/$name/$name.yy" -Raw) -replace ',\s*([}\]])','$1' | ConvertFrom-Json
     $bitmap=[Drawing.Bitmap]::new(800,600)

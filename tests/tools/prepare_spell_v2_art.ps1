@@ -30,7 +30,7 @@ public static class SpellAtlas {
  }
 }
 '@
-$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/spell_v2'))
+$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/vfx/spell_v2'))
 $icons=[Drawing.Bitmap]::new((Join-Path $root 'sources/icons.png'));$rows=[SpellAtlas]::Cuts($icons,6,$true);$cols=[SpellAtlas]::Cuts($icons,6,$false)
 $ids=@(101..118)+@(201..218)
 foreach($i in 0..35){$row=[int][Math]::Floor($i/6);$col=$i%6;[SpellAtlas]::Icon($icons,$cols[$col],$rows[$row],$cols[$col+1],$rows[$row+1],(Join-Path $root "frames/icon-$($ids[$i]).png"))};$icons.Dispose()

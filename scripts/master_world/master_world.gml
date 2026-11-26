@@ -21,6 +21,7 @@ function master_world_ground() {
             if(visible && (master_prop<4 || (master_prop>=8 && master_prop<=11)))array_push(global.master_occluders,id);
             if(master_prop>=8 && master_prop<=10)array_push(global.master_collision_props,id);
         }
+        scenery_grid_build(); // cell index for scenery_point_blocked (same result, fewer props tested)
     }
     for(var yy=floor(r.top/tile)*tile;yy<r.bottom;yy+=tile)for(var xx=floor(r.left/tile)*tile;xx<r.right;xx+=tile) {
         var mx=(abs(xx div tile) mod 2)==0 ? 1 : -1,my=(abs(yy div tile) mod 2)==0 ? 1 : -1;

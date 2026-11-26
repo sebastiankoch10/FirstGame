@@ -22,4 +22,4 @@ Drei Welten: Wald (`Room1`, handgebauter Master-Wald), Verfluchter Sumpf, Aschen
 
 ## Bekannte Probleme
 - Die Layoutdaten sind generiert: Änderungen nur über `build_level.py`, sonst gehen sie beim nächsten Erzeugen verloren.
-- `RoomCrypt` und `RoomRuins` sind Fallbacks aus der Codex-Zeit; ob sie noch gebraucht werden, ist offen ([[Bugs & Ideen]]).
+- `RoomCrypt` und `RoomRuins` sind Fallbacks aus der Codex-Zeit. Geprüft am 26.11.: Sie werden nur über `fallback_room` in `level_definitions` erreicht, wenn `RoomSwamp` bzw. `RoomAshfrost` fehlen. Beide Räume existieren, im Spiel also nie. Außerdem nutzen nur die Grafikwerkzeuge `finish_art_migration.py` und `normalize_art_resources.py` sie. Entfernen würde nur Projektgröße sparen, daher bleiben sie als Sicherheitsnetz.

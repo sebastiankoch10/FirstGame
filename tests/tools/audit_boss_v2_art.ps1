@@ -15,7 +15,7 @@ public static class BossV2ReadAudit {
  }
 }
 '@
-$artRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/boss_v2'))
+$artRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/bosses/boss_v2'))
 $expected=@{fire=32;ice=32;behemoth_life=16;behemoth_attacks=32;twins_fx=36;swamp_fx=36;brood=4;projectiles=8}
 $sizes=@{fire=128;ice=128;behemoth_life=512;behemoth_attacks=512;twins_fx=256;swamp_fx=256;brood=96;projectiles=128}
 $results=@();$failed=@();$total=0

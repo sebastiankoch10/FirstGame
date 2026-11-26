@@ -75,7 +75,9 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
   - Die Boss-Suite zählt Feld-Gefahren (`field`) als Musterzellen.
   - `run_level_smoke.py` läuft mit fester Bildzeit (60 Hz), weil die Gegnerprüfungen zeitabhängig flackerten.
 
-- **QA-Runner seit 26.11.:** Suiten `docs` (immer, Sekunden, `tests/tools/vault_check.py`), `review` (nur bei Review-Änderungen, Regeln `REVIEW_RX`/`REVIEW_TOUCH` in `qa.py`) und `perf` (`run_native_harness.py perf`, Lastmessung ohne parallele Last; GameMaker liefert weder Draw Calls noch Prozessspeicher an GML, Ersatz: `fps_real`, Lichtpass-Zeit, Instanzzahl). Level-Auswertung der Bots: `QA/tools/analyze_levels.py`. Veraltete Harnesses und Runner liegen in `tests/_legacy/`. Prüf-Agenten: `qa` und `visual-qa` (je Claude und Codex).
+- **QA-Runner seit 26.11.:** Suiten `docs` (immer, Sekunden, `tests/tools/vault_check.py`), `review` (nur bei Review-Änderungen, Regeln `REVIEW_RX`/`REVIEW_TOUCH` in `qa.py`) und `perf` (`run_native_harness.py perf`, Lastmessung ohne parallele Last; GameMaker liefert weder Draw Calls noch Prozessspeicher an GML, Ersatz: `fps_real`, Lichtpass-Zeit, Instanzzahl). Level-Auswertung der Bots: `QA/tools/analyze_levels.py`.
+  - `perf` meldet seit 26.11. zusätzlich Ausreißer über 50 ms (`spikes_over_50ms`, Logzeile `PERF SPIKE` mit Bildnummer). Mit `texture_debug_messages` stehen Texturlade-Meldungen im Log; `PERF WINDOW <Szenario>` markiert den Beginn jedes Messfensters. Ladezeit des Vorladens beim Run-Start: Logzeile `TEXTURE_PREFETCH ms`.
+  - CPU-Profil ohne Projektänderung: `python tests/tools/profile_perf.py [--funcs a,b]` umhüllt in einer Testkopie jedes Step-/Draw-Ereignis und die genannten Funktionen mit `get_timer()` und meldet ms und Aufrufe je Bild und Szenario (`tests/reports/perf-profile.json`). Die Hüllen kosten etwa 1 µs je Aufruf; nur Läufe dieses Werkzeugs untereinander vergleichen. Veraltete Harnesses und Runner liegen in `tests/_legacy/`. Prüf-Agenten: `qa` und `visual-qa` (je Claude und Codex).
 
 ## Abhängigkeiten
 Alle Systeme, besonders [[Bosse]] · [[Talente]] · [[Ausrüstung]] · [[Level & Welten]] · [[Klassen & Startwaffen]]

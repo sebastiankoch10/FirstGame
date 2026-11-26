@@ -58,6 +58,32 @@ function lv_menu_tick() {
     global.lv_stage=1;global.lv_frame=0;
     menu_activate(global.lv_level);
 }
+// Reference: the full scan scenery_point_blocked used before the cell index (26.11.); results must match exactly.
+function lv_scan_blocked(_x,_y,_pad) {
+    for(var i=0;i<array_length(global.master_collision_props);i++) {
+        var p=global.master_collision_props[i],sy=p.image_yscale,sx=p.image_xscale;
+        if(abs(_y-(p.y-6*sy))>12*sy+_pad)continue;
+        if(p.master_prop==9) {if(abs(_x-(p.x-70*sx))<=20*sx+_pad || abs(_x-(p.x+70*sx))<=20*sx+_pad)return true;}
+        else if(abs(_x-p.x)<=(p.master_prop==8 ? 28 : 65)*sx+_pad)return true;
+    }
+    return false;
+}
+function lv_scenery_grid_check() {
+    var props=global.master_collision_props,pads=[0,10,12,16,24],bad=0,blocked=0,n=0;
+    lv_check(array_length(props)>0 && array_length(global.master_collision_grid)>0,"forest collision cell index is built ("+string(array_length(props))+" props)");
+    // lattice over the whole room plus a dense ring of points around every prop edge
+    for(var i=0;i<3000;i++)for(var j=0;j<array_length(pads);j++) {
+        var xx=(i*7919) mod room_width,yy=(i*104729) mod room_height,a=scenery_point_blocked(xx,yy,pads[j]),b=lv_scan_blocked(xx,yy,pads[j]);
+        n++;bad+=a!=b;blocked+=b;
+    }
+    for(var i=0;i<array_length(props);i++)for(var k=0;k<24;k++)for(var j=0;j<array_length(pads);j++) {
+        var p=props[i],xx=p.x+(k mod 6-2.5)*40*p.image_xscale,yy=p.y-6*p.image_yscale+(k div 6-1.5)*12*p.image_yscale;
+        var a=scenery_point_blocked(xx,yy,pads[j]),b=lv_scan_blocked(xx,yy,pads[j]);
+        n++;bad+=a!=b;blocked+=b;
+    }
+    lv_metric("scenery_grid_points",n);lv_metric("scenery_grid_blocked",blocked);
+    lv_check(bad==0 && blocked>100,"collision cell index matches the full scan ("+string(n)+" points, "+string(blocked)+" blocked, "+string(bad)+" differ)");
+}
 function lv_kill(_e) {if(instance_exists(_e)){_e.hp=0;}}
 function lv_resolve_choice() {
     if(!(global.levelup_active || global.chest_collected))return false;
@@ -108,6 +134,7 @@ function lv_controller_tick() {
             ObjectSpawner.population_timer=999;
         }
         if(f==40)lv_capture("start-"+lv.id);
+        if(f==41 && room==Room1)lv_scenery_grid_check();
         if(f==44 && gen && array_length(ObjectLevelWorld.data.sites)>0) {
             // Scenic preview at the first landmark: the level-select image is a real native frame.
             var site=ObjectLevelWorld.data.sites[0];lv_place(site.x,site.y+190);

@@ -37,7 +37,7 @@ public static class BossV2Atlas {
  }
 }
 '@
-$artRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/boss_v2'))
+$artRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/bosses/boss_v2'))
 $definitions=@(
  @{name='fire';cols=4;rows=8;size=128;foot=116;height=90;actor=$true},
  @{name='ice';cols=4;rows=8;size=128;foot=116;height=90;actor=$true},

@@ -34,12 +34,12 @@ $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $entries=Get-Content (Join-Path $root 'output/character_frames.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 $records=@();$visible=0;$hidden=0;$count=0
 foreach($entry in $entries){
- $path=Join-Path $root $entry.path;$clean=Join-Path $root ('FirstGame_ArtPack/spell_v2/clean_characters/'+$entry.sprite+'/'+$entry.frame+'.png')
+ $path=Join-Path $root $entry.path;$clean=Join-Path $root ('FirstGame_ArtPack/vfx/spell_v2/clean_characters/'+$entry.sprite+'/'+$entry.frame+'.png')
  [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($clean)) | Out-Null
  $action=($entry.sprite -split '_')[3];$quietPose=$action -in @('idle','walk','run','jump','fall','dive','slide')
  $change=[CharacterEdges]::Clean($path,$clean,$quietPose);$count++
  if($change[0]+$change[1] -gt 0){
-  $backup=Join-Path $root ('FirstGame_ArtPack/spell_v2/character_before/'+$entry.sprite+'/'+$entry.frame+'.png')
+  $backup=Join-Path $root ('FirstGame_ArtPack/vfx/spell_v2/character_before/'+$entry.sprite+'/'+$entry.frame+'.png')
   [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($backup)) | Out-Null
   if(-not(Test-Path -LiteralPath $backup)){Copy-Item -LiteralPath $path -Destination $backup}
   Copy-Item -LiteralPath $clean -Destination $path;Copy-Item -LiteralPath $clean -Destination (Join-Path $root $entry.layer)

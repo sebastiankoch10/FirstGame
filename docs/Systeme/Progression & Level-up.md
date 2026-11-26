@@ -20,5 +20,5 @@ XP-Münzen, Levelaufstieg, Zauberwahl, Truhen, Magnet-Orb.
 [[Zauber & Passiva]] · [[Talente]] · [[Bosse]] (Belohnung) · [[UI, HUD & Menüs]] · [[Klassen & Startwaffen]] (Waffen-Upgrades)
 
 ## Bekannte Probleme
-- `progression_audit` schreibt in jedem Run eine JSON-Datei, auch im normalen Spiel ([[Bugs & Ideen]]).
+- `progression_audit` schreibt im normalen Spiel an 11 festen Zeitpunkten je Run (Minute 1 bis 30) eine kleine JSON-Datei. Das ist gewollt, denn so entstehen Messdaten echter Läufe für die Kalibrierung. Geprüft am 26.11.: kein Leistungsproblem, Entwicklungssitzungen schreiben nichts.
 - Die Werte der Waffen-Upgrades sind neue, ungetestete Designwerte.

@@ -1,10 +1,10 @@
 param(
-    [string]$DetailSource = "$PSScriptRoot/../../FirstGame_ArtPack/environment/landscape_source.png",
-    [string]$GroundSource = "$PSScriptRoot/../../FirstGame_ArtPack/environment/ground_source.png"
+    [string]$DetailSource = "$PSScriptRoot/../../FirstGame_ArtPack/environment/environment/landscape_source.png",
+    [string]$GroundSource = "$PSScriptRoot/../../FirstGame_ArtPack/environment/environment/ground_source.png"
 )
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
-$artPath = [IO.Path]::GetFullPath("$PSScriptRoot/../../FirstGame_ArtPack/environment")
+$artPath = [IO.Path]::GetFullPath("$PSScriptRoot/../../FirstGame_ArtPack/environment/environment")
 function Get-Cell($source, [int]$index, [int]$size) {
     $bitmap = [Drawing.Bitmap]::new($size,$size)
     $graphics = [Drawing.Graphics]::FromImage($bitmap)

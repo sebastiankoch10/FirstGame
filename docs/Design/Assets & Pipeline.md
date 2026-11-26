@@ -50,7 +50,7 @@ Rang 2 unter [[Leitbild]].
 | `level_swamp`, `level_ashfrost`, `level_forest` | 105 / 96 / 2 | 101 / 92 / 0 | `build_level.py`, `update_previews.py` | Quelle bzw. generiert (Level) |
 | `level_enemies` | 40 | 0 | `build_enemies.py` | Quelle der Sumpf- und Ruinengegner |
 | `spell_v2` | 102 | 96 | `import_spell_v2.py`, `build_spell_v2_catalog.py` | Quelle Zaubericons und Effekte, Katalog `catalog.json` |
-| `atmosphere_v2` | 56 | 52 | `import_atmosphere_art.py` | Quelle (Krieger v2, Boss, Magnet) |
+| `atmosphere_v2` (seit 26.11. unter `bosses/`) | 56 | 52 | `import_atmosphere_art.py`, `prepare_atmosphere_art.ps1` | **Quelle** der Miniboss-Modelle (`spr_fg_boss_golem`, `spr_fg_boss_dragon`), der Magnetkugel und der Münze; die Krieger-v2-Bögen darin sind ungenutzt |
 | `environment` | 21 | 17 | `finish_art_migration.py` | Quelle Umgebung (frühe Migration) |
 | `references` | 9 | 0 | — | **Referenz** (Konzepttafeln, u. a. Zaubermeisterin, Waldläufer, Drachenangriffe) |
 | `heroes` | 120 | 0 | — | **Legacy** (ArtPack 0.1, Helden in 4 Richtungen) |
@@ -117,11 +117,11 @@ FirstGame_ArtPack/                 Name bleibt (bekannt bei Nutzer und Agenten)
   references/                      Konzepttafeln, Stil- und Bewegungsreferenzen (inkl. der losen Wurzel-PNGs)
   characters/  swordsman_v3/ · class_overhaul/ · character_layers/(generiert)
   enemies/     level_enemies/ · master_world_enemies/
-  bosses/      dragon_boss/(unveränderlich) · boss_v2/ · <neue Rigs>/
+  bosses/      dragon_boss/(unveränderlich) · boss_v2/ · atmosphere_v2/ · <neue Rigs>/
   vfx/         spell_v2/ · effects/ · <neue Partikel-Atlanten>/
   environment/ environment/ · master_world/ · level_swamp/ · level_ashfrost/ · level_forest/
   ui/          icons/ · portraits/
-  _legacy/     heroes/ · monsters/ · monster_originals/ · previews/ · atmosphere_v2/(nach Prüfung)
+  _legacy/     heroes/ · monsters/ · monster_originals/ · previews/
 ```
 
 **Migrationsplan (schrittweise, jeder Schritt mit Tests):**
@@ -144,7 +144,11 @@ FirstGame_ArtPack/                 Name bleibt (bekannt bei Nutzer und Agenten)
 - Geprüft: alle Tabelleneinträge vorhanden; Probeläufe `build_dragon_parts.py --preview`, `build_boss_baked.py twins --preview`, `audit_boss_v2_assets.py` PASS; QA-Suiten siehe LOG.
 - Abweichung vom Zielbild: Die Skelett-Frames des Walds bleiben in `environment/master_world/` (kein Aufteilen eines Ordners, den der Welt-Importer als Ganzes liest).
 
-**Offen:** `atmosphere_v2/` prüfen und gegebenenfalls nach `_legacy/` legen (ein Tabelleneintrag verweist noch darauf); `ui/` entsteht erst mit neuen UI-Quellen.
+**Nachtrag 26.11. nachmittags:**
+- `atmosphere_v2/` geprüft: Der Ordner ist keine Altlast, denn vier Spielgrafiken stammen daraus (Minibosse Waldgolem und Drache, Magnetkugel, Münze). Deshalb liegt er als Ganzes unter `bosses/`, nach dem Vorbild von `master_world`, weil der Importer ihn als Ganzes liest. Der relative Verweis der Drachen-Quellen (`../atmosphere_v2/frames/boss-dragon-0.png`) stimmt dadurch wieder.
+- Lücke der Migration vom Vormittag geschlossen: Die PowerShell-Vorbereitungsskripte (`prepare_*.ps1`, `audit_boss_v2_art.ps1`, `clean_character_edges.ps1`, `preview_art_rooms.ps1`) zeigten noch auf die alten Ordner. Die Python-Tabelle können sie nicht einbinden, daher behalten sie ihre Pfade. `art_paths.py --check` prüft jetzt aber, dass jeder ArtPack-Pfad in einer `.ps1` existiert (16 Pfade, 0 fehlen).
+
+**Offen:** `ui/` entsteht erst mit neuen UI-Quellen.
 
 **Sofort zulässig, ohne Migration:**
 - neue Quellen gleich in die Zielstruktur legen und in der Pfadtabelle eintragen;

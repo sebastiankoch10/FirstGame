@@ -9,17 +9,17 @@ Quell-, Referenz- und generierte Grafik. Rolle jedes Ordners, Werkzeuge und Ziel
 | `characters/character_layers/` | generierte Vorschauen der Figuren-Pipeline |
 | `bosses/dragon_boss/` | Drachen-Quellen, **nicht verändern** |
 | `bosses/boss_v2/` | Quellen Hexen und Behemoth |
+| `bosses/atmosphere_v2/` | Quellen der Miniboss-Modelle (Waldgolem, Drache), Magnetkugel und Münze; die Krieger-v2-Bögen darin sind ungenutzt. Als Ganzes behalten, weil der Importer den Ordner als Ganzes liest |
 | `enemies/level_enemies/` | generierte Gegnerquellen (Sumpf, Ruinen) |
 | `environment/` (`environment/`, `master_world/`, `level_forest/`, `level_swamp/`, `level_ashfrost/`) | Welt- und Levelquellen (der Wald enthält auch die Skelett-Frames) |
 | `vfx/spell_v2/` | Zauber-Icons, Effekte, `catalog.json` |
-| `atmosphere_v2/` | frühe Quellen (Krieger v2, Boss, Magnet) |
 | `_legacy/` | ArtPack 0.1 (heroes, monsters, icons, portraits, previews, effects), nicht mehr im Spiel; `manifest.json` und `CODEX_IMPORT.md` beschreiben diesen alten Stand |
 
 ---
 
 # FirstGame ArtPack 0.1 – Import-Prototyp
 
-Neue Krieger-, Boss- und Magnetgrafiken mit Quellen und Importskripten: [atmosphere_v2/README.md](atmosphere_v2/README.md).
+Neue Krieger-, Boss- und Magnetgrafiken mit Quellen und Importskripten: [bosses/atmosphere_v2/README.md](bosses/atmosphere_v2/README.md).
 
 ## Verbindlicher Integrationsstand 2026-11-22
 

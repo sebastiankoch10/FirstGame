@@ -150,7 +150,9 @@ function enemy_pursue() {
     if(authored && lvl_cfg.weave>0) dir+=sin(current_time/1000*(lvl_cfg.hover>0 ? 1.6 : 4.2)+lvl_weave_phase)*(lvl_cfg.hover>0 ? 38 : 24)*lvl_cfg.weave;
     var dx=lengthdir_x(pace,dir), dy=lengthdir_y(pace,dir);
     if (object_index==ObjectMonster) {
-        var neighbors=ds_list_create();
+        // One shared list, cleared per query (same contents and order as a fresh list, no allocation per enemy and frame).
+        if(!variable_global_exists("enemy_neighbors") || !ds_exists(global.enemy_neighbors,ds_type_list))global.enemy_neighbors=ds_list_create();
+        var neighbors=global.enemy_neighbors;ds_list_clear(neighbors);
         collision_circle_list(x,y,30,ObjectMonster,false,true,neighbors,false);
         var sx=0,sy=0;
         for(var i=0;i<ds_list_size(neighbors);i++) {
@@ -161,7 +163,6 @@ function enemy_pursue() {
                 sx+=lengthdir_x((24-dist)/24,away); sy+=lengthdir_y((24-dist)/24,away);
             }
         }
-        ds_list_destroy(neighbors);
         var push=point_distance(0,0,sx,sy);
         if (push>0) {dx+=sx/push*min(push*0.12,pace*0.3); dy+=sy/push*min(push*0.12,pace*0.3);}
     }

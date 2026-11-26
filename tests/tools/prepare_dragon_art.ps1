@@ -1,7 +1,7 @@
 # Deterministic alpha-preserving import of original generated dragon artwork.
 $ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.Drawing
-$root=Join-Path $PSScriptRoot '../../FirstGame_ArtPack/dragon_boss'
+$root=Join-Path $PSScriptRoot '../../FirstGame_ArtPack/bosses/dragon_boss'
 function Bounds($b) {
  $l=$b.Width;$t=$b.Height;$r=0;$bottom=0
  for($y=0;$y -lt $b.Height;$y++){for($x=0;$x -lt $b.Width;$x++){if($b.GetPixel($x,$y).A -ge 128){$l=[Math]::Min($l,$x);$t=[Math]::Min($t,$y);$r=[Math]::Max($r,$x);$bottom=[Math]::Max($bottom,$y)}}}

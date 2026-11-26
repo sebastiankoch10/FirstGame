@@ -1,6 +1,6 @@
 # Deterministic grid slicing only: preserves generated RGBA, uses nearest-neighbour scaling.
 Add-Type -AssemblyName System.Drawing
-$root=Join-Path $PSScriptRoot '../../FirstGame_ArtPack/atmosphere_v2'
+$root=Join-Path $PSScriptRoot '../../FirstGame_ArtPack/bosses/atmosphere_v2'  # same folder as ATMOSPHERE_V2 in tests/tools/assets/art_paths.py
 function Bounds($b) {
  $l=$b.Width;$t=$b.Height;$r=0;$bottom=0
  for($y=0;$y -lt $b.Height;$y++){for($x=0;$x -lt $b.Width;$x++){if($b.GetPixel($x,$y).A -ge 128){$l=[Math]::Min($l,$x);$t=[Math]::Min($t,$y);$r=[Math]::Max($r,$x);$bottom=[Math]::Max($bottom,$y)}}}

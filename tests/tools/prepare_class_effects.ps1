@@ -27,7 +27,7 @@ public static class ClassEffectsAtlas {
  }
 }
 '@
-$artRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/class_overhaul'))
+$artRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../FirstGame_ArtPack/characters/class_overhaul'))
 foreach($name in @('class_fx','dragon_fx','dragon_poses')){
  $dest=Join-Path $artRoot "frames/$name"
  New-Item -ItemType Directory -Force $dest | Out-Null
