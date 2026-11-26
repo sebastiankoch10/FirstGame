@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"review_registry_data",
   "parent":{
-    "name":"Welt_und_Atmosphaere",
-    "path":"folders/Skripte/Welt_und_Atmosphaere.yy",
+    "name":"Entwicklung_Review",
+    "path":"folders/Skripte/Entwicklung_Review.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

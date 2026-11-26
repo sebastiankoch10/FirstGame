@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, bosse]
-updated: 2026-11-25
+updated: 2026-11-26
 status: verbindlich (Fachgebiet Hauptbosse); bis 24.11. unter DESIGN/BOSS_DESIGN.md
 ---
 # Boss-Design: Bosskampf-Philosophie und Umsetzungsstand
@@ -27,7 +27,41 @@ Die Leitfragen für den Spieler:
 - **Die Lösung sind interessantere Mechaniken**, keine künstliche Reichweitenbegrenzung.
 - Jeder Hauptboss braucht Mittel gegen weit entfernte Spieler: weit reichende Strahlen, gezielt platzierte Bodenangriffe, großflächige Muster, Projektilkombinationen, kontrollierte Repositionierung und seltene Aufholattacken.
 
-## B – Seltene Aufholattacken
+## A2 – Distanzabhängiger Druck (Auftrag 26.11., Phase 2B, verbindlich)
+Entfernung allein darf keine dauerhaft risikofreie Strategie sein. Kiting, Fernkampf und Nahkampf bleiben legitim, verlangen aber aktives Ausweichen und Timing.
+- **Druck mit Hysterese** (`bc_pressure`, `scripts/boss_choreo`):
+  - Ab `far_distance` 420 px gilt der Spieler als fern, unter `far_exit` 330 px nicht mehr.
+  - Der Druck wächst über `far_span` 520 px von 0,25 auf 1.
+- **Wirkung** (Werte in `bc_config`, Startwerte des Auftrags, keine gemessene Balance):
+  - **Erholung zwischen Angriffen** bis zu 45 % kürzer (`bc_recovery`). Verdiente Schadensfenster bleiben bestehen, nur nicht unbegrenzt lang.
+  - **Annäherung:** Drache 65 → bis 295 px/s, Behemoth 32 → bis 202 px/s; die Hexen folgen bis zu viermal schneller.
+  - **Aufholattacke:** nach 1,2 s Ferne statt 3,5 s, Abklingzeit 9 s statt 20 s. Die Ferne zählt in jedem Zustand; die Bewegung startet nur zwischen zwei Angriffen.
+  - **Fern-Pool des Drachen** (`bc_dragon_far_pick`): Bei Druck ≥ 0,5 werden Nahmuster (Stampfen, Bodeneinschlag, Wirbel, Flügelsturm) abwechselnd durch Feuerstrahl oder Meteore ersetzt.
+- **Fairness:**
+  - Laufende, angekündigte Angriffe werden nie abgebrochen, um nachzusetzen.
+  - Kein Teleport auf den Spieler.
+  - Alle Aufholbewegungen sind angekündigt und ausweichbar.
+
+## A3 – Von außen nach innen: kontrahierende Ringe, Schachbrett über das ganze Feld (Phase 2B)
+- **Kontrahierende Ringwellen** (`bc_closing_waves`):
+  - Mehrere Ringbänder starten außen und ziehen sich zum Boss hin zusammen, zeitlich versetzt, jedes mit einer Öffnung an anderer Stelle.
+  - Sie treiben Kiter nach innen.
+  - **Lösungen:** durch die Öffnung gehen, ein Band mit getimtem Sprung oder Ausweichrolle kreuzen (Höhe `ground`), mitlaufen, vorher positionieren.
+  - Beim Drachen ist das die komplexe Variante des Feuerwirbels (ab Phase 2): drei Ringe von 820 auf 150 px, Band 40 px, 0,6 s Versatz.
+- **Durchlauflose Trefferprüfung:** Bewegte Ringe prüfen auch das seit dem letzten Schritt überstrichene Band (`sweep_prev`), damit schnelle Ringe den Spieler bei niedriger Bildrate nicht überspringen.
+- **Spielfeldweites Schachbrett** (`bc_field_checker`):
+  - Eine einzige Gefahr pro Welle mit Form `checker`. Die Zellen hängen am Weltursprung, die Fläche ist die ganze Arena (Raum).
+  - Der Treffertest gilt überall, gezeichnet werden nur sichtbare Zellen.
+  - Unabhängig von Abstand, Kamera und Spielweise; Weglaufen entkommt nicht.
+  - Im Einsatz bei Hexen-Attacke 3 und Drachen-Stampfen (komplexe Varianten), jeweils Feuer bzw. Magma, dann das invertierte Brett.
+  - Gerade sichere Felder bleiben dunkel (spätere Welle nur als Umriss).
+- **Sprung- und Ausweichregeln pro Angriff** (Höhe am Gefahren-Struct, `player_protected_from`):
+  - `ground`: Sprung oder Ausweichrolle schützen.
+  - `high`: Rutschen oder Ausweichrolle.
+  - `all`: nur die Ausweichrolle (Unverwundbarkeit während `dodge_timer`).
+  - Darstellung: Gefahren, die nur das Ausweichen löst, haben einen 2-px-Rand, alle anderen 1 px.
+
+## B – Aufholattacken (seit 26.11. häufiger, siehe A2)
 
 Jeder Hauptboss hat eine eigene, sichtbar animierte Aufhol- bzw. Repositionierungsbewegung:
 - **Drache:** Flügel ausbreiten, abheben, Flug oder Sturzflug zum Spieler. Die Landezone wird angekündigt; bei der Landung gibt es Staub, Erschütterung und einen Einschlag.
@@ -36,7 +70,7 @@ Jeder Hauptboss hat eine eigene, sichtbar animierte Aufhol- bzw. Repositionierun
 
 Regeln:
 - Nur bei sinnvoll großem Abstand.
-- Eigene Animation und langer Cooldown.
+- Eigene Animation und Cooldown (seit 26.11. 9 s, vorher 20 s; siehe A2).
 - Nie Schaden ohne Vorwarnung.
 - Danach geht normales Verhalten weiter.
 - Kein Teleport direkt auf den Spieler; die Aufholattacke ist lernbar und ausweichbar.

@@ -25,6 +25,11 @@ Multiplikatives Weltlicht, Wetter, Kampf-Feedback, Zauberpartikel.
 - **Intensitätsbänder** in `scripts/gameplay_polish`: `vfx_band` teilt Zauberstufen in 1–3, 4–6, 7–9; `vfx_band_alpha` (0,55 / 0,8 / 1) wirkt nur auf Deckkraft und Glühen. `global.vfx_band_override` erzwingt ein Band für Vorschauen und Tests. Dort auch der Kettenblitz (`chain_segment_add`) und `vfx_hash` (deterministischer Zufall ohne globalen RNG).
 - `scripts/attack_telegraph`: Warnflächen mit Countdown (zusammen mit [[Bosse]]).
 
+- **Seit 26.11. (Phase 2A):**
+  - Gegnerwarnungen und Gefahrenflächen zeichnet [[Telegraphs & Gefahrenflächen]] (`scripts/hazard_fx`).
+  - `light_flash` (starker kurzer Lichtblitz, Glanz, Anhebung der Umgebung; Einstellung `blitze`) neben `light_pulse`.
+  - Aufladelicht am Drachenmaul in `atmosphere_draw`.
+
 ## Abhängigkeiten
 [[Zauber & Passiva]] · [[Bosse]] · [[Level & Welten]] · [[Klassen & Startwaffen]] · [[Rendering & Pixelraster]] · [[Speichern & Einstellungen]]
 

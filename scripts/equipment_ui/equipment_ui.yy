@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"equipment_ui",
   "parent":{
-    "name":"Welt_und_Atmosphaere",
-    "path":"folders/Skripte/Welt_und_Atmosphaere.yy",
+    "name":"Fortschritt_und_Ausruestung",
+    "path":"folders/Skripte/Fortschritt_und_Ausruestung.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

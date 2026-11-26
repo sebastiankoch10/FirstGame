@@ -4,9 +4,11 @@
 /// ability's existing damage; this file adds geometry and timing, no new balancing numbers.
 function bc_config() {
     static cfg={beam_length:2600,       // "unbounded" beams: longer than any camera diagonal in a 4096 world
-        far_distance:520,               // catch-up moves only when the player keeps this distance ...
-        far_time:3.5,                   // ... for this many seconds while the boss is between attacks
-        catchup_cooldown:20,            // rare: at most every 20 s
+        far_distance:420,               // pressure starts beyond this distance (hysteresis: ends below far_exit) ...
+        far_exit:330,far_span:520,      // ... and grows to full over far_span pixels (user order 26.11.: clearly more aggressive bosses)
+        far_time:1.2,                   // announced catch-up move after this long at range (counted in every state, started only between attacks)
+        catchup_cooldown:9,             // was 20 s: distance alone must not stay a risk-free strategy
+        far_recovery_cut:.45,far_speed_dragon:230,far_speed_behemoth:170,far_follow_twins:1.0, // twins already aim at the player; a faster centre shifted their beam origins away (boss suite 26.11.)
         dive_warning:1.6,dive_radius:170,emerge_warning:1.7,emerge_radius:190,reform_warning:1.1,reform_radius:85,
         cell:118,grid:5};
     return cfg;
@@ -31,6 +33,20 @@ function bc_checker(_b,_kind,_cx,_cy,_cell,_n,_parity,_warning,_active,_damage,_
         if(is_struct(h) && !h.expired)array_push(out,h);
     }
     return out;
+}
+/// Field-wide checkerboard (Phase 2B): ONE hazard whose cells are anchored to world coordinates and cover the whole
+/// arena (room), independent of boss distance, player position and camera. _parity 0/1 selects the dangerous colour.
+function bc_field_checker(_b,_kind,_cell,_parity,_warning,_active,_damage,_height="all") {
+    var g=telegraph_make("checker",0,0,_cell,_warning,0,0,_cell);g.parity=_parity;g.bounds=[0,0,room_width,room_height];
+    var h=bv2_hazard(_b,_kind,g,_active,_damage,_height,true,undefined);
+    if(is_struct(h)){h.warning=max(0,_warning);h.field=true;}
+    return h;
+}
+/// Parity of the world cell the player stands on: the first wave uses it, so the board always forces a move
+/// (the grid itself stays anchored in the world; only the dangerous colour is chosen at cast time).
+function bc_field_parity(_cell) {
+    if(!instance_exists(ObjectPlayer))return 0;
+    return ((floor(ObjectPlayer.x/_cell)+floor((ObjectPlayer.y-10)/_cell)) mod 2+2) mod 2;
 }
 /// Parallel stripes of width _stripe; every second stripe (selected by _parity) is dangerous.
 function bc_stripes(_b,_kind,_cx,_cy,_angle,_stripe,_count,_length,_parity,_warning,_active,_damage,_height="ground") {
@@ -87,73 +103,33 @@ function bc_hazard_update(_h,_p) {
 }
 /// Telegraph for sweeps: the full fan that will be swept, the start edge and the sweep direction. Returns true if drawn.
 function bc_hazard_telegraph(_h,_col) {
-    if(variable_struct_exists(_h,"cell")) {
-        // Overlapping waves stay readable: the next wave is strong with its countdown, a later wave is only a faint preview.
-        var remaining=_h.warning-_h.age,u=clamp(1-(remaining-.35)/1.25,0,1),g=_h.g;
-        telegraph_paint(g,_col,.012+.12*u,.06+.36*u);
-        var mx=g.x+lengthdir_x(g.radius*.5,g.angle),my=g.y+lengthdir_y(g.radius*.5,g.angle);
-        if(remaining<1.6) {
-            var p=clamp(1-remaining/1.6,0,1),rad=clamp(min(g.radius,g.width)*.16,9,16),ang=90-360*p;
-            draw_set_alpha(.35+.4*u);draw_set_color(_col);draw_circle(mx,my,rad,true);
-            draw_set_alpha(.55+.4*u);draw_set_color(merge_color(_col,c_white,.6));draw_line_width(mx,my,mx+lengthdir_x(rad,ang),my+lengthdir_y(rad,ang),1);
-            var late=clamp((p-.85)/.15,0,1);
-            if(late>0){draw_set_alpha(.25*late);draw_set_color(merge_color(_col,c_white,.4));telegraph_paint(g,_col,0,.5*late);}
-        } else {
-            draw_set_alpha(.35);draw_set_color(_col);
-            for(var k=-1;k<=1;k++)draw_circle(mx+k*7,my,1.6,false);
-        }
-        draw_set_alpha(1);draw_set_color(c_white);
-        return true;
-    }
+    if(variable_struct_exists(_h,"cell")){telegraph_draw(_h.g,_col,hz_element_of(_h.kind));return true;} // queued: priority by time to impact
     if(!variable_struct_exists(_h,"sweep_from"))return false;
     var g=_h.g,p=telegraph_progress(g),len=min(g.radius,1150),span=_h.sweep_to-_h.sweep_from;
     var fan=telegraph_make("sector",g.x,g.y,len,1,(_h.sweep_from+_h.sweep_to)*.5,abs(span));
     if(g.shape=="sector")fan.span=abs(span)+g.span;
-    telegraph_paint(fan,_col,.055,.22);
-    if(g.shape=="line")telegraph_paint(telegraph_make("line",g.x,g.y,len,1,_h.sweep_from,0,g.width),_col,.12,.5);
+    telegraph_paint(fan,_col,.07,.32); // whole swept fan: visible but calm, the start lane carries the countdown
+    if(g.shape=="line"){var lane=telegraph_make("line",g.x,g.y,len,g.duration,_h.sweep_from,0,g.width);lane.elapsed=g.elapsed;telegraph_draw(lane,_col,hz_element_of(_h.kind));}
+    else {var start=telegraph_make("sector",g.x,g.y,len,g.duration,_h.sweep_from,g.span);start.elapsed=g.elapsed;telegraph_draw(start,_col,hz_element_of(_h.kind));}
     // direction arrows along the arc
     draw_set_color(merge_color(_col,c_white,.4));draw_set_alpha(.75);
     for(var k=1;k<=3;k++) {
         var a=_h.sweep_from+span*(k/4),r=len*(.35+.18*k),ax=g.x+lengthdir_x(r,a),ay=g.y+lengthdir_y(r,a),dir=a+(span>0 ? 90 : -90);
         draw_triangle(ax+lengthdir_x(9,dir),ay+lengthdir_y(9,dir),ax+lengthdir_x(6,dir+140),ay+lengthdir_y(6,dir+140),ax+lengthdir_x(6,dir-140),ay+lengthdir_y(6,dir-140),false);
     }
-    // countdown clock at the origin side
-    var cx=g.x+lengthdir_x(min(160,len*.3),_h.sweep_from),cy=g.y+lengthdir_y(min(160,len*.3),_h.sweep_from),rad=16,ang=90-360*p;
-    draw_set_alpha(.4);draw_set_color(_col);draw_circle(cx,cy,rad,true);
-    draw_set_alpha(.9);draw_set_color(merge_color(_col,c_white,.65));draw_line_width(cx,cy,cx+lengthdir_x(rad,ang),cy+lengthdir_y(rad,ang),1);
     draw_set_alpha(1);draw_set_color(c_white);
     return true;
 }
 /// Active look for pattern cells and long beams. Returns true if drawn.
 function bc_hazard_active_draw(_h,_age,_col) {
     var g=_h.g,k=clamp((_h.active+.25-_age)*3,0,1);
-    if(string_pos("dragon_",_h.kind)==1 && g.shape=="circle"){dragon_fx_sprite(string_pos("meteor",_h.kind)>0 ? 2 : 5,.375+clamp(_age/.65,0,.624),g.x,g.y,g.radius);draw_set_alpha(1);return true;}
-    if(variable_struct_exists(_h,"cell")) {
-        var nx=lengthdir_x(g.width*.5,g.angle+90),ny=lengthdir_y(g.width*.5,g.angle+90),ex=g.x+lengthdir_x(g.radius,g.angle),ey=g.y+lengthdir_y(g.radius,g.angle);
-        gpu_set_blendmode(bm_add);draw_set_color(_col);draw_set_alpha(.34*k);
-        draw_triangle(g.x+nx,g.y+ny,ex+nx,ey+ny,ex-nx,ey-ny,false);draw_triangle(g.x+nx,g.y+ny,ex-nx,ey-ny,g.x-nx,g.y-ny,false);
-        draw_set_alpha(.8*k);draw_set_color(merge_color(_col,c_white,.35));
-        draw_line_width(g.x+nx,g.y+ny,ex+nx,ey+ny,2);draw_line_width(ex+nx,ey+ny,ex-nx,ey-ny,2);draw_line_width(ex-nx,ey-ny,g.x-nx,g.y-ny,2);draw_line_width(g.x-nx,g.y-ny,g.x+nx,g.y+ny,2);
-        gpu_set_blendmode(bm_normal);
-        var mx=(g.x+ex)*.5,my=(g.y+ey)*.5;
-        if(string_pos("dragon",_h.kind)>0)dragon_fx_sprite(5,.375+clamp(_age/.65,0,.624),mx,my,min(g.width,g.radius)*.55);
-        else bv2_fx(_h.kind,clamp(_age/max(.35,_h.active),0,1),mx,my,min(g.width,g.radius)*.5);
-        draw_set_alpha(1);return true;
-    }
+    if(string_pos("dragon_",_h.kind)==1 && g.shape=="circle"){hz_area_draw(g,string_pos("void",_h.kind)>0 ? 4 : 1,_col,_age,_h.active,round(g.x));dragon_fx_sprite(string_pos("meteor",_h.kind)>0 ? 2 : 5,.375+clamp(_age/.65,0,.624),g.x,g.y,g.radius);draw_set_alpha(1);return true;}
+    if(variable_struct_exists(_h,"cell")){hz_area_draw(g,hz_element_of(_h.kind),_col,_age,_h.active,round(g.x+g.y));return true;}
     if(g.shape=="line" && string_pos("dragon_beam",_h.kind)==1) {
         // The hitbox stays 2600 px; the flame art is only stretched up to the visible screen edge (same look as the original beam).
-        var r=combat_view_rect(),vis=600,corners=[[r.left,r.top],[r.right,r.top],[r.left,r.bottom],[r.right,r.bottom]];
-        for(var i=0;i<4;i++)vis=max(vis,(corners[i][0]-g.x)*lengthdir_x(1,g.angle)+(corners[i][1]-g.y)*lengthdir_y(1,g.angle)+100);
-        dragon_fire_sprite(g,g.angle,min(g.radius,vis),g.width,floor(current_time/80) mod 4,k);return true;
+        vfx_beam_stream(g,1,_age,_h.active,7);return true; // coherent fire stream over the 2600 px hit line (drawn to the view edge)
     }
-    if(variable_struct_exists(_h,"closing")) {
-        gpu_set_blendmode(bm_add);draw_set_color(_col);
-        for(var n=0;n<5;n++){draw_set_alpha(.07*k);draw_circle(g.x,g.y,g.inner+18+n*26,true);}
-        draw_set_alpha(.55*k);draw_circle(g.x,g.y,g.inner,true);draw_circle(g.x,g.y,g.inner+2,true);
-        gpu_set_blendmode(bm_normal);
-        for(var n=0;n<24;n++){var a=n*15+_age*12;bv2_fx(_h.kind,.3+frac(_age*.7+n*.13)*.4,g.x+lengthdir_x(g.inner+36,a),g.y+lengthdir_y(g.inner+36,a),34,a);}
-        draw_set_alpha(1);return true;
-    }
+    if(variable_struct_exists(_h,"closing")){hz_area_draw(g,hz_element_of(_h.kind),_col,_age,_h.active,3);return true;}
     return false;
 }
 /// Activation sparks for cells (purely visual).
@@ -164,6 +140,32 @@ function bc_hazard_activated(_h) {
 }
 
 // ---------------- Rare catch-up moves (replace the technical teleport for ordinary distances) ----------------
+/// Distance pressure 0..1 with hysteresis (enter beyond far_distance, leave below far_exit). Drives approach speed,
+/// recovery length, the far attack pool and catch-up moves. Running, announced attacks are never interrupted by it.
+function bc_pressure(_b) {
+    if(!instance_exists(ObjectPlayer))return 0;
+    var cfg=bc_config(),d=bc_boss_distance(_b);
+    if(!variable_instance_exists(_b,"bc_far"))_b.bc_far=false;
+    if(_b.bc_far && d<cfg.far_exit)_b.bc_far=false;else if(!_b.bc_far && d>cfg.far_distance)_b.bc_far=true;
+    return _b.bc_far ? clamp((d-cfg.far_exit)/cfg.far_span,.25,1) : 0;
+}
+function bc_recovery(_b,_base) {return _base*(1-bc_config().far_recovery_cut*bc_pressure(_b));}
+/// Far attack pool for the dragon: close-range patterns are swapped for reaching ones while the player keeps away.
+function bc_dragon_far_pick(_b,_kind) {
+    if(bc_pressure(_b)<.5 || !array_contains(["stomp","slam","vortex","wind"],_kind))return _kind;
+    if(!variable_instance_exists(_b,"bc_far_pick"))_b.bc_far_pick=0;
+    _b.bc_far_pick++;return (_b.bc_far_pick mod 2)==0 ? "beam" : "meteor";
+}
+/// Contracting ring waves (outside -> inside): _count concentric bands start at _from and shrink toward the centre,
+/// each _delay later. Height "ground": a timed jump or dodge crosses a band; an optional gap is a walkable opening.
+function bc_closing_waves(_b,_kind,_cx,_cy,_count,_from,_to,_band,_delay,_warning,_active,_damage,_gap_width=0,_gap_angle=0) {
+    var out=[];
+    for(var i=0;i<_count;i++) {
+        var h=bc_closing_ring(_b,_kind,_cx,_cy,_from,_to,_band,_warning+i*_delay,_active,_damage);
+        if(is_struct(h)){h.hit_once=true;h.interval=99;if(_gap_width>0){h.gap_width=_gap_width;h.gap_angle=_gap_angle+i*137;h.rotate_speed=0;}array_push(out,h);}
+    }
+    return out;
+}
 function bc_catchup_init(_b) {_b.bc_far_time=0;_b.bc_catch_cd=bc_config().catchup_cooldown*.5;_b.bc_catch=undefined;_b.bc_alpha=1;_b.bc_lift=0;}
 function bc_boss_distance(_b) {
     var pl=ObjectPlayer,x0=_b.x,y0=_b.y;
@@ -178,7 +180,8 @@ function bc_catchup_step(_b,_kind,_dt) {
     _b.bc_catch_cd=max(0,_b.bc_catch_cd-_dt);
     if(is_struct(_b.bc_catch))return bc_catchup_run(_b,_kind,_dt);
     var idle=_b.boss_state=="recovery";
-    _b.bc_far_time=(idle && bc_boss_distance(_b)>cfg.far_distance) ? _b.bc_far_time+_dt : (idle ? max(0,_b.bc_far_time-_dt) : _b.bc_far_time);
+    // Range is counted in every state (pressure builds during long attacks too); the move itself starts only between attacks.
+    _b.bc_far_time=bc_pressure(_b)>0 ? _b.bc_far_time+_dt : max(0,_b.bc_far_time-_dt*2);
     if(!idle || _b.bc_far_time<cfg.far_time || _b.bc_catch_cd>0)return false;
     // Start: the destination is fixed and announced now; it never follows the player afterwards.
     var damage=_kind=="dragon" ? dragon_encounter_config("slam",_b.boss_phase).damage*_b.v2_scaling.damage : bv2_attack_profile(_kind=="twins" ? "twins" : "behemoth",_kind=="twins" ? 7 : 5).damage*_b.v2_scaling.damage;

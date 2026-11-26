@@ -1,6 +1,6 @@
 ---
 tags: [system, bosse]
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 # Bosse
 
@@ -18,6 +18,13 @@ Zwei Minibosse in Minute 1 und 3. Ab Minute 5 alle 5 Minuten ein zufälliger Hau
 - `scripts/boss_hazards_v2` und `scripts/attack_telegraph`: gemeinsame Gefahren, eine Uhr `v2_clock` je Boss, Countdown am Zonenrand.
 - `scripts/boss_choreo`: Muster, Schwenkstrahlen mit 2.600 px, Aufholattacken und die Eskalationsregel `bc_complex`.
 - Objekt: `ObjectBossMonster`. Regeln: [[Boss-Design]] und [[Kampf & Begegnungen]] (verbindlich). Test: `tests/boss_harness.gml`.
+
+- **Seit 26.11. (Phase 2A/2B):**
+  - Druck nach Entfernung (`bc_pressure`, schnellere Annäherung, kürzere Erholung, Aufholen nach 1,2 s, Abklingzeit 9 s, Fern-Pool des Drachen).
+  - Spielfeldweites Schachbrett (Hexen 3, Drache 3, komplexe Varianten).
+  - Kontrahierende Feuerringe (Drache 8, komplex).
+  - Feueratem als Strom mit Aufladung und Ausholbewegung (`dragon_parts_breath_offset`).
+  - Details: [[Telegraphs & Gefahrenflächen]], Regeln [[Boss-Design]] A2/A3.
 
 ## Abhängigkeiten
 [[Boss-Testmodus]] · [[Spieler & Bewegung]] · [[Licht, Wetter & Effekte]] · [[Ausrüstung]] · [[Talente]]

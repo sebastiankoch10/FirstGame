@@ -229,7 +229,7 @@ function cd_capture_draw() {
     if(f>=2 && f<=6) {
         var p=(f-2)*.25,s=surface_create(800,600);surface_set_target(s);draw_clear(make_color_rgb(12,18,26));
         var shapes=["circle","sector","line","rectangle","ring"];
-        for(var i=0;i<5;i++){var marker_x=140+(i mod 3)*255,marker_y=160+(i div 3)*280,g=telegraph_make(shapes[i],marker_x,marker_y,95,1,20,110,34);g.elapsed=p;telegraph_draw(g,make_color_rgb(255,126,63));draw_set_color(c_white);draw_text(marker_x-65,marker_y+115,shapes[i]+" "+string(p*100)+"%");}
+        for(var i=0;i<5;i++){var marker_x=140+(i mod 3)*255,marker_y=160+(i div 3)*280,g=telegraph_make(shapes[i],marker_x,marker_y,95,1,20,110,34);g.elapsed=p;telegraph_draw(g,make_color_rgb(255,126,63));telegraph_flush();draw_set_color(c_white);draw_text(marker_x-65,marker_y+115,shapes[i]+" "+string(p*100)+"%");}
         surface_reset_target();surface_save(s,"cdcapture-warning-"+string((f-2)*25)+".png");
         // Read actual native rendered pixels, not just the progress scalar.
         if(f==2)global.cd_fill_counts=[[],[],[],[],[]];
@@ -242,10 +242,10 @@ function cd_capture_draw() {
             }
             array_push(global.cd_fill_counts[i],filled);
             if(f==6) {
-                // Current warning design (docs/Design/Boss-Design.md): faint zone fill from 0 %, countdown runs along the edge and brightens late.
+                // Current warning design (docs/Design/Kampf & Begegnungen.md 5.3): whole area tinted from 0 %, the same shape fills from its origin as countdown.
                 var counts=global.cd_fill_counts[i],ratios=[],mono=true;for(var j=0;j<5;j++){array_push(ratios,counts[j]/max(1,counts[4]));if(j>0 && counts[j]<counts[j-1]-2)mono=false;}
                 cd_check(counts[0]>0,"Native rendered "+shapes[i]+" warning zone is visible from 0% countdown");
-                cd_check(mono && counts[4]>counts[0],"Native rendered "+shapes[i]+" edge countdown grows monotonically to activation");
+                cd_check(mono && counts[4]>counts[0],"Native rendered "+shapes[i]+" countdown fill grows monotonically to activation");
                 if(!variable_struct_exists(global.cd_metrics,"rendered_fill"))global.cd_metrics.rendered_fill=[];
                 array_push(global.cd_metrics.rendered_fill,{shape:shapes[i],filled_pixel_samples:counts,ratios:ratios});
             }

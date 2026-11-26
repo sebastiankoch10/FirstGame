@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"render_pipeline",
   "parent":{
-    "name":"Welt_und_Atmosphaere",
-    "path":"folders/Skripte/Welt_und_Atmosphaere.yy",
+    "name":"Kern_und_Spieler",
+    "path":"folders/Skripte/Kern_und_Spieler.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -193,6 +193,7 @@ function elite_outline_draw(_e,_scale) {
     var a=.55+.25*sin(current_time/180),col=make_color_rgb(255,206,96),sp=_e.sprite_index,fr=_e.image_index;
     var hover=variable_instance_exists(_e,"lvl_hover") ? _e.lvl_hover*(1+sin(current_time/260+_e.lvl_weave_phase)*.25) : 0;   // same as enemy_draw
     gpu_set_fog(true,col,0,1);
-    for(var i=0;i<4;i++)draw_sprite_ext(sp,fr,_e.x+lengthdir_x(2,i*90),_e.y-hover+lengthdir_y(2,i*90),_scale/monster_art_div(_e)*_e.image_xscale,_scale/monster_art_div(_e)*_e.image_yscale,0,c_white,a);
+    var mdx=variable_instance_exists(_e,"motion_dx") ? _e.motion_dx : 0,mdy=variable_instance_exists(_e,"motion_dy") ? _e.motion_dy : 0;
+    for(var i=0;i<4;i++)draw_sprite_ext(sp,fr,_e.x+mdx+lengthdir_x(2,i*90),_e.y-hover+mdy+lengthdir_y(2,i*90),_scale/monster_art_div(_e)*_e.image_xscale,_scale/monster_art_div(_e)*_e.image_yscale,0,c_white,a);
     gpu_set_fog(false,c_black,0,0);
 }

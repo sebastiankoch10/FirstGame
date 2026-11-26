@@ -1,5 +1,6 @@
 /// Shared bounded hazards. One clock drives telegraph, activation, contact and expiry.
 function bv2_hazard(_b,_kind,_g,_active,_damage,_height,_once,_extra) {
+    _g.height=_height; // the renderer shows how the hazard is solved (ground: jump or dodge, high: slide or dodge, all: dodge only)
     if(!variable_global_exists("bv2_hazards"))global.bv2_hazards=[];
     if(array_length(global.bv2_hazards)>=128)return {owner:_b,kind:_kind,g:_g,expired:true};
     var h={owner:_b,kind:_kind,g:_g,age:0,warning:_g.duration,active:_active,damage:_damage,height:_height,hit_once:_once,hit:false,next_hit:0,interval:.45,
@@ -16,7 +17,10 @@ function bv2_bullet(_b,_kind,_x,_y,_angle,_speed,_damage,_radius=10,_life=5) {
     array_push(global.hostile_bullets,b);return b;
 }
 function bv2_hazard_hit(_h,_pl) {
-    if(!telegraph_contains(_h.g,_pl.x,_pl.y-10))return false;
+    var inside=telegraph_contains(_h.g,_pl.x,_pl.y-10);
+    // moving rings: also count the band swept since the last step (no tunnelling at low frame rates)
+    if(!inside && variable_struct_exists(_h,"sweep_prev") && _h.g.shape=="ring"){var d=point_distance(_h.g.x,_h.g.y,_pl.x,_pl.y-10),lo=min(_h.sweep_prev,_h.g.radius)-(_h.g.radius-_h.g.inner),hi=max(_h.sweep_prev,_h.g.radius);inside=d>=lo && d<=hi;}
+    if(!inside)return false;
     if(_h.gap_width>0 && abs(angle_difference(point_direction(_h.g.x,_h.g.y,_pl.x,_pl.y-10),_h.gap_angle+_h.rotate_speed*max(0,_h.age-_h.warning)))<_h.gap_width*.5)return false;
     return true;
 }
@@ -34,10 +38,17 @@ function bv2_hazards_step(_dt) {
         if(h.gap_width>0){h.g.gap_width=h.gap_width;h.g.gap_angle=h.gap_angle+h.rotate_speed*max(0,h.age-h.warning);}
         if(h.age>=h.warning && h.age<h.warning+h.active) {
             var p=clamp((h.age-h.warning)/max(.001,h.active),0,1);
-            if(h.expand_from>=0 && h.expand_to>=0){var width=variable_struct_exists(h,"ring_width") ? h.ring_width : 40;h.g.radius=lerp(h.expand_from,h.expand_to,p);h.g.inner=max(0,h.g.radius-width);}
+            if(h.expand_from>=0 && h.expand_to>=0){var width=variable_struct_exists(h,"ring_width") ? h.ring_width : 40,prev=h.g.radius;h.g.radius=lerp(h.expand_from,h.expand_to,p);h.g.inner=max(0,h.g.radius-width);h.sweep_prev=prev;}
             bc_hazard_update(h,p);
             if(variable_struct_exists(h,"wave_from_x")){var dist=p*h.wave_length;h.g.x=h.wave_from_x+lengthdir_x(dist,h.wave_angle);h.g.y=h.wave_from_y+lengthdir_y(dist,h.wave_angle);h.g.radius=h.wave_thickness;h.g.width=h.wave_width;h.g.angle=h.wave_angle;}
-            if(!h.activated){h.activated=true;light_pulse(h.g.x,h.g.y,min(360,h.g.radius*2),bv2_element_color(h.kind),.8,.2);bc_hazard_activated(h);}
+            if(!h.activated){
+                h.activated=true;var el=hz_element_of(h.kind),big=geo_area(h.g)>40000;
+                // impact light on the damage event: lightning lifts the whole scene briefly, big areas flash, small ones pulse
+                if(el==3)light_flash(h.g.x,h.g.y,min(420,h.g.radius*2+80),make_color_rgb(190,215,255),1.6,.3,.45);
+                else if(big)light_flash(h.g.x,h.g.y,min(420,h.g.radius*1.6),bv2_element_color(h.kind),1.2,.32,.12);
+                else light_pulse(h.g.x,h.g.y,min(360,h.g.radius*2),bv2_element_color(h.kind),.9,.22);
+                bc_hazard_activated(h);
+            }
             if(instance_exists(ObjectPlayer) && (!h.hit_once || !h.hit) && h.age>=h.next_hit && bv2_hazard_hit(h,ObjectPlayer)) {
                 if(player_receive_damage(ObjectPlayer,h.damage,h.height)){h.hit=true;h.next_hit=h.age+h.interval;bv2_player_status(ObjectPlayer,h);}
             }
@@ -96,10 +107,13 @@ function bv2_hazards_draw() {
     if(!variable_global_exists("bv2_hazards"))return;
     for(var i=0;i<array_length(global.bv2_hazards);i++) {
         var h=global.bv2_hazards[i],g=h.g,col=bv2_element_color(h.kind);
-        if(h.age<h.warning) {if(!bc_hazard_telegraph(h,col))telegraph_draw(g,col);continue;}
-        var age=h.age-h.warning;if(age>h.active+.25)continue;
-        if(age<.08)telegraph_flash(g,col);
+        var el=hz_element_of(h.kind);
+        if(h.age<h.warning) {if(!bc_hazard_telegraph(h,col))telegraph_draw(g,col,el);continue;}
+        var age=h.age-h.warning;if(age>h.active+.3)continue;
         if(bc_hazard_active_draw(h,age,col)){draw_set_alpha(1);continue;}
+        // Phase 2A: the whole active area as one coherent element surface over the exact hit geometry (WYSIWYG).
+        if(g.shape=="line" && h.active>=.35)vfx_beam_stream(g,el,age,h.active,i);else hz_area_draw(g,el,col,age,h.active,i);
+        draw_set_alpha(1);continue;
         draw_set_alpha(clamp((h.active+.3-age)*3,0,1));
         if(g.shape=="line" || g.shape=="rectangle") {
             var xx=g.x+lengthdir_x(g.radius*.5,g.angle),yy=g.y+lengthdir_y(g.radius*.5,g.angle);

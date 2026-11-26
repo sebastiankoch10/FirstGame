@@ -56,8 +56,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Beute",
-    "path":"folders/Sprites/Beute.yy",
+    "name":"Drache",
+    "path":"folders/Sprites/Bosse/Drache.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -73,8 +73,14 @@ function dragon_encounter_begin(_b,_kind) {
         if(_kind=="stomp" && bc_complex(_b,2)) {
             // Magma checkerboard, then the inverted board: stand on the dark cells, then switch.
             _b.enc_zones=[];_b.dragon_magma=[];
-            bc_checker(_b,"dragon_magma_cell",pl.x,pl.y-10,cfgc.cell,cfgc.grid,0,c.warning+.6,.5,c.damage,"ground"); // jumpable
-            bc_checker(_b,"dragon_magma_cell",pl.x,pl.y-10,cfgc.cell,cfgc.grid,1,c.warning+1.9,.5,c.damage,"ground");
+            var pp=bc_field_parity(cfgc.cell);
+            bc_field_checker(_b,"dragon_magma_cell",cfgc.cell,pp,c.warning+.6,.5,c.damage,"ground"); // whole arena, jumpable
+            bc_field_checker(_b,"dragon_magma_cell",cfgc.cell,1-pp,c.warning+1.9,.5,c.damage,"ground");
+        }
+        if(_kind=="vortex" && bc_complex(_b,2)) {
+            // Fire rings contract from outside toward the dragon (they drive kiters inward): walk through the opening,
+            // jump over a band (ground) or dodge through it. Three waves 0.6 s apart, openings at different angles.
+            bc_closing_waves(_b,"dragon_fire_ring",_b.x,_b.y-10,3,820,150,40,.6,c.warning,2.6,c.damage*.8,50,point_direction(_b.x,_b.y,pl.x,pl.y)+180);
         }
         if(_kind=="meteor" && phase>=2) {
             // Consecutive explosions marching from the dragon through the player's position (reaches far kiters).
@@ -100,7 +106,7 @@ function dragon_encounter_zones(_b,_dt) {
     var pl=ObjectPlayer,c=_b.enc_cfg,played=false;
     for(var i=0;i<array_length(_b.enc_zones);i++) {
         var z=_b.enc_zones[i];z.age=_b.dragon_state_age+( _b.boss_state=="active" ? c.warning : 0);z.g.elapsed=z.age;
-        if(telegraph_ready(z.g) && !z.erupted) {z.erupted=true;if(!played){fg_sfx(_b.boss_cast=="meteor" ? "dragon_meteor" : "dragon_magma");played=true;}light_pulse(z.x,z.y,290,make_color_rgb(255,121,44),1,.35);}
+        if(telegraph_ready(z.g) && !z.erupted) {z.erupted=true;if(!played){fg_sfx(_b.boss_cast=="meteor" ? "dragon_meteor" : "dragon_magma");played=true;}light_flash(z.x,z.y,300,make_color_rgb(255,121,44),1.3,.32,.06);}
         if(z.erupted && z.age<z.warning+.55 && !z.hit && telegraph_contains(z.g,pl.x,pl.y-10))if(player_receive_damage(pl,c.damage,c.height))z.hit=true;
     }
 }
@@ -122,15 +128,16 @@ function dragon_encounter_step(_b,_dt) {
             var overflow=max(0,_b.dragon_state_age-_b.enc_cfg.warning);
             dragon_state(_b,"active",max(0,_b.enc_cfg.active-overflow));_b.dragon_state_age=overflow;
             fg_sfx(_b.boss_cast=="beam" || _b.boss_cast=="arc" ? "dragon_fire" : "dragon_charge");
-            light_pulse(_b.enc_geometry.x,_b.enc_geometry.y,280,make_color_rgb(255,146,66),1,.3);
+            if(_b.boss_cast=="beam" || _b.boss_cast=="arc"){var fm=dragon_mouth(_b,true);light_flash(fm.x,fm.y,340,make_color_rgb(255,146,66),1.5,.35,.1);} // breath ignites
+            else light_pulse(_b.enc_geometry.x,_b.enc_geometry.y,280,make_color_rgb(255,146,66),1,.3);
         }
     } else if(_b.boss_timer<=0) {
-        if(_b.boss_state=="active") { _b.enc_zones=[];_b.dragon_magma=[];dragon_state(_b,"recovery",_b.boss_phase>=3 ? .85 : 1.2); }
+        if(_b.boss_state=="active") { _b.enc_zones=[];_b.dragon_magma=[];dragon_state(_b,"recovery",bc_recovery(_b,_b.boss_phase>=3 ? .85 : 1.2)); }
         else if(_b.boss_state=="intro" || _b.boss_state=="transition")dragon_state(_b,"recovery",.8);
         else {
             var phase=dragon_phase_for_hp(_b);
             if(phase!=_b.boss_phase){_b.boss_phase=phase;_b.dragon_cycle=0;dragon_state(_b,"transition",1.2);fg_sfx("boss_phase");}
-            else {if(variable_global_exists("boss_test") && global.boss_test.active && global.boss_test.ability!=-1)boss_v2_force_attack(_b,global.boss_test.ability);else if(!dragon_melee_try(_b)){var rotation=boss_v2_dragon_rotation(_b);dragon_encounter_begin(_b,rotation[_b.dragon_cycle mod array_length(rotation)]);_b.dragon_cycle++;}}
+            else {if(variable_global_exists("boss_test") && global.boss_test.active && global.boss_test.ability!=-1)boss_v2_force_attack(_b,global.boss_test.ability);else if(!dragon_melee_try(_b)){var rotation=boss_v2_dragon_rotation(_b);dragon_encounter_begin(_b,bc_dragon_far_pick(_b,rotation[_b.dragon_cycle mod array_length(rotation)]));_b.dragon_cycle++;}}
         }
     }
     if(_b.boss_state=="windup" || _b.boss_state=="active") {
@@ -159,7 +166,7 @@ function dragon_encounter_step(_b,_dt) {
         }
     }
     if(_b.boss_state=="recovery") {
-        var pl=ObjectPlayer,dir=point_direction(_b.x,_b.y,pl.x+(pl.x<_b.x ? 245 : -245),pl.y+200),v=65;
+        var pl=ObjectPlayer,dir=point_direction(_b.x,_b.y,pl.x+(pl.x<_b.x ? 245 : -245),pl.y+200),v=65+bc_config().far_speed_dragon*bc_pressure(_b); // faster when the player keeps away
         _b.chase_vx=lengthdir_x(v,dir);_b.chase_vy=lengthdir_y(v,dir);_b.x=clamp(_b.x+_b.chase_vx*_dt,140,room_width-140);_b.y=clamp(_b.y+_b.chase_vy*_dt,310,room_height-24);
         if(abs(pl.x-_b.x)>40)_b.dragon_facing=pl.x<_b.x ? -1 : 1;
     }
@@ -170,24 +177,26 @@ function dragon_encounter_draw(_b) {
     var kind=_b.boss_cast,g=_b.enc_geometry,c=_b.enc_cfg,age=_b.dragon_state_age,col=(kind=="void" || kind=="volley") ? make_color_rgb(181,104,251) : (kind=="wind" ? make_color_rgb(130,225,211) : ((kind=="tail" || kind=="bite") ? make_color_rgb(236,214,170) : make_color_rgb(255,115,58)));
     var swept=variable_instance_exists(_b,"enc_sweep") && is_struct(_b.enc_sweep);
     if(_b.boss_state=="windup" && !array_contains(["meteor","stomp","void","volley","wind"],kind) && !(kind=="beam" && swept)) {
-        g.elapsed=age;telegraph_draw(g,col);
+        g.elapsed=age;telegraph_draw(g,col,(kind=="tail" || kind=="bite") ? 0 : 1);
     }
+    // Energy gathering at the mouth for fire attacks: embers converge, the mouth glows (light in atmosphere_draw).
+    if(_b.boss_state=="windup" && (kind=="beam" || kind=="arc" || kind=="sweep")){var m=dragon_mouth(_b,false);vfx_charge(m.x,m.y,clamp(age/max(.1,c.warning),0,1),1,70,11);}
     if(_b.boss_state=="active") {
-        if(age<.08 && !array_contains(["meteor","stomp","void","volley","wind"],kind) && !(kind=="beam" && swept))telegraph_flash(g,col);
-        if((kind=="beam" && !swept) || kind=="sweep") {var fire=dragon_attack_geometry(_b);dragon_fire_sprite(fire,_b.dragon_angle,fire.length,48,floor(_b.dragon_clock*12) mod 4,1);}
+        if(age<.08 && (kind=="tail" || kind=="bite"))telegraph_flash(g,col);
+        if((kind=="beam" && !swept) || kind=="sweep") {var fire=dragon_attack_geometry(_b);vfx_beam_stream({shape:"line",x:fire.x,y:fire.y,angle:_b.dragon_angle,radius:fire.length,width:fire.width,inner:0,span:0},1,age,c.active,5);}
         if(kind=="arc")vfx_fire_cone(g.x,g.y,g.angle,g.span,g.radius,age,c.active); // fills exactly the telegraphed sector
         if(kind=="vortex" || kind=="slam") {
             var r=kind=="slam" ? max(45,320*age/c.active) : 100+210*age/c.active;
             if(kind=="vortex")dragon_fx_sprite(6,.25+frac(age)*.35,g.x,g.y,r,_b.dragon_clock*100);
             else {for(var dust=0;dust<12;dust++){var angle=dust*30;class_fx_sprite(7,clamp(age/c.active,0,1),g.x+lengthdir_x(r-20,angle),g.y+lengthdir_y(r-20,angle),28,angle);}if(age<.4)class_fx_sprite(7,age/.4,g.x,g.y,90);}
-            draw_set_color(col);draw_set_alpha(.75);draw_circle(g.x,g.y,r,true);draw_circle(g.x,g.y,max(0,r-40),true);
+            var ring=telegraph_make("ring",g.x,g.y,r,1,0,360,40);ring.inner=max(0,r-40);hz_area_draw(ring,kind=="slam" ? 5 : 1,col,age,c.active,kind=="slam" ? 2 : 8); // same ring as the hit test
         }
         if(kind=="wind")dragon_fx_sprite(3,.25+frac(age)*.4,g.x+lengthdir_x(160,g.angle),g.y+lengthdir_y(160,g.angle),150,g.angle);
     }
     if(_b.boss_state=="windup" || _b.boss_state=="active")for(var i=0;i<array_length(_b.enc_zones);i++) {
         var z=_b.enc_zones[i];
-        if(!z.erupted) {telegraph_draw(z.g,col);if(kind=="meteor"){var p=telegraph_progress(z.g);dragon_fx_sprite(2,.2,z.x-50*(1-p),z.y-300*(1-p),36,285);}}
-        else if(z.age<z.warning+.8){dragon_fx_sprite(kind=="meteor" ? 2 : 5,.375+clamp((z.age-z.warning)/.65,0,.624),z.x,z.y,c.radius);}
+        if(!z.erupted) {telegraph_draw(z.g,col,kind=="void" ? 4 : 1);if(kind=="meteor"){var p=telegraph_progress(z.g);dragon_fx_sprite(2,.2,z.x-50*(1-p),z.y-300*(1-p),36,285);}}
+        else if(z.age<z.warning+.8){hz_area_draw(z.g,1,col,z.age-z.warning,.45,i);dragon_fx_sprite(kind=="meteor" ? 2 : 5,.375+clamp((z.age-z.warning)/.65,0,.624),z.x,z.y,c.radius);}
     }
     draw_set_alpha(1);draw_set_color(c_white);
 }

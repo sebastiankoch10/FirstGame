@@ -142,3 +142,16 @@ function eqv_draw_base_cut(_spr, _frame, _x, _y, _xs, _ys, _rot, _col, _alpha, _
     var dx = -ox * _xs, dy = (_cut - oy) * _ys, cs = dcos(_rot), sn = dsin(_rot);
     draw_sprite_general(_spr, _frame, 0, _cut, w, h - _cut, _x + dx * cs + dy * sn, _y - dx * sn + dy * cs, _xs, _ys, _rot, _col, _col, _col, _col, _alpha);
 }
+/// Weapon attachment point of a frame (Phase 1, 7.3): grip in world coordinates and the direction from the grip to the
+/// tip, following the body's own per-frame pose (generated equipment_attach_data, tests/tools/characters/
+/// build_attach_points.py). ok=false when no weapon is visible in the frame; conf=0 when the hand is hidden (back
+/// views): callers keep an attached item hidden there. Any future weapon type, off-hand item or shield is drawn here
+/// instead of at an approximate floating position. Mirroring follows _xs like draw_sprite_ext.
+function eqv_attach(_actor, _spr, _frame, _x, _y, _xs, _ys) {
+    var cell = eqv_cell(_actor, _spr, _frame), d = equipment_attach_data();
+    if (cell < 0 || !variable_struct_exists(d, _actor)) return {ok: false};
+    var rows = d[$ _actor]; if (cell >= array_length(rows)) return {ok: false};
+    var a = rows[cell]; if (!is_array(a)) return {ok: false};
+    var F = eqv_frame();
+    return {ok: true, x: _x + (a[0] - F.ox) * _xs, y: _y + (a[1] - F.oy) * _ys, angle: _xs < 0 ? 180 - a[2] : a[2], length: a[3] * abs(_xs), conf: a[4]};
+}

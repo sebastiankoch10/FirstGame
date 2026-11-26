@@ -133,8 +133,10 @@ function bv2_encounter_attack_begin(_b,_index) {
                 if(bc_complex(_b,2)) {
                     // Fire on one colour of the board, then ice on the cells that were safe a moment ago.
                     var cfgc=bc_config();
-                    bc_checker(_b,"twins_meteor_cell",_b.v2_target_x,_b.v2_target_y,cfgc.cell,cfgc.grid,0,warning+.45,.45,damage,"all");
-                    bc_checker(_b,"twins_ice_cell",_b.v2_target_x,_b.v2_target_y,cfgc.cell,cfgc.grid,1,warning+1.75,.45,damage,"all");
+                    // Phase 2B: the board covers the whole arena (one hazard each), so distance never escapes it.
+                    var pp=bc_field_parity(cfgc.cell);
+                    bc_field_checker(_b,"twins_meteor_cell",cfgc.cell,pp,warning+.45,.45,damage,"all");
+                    bc_field_checker(_b,"twins_ice_cell",cfgc.cell,1-pp,warning+1.75,.45,damage,"all");
                     break;
                 }
                 for(var i=0;i<4+(phase>=3 ? 2 : 0);i++) {
@@ -155,7 +157,7 @@ function bv2_encounter_attack_begin(_b,_index) {
                 bv2_encounter_add_line(_b,"twins_fire_cross",fire_hand.x,fire_hand.y,_b.v2_target_x+250,_b.v2_target_y+180,28,warning,2,damage,"fire_cross");
                 bv2_encounter_add_line(_b,"twins_ice_cross",ice_hand.x,ice_hand.y,_b.v2_target_x-250,_b.v2_target_y+180,28,warning,2,damage,"ice_cross");
                 // Later phases: the long fire/ice beams cross while the floor freezes in alternating stripes.
-                if(phase>=3)bc_stripes(_b,"twins_ice_flood",_b.v2_target_x,_b.v2_target_y,(_b.v2_cycle mod 2)*90,105,7,1100,0,warning+.3,1.2,damage,"ground");
+                if(phase>=3)bc_stripes(_b,"twins_ice_flood",_b.v2_target_x,_b.v2_target_y,(_b.v2_cycle mod 2)*90,105,7,1100,1,warning+.3,1.2,damage,"ground"); // parity 1: the player's own lane floods (forces a move, like the field board)
                 break;
             case 7:
                 bv2_zone(_b,"twins_blast",_b.v2_target_x,_b.v2_target_y,155,warning,.3,damage,"all");
@@ -320,7 +322,7 @@ function bv2_encounter_step(_b,_dt) {
         bv2_encounter_state(_b,"active",max(0,_b.v2_profile.active-overflow));
         if(!_b.v2_launched){_b.v2_launched=true;bv2_encounter_release(_b);}
     } else if(_b.boss_timer<=0) {
-        if(_b.boss_state=="active")bv2_encounter_state(_b,"recovery",max(.65,1.25/max(1,_b.v2_scaling.speed)));
+        if(_b.boss_state=="active")bv2_encounter_state(_b,"recovery",bc_recovery(_b,max(.65,1.25/max(1,_b.v2_scaling.speed))));
         else if(_b.boss_state=="intro" || _b.boss_state=="transition")bv2_encounter_state(_b,"recovery",.65);
         else {
             var phase=bv2_encounter_phase(_b);
@@ -334,12 +336,12 @@ function bv2_encounter_step(_b,_dt) {
     }
     if(_b.v2_kind=="twins") {
         if(_b.boss_state=="recovery" || _b.boss_state=="intro") {
-            var blend=1-exp(-.7*_dt);_b.v2_center_x=lerp(_b.v2_center_x,ObjectPlayer.x,blend);_b.v2_center_y=lerp(_b.v2_center_y,ObjectPlayer.y-10,blend);
+            var blend=1-exp(-(.7+bc_config().far_follow_twins*bc_pressure(_b))*_dt);_b.v2_center_x=lerp(_b.v2_center_x,ObjectPlayer.x,blend);_b.v2_center_y=lerp(_b.v2_center_y,ObjectPlayer.y-10,blend);
             if(_b.boss_state=="recovery")_b.v2_formation=(_b.v2_cycle mod 3)==0 ? "follow" : ((_b.v2_cycle mod 3)==1 ? "eight" : "circle");
         }
         bv2_encounter_twins_positions(_b,_dt);bv2_encounter_update_links(_b);
     } else if(_b.boss_state=="recovery" || _b.boss_state=="intro") {
-        var pl=ObjectPlayer,goal_x=pl.x+(pl.x<_b.x ? 220 : -220),goal_y=pl.y+190,dir=point_direction(_b.x,_b.y,goal_x,goal_y),distance=point_distance(_b.x,_b.y,pl.x,pl.y),goal_distance=point_distance(_b.x,_b.y,goal_x,goal_y),move_amount=distance>210 ? min(32*_dt,goal_distance) : 0;
+        var pl=ObjectPlayer,goal_x=pl.x+(pl.x<_b.x ? 220 : -220),goal_y=pl.y+190,dir=point_direction(_b.x,_b.y,goal_x,goal_y),distance=point_distance(_b.x,_b.y,pl.x,pl.y),goal_distance=point_distance(_b.x,_b.y,goal_x,goal_y),move_amount=distance>210 ? min((32+bc_config().far_speed_behemoth*bc_pressure(_b))*_dt,goal_distance) : 0;
         _b.x=clamp(_b.x+lengthdir_x(move_amount,dir),150,room_width-150);_b.y=clamp(_b.y+lengthdir_y(move_amount,dir),350,room_height-30);
         var face=pl.x<_b.x ? -1 : 1;if(face!=_b.v2_facing)_b.v2_turn_time=.24;_b.v2_facing=face;
     }

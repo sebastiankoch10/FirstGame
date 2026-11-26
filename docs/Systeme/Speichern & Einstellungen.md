@@ -17,6 +17,8 @@ Es gibt **keinen Spielstand**. Jeder Run beginnt neu. Gespeichert wird nur wenig
 
 - `review_approvals.json`, `review_approvals.log` (seit 26.11.): persönliche Freigaben aus dem [[Review-Center]], nur per Klick im Spiel geschrieben. Test- und Review-Sitzungen schreiben keine Talente und kein Fortschrittsprotokoll.
 
+- `firstgame_settings.ini` [Grafik] `blitze` (0 normal, 1 reduziert), seit 26.11., Menüpunkt „Lichtblitze“ in beiden Einstellungsmenüs (`light_flash_toggle`).
+
 ## Abhängigkeiten
 [[Audio]] · [[Talente]] · [[Progression & Level-up]] · [[Rendering & Pixelraster]] · [[Licht, Wetter & Effekte]] (Effektqualität)
 

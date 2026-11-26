@@ -1,14 +1,14 @@
 {
-  "passed": true,
   "checks": 195.0,
   "failures": [],
   "metrics": {
-    "Sword_particles_peak": 40.0,
-    "Mage_particles_peak": 36.0,
-    "Ranger_particles_peak": 43.0
+    "Ranger_particles_peak": 43.0,
+    "Sword_particles_peak": 39.0,
+    "Mage_particles_peak": 33.0
   },
+  "passed": true,
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\feature\\20261126-070223",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\feature\\20261126-104313",
   "exceptions": [],
   "captures": [
     "character-Mage.png",

@@ -29,6 +29,9 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
 
 - **Spielerlevel je Minute ist nicht gemessen:** Testmodus und Review-Center nutzen `boss_test_preset` (Minute 15 → Level 36). Mit einer Bot-Kohorte die echten Level je Minute messen und die Tabelle kalibrieren (Zahlenänderung nur mit Freigabe). → [[Review-Center]]
 
+- **Level-Suite war zeitabhängig** (behoben am 26.11.): Die Verfolgen- und Treffer-Prüfungen zählen Bilder, liefen aber mit echter Bildzeit. Je nach Rechnerlast scheiterten wechselnd Konstrukt, Sumpfskelett oder Ritter. `run_level_smoke.py` setzt jetzt wie die Boss-Suite 60 Hz fest (danach 4 von 4 Läufen PASS). Weitere Suiten ohne feste Bildzeit (feature, classes) bei Auffälligkeiten ebenso umstellen. → [[Tests & QA]]
+- **Boss-Kennzahl „Muster erzwingen Bewegung“** ist ein Schwellenwert-Test (Hälfte der Fälle über 20 px). Nach dem Bossdruck lag die Hexen-Kennzahl kurz bei 8 von 17; behoben durch die Eisflut-Regel (Spielerbahn zuerst). Bei künftigen Taktänderungen im Blick behalten. → [[Tests & QA]]
+
 ## Balancing-Beobachtungen (nur Empfehlungen, keine Zahlen geändert)
 - **Drache ab Minute 10** für Bots sehr schwer: 17 % bzw. 8 % Siege. → [[Bosse]]
 - **Behemoth-Doppelstampfer:** trifft bedrohte Bots zu 79 %. Mehr Reaktionszeit oder deutlichere Warnung prüfen. → [[Bosse]]

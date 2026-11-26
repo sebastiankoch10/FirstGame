@@ -98,6 +98,12 @@ function vh_api_checks(_actor) {
     vh_check(array_length(k) == 1 && k[0] == "wpn_s", "unequipping removes the layers again");
     var cell = eqv_cell(_actor, pl.visual_sprite_index, pl.visual_frame_index);
     vh_check(pl.visual_actor == _actor && cell >= 0, "live player sprite has layered art (" + sprite_get_name(pl.visual_sprite_index) + ")");
+    // attachment points: most cells carry a grip inside the frame, mirrored frames mirror the grip
+    var rows = equipment_attach_data()[$ _actor], have = 0, inside = 0;
+    for (var c = 0; c < array_length(rows); c++) if (is_array(rows[c])) {have++; if (rows[c][0] >= 0 && rows[c][0] < eqv_frame().size && rows[c][1] >= 0 && rows[c][1] < eqv_frame().size) inside++;}
+    vh_check(have >= array_length(rows) * .8 && inside == have, "weapon attachment points for " + string(have) + " of " + string(array_length(rows)) + " cells, all inside the frame");
+    var at = eqv_attach(_actor, pl.visual_sprite_index, pl.visual_frame_index, 100, 100, 1, 1), am = eqv_attach(_actor, pl.visual_sprite_index, pl.visual_frame_index, 100, 100, -1, 1);
+    vh_check(!at.ok || (abs((at.x - 100) + (am.x - 100)) < .01 && abs(angle_difference(at.angle, 180 - am.angle)) < .01), "eqv_attach mirrors grip and angle with the facing");
 }
 
 /// Contact sheet: rows = 8 directions, columns = 11 states, one sheet per equipment set. Returns a buffer of the pixels.

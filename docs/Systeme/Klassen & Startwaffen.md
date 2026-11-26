@@ -20,6 +20,9 @@ Drei Klassen mit eigener automatischer Startwaffe: Schwertmeister (`Sword`), Ark
 - **Waffen-Upgrades** (seit 25.11., `weapon_upgrade_*` in `scripts/class_weapons`): 5 Stufen je Klasse (Klinge, Sternenstab, Jagdbogen), angeboten als Karten im Level-up ([[Progression & Level-up]]), unabhängig von den 6 Zauberslots. Jede Stufe addiert Werte auf die bestehenden Waffen-Hooks (Schaden in %, Reichweite, Tempo, Sternenorb, Salve), gelesen über `talent_stat` ([[Talente]]). `weapon_visual_tier` (Stufe 1/2/3 ab Upgrade 0/2/4) bestimmt das Aussehen von Hieben und Geschossen. Zurückgesetzt mit jedem Run. Werte sind neue, ungetestete Designwerte.
 - Projektile laufen über `ObjectLightningball` (Stab und Pfeil).
 
+- **Grundpfeile seit 26.11. neutral** (`vfx_arrow_shot`, `vfx_arrow_fall`, `vfx_arrow_hit`, silberne Stufen-Spur in `projectile_draw`).
+- **Spieler-Zielmarken** `vfx_player_target_mark` statt Gegner-Telegraph (Sternenorb, Hagel); die Kegelwarnung des Magierbogens ist entfernt.
+
 ## Abhängigkeiten
 [[Spieler & Bewegung]] · [[Talente]] (Klassenbäume) · [[Ausrüstung]] (Waffenschaden %) · [[Licht, Wetter & Effekte]] · [[Progression & Level-up]] (Waffenkarten)
 

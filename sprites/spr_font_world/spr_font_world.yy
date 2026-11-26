@@ -39,8 +39,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Beute",
-    "path":"folders/Sprites/Beute.yy",
+    "name":"Schrift",
+    "path":"folders/Sprites/UI/Schrift.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

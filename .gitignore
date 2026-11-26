@@ -89,3 +89,6 @@ output/
 
 # Python bytecode
 __pycache__/
+# Review registry backups written by tests/tools/review/review.py
+review/*.bak
+review/*.tmp

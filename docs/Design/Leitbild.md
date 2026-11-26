@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, leitbild]
-updated: 2026-11-25
+updated: 2026-11-26
 status: verbindlich (global, höchster Rang unter den Designdokumenten)
 ---
 # Leitbild: globale Designphilosophie
@@ -98,6 +98,10 @@ Diese Regeln gelten für alle Klassen, Gegner, Bosse und Fähigkeiten, auch kün
 | G12 | **Keine Balancing-Zahlenänderungen ohne Auftrag** (HP, Schaden, XP, Klassenwerte, Skalierung, Drop-Raten). Darstellung darf sich ändern, Hitbox-Radien und Werte nicht. | `AGENTS.md` |
 | G13 | **Performance-Budgets** gelten für jede neue Funktion (Partikel, Lichter, Stimmen, Instanzen). | [[Technische Architektur]] |
 | G14 | **Bestehendes Drachenmodell und Originalquellen bleiben erhalten.** Erweitern statt ersetzen. | [[Assets & Pipeline]] |
+| G15 | **Sichtbare Gefahr = Schadensfläche (WYSIWYG).** Warnung, aktive Fläche, Partikel und Treffertest nutzen dieselbe Geometrie. Gefahrenflächen sind zusammenhängend, ohne scheinbar sichere Lücken; die nächste Mechanik liegt immer oben (Auftrag 26.11., Phase 2A). | [[Kampf & Begegnungen]] |
+| G16 | **Grundangriffe sehen aus wie das, was sie mechanisch sind.** Ein Grundpfeil ist ein physischer Pfeil. Element- oder Spezialoptik entsteht erst durch echte Element- oder Spezialmechanik. Gilt für alle Klassen (Auftrag 26.11., Phase 2B). | [[Fähigkeiten, VFX & Audio]] |
+| G17 | **Progression ist qualitativ.** Grundstufe kompakt und hochwertig; höhere Stufen bekommen neue Komponenten und Phasen, nicht nur Größe oder Partikelzahl. Gegnerische Gefahren bleiben auch im Endgame lesbar (Phase 2B). | [[Fähigkeiten, VFX & Audio]] |
+| G18 | **Persönliche Freigabe nur durch den Nutzer** im Review-Center. Technische QA ist keine Freigabe; freigegebene Inhalte sind Qualitätsreferenz (Phase 1). | AGENTS.md „Review-Workflow“, [[Review-Center]] |
 
 ## 6. Aufgelöste Widersprüche (Audit 25.11.2026)
 

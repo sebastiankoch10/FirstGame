@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, grafik, animation, referenz]
-updated: 2026-11-25
+updated: 2026-11-26
 status: verbindlich (Fachgebiet Art Direction, Darstellung, Animationsqualität)
 ---
 # Visuelles Leitbild & Animation
@@ -44,6 +44,23 @@ Rang 2 unter [[Leitbild]]. Die Technik (wie es gebaut wird) steht in [[Technisch
   - Sehr große Hauptbosse dürfen etwa ein Viertel des Bildes einnehmen.
   - Kleine Sprites werden **nicht** einfach hochskaliert (Auftrag 22.11.).
 - **Bestehendes bewahren:** Das Drachenmodell und die ArtPack-Originale werden nicht verändert. Erweitert wird nur.
+
+## 3a. Referenz Angriffsaufbau und Telegraphing (Auftrag 26.11., Phase 2A)
+- **Quelle:** <https://www.youtube.com/watch?v=AbYWv1KrQwg>, Sequenz 03:43–03:58, besonders 03:56 (<https://www.youtube.com/watch?v=AbYWv1KrQwg&t=223s>). Es ist der Endkampf gegen Dark Gaia in Terranigma.
+- **Zweck:** nur Aufbau, Formsprache und Timing von Angriffsankündigungen, keine Assets, Designs oder Musik.
+- **Methode (ehrlich):** wie bei 3.1 die öffentlichen Storyboard-Bilder der Zeitleiste, hier 320×180 mit nur **einem Bild je ca. 4,9 s** (0:03:36, 03:41, 03:46, 03:51, 03:56, 04:01). Kein Download. Zwischenbilder, Partikel und Timing sind damit **nicht** sichtbar.
+- **Tatsächlich beobachtet:**
+  - 03:41: Der Boss breitet die Flügel mit magenta-gelben Energiestreifen aus.
+  - 03:46: Vom Kern des Bosses geht eine große, flache, halbtransparente graue Trapezform über die Arena; dazu eine senkrechte cyanfarbene Energiesäule, und der Arenaboden hellt auf.
+  - 03:51: Die Form ist auf ein schmaleres Dreieck mit Spitze am Boss **fokussiert**.
+  - 03:56–04:01: Einschlag am Spieler (rot-orange).
+- **Vermutung (nicht beobachtbar):** Das Zusammenziehen dient als Zeitanzeige und Zielfestlegung.
+- **Die Beobachtungen des Nutzers** (Energie sammelt sich, Funken strömen zum Ursprung, Form füllt und verdichtet sich, innere Bewegung, Fokussierung, eindeutige sichere Bereiche, clean) sind die verbindliche Grundlage.
+- **Umsetzung:**
+  - `vfx_charge` (Sammeln am Ursprung).
+  - Füll-Countdown und Verdichtung (`tg_render`).
+  - Fokus-Umriss: Ein heller, ungefüllter Umriss läuft von außen auf die echte Kante zusammen (`tg_scaled`). Die getönte Fläche bleibt exakt die Schadensfläche.
+  - Elementpartikel innerhalb der Form.
 
 ## 3. Verbindliche Bewegungsreferenz: Terranigma
 
@@ -203,6 +220,32 @@ Rang 2 unter [[Leitbild]]. Die Technik (wie es gebaut wird) steht in [[Technisch
 - **Waffen** folgen der Hand (Ankerpunkt) und haben eigene Nachschwung- und Verwischungsbilder.
 - **Ausrüstung** ist synchron zum Körper (Ist) und bekommt dieselbe Sekundärbewegung wie Kleidung (Soll, z. B. Schulterstücke, Umhangsaum).
 - **Beschworene Kreaturen** folgen denselben Gegnerregeln. Ihr Erscheinen und Verschwinden ist inszeniert.
+
+### 5.5a Modulare Charakterdarstellung (Soll, Auftrag 26.11., Phase 1; gilt für alle Klassen)
+- **Neutrale Basis:**
+  - Jede Klasse hat ein Basismodell in schlichter, eng anliegender Grundkleidung, ohne fest integrierte Rüstung oder Waffe, mit kompakter Silhouette und konsistenter Anatomie.
+  - Frisur, Körpermerkmale und Identität der Klasse bleiben; modular heißt nicht gleich aussehend.
+- **Ebenen ersetzen statt überlagern:**
+  - Ausrüstungsteile (Kopf/Helm, Brust/Oberkleidung, Schultern, Hände, Beine, Füße, Umhang, Waffe, Schild) belegen dieselben Pixel wie die Körperzone, die sie verdecken.
+  - Verdeckte Teile werden ausgeblendet oder ersetzt (Beispiel Helm: `eqv_hcut` schneidet Haar und Kopf des Basismodells ab).
+  - Reihenfolge je Richtung (Draw Order); ein einziger Zustand für Werte und Darstellung.
+- **Ankerpunkte:**
+  - Waffen und künftige Nebenhand-Gegenstände hängen an Griffpunkten je Animationsbild: `eqv_attach`, Daten aus `tests/tools/characters/build_attach_points.py`.
+  - Der Griff ist die Projektion der Hand auf die Waffenachse (Schwertheft, Stab- und Bogenmitte).
+  - Bei verdeckter Hand (Konfidenz 0) bleibt ein angehängter Gegenstand verborgen.
+  - Nie frei schwebend.
+- **Visuelle Progression der Ausrüstung:**
+  - Grundausrüstung hochwertig, aber zurückhaltend; höhere Stufen komplexer und eigenständiger.
+  - Keine überdimensionierte Grundausrüstung, keine abweichenden Pixelgrößen.
+  - Seltenheit färbt nur Akzente.
+- **Bewegung:**
+  - Haare, Umhang, Körper und Ausrüstung reagieren gemeinsam: Neigung, Absprung, Steigen, Fallen, Landung, Wende (`player_motion_life`).
+  - Ohne Eingabeverzögerung (nur Darstellung).
+- **Ist-Stand 26.11. (ehrlich):**
+  - Ebenen ersetzen bereits pixelgenau, daher gibt es kein Doppel-Rüstungs-Clipping.
+  - Helme sind Kopf-Komposite.
+  - Ankerpunkte für 222/212/230 von 256 Zellen (Schwert, Stab, Bogen) sind vorbereitet, werden aber noch von keiner Zeichenstelle genutzt.
+  - **Offen:** Die Silhouette des Basismodells stammt noch aus den gepanzerten Originalfiguren (breite Schultern). Eine wirklich schlanke Grundkleidung braucht neue Quellgrafik für 3 Klassen × 256 Posen, Entscheidung beim Nutzer (siehe [[Roadmap & Vertical Slice]]). Prozedurales Ausdünnen ist verworfen, weil es Anatomie und Kanten zerstört.
 
 ### 5.6 Fähigkeiten
 Visuell relevante Fähigkeiten haben Phasen; siehe [[Fähigkeiten, VFX & Audio]].

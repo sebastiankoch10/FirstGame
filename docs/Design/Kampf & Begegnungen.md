@@ -96,7 +96,8 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
    - **Abklingen:** Nach der aktiven Zeit wird die Fläche entsättigt und grau, Partikel steigen auf und verblassen (etwa 0,3 s). So sieht eine abgeklungene Fläche nicht mehr gefährlich aus.
 3b. **Überlappende Mechaniken, zeitliche Priorität** (wie in Final Fantasy XIV):
    - Alle Gegnerwarnungen eines Bildes werden gesammelt und nach verbleibender Zeit bis zum Einschlag sortiert gezeichnet (`telegraph_flush`). Die nächste Mechanik liegt immer oben.
-   - Warnungen, die mehr als 0,45 s nach der nächsten einschlagen, erscheinen als halbtransparente Vorschau ohne Partikel. So bleibt erkennbar, was zuerst und was danach kommt.
+   - Warnungen, die mehr als 0,45 s nach der nächsten einschlagen, erscheinen nur als dünner Umriss: keine Füllung, kein Countdown, keine Partikel. Was gerade sicher ist, sieht sicher aus. Sobald eine Mechanik an der Reihe ist, bekommt sie ihre volle Darstellung. So bleibt erkennbar, was zuerst und was danach kommt (Aufnahme 26.11.: Eine gefüllte Vorschau der zweiten Schachbrettwelle ließ die sicheren Felder der ersten unsicher wirken).
+   - Große Muster (spielfeldweite Bretter, breite Ringe ab 160.000 px²) werden um 25–30 % schwächer gefüllt, damit der Bildschirm nicht überflutet.
    - Countdown und Intensität laufen pro Mechanik unabhängig.
    - Keine additive Mischung von Warnflächen.
    - Warnungen werden nach allen Spieler- und Welteffekten gezeichnet; eigene Effekte verdecken sie nicht.
@@ -159,6 +160,15 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
 ### Normale Gegner
 - **Rolle:** Sie bilden Horden, lassen sich sammeln und kiten und verengen den Raum. Ihre Bewegung ist flüssig, mit dezenter Trennung, ohne Zittern und ohne Stapeln.
 - **Individualität (Soll, Auftrag 25.11.):** Gegner unterscheiden sich durch Anatomie, Masse, Bewegungsweise und Angriffscharakter, nicht nur durch Sprite, Schaden und Tempo. Ein Wolf bewegt sich anders als ein Skelett, eine Spinne, ein Flieger oder eine magische Kreatur.
+- **Bewegungsidentität** (Ist seit 26.11., Schalter `ENEMY_MOTION_ENABLED`; `enemy_motion_profile`/`enemy_motion_offset` in `scripts/level_worlds`):
+  - Je Art eigene, ganzpixelige Körperversätze über der Bildanimation.
+    - Sumpfkriecher: schnelles Huschen.
+    - Pilzkreatur: Hüpfen.
+    - Skelett und Verfluchte Rüstung: steifes Rucken.
+    - Ritter, Rüstung und Konstrukt: schwerer Tritt mit langem Bodenkontakt.
+    - Eisgeist: seitliches Schweben, steigt vor dem Angriff.
+  - Beim Angriff: Ausholen weg vom Ziel, Vorstoß zum Ziel während der Trefferphase.
+  - Keine Rotation oder Stauchung (würden Pixelzeilen verschlucken).
 - **Angriffe:**
   - Kontaktschaden ist die Grundlage.
   - Gegner mit eigenem Angriff kündigen ihn über den Körper an (kurzes Ausholen).

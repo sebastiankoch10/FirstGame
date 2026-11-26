@@ -155,7 +155,12 @@ function spell_v2_step(_dt) {
                     spell_v2_area(xx,yy,f.radius,f.damage,f.sid,f.level);spell_fx_burst(xx,yy,f.radius,f.element,.45,vfx_band(f.level));f.ticks++;
                 }break;
             case "seal":case "verdict":
-                if(f.ticks==0 && f.age>=(f.kind=="seal" ? .9 : .72)) {spell_v2_area(f.x,f.y,f.radius,f.damage,f.sid,f.level);spell_fx_burst(f.x,f.y,f.radius,f.element,.45,vfx_band(f.level));f.ticks++;}
+                if(f.ticks==0 && f.age>=(f.kind=="seal" ? .9 : .72)) {
+                    spell_v2_area(f.x,f.y,f.radius,f.damage,f.sid,f.level);spell_fx_burst(f.x,f.y,f.radius,f.element,.45,vfx_band(f.level));f.ticks++;
+                    // release phase: light on the damage event, growing with the band (basis: a pulse, endgame: a real flash)
+                    var bb=vfx_band(f.level),lc=spell_element_color(f.element);
+                    if(bb==0)light_pulse(f.x,f.y,f.radius*1.6,lc,.8,.2);else light_flash(f.x,f.y,f.radius*(bb==2 ? 2.4 : 1.8),lc,bb==2 ? 1.5 : 1.1,.26,(bb==2 && f.kind=="seal") ? .18 : 0);
+                }
                 break;
             case "glaive":
                 var ox=f.x,oy=f.y,p=clamp(f.age/.55,0,1);

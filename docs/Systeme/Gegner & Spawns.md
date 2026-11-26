@@ -17,6 +17,8 @@ Normale Gegner, Bevölkerungssteuerung und Tod (Münze, Ausrüstungs-Drop).
 - `scripts/gameplay`: `enemy_pursue` (Verfolgung, Trennung, Schweben).
 - Objekte: `ObjectSpawner`, `ObjectSkeletonRemains`.
 
+- **Bewegungsidentität** (seit 26.11., Schalter `#macro ENEMY_MOTION_ENABLED`): `enemy_motion_profile` und `enemy_motion_offset` (`scripts/level_worlds`), ganzpixelige Versätze je Art mit Ausholen und Vorstoß. Wird in `enemy_draw` und `elite_outline_draw` angewendet (`motion_dx`, `motion_dy`).
+
 ## Abhängigkeiten
 [[Level & Welten]] · [[Progression & Level-up]] · [[Ausrüstung]] · [[Bosse]] (Brut, Zwillings-Akteur)
 

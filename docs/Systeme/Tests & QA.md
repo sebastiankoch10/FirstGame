@@ -69,6 +69,12 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
 
 - **Review-Center End-to-End** (seit 26.11.): `python tests/tools/review/review_e2e.py`. Zwei Builds und drei Starts mit Testfreigaben: Freigabe per Klick, Persistenz nach Neustart, Sync genau einmal, Revision erneut offen, Archiv startbar, echter Speicherordner und Registry unverändert. Ergebnis in `tests/reports/review-e2e-result.json`, Nachweise unter `%LOCALAPPDATA%\FirstGame-Tests\review-e2e\`. Die Feature-Suite prüft seit 26.11. auch das Inventar (Ziehen, Tausch, ungültige Plätze, Abbruch, Rechtsklick, voller Rucksack, Vergleich).
 
+- **Seit 26.11.:**
+  - `record_scene.py --boss-hp` (Bossphase in Aufnahmen).
+  - Die Klassen-Suite leert die Warteschlange (`telegraph_flush`) vor dem Pixeltest.
+  - Die Boss-Suite zählt Feld-Gefahren (`field`) als Musterzellen.
+  - `run_level_smoke.py` läuft mit fester Bildzeit (60 Hz), weil die Gegnerprüfungen zeitabhängig flackerten.
+
 ## Abhängigkeiten
 Alle Systeme, besonders [[Bosse]] · [[Talente]] · [[Ausrüstung]] · [[Level & Welten]] · [[Klassen & Startwaffen]]
 

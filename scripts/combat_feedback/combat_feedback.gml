@@ -106,7 +106,7 @@ function projectile_draw() {
     if(variable_instance_exists(id,"class_weapon_v2") && class_weapon_v2) {
         var radius=(projectile_kind=="bolt" ? 19 : 23)+class_tier*3;
         class_fx_sprite(projectile_kind=="bolt" ? 4 : 0,.25+.08*sin(current_time/90),x,y,radius,direction);
-        if(class_tier>1){draw_set_alpha(.4);draw_set_color(projectile_kind=="bolt" ? make_color_rgb(148,231,119) : make_color_rgb(166,119,255));draw_line_width(x-lengthdir_x(22+class_tier*6,direction),y-lengthdir_y(22+class_tier*6,direction),x,y,2);draw_set_alpha(1);draw_set_color(c_white);}
+        if(class_tier>1){draw_set_alpha(.4);draw_set_color(projectile_kind=="bolt" ? make_color_rgb(206,212,218) : make_color_rgb(166,119,255));draw_line_width(x-lengthdir_x(22+class_tier*6,direction),y-lengthdir_y(22+class_tier*6,direction),x,y,2);draw_set_alpha(1);draw_set_color(c_white);} // arrows: silver streak with the upgrade tier, never an element colour
         return;
     }
     var kind=projectile_kind,col=make_color_rgb(150,201,255);

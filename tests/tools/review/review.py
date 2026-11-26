@@ -41,10 +41,10 @@ def load_registry(path: Path) -> dict:
     return json.loads(path.read_text(encoding='utf-8'))
 
 
-def save_atomic(path: Path, text: str) -> None:
+def save_atomic(path: Path, text: str, backup: bool = True) -> None:
     """Write via a temp file and os.replace; the previous version stays as .bak (no partial files, no silent loss)."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    if path.exists():
+    if backup and path.exists():
         shutil.copy2(path, path.with_suffix(path.suffix + '.bak'))
     tmp = path.with_suffix(path.suffix + '.tmp')
     tmp.write_text(text, encoding='utf-8', newline='\n')
@@ -113,7 +113,7 @@ def build(reg: dict, out: Path) -> None:
     if errors:
         print('\n'.join('FEHLER ' + e for e in errors))
         raise SystemExit(1)
-    save_atomic(out, gml_data(reg))
+    save_atomic(out, gml_data(reg), backup=False)  # generated: no backup next to the GameMaker script
 
 
 def sync(reg: dict, save_dir: Path, include_test: bool) -> tuple[list[str], list[str]]:

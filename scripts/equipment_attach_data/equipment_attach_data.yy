@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"equipment_attach_data",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"equipment_attach_data",
+  "parent":{
+    "name":"Fortschritt_und_Ausruestung",
+    "path":"folders/Skripte/Fortschritt_und_Ausruestung.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

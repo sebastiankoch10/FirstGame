@@ -122,6 +122,16 @@ Jeder Baustein für sich ist unscheinbar. Erst zusammen und zur selben Zeit wirk
 - Schaden, Ziele, Sprungweite und Takt sind unverändert.
 - Ohne Zufallszahlen aus dem globalen RNG (deterministischer Hash), seeded Runs bleiben vergleichbar.
 
+### Grundangriffe und Progression (Phase 2B, 26.11.)
+- **Grundangriffe:**
+  - Waldläufer: physischer Pfeil (`vfx_arrow_shot`) mit Holzschaft, kleiner Stahlspitze, Naturfedern und nur einer feinen Bewegungsspur. Waffen-Upgrades fügen eine silberne Spur hinzu, keine Elementfarbe. Einschlag als Splitter und Staub (physische Palette).
+  - Arkanistin: Ihr Grundangriff ist mechanisch arkan, die arkane Optik ist also richtig.
+  - Schwertmeister: physische Hiebe, Seltenheit nur am Rand.
+- **Mehrphasige Spielerfähigkeiten** (G9): Vorführbeispiel sind Donnersiegel und Sonnenurteil, ohne Timing-Änderung.
+  - Sammeln am Zielpunkt (`vfx_charge`), fallende Lichtsäule, Einschlag am Schadensereignis mit Licht nach Band (Basis Puls, Mittel Blitz, Endgame Blitz mit kurzer Aufhellung beim Siegel), danach Abklingen.
+  - Schnelle automatische Angriffe bekommen keine künstliche Aufladung.
+- **Review:** Stufe 1, 5 und 9 sind als eigene Szenarien registriert (`spell.seal.l1|l5|l9`).
+
 ## 3. Größendisziplin
 
 - **Sichtbare Schadensfläche = Hitbox (G6).** Dekoratives Glühen darf den Rand höchstens leicht überschreiten (Richtwert 10 %). Es darf nie wie Schaden aussehen.

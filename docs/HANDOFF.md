@@ -5,23 +5,34 @@ agent: Claude
 ---
 # Übergabe (wird nach jeder Aufgabe überschrieben, max. ~40 Zeilen)
 
-**Zuletzt dran:** Claude, 2026-11-26. **In Arbeit:** Aufträge Phase 1, 2A und 2B des Nutzers (siehe Chat). Reihenfolge: Review-Center → Inventar → Telegraphs, Geometrie, VFX, Licht (2A) → Bossverhalten, Schachbrett, Ringe (2B) → artikulierte Bosse und Gegner → Grundangriffe und Progression → modulare Charaktere → Assets → Doku und Bericht.
+**Zuletzt dran:** Claude, 2026-11-26. Aufträge Phase 1, 2A und 2B des Nutzers umgesetzt, soweit ohne neue Grafik möglich. Regeln: AGENTS.md „Review-Workflow“.
 
 ## Stand
-- **Fertig und getestet (Commit 26.11.):**
-  - **Review-Center:** [[Review-Center]], Ablauf in AGENTS.md „Review-Workflow“.
-  - **Inventar:** Drag-and-drop, Rechtsklick, Tooltips, Shift-Vergleich.
-  - QA Stufe 3 PASS, Review-E2E PASS.
-- **Vorbereitet im Scratchpad, noch nicht eingespielt:** `hazard_fx` (Telegraphs v2, Flächen, Strahl, Aufladung, Schachbrett), Licht-Blitze, Aggression und Ringe.
-- **Review-Registry:** 3 Einträge offen (Drache Feuerstrahl, Hexen Ring, Charakter Bewegung).
+- **Review-Center:** [[Review-Center]]. 25 Szenarien offen in `review/registry.json`, keine persönliche Freigabe bisher. **Start jeder Sitzung:** `python tests/tools/review/review.py sync` (Claude per Hook).
+- **Phase 1:**
+  - Review-Center, Freigabe, End-to-End-Test.
+  - Inventar (Drag-and-drop, Rechtsklick, Tooltips, Shift-Vergleich).
+  - Waffen-Ankerpunkte (`eqv_attach`, vorbereitet).
+  - Sprungreaktion von Haar und Umhang.
+- **Phase 2A:**
+  - Gemeinsamer Gefahren-Renderer [[Telegraphs & Gefahrenflächen]] mit WYSIWYG, Füll-Countdown, Fokus-Umriss, Priorität nach Zeit und zusammenhängenden Flächen.
+  - Feuerstrom, Aufladung und Ausholbewegung des Drachen.
+  - `light_flash` mit Option „Lichtblitze“; Spieler-Zielmarken.
+- **Phase 2B:**
+  - Spielfeldweites Schachbrett, Druck nach Entfernung, kontrahierende Feuerringe, Eisflut-Regel.
+  - Neutrale Grundpfeile; mehrphasiges Siegel mit Stufen 1/5/9.
+- **Tests (26.11.):** QA Stufe 3 PASS (811/195/141/166/151/81), Review-E2E PASS 12/12.
 
 ## Offen (Reihenfolge)
-1. Phase 2A einspielen, prüfen, Review-Fälle registrieren.
-2. Phase 2B: spielfeldweites Schachbrett, Druck nach Entfernung, kontrahierende Ringe, artikulierter Drache (Schweif, Flügel), Gegnerbewegung, Waldläufer-Grundpfeile, Fähigkeitsprogression.
-3. Phase 1 Rest: modulare Charakterdarstellung (neutrale Basis, Ebenen, Waffen-Ankerpunkte).
-4. **Nutzer:** F5 → Review-Center, prüfen und mit dem grünen Haken freigeben.
+1. **Nutzer:** F5 → Review-Center, Szenarien prüfen, gefallene mit dem grünen Haken freigeben.
+2. **Grafik-Entscheidungen** ([[Roadmap & Vertical Slice]] Zeilen 11–13):
+   - neutrale schlanke Basisfigur (3 Klassen × 256 Posen);
+   - Drachenschweif als Kette und Flügel als Teile (neue Quellsegmente);
+   - danach die Ankerpunkte nutzen.
+3. **Level-Suite** läuft seit 26.11. mit fester Bildzeit; feature und classes bei Auffälligkeiten ebenso umstellen ([[Bugs & Ideen]]).
+4. **Spielerlevel je Minute** per Bot-Kohorte messen (Testmodus-Presets sind Entwicklungswerte).
 
 ## Bekannte Bugs / Risiken
-- GameMaker-IDE war offen und sortiert `FirstGame.yyp` beim Speichern um (inhaltlich gleich).
-- `FirstGame_ArtPack/class_overhaul/CHARACTER_ART.md` hat ein fremdes „c“ in Zeile 1; nicht angefasst.
-- Spielerlevel je Minute ist nicht gemessen (`boss_test_preset`), siehe [[Bugs & Ideen]].
+- Die Bossdruck-Werte (`bc_config`) sind Startwerte; nach dem Spieltest feinjustieren.
+- Die GameMaker-IDE war offen; sie sortiert `FirstGame.yyp` beim Speichern um (inhaltlich gleich).
+- `FirstGame_ArtPack/class_overhaul/CHARACTER_ART.md` enthält ein fremdes „c“ in Zeile 1; nicht angefasst.

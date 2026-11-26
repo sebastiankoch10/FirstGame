@@ -46,6 +46,7 @@ function bh_relevant(_horizon) {
         if(g.shape=="line" || g.shape=="rectangle"){cx=g.x+lengthdir_x(g.radius*.5,g.angle);cy=g.y+lengthdir_y(g.radius*.5,g.angle);r=sqrt(sqr(g.radius*.5)+sqr(g.width*.5))+16;}
         if(variable_struct_exists(h,"sweep_from")){cx=g.x;cy=g.y;r=g.radius+40;}
         if(variable_struct_exists(h,"expand_from"))r=max(r,h.expand_from+16);
+        if(g.shape=="checker"){cx=room_width*.5;cy=room_height*.5;r=room_width+room_height;} // field-wide board covers the arena
         array_push(out,{h:h,cx:cx,cy:cy,r:r});
     }
     return out;
@@ -150,7 +151,7 @@ function bh_controller_tick() {
         var probe=run[0]=="storm_warden" ? 3 : (run[0]=="twins" ? 3 : 2),saved=b.v2_unlocked;
         for(var tier=0;tier<2;tier++) {
             bv2_clear_owner(b);b.v2_unlocked=tier==0 ? 3 : 9;b.boss_phase=3;b.hp=b.max_hp*.35;boss_v2_force_attack(b,probe);
-            var cells=0;for(var i=0;i<array_length(global.bv2_hazards);i++)if(global.bv2_hazards[i].owner==b && variable_struct_exists(global.bv2_hazards[i],"cell"))cells++;
+            var cells=0;for(var i=0;i<array_length(global.bv2_hazards);i++)if(global.bv2_hazards[i].owner==b && (variable_struct_exists(global.bv2_hazards[i],"cell") || variable_struct_exists(global.bv2_hazards[i],"field")))cells++; // field-wide boards count as pattern cells
             bh_check(tier==0 ? cells==0 : cells>0,run[0]+" ability "+string(probe)+" phase 3 with "+string(b.v2_unlocked)+" unlocked: "+(tier==0 ? "no" : "has")+" pattern cells ("+string(cells)+")");
         }
         b.v2_unlocked=saved;bv2_clear_owner(b);

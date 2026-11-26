@@ -4,6 +4,12 @@ updated: 2026-11-26
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-26 · Claude · Phase 2A/2B: Telegraphs, Gefahrenflächen, Licht, Bossdruck, Schachbrett, Ringe, Pfeile, Ankerpunkte
+- Neu: `scripts/hazard_fx`, `scripts/equipment_attach_data`, `tests/tools/characters/build_attach_points.py`, Systemnotiz `Telegraphs & Gefahrenflächen`.
+- Geändert: `attack_telegraph`, `boss_hazards_v2`, `boss_choreo`, `boss_encounters_v2`, `dragon_encounter`, `dragon_parts`, `atmosphere`, `class_weapons`, `combat_feedback`, `spell_v2`, `spell_vfx`, `gameplay`, `player_artpack`, `equipment_visual`, `level_worlds` (Gegner-Bewegungsidentität), Tests (Boss-Orakel, Klassen-Flush, Visual-Anker, Level-Suite mit fester Bildzeit), `record_scene.py --boss-hp`, `ide_folders.py`.
+- Doku: Leitbild G15–G18, Kampf & Begegnungen, Boss-Design A2/A3, Fähigkeiten/VFX/Audio, Visuelles Leitbild (Referenz 3a, modulare Figur 5.5a), Roadmap, Assets, DECISIONS. Review-Registry: 25 Szenarien.
+- Tests: QA Stufe 3 PASS (Regression 811, Feature 195, Boss 141, Level 166, Klassen 151, Visual 81); Review-E2E PASS 12/12.
+
 ### 2026-11-26 · Claude · Phase 1: Review-Center und Inventar
 - Review-Center (`scripts/review_center`, `review/registry.json`, generiert `scripts/review_registry_data`, Werkzeuge `tests/tools/review/review.py` und `review_e2e.py`, `tests/review_harness.gml`). Hauptmenü, Pausenmenü mit grünem Freigabeknopf, Hook in `.claude/settings.json`.
 - Inventar (`scripts/equipment_ui`): Drag-and-drop, Rechtsklick legt ab, Tooltips, Shift-Vergleich. `equipment_menu_step` und `equipment_tooltip_draw` leiten weiter.

@@ -9,7 +9,30 @@ function light_pulse(_x,_y,_radius,_color,_strength=1,_duration=0.22) {
     if(array_length(global.light_pulses)>=40) array_delete(global.light_pulses,0,1);
     array_push(global.light_pulses,{x:_x,y:_y,radius:_radius,color:_color,strength:_strength,life:_duration,total:_duration});
 }
+/// Strong, short light flash for powerful attacks (Phase 2A): an intense light source, an additive glare on the world
+/// and an optional lift of the ambient darkness (_lift 0..1, e.g. lightning). Scaled down by "Lichtblitze: Reduziert".
+/// Always fired on the damage event of the attack, so light and hit stay in sync.
+function light_flash(_x,_y,_radius,_color,_strength=1.4,_duration=.28,_lift=0) {
+    if(!variable_global_exists("light_flashes"))global.light_flashes=[];
+    if(array_length(global.light_flashes)>=8)array_delete(global.light_flashes,0,1);
+    var k=light_flash_reduced() ? .35 : 1;
+    array_push(global.light_flashes,{x:_x,y:_y,radius:_radius,color:_color,strength:_strength*k,life:_duration,total:_duration,lift:_lift*k,glare:.55*k});
+}
+function light_flash_reduced() {
+    if(!variable_global_exists("flash_reduced_level")){ini_open("firstgame_settings.ini");global.flash_reduced_level=ini_read_real("Grafik","blitze",0)!=0;ini_close();}
+    return global.flash_reduced_level;
+}
+function light_flash_toggle() {global.flash_reduced_level=!light_flash_reduced();ini_open("firstgame_settings.ini");ini_write_real("Grafik","blitze",global.flash_reduced_level ? 1 : 0);ini_close();}
+function light_flash_label() {return light_flash_reduced() ? ": Reduziert" : ": Normal";}
+/// Ambient lift of all active flashes (strongest wins), eased out quickly.
+function light_flash_lift() {
+    var best={k:0,col:c_white};if(!variable_global_exists("light_flashes"))return best;
+    for(var i=0;i<array_length(global.light_flashes);i++){var f=global.light_flashes[i],k=f.lift*power(f.life/f.total,2);if(k>best.k){best.k=k;best.col=merge_color(f.color,c_white,.55);}}
+    return best;
+}
 function atmosphere_step(_dt) {
+    if(!variable_global_exists("light_flashes")) global.light_flashes=[];
+    for(var i=array_length(global.light_flashes)-1;i>=0;i--){global.light_flashes[i].life-=_dt;if(global.light_flashes[i].life<=0)array_delete(global.light_flashes,i,1);}
     if(!variable_global_exists("light_pulses")) global.light_pulses=[];
     for(var i=array_length(global.light_pulses)-1;i>=0;i--) {
         global.light_pulses[i].life-=_dt;
@@ -40,7 +63,7 @@ function atmosphere_draw() {
     if(!surface_exists(light_surface)) return;
     var old_world=matrix_get(matrix_world);matrix_set(matrix_world,matrix_build_identity());
     surface_set_target(light_surface);camera_set_view_size(light_camera,ww,hh);camera_apply(light_camera);
-    draw_clear(weather_ambient());
+    var lift=light_flash_lift();draw_clear(merge_color(weather_ambient(),lift.col,clamp(lift.k,0,.85)));
     global.light_metrics.sources=0;gpu_set_blendmode(bm_add);
     atmosphere_source(ObjectPlayer.x,ObjectPlayer.y-18,180,make_color_rgb(167,181,183),0.60,r);
     if(room==Room1)master_scenery_lights(r);
@@ -48,6 +71,14 @@ function atmosphere_draw() {
     equipment_lights(r);spell_vfx_lights(r);
     for(var i=0;i<array_length(global.light_pulses);i++) {
         var p=global.light_pulses[i];atmosphere_source(p.x,p.y,p.radius,p.color,p.strength*p.life/p.total,r);
+    }
+    if(variable_global_exists("light_flashes"))for(var i=0;i<array_length(global.light_flashes);i++) {
+        var f=global.light_flashes[i],k=power(f.life/f.total,1.5);atmosphere_source(f.x,f.y,f.radius,f.color,f.strength*k,r);atmosphere_source(f.x,f.y,f.radius*.45,c_white,f.strength*k*.8,r);
+    }
+    // Charge light: the dragon's mouth brightens while fire gathers (synchronised with vfx_charge).
+    if(instance_exists(global.active_boss) && global.active_boss.dragon_enabled && global.active_boss.boss_state=="windup" && (global.active_boss.boss_cast=="beam" || global.active_boss.boss_cast=="arc" || global.active_boss.boss_cast=="sweep")) {
+        var bb=global.active_boss,m=dragon_mouth(bb,false),cp=clamp(bb.dragon_state_age/max(.1,bb.enc_cfg.warning),0,1);
+        atmosphere_source(m.x,m.y,80+170*cp,make_color_rgb(255,150,60),.25+.95*cp,r);
     }
     if(instance_exists(global.active_boss) && global.active_boss.dragon_enabled && global.active_boss.boss_state=="active") {
         var g=dragon_attack_geometry(global.active_boss);
@@ -76,6 +107,11 @@ function atmosphere_draw() {
     matrix_set(matrix_view,old_view);matrix_set(matrix_projection,old_projection);
     gpu_set_texfilter(true);gpu_set_blendmode_ext(bm_dest_colour,bm_zero);draw_set_alpha(1);draw_set_color(c_white);
     draw_surface_stretched(light_surface,r.left,r.top,r.right-r.left,r.bottom-r.top);
+    // Additive glare of flashes on top of the lit world (short; never a permanent overexposure).
+    if(variable_global_exists("light_flashes") && array_length(global.light_flashes)>0) {
+        gpu_set_blendmode(bm_add);
+        for(var i=0;i<array_length(global.light_flashes);i++){var f=global.light_flashes[i],k=power(f.life/f.total,2)*f.glare;draw_sprite_ext(light_sprite,0,f.x,f.y,f.radius/64,f.radius/64,0,f.color,k);}
+    }
     gpu_set_blendmode(bm_normal);gpu_set_texfilter(false);
     global.light_metrics.draw_ms=(get_timer()-stamp)/1000;
 }

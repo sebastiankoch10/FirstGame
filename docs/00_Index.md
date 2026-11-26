@@ -55,6 +55,7 @@ Momentaufnahme des ganzen Kanons als ein Text: [[Designphilosophie_2026-11-25]] 
 **Darstellung, Ton, Daten**
 - [[Rendering & Pixelraster]]
 - [[Licht, Wetter & Effekte]]
+- [[Telegraphs & Gefahrenflächen]]
 - [[UI, HUD & Menüs]]
 - [[Audio]]
 - [[Speichern & Einstellungen]]

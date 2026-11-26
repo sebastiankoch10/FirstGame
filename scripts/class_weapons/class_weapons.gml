@@ -113,13 +113,18 @@ function vfx_arcane_bolt(_x,_y,_r,_dir,_alpha) {
     draw_set_color(pal[2]);draw_circle(x0-1,y0-1,max(1,r*.45),false);
 }
 /// Waldlaeufer arrow in flight: shaft, steel head, green fletching, a faint streak.
+/// Baseline arrow (Phase 2B): a plain physical arrow - slim wooden shaft, small steel head, natural fletching, only a
+/// faint motion streak. No element colour: poison, fire or lightning looks come only from real element mechanics.
 function vfx_arrow_shot(_x,_y,_r,_dir,_alpha) {
-    var len=max(12,_r*.9),tx=_x-lengthdir_x(len,_dir),ty=_y-lengthdir_y(len,_dir);
-    if(vfx_quality()>0)vfx_pixel_line(tx-lengthdir_x(len*.8,_dir),ty-lengthdir_y(len*.8,_dir),tx,ty,1,make_color_rgb(228,255,234),.25*_alpha);
-    vfx_pixel_line(tx,ty,_x,_y,2,make_color_rgb(140,104,64),_alpha);
-    vfx_pixel_line(tx,ty,_x,_y,1,make_color_rgb(214,178,120),_alpha);
-    vfx_pixel_line(_x,_y,_x+lengthdir_x(4,_dir),_y+lengthdir_y(4,_dir),2,make_color_rgb(236,240,232),_alpha);
-    for(var s=-1;s<=1;s+=2)vfx_pixel_line(tx,ty,tx-lengthdir_x(4,_dir)+lengthdir_x(3*s,_dir+90),ty-lengthdir_y(4,_dir)+lengthdir_y(3*s,_dir+90),1,make_color_rgb(116,239,153),_alpha);
+    var len=clamp(_r*.75,12,17),tx=_x-lengthdir_x(len,_dir),ty=_y-lengthdir_y(len,_dir),wood=make_color_rgb(150,112,70),light=make_color_rgb(204,170,118);
+    if(vfx_quality()>0)vfx_pixel_line(tx-lengthdir_x(10,_dir),ty-lengthdir_y(10,_dir),tx,ty,1,make_color_rgb(214,214,206),.16*_alpha); // motion streak
+    vfx_pixel_line(tx,ty,_x,_y,1,wood,_alpha);
+    vfx_pixel_line(tx+lengthdir_x(2,_dir),ty+lengthdir_y(2,_dir),_x-lengthdir_x(2,_dir),_y-lengthdir_y(2,_dir),1,light,.55*_alpha);
+    // steel head: 3 px point with a bright tip pixel
+    vfx_pixel_line(_x,_y,_x+lengthdir_x(3,_dir),_y+lengthdir_y(3,_dir),2,make_color_rgb(150,158,166),_alpha);
+    vfx_px(_x+lengthdir_x(3,_dir),_y+lengthdir_y(3,_dir),1,make_color_rgb(232,236,238),_alpha);
+    // fletching: two short off-white/brown vanes
+    for(var s=-1;s<=1;s+=2)vfx_pixel_line(tx+lengthdir_x(3,_dir),ty+lengthdir_y(3,_dir),tx+lengthdir_x(2*s,_dir+90),ty+lengthdir_y(2*s,_dir+90),1,s<0 ? make_color_rgb(222,214,196) : make_color_rgb(176,148,112),_alpha);
 }
 /// Dust puff (slam, stomp): three grey-brown pixel clouds that swell and fade.
 function vfx_dust_puff(_x,_y,_r,_p,_alpha) {
@@ -134,7 +139,6 @@ function class_effects_draw() {
         if(string_pos("burst",f.kind)==1){vfx_class_burst(f.x,f.y,f.radius,p,real(string_delete(f.kind,1,5)),tier);continue;}
         if(f.kind=="mage_arc") {
             vfx_arc_sweep(f.x,f.y,f.angle,60,f.radius,p,4,tier);
-            if(f.age>=.09 && f.age<.25){var arc=telegraph_make("sector",f.x,f.y,f.radius,1,f.angle,120);arc.elapsed=1;telegraph_draw(arc,make_color_rgb(147,117,255));}
         }
         if(f.kind=="mage_circle") {
             vfx_magic_circle(f.x,f.y,f.radius,p,f.age,tier);
@@ -147,10 +151,10 @@ function class_effects_draw() {
         if(f.kind=="mage_star" || f.kind=="mage_star_nova") {
             var flight=clamp(f.age/.85,0,1),xx=lerp(f.sx,f.x,flight),ground_y=lerp(f.sy,f.y,flight),height=sin(pi*flight)*180;
             if(f.age<1){var shrink=f.age>.85 ? 1-(f.age-.85)/.15*.7 : 1;vfx_star_orb(xx,ground_y-height,(20+tier*4)*shrink,f.age);var pal=vfx_palette(4);for(var trail=1;trail<=5;trail++){var prev=max(0,flight-trail*.018),tx=lerp(f.sx,f.x,prev),ty=lerp(f.sy,f.y,prev)-sin(pi*prev)*180;vfx_px(tx-1,ty-1,trail<3 ? 3 : 2,trail<3 ? pal[1] : pal[0],1-trail*.15);}}
-            var mark=telegraph_make("circle",f.x,f.y,f.radius,.85);mark.elapsed=f.age;telegraph_draw(mark,make_color_rgb(156,118,255));
+            if(f.age<.85)vfx_player_target_mark(f.x,f.y,f.radius,f.age/.85,make_color_rgb(186,150,255));
         }
         if(f.kind=="ranger_rain") {
-            var mark=telegraph_make("circle",f.x,f.y,f.radius,.4);mark.elapsed=f.age;telegraph_draw(mark,make_color_rgb(150,232,113));
+            if(f.age<.4)vfx_player_target_mark(f.x,f.y,f.radius,f.age/.4,make_color_rgb(170,236,140));
             if(f.age>=.25)for(var n=0;n<20+tier*4;n++) {
                 var a=n*137.5,r=f.radius*sqrt((n+.5)/(20+tier*4)),xx=f.x+lengthdir_x(r,a),yy=f.y+lengthdir_y(r,a),fall=frac(f.age*3+n*.137);
                 if(f.age>.4 && f.age<1.17)vfx_arrow_fall(xx-40*(1-fall),yy-170*(1-fall),285);
@@ -260,12 +264,19 @@ function vfx_arrow_fall(_x,_y,_dir) {
     var tx=_x-lengthdir_x(16,_dir),ty=_y-lengthdir_y(16,_dir);
     vfx_pixel_line(tx,ty,_x,_y,1,make_color_rgb(214,178,120),1);
     vfx_px(_x+lengthdir_x(1,_dir)-1,_y+lengthdir_y(1,_dir)-1,2,make_color_rgb(236,240,232),1);
-    vfx_px(tx-1,ty-1,2,make_color_rgb(116,239,153),1);
-    if(vfx_quality()>0)vfx_pixel_line(tx-lengthdir_x(10,_dir),ty-lengthdir_y(10,_dir),tx,ty,1,make_color_rgb(228,255,234),.25);
+    vfx_px(tx-1,ty-1,2,make_color_rgb(222,214,196),1); // natural fletching, no element colour
+    if(vfx_quality()>0)vfx_pixel_line(tx-lengthdir_x(10,_dir),ty-lengthdir_y(10,_dir),tx,ty,1,make_color_rgb(214,214,206),.18);
 }
 /// Arrow impact: a short cross and dust pixels.
 function vfx_arrow_hit(_x,_y,_q,_seed) {
-    var pal=vfx_palette(6),k=1-_q,s=2+round(_q*4);
+    var pal=vfx_palette(0),k=1-_q,s=2+round(_q*3); // physical: splinters and dust
     vfx_pixel_line(_x-s,_y,_x+s,_y,1,pal[2],k);vfx_pixel_line(_x,_y-s,_x,_y+s,1,pal[1],k);
     for(var i=0;i<3;i++){var a=i*120+40*vfx_hash(_seed,i);vfx_px(_x+lengthdir_x(3+_q*8,a),_y+lengthdir_y(2+_q*5,a),1,make_color_rgb(150,128,96),k);}
+}
+/// Player target aid (not an enemy telegraph: no fill, no countdown surface): thin rotating rune dashes and a centre dot
+/// in the player's colour, tightening slightly toward the impact (docs/Design/Kampf & Begegnungen.md, Telegraphs).
+function vfx_player_target_mark(_x,_y,_r,_p,_col) {
+    var t=current_time/1000,r=_r*(1-.12*_p),a0=t*90,x0=round(_x),y0=round(_y),al=.55*(1-.4*_p);
+    for(var k=0;k<8;k++){var a=a0+k*45;vfx_pixel_line(x0+lengthdir_x(r,a),y0+lengthdir_y(r,a),x0+lengthdir_x(r,a+14),y0+lengthdir_y(r,a+14),1,_col,al);}
+    draw_set_alpha(al);draw_set_color(_col);draw_rectangle(x0-1,y0-1,x0+1,y0+1,false);draw_set_alpha(1);draw_set_color(c_white);
 }

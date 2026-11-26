@@ -7,3 +7,4 @@ if(instance_exists(global.active_boss) && global.active_boss.v2_enabled && !glob
 boss_hazards_draw();chain_visual_draw();boss_direction_draw();
 
 if(instance_exists(global.active_boss) && global.active_boss.dragon_enabled) dragon_vfx_draw(global.active_boss);
+telegraph_flush(); // enemy warnings sorted by time to impact (scripts/hazard_fx)

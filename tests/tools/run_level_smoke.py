@@ -58,6 +58,9 @@ def main():
         code = re.sub(r'\bmouse_x\b', 'gp_mouse_x()', code)
         code = re.sub(r'\bmouse_y\b', 'gp_mouse_y()', code)
         code = code.replace('show_error(', 'lv_show_error(')
+        # Fixed 60 Hz frame time (like the boss suite): the enemy chase/strike checks count frames, so real frame-time
+        # jitter of the test machine made them flaky (26.11.: construct/skeleton/knight failing in turn, 1 of 2 runs).
+        code = re.sub(r'\bdelta_time\b', '16667', code)
         write(path, code)
     runner = GameMakerRunner(project, runtime_version='2024.14.4.268')
     igor = runner.find_gamemaker_runtime(); lic = runner.find_license_file()

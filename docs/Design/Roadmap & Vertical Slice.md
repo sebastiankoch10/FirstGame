@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, roadmap, vertical-slice]
-updated: 2026-11-25
+updated: 2026-11-26
 status: verbindlich als Reihenfolge; einzelne Schritte brauchen die markierten Nutzerentscheidungen
 ---
 # Roadmap & Vertical Slice
@@ -51,6 +51,9 @@ graph LR
 | 8 | Auswertung des Slice, Anpassung der Standards, dann **L3 Übertragung** je Inhaltsgruppe (Klassen → Gegner → Bosse → Zauber) | XL | 6, 7 | Reihenfolge |
 | 9 | V3 Minibosse (Codex zeichnet, Vorgaben von Claude); ~~L5 Elitegegner~~ und ~~L4 Waffen-Upgrades~~ umgesetzt am 25.11. | L | 8 | entschieden |
 | 10 | *(Pfadtabelle erledigt 25.11.)* L1 Asset-Migration (Pfadtabelle, dann Verschieben) | M | — (jederzeit) | nein |
+| 11 | **Neutrale Basisgrafik** (schlanke, eng anliegende Grundkleidung) für 3 Klassen × 256 Posen als neue Quelle der Charakter-Pipeline (Phase 1, 7.1). Die Ebenen-Architektur steht bereits. | L | Quelle: Nutzerentscheidung (KI-Atlanten wie bisher oder Pixel-Artist) | offen |
+| 12 | **Drache Stufe 2:** Schweif als Gliederkette mit Trefferfläche an der Spitze und Flügel als eigene Teile. Braucht eigene Quellsegmente; der Schweif liegt in der Dreiviertelansicht eingerollt zwischen den Beinen (Phase 2B, 4). | L | neue Quellsegmente | offen |
+| 13 | **Ankerpunkte nutzen:** weitere Waffentypen, Nebenhand und Schilde über `eqv_attach` (Daten seit 26.11. vorbereitet). | M | 11 | vorbereitet |
 
 ## 4. Vertical Slice: Spezifikation
 

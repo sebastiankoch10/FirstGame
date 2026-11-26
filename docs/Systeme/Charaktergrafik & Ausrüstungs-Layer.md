@@ -1,6 +1,6 @@
 ---
 tags: [system, grafik, ausruestung, charaktere]
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 # Charaktergrafik & Ausrüstungs-Layer
 
@@ -62,6 +62,13 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
 - **Seltenheit:** färbt die Akzente: gewöhnlich Bronze, magisch Blau, selten Gold, episch Violett.
 - **Talisman:** nicht sichtbar am Körper.
 - **Umhänge:** kein Ausrüstungsslot. Der rote Umhang (Schwertkämpfer) und der grüne Umhang (Waldläufer) bleiben Teil der Klassenidentität im Basismodell.
+
+- **Ankerpunkte seit 26.11.:**
+  - `tests/tools/characters/build_attach_points.py` erzeugt `scripts/equipment_attach_data`: je Klasse und Zelle Griffpunkt, Winkel, Länge und Konfidenz, aus Startwaffen- und Handebene.
+  - `eqv_attach(actor, spr, frame, x, y, xs, ys)` liefert den Griff in Weltkoordinaten (gespiegelt mit der Blickrichtung).
+  - Noch von keiner Zeichenstelle genutzt; vorbereitet für weitere Waffentypen, Nebenhand und Schilde.
+  - Prüfung in der Suite `visual`.
+- **Sprungreaktion seit 26.11.:** In `player_motion_life` (`scripts/player_artpack`) schwingen Haar und Umhang beim Absprung zurück, hängen beim Steigen nach und heben sich beim Fallen.
 
 ## Abhängigkeiten
 [[Ausrüstung]] (Slots, Gegenstandsstufe, Seltenheit) · [[Spieler & Bewegung]] (Animationszustände, ein Frame-Takt) · [[Klassen & Startwaffen]] (Startwaffe als Ebene) · [[UI, HUD & Menüs]] (Porträt, Icons) · [[Tests & QA]] (Suite `visual`)

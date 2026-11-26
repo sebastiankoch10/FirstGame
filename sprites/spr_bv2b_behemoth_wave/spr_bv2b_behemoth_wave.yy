@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Beute",
-    "path":"folders/Sprites/Beute.yy",
+    "name":"Sumpfbehemoth",
+    "path":"folders/Sprites/Bosse/Sumpfbehemoth.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

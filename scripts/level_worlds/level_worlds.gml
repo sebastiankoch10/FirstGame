@@ -88,6 +88,44 @@ function level_enemy_spawn(_x,_y) {
 }
 /// Sprite scale divisor: creatures marked baked are rendered at their cfg.scale (pixel density 1:1, see
 /// tests/tools/levels/enemies.py creature_spec), so they are drawn at monster_scale/cfg.scale (1 unless elite).
+/// Switch (on): an earlier suspicion that it broke the level suite was the suite's real frame time (fixed 26.11.).
+#macro ENEMY_MOTION_ENABLED true
+/// Movement identity per species (Phase 2B, docs/Design/Kampf & Begegnungen.md 7): whole-pixel body offsets layered on
+/// the frame animation. Rhythm and weight differ (light scuttle, bouncy hop, heavy stomp, stiff jerk, floating drift);
+/// the wind-up pulls back from the target and the strike lunges toward it, so the body announces the attack.
+function enemy_motion_profile(_kind) {
+    static p={
+        swamp_crawler:{rate:15,bob:1,side:1,hop:0,heavy:0,back:1,lunge:5,jerk:0},
+        swamp_mushroom:{rate:5.5,bob:0,side:0,hop:4,heavy:0,back:1,lunge:3,jerk:0},
+        swamp_skeleton:{rate:7,bob:1,side:0,hop:0,heavy:0,back:2,lunge:3,jerk:1},
+        swamp_knight:{rate:4.5,bob:2,side:0,hop:0,heavy:1,back:3,lunge:4,jerk:0},
+        ash_warrior:{rate:6,bob:1,side:0,hop:0,heavy:0,back:2,lunge:4,jerk:0},
+        cursed_armor:{rate:3.8,bob:2,side:0,hop:0,heavy:1,back:3,lunge:3,jerk:1},
+        ice_spirit:{rate:2.2,bob:0,side:3,hop:0,heavy:0,back:-3,lunge:4,jerk:0},
+        construct:{rate:3.2,bob:2,side:0,hop:0,heavy:1,back:2,lunge:2,jerk:0}
+    };
+    return variable_struct_exists(p,_kind) ? p[$ _kind] : undefined;
+}
+function enemy_motion_offset() {
+    var o={dx:0,dy:0};
+    if(!variable_instance_exists(id,"lvl_kind"))return o;
+    var pr=enemy_motion_profile(lvl_kind);if(!is_struct(pr))return o;
+    var t=current_time/1000+particle_phase*.37,moving=point_distance(x,y,xprevious,yprevious)>.15;
+    var ph=t*pr.rate,face=instance_exists(ObjectPlayer) ? sign(ObjectPlayer.x-x) : 1;if(face==0)face=1;
+    if(moving) {
+        if(pr.heavy){var s=abs(sin(ph));o.dy=-round(pr.bob*power(s,3));}                 // heavy: long ground contact, short lift
+        else o.dy=-round(pr.bob*abs(sin(ph)));
+        if(pr.hop>0)o.dy=-round(pr.hop*abs(sin(ph)));                                  // bouncy hop
+        if(pr.side>0)o.dx=round(pr.side*sin(ph*(pr.hop>0 ? 1 : 2)));                     // scuttle / drift
+        if(pr.jerk && (floor(ph*2) mod 3)==0)o.dx+=face;                                // stiff, jerky gait
+    }
+    if(variable_instance_exists(id,"skeleton_attacking") && skeleton_attacking && is_struct(lvl_cfg)) {
+        var at=skeleton_attack_time,wu=max(.01,lvl_cfg.windup),se=lvl_cfg.strike_end;
+        if(at<wu){var k=at/wu;o.dx=-face*round(pr.back*k);o.dy=lvl_kind=="ice_spirit" ? -round(3*k) : (pr.heavy ? -round(k) : round(k*.6));}
+        else if(at<se){var k=clamp((at-wu)/max(.01,se-wu),0,1);o.dx=face*round(pr.lunge*sin(pi*min(1,k*1.4)));o.dy=pr.heavy ? round(2*sin(pi*k)) : 0;}
+    }
+    return o;
+}
 function monster_art_div(_e) {
     return (variable_instance_exists(_e,"lvl_cfg") && is_struct(_e.lvl_cfg) && variable_struct_exists(_e.lvl_cfg,"baked")) ? _e.lvl_cfg.scale : 1;
 }

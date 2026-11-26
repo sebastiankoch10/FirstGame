@@ -31,6 +31,12 @@ function dragon_parts_pivot_for(_b,_wx,_wy,_local_angle,_open) {
     var s=dragon_parts_spec(),q=dragon_parts_quant(_local_angle),m=_open ? s.head.open.mouth : s.head.closed.mouth;
     return [(_wx-_b.x)*_b.dragon_facing-lengthdir_x(m,q),(_wy-_b.y)-lengthdir_y(m,q)];
 }
+/// Breath wind-up in local space: the head draws back along the neck (up to 12 px, slightly raised) while fire gathers,
+/// then thrusts forward in the last 18 % of the warning; at release the head locks exactly on the attack origin.
+function dragon_parts_breath_offset(_b,_ta) {
+    var q=clamp(_b.dragon_state_age/max(.1,_b.enc_cfg.warning),0,1),e=min(1,q/.82),pull=q<.82 ? 12*e*e*(3-2*e) : 12*(1-(q-.82)/.18);
+    return [-lengthdir_x(pull,_ta),-lengthdir_y(pull,_ta)-pull*.35];
+}
 function dragon_parts_step(_b,_dt) {
     if(!DRAGON_PARTS_ENABLED || global.game_paused)return;
     if(!variable_instance_exists(_b,"dp"))dragon_parts_init(_b);
@@ -46,6 +52,7 @@ function dragon_parts_step(_b,_dt) {
         var m=dragon_mouth(_b,true);ta=dragon_parts_local(_b,_b.dragon_angle);
         open=st=="active" || _b.dragon_state_age>_b.enc_cfg.warning*.45;
         p=dragon_parts_pivot_for(_b,m.x,m.y,ta,open);tx=p[0];ty=p[1];stiff=14;exact=st=="active";
+        if(st=="windup"){var pb=dragon_parts_breath_offset(_b,ta);tx+=pb[0];ty+=pb[1];}
     } else if(attack && cast=="bite" && is_struct(_b.enc_geometry)) {
         var g=_b.enc_geometry;ta=dragon_parts_local(_b,g.angle);
         if(st=="windup") {
@@ -60,6 +67,7 @@ function dragon_parts_step(_b,_dt) {
     } else if(attack && is_struct(_b.enc_geometry) && array_contains(["arc","volley","void"],cast)) {
         var g=_b.enc_geometry;ta=dragon_parts_local(_b,g.angle);open=st=="active" || _b.dragon_state_age>_b.enc_cfg.warning*.5;
         p=dragon_parts_pivot_for(_b,g.x,g.y,ta,open);tx=p[0];ty=p[1];stiff=12;
+        if(st=="windup" && cast=="arc"){var pb=dragon_parts_breath_offset(_b,ta);tx+=pb[0];ty+=pb[1];}
     } else {
         // look at the player with a slow breathing reach
         var wx=_b.x+f*dp.sx,wy=_b.y+dp.sy;

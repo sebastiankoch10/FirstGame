@@ -178,7 +178,8 @@ function enemy_draw(_scale,_boss) {
     draw_set_alpha(1);
     var hover=variable_instance_exists(id,"lvl_hover") ? lvl_hover*(1+sin(current_time/260+lvl_weave_phase)*.25) : 0;
     if(level_world_room())master_shadow_draw(x-3,y+2,(hover>0 ? 10 : 14)*_scale,(hover>0 ? 3.5 : 5)*_scale,hover>0 ? .22 : .36);
-    var art=monster_art_div(id);draw_sprite_ext(sprite_index,image_index,x,y-hover,_scale/art*image_xscale,_scale/art*image_yscale,0,hurt_flash_timer>0 ? make_color_rgb(255,200,170) : element_tint(id),1);
+    var mo=ENEMY_MOTION_ENABLED ? enemy_motion_offset() : {dx:0,dy:0};motion_dx=mo.dx;motion_dy=mo.dy; // species movement identity (level_worlds), switched off 26.11. // species movement identity (level_worlds)
+    var art=monster_art_div(id);draw_sprite_ext(sprite_index,image_index,x+mo.dx,y-hover+mo.dy,_scale/art*image_xscale,_scale/art*image_yscale,0,hurt_flash_timer>0 ? make_color_rgb(255,200,170) : element_tint(id),1);
     var w=_boss ? 76 : 38, h=_boss ? 8 : 5;
     var yy=y-40*_scale;
     if(!_boss && hp<max_hp && (hurt_flash_timer>0 || damage_number_timer>0)) {
@@ -212,7 +213,7 @@ function menu_labels(_mode) {
     switch(_mode) {
         case "characters": return ["Schwertmeister","Arkanistin","Waldlaeufer"];
         case "levels": return level_names();
-        case "settings": return ["Vollbild: Ein/Aus","Gesamtlautstaerke","Musik","Effekte","Ton im Hintergrund abspielen","Effektqualitaet","Zurueck zum Titelbildschirm"];
+        case "settings": return ["Vollbild: Ein/Aus","Gesamtlautstaerke","Musik","Effekte","Ton im Hintergrund abspielen","Effektqualitaet","Lichtblitze","Zurueck zum Titelbildschirm"];
         case "boss_test":return boss_test_menu_labels();
         default: {
             var l=boss_test_enabled() ? ["Neues Spiel","Einstellungen","Beenden","Testmodus"] : ["Neues Spiel","Einstellungen","Beenden"];
@@ -228,7 +229,7 @@ function menu_geometry(_count,_characters=false) {
 }
 function menu_activate(_choice) {
     if(menu_mode=="boss_test"){boss_test_menu_change(_choice,1);return;}
-    fg_sfx(menu_mode=="characters" ? "character_select" : (menu_mode=="levels" ? "game_start" : (menu_mode=="settings" && _choice==6 ? "ui_back" : "ui_click")));
+    fg_sfx(menu_mode=="characters" ? "character_select" : (menu_mode=="levels" ? "game_start" : (menu_mode=="settings" && _choice==7 ? "ui_back" : "ui_click")));
     if (menu_mode=="characters") {
         var names=["Sword","Mage","Ranger"];
         global.selected_character=names[clamp(_choice,0,2)];
@@ -243,7 +244,8 @@ function menu_activate(_choice) {
         if (_choice>=1 && _choice<=3) {var volume_keys=["master_volume","music_volume","effects_volume"]; fg_audio_cycle_volume(volume_keys[_choice-1]);}
         if (_choice==4) fg_audio_toggle_background();
         if (_choice==5) vfx_quality_cycle();
-        if (_choice==6) {menu_mode="main"; menu_index=0;}
+        if (_choice==6) light_flash_toggle();
+        if (_choice==7) {menu_mode="main"; menu_index=0;}
     } else {
         if (_choice==0) {menu_mode="characters"; menu_index=0; pending_new_game=true;}
         if (_choice==1) {menu_mode="settings"; menu_index=0;}
@@ -256,7 +258,7 @@ function menu_activate(_choice) {
 function round_menu_labels() {
     if (global.game_over) return review_active() ? ["Szenario neu starten","Zurueck zum Review-Center"] : ["Neustart","Zurueck zum Hauptmenue"];
     if (review_active() && !global.settings_active) return review_pause_labels();
-    if (global.settings_active) return ["Vollbild: Ein/Aus","Gesamtlautstaerke","Musik","Effekte","Ton im Hintergrund abspielen","Effektqualitaet","Zurueck zur Runde","Zurueck zum Titelbildschirm"];
+    if (global.settings_active) return ["Vollbild: Ein/Aus","Gesamtlautstaerke","Musik","Effekte","Ton im Hintergrund abspielen","Effektqualitaet","Lichtblitze","Zurueck zur Runde","Zurueck zum Titelbildschirm"];
     return ["Weiter","Talente & Ausruestung","Neues Spiel","Einstellungen","Zurueck zum Titelbildschirm","Beenden"];
 }
 function round_menu_activate(_choice) {
@@ -266,8 +268,9 @@ function round_menu_activate(_choice) {
         if (_choice>=1 && _choice<=3) {var volume_keys=["master_volume","music_volume","effects_volume"]; fg_audio_cycle_volume(volume_keys[_choice-1]);}
         if (_choice==4) fg_audio_toggle_background();
         if (_choice==5) vfx_quality_cycle();
-        if (_choice==6) {fg_sfx("ui_back"); global.settings_active=false; global._pause_index=0;}
-        if (_choice==7) round_end_to_title();
+        if (_choice==6) light_flash_toggle();
+        if (_choice==7) {fg_sfx("ui_back"); global.settings_active=false; global._pause_index=0;}
+        if (_choice==8) round_end_to_title();
         return;
     }
     var action=round_menu_labels()[_choice];
@@ -314,6 +317,7 @@ function round_menu_draw() {
         if(global.settings_active && i>=1 && i<=3) label+=fg_audio_volume_label(i);
         if(global.settings_active && i==4) label+=global.audio_background ? ": Ein" : ": Aus";
         if(global.settings_active && i==5) label+=vfx_quality_label();
+        if(global.settings_active && i==6) label+=light_flash_label();
         if(string_width(label)>ui.w-18) {
             draw_set_valign(fa_top);draw_text_ext(ui.x+ui.w/2,yy+6,label,18,ui.w-18);
         } else draw_text(ui.x+ui.w/2,yy+ui.h/2,label);

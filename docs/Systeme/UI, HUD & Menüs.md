@@ -19,5 +19,7 @@ Hauptmenü, Charakter- und Levelauswahl, Pause, Level-up-Wahl, HUD, Charakterbil
 
 - **Review-Center** (seit 26.11.): Hauptmenüpunkt „Review-Center (N offen)“, Listenbildschirm mit Reitern und Detailfeld; im Szenario erweitert sich das Pausenmenü um Review-Aktionen und den grünen Freigabeknopf. Siehe [[Review-Center]].
 
+- Einstellungen seit 26.11. mit „Lichtblitze“ (Index 6). „Zurueck“ liegt jetzt auf 7, im Pausenmenü auf 7 bzw. 8.
+
 ## Abhängigkeiten
 [[Spielablauf & Zustände]] · [[Talente]] · [[Ausrüstung]] · [[Zauber & Passiva]] · [[Boss-Testmodus]]

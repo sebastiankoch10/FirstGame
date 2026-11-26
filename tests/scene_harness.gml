@@ -79,6 +79,8 @@ function sc_controller_tick() {
     if(!variable_global_exists("sc_stage") || !instance_exists(ObjectPlayer))return;
     global.sc_frame++;var f=global.sc_frame,pl=ObjectPlayer;global.sc_press=-1;
     pl.hp=max(pl.hp,pl.max_hp*.9);
+    // --boss-hp: start the boss in a later phase (phase follows HP), once
+    if(SC_BOSS_HP<1 && instance_exists(global.active_boss) && !variable_global_exists("sc_hp_set")){global.sc_hp_set=true;global.active_boss.hp=global.active_boss.max_hp*SC_BOSS_HP;}
     if(SC_SCENE=="boss"){if(variable_global_exists("boss_test") && is_struct(global.boss_test))global.boss_test.invulnerable=true;}
     else {
         global.next_levelup_time=1000000000;

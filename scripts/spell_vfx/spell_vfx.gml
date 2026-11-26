@@ -282,6 +282,8 @@ function vfx_pillar_draw(_f,_b,_fa) {
     var marks=_b==2 ? 8 : 6;
     for(var m=0;m<marks;m++){var a=m*360/marks+rot*1.5,mx=_f.x+lengthdir_x(_f.radius*.82,a),my=_f.y+lengthdir_y(_f.radius*.82,a);vfx_px(mx-1,my-1,3,pal[2],(.5+.5*p)*_fa);}
     if(_f.age<th) {
+        // gathering (multi-phase ability, Phase 2B): energy streams into the target point while the column falls
+        vfx_charge(_f.x,_f.y,p*(.55+.2*_b)*_fa,_f.element,_f.radius*(.7+.15*_b),round(_f.x));
         // charge: a thin column of light falling into the centre
         var top=_f.y-230*(1-p),drops=_b+2;
         vfx_pixel_line(_f.x,top,_f.x,_f.y,1,pal[1],.7*_fa);vfx_glow_line(_f.x,top,_f.x,_f.y,6,pal[1],.12+.05*_b);

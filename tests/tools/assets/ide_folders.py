@@ -31,7 +31,10 @@ SPRITE_RULES = [
     # ArtPack 0.1 monster strips: still used by minibosses (boar, golem) and fallback spawns.
     (r'^spr_fg_(slime|mushroom|boar|goblin|bat|wisp|lizard|spider|skeleton|plant|beetle|imp|golem|blob|bandit|dragon)_',
      'Sprites/Gegner/ArtPack_0_1_Streifen'),
-    (r'^(spr_fg_dragonboss|spr_fg_dragonextra|spr_dragon_fx|spr_fg_boss_dragon)', 'Sprites/Bosse/Drache'),
+    (r'^(spr_fg_dragonboss|spr_fg_dragonextra|spr_dragon_fx|spr_fg_boss_dragon|spr_drg_)', 'Sprites/Bosse/Drache'),
+    (r'^spr_bv2b_(fire|ice)_', 'Sprites/Bosse/Zwillingshexen'),
+    (r'^spr_bv2b_behemoth_', 'Sprites/Bosse/Sumpfbehemoth'),
+    (r'^spr_font_', 'Sprites/UI/Schrift'),
     (r'^spr_bv2_(twins|fire|ice)', 'Sprites/Bosse/Zwillingshexen'),
     (r'^spr_bv2_(behemoth|swamp|brood)', 'Sprites/Bosse/Sumpfbehemoth'),
     (r'^spr_fg_boss_', 'Sprites/Bosse/Minibosse'),
@@ -48,14 +51,16 @@ SPRITE_RULES = [
 ]
 
 SCRIPT_RULES = [
-    (r'^(gameplay|gameplay_polish|reset_round|player_artpack|apply_passives|hud|progression_audit)$', 'Skripte/Kern_und_Spieler'),
+    (r'^(gameplay|gameplay_polish|reset_round|player_artpack|apply_passives|hud|progression_audit|render_pipeline)$', 'Skripte/Kern_und_Spieler'),
+    (r'^(review_center|review_registry_data)$', 'Skripte/Entwicklung_Review'),
+    (r'^hazard_fx$', 'Skripte/Kampf_und_Klassen'),
     (r'^(master_combat|class_weapons|combat_feedback|attack_telegraph|attack_timeline)$', 'Skripte/Kampf_und_Klassen'),
     (r'^(spell|spell_v2|spell_v2_catalog|spell_vfx|spell_world_v2|spell_choices_v2|spell_ui_v2|cast_spell|get_spell_data|hotbar_assign|run_spell_stats|handle_chest_selection)$',
      'Skripte/Zauber'),
     (r'^(boss_|dragon_)', 'Skripte/Bosse'),
     (r'^(master_skeleton|survivor_balance)$', 'Skripte/Gegner'),
     (r'^(level_|master_world|atmosphere|weather)', 'Skripte/Welt_und_Atmosphaere'),
-    (r'^(talents|equipment|equipment_visual|equipment_visual_data)$', 'Skripte/Fortschritt_und_Ausruestung'),
+    (r'^(talents|equipment|equipment_visual|equipment_visual_data|equipment_ui|equipment_attach_data)$', 'Skripte/Fortschritt_und_Ausruestung'),
     (r'^audio_manager$', 'Skripte/Audio'),
 ]
 

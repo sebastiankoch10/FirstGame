@@ -17,6 +17,8 @@ updated: 2026-11-26
 - Weitere: `scripts/spell_ui_v2` (Tooltips und Run-Statistiken), `scripts/hotbar_assign`, `scripts/run_spell_stats`.
 - Darstellung (seit 25.11.): alle 18 aktiven Zauber als zusammengesetzte Pixel-Effekte (`scripts/spell_vfx`, `spell_fx_core_draw` in `spell_v2`). Die Intensität folgt der Zauberstufe in drei Bändern (1–3, 4–6, 7–9; `vfx_band`), wirkt nur auf Deckkraft und Glühen, nie auf Trefferradien. Details: [[Licht, Wetter & Effekte]].
 
+- **Seit 26.11. mehrphasig:** Donnersiegel und Sonnenurteil sammeln Energie am Zielpunkt (`vfx_charge` in `vfx_pillar_draw`) und lösen beim Schadensereignis Licht nach Band aus (`spell_v2_step`, Fall `seal`/`verdict`). Review: `spell.seal.l1|l5|l9`.
+
 ## Abhängigkeiten
 [[Progression & Level-up]] · [[Licht, Wetter & Effekte]] (`spell_vfx`) · [[UI, HUD & Menüs]] · [[Bosse]] · [[Klassen & Startwaffen]]
 

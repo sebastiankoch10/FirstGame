@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, assets, pipeline, struktur]
-updated: 2026-11-25
+updated: 2026-11-26
 status: verbindlich (Fachgebiet Asset-Organisation, Namen, Arbeitsablauf)
 ---
 # Assets & Pipeline
@@ -92,6 +92,16 @@ Skripte/
 - **Neue Ressourcen** aus `tests/tools/levels/gm_project.py` landen automatisch im passenden Ordner.
 - **Ältere Importer** nutzen eigene Vorlagen. Nach einem Lauf `ide_folders.py --apply` ausführen.
 - **Neue Namensfamilien** brauchen eine Regel in `ide_folders.py`.
+
+## 3a. Stand 26.11.2026 (Phasen 1, 2A, 2B)
+- **Keine neuen Bild- oder Tondateien:** Telegraphs, Gefahrenflächen, Feuerstrom, Aufladungen, Lichtblitze, Pfeile und Zielmarken sind prozedurale Pixel-Komposite im Weltraster. Kein Original-Asset wurde verändert, verschoben oder gelöscht.
+- **Neue generierte Datenbausteine** (nicht von Hand ändern):
+  - `scripts/review_registry_data` aus `review/registry.json` (`tests/tools/review/review.py build`).
+  - `scripts/equipment_attach_data` aus den Ausrüstungsatlanten (`tests/tools/characters/build_attach_points.py`).
+- **Neue Werkzeuge:**
+  - `tests/tools/review/` (Registry, Abgleich der Freigaben, End-to-End-Test).
+  - `tests/tools/characters/build_attach_points.py`.
+- **IDE-Baum:** neue Skripte über `tests/tools/assets/ide_folders.py --apply` einsortiert. Das ändert nur die virtuelle Ansicht, keine Datei wird verschoben.
 
 ## 4. Zielstruktur für Quell-Assets und Migrationsplan
 
