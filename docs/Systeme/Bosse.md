@@ -37,5 +37,14 @@ Zwei Minibosse in Minute 1 und 3. Ab Minute 5 alle 5 Minuten ein zufälliger Hau
 - Die älteren Drachenangriffe nutzen das alte Encounter-System: Treffertest und Darstellung laufen in `dragon_encounter_step` und `dragon_encounter_draw`, nicht über `bv2_*`. Stand nach dem Audit vom 26.11.:
   - Der wachsende Ring von Bodenschlag und Wirbel kommt aus einer Funktion, `dragon_ring_geometry`, für Treffer, Bild und Test. Vorher stand die Formel doppelt im Code.
   - Das Orakel der Boss-Suite sieht jetzt Fächer, Biss, Schweif, Stampf- und Meteorzonen und den Ring. Ergebnis: in allen 18 Drachenfällen 0 Bilder ohne erreichbare sichere Position.
-  - Weiterhin unsichtbar für das Orakel sind die drei Projektilangriffe Wind, Leere und Salve (`hostile_bullets`).
+  - Seit dem Nachtrag vom 26.11. sieht das Orakel auch die Projektile des Drachen (Wind, Leere, Salve; `hostile_bullets`). Es nutzt dieselbe Trefferregel wie `boss_hazards_step`: Abstand zur Flugbahn ≤ Projektilradius + Kontaktradius.
+  - Ergebnis: In allen 18 Drachenfällen und 11 Sequenzen gibt es 0 Bilder ohne erreichbare sichere Position.
+
+    | Fall | Projektile im Blick (max., Bilder) | Ausweichbewegung (Bilder) |
+    |---|---|---|
+    | Wind P1 / P3 | 12 / 16, je 343 | 41 / 0 |
+    | Leere P1 / P3 | 12 / 16, je 348 | 0 / 0 |
+    | Salve P1 / P3 | 17 / 16, je 356 | 116 / 54 |
+
+  - Offen: Bei Leere und bei Wind in Phase 3 kreuzt keine Flugbahn die stillstehende Testfigur, obwohl die Fächer auf sie zielen sollten ([[Bugs & Ideen]]).
   - Langfristig sollten diese Angriffe auf `bv2`-Gefahren umziehen, damit es nur einen Treffer- und Warnpfad gibt ([[Bugs & Ideen]]).

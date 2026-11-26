@@ -77,7 +77,8 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
   - Seit 26.11. auch die Feature-Suite (`FIXED_DT_SUITES` in `run_native_harness.py`). Die Klassen-Suite hat mit `cd_sim_dt` schon eine simulierte Bildzeit.
   - Boss-Suite seit 26.11. mit dem Lauf `sequences` (Drache): Jede choreografierte Sequenz jeder Phase wird mit dem Orakel erzwungen. Geprüft wird: läuft vollständig und in Reihenfolge, jeder Schritt startet und erreicht die Aktivierung, sichere Position erreichbar. Danach ein natürlicher Lauf über 40 s: Sequenzen ergänzen, reguläre Angriffe bleiben.
   - Audit 26.11.:
-    - Das Orakel der Boss-Suite sieht auch die geometrischen Altangriffe des Drachen (`legacy` in `bh_relevant`, Ring über `dragon_ring_geometry`).
+    - Das Orakel der Boss-Suite sieht auch die geometrischen Altangriffe und die Projektile des Drachen (`legacy` in `bh_relevant`: Geometrie, Ring über `dragon_ring_geometry`, Flugbahn bis zum Horizont). Je Fall stehen `bullets` und `bullet_frames` im Bericht.
+  - `check_base_neutral.py` nutzt seit 26.11. die echten Zellgrenzen und den Alpha-Schnitt des Importers (`atlas.Atlas`), mit `--dir` auch für Entwürfe außerhalb des Übergabeordners.
     - Die Perf-Suite hat das Szenario `horde_coins` (Horde plus 2.500 liegende Münzen, Kennzahl `active_coins`).
     - Die Level-Suite prüft das Münz-Culling in allen drei Leveln (`lv_coin_cull_check`).
   - `record_scene.py spellsheet --spell-level N`: alle 18 aktiven Zauber in einem Build, je 3 Zeitpunkte, beschriftetes Raster `spellsheet.png`.

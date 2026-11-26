@@ -13,8 +13,13 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
 - **Boss-Testmenü im Release:** `#macro BOSS_TEST_MENU_ENABLED true` in `scripts/boss_test_mode`. Vor einer Veröffentlichung auf `false` setzen. → [[Boss-Testmodus]]
 - **Drei Boss-Codepfade** (Audit 26.11., größtes Wartungsrisiko): `boss_combat` (Minibosse, alte Muster), `dragon_encounter` (eigener Treffertest und eigene Darstellung) und `boss_encounters_v2` auf den gemeinsamen `bv2`-Gefahren.
   - Entschärft: gemeinsame Ringgeometrie `dragon_ring_geometry`; das Orakel prüft jetzt auch die geometrischen Altangriffe des Drachen.
-  - Offen: Wind, Leere und Salve (Projektile) sieht das Orakel nicht.
+  - Seit 26.11. sieht das Orakel auch Wind, Leere und Salve (Projektile): 0 unsichere Bilder in allen Fällen ([[Bosse]]).
   - Vorschlag: die Altangriffe des Drachen einzeln auf `bv2_sector`/`bv2_zone`/Ring umziehen, je Angriff mit dem vorhandenen Orakel-Fall als Absicherung; zuerst Fächer und Bodenschlag (rein geometrisch), zuletzt die Projektile.
+  → [[Bosse]]
+- **Drachen-Projektile verfehlen eine stillstehende Figur?** (Prüffrage aus dem Orakel-Nachtrag 26.11.)
+  - Befund: In den Fällen Leere (P1, P3) und Wind (P3) sieht das Orakel 12–16 Projektile, aber keine Flugbahn kreuzt die stillstehende Testfigur in 330 px Abstand; es bewegt sich 0 Bilder.
+  - Ursache nicht geprüft. Verdacht: Die Zielrichtung folgt dem Kopf in 32 festen Drehstufen (`dragon_parts`), die Mittelachse des Fächers läge dann bis zu etwa 5,6° neben der Figur.
+  - Nächster Schritt: im Boss-Test (F5, Fähigkeit 7) prüfen, ob die Leere eine ruhende Figur trifft. Das ist eine Frage der Lesbarkeit, keine Unfairness.
   → [[Bosse]]
 - **Gegnerzustand per Existenzprüfung:** `ObjectMonster` unterscheidet Art und Zustand über etwa 12 `variable_instance_exists`-Abfragen je Gegner und Bild (`boss_twin`, `boss_minion`, `lvl_kind`, `hit_stun`, `lvl_hover` …). Das ist fehleranfällig bei neuen Gegnerarten und kostet Zeit. Vorschlag: alle Felder in `ObjectMonster/Create_0` mit Standardwerten anlegen und die Abfragen schrittweise durch Feldvergleiche ersetzen, abgesichert durch Level- und Regression-Suite. → [[Gegner & Spawns]]
 - **Sequenz-Vielfalt des Drachen** (Datenbefund, Designfrage): „Feuersturm“ (Phase 3) und „Inferno“ (Phase 4) sind identisch, und drei weitere Sequenzen sind Umstellungen derselben drei Fähigkeiten (Feueratem, Fächer, Stampfen). Feueratem kommt in 8, Stampfen in 7 von 11 Sequenzen vor, Salve und Leere nur je einmal. Entscheidung über die Zusammenstellung beim Nutzer nach dem Spieltest. → [[Boss-Design]]

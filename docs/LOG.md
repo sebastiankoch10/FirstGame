@@ -4,6 +4,12 @@ updated: 2026-11-26
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-26 · Claude · Orakel für Drachen-Projektile, Codex-Übergabe geprüft
+- `tests/boss_harness.gml`: Das Orakel sieht die Projektile des Drachen (gleiche Trefferregel wie `boss_hazards_step`), Zählung `bullets` und `bullet_frames` je Fall. Spielcode unverändert.
+- Übergabe: Pfade existieren. Korrigiert sind die Atlasgrößen (5 von 12 abweichend, Waldläufer combat 9 Reihen) und der Alpha-Schnitt 128/180 in `Assets & Pipeline.md` 7.1 und `base_neutral/README.md`. `check_base_neutral.py` nutzt jetzt die Zellgrenzen des Importers und hat die Option `--dir`.
+- Doku: Bosse (Tabelle Projektile), Bugs & Ideen (Prüffrage Leere/Wind), Tests & QA, HANDOFF.
+- Tests: QA PASS (docs, anchors, Boss 190); 0 unsichere Bilder in allen Drachenfällen. Probe `check_base_neutral` PASS bzw. FAIL wie erwartet.
+
 ### 2026-11-26 · Claude · Kurskorrektur: Basemodel ohne Ausrüstung (Priorität 1), Erzeugung blockiert
 - Regel zentral verankert: `Visuelles Leitbild & Animation.md` 5.5a (Verbots- und Erlaubnisliste, Ebenen-Stapel mit 10 Ebenen). Die heutigen Figuren sind als ausgerüstete Startfiguren eingestuft.
 - Widersprüche bereinigt: `Klassen.md` (Aussehen ohne Umhang, Robe, Köcher als Identität), `DECISIONS.md` („Umhänge bleiben im Basismodell“ ersetzt), `Assets & Pipeline.md` 7.1 und 7.7, `Progression & Builds.md`, Roadmap 11, Systemnotizen Charaktergrafik und Ausrüstung, ArtPack-README, `base_neutral/README.md`.

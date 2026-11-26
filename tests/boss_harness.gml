@@ -60,6 +60,14 @@ function bh_relevant(_horizon) {
         if(near && (kind=="slam" || kind=="vortex"))array_push(out,{legacy:"ring",g:b.enc_geometry,kind:kind,age:act ? age : 0,active:cfg.active,horizon:_horizon});
         for(var i=0;i<array_length(b.enc_zones);i++){var z=b.enc_zones[i];if((!z.erupted && z.warning-z.age<=_horizon) || (z.erupted && z.age<z.warning+.45))array_push(out,{legacy:"geo",g:z.g});}
     }
+    // Dragon projectiles (wind, void, volley; audit follow-up 26.11.): the flight path until the horizon, with the same
+    // hit rule as boss_hazards_step (point-to-segment distance <= bullet radius + player contact radius).
+    if(variable_global_exists("hostile_bullets") && instance_exists(ObjectPlayer))for(var i=0;i<array_length(global.hostile_bullets);i++) {
+        var hb=global.hostile_bullets[i];
+        if(!instance_exists(hb.owner) || !variable_instance_exists(hb.owner,"dragon_enabled") || !hb.owner.dragon_enabled)continue;
+        var t=min(_horizon,max(0,hb.life-hb.age));
+        array_push(out,{legacy:"bullet",x0:hb.x,y0:hb.y,x1:hb.x+hb.vx*t,y1:hb.y+hb.vy*t,r:hb.radius+ObjectPlayer.contact_radius});
+    }
     return out;
 }
 /// Oracle danger test of a world point against the prefiltered hazards (12 px player margin on circles/rings).
@@ -69,6 +77,7 @@ function bh_point_unsafe_list(_list,_px,_py) {
         var e=_list[i];
         if(variable_struct_exists(e,"legacy")) {
             if(e.legacy=="geo"){if(telegraph_contains(e.g,_px,_py-10))return true;}
+            else if(e.legacy=="bullet"){if(boss_point_segment_distance(_px,_py-10,e.x0,e.y0,e.x1,e.y1)<=e.r)return true;}
             else { // band the ring sweeps from now until the horizon (12 px player margin)
                 var d=point_distance(e.g.x,e.g.y,_px,_py-10),r0=dragon_ring_geometry(e.kind,e.g,e.age,e.active),r1=dragon_ring_geometry(e.kind,e.g,min(e.active,e.age+e.horizon),e.active);
                 if(d>=r0.inner-12 && d<=r1.radius+12)return true;
@@ -111,7 +120,7 @@ function bh_case_list(_boss) {
     for(var a=1;a<=9;a++){array_push(out,[a,1]);array_push(out,[a,3]);}
     return out;
 }
-function bh_new_rec(_mode,_label) {return {natural:0,forced_catchup:false,dist_sum:0,mode:_mode,label:_label,hazards:0,contacts:0,contact_kinds:[],unsafe_frames:0,frames:0,moved:0,max_beam:0,max_line:0,reach:0,reach_abilities:[],catchups:0,start_unsafe:false};}
+function bh_new_rec(_mode,_label) {return {bullets:0,bullet_frames:0,natural:0,forced_catchup:false,dist_sum:0,mode:_mode,label:_label,hazards:0,contacts:0,contact_kinds:[],unsafe_frames:0,frames:0,moved:0,max_beam:0,max_line:0,reach:0,reach_abilities:[],catchups:0,start_unsafe:false};}
 function bh_controller_tick() {
     bh_init();
     if(!instance_exists(ObjectPlayer) || global.bh_stage==0)return;
@@ -151,7 +160,7 @@ function bh_controller_tick() {
         if(global.bh_case==4 && global.bh_case_frame==70 && run[0]=="storm_warden")global.bh_world_shot="dragon-beam-sweep";
         if(global.bh_case_frame==72){var c=global.bh_cases[global.bh_case];if(c[1]==3 && ((run[0]=="storm_warden" && c[0]==3) || (run[0]=="twins" && (c[0]==3 || c[0]==4 || c[0]==8)) || (run[0]=="behemoth" && (c[0]==2 || c[0]==5 || c[0]==6))))global.bh_world_shot=string_replace_all(rec.label," ","-");}
         if(global.bh_case_frame>=390) {
-            array_push(global.bh_rows,{label:rec.label,hazards:rec.hazards,contacts:rec.contacts,kinds:rec.contact_kinds,unsafe_frames:rec.unsafe_frames,frames:rec.frames,moved:rec.moved,start_unsafe:rec.start_unsafe,max_beam:rec.max_beam,max_line:rec.max_line});
+            array_push(global.bh_rows,{label:rec.label,hazards:rec.hazards,contacts:rec.contacts,kinds:rec.contact_kinds,unsafe_frames:rec.unsafe_frames,frames:rec.frames,moved:rec.moved,start_unsafe:rec.start_unsafe,max_beam:rec.max_beam,max_line:rec.max_line,bullets:rec.bullets,bullet_frames:rec.bullet_frames});
             global.bh_case++;global.bh_stage=global.bh_case<array_length(global.bh_cases) ? 2 : 4;
         }
         return;
@@ -196,6 +205,8 @@ function bh_controller_tick() {
 function bh_oracle_tick(_pl,_rec,_dt) {
     _rec.frames++;
     var spd=_pl.moveSpeed*60,best=-1,bx=_pl.x,by=_pl.y,any=false,soon=bh_relevant(1.3),now=bh_relevant(.35);
+    var nb=0;for(var i=0;i<array_length(soon);i++)if(variable_struct_exists(soon[i],"legacy") && soon[i].legacy=="bullet")nb++;
+    _rec.bullets=max(_rec.bullets,nb);if(nb>0)_rec.bullet_frames++; // dragon projectiles seen by the oracle
     if(!bh_point_unsafe_list(soon,_pl.x,_pl.y)){best=0;}
     else {
         if(global.bh_case_frame<5)_rec.start_unsafe=true;

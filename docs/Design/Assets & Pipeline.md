@@ -204,7 +204,16 @@ Nichts wird prozedural zurechtgeschnitten, wenn das die Qualität senkt. Fehlt e
 - **Umfang:** 3 Klassen × 4 Atlanten (`walk`, `combat`, `mobility`, `reaction`) × 8 Spalten × 8 Richtungen, also 256 Posen je Klasse.
   - Abgedeckt sind Idle, Laufen und Rennen, Angriffsbewegungen (Autoattack-Basis), Sprung, Fall, Landung, Ausweichen, Slide, Dive, Treffer und Tod.
   - Neu und wünschenswert ist ein 5. Atlas `transitions` mit gezeichneten Übergängen: Richtungswechsel 3, Landung 2, Ausweich-Start 1, Erholung nach Treffer 2. Heute laufen diese Übergänge prozedural (`player_motion_life`). Für diesen Atlas muss `atlas.SETS` bei der Lieferung um eine Quelle ergänzt werden.
-- **Maße:** wie die Originalatlanten, 1254 × 1254 px (Waldläufer `combat` 1263 × 1245) mit 8 × 8 Zellen.
+- **Maße (korrigiert 26.11., gemessen):** exakt die Pixelgröße des jeweiligen Originalatlas. Jede Figur steht an derselben Stelle wie in der Originalzelle (Original als Unterlage zeichnen), weil Import und Prüfung die Zellgrenzen des Originals verwenden.
+
+  | Klasse | walk | combat | mobility | reaction |
+  |---|---|---|---|---|
+  | Schwertkämpfer (`swordsman_v3/sources/<atlas>.png`) | 1254 × 1254 | 1254 × 1254 | 1254 × 1254 | 1254 × 1254 |
+  | Arkanistin (`class_overhaul/sources/mage_<atlas>.png`) | 1254 × 1254 | 1254 × 1254 | 1261 × 1247 | 1258 × 1250 |
+  | Waldläufer (`class_overhaul/sources/ranger_<atlas>.png`) | 1254 × 1254 | 1263 × 1245, **9 Reihen** (die 9. ist ungenutzt) | 1261 × 1247 | 1259 × 1249 |
+
+  - Spalten: 8 gleich breite.
+  - Reihen: beim Schwertkämpfer 8 gleich hohe. Bei Arkanistin und Waldläufer liegen die Reihengrenzen an den Lücken im Originalbild (`atlas.row_cuts`).
 - **Pose:**
   - Jede Zelle zeigt dieselbe Pose, Blickrichtung, Körpergröße und denselben Fußpunkt wie die Originalzelle. Nur die Ausrüstung fehlt.
   - Wo Umhang oder Robe den Körper bisher verdeckten (Rücken, Beine der Arkanistin), wird der Körper neu gezeichnet.
@@ -214,7 +223,8 @@ Nichts wird prozedural zurechtgeschnitten, wenn das die Qualität senkt. Fehlt e
 - **Dateien:** `FirstGame_ArtPack/characters/base_neutral/<klasse>_<atlas>_base.png` mit `swordsman` / `mage` / `ranger`, z. B. `mage_combat_base.png`. Der Ordner existiert, Pfadkonstante `CHARACTER_BASE_NEUTRAL`.
 - **Einlesen ohne Umbau:**
   - `atlas.base_neutral_path()` liefert die Datei.
-  - Sie wird mit derselben Abbildung wie die Originale in die 160 × 160-Frames geschnitten (Ursprung 80,145, Dichte 1:1, Alpha-Schnitt 128).
+  - Sie wird mit derselben Abbildung wie die Originale in die 160 × 160-Frames geschnitten: Ursprung 80,145, Dichte 1:1, Alpha-Schnitt 128 beim Schwertkämpfer und 180 bei Arkanistin und Waldläufer. Der Hintergrund muss deshalb vollständig transparent und die Figur voll deckend sein.
+  - **Achtung beim Bau des Importers:** `atlas.Cell.to_frame` schneidet Ebenen mit der Freistellungsmaske der **Original**zelle. Für das Basemodel gelten Zellgrenzen, Maßstab und Fußpunkt des Originals, die Freistellung aber aus dem Basemodel selbst. Sonst gehen Pixel außerhalb der alten Silhouette verloren, etwa Beine, die bisher unter der Robe lagen.
   - Ankerpunkte (`equipment_attach_data`) passen, weil Griffpositionen gleich bleiben; `build_attach_points.py` wird trotzdem neu ausgeführt.
 - **Technische Abnahme:** `python tests/tools/characters/check_base_neutral.py` prüft:
   - gleiche Größe;
