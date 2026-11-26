@@ -19,6 +19,8 @@ Normale Gegner, Bevölkerungssteuerung und Tod (Münze, Ausrüstungs-Drop).
 
 - **Bewegungsidentität** (seit 26.11., Schalter `#macro ENEMY_MOTION_ENABLED`): `enemy_motion_profile` und `enemy_motion_offset` (`scripts/level_worlds`), ganzpixelige Versätze je Art mit Ausholen und Vorstoß. Wird in `enemy_draw` und `elite_outline_draw` angewendet (`motion_dx`, `motion_dy`).
 
+- **Wald-Skelette (seit 26.11.):** Bewegungsprofile je Rolle (`forest_warrior` steif-ruckig, `forest_scout` schnell und vorgebeugt, `forest_guard` schwer), Ausholen und Vorstoß im Schlagfenster 0,20–0,36 s, Klappern mit Rückstoß bei Treffern, kurzes Knochenrasseln im Stand. Die Laufanimation läuft je Rolle mit 13, 10 bzw. 7,5 Bildern/s (`master_skeleton_step`). Verhalten und Werte unverändert.
+
 ## Abhängigkeiten
 [[Level & Welten]] · [[Progression & Level-up]] · [[Ausrüstung]] · [[Bosse]] (Brut, Zwillings-Akteur)
 

@@ -11,7 +11,8 @@ def main():
     baseline=ROOT/'QA/baseline/project';known=[]
     for name in ['ObjectFireball','ObjectIceball','ObjectLightningball']:
         event=f'objects/{name}/Collision_ObjectMonster.gml';asset=f'objects/{name}/{name}.yy'
-        if (ROOT/event).read_bytes()==(baseline/event).read_bytes() and (ROOT/asset).read_bytes()==(baseline/asset).read_bytes():
+        # the orphaned event files were removed on 2026-11-26; the exception only applies while such a file still exists
+        if (ROOT/event).is_file() and (ROOT/event).read_bytes()==(baseline/event).read_bytes() and (ROOT/asset).read_bytes()==(baseline/asset).read_bytes():
             known.append(f'{asset}: orphaned event file: Collision_ObjectMonster.gml')
     result['preexisting_errors']=[e for e in result['errors'] if e in known]
     result['new_errors']=[e for e in result['errors'] if e not in known]

@@ -1,0 +1,60 @@
+{
+  "checks": 3.0,
+  "failures": [],
+  "metrics": {
+    "dragon_adds": {
+      "fps_real_mean": 84.75390295028687,
+      "fps_real_min": 41.692726135253906,
+      "hazard_particles": 193.64666666666668,
+      "light_pass_ms": 0.19386333333333353,
+      "hostile_bullets": 2.276666666666667,
+      "hazards": 2.585,
+      "enemies": 59.306666666666665,
+      "lights": 22.5,
+      "instances": 1241.8216666666667,
+      "spell_particles": 95.65833333333333,
+      "frames": 600.0,
+      "frame_ms_mean": 17.066964999999993,
+      "frame_ms_p95": 20.076,
+      "frame_ms_max": 24.174
+    },
+    "twins_adds": {
+      "fps_real_mean": 90.65565628051758,
+      "fps_real_min": 58.40780258178711,
+      "hazard_particles": 74.86,
+      "light_pass_ms": 0.1929666666666666,
+      "hostile_bullets": 0.0,
+      "hazards": 1.5133333333333334,
+      "enemies": 59.25333333333333,
+      "lights": 27.01,
+      "instances": 1241.9516666666666,
+      "spell_particles": 98.26333333333334,
+      "frames": 600.0,
+      "frame_ms_mean": 16.666631666666667,
+      "frame_ms_p95": 16.815,
+      "frame_ms_max": 17.332
+    },
+    "horde": {
+      "fps_real_mean": 65.78960332870483,
+      "fps_real_min": 35.97251510620117,
+      "hazard_particles": 59.91833333333334,
+      "light_pass_ms": 0.3207233333333332,
+      "hostile_bullets": 0.0,
+      "hazards": 0.6566666666666666,
+      "enemies": 147.72,
+      "lights": 30.096666666666668,
+      "instances": 1340.6433333333334,
+      "spell_particles": 40.09,
+      "frames": 600.0,
+      "frame_ms_mean": 17.095656666666656,
+      "frame_ms_p95": 19.518,
+      "frame_ms_max": 27.99
+    }
+  },
+  "passed": true,
+  "exit_code": 0,
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\perf\\20261126-115311",
+  "exceptions": [],
+  "captures": [],
+  "test_type": "native Windows VM, injected input; not manual play"
+}

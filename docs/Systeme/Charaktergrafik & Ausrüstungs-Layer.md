@@ -22,13 +22,13 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
 - **Atlanten:**
   - `sprites/spr_eqv_<actor>_<teil>[ _acc]`: 41 pro Klasse, Texturgruppe `Equipment`.
   - Icons: `spr_eqv_icons_<actor>` mit 20 Frames, Frame = Slot·4 + Stufe.
-- **Basismodelle:** die bestehenden `spr_fg_<actor>_<aktion>_<richtung>`, Frames an Ort und Stelle ersetzt. Die Originale liegen unverändert in `FirstGame_ArtPack/swordsman_v3/frames` und `class_overhaul/frames`.
+- **Basismodelle:** die bestehenden `spr_fg_<actor>_<aktion>_<richtung>`, Frames an Ort und Stelle ersetzt. Die Originale liegen unverändert in `FirstGame_ArtPack/characters/swordsman_v3/frames` und `class_overhaul/frames`.
 - **Pipeline:** `tests/tools/characters/`
   - `atlas.py`: exakter Port des Atlas-Imports.
   - `segment.py`: Zerlegung in hoher Auflösung.
   - `render.py`: Materialien, Muster, Helme, Waffen.
   - `build_characters.py`: alles erzeugen und registrieren.
-  - Vorschauen: `FirstGame_ArtPack/character_layers/preview_<actor>.png`.
+  - Vorschauen: `FirstGame_ArtPack/characters/character_layers/preview_<actor>.png`.
 - **Zeichenstellen:** `objects/ObjectPlayer/Draw_0` (Spielfigur), `objects/ObjectMainMenu/Draw_64` (Porträt).
 - **Item-Icons:** `equipment_item_icon` in `scripts/equipment`, genutzt im Inventar, im HUD und bei Bodenfunden.
 - **Test:** `tests/visual_harness.gml` über `run_native_harness.py visual`, Suite `visual` in `tests/tools/qa.py`.
@@ -69,6 +69,8 @@ Alle Ebenen nutzen pro Frame exakt dieselben Pixel wie der Körper. Es gibt nur 
   - Noch von keiner Zeichenstelle genutzt; vorbereitet für weitere Waffentypen, Nebenhand und Schilde.
   - Prüfung in der Suite `visual`.
 - **Sprungreaktion seit 26.11.:** In `player_motion_life` (`scripts/player_artpack`) schwingen Haar und Umhang beim Absprung zurück, hängen beim Steigen nach und heben sich beim Fallen.
+
+- **`eqv_attach_draw` (seit 26.11.):** zeichnet ein beliebiges Gegenstands-Sprite (nach rechts zeigend, Ursprung am Griff) an der Hand des aktuellen Bildes, mit Winkel und Spiegelung; liefert false bei verdeckter Hand. Kontrollanzeige im Testmodus mit F10. Die Waffenebenen der Startwaffen und Waffen-Items bleiben pixelgenaue Ebenen; die Ankerpunkte sind für zusätzliche Modelle (weitere Waffentypen, Nebenhand, Schild) gedacht.
 
 ## Abhängigkeiten
 [[Ausrüstung]] (Slots, Gegenstandsstufe, Seltenheit) · [[Spieler & Bewegung]] (Animationszustände, ein Frame-Takt) · [[Klassen & Startwaffen]] (Startwaffe als Ebene) · [[UI, HUD & Menüs]] (Porträt, Icons) · [[Tests & QA]] (Suite `visual`)

@@ -8,7 +8,7 @@ updated: 2026-11-26
 Es gibt **keinen Spielstand**. Jeder Run beginnt neu. Gespeichert wird nur wenig, im lokalen GameMaker-Ordner (`%LOCALAPPDATA%\FirstGame`).
 
 ## Was wird geschrieben (laut Code)
-- `firstgame_audio.ini`: die Option „Ton im Hintergrund“ (`scripts/audio_manager`). Gesamt-, Musik- und Effektlautstärke wurden im Code **nicht** als gespeichert gefunden.
+- `firstgame_audio.ini`: „Ton im Hintergrund“ und seit 26.11. Gesamt-, Musik- und Effektlautstärke (`master`, `music`, `effects`; `scripts/audio_manager`).
 - `firstgame_settings.ini` (seit 25.11.): Effektqualität, Abschnitt `Grafik`, Schlüssel `effekte` (0 Niedrig, 1 Mittel, 2 Hoch). Menüeintrag „Effektqualitaet“ in beiden Einstellungsmenüs (`scripts/gameplay`, `ObjectMainMenu`).
   - Im selben Abschnitt `vollbild` (0/1), geschrieben von `render_set_fullscreen` und beim Start gelesen ([[Rendering & Pixelraster]]).
 - `firstgame_talents.ini`: Talentränge und -punkte je Klasse (seit 2026-11-25 aktiv, nur im echten Spiel).
@@ -23,4 +23,4 @@ Es gibt **keinen Spielstand**. Jeder Run beginnt neu. Gespeichert wird nur wenig
 [[Audio]] · [[Talente]] · [[Progression & Level-up]] · [[Rendering & Pixelraster]] · [[Licht, Wetter & Effekte]] (Effektqualität)
 
 ## Bekannte Probleme
-- Lautstärken gehen beim Neustart vermutlich verloren. Siehe [[Bugs & Ideen]].
+- Keine offenen Probleme bekannt (Lautstärken seit 26.11. gespeichert).

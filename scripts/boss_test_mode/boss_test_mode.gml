@@ -140,6 +140,13 @@ function boss_test_draw_gui() {
         with(ObjectBossMonster)draw_rectangle((bbox_left-view_x)*sx,(bbox_top-view_y)*sy,(bbox_right-view_x)*sx,(bbox_bottom-view_y)*sy,true);
         draw_set_color(make_color_rgb(122,227,222));
         with(ObjectPlayer)draw_rectangle((bbox_left-view_x)*sx,(bbox_top-view_y)*sy,(bbox_right-view_x)*sx,(bbox_bottom-view_y)*sy,true);
+        // weapon attachment point of the current frame (eqv_attach): grip (cyan; orange = hand hidden) and direction to the tip
+        var plr=ObjectPlayer;
+        if(variable_instance_exists(plr,"visual_actor")) {
+            var at=eqv_attach(plr.visual_actor,plr.visual_sprite_index,plr.visual_frame_index,plr.x,plr.y,plr.visual_mirror<0 ? -1 : 1,1);
+            if(at.ok){var gx=(at.x-view_x)*sx,gy=(at.y-view_y)*sy;draw_set_color(make_color_rgb(255,80,220));draw_line_width(gx,gy,gx+lengthdir_x(at.length*sx,at.angle),gy+lengthdir_y(at.length*sy,at.angle),2);
+                draw_set_color(at.conf>0 ? make_color_rgb(90,240,255) : make_color_rgb(255,160,40));draw_circle(gx,gy,4,false);}
+        }
     }
     draw_set_color(c_white);
 }

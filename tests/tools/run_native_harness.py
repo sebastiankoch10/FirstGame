@@ -29,6 +29,8 @@ SUITES = {
     'feature': ('tests/feature_harness.gml', 'ft', 'FEATURE', 'FirstGameFeatureSmoke', 900),
     'boss': ('tests/boss_harness.gml', 'bh', 'BOSSMECH', 'FirstGameBossMech', 3000),
     'visual': ('tests/visual_harness.gml', 'vh', 'VISUAL', 'FirstGameVisual', 900),
+    # load measurement (real frame time; run without parallel load): frame time, fps_real, counters per scenario
+    'perf': ('tests/perf_harness.gml', 'pf', 'PERF', 'FirstGamePerf', 900),
 }
 # Extra (regex, replacement) pairs applied to every GML file of the copy; used by record_scene.py for a fixed frame time.
 EXTRA_REPLACEMENTS: list[tuple[str, str]] = []

@@ -1,7 +1,9 @@
 {
-  "checks": 166.0,
   "failures": [],
   "metrics": {
+    "L0_frame_ms_max": 16.667,
+    "L1_props": 1428.0,
+    "L0_boss15": "storm_warden",
     "L2_boss10": "twins",
     "L2_crowd_minute10": 80.0,
     "L2_frame_ms_avg": 16.66699999999999,
@@ -20,14 +22,12 @@
     "L2_props": 957.0,
     "L0_crowd_minute10": 80.0,
     "L0_frame_ms_avg": 16.66699999999999,
-    "L0_boss10": "behemoth",
-    "L0_frame_ms_max": 16.667,
-    "L1_props": 1428.0,
-    "L0_boss15": "storm_warden"
+    "L0_boss10": "behemoth"
   },
   "passed": true,
+  "checks": 166.0,
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\level-smoke\\20261126-105449",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\level-smoke\\20261126-120937",
   "exceptions": [],
   "captures": [
     "boss15-ashfrost.png",

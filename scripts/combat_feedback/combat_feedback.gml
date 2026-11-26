@@ -126,13 +126,13 @@ function projectile_draw() {
 function pickup_hint_draw() {
     with(ObjectMagnetOrb) {
         draw_set_color(make_color_rgb(122,255,242));draw_circle(x,y-12,21,true);
-        if(instance_exists(ObjectPlayer) && point_distance(x,y,ObjectPlayer.x,ObjectPlayer.y)<100) {draw_set_halign(fa_center);draw_text(x,y-42,"MAGNET");draw_set_halign(fa_left);}
+        if(instance_exists(ObjectPlayer) && point_distance(x,y,ObjectPlayer.x,ObjectPlayer.y)<100) {draw_set_halign(fa_center);draw_set_font(world_font());draw_text(round(x),round(y-42),"MAGNET");draw_set_font(-1);draw_set_halign(fa_left);}
     }
     draw_set_color(c_white);
 }
 /// Pixel font for numbers in the world (tests/tools/art/build_pixel_font.py): 5x7 glyphs, white fill (tinted by the
 /// draw colour) and a dark outline, so labels stay crisp on the world grid (render_pipeline).
 function world_font() {
-    if(!variable_global_exists("world_font_id") || !font_exists(global.world_font_id))global.world_font_id=font_add_sprite_ext(spr_font_world,"0123456789.,+-%",true,1);
+    if(!variable_global_exists("world_font_id") || !font_exists(global.world_font_id))global.world_font_id=font_add_sprite_ext(spr_font_world,"0123456789.,+-%ABCDEFGHIJKLMNOPQRSTUVWXYZ",true,1);
     return global.world_font_id;
 }

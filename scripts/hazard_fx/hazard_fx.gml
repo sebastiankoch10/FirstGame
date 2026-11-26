@@ -167,6 +167,7 @@ function telegraph_draw(_g,_color,_el=-1) {
 /// Draw all queued warnings: later impacts first and faint, the next impact last and fully readable (FFXIV-like
 /// priority). Every warning: full-area tint + integrated filling countdown + edge; no clock hand.
 function telegraph_flush() {
+    global.hz_last=variable_global_exists("hz_budget") ? global.hz_budget : 0; // hazard-fx particles drawn this frame (perf metric)
     global.hz_budget=0;global.hz_frame=(variable_global_exists("hz_frame") ? global.hz_frame : 0)+1;
     if(!variable_global_exists("tg_queue") || array_length(global.tg_queue)==0)return;
     var q=global.tg_queue,soon=999;

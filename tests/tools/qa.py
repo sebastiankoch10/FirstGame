@@ -67,11 +67,23 @@ SUITES = {
                    covers='Charakter- und Ausruestungs-Layer: Laufzeit-Aufnahmen aller Klassen/Zustaende/Sets'),
 }
 MAINTAINED = ['regression', 'feature', 'boss', 'level', 'classes', 'visual']
+# Fast static documentation/hygiene checks (seconds, no build, never cached): vault links, frontmatter, registry,
+# IDE folders, art paths, system-note coverage. Runs whenever anything relevant changed, also for docs-only diffs.
+SUITES['docs'] = dict(cmd=['tests/tools/vault_check.py', '--since', 'HEAD'], report=None, inputs=[], minutes=.1, always=True,
+                      covers='Vault-Links, Frontmatter, Review-Registry, IDE-Ordner, Kunstpfade, Systemnotiz-Abdeckung (ohne Build)')
+# Review Center end-to-end (2 builds, 3 starts, test approvals only): only when review-related code changed (REVIEW_RX
+# on paths, REVIEW_TOUCH on changed lines of the shared menu files). Never part of the default tier-3 list.
+SUITES['review'] = dict(cmd=['tests/tools/review/review_e2e.py'], report='tests/reports/review-e2e-result.json',
+                        inputs=['tests/tools/review/review_e2e.py', 'tests/tools/review/review.py', 'tests/review_harness.gml', 'review/registry.json'],
+                        minutes=7, covers='Review-Center Ende-zu-Ende: Liste, Szenariostart, Freigabeknopf, Persistenz, Sync, Revision')
+REVIEW_RX = re.compile(r'^(scripts/review_center/|scripts/review_registry_data/|tests/tools/review/|tests/review_harness\.gml$)')
+REVIEW_SHARED = ['scripts/gameplay/gameplay.gml', 'scripts/boss_test_mode/boss_test_mode.gml', 'objects/ObjectMainMenu', 'objects/ObjectController/Draw_64.gml']
+REVIEW_TOUCH = re.compile(r'review_|round_menu_|menu_mode\s*==\s*"review"|pause_geometry|boss_test_pending_start')
 # Not part of any tier (kept for history): reason
 LEGACY = {
-    'tests/tools/run_combat_smoke.py': 'veraltet, Absturz 0xC0000005 seit 2026-11-24, baut in output/',
-    'tests/tools/run_boss_v2_smoke.py': 'doppelt: boss_v2_harness laeuft in regression mit',
-    'tests/tools/run_player_animation_legacy.py': 'alte Figurenanimation vor v3',
+    'tests/_legacy/run_combat_smoke.py': 'veraltet, Absturz 0xC0000005 seit 2026-11-24, baut in output/',
+    'tests/_legacy/run_boss_v2_smoke.py': 'doppelt: boss_v2_harness laeuft in regression mit',
+    'tests/_legacy/run_player_animation_legacy.py': 'alte Figurenanimation vor v3',
 }
 
 # (path regex, system note in docs/Systeme, suites)
@@ -140,6 +152,18 @@ def classify(files):
     return systems, suites, gml_lines, art, core, res
 
 
+def review_touched(since):
+    """True if review-related code changed: review files themselves, or review/pause-menu lines in the shared menu files."""
+    names = [p for p, _ in changed_files(since)]
+    if any(REVIEW_RX.match(p) for p in names):
+        return True
+    shared = [p for p in names if any(p.startswith(s) for s in REVIEW_SHARED)]
+    if not shared:
+        return False
+    diff = git('diff', '-U0', since, '--', *shared)
+    return any(REVIEW_TOUCH.search(l[1:]) for l in diff.splitlines() if l[:1] in '+-' and not l.startswith(('+++', '---')))
+
+
 def auto_tier(files, systems, gml_lines, core):
     relevant = [p for p, _ in files if re.match(r'^(objects|scripts|rooms|sprites|sounds|tilesets|options|tests|QA/tools)/|^FirstGame\.yyp$', p)]
     if not relevant:
@@ -200,7 +224,7 @@ def run_suite(name, force, cache):
     script = ROOT / s['cmd'][0]
     if not script.is_file() or any(not (ROOT / i).is_file() for i in s['inputs']):
         return dict(suite=name, status='NOT RUN', detail='Suite-Dateien fehlen')
-    key = inputs_hash(s['inputs'])
+    key = None if s.get('always') else inputs_hash(s['inputs'])
     c = cache.get(name)
     if key and not force and c and c.get('hash') == key and c.get('status') == 'PASS':
         return dict(suite=name, status='PASS', cached=True, checks=c.get('checks'), detail=f"wiederverwendet vom {c.get('date')} (Eingaben unveraendert)")
@@ -243,6 +267,11 @@ def main():
     systems, suites, gml_lines, art, core, res = classify(files)
     tier = a.tier if a.tier is not None else auto_tier(files, systems, gml_lines, core)
     todo = [s.strip() for s in a.suites.split(',')] if a.suites else plan(tier, suites, art, res)
+    if not a.suites:
+        if tier >= 1 and review_touched(a.since) and 'review' not in todo:
+            todo.append('review')
+        if files and 'docs' not in todo:
+            todo.insert(0, 'docs')  # seconds; also the only suite for documentation-only changes
     print(f"QA Stufe {tier} | {len(files)} geaenderte Dateien seit {a.since} | {gml_lines} GML-Zeilen | Systeme: {', '.join(sorted(systems)) or '-'}")
     if tier >= 4:
         print('Stufe 4 laeuft nie automatisch. Auf ausdruecklichen Auftrag z. B.:\n'

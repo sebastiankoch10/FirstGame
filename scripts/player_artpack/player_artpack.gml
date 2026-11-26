@@ -83,7 +83,7 @@ function player_motion_life() {
     var air=motion_state!=player_motion_state.grounded,vx=dt>0 ? (x-life_prev_x)/dt : 0;
     vx=clamp(vx,-600,600);
     if(life_prev_air && !air){life_land=.14;life_cape_v+=90;life_hair_v+=110;}
-    var back=visual_mirror ? -1 : 1; // "behind" the character in screen degrees
+    var back=visual_mirror<0 ? 1 : -1; // "behind" the character in screen degrees (visual_mirror is 1 or -1)
     if(!life_prev_air && air && dodge_timer<=0){life_cape_v-=110*back;life_hair_v-=130*back;} // take-off kick: hair and cape whip back
     if(visual_mirror!=life_prev_mirror && !air)life_turn=.09;
     var ax=dt>0 ? (vx-life_vx)/dt : 0;

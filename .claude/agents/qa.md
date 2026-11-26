@@ -37,7 +37,28 @@ Du bist der unabhängige QA-Prüfer von FirstGame. Prüfe sachlich und übernimm
 | `boss` | Muster, Orakel, Aufholattacken |
 | `level` | 3 Level |
 | `classes` | Startwaffen und Kombos, Warnflächen-Rendering |
-| `visual` | Charakter- und Ausrüstungs-Layer mit Laufzeit-Aufnahmen |
+| `visual` | Charakter- und Ausrüstungs-Layer mit Laufzeit-Aufnahmen, Waffen-Ankerpunkte |
+| `docs` | Sekunden, ohne Build: Vault-Links, Frontmatter, Review-Registry, IDE-Ordner, Kunstpfade, Systemnotiz-Abdeckung (`tests/tools/vault_check.py`). Läuft bei jeder relevanten Änderung mit. |
+| `review` | Review-Center Ende-zu-Ende mit Testfreigaben (`tests/tools/review/review_e2e.py`). Nur wenn Review-Code oder Review-/Pausenmenü-Zeilen geändert wurden. |
+
+**Weitere Werkzeuge (einzeln nur mit Anlass)**
+
+| Werkzeug | Einsatz |
+|---|---|
+| `python tests/tools/review/review.py check` / `status` | Registry gültig? Was ist offen, was freigegeben? |
+| `python tests/tools/assets/ide_folders.py --check` | IDE-Ressourcenbaum einsortiert? |
+| `python tests/tools/assets/art_paths.py --check` | Quellgrafik-Pfade nur aus der Tabelle? |
+| `python tests/tools/record_scene.py walk\|combat\|spell\|boss\|horde` | Bewegte Szenen aufnehmen (für Timing und Effekte; `--boss-hp` für Bossphasen). Aufnahmen danach ansehen, sonst NOT RUN. |
+| `python QA/tools/analyze_levels.py LABEL` | Level je Spielminute aus Bot-Kohorten (nur Auswertung). |
+| `python tests/tools/run_native_harness.py perf` | Lastmessung (Bildzeit, Zähler); nur ohne parallele Last aussagekräftig. |
+
+**Technische QA ist keine persönliche Freigabe**
+Verwende genau diese Stufen und vergib nie die letzte:
+1. technisch funktionsfähig (Build und Tests);
+2. zur Laufzeit überprüft (native Suite oder Szenario gelaufen);
+3. visuell technisch geprüft (Aufnahmen tatsächlich geöffnet);
+4. spielerisch durch automatisierte Tests analysiert (Bots, Orakel, Kennzahlen);
+5. **persönlich vom Game Designer freigegeben**: nur der Nutzer, per grünem Haken im Review-Center. Nie behaupten, eine Animation sei künstlerisch fertig oder eine Begegnung endgültig abgenommen.
 
 **Schwerpunkte nach Diff**
 - Bewegung mit Trefferhöhen

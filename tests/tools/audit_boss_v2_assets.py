@@ -1,4 +1,5 @@
-"""Verify actual new files and byte-preservation against the successful prior native snapshot."""
+"""Boss v2 asset audit: every sprite of the manifest is registered and a valid PNG of the declared size, the reference
+images exist, and the twins/swamp sound cues are registered. (Byte preservation: see audit_visual_preservation.py.)"""
 from pathlib import Path
 import hashlib,json,struct,sys
 sys.path.insert(0,str(Path.home()/'AppData/Local/pipx/pipx/venvs/gms-mcp/Lib/site-packages'))
@@ -13,8 +14,11 @@ def main():
   for frame in data['frames']:
    raw=(folder/(frame['name']+'.png')).read_bytes();frames+=1
    if raw[:8]!=b'\x89PNG\r\n\x1a\n' or struct.unpack('>II',raw[16:24])!=(data['width'],data['height']):errors.append('Invalid PNG '+name)
+ # The byte comparison against the 22.11. snapshot is obsolete: output/ was removed on 25.11. and the hero and dragon
+ # sprites were rebuilt on purpose since (1:1 pixel density, layers, dragon parts). Unintended PNG changes are covered
+ # by QA/tools/audit_visual_preservation.py against QA/baseline. The loop only runs if someone restores the snapshot.
  preserved=0;mismatches=[];prior=ROOT/'output/class-dragon-smoke/20261122-224716/project/sprites'
- for folder in prior.iterdir():
+ for folder in (prior.iterdir() if prior.is_dir() else []):
   if not folder.name.startswith(('spr_fg_swordsmanv3_','spr_fg_magev3_','spr_fg_rangerv3_','spr_fg_dragonboss_','spr_fg_dragonextra_')):continue
   for path in folder.rglob('*'):
    if path.is_file():

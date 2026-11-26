@@ -5,34 +5,25 @@ agent: Claude
 ---
 # Übergabe (wird nach jeder Aufgabe überschrieben, max. ~40 Zeilen)
 
-**Zuletzt dran:** Claude, 2026-11-26. Aufträge Phase 1, 2A und 2B des Nutzers umgesetzt, soweit ohne neue Grafik möglich. Regeln: AGENTS.md „Review-Workflow“.
+**Zuletzt dran:** Claude, 2026-11-26 mittags. Autonomer Auftrag „offene Aufgaben, QA-Optimierung, Obsidian-Integration“ abgeschlossen. **Commit lokal, nicht gepusht** (Auftrag: kein automatischer Push); für andere Geräte `git push origin entwicklung`.
 
 ## Stand
-- **Review-Center:** [[Review-Center]]. 25 Szenarien offen in `review/registry.json`, keine persönliche Freigabe bisher. **Start jeder Sitzung:** `python tests/tools/review/review.py sync` (Claude per Hook).
-- **Phase 1:**
-  - Review-Center, Freigabe, End-to-End-Test.
-  - Inventar (Drag-and-drop, Rechtsklick, Tooltips, Shift-Vergleich).
-  - Waffen-Ankerpunkte (`eqv_attach`, vorbereitet).
-  - Sprungreaktion von Haar und Umhang.
-- **Phase 2A:**
-  - Gemeinsamer Gefahren-Renderer [[Telegraphs & Gefahrenflächen]] mit WYSIWYG, Füll-Countdown, Fokus-Umriss, Priorität nach Zeit und zusammenhängenden Flächen.
-  - Feuerstrom, Aufladung und Ausholbewegung des Drachen.
-  - `light_flash` mit Option „Lichtblitze“; Spieler-Zielmarken.
-- **Phase 2B:**
-  - Spielfeldweites Schachbrett, Druck nach Entfernung, kontrahierende Feuerringe, Eisflut-Regel.
-  - Neutrale Grundpfeile; mehrphasiges Siegel mit Stufen 1/5/9.
-- **Tests (26.11.):** QA Stufe 3 PASS (811/195/141/166/151/81), Review-E2E PASS 12/12.
+- **Review-Center:** 25 Szenarien offen, keine persönliche Freigabe bisher ([[Review-Center]]). In diesem Auftrag wurden bewusst keine neuen Review-Fälle angelegt; die betroffenen sichtbaren Änderungen stehen in [[Bugs & Ideen]].
+- **Neu am 26.11. mittags:**
+  - **Messungen:** Lastmessung (`run_native_harness.py perf`) und Level je Minute aus zwei Bot-Kohorten (`QA/tools/analyze_levels.py`); Kalibrierungsvorschlag für `boss_test_preset` in [[Boss-Testmodus]] (nicht umgesetzt).
+  - **Spiel:** mehrphasige Steinstacheln, Sternenfall und Prismensamen; Bewegungsidentität der Wald-Skelette; `eqv_attach_draw` und Ankeranzeige mit F10; Lautstärken werden gespeichert; Pixelschrift mit Buchstaben („MAGNET“).
+  - **Aufgeräumt:** verwaiste Kollisions-Events entfernt, alte Tests nach `tests/_legacy/`, Asset-Migration abgeschlossen (ArtPack-Zielstruktur), `docs/ai-activity.log` nur noch lokal.
+  - **QA:** Suiten `docs` (immer), `review` (nur bei Review-Änderungen), `perf` (auf Anlass); Agenten `qa` und `visual-qa` für Claude und Codex synchron.
+- **Regel:** Neue Anforderungen in die maßgebliche vorhandene Doku einarbeiten (AGENTS.md „Grundsätze“).
+- **Tests (26.11.):** QA Stufe 3 PASS (docs, anchors, static, regression 811, feature 195, boss 141, level 166, classes 151, visual 84); perf gemessen; Review-E2E zuletzt PASS 12/12 (heute nicht erneut nötig, kein Review-Code geändert).
 
 ## Offen (Reihenfolge)
-1. **Nutzer:** F5 → Review-Center, Szenarien prüfen, gefallene mit dem grünen Haken freigeben.
-2. **Grafik-Entscheidungen** ([[Roadmap & Vertical Slice]] Zeilen 11–13):
-   - neutrale schlanke Basisfigur (3 Klassen × 256 Posen);
-   - Drachenschweif als Kette und Flügel als Teile (neue Quellsegmente);
-   - danach die Ankerpunkte nutzen.
-3. **Level-Suite** läuft seit 26.11. mit fester Bildzeit; feature und classes bei Auffälligkeiten ebenso umstellen ([[Bugs & Ideen]]).
-4. **Spielerlevel je Minute** per Bot-Kohorte messen (Testmodus-Presets sind Entwicklungswerte).
+1. **Nutzer:** F5 → Review-Center prüfen und freigeben; über `boss_test_preset`-Vorschlag entscheiden.
+2. **Performance:** Engpass ist die Gegnerzahl (148 Gegner ≈ 64–66 FPS unbegrenzt); `enemy_pursue` und `enemy_draw` profilieren ([[Bugs & Ideen]]).
+3. **Grafik-Entscheidungen** ([[Roadmap & Vertical Slice]] Zeilen 11–13): neutrale Basisfigur; Drachenschweif und Flügel als Teile; danach Ankerpunkte für weitere Waffenmodelle nutzen.
+4. `FirstGame_ArtPack/atmosphere_v2/` prüfen und gegebenenfalls nach `_legacy/` legen.
 
 ## Bekannte Bugs / Risiken
 - Die Bossdruck-Werte (`bc_config`) sind Startwerte; nach dem Spieltest feinjustieren.
-- Die GameMaker-IDE war offen; sie sortiert `FirstGame.yyp` beim Speichern um (inhaltlich gleich).
-- `FirstGame_ArtPack/class_overhaul/CHARACTER_ART.md` enthält ein fremdes „c“ in Zeile 1; nicht angefasst.
+- `FirstGame_ArtPack/characters/class_overhaul/CHARACTER_ART.md` enthält ein fremdes „c“ in Zeile 1 (uncommittet, nicht angefasst).
+- Beim Schreiben von Patches über die Shell werden doppelte Backslashes zu einfachen; in Skripten `chr(92)` verwenden.

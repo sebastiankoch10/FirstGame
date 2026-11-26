@@ -153,13 +153,13 @@ function spell_v2_step(_dt) {
                     var xx=f.kind=="spikes" ? f.sx+lengthdir_x(65+f.ticks*70,f.angle) : f.x+lengthdir_x(f.ticks*32,f.angle+f.ticks*137);
                     var yy=f.kind=="spikes" ? f.sy+lengthdir_y(65+f.ticks*70,f.angle) : f.y+lengthdir_y(f.ticks*32,f.angle+f.ticks*137);
                     spell_v2_area(xx,yy,f.radius,f.damage,f.sid,f.level);spell_fx_burst(xx,yy,f.radius,f.element,.45,vfx_band(f.level));f.ticks++;
+                    spell_impact_light(xx,yy,f.radius,f.element,vfx_band(f.level)); // release phase: light on the damage event
                 }break;
             case "seal":case "verdict":
                 if(f.ticks==0 && f.age>=(f.kind=="seal" ? .9 : .72)) {
                     spell_v2_area(f.x,f.y,f.radius,f.damage,f.sid,f.level);spell_fx_burst(f.x,f.y,f.radius,f.element,.45,vfx_band(f.level));f.ticks++;
                     // release phase: light on the damage event, growing with the band (basis: a pulse, endgame: a real flash)
-                    var bb=vfx_band(f.level),lc=spell_element_color(f.element);
-                    if(bb==0)light_pulse(f.x,f.y,f.radius*1.6,lc,.8,.2);else light_flash(f.x,f.y,f.radius*(bb==2 ? 2.4 : 1.8),lc,bb==2 ? 1.5 : 1.1,.26,(bb==2 && f.kind=="seal") ? .18 : 0);
+                    spell_impact_light(f.x,f.y,f.radius,f.element,vfx_band(f.level),f.kind=="seal");
                 }
                 break;
             case "glaive":
@@ -176,6 +176,7 @@ function spell_v2_step(_dt) {
                     spell_v2_area(f.x,f.y,f.radius,f.damage,f.sid,f.level);
                     var victims=spell_targets(f.x,f.y,f.radius+130);for(var n=0;n<min(f.count,array_length(victims));n++){spell_v2_hit(victims[n],f.damage*.65,f.sid,f.level);spell_link(f.x,f.y,victims[n].x,victims[n].y-12,4);spell_fx_burst(victims[n].x,victims[n].y-12,44,4,.4,vfx_band(f.level));}
                     spell_fx_burst(f.x,f.y,f.radius,4,.4,vfx_band(f.level));f.age=f.duration;
+                    spell_impact_light(f.x,f.y,f.radius,4,vfx_band(f.level));
                 }break;
         }
         if(f.age>=f.duration)array_delete(global.spell_fields,i,1);
@@ -203,6 +204,8 @@ function spell_v2_draw() {
                 var xx=f.kind=="spikes" ? f.sx+lengthdir_x(65+n*70,f.angle) : f.x+lengthdir_x(n*32,f.angle+n*137);
                 var yy=f.kind=="spikes" ? f.sy+lengthdir_y(65+n*70,f.angle) : f.y+lengthdir_y(n*32,f.angle+n*137);
                 vfx_pixel_ring(xx,yy,f.radius,col,.6*fa,f.age*40+n*30,3,2);if(f.kind=="meteor")vfx_pixel_streak(xx-40,yy-160,xx,yy-18,col,fa);
+                // gathering phase (multi-phase ability): energy collects at the next impact point during its existing delay
+                if(n==f.ticks){var gp=clamp(1-(.28+n*.35-f.age)/.35,0,1);vfx_charge(xx,yy-(f.kind=="meteor" ? 18 : 0),gp*(.5+.2*vfx_band(f.level))*fa,f.element,f.radius*.8,n*7);}
             }
         } else {
             var b=vfx_band(f.level),rot=f.age*(30+b*20);
@@ -233,4 +236,11 @@ function spell_fx_core_draw(_x,_y,_radius,_element,_progress,_alpha) {
     var row=_element==0 || _element==7 ? 4 : clamp(_element-1,0,5),spr=asset_get_index("spr_v2_fx_"+string(row));
     var frame=clamp(floor(_progress*4),0,3),size=_radius*2/208;
     draw_sprite_ext(spr,frame,_x,_y,size,size,0,c_white,_alpha*clamp((1-_progress)*2,0,1));
+}
+/// Light of a spell impact, fired on the damage event and scaled by the visual band: basis a small pulse, middle a
+/// flash, endgame a stronger flash (_lift: lightning-type endgame impacts brighten the scene briefly).
+function spell_impact_light(_x,_y,_radius,_element,_band,_lift=false) {
+    var lc=spell_element_color(_element);
+    if(_band<=0)light_pulse(_x,_y,_radius*1.6,lc,.8,.2);
+    else light_flash(_x,_y,_radius*(_band==2 ? 2.4 : 1.8),lc,_band==2 ? 1.5 : 1.1,.26,(_band==2 && _lift) ? .18 : 0);
 }

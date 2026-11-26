@@ -75,6 +75,8 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
   - Die Boss-Suite zählt Feld-Gefahren (`field`) als Musterzellen.
   - `run_level_smoke.py` läuft mit fester Bildzeit (60 Hz), weil die Gegnerprüfungen zeitabhängig flackerten.
 
+- **QA-Runner seit 26.11.:** Suiten `docs` (immer, Sekunden, `tests/tools/vault_check.py`), `review` (nur bei Review-Änderungen, Regeln `REVIEW_RX`/`REVIEW_TOUCH` in `qa.py`) und `perf` (`run_native_harness.py perf`, Lastmessung ohne parallele Last; GameMaker liefert weder Draw Calls noch Prozessspeicher an GML, Ersatz: `fps_real`, Lichtpass-Zeit, Instanzzahl). Level-Auswertung der Bots: `QA/tools/analyze_levels.py`. Veraltete Harnesses und Runner liegen in `tests/_legacy/`. Prüf-Agenten: `qa` und `visual-qa` (je Claude und Codex).
+
 ## Abhängigkeiten
 Alle Systeme, besonders [[Bosse]] · [[Talente]] · [[Ausrüstung]] · [[Level & Welten]] · [[Klassen & Startwaffen]]
 

@@ -31,6 +31,12 @@ updated: 2026-11-26
 - **2026-11-26 · Bossdruck nach Entfernung** (Hysterese 420/330 px, Erholung bis -45 %, schnellere Annäherung, Aufholen nach 1,2 s statt 3,5 s, Abklingzeit 9 s statt 20 s, Fern-Pool des Drachen). Grund: Nutzerauftrag „deutlich aggressiver“. Startwerte, Feinabstimmung nach Spieltest.
 - **2026-11-26 · Keine Gliederkette für Schweif und Flügel ohne neue Grafik.** Der Schweif liegt in der Dreiviertelansicht eingerollt zwischen den Beinen; Ausschneiden ergäbe zerrissene, schwebende Teile. Umgesetzt ist die Körperreaktion beim Feueratem. Schweif und Flügel brauchen eigene Quellsegmente (Roadmap).
 - **2026-11-26 · Lichtblitze mit Barrierefreiheits-Option:** `light_flash` nur an Schadensereignissen mächtiger Angriffe, Einstellung „Lichtblitze: Reduziert“ (35 %).
+- **2026-11-26 · Neue Anforderungen werden in die maßgebliche vorhandene Doku eingearbeitet** (ergänzen, präzisieren oder ersetzen; keine Parallel-Dateien, keine Prioritätsinflation; Soll, geplant, implementiert und getestet getrennt). Regel in AGENTS.md „Grundsätze“. Grund: Nutzerauftrag; der Vault soll langfristig widerspruchsfrei bleiben.
+- **2026-11-26 · `docs/ai-activity.log` ist nur noch lokal** (`git rm --cached`, `.gitignore`). Der Stop-Hook schreibt weiter, die Historie bis dahin bleibt in Git. Grund: Die Datei erschien in jedem Diff; das dauerhafte Protokoll sind LOG und HANDOFF.
+- **2026-11-26 · QA-Auswahl:** `docs` läuft immer mit (Sekunden, Skript statt Agent), `review` nur bei Review-Änderungen, `perf` und Simulationen nur auf Anlass. Grund: verlässliche Prüfung ohne unnötige Laufzeit und Tokens.
+- **2026-11-26 · Verwaiste Kollisions-Events der Altprojektile entfernt statt registriert.** Grund: Der Schaden läuft über `spell_projectile_step` (Kollisionslisten); registrierte Events hätten doppelt getroffen.
+- **2026-11-26 · Asset-Migration abgeschlossen** (Zielstruktur `characters/`, `enemies/`, `bosses/`, `vfx/`, `environment/` im ArtPack; nur die Pfadtabelle geändert). Die Skelett-Frames bleiben in `environment/master_world/`, weil der Welt-Importer den Ordner als Ganzes liest.
+- **2026-11-26 · `boss_test_preset` wird nicht eigenmächtig geändert.** Messung und Vorschlag stehen in [[Boss-Testmodus]]; die Zahlen setzt der Nutzer frei (Balancing-Regel).
 
 ## Spieldesign
 - **2026-11-25 · Helm = Kopf und Helm als ein Bild** (Auftrag des Nutzers): Das Kopfteil ersetzt die oberen Zeilen des Basismodells, statt darüber zu liegen. Grund: Haare standen um die Helmkuppel heraus. Haare unterhalb des Helmrands bleiben sichtbar.

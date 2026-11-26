@@ -92,3 +92,6 @@ __pycache__/
 # Review registry backups written by tests/tools/review/review.py
 review/*.bak
 review/*.tmp
+
+# Local Stop-hook activity log (not versioned since 2026-11-26; history up to then stays in git)
+docs/ai-activity.log

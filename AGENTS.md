@@ -81,7 +81,7 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
   - Auswertung: `QA/tools/analyze_v3.py`
   - Artefakte liegen unter `%LOCALAPPDATA%\FirstGame-Tests\native-mc-*`.
   - Lange Läufe als eigenständigen Prozess starten (PowerShell `Start-Process`).
-- **Bekannt veraltet:** `tests/tools/run_combat_smoke.py` scheiterte schon vor 2026-11-24. Die Vorlage ist veraltet.
+- **Archiviert (26.11.):** veraltete Harnesses und Runner liegen in `tests/_legacy/` (Gründe im dortigen README); keine QA-Stufe nutzt sie.
 - **Weitere Werkzeuge:**
   - Szenen-Aufnahme: `python tests/tools/record_scene.py walk|combat|spell|boss|horde` (feste 60-Hz-Bildzeit, WebP und Übersichtsbild unter `%LOCALAPPDATA%\FirstGame-Tests\scene\`). Für Bewegung, Timing und Effekte statt Einzelbildern.
   - Produktions-ZIP nur auf ausdrücklichen Wunsch: `python tests/tools/build_production.py`.
@@ -157,7 +157,7 @@ Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft neue Inhalte im Spie
 - **Nicht komplett lesen:**
   - `docs/LOG.md`: nur die obersten ~15 Zeilen
   - `docs/DECISIONS.md`: nur gezielt per Suche
-  - `docs/ai-activity.log`, `docs/_archive/`, `docs/_export/`, `QA/data/`, `QA/logs/`
+  - `docs/ai-activity.log` (lokal, seit 26.11. nicht mehr versioniert), `docs/_archive/`, `docs/_export/`, `QA/data/`, `QA/logs/`
   - generierte Dateien (`level_layout_*`, `spell_v2_catalog`)
   - Root-`*_REPORT.md`, `DEVELOPMENT_PROGRESS.md`, `TODO.md`, `QA/CURRENT_STATUS.md`
 - **Ausgaben klein halten:**
@@ -174,6 +174,10 @@ Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft neue Inhalte im Spie
   - 4: Simulationen, **nur auf Auftrag**
 - **Cache:** Unveränderte Build-Eingaben nutzen das letzte PASS wieder.
 - **Suiten:** `regression`, `feature`, `boss`, `level`, `classes`, `visual`. Details in `docs/Systeme/Tests & QA.md`.
+  - `docs` (Sekunden, ohne Build): Vault-Links, Frontmatter, Review-Registry, IDE-Ordner, Kunstpfade, Systemnotiz-Abdeckung. Läuft bei jeder relevanten Änderung automatisch mit, auch bei reinen Doku-Änderungen.
+  - `review` (Review-Center Ende-zu-Ende): nur wenn Review-Code oder Review-/Pausenmenü-Zeilen geändert wurden.
+  - `perf` (Lastmessung, `run_native_harness.py perf`): nur auf Anlass und ohne parallele Last.
+- **Technische QA ist keine persönliche Freigabe.** Stufen: technisch funktionsfähig → zur Laufzeit überprüft → visuell technisch geprüft → spielerisch durch automatisierte Tests analysiert → persönlich vom Game Designer freigegeben (nur der Nutzer).
 - **QA-Prüfer** (nur lesend): `.codex/agents/qa.toml` (Codex) und `.claude/agents/qa.md` (Claude), mit demselben Inhalt.
 
 ### Schreiben: am Ende jeder abgeschlossenen Aufgabe, nicht nach jeder Nachricht
@@ -191,6 +195,12 @@ Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft neue Inhalte im Spie
 - f) Committen, die Nachricht beginnt mit `[Claude]` oder `[Codex]`; danach `entwicklung` pushen ist erlaubt.
 
 ### Grundsätze
+- **Neue Anforderungen in das Bestehende einarbeiten (verbindlich seit 26.11.):**
+  - Neue bestätigte Anforderungen gehören in das jeweils maßgebliche vorhandene Dokument (Boss → `Boss-Design.md`, Talente und Ausrüstung → `Progression & Builds.md`, Klassen → `Klassen.md` usw.), nicht in neue Dateien oder zusätzliche Erinnerungen.
+  - Vorher prüfen, ob sie bestehende Regeln **ergänzen, präzisieren oder ersetzen**. Widersprüchliche aktive Vorgaben entfernen; Ersetztes kurz in `DECISIONS.md` vermerken (Historie bleibt nachvollziehbar, wirkt aber nicht mehr als Anweisung). Nicht eindeutig Entschiedenes als „offen“ führen.
+  - Keine Prioritätsinflation: Designphilosophie, konkrete Anforderung, technische Entscheidung, aktiver Auftrag, künftige Idee und offene Entscheidung unterscheiden. Die Roadmap ändert sich nur bei einer echten neuen Priorität.
+  - Design (Soll), geplant, implementiert und getestet klar trennen; nichts Geplantes als fertig und keinen nicht gelaufenen Test als bestanden ausgeben.
+  - Nur betroffene Abschnitte lesen und ändern; keine Neugenerierung des Vaults, keine redundanten Zusammenfassungen.
 - **Jede Information steht an genau einer Stelle:**
   - Arbeitsregeln: AGENTS.md
   - Designregeln (Soll): `docs/Design/`

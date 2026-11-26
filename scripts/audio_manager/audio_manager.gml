@@ -24,6 +24,12 @@ function fg_audio_init() {
     if(!variable_global_exists("master_volume")) global.master_volume=1;
     if(!variable_global_exists("music_volume")) global.music_volume=0.65;
     if(!variable_global_exists("effects_volume")) global.effects_volume=0.8;
+    // Volumes persist across restarts (firstgame_audio.ini [Audio] master/music/effects); missing keys keep the defaults.
+    ini_open("firstgame_audio.ini");
+    global.master_volume=clamp(ini_read_real("Audio","master",global.master_volume),0,1);
+    global.music_volume=clamp(ini_read_real("Audio","music",global.music_volume),0,1);
+    global.effects_volume=clamp(ini_read_real("Audio","effects",global.effects_volume),0,1);
+    ini_close();
     global.fg_audio={context:"",asset:-1,current:-1,retiring:-1,fade:1,retire_level:0,
         voices:[],last_sfx:{},requests:{},played:{},music_starts:0,skipped:0};
     audio_channel_num(24);
@@ -118,6 +124,7 @@ function fg_audio_cycle_volume(_which) {
     fg_audio_init();
     var value=variable_global_get(_which);
     variable_global_set(_which,value>=1 ? 0 : min(1,value+0.25));
+    ini_open("firstgame_audio.ini");ini_write_real("Audio",string_replace(_which,"_volume",""),variable_global_get(_which));ini_close(); // saved at once
     fg_audio_apply_focus(window_has_focus());
 }
 function fg_audio_volume_label(_index) {

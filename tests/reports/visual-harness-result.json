@@ -1,13 +1,16 @@
 {
   "passed": true,
-  "checks": 81.0,
+  "checks": 84.0,
   "failures": [],
   "metrics": {
+    "rangerv3_diff_t0": 163836.0,
+    "rangerv3_diff_t1": 163836.0,
+    "rangerv3_diff_t2": 163836.0,
+    "rangerv3_diff_t3": 164312.0,
+    "magev3_diff_t0": 122878.0,
+    "magev3_diff_t1": 122878.0,
+    "magev3_diff_t2": 122878.0,
     "magev3_diff_t3": 123360.0,
-    "swordsmanv3_diff_t0": 147472.0,
-    "swordsmanv3_diff_t1": 170474.0,
-    "swordsmanv3_diff_t2": 170474.0,
-    "swordsmanv3_diff_t3": 170928.0,
     "swordsmanv3": {
       "filled": {
         "wpn_s": 223.0,
@@ -62,7 +65,8 @@
       "cells": 256.0,
       "frames": 424.0
     },
-    "rangerv3_diff_t0": 163736.0,
+    "swordsmanv3_diff_t0": 147472.0,
+    "swordsmanv3_diff_t1": 170474.0,
     "magev3": {
       "filled": {
         "wpn_s": 212.0,
@@ -90,15 +94,11 @@
       "cells": 256.0,
       "frames": 432.0
     },
-    "rangerv3_diff_t1": 163736.0,
-    "rangerv3_diff_t2": 163736.0,
-    "rangerv3_diff_t3": 164212.0,
-    "magev3_diff_t0": 122878.0,
-    "magev3_diff_t1": 122878.0,
-    "magev3_diff_t2": 122878.0
+    "swordsmanv3_diff_t2": 170474.0,
+    "swordsmanv3_diff_t3": 170928.0
   },
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\visual\\20261126-105915",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\visual\\20261126-121417",
   "exceptions": [],
   "captures": [
     "Mage-base.png",

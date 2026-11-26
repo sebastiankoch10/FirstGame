@@ -155,3 +155,14 @@ function eqv_attach(_actor, _spr, _frame, _x, _y, _xs, _ys) {
     var F = eqv_frame();
     return {ok: true, x: _x + (a[0] - F.ox) * _xs, y: _y + (a[1] - F.oy) * _ys, angle: _xs < 0 ? 180 - a[2] : a[2], length: a[3] * abs(_xs), conf: a[4]};
 }
+/// Draw any item sprite at the hand of the current animation frame. The sprite must point to the right with its
+/// origin on the grip (hilt, staff or bow middle). Position, rotation and mirroring follow the body pose; with the
+/// hand hidden (conf 0) or no weapon in the frame nothing is drawn and false is returned, so the caller can show the
+/// item on the back or skip it. Call it before the body for "behind" and after it for "in front" (layer order).
+function eqv_attach_draw(_item_spr, _subimg, _actor, _spr, _frame, _x, _y, _xs, _ys, _col = c_white, _alpha = 1) {
+    var at = eqv_attach(_actor, _spr, _frame, _x, _y, _xs, _ys);
+    if (!at.ok || at.conf < 1 || !sprite_exists(_item_spr)) return false;
+    // a mirrored body mirrors the item across its own axis: flip vertically and use the mirrored angle
+    draw_sprite_ext(_item_spr, _subimg, round(at.x), round(at.y), abs(_xs), _xs < 0 ? -abs(_ys) : abs(_ys), at.angle, _col, _alpha);
+    return true;
+}

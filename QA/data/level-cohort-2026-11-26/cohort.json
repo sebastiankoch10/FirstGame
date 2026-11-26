@@ -1,0 +1,56 @@
+{
+  "started_utc": "2026-11-26T10:19:55.540121+00:00",
+  "phase": "after",
+  "workers": 4,
+  "runs_per_class_per_worker": 9,
+  "requested_total": 108,
+  "seedstart": 991000,
+  "batchsize": 600,
+  "artifact": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\native-mc-after\\20261126-111824",
+  "exe_sha256": "8f5d5c443666a69dc950f2fb50045a722d6d4391e4d2df1bc6825c4c4cfb7f78",
+  "children": [
+    {
+      "worker": 2,
+      "seedstart": 991018,
+      "exit_code": 0,
+      "wall_seconds": 841.1382040977478,
+      "rows": 27,
+      "completed_runs": 27,
+      "data": "QA\\data\\level-cohort-2026-11-26\\worker-2.jsonl",
+      "log": "QA\\data\\level-cohort-2026-11-26\\worker-2.log"
+    },
+    {
+      "worker": 3,
+      "seedstart": 991027,
+      "exit_code": 0,
+      "wall_seconds": 1426.7119679450989,
+      "rows": 27,
+      "completed_runs": 27,
+      "data": "QA\\data\\level-cohort-2026-11-26\\worker-3.jsonl",
+      "log": "QA\\data\\level-cohort-2026-11-26\\worker-3.log"
+    },
+    {
+      "worker": 1,
+      "seedstart": 991009,
+      "exit_code": 0,
+      "wall_seconds": 1772.9972026348114,
+      "rows": 27,
+      "completed_runs": 27,
+      "data": "QA\\data\\level-cohort-2026-11-26\\worker-1.jsonl",
+      "log": "QA\\data\\level-cohort-2026-11-26\\worker-1.log"
+    },
+    {
+      "worker": 0,
+      "seedstart": 991000,
+      "exit_code": 0,
+      "wall_seconds": 1796.8935227394104,
+      "rows": 27,
+      "completed_runs": 27,
+      "data": "QA\\data\\level-cohort-2026-11-26\\worker-0.jsonl",
+      "log": "QA\\data\\level-cohort-2026-11-26\\worker-0.log"
+    }
+  ],
+  "completed": true,
+  "elapsed_wall_seconds": 1796.8955254554749,
+  "completed_runs": 108
+}

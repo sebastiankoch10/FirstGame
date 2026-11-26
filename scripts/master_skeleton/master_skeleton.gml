@@ -30,7 +30,11 @@ function master_skeleton_step(_dt) {
     image_xscale=1;image_yscale=1;image_speed=0;
     if(action=="attack")image_index=skeleton_attack_time<.20 ? 0 : 1;
     else if(action=="hurt")image_index=min(count-1,floor(skeleton_clock*20));
-    else image_index=floor(skeleton_clock*(action=="walk" ? 10 : 3)) mod count;
+    else {
+        // walk cycle speed follows the role (visual only): the scout's legs move faster, the guard's slower
+        var walk_rate=skeleton_role=="scout" ? 13 : (skeleton_role=="guard" ? 7.5 : 10);
+        image_index=floor(skeleton_clock*(action=="walk" ? walk_rate : 3)) mod count;
+    }
 }
 function master_skeleton_remains(_enemy) {
     if(instance_number(ObjectSkeletonRemains)>=32)with(instance_find(ObjectSkeletonRemains,0))instance_destroy();

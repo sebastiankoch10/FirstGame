@@ -17,7 +17,7 @@ Rang 2 unter [[Leitbild]]. Technischer Ist-Stand: [[Klassen & Startwaffen]], [[C
   - „Kombo mit Finisher“;
   - „eigene Sounds und Licht“;
   - „gleiche Logik für die visuelle Waffenentwicklung“.
-- **Fundstellen:** `CLASS_DRAGON_REPORT.md` (Abschnitte Zaubermeisterin, Waldläufer) und `FirstGame_ArtPack/class_overhaul/CHARACTER_ART.md`.
+- **Fundstellen:** `CLASS_DRAGON_REPORT.md` (Abschnitte Zaubermeisterin, Waldläufer) und `FirstGame_ArtPack/characters/class_overhaul/CHARACTER_ART.md`.
 - **Neu (Auftrag 25.11.):** Diese Anforderungen gelten jetzt global (Abschnitt 2). Die Klassenprofile in Abschnitt 3 enthalten nur noch die echten Besonderheiten.
 
 ## 2. Anforderungen an jede Klasse (auch künftige)

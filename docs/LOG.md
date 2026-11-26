@@ -4,6 +4,12 @@ updated: 2026-11-26
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen)
 
+### 2026-11-26 · Claude · Offene Aufgaben, QA-Optimierung, Dokumentationsregel
+- Messungen: `tests/perf_harness.gml` (Suite `perf`), `QA/tools/analyze_levels.py`, Kohorte `QA/data/level-cohort-2026-11-26/`; Vorschlag für `boss_test_preset` in der Notiz Boss-Testmodus.
+- Spiel: `spell_v2` (`spell_impact_light`, Sammelphase), `level_worlds` und `master_skeleton` (Wald-Skelette, allokationsfreie Bewegung), `equipment_visual` (`eqv_attach_draw`), `boss_test_mode` (F10-Anker), `audio_manager` (Lautstärken speichern), `combat_feedback` und `build_pixel_font.py` (Buchstaben, „MAGNET“).
+- Aufräumen und QA: Kollisions-Events der Altprojektile entfernt, `tests/_legacy/`, ArtPack in Zielstruktur (`art_paths.py`), `qa.py` (Suiten `docs`, `review`), `tests/tools/vault_check.py`, `validate_project.py`, `audit_boss_v2_assets.py`, `export_design.py`, Agenten `qa`/`visual-qa`, `docs/ai-activity.log` nicht mehr versioniert.
+- Tests: QA Stufe 3 PASS (docs, anchors, static, Regression 811, Feature 195, Boss 141, Level 166, Klassen 151, Visual 84); perf: Horde 148 Gegner 64–66 FPS unbegrenzt, Bosse mit 60 Gegnern 79–91.
+
 ### 2026-11-26 · Claude · Phase 2A/2B: Telegraphs, Gefahrenflächen, Licht, Bossdruck, Schachbrett, Ringe, Pfeile, Ankerpunkte
 - Neu: `scripts/hazard_fx`, `scripts/equipment_attach_data`, `tests/tools/characters/build_attach_points.py`, Systemnotiz `Telegraphs & Gefahrenflächen`.
 - Geändert: `attack_telegraph`, `boss_hazards_v2`, `boss_choreo`, `boss_encounters_v2`, `dragon_encounter`, `dragon_parts`, `atmosphere`, `class_weapons`, `combat_feedback`, `spell_v2`, `spell_vfx`, `gameplay`, `player_artpack`, `equipment_visual`, `level_worlds` (Gegner-Bewegungsidentität), Tests (Boss-Orakel, Klassen-Flush, Visual-Anker, Level-Suite mit fester Bildzeit), `record_scene.py --boss-hp`, `ide_folders.py`.

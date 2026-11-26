@@ -8,7 +8,7 @@ updated: 2026-11-26
 18 aktive und 18 passive Fähigkeiten, Stufe 1–9, je 6 Slots. Aktive Zauber lösen automatisch aus.
 
 ## Wichtige Dateien
-- Daten: `scripts/spell_v2_catalog` (aus `FirstGame_ArtPack/spell_v2/catalog.json`), `scripts/get_spell_data`.
+- Daten: `scripts/spell_v2_catalog` (aus `FirstGame_ArtPack/vfx/spell_v2/catalog.json`), `scripts/get_spell_data`.
 - `scripts/spell_v2`: Werte (`spell_v2_values`), Felder und Mechaniken (`spell_v2_step`), Zeichnung, `progression_try_level`.
 - `scripts/spell`: Projektile, `apply_attack_damage`, `learn_spell` (`-2` ist die Waffen-Upgrade-Karte, siehe [[Klassen & Startwaffen]]). Nach den Kollisionsabfragen auf `ObjectBossMonster` prüft `boss_parts_collide` auch Kopf und Hals des Drachen ([[Bosse]]).
 - `scripts/cast_spell` ist der ältere Castpfad für 101–106 mit den Objekten `ObjectFireball`, `ObjectIceball` und `ObjectLightningball` (Werte in `projectile_setup`, `scripts/combat_feedback`; Zeichnen über `projectile_draw`).
@@ -18,6 +18,8 @@ updated: 2026-11-26
 - Darstellung (seit 25.11.): alle 18 aktiven Zauber als zusammengesetzte Pixel-Effekte (`scripts/spell_vfx`, `spell_fx_core_draw` in `spell_v2`). Die Intensität folgt der Zauberstufe in drei Bändern (1–3, 4–6, 7–9; `vfx_band`), wirkt nur auf Deckkraft und Glühen, nie auf Trefferradien. Details: [[Licht, Wetter & Effekte]].
 
 - **Seit 26.11. mehrphasig:** Donnersiegel und Sonnenurteil sammeln Energie am Zielpunkt (`vfx_charge` in `vfx_pillar_draw`) und lösen beim Schadensereignis Licht nach Band aus (`spell_v2_step`, Fall `seal`/`verdict`). Review: `spell.seal.l1|l5|l9`.
+
+- Seit 26.11. ebenfalls mehrphasig, ohne Timing-Änderung: Steinstacheln, Sternenfall (Sammeln am nächsten Einschlagspunkt während der bestehenden Wartezeit) und Prismensamen; Licht am Schadensereignis über `spell_impact_light` (Band 0 Puls, 1–2 Blitz).
 
 ## Abhängigkeiten
 [[Progression & Level-up]] · [[Licht, Wetter & Effekte]] (`spell_vfx`) · [[UI, HUD & Menüs]] · [[Bosse]] · [[Klassen & Startwaffen]]

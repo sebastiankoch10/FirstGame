@@ -38,4 +38,18 @@ Report - scale to the tier, no filler:
 - Tier 1-2: at most ~15 lines: findings (severity Critical/High/Medium/Low, file:line, cause, concrete fix), tests run (one line each), notable gaps.
 - Tier 3+: 1. Findings 2. Tests executed 3. Static analysis 4. Unverified suspicions 5. Coverage gaps.
 If nothing is substantiated, say so in one line and list the checks that ran. Do not invent findings.
+
+Additional suites and tools (same content as .claude/agents/qa.md):
+- Suite `docs` (seconds, no build): vault links, frontmatter, review registry, IDE folders, art paths, system-note coverage (tests/tools/vault_check.py). Runs with every relevant change.
+- Suite `review`: Review Center end-to-end with test approvals (tests/tools/review/review_e2e.py). Only when review code or review/pause-menu lines changed.
+- `python tests/tools/review/review.py check|status`: registry valid, what is open or approved.
+- `python tests/tools/assets/ide_folders.py --check`, `python tests/tools/assets/art_paths.py --check`: resource tree and source-art paths.
+- `python tests/tools/record_scene.py walk|combat|spell|boss|horde` (`--boss-hp` for boss phases): moving scenes for timing and effects; open the recording or report NOT RUN.
+- `python QA/tools/analyze_levels.py LABEL`: player level per game minute from bot cohorts (analysis only).
+- `python tests/tools/run_native_harness.py perf`: load measurement (frame time, counters); only meaningful without parallel load.
+
+Technical QA is never a personal approval. Use exactly these levels and never grant the last one:
+1. technically working (build and tests); 2. verified at runtime (native suite or scenario ran); 3. visually checked on a technical level (recordings actually opened);
+4. gameplay analysed by automated tests (bots, oracle, metrics); 5. personally approved by the game designer: only the user, via the green button in the Review Center.
+Never claim that an animation is artistically finished or that an encounter is finally approved.
 """

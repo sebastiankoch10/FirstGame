@@ -11,9 +11,9 @@ Rang 2 unter [[Leitbild]].
 
 | Begriff | Bedeutung | Beispiel |
 |---|---|---|
-| **Quelle** | Original, aus dem etwas erzeugt wird. Wird nie verändert. | `FirstGame_ArtPack/class_overhaul/sources/*.png`, Drachen-PNGs |
+| **Quelle** | Original, aus dem etwas erzeugt wird. Wird nie verändert. | `FirstGame_ArtPack/characters/class_overhaul/sources/*.png`, Drachen-PNGs |
 | **Referenz** | Vorbild oder Konzepttafel, wird nicht ins Spiel importiert | `FirstGame_ArtPack/references/*` |
-| **Generiert** | Von einem Werkzeug erzeugtes Zwischen- oder Endprodukt, jederzeit neu erzeugbar | `FirstGame_ArtPack/character_layers/preview_*.png`, `scripts/equipment_visual_data` |
+| **Generiert** | Von einem Werkzeug erzeugtes Zwischen- oder Endprodukt, jederzeit neu erzeugbar | `FirstGame_ArtPack/characters/character_layers/preview_*.png`, `scripts/equipment_visual_data` |
 | **GameMaker-Ressource** | registriert in `FirstGame.yyp`, liegt in `sprites/`, `sounds/`, `scripts/` usw. | `sprites/spr_fg_magev3_walk_down/` |
 | **Legacy** | Früherer Stand, im Spiel nicht mehr erreichbar, als Nachweis aufbewahrt | ArtPack-0.1-Helden |
 | **Temporär** | Testkopien, Builds, Logs. Gehört nicht ins Repo. | `%LOCALAPPDATA%\FirstGame-Tests\`, `output/` |
@@ -138,7 +138,13 @@ FirstGame_ArtPack/                 Name bleibt (bekannt bei Nutzer und Agenten)
 
 **Schritt 1 erledigt am 25.11.:** Pfadtabelle `tests/tools/assets/art_paths.py` (eine Konstante je Quellordner, `level_dir()` für Levelgrafik). 24 Werkzeuge lesen nur noch daraus; `python tests/tools/assets/art_paths.py --check` meldet 0 Code-Verweise außerhalb der Tabelle. Jeder umgestellte Ausdruck wurde vorher auf denselben Zielpfad geprüft.
 
-**Offen:** Schritte 2–4 (Probelauf der Importer, Verschieben mit `git mv`, Prüfen).
+**Schritte 2–4 erledigt am 26.11.:**
+- Probelauf: `art_paths.py --check` vor und nach dem Verschieben mit 0 Verweisen außerhalb der Tabelle.
+- Verschoben mit `git mv`: `swordsman_v3`, `class_overhaul`, `character_layers` → `characters/`; `level_enemies` → `enemies/`; `dragon_boss`, `boss_v2` → `bosses/`; `spell_v2` → `vfx/`; `environment`, `master_world`, `level_forest`, `level_swamp`, `level_ashfrost` → `environment/`. Nur die Pfadtabelle wurde angepasst.
+- Geprüft: alle Tabelleneinträge vorhanden; Probeläufe `build_dragon_parts.py --preview`, `build_boss_baked.py twins --preview`, `audit_boss_v2_assets.py` PASS; QA-Suiten siehe LOG.
+- Abweichung vom Zielbild: Die Skelett-Frames des Walds bleiben in `environment/master_world/` (kein Aufteilen eines Ordners, den der Welt-Importer als Ganzes liest).
+
+**Offen:** `atmosphere_v2/` prüfen und gegebenenfalls nach `_legacy/` legen (ein Tabelleneintrag verweist noch darauf); `ui/` entsteht erst mit neuen UI-Quellen.
 
 **Sofort zulässig, ohne Migration:**
 - neue Quellen gleich in die Zielstruktur legen und in der Pfadtabelle eintragen;

@@ -1,17 +1,9 @@
 {
-  "success": false,
-  "errors": [
-    "objects/ObjectFireball/ObjectFireball.yy: orphaned event file: Collision_ObjectMonster.gml",
-    "objects/ObjectIceball/ObjectIceball.yy: orphaned event file: Collision_ObjectMonster.gml",
-    "objects/ObjectLightningball/ObjectLightningball.yy: orphaned event file: Collision_ObjectMonster.gml"
-  ],
+  "success": true,
+  "errors": [],
   "warnings": [],
   "yyp": "FirstGame.yyp",
-  "preexisting_errors": [
-    "objects/ObjectFireball/ObjectFireball.yy: orphaned event file: Collision_ObjectMonster.gml",
-    "objects/ObjectIceball/ObjectIceball.yy: orphaned event file: Collision_ObjectMonster.gml",
-    "objects/ObjectLightningball/ObjectLightningball.yy: orphaned event file: Collision_ObjectMonster.gml"
-  ],
+  "preexisting_errors": [],
   "new_errors": [],
   "resources": 1392,
   "no_new_errors": true

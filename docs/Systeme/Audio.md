@@ -19,4 +19,4 @@ Musik (Menü, Level, Boss) und Soundeffekte mit zentralem Mixer.
 
 ## Bekannte Probleme
 - Die Klänge sind programmatisch synthetisierte Prototypen; kein Hörtest.
-- Lautstärken werden nicht gespeichert, nur „Ton im Hintergrund“ ([[Bugs & Ideen]]).
+- Lautstärken (Gesamt, Musik, Effekte) werden seit 26.11. in `firstgame_audio.ini` gespeichert und beim Start geladen (`fg_audio_init`, `fg_audio_cycle_volume`).

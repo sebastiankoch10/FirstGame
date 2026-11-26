@@ -1,16 +1,17 @@
-# FirstGame ArtPack – Index (Stand 25.11.2026)
+# FirstGame ArtPack – Index (Stand 26.11.2026, Zielstruktur aus dem Migrationsplan)
 
 Quell-, Referenz- und generierte Grafik. Rolle jedes Ordners, Werkzeuge und Zielstruktur: `docs/Design/Assets & Pipeline.md`.
 
 | Ordner | Rolle |
 |---|---|
 | `references/` | Konzepttafeln und Referenzen (Zaubermeisterin, Waldläufer, Drachenangriffe, Hexen und Behemoth = die früheren losen `ChatGPT-Bild …`-Dateien, `monster_originals/`) |
-| `swordsman_v3/`, `class_overhaul/` | Quellen der Spielerfiguren (Atlanten, Originalframes) |
-| `character_layers/` | generierte Vorschauen der Figuren-Pipeline |
-| `dragon_boss/` | Drachen-Quellen, **nicht verändern** |
-| `boss_v2/` | Quellen Hexen und Behemoth |
-| `master_world/`, `environment/`, `level_*/`, `level_enemies/` | Welt- und Gegnerquellen |
-| `spell_v2/` | Zauber-Icons, Effekte, `catalog.json` |
+| `characters/swordsman_v3/`, `characters/class_overhaul/` | Quellen der Spielerfiguren (Atlanten, Originalframes) |
+| `characters/character_layers/` | generierte Vorschauen der Figuren-Pipeline |
+| `bosses/dragon_boss/` | Drachen-Quellen, **nicht verändern** |
+| `bosses/boss_v2/` | Quellen Hexen und Behemoth |
+| `enemies/level_enemies/` | generierte Gegnerquellen (Sumpf, Ruinen) |
+| `environment/` (`environment/`, `master_world/`, `level_forest/`, `level_swamp/`, `level_ashfrost/`) | Welt- und Levelquellen (der Wald enthält auch die Skelett-Frames) |
+| `vfx/spell_v2/` | Zauber-Icons, Effekte, `catalog.json` |
 | `atmosphere_v2/` | frühe Quellen (Krieger v2, Boss, Magnet) |
 | `_legacy/` | ArtPack 0.1 (heroes, monsters, icons, portraits, previews, effects), nicht mehr im Spiel; `manifest.json` und `CODEX_IMPORT.md` beschreiben diesen alten Stand |
 
