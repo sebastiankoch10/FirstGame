@@ -33,23 +33,42 @@ function fx_beam_visible_len(_x,_y,_ang,_len) {
 function fx_dragon_charge() {
     var b=variable_global_exists("active_boss") ? global.active_boss : noone;
     if(!instance_exists(b) || !b.dragon_enabled || b.dragon_dying || b.boss_state!="windup")return undefined;
-    if(!(b.boss_cast=="beam" || b.boss_cast=="arc" || b.boss_cast=="sweep"))return undefined;
-    var m=dragon_mouth(b,false);return {x:m.x,y:m.y,p:clamp(b.dragon_state_age/max(.1,b.enc_cfg.warning),0,1),bx:b.x,by:b.y,size:b.visual_height};
+    if(!array_contains(["beam","arc","sweep","void","wind","volley"],b.boss_cast))return undefined;
+    // projectile attacks announce themselves the same way (Die Attacke ist die Warnung): energy of their element gathers
+    var el=b.boss_cast=="void" ? 4 : (b.boss_cast=="wind" ? 2 : 1);
+    var m=dragon_mouth(b,false);return {x:m.x,y:m.y,p:clamp(b.dragon_state_age/max(.1,b.enc_cfg.warning),0,1),bx:b.x,by:b.y,size:b.visual_height,el:el};
+}
+/// Active fire surfaces of the dragon (fan, long cones, magma, meteors, fire rings): flames lick up all over the hit
+/// area while it burns (FXP_TOP: over the opaque surface, under every warning). Slow and short-lived, so they stay close
+/// to the area (at most about 20 px above it). Visual only, bounded per frame.
+function fx_hazard_flames_step(_dt) {
+    if(!variable_global_exists("bv2_hazards"))return;
+    var budget=fxp_n(40);
+    for(var i=0;i<array_length(global.bv2_hazards) && budget>0;i++) {
+        var h=global.bv2_hazards[i];if(h.age<h.warning || h.age>=h.warning+h.active)continue;
+        // the slam's dust wave leaves lit dust behind its front (the band itself is drawn by hz_act_shock)
+        if(h.kind=="dragon_slam" && variable_struct_exists(h,"ring_fn")){var ring=hz_ring_at(h,h.age-h.warning);repeat(min(budget,fxp_n(5))){var a=vfx_random(360),rr=ring.radius-vfx_random(12);fxp_add(ring.x+lengthdir_x(rr,a),ring.y+lengthdir_y(rr,a),lengthdir_x(50,a),lengthdir_y(30,a)-8,vfx_random_range(.5,.9),5,vfx_choose(4,5,6),FXP_PUFF,FXP_LIT,-6,1.5,.1,.75);budget--;}continue;}
+        var k=h.kind;if(!(k=="dragon_arc" || k=="dragon_cone" || k=="dragon_magma" || k=="dragon_meteor" || k=="dragon_fire_ring" || k=="dragon_magma_cell"))continue;
+        var n=min(budget,max(2,round(geo_area(h.g)/9000)));budget-=n;
+        repeat(n){var pt=geo_sample(h.g,vfx_random(1),vfx_random(1));if(!telegraph_contains(h.g,pt.x,pt.y))continue;
+            fxp_add(pt.x,pt.y,vfx_random_range(-8,8),-vfx_random_range(30,60),vfx_random_range(.2,.35),1,vfx_choose(1,2,2),vfx_choose(FXP_EMBER,FXP_PIXEL,FXP_STREAK),FXP_TOP,-30,2,vfx_random_range(0,.3));}
+    }
 }
 /// Emission (Step, paused with the game): particles for charges and active beams.
 function fx_attacks_step(_dt) {
     if(_dt<=0)return;
+    fx_hazard_flames_step(_dt);
     var c=fx_dragon_charge();
     if(is_struct(c)) {
-        fxp_gather(c.x,c.y,70+60*c.p,1,.35+.65*c.p);
-        if(c.p>.3)fxp_aura(c.bx,c.by-c.size*.35,c.size*.32,1,.5*c.p);
+        fxp_gather(c.x,c.y,70+60*c.p,c.el,.35+.65*c.p);
+        if(c.p>.3 && c.el==1)fxp_aura(c.bx,c.by-c.size*.35,c.size*.32,1,.5*c.p);
     }
     var beams=fx_fire_beams();
     for(var i=0;i<array_length(beams);i++) {
         var q=beams[i],len=fx_beam_visible_len(q.x,q.y,q.angle,q.len),fade=clamp((q.active-q.age)/.25,0,1);
         fxp_flame_line(q.x,q.y,q.angle,len,q.width*.8,fade,FXP_TOP);
         // ignition: shock ring at the mouth, short warm scene shift, a burst of sparks
-        if(q.age<_dt*1.5){fx_shock(q.x,q.y,90,3,.3);fx_scene_tint(make_color_rgb(255,150,70),.16,.4);fx_aberration(1.5,.16);fxp_impact(q.x,q.y,1,.6);}
+        if(q.age<_dt*1.5){fx_shock(q.x,q.y,90,3,.3);fx_scene_tint(make_color_rgb(255,150,70),.1,.4);fx_aberration(1.5,.16);fxp_impact(q.x,q.y,1,.6);}
         // smoke lifting off the burnt path, lit by the fire (world light)
         if(vfx_random(1)<.5*fxp_rate()){var d=vfx_random(len),o=vfx_random_range(-.35,.35)*q.width;
             fxp_add(q.x+lengthdir_x(d,q.angle)+lengthdir_x(o,q.angle+90),q.y+lengthdir_y(d,q.angle)+lengthdir_y(o,q.angle+90),vfx_random_range(-10,10),-vfx_random_range(20,45),vfx_random_range(.7,1.2),8,vfx_choose(3,4,5),FXP_PUFF,FXP_LIT,-6,.8,0,.85);}
@@ -63,7 +82,7 @@ function fx_attacks_step(_dt) {
 function fx_attacks_draw() {
     var t=current_time/1000,c=fx_dragon_charge();
     if(is_struct(c)) {
-        var r=3+9*c.p+sin(t*26)*c.p,pal=vfx_palette(1);
+        var r=3+9*c.p+sin(t*26)*c.p,pal=vfx_palette(c.el);
         draw_set_alpha(.5*c.p);draw_set_color(pal[1]);draw_circle(round(c.x),round(c.y),round(r*1.8),false);
         draw_set_alpha(c.p);draw_set_color(pal[2]);draw_circle(round(c.x),round(c.y),round(r),false);
         draw_set_color(c_white);draw_circle(round(c.x),round(c.y),max(1,round(r*.45)),false);
@@ -90,5 +109,5 @@ function fx_attacks_lights(_rect) {
         for(var k=1;k<=n;k++){var d=len*k/n;atmosphere_source(q.x+lengthdir_x(d,q.angle),q.y+lengthdir_y(d,q.angle),140+q.width,make_color_rgb(255,128+k*6,44),(.6-.03*k)*fade*(.9+.1*sin(current_time/45+k)),_rect);}
     }
     var c=fx_dragon_charge();
-    if(is_struct(c))atmosphere_source(c.bx,c.by-c.size*.3,c.size*.9,make_color_rgb(255,120,50),.15*c.p,_rect);
+    if(is_struct(c))atmosphere_source(c.bx,c.by-c.size*.3,c.size*.9,c.el==4 ? make_color_rgb(190,110,255) : (c.el==2 ? make_color_rgb(120,230,220) : make_color_rgb(255,120,50)),.15*c.p,_rect);
 }

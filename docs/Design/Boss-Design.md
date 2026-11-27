@@ -77,7 +77,22 @@ Regeln:
 - Die Boss-Richtungsanzeige funktioniert weiter.
 
 ## B2 – Die Attacke ist die Warnung (Designentscheidung des Nutzers, 27.11.2026)
-**Soll, noch nicht umgesetzt;** die Umsetzung kommt als eigener Auftrag. Die globale Regel steht in [[Kampf & Begegnungen]] 5.0 und Leitbild G19, hier nur die Bossbesonderheiten.
+**Ist seit 27.11. für den Drachen umgesetzt** (Pilot; die übrigen Bosse folgen nach Entscheidung des Nutzers). Die globale Regel steht in [[Kampf & Begegnungen]] 5.0 und Leitbild G19, hier nur die Bossbesonderheiten.
+- **Drache, je Attacke** (`hz_dragon_look` in `scripts/hazard_looks`):
+  - Feueratem: Glut-„Zündschnur“ in der Startbahn, Glutfunken treiben in Schwenkrichtung über den Fächer.
+  - Feuerfächer und lange Kegel: Flammen keimen in der ganzen Fläche, werden höher und zittern vor dem Auslösen.
+  - Stampfen und Magma-Schachbrett: Risse glühen auf, Magma blubbert, bei Treffern jeder Höhe hohe Flammen; im Schachbrett je Feld.
+  - Meteor: Der Halbschatten ist von Beginn an genau die Trefferfläche, der Kernschatten wächst bis zum Einschlag, der Fels fällt sichtbar.
+  - Bodenschlag: Ein unregelmäßiges Netz dunkler Risse durchzieht die ganze Fläche bis zum Endradius der Druckwelle, der Boden ist staubig getönt, Geröll hüpft und zittert; während der Welle bleibt der Endradius schwach sichtbar.
+  - Wirbel und schließende Feuerringe: Glut kreist im Ring, die Öffnung bleibt leer.
+  - Leere, Wind, Salve: Energie ihres Elements sammelt sich am Maul; die Projektile ziehen Spuren (keine Bodenwarnung, Grundsatz D).
+  - Biss und Schweif: Staubschleier über dem Trefferkeil, Staub wirbelt darin auf, dazu die Ausholbewegung.
+- **Drache, aktive Attacke** (`hz_dragon_active`, seit 27.11.):
+  - Feuerfächer, lange Kegel, Feuerringe, Wirbel: brennender Boden mit Flammenteppich und Flammensaum; der Fächer glüht zum Maul hin heller.
+  - Stampfen, Magma-Schachbrett, Meteor: dunkle Kruste, die entlang des Rissnetzes aus der Ankündigung aufbricht und glüht; Lavablasen, Ausbruchsflammen; beim Meteor ein heißer Einschlagkern. Die Fläche kühlt ab, solange sie aktiv ist.
+  - Bodenschlag: wandernde Staubwand im Trefferband, Staub bleibt hinter der Front zurück.
+  - Biss und Schweif: Hiebspuren in warmen Staubtönen (anders als die weißen Schwerthiebe des Spielers) über dem Trefferkeil.
+  - Feueratem: unverändert der Feuerstrahl aus dem Schaustück.
 - Bossattacken kündigen sich durch Körper, Ansetzen und die Elemente der Attacke selbst an. Marker, die genauso viel zeigen wie die Attacke, entfallen (z. B. Kegel plus wanderndes Rechteck beim Drachenatem, sich füllende Schachbrettfelder).
 - **Beispiele des Nutzers:**
   - Schachbrett: In den Feldern bauen sich kleine Flammen auf, vibrieren und explodieren gleich; danach dasselbe invertiert mit Eis.

@@ -87,6 +87,8 @@ function fx_world_step(_dt) {
     fx_world_init();var f=global.fxw;f.hits=0;f.deaths=0;f.coins=0;
     if(_dt<=0)return;
     f.crowd=fx_crowd_k();
+    // dragon projectiles leave element trails (void, wind, fire volley)
+    if(variable_global_exists("hostile_bullets"))for(var i=0;i<min(48,array_length(global.hostile_bullets));i++){var b=global.hostile_bullets[i];if(variable_struct_exists(b,"dragon_void"))fxp_trail(b.x,b.y,point_direction(0,0,b.vx,b.vy),b.wind ? 2 : (b.volley ? 1 : 4),point_distance(0,0,b.vx,b.vy),(b.wind || b.volley) ? .8 : 1.3);}
     // coin glints: a few random active coins per frame instead of a call in every coin's step (perf 27.11.)
     var nc=instance_number(ObjectCoin);if(nc>0)repeat(min(4,floor(nc*.005*fxp_rate()+vfx_random(1)))){var c=instance_find(ObjectCoin,vfx_irandom(nc-1));if(instance_exists(c) && !c.coin_collected && !c.magnetized)fx_coin_glint(c);}
     if(f.levelup>0 && instance_exists(ObjectPlayer)){f.levelup-=_dt;fxp_aura(ObjectPlayer.x,ObjectPlayer.y-4,16,7,clamp(f.levelup,0,1));}

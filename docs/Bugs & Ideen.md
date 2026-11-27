@@ -25,6 +25,11 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
   - Die 1-px-Ränder der Gefahrenflächen sind feiner als die Weltgrafik; das war schon vorher so.
   - Der getönte Strahlbereich ist auf hell beleuchtetem Boden nur über Farbton und Rand vom Boden abgesetzt (Tönung inzwischen 0,65).
   → [[Visuelles Leitbild & Animation]] 7
+- **Drache, Befunde der visual-qa vom 27.11. außerhalb der Gefahrenflächen (offen, nicht ungefragt bearbeiten):**
+  - Ursprung von Strahl, Leere und Salve liegt nicht am gezeichneten Maul (Strahl etwa 65 px unter dem Kopf, Leere und Salve starten am Flügel, Windladung über dem Kopf); Verdacht: Maul-Anker der Bauteil-Figur bei Blick nach rechts (`dragon_parts_fire_mouth`). Spielrelevant (G1), weil der Ursprung die Trefferlinie bestimmt.
+  - Biss: Bei weitem Ausfall wird der Hals als gerade Segmentsäule über mehr als 250 px gezeichnet (`dragon_parts`, Biss).
+  - Navigation bricht laufende Ankündigungen ab (`bv2_clear_enc`), z. B. das zweite, invertierte Schachbrett; Verhalten wie vor der Zusammenführung, widerspricht aber Boss-Design H2 „Nie abbrechen“.
+  → [[Boss-Design]], [[Bosse]]
 - **Gegnerzustand per Existenzprüfung:** `ObjectMonster` unterscheidet Art und Zustand über etwa 12 `variable_instance_exists`-Abfragen je Gegner und Bild (`boss_twin`, `boss_minion`, `lvl_kind`, `hit_stun`, `lvl_hover` …). Das ist fehleranfällig bei neuen Gegnerarten und kostet Zeit. Vorschlag: alle Felder in `ObjectMonster/Create_0` mit Standardwerten anlegen und die Abfragen schrittweise durch Feldvergleiche ersetzen, abgesichert durch Level- und Regression-Suite. → [[Gegner & Spawns]]
 - **Drachenkopf bei steilen Winkeln:** Die Kopfansichten entstehen durch Drehen der Seitenansicht; nach unten gerichtet wirkt der Kopf flach. Besser: eigene Draufsicht-Variante des Kopfes; Anforderungen in [[Assets & Pipeline]] 7.4. → [[Bosse]]
 

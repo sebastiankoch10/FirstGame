@@ -67,7 +67,7 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
 
 ## 5. Warnungen (Telegraphs): globale Regeln
 
-0. **Die Attacke ist die Warnung** (Designentscheidung des Nutzers, 27.11.2026; Soll, die Umsetzung kommt als eigener Auftrag; Ist: Markerwarnungen nach 3).
+0. **Die Attacke ist die Warnung** (Designentscheidung des Nutzers, 27.11.2026). Ist seit 27.11.: umgesetzt für alle Drachenattacken (Pilot, `scripts/hazard_looks`); Zwillingshexen, Behemoth, Minibosse und Gegner zeigen noch Markerwarnungen nach 3, bis der Nutzer über ihre Umstellung entscheidet.
    - **Vorbild:** das Flair der Boss-, Dungeon- und Raidkämpfe aus Final Fantasy XIV, besonders der Ultimate-Kämpfe. Gemeint sind Prinzip und Gefühl, keine Kopie konkreter Kämpfe oder Assets.
    - **Die Attacke kündigt sich selbst an:** Körper (Kopf, Ausholen, Ansetzen) und Elemente, die sich in der späteren Trefferform aufbauen, steigern (vibrieren, verdichten, aufleuchten) und dann auslösen.
    - **Keine Marker, die genauso viel zeigen wie die Attacke selbst**, z. B. Kegel plus wanderndes Rechteck beim Drachenatem oder sich füllende Schachbrettfelder.
@@ -79,7 +79,16 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
      - Genug Vorlaufzeit; sichere Bereiche sind erkennbar.
      - Ablauf, Timing und Trefferflächen bleiben unverändert (eine Uhr je Besitzer, 1).
    - **Weiter gültig:** 1, 2, 3a, das Prinzip von 3b (nächste Mechanik oben, Sicheres sieht sicher aus), 4–6 und die Phasen in 8. **Ersetzt** sind die eigenständigen Markerformen in 3, 3b, 4, 7, 8 und Abschnitt 8 (jeweils durchgestrichen).
-   - **Offen** (Entscheidung im Umsetzungsauftrag): wie ein Strahlschwenk ohne Fächer-Marker vorab lesbar wird (Kopfdrehung, Ansetzrichtung); wie Bodenhöhe (überspringbar) an den Vorzeichen erkennbar bleibt; welche Teile der Vorzeichen auf der unbearbeiteten Lesbarkeitsebene liegen ([[Visuelles Leitbild & Animation]] 7.3).
+   - **Entschieden am 27.11.** (vorher offen, Begründung in [[DECISIONS]]):
+     - **Strahlschwenk:** In der Startbahn läuft eine „Zündschnur“ aus Glut, die zum Zünden hin dichter wird und am Ende züngelt. Ab 40 % der Vorlaufzeit treiben Glutfunken über den Fächer, der überstrichen wird, und zwar in Schwenkrichtung. So sind Fläche und Richtung lesbar, ohne Fächer-Marker oder Pfeile.
+     - **Trefferhöhe:** Bodenattacken zeigen flache Vorzeichen (Risse, niedrige Flammen, Staub, Geröll). Attacken, die jede Höhe treffen, steigen über Figurenhöhe (hohe Flammen, fallender Fels). Hohe Attacken zeigen Glut in Körperhöhe. Die alte Regel „Randstärke 1 oder 2 px“ entfällt mit dem Rand.
+     - **Ebene:** Die Vorzeichen liegen scharf auf der unbearbeiteten Lesbarkeitsebene (`telegraph_flush`, Reihenfolge nach Zeit bis zum Einschlag, Späteres gedämpft). Ihr Glühen kommt über das Weltlicht (`hz_pre_lights`), das nachbearbeitet wird.
+     - **Lesbarkeit der Fläche:** Elemente füllen die ganze Trefferfläche, der Rand bildet sich aus einem unregelmäßigen Saum von Elementen. Dazu kommt ein flackernder Hitzeschimmer genau über der Fläche (die Hitze der Attacke selbst, ohne Umriss und ohne Countdown). Grund: In der ersten Aufnahme waren Elemente allein bei Spielgröße zu schwach, um die sichere Fläche zu erkennen.
+     - **Kein Ring aus gleichmäßigen Elementen:** Ein Saum aus gleich weit stehenden Flammen oder ein glühender Ringriss liest sich wie ein gestrichelter Marker, ein Speichenstern aus Rissen wie eine Zielscheibe (Aufnahmen 27.11.). Risse bilden deshalb ein unregelmäßiges Netz über die Fläche, die Kante entsteht aus Füllung und Elementen. Ringbänder haben keinen Elementsaum; ihre Kante ist die Füllung.
+     - **Vorlauf von Beginn an lesbar:** Füllung und die meisten Elemente sind ab dem ersten Bild der Ankündigung da; zum Auslösen steigt nur die Intensität (visual-qa 27.11.: sonst war die erste Hälfte der Vorlaufzeit praktisch unsichtbar).
+     - **Tiefe:** Elemente, die auf dem Körper des Drachen oder auf der Spielerfigur lägen, entfallen (Rang 1 in 8; der Drache steht davor); die Füllung bleibt, damit die Trefferfläche nie verdeckt ist. Über Baumkronen bleiben Gefahren sichtbar (Lesbarkeit vor Tiefe).
+     - **Abklingen:** Eine Fläche, die nicht mehr trifft, wird sofort grau (3a, Sicheres sieht sicher aus).
+     - **Aktive Darstellung:** Während die Attacke trifft, zeigt die Fläche die Attacke selbst: brennender Boden mit Flammenteppich, aufgebrochene Kruste mit glühenden Spalten, Staubwand, Hiebspur. Genau die Trefferfläche, ohne Umriss; das Licht der Fläche erhellt die Umgebung. Die frühere Darstellung (Füllung, heller Randstreifen, 1-px-Umriss, Zielscheiben-Kern) entfällt beim Drachen. Leuchtende Flächen dürfen das Bild nicht überstrahlen: höchstens ein Lichtblitz je Angriffsbild, weitere Felder desselben Bildes glimmen nur.
 1. **Synchron (G1):** Warnung, Hitbox, Schaden, Effekt und Ton laufen über dieselbe Uhr des Besitzers.
    - Bei 100 % wird die Attacke im selben Update aktiv, ohne versteckte Wartezeit.
    - Vor 100 % gibt es keinen Schaden aus der angekündigten Fläche.
@@ -240,6 +249,7 @@ Rangfolge, was bei Konflikten sichtbar bleiben muss (1 = höchste):
 **Regeln:**
 - **Zeichenreihenfolge folgt der Rangfolge.** Gegnerwarnungen und Bossgefahren liegen über den eigenen Effekten.
   - Ist: `ObjectController/Draw_73` zeichnet Zauber vor den Bossgefahren. Bossgefahren liegen also schon darüber.
+  - Ist seit 27.11.: Aktive Bossgefahren werden nach allen Ankündigungen gezeichnet (`bv2_hazards_draw(2)` nach `telegraph_flush`), Rang 2 liegt also über Rang 3.
 - **Eigene Bodeneffekte** bleiben halbtransparent und unter einer Deckkraft-Obergrenze (Richtwerte in [[Fähigkeiten, VFX & Audio]]). Sie benutzen nie die Formsprache gegnerischer Warnungen.
 - **Farben haben Bedeutung.** Elementfarben gelten für Freund und Feind. Unterschieden werden beide durch die Formsprache (~~Umriss plus Rand-Countdown = Gefahr~~ seit 27.11.: Vorzeichen in der Trefferform = Gefahr) und die Intensität, nicht nur durch die Farbe.
 - **Endgame-Effekte** dürfen beeindrucken, aber sichere Flächen bleiben erkennbar.

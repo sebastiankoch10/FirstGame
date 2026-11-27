@@ -147,7 +147,7 @@ function dragon_encounter_step(_b,_dt) {
             var overflow=max(0,_b.dragon_state_age-_b.enc_cfg.warning);
             dragon_state(_b,"active",max(0,_b.enc_cfg.active-overflow));_b.dragon_state_age=overflow;
             fg_sfx(_b.boss_cast=="beam" || _b.boss_cast=="arc" ? "dragon_fire" : "dragon_charge");
-            if(_b.boss_cast=="beam" || _b.boss_cast=="arc"){var fm=dragon_mouth(_b,true);light_flash(fm.x,fm.y,340,make_color_rgb(255,146,66),1.5,.35,.1);} // breath ignites
+            if(_b.boss_cast=="beam" || _b.boss_cast=="arc"){var fm=dragon_mouth(_b,true);light_flash(fm.x,fm.y,240,make_color_rgb(255,146,66),.7,.3,.03);} // breath ignites (softer since 27.11.: it washed out the screen)
             else light_pulse(_b.enc_geometry.x,_b.enc_geometry.y,280,make_color_rgb(255,146,66),1,.3);
         }
     } else if(_b.boss_timer<=0) {

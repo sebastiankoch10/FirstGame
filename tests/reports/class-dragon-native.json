@@ -1,6 +1,8 @@
 {
+  "passed": true,
   "checks": 151.0,
   "failures": [],
+  "status": "PASS",
   "metrics": {
     "sword_combo": [
       11.0,
@@ -8,13 +10,6 @@
       19.0
     ],
     "mage": {
-      "stages": [
-        1.0,
-        2.0,
-        3.0,
-        4.0,
-        1.0
-      ],
       "outcomes": [
         {
           "step": 1.0,
@@ -36,24 +31,16 @@
           "step": 1.0,
           "damage": 29.0
         }
+      ],
+      "stages": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        1.0
       ]
     },
     "ranger": {
-      "counts": [
-        1.0,
-        1.0,
-        3.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        5.0,
-        1.0,
-        1.0,
-        0.0,
-        1.0
-      ],
       "outcomes": [
         {
           "projectiles": 1.0,
@@ -120,174 +107,189 @@
           "step": 1.0,
           "damage": 6.0
         }
+      ],
+      "counts": [
+        1.0,
+        1.0,
+        3.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        5.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0
       ]
     },
     "audio": [
       {
-        "native_frame": 8.0,
         "cue": "mage_bolt",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 8.0
       },
       {
-        "native_frame": 15.0,
         "cue": "mage_arc",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 15.0
       },
       {
-        "native_frame": 22.0,
         "cue": "mage_circle",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 22.0
       },
       {
-        "native_frame": 29.0,
         "cue": "mage_star",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 29.0
       },
       {
-        "native_frame": 36.0,
         "cue": "mage_implosion",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 36.0
       },
       {
-        "native_frame": 43.0,
         "cue": "ranger_arrow",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 43.0
       },
       {
-        "native_frame": 50.0,
         "cue": "ranger_volley",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 50.0
       },
       {
-        "native_frame": 57.0,
         "cue": "ranger_rain",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 57.0
       },
       {
-        "native_frame": 64.0,
         "cue": "dragon_fire",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 64.0
       },
       {
-        "native_frame": 71.0,
         "cue": "dragon_charge",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 71.0
       },
       {
-        "native_frame": 78.0,
         "cue": "dragon_meteor",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 78.0
       },
       {
-        "native_frame": 85.0,
         "cue": "dragon_slam",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 85.0
       },
       {
-        "native_frame": 92.0,
         "cue": "dragon_wind",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 92.0
       },
       {
-        "native_frame": 99.0,
         "cue": "dragon_void",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 99.0
       },
       {
-        "native_frame": 106.0,
         "cue": "dragon_magma",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 106.0
       },
       {
-        "native_frame": 113.0,
         "cue": "dragon_vortex",
-        "handle_created": true
+        "handle_created": true,
+        "native_frame": 113.0
       }
     ],
     "rendered_fill": [
       {
+        "filled_pixel_samples": [
+          79.0,
+          524.0,
+          1844.0,
+          4051.0,
+          7062.0
+        ],
         "shape": "circle",
         "ratios": [
-          0.011045029736618521,
-          0.07476635514018691,
-          0.2608326253186066,
-          0.5740583404134806,
+          0.011186632681959784,
+          0.07419994335882187,
+          0.26111583120928916,
+          0.5736335315774568,
           1.0
-        ],
-        "filled_pixel_samples": [
-          78.0,
-          528.0,
-          1842.0,
-          4054.0,
-          7062.0
         ]
       },
       {
-        "shape": "sector",
-        "ratios": [
-          0.027816411682892908,
-          0.08484005563282336,
-          0.2661103384330088,
-          0.573945294390357,
-          1.0
-        ],
         "filled_pixel_samples": [
-          60.0,
+          58.0,
           183.0,
-          574.0,
+          576.0,
           1238.0,
           2157.0
+        ],
+        "shape": "sector",
+        "ratios": [
+          0.02688919796012981,
+          0.08484005563282336,
+          0.2670375521557719,
+          0.573945294390357,
+          1.0
         ]
       },
       {
-        "shape": "line",
-        "ratios": [
-          0.044136191677175286,
-          0.27616645649432536,
-          0.5170239596469105,
-          0.7591424968474149,
-          1.0
-        ],
         "filled_pixel_samples": [
-          35.0,
-          219.0,
+          36.0,
+          220.0,
           410.0,
           602.0,
           793.0
-        ]
-      },
-      {
-        "shape": "rectangle",
+        ],
+        "shape": "line",
         "ratios": [
-          0.04665825977301387,
-          0.27616645649432536,
-          0.5182849936948297,
+          0.04539722572509458,
+          0.27742749054224464,
+          0.5170239596469105,
           0.7591424968474149,
           1.0
-        ],
-        "filled_pixel_samples": [
-          37.0,
-          219.0,
-          411.0,
-          602.0,
-          793.0
         ]
       },
       {
-        "shape": "ring",
-        "ratios": [
-          0.025746903084770463,
-          0.22176341996599466,
-          0.4624726742773864,
-          0.7252854019917415,
-          1.0
-        ],
         "filled_pixel_samples": [
-          106.0,
-          913.0,
-          1904.0,
+          35.0,
+          220.0,
+          410.0,
+          603.0,
+          793.0
+        ],
+        "shape": "rectangle",
+        "ratios": [
+          0.044136191677175286,
+          0.27742749054224464,
+          0.5170239596469105,
+          0.7604035308953342,
+          1.0
+        ]
+      },
+      {
+        "filled_pixel_samples": [
+          104.0,
+          910.0,
+          1903.0,
           2986.0,
           4117.0
+        ],
+        "shape": "ring",
+        "ratios": [
+          0.025261112460529513,
+          0.22103473402963322,
+          0.46222977896526596,
+          0.7252854019917415,
+          1.0
         ]
       }
     ],
@@ -431,21 +433,19 @@
       }
     ],
     "performance": {
-      "frames": 60.0,
       "enemies": 150.0,
-      "mean_frame_ms": 16.665399999999998,
-      "max_frame_ms": 16.969,
+      "frames": 60.0,
+      "mean_frame_ms": 16.797249999999995,
       "weather": "heavy_rain",
+      "max_frame_ms": 22.173,
       "class_weapon_effects": true,
       "enemy_ai_stepped": true,
       "measurement": "real get_timer intervals between native frames; short sample, not a long-term benchmark"
     }
   },
   "scope": "Native production functions; deterministic fixtures and short scripted damage windows. Not human gameplay E2E.",
-  "status": "PASS",
-  "passed": true,
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\classes\\20261127-110328",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\classes\\20261127-184848",
   "rendered": [
     "crowd-class-rain.png",
     "mage-arc.png",

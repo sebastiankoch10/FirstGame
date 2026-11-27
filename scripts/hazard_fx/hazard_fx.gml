@@ -156,24 +156,26 @@ function hz_crackle(_g,_t,_k,_seed=0) {
 
 // ---------------- Telegraph (warning) ----------------
 /// Queue an enemy warning; drawn by telegraph_flush() sorted by time to impact. _el: element (-1 = from colour).
-function telegraph_draw(_g,_color,_el=-1) {
+function telegraph_draw(_g,_color,_el=-1,_look="",_extra=undefined) {
     if(!variable_global_exists("tg_queue"))global.tg_queue=[];
     var c={shape:_g.shape,x:_g.x,y:_g.y,radius:_g.radius,angle:_g.angle,span:_g.span,width:_g.width,inner:_g.inner,elapsed:_g.elapsed,duration:_g.duration};
     if(variable_struct_exists(_g,"parity")){c.parity=_g.parity;c.bounds=_g.bounds;}
     if(variable_struct_exists(_g,"height"))c.height=_g.height;
     if(variable_struct_exists(_g,"gap_width")){c.gap_width=_g.gap_width;c.gap_angle=_g.gap_angle;}
-    array_push(global.tg_queue,{g:c,col:_color,el:_el==-1 ? hz_element_of(_color) : _el,remain:max(0,_g.duration-_g.elapsed)});
+    array_push(global.tg_queue,{g:c,col:_color,el:_el==-1 ? hz_element_of(_color) : _el,remain:max(0,_g.duration-_g.elapsed),look:_look,extra:_extra});
 }
 /// Draw all queued warnings: later impacts first and faint, the next impact last and fully readable (FFXIV-like
 /// priority). Every warning: full-area tint + integrated filling countdown + edge; no clock hand.
 function telegraph_flush() {
     global.hz_last=variable_global_exists("hz_budget") ? global.hz_budget : 0; // hazard-fx particles drawn this frame (perf metric)
     global.hz_budget=0;global.hz_frame=(variable_global_exists("hz_frame") ? global.hz_frame : 0)+1;
+    global.hz_pre_left=(vfx_quality()==0 ? 500 : (vfx_quality()==1 ? 900 : 1400));global.hz_pre_left_late=round(global.hz_pre_left*.3);global.hz_pre_later=false;hz_boss_rect(); // precursor elements per frame
     if(!variable_global_exists("tg_queue") || array_length(global.tg_queue)==0)return;
     var q=global.tg_queue,soon=999;
     for(var i=0;i<array_length(q);i++)soon=min(soon,q[i].remain);
     array_sort(q,function(_a,_b){return _b.remain-_a.remain;});
-    for(var i=0;i<array_length(q);i++)tg_render(q[i].g,q[i].col,q[i].el,q[i].remain>soon+.45);
+    // precursor looks ("Die Attacke ist die Warnung", scripts/hazard_looks) share the order: soonest on top, later dimmed
+    for(var i=0;i<array_length(q);i++){if(q[i].look!="")hz_pre_render(q[i].g,q[i].col,q[i].el,q[i].remain>soon+.45,q[i].look,q[i].extra);else tg_render(q[i].g,q[i].col,q[i].el,q[i].remain>soon+.45);}
     global.tg_queue=[];draw_set_alpha(1);draw_set_color(c_white);
 }
 /// One warning. Phases on the warning clock p (0..1): gathering (sparse inward particles), formation (fill grows

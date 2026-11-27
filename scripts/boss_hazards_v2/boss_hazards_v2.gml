@@ -110,12 +110,15 @@ function vfx_element_burst(_x,_y,_r,_q,_el) {
         else vfx_px(px,py,i mod 3==0 ? 3 : 2,i mod 2 ? pal[0] : pal[1],k);
     }
 }
-function bv2_hazards_draw() {
+/// _pass: 0 everything, 1 warnings only (queued for telegraph_flush), 2 active surfaces only (drawn after the flush,
+/// so a hitting attack lies above every later warning, Kampf & Begegnungen 8).
+function bv2_hazards_draw(_pass=0) {
     if(!variable_global_exists("bv2_hazards"))return;
     for(var i=0;i<array_length(global.bv2_hazards);i++) {
         var h=global.bv2_hazards[i],g=h.g,col=variable_struct_exists(h,"col") ? h.col : bv2_element_color(h.kind);
         var el=hz_element_of(h.kind);
-        if(h.age<h.warning) {if(!hz_look_warning(h,col))telegraph_draw(g,col,el);continue;}
+        if(h.age<h.warning) {if(_pass!=2 && !hz_look_warning(h,col))telegraph_draw(g,col,el);continue;}
+        if(_pass==1)continue;
         var age=h.age-h.warning;if(age>h.active+.3)continue;
         if(h.active<=0)continue; // announcement only (marker)
         if(hz_look_active(h,age,col)){draw_set_alpha(1);continue;}
