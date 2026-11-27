@@ -4,6 +4,11 @@ updated: 2026-11-27
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen). Ältere Einträge: [[LOG_2026]]
 
+### 2026-11-27 · Claude · Punkt 4: Zauber und Passiva auf den Overhaul-Bausteinen (Roadmap 16)
+- Neu `scripts/fx_spells`: Pixelpartikel für Einschläge und Feldtreffer, lebende Zauber und sichtbar wirkende Passiva; Hooks in `spell_v2`, `spell`, `cast_spell`, `apply_passives`, `gameplay`, `reset_round`, Controller-Step.
+- Eigene Lichtblitze und -pulse gedämpft (`light_flash` mit Glanz-Parameter, `gameplay_polish`, `spell_v2`), Arkan-Einschlag schwächer, eigene Druckringe nur ohne Boss.
+- visual-qa (Spellsheet vorher/nachher, Stufe 1 und 9, Drache mit Kettenblitz); QA-Suiten PASS. Doku: Fähigkeiten, VFX & Audio, Zauber & Passiva, Licht, Roadmap 16, DECISIONS, Bugs & Ideen.
+
 ### 2026-11-27 · Claude · Block 3: „Die Attacke ist die Warnung“ am Drachen (Pilot), HD-2D-Angriffe
 - `scripts/hazard_looks`: Vorzeichen (`hz_pre_*`: Flammen, Rissnetz `hz_crack_net`, Meteor-Schatten und Fels, Glut-Zündschnur, Staub, Hitzeschimmer, Licht `hz_pre_lights`) und aktive Darstellung (`hz_dragon_active`: Flammenteppich, Kruste, Staubwand, Hiebspur) für alle 9 Drachenattacken plus Biss und Schweif; offene Fragen aus Kampf 5.0 entschieden.
 - Zeichenreihenfolge: aktive Bossgefahren über allen Ankündigungen (`bv2_hazards_draw(_pass)`, `Draw_73`); Elemente nie auf Spielerfigur und Drachenkörper; Zündblitze gedämpft, ein Licht je Angriffsbild.

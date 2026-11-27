@@ -30,6 +30,12 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
   - Biss: Bei weitem Ausfall wird der Hals als gerade Segmentsäule über mehr als 250 px gezeichnet (`dragon_parts`, Biss).
   - Navigation bricht laufende Ankündigungen ab (`bv2_clear_enc`), z. B. das zweite, invertierte Schachbrett; Verhalten wie vor der Zusammenführung, widerspricht aber Boss-Design H2 „Nie abbrechen“.
   → [[Boss-Design]], [[Bosse]]
+- **Zauber, Befunde der visual-qa vom 27.11. (schon vorher vorhanden, offen):**
+  - Eigene Zauber-Sprites verdecken teils die Spielerfigur (Stone Spikes, Frost Nova, Healing Pulse und Wisp auf Stufe 9), verstößt gegen Rang 1 in [[Kampf & Begegnungen]] 8.
+  - Ember Field auf Stufe 9 ähnelt dem Feuerboden des Drachen (gleiches Element, ähnliche Form) und ist deckender als der Richtwert 0,35; ein gemeinsamer Test mit dem Drachen fehlt.
+  - Alte Partikelformen ohne Pixelraster (hohle Quadrate, Vektorlinien in `spell_vfx`), sichtbar bei Thunder Seal und Solar Verdict.
+  - Partikel der Passiva (Heilfunken, Schutzschimmer, Resonanz, Schwüre, Orbit Shield) sind in keiner Aufnahme geprüft (NOT RUN); der Recorder hat dafür keine Szene.
+  → [[Fähigkeiten, VFX & Audio]]
 - **Gegnerzustand per Existenzprüfung:** `ObjectMonster` unterscheidet Art und Zustand über etwa 12 `variable_instance_exists`-Abfragen je Gegner und Bild (`boss_twin`, `boss_minion`, `lvl_kind`, `hit_stun`, `lvl_hover` …). Das ist fehleranfällig bei neuen Gegnerarten und kostet Zeit. Vorschlag: alle Felder in `ObjectMonster/Create_0` mit Standardwerten anlegen und die Abfragen schrittweise durch Feldvergleiche ersetzen, abgesichert durch Level- und Regression-Suite. → [[Gegner & Spawns]]
 - **Drachenkopf bei steilen Winkeln:** Die Kopfansichten entstehen durch Drehen der Seitenansicht; nach unten gerichtet wirkt der Kopf flach. Besser: eigene Draufsicht-Variante des Kopfes; Anforderungen in [[Assets & Pipeline]] 7.4. → [[Bosse]]
 

@@ -105,6 +105,7 @@ function player_receive_damage(_pl,_amount,_height="ground") {
     var hp_before=_pl.hp;
     _pl.hp=max(0,_pl.hp-_amount*(1-_pl.damage_reduction));
     run_stats_get(SPELL.SHIELD).blocked+=max(0,min(hp_before,_amount)-(hp_before-_pl.hp));
+    if(_pl.armor_flat>0 || _pl.damage_reduction>0)fx_ward_flash(_pl);
     _pl.last_damage_taken=hp_before-_pl.hp;_pl.health_visible_time=3;
     fg_sfx("player_hit");
     _pl.hud_damage_hold=0.25; _pl.hud_hit_flash=0.2;

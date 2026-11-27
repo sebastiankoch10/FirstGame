@@ -27,6 +27,7 @@ function spell_v2_init() {global.spell_fields=[];global.spell_bursts=[];global.s
 function spell_link(_ax,_ay,_bx,_by,_element) {
     if(array_length(global.spell_links)>=48)array_delete(global.spell_links,0,1);
     array_push(global.spell_links,{ax:_ax,ay:_ay,bx:_bx,by:_by,element:_element,life:.18});
+    fx_spell_link(_ax,_ay,_bx,_by,_element);
 }
 function spell_v2_values(_sid,_level) {
     var d=GetSpellData(_sid);if(!is_struct(d))return undefined;
@@ -57,8 +58,9 @@ function spell_v2_values(_sid,_level) {
 function spell_fx_burst(_x,_y,_radius,_element,_duration=.4,_band=2) {
     if(array_length(global.spell_bursts)>=64)array_delete(global.spell_bursts,0,1);
     array_push(global.spell_bursts,{x:_x,y:_y,radius:_radius,element:_element,age:0,duration:_duration,band:_band});
-    light_pulse(_x,_y,min(280,_radius*1.7),spell_element_color(_element),.65*vfx_band_alpha(_band),min(.3,_duration));
+    light_pulse(_x,_y,min(280,_radius*1.7),spell_element_color(_element),.5*vfx_band_alpha(_band),min(.3,_duration));
     spell_vfx_burst(_x,_y,_radius,_element,_band);
+    fx_spell_burst(_x,_y,_radius,_element,_band); // pixel particles (scripts/fx_spells)
 }
 function spell_element_color(_element) {
     var colors=[make_color_rgb(242,213,145),make_color_rgb(255,137,44),make_color_rgb(108,225,255),make_color_rgb(143,197,255),make_color_rgb(206,118,255),make_color_rgb(213,174,101),make_color_rgb(116,239,153),make_color_rgb(255,218,108)];
@@ -242,5 +244,5 @@ function spell_fx_core_draw(_x,_y,_radius,_element,_progress,_alpha) {
 function spell_impact_light(_x,_y,_radius,_element,_band,_lift=false) {
     var lc=spell_element_color(_element);
     if(_band<=0)light_pulse(_x,_y,_radius*1.6,lc,.8,.2);
-    else light_flash(_x,_y,_radius*(_band==2 ? 2.4 : 1.8),lc,_band==2 ? 1.5 : 1.1,.26,(_band==2 && _lift) ? .18 : 0);
+    else light_flash(_x,_y,_radius*(_band==2 ? 2 : 1.6),lc,_band==2 ? 1.15 : .95,.26,(_band==2 && _lift) ? .08 : 0,.3); // own spells below boss dangers (Kampf 8)
 }

@@ -26,5 +26,5 @@ function apply_passives(_pl) {
 }
 function spell_passive_step(_dt) {
  var pl=ObjectPlayer;pl.regen_clock+=_dt;
- if(pl.regen_clock>=1){pl.regen_clock-=1;if(pl.regen_rate>0 && pl.hp<pl.max_hp){var before=pl.hp;pl.hp=min(pl.max_hp,pl.hp+pl.regen_rate);run_stats_heal(SPELL.REGEN,pl.hp-before);run_stats_cast(SPELL.REGEN);}}
+ if(pl.regen_clock>=1){pl.regen_clock-=1;if(pl.regen_rate>0 && pl.hp<pl.max_hp){var before=pl.hp;pl.hp=min(pl.max_hp,pl.hp+pl.regen_rate);run_stats_heal(SPELL.REGEN,pl.hp-before);fx_heal_motes(pl,pl.hp-before);run_stats_cast(SPELL.REGEN);}}
 }

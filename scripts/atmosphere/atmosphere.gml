@@ -16,11 +16,11 @@ function light_pulse(_x,_y,_radius,_color,_strength=1,_duration=0.22) {
 /// Strong, short light flash for powerful attacks (Phase 2A): an intense light source, an additive glare on the world
 /// and an optional lift of the ambient darkness (_lift 0..1, e.g. lightning). Scaled down by "Lichtblitze: Reduziert".
 /// Always fired on the damage event of the attack, so light and hit stay in sync.
-function light_flash(_x,_y,_radius,_color,_strength=1.4,_duration=.28,_lift=0) {
+function light_flash(_x,_y,_radius,_color,_strength=1.4,_duration=.28,_lift=0,_glare=.55) {
     if(!variable_global_exists("light_flashes"))global.light_flashes=[];
     if(array_length(global.light_flashes)>=8)array_delete(global.light_flashes,0,1);
     var k=light_flash_reduced() ? .35 : 1;
-    array_push(global.light_flashes,{x:_x,y:_y,radius:_radius,color:_color,strength:_strength*k,life:_duration,total:_duration,lift:_lift*k,glare:.55*k});
+    array_push(global.light_flashes,{x:_x,y:_y,radius:_radius,color:_color,strength:_strength*k,life:_duration,total:_duration,lift:_lift*k,glare:_glare*k});
 }
 function light_flash_reduced() {
     if(!variable_global_exists("flash_reduced_level")){ini_open("firstgame_settings.ini");global.flash_reduced_level=ini_read_real("Grafik","blitze",0)!=0;ini_close();}

@@ -13,6 +13,7 @@ updated: 2026-11-27
 - `scripts/spell`: Projektile, `apply_attack_damage`, `learn_spell` (`-2` ist die Waffen-Upgrade-Karte, siehe [[Klassen & Startwaffen]]). Nach den Kollisionsabfragen auf `ObjectBossMonster` prüft `boss_parts_collide` auch Kopf und Hals des Drachen ([[Bosse]]).
 - `scripts/cast_spell` ist der ältere Castpfad für 101–106 mit den Objekten `ObjectFireball`, `ObjectIceball` und `ObjectLightningball` (Werte in `projectile_setup`, `scripts/combat_feedback`; Zeichnen über `projectile_draw`).
 - `scripts/apply_passives`: setzt die Spielerwerte jeden Frame neu aus den Passiva und danach aus [[Talente]] und [[Ausrüstung]].
+- `scripts/fx_spells` (seit 27.11.): Pixelpartikel der Zauber und Passiva (`fx_spell_burst` aus `spell_fx_burst`, `fx_spell_link` aus `spell_link`, `fx_spells_step` aus dem Controller-Step, `fx_heal_motes`, `fx_ward_flash` aus `player_receive_damage`, `fx_resonance_spark`); nur Darstellung, Budget je Bild.
 - `scripts/spell_choices_v2`: Angebote und Voraussetzungen, z. B. Split Runes nur mit 101, 102 oder 105.
 - Weitere: `scripts/spell_ui_v2` (Tooltips und Run-Statistiken), `scripts/hotbar_assign`, `scripts/run_spell_stats`.
 - Darstellung (seit 25.11.): alle 18 aktiven Zauber als zusammengesetzte Pixel-Effekte (`scripts/spell_vfx`, `spell_fx_core_draw` in `spell_v2`). Die Intensität folgt der Zauberstufe in drei Bändern (1–3, 4–6, 7–9; `vfx_band`), wirkt nur auf Deckkraft und Glühen, nie auf Trefferradien. Details: [[Licht, Wetter & Effekte]].

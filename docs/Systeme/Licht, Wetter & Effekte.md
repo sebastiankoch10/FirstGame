@@ -35,7 +35,7 @@ Verstärkbares Weltlicht, Wetter, Atmosphäre je Level, Kampf-Feedback, Zauber- 
 
 - **Seit 26.11. (Phase 2A):**
   - Gegnerwarnungen und Gefahrenflächen zeichnet [[Telegraphs & Gefahrenflächen]] (`scripts/hazard_fx`).
-  - `light_flash` (starker kurzer Lichtblitz, Glanz, Anhebung der Umgebung; Einstellung `blitze`) neben `light_pulse`.
+  - `light_flash` (starker kurzer Lichtblitz, Glanz, Anhebung der Umgebung; Einstellung `blitze`; Glanzstärke als optionaler Parameter, eigene Zauber 0,25–0,3) neben `light_pulse`.
   - Aufladelicht am Drachenmaul in `atmosphere_draw`.
 
 ## Abhängigkeiten

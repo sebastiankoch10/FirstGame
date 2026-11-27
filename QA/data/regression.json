@@ -1,5 +1,4 @@
 {
-  "checks": 811.0,
   "failures": [],
   "metrics": {
     "random_selection": [
@@ -33,44 +32,6 @@
       "storm_warden",
       "storm_warden",
       "behemoth"
-    ],
-    "twins_abilities": [
-      {
-        "ability": 1.0,
-        "damage": 26.60000000000582
-      },
-      {
-        "ability": 2.0,
-        "damage": 41.80000000000291
-      },
-      {
-        "ability": 3.0,
-        "damage": 47.5
-      },
-      {
-        "ability": 4.0,
-        "damage": 41.80000000000291
-      },
-      {
-        "ability": 5.0,
-        "damage": 91.20000000001164
-      },
-      {
-        "ability": 6.0,
-        "damage": 53.19999999999709
-      },
-      {
-        "ability": 7.0,
-        "damage": 68.39999999999418
-      },
-      {
-        "ability": 8.0,
-        "damage": 41.80000000000291
-      },
-      {
-        "ability": 9.0,
-        "damage": 76.0
-      }
     ],
     "behemoth_abilities": [
       {
@@ -192,8 +153,8 @@
       {
         "minute": 5.0,
         "boss": "storm_warden",
-        "hp": 12420.0,
         "unlocked": 3.0,
+        "hp": 12420.0,
         "scaling": {
           "projectiles": 0.0,
           "hp": 1.35,
@@ -207,8 +168,8 @@
       {
         "minute": 10.0,
         "boss": "storm_warden",
-        "hp": 17480.0,
         "unlocked": 6.0,
+        "hp": 17480.0,
         "scaling": {
           "projectiles": 0.0,
           "hp": 1.9,
@@ -222,8 +183,8 @@
       {
         "minute": 15.0,
         "boss": "storm_warden",
-        "hp": 23000.0,
         "unlocked": 9.0,
+        "hp": 23000.0,
         "scaling": {
           "projectiles": 1.0,
           "hp": 2.5,
@@ -237,8 +198,8 @@
       {
         "minute": 5.0,
         "boss": "twins",
+        "unlocked": 3.0,
         "hp": 17550.0,
-        "unlocked": 3.0,
         "scaling": {
           "projectiles": 0.0,
           "hp": 1.35,
@@ -252,8 +213,8 @@
       {
         "minute": 10.0,
         "boss": "twins",
-        "hp": 24700.0,
         "unlocked": 6.0,
+        "hp": 24700.0,
         "scaling": {
           "projectiles": 0.0,
           "hp": 1.9,
@@ -267,8 +228,8 @@
       {
         "minute": 15.0,
         "boss": "twins",
-        "hp": 32500.0,
         "unlocked": 9.0,
+        "hp": 32500.0,
         "scaling": {
           "projectiles": 1.0,
           "hp": 2.5,
@@ -282,8 +243,8 @@
       {
         "minute": 5.0,
         "boss": "behemoth",
-        "hp": 12420.0,
         "unlocked": 3.0,
+        "hp": 12420.0,
         "scaling": {
           "projectiles": 0.0,
           "hp": 1.35,
@@ -297,8 +258,8 @@
       {
         "minute": 10.0,
         "boss": "behemoth",
-        "hp": 17480.0,
         "unlocked": 6.0,
+        "hp": 17480.0,
         "scaling": {
           "projectiles": 0.0,
           "hp": 1.9,
@@ -312,8 +273,8 @@
       {
         "minute": 15.0,
         "boss": "behemoth",
-        "hp": 23000.0,
         "unlocked": 9.0,
+        "hp": 23000.0,
         "scaling": {
           "projectiles": 1.0,
           "hp": 2.5,
@@ -352,17 +313,56 @@
       }
     ],
     "performance": {
-      "mean_frame_ms": 16.65533333333333,
-      "max_frame_ms": 17.23,
+      "max_frame_ms": 17.182,
       "measurement": "Native get_timer frames with150 AI enemies, heavy rain and boss acid. Short sample; PNG export outside measurement.",
       "enemies": 150.0,
-      "frames": 60.0
-    }
+      "frames": 60.0,
+      "mean_frame_ms": 16.647016666666666
+    },
+    "twins_abilities": [
+      {
+        "ability": 1.0,
+        "damage": 26.60000000000582
+      },
+      {
+        "ability": 2.0,
+        "damage": 41.80000000000291
+      },
+      {
+        "ability": 3.0,
+        "damage": 47.5
+      },
+      {
+        "ability": 4.0,
+        "damage": 41.80000000000291
+      },
+      {
+        "ability": 5.0,
+        "damage": 91.20000000001164
+      },
+      {
+        "ability": 6.0,
+        "damage": 53.19999999999709
+      },
+      {
+        "ability": 7.0,
+        "damage": 68.39999999999418
+      },
+      {
+        "ability": 8.0,
+        "damage": 41.80000000000291
+      },
+      {
+        "ability": 9.0,
+        "damage": 76.0
+      }
+    ]
   },
   "scope": "Current production functions and input-injected actual Player/Controller Steps in isolated native runner. Targeted regressions and short rendered150-enemy stress fixture; not full runs or human playtests.",
   "passed": true,
+  "checks": 811.0,
   "exit_code": 0,
-  "logs": "QA\\logs\\regression-20261127-182138",
+  "logs": "QA\\logs\\regression-20261127-195907",
   "screenshots": [
     "qacapture-crowd150-heavy-rain.png",
     "qacapture-hud-full-build-1280.png",

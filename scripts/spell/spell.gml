@@ -42,7 +42,7 @@ function apply_attack_damage(_target, _amount, _source, _sid=0) {
     if(instance_exists(pl)) {
         var d=GetSpellData(_sid),element=is_struct(d) ? d.element : 0;
         if(element==1)factor+=pl.fire_bonus;if(element==2)factor+=pl.cold_bonus;if(element==3)factor+=pl.storm_bonus;
-        if(_target.burn_time>0 || _target.slow_time>0 || _target.shock_time>0){factor*=1+pl.resonance;if(pl.resonance>0)run_stats_cast(SPELL.RESONANCE);}
+        if(_target.burn_time>0 || _target.slow_time>0 || _target.shock_time>0){factor*=1+pl.resonance;if(pl.resonance>0){run_stats_cast(SPELL.RESONANCE);fx_resonance_spark(_target);}}
         critical=pl.crit_chance>0 && random(1)<pl.crit_chance;if(critical){factor*=pl.crit_damage;run_stats_get(SPELL.CRIT).hits++;run_stats_cast(SPELL.CRIT);}
     }
     var actual_damage = round(max(1, _amount*factor));
@@ -105,6 +105,7 @@ function spell_projectile_hit(_projectile,_target) {
     var kind=sid==SPELL.FIREBALL ? "fire" : (sid==SPELL.ICEBALL ? "ice" : _projectile.projectile_kind);
     var impact_x=variable_instance_exists(_projectile,"hit_x") ? _projectile.hit_x : _projectile.x,impact_y=variable_instance_exists(_projectile,"hit_y") ? _projectile.hit_y : _projectile.y;
     impact_add(impact_x,impact_y,kind,_projectile.direction);
+    if(kind=="arcane")fxp_impact(impact_x,impact_y,4,.16+.06*vfx_spell_band(sid));
     fg_sfx(kind=="bolt" ? "arrow_hit" : (kind=="fire" ? "explosion" : (kind=="ice" ? "ice_hit" : (kind=="arcane" ? "arcane_hit" : "magic_hit"))));
     if(sid==SPELL.FIREBALL) {
         var d=GetSpellData(sid);

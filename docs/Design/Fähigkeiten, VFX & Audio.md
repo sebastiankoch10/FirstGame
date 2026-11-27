@@ -98,6 +98,8 @@ Aufbau eines Angriffs in fünf Phasen (Sammeln, Zünden, Tragen, Einschlagen, Na
   - Kleine Flächen: weiter `light_pulse`.
   - Feueratem: warmer Blitz am Maul beim Zünden, davor steigt das Licht am Maul mit der Aufladung.
   - Spieler-Kettenblitz: ab Band 1, Anhebung nur im Endgame-Band.
+  - **Eigene Zauber bleiben unter Bossgefahren** (seit 27.11., Kampf & Begegnungen 8, Rang 7): kleinere, schwächere Blitze mit wenig Glanz (`light_flash(…, _glare)`); der Endgame-Kettenblitz überstrahlte den Boss weiß.
+- **Zauber und Passiva als Pixelpartikel** (seit 27.11., Roadmap 16, `scripts/fx_spells`): Jeder Einschlag und jeder Feldtreffer bekommt Kernblitz, Element-Funken und Element-Zutat (Glut, Splitter, Funkenlinien, Staub), im Endgame einen Druckring. Lebende Zauber haben eigene Partikel (Glut über Ember Field, Sog in Gravity Well, Frostnebel in Ice Prison, Streifen hinter Orbit Blades und Returning Glaive, Spur hinter Wisp Sentinel und Prismatic Seed, Energie vor Thunder Seal und Solar Verdict, fallende Streifen bei Starfall). Sichtbar wirkende Passiva: Heilfunken (Regeneration, Vitalität, Healing Pulse), Schutzschimmer bei abgefangenem Schaden (Rüstung, Orbit Shield), Resonanzfunke (Resonant Core), Element-Schwüre als einzelne Funken am Fuß, Glanz am Orbit Shield. Reine Werte-Passiva (z. B. Power Up, Quick Hands, Wide Glyphs) haben kein eigenes Bild; sie zeigen sich in dem Zauber, den sie verändern. Stärke folgt dem Band (G17), Menge der Effektqualität.
 - **Grenzen:**
   - höchstens 8 gleichzeitige Blitze, Dauer 0,2–0,35 s, quadratisches Abklingen;
   - Umgebungsanhebung höchstens 85 %;

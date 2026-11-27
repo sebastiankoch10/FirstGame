@@ -59,7 +59,7 @@ SCRIPT_RULES = [
      'Skripte/Zauber'),
     (r'^(boss_|dragon_)', 'Skripte/Bosse'),
     (r'^(master_skeleton|survivor_balance)$', 'Skripte/Gegner'),
-    (r'^(level_|master_world|atmosphere|weather|atmos_fx|fx_particles|fx_world)', 'Skripte/Welt_und_Atmosphaere'),
+    (r'^(level_|master_world|atmosphere|weather|atmos_fx|fx_particles|fx_world|fx_spells)', 'Skripte/Welt_und_Atmosphaere'),
     (r'^(talents|equipment|equipment_visual|equipment_visual_data|equipment_ui|equipment_attach_data)$', 'Skripte/Fortschritt_und_Ausruestung'),
     (r'^audio_manager$', 'Skripte/Audio'),
 ]

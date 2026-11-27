@@ -13,7 +13,7 @@ function cast_spell(_spell,_target=undefined) {
     if(sid>=107)return spell_v2_cast(_spell,_target,v);
     if(sid==SPELL.HEAL) {
         var before_heal=pl.hp;pl.hp=min(pl.max_hp,pl.hp+v.damage);
-        run_stats_heal(sid,pl.hp-before_heal);
+        run_stats_heal(sid,pl.hp-before_heal);fx_heal_motes(pl,pl.hp-before_heal);
         effect_add(pl.x,pl.y-10,62,make_color_rgb(111,239,151),24,"heal");
         spell_fx_burst(pl.x,pl.y-10,76,6,.4,vfx_spell_band(sid));
     } else if(sid==SPELL.LIGHTNING) {

@@ -89,7 +89,7 @@ LEGACY = {
 # (path regex, system note in docs/Systeme, suites)
 RULES = [
     (r'^scripts/(talents|equipment|spell_vfx)/', 'Talente/Ausruestung/Effekte', ['feature']),
-    (r'^scripts/(render_fx|fx_particles|atmos_fx|fx_attacks|fx_character|fx_world|render_pipeline)/|^shaders/', 'Licht, Effekte & Rendering', ['feature', 'visual', 'regression']),
+    (r'^scripts/(render_fx|fx_particles|atmos_fx|fx_attacks|fx_character|fx_world|fx_spells|render_pipeline)/|^shaders/', 'Licht, Effekte & Rendering', ['feature', 'visual', 'regression']),
     (r'^scripts/(equipment_visual|player_layers)/|^sprites/spr_(fg_(swordsmanv3|magev3|rangerv3)|eqv_)', 'Charakter & Ausruestungsgrafik', ['visual', 'classes']),
     (r'^scripts/player_artpack/|^objects/ObjectPlayer/Draw', 'Charakter & Ausruestungsgrafik', ['visual', 'classes']),
     (r'^scripts/(boss_|dragon_|attack_telegraph|hazard_looks|hazard_fx)|^objects/ObjectBossMonster/', 'Bosse', ['boss', 'regression', 'classes']),

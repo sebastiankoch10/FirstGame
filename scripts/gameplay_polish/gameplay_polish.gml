@@ -109,7 +109,7 @@ function cast_chain_lightning(_first,_damage,_targets,_hop_range,_owner) {
         // Visual band from the spell level (docs/Design/Fähigkeiten, VFX & Audio.md 4): compact at 1-3, full at 7-9.
         var band=vfx_spell_band(SPELL.LIGHTNING);
         if(band==2)spell_fx_burst(bx,by,56,3,.3,2); else if(band==1)spell_fx_burst(bx,by,34,3,.24,1);
-        light_pulse(bx,by,band==2 ? 185 : (band==1 ? 150 : 110),make_color_rgb(115,193,255),band==0 ? .6 : .8,.22);
+        light_pulse(bx,by,band==2 ? 150 : (band==1 ? 130 : 110),make_color_rgb(115,193,255),band==0 ? .5 : .55,.22);
         if(array_length(visited)==1)chain_segment_add(bx-26,by-(band==0 ? 160 : 220),bx,by,band,true);
         chain_segment_add(ax,ay,bx,by,band);
         ax=bx;ay=by;
@@ -146,7 +146,8 @@ function chain_segment_add(_ax,_ay,_bx,_by,_band,_strike=false) {
     var life=_band==2 ? .3 : (_band==1 ? .26 : .22);
     array_push(global.chain_segments,{ax:_ax,ay:_ay,bx:_bx,by:_by,life:life,total:life,band:_band,seed:random_seed_free(),strike:_strike});
     // Player lightning: a strike flashes with the band (basis small, endgame lifts the scene a little); never every hop.
-    if(_strike && _band>=1)light_flash(_bx,_by,_band==2 ? 260 : 170,make_color_rgb(190,215,255),_band==2 ? 1.5 : 1.1,.22,_band==2 ? .22 : 0);
+    // softened 27.11.: the endgame strike washed the boss out white (own effects stay below boss dangers, Kampf 8)
+    if(_strike && _band>=1)light_flash(_bx,_by,_band==2 ? 210 : 150,make_color_rgb(190,215,255),_band==2 ? 1.1 : .9,.22,_band==2 ? .08 : 0,.25);
     // graphics overhaul: a strike lands with a white core, crackling spark lines and a shock ring; every hop sparks
     if(_strike){fxp_impact(_bx,_by,3,.35+.25*_band);if(_band>=2)fx_aberration(1.5,.12);}
     else repeat(fxp_n(2+_band)){var a2=vfx_random(360);fxp_add(_bx,_by,lengthdir_x(180,a2),lengthdir_y(180,a2),vfx_random_range(.06,.14),3,1,FXP_STREAK,FXP_EMIT,0,4,0);}
