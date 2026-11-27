@@ -25,6 +25,7 @@ function sc_gui_capture_begin() {}
 function sc_gui_capture_end() {}
 function sc_world_capture() {
     if(!variable_global_exists("sc_shot") || global.sc_shot<0)return;
+    if(global.sc_saved==0)show_debug_message("SCENE app surface "+string(surface_get_width(application_surface))+"x"+string(surface_get_height(application_surface))+" window "+string(window_get_width())+"x"+string(window_get_height())+" view port "+string(view_wport[0])+"x"+string(view_hport[0])+" room "+room_get_name(room));
     surface_save(application_surface,"sccapture-"+string_replace_all(string_format(global.sc_shot,4,0)," ","0")+".png");
     global.sc_saved++;global.sc_shot=-1;
 }
@@ -78,7 +79,7 @@ function sc_drive(_t) {
             cast_spell({id:101+k,level:SC_SPELL_LEVEL,cooldown:0,cooldown_timer:0},101+k==SPELL.HEAL ? undefined : target);}
     } else if(SC_SCENE=="boss" || SC_SCENE=="horde") {
         // Circle-strafe: around the boss at ~300 px, in the horde around the start point.
-        var cx=global.sc_cx,cy=global.sc_cy,r=SC_SCENE=="boss" ? 300 : 160;
+        var cx=global.sc_cx,cy=global.sc_cy,r=SC_SCENE=="boss" ? SC_ORBIT : 160;
         if(SC_SCENE=="boss"){if(!instance_exists(global.active_boss))return;cx=global.active_boss.x;cy=global.active_boss.y;}
         var a=point_direction(cx,cy,pl.x,pl.y),dist=point_distance(cx,cy,pl.x,pl.y);
         global.sc_move=a+90+60*clamp((dist-r)/80,-1,1);

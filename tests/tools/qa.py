@@ -92,7 +92,7 @@ RULES = [
     (r'^scripts/(render_fx|fx_particles|atmos_fx|fx_attacks|fx_character|fx_world|render_pipeline)/|^shaders/', 'Licht, Effekte & Rendering', ['feature', 'visual', 'regression']),
     (r'^scripts/(equipment_visual|player_layers)/|^sprites/spr_(fg_(swordsmanv3|magev3|rangerv3)|eqv_)', 'Charakter & Ausruestungsgrafik', ['visual', 'classes']),
     (r'^scripts/player_artpack/|^objects/ObjectPlayer/Draw', 'Charakter & Ausruestungsgrafik', ['visual', 'classes']),
-    (r'^scripts/(boss_|dragon_|attack_telegraph)|^objects/ObjectBossMonster/', 'Bosse', ['boss', 'regression']),
+    (r'^scripts/(boss_|dragon_|attack_telegraph|hazard_looks|hazard_fx)|^objects/ObjectBossMonster/', 'Bosse', ['boss', 'regression', 'classes']),
     (r'^scripts/(level_|survivor_balance|master_world|master_skeleton|weather)|^rooms/|^objects/(ObjectLevel|ObjectMaster|ObjectSpawner|ObjectEnvironment)', 'Level/Gegner', ['level']),
     (r'^scripts/(class_weapons|master_combat|attack_timeline)/|^objects/(ObjectSwordHitbox|ObjectLightningball)/', 'Klassen & Startwaffen', ['classes', 'regression']),
     (r'^scripts/(spell|spell_v2|spell_v2_catalog|spell_choices_v2|apply_passives|cast_spell|get_spell_data|run_spell_stats|hotbar_assign|spell_world_v2|spell_ui_v2)/', 'Zauber & Passiva', ['regression', 'feature']),

@@ -1,4 +1,5 @@
 {
+  "failures": [],
   "metrics": {
     "Sword_particles_peak": 39.0,
     "Mage_particles_peak": 36.0,
@@ -6,9 +7,8 @@
   },
   "passed": true,
   "checks": 219.0,
-  "failures": [],
   "exit_code": 0,
-  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\feature\\20261127-094305",
+  "logs": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\feature\\20261127-104405",
   "exceptions": [],
   "captures": [
     "character-Mage.png",

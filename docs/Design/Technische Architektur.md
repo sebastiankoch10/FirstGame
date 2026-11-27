@@ -157,6 +157,7 @@ Ausbaustufe (Soll):
   - Prioritätsebene;
   - Nutzung für Elite- und normale Gegner mit großen Flächen.
 - Keine zweite, parallele Warnlogik (Auftrag 22.11.).
+- **Ist seit 27.11.:** Alle Boss- und Minibossattacken laufen über `bv2` (Drache und Minibosse zusammengeführt); Darstellung und Zündung je Art an einer Stelle (`scripts/hazard_looks`).
 - **Soll seit 27.11.:** Die Darstellung wechselt von Markern zu den Vorzeichen der Attacke selbst ([[Kampf & Begegnungen]] 5.0, Leitbild G19). Uhr, Geometrie und Treffertest bleiben; die Vorzeichen lesen dieselbe Uhr und dasselbe Geometrie-Struct.
 
 ### 4.6 Projektile

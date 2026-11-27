@@ -88,7 +88,7 @@ function boss_test_pending_start() {
     global.boss_rng=request.seed;global.choice_rng=request.seed;random_set_seed(request.seed);
     global.monster_hp_multiplier=global.base_monster_hp_multiplier*(1+request.minute*.07);
     global.monster_damage_multiplier=global.base_monster_damage_multiplier*(1+request.minute*.06);
-    global.boss_spawned=array_create(8,true);global.hostile_bullets=[];global.boss_zones=[];global.bv2_hazards=[];global.active_boss=noone;global.boss_exists=false;
+    global.boss_spawned=array_create(8,true);global.hostile_bullets=[];global.bv2_hazards=[];global.active_boss=noone;global.boss_exists=false;
     if(instance_exists(ObjectSpawner))ObjectSpawner.population_timer=1000000000;
     boss_test_apply_build(request.minute,request.random_build,request.seed);
     var boss=boss_spawn(request.boss);if(!instance_exists(boss)){boss_test_end();return false;}

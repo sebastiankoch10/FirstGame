@@ -119,6 +119,7 @@ def main():
     ap.add_argument('--boss', default='storm_warden')
     ap.add_argument('--minute', type=int, default=10)
     ap.add_argument('--ability', type=int, default=-1, help='boss: force ability 1-9 (dragon: 1 beam, 2 arc, 3 stomp ...)')
+    ap.add_argument('--orbit', type=int, default=300, help='boss: radius the scripted player circles at (140 provokes bite and tail sweep)')
     ap.add_argument('--boss-hp', type=float, default=1.0, help='boss: start HP fraction (phase 2 below .75, phase 3 below .5)')
     for k in ('start', 'frames', 'every'):
         ap.add_argument('--' + k, type=int)
@@ -132,7 +133,7 @@ def main():
             cfg[k] = getattr(a, k)
     cls = CLASSES.get(a.cls.lower(), a.cls)
     macros = {'SC_SCENE': f'"{a.scene}"', 'SC_CLASS': f'"{cls}"', 'SC_LEVEL_INDEX': a.level, 'SC_SPELL': spell_id(a.spell),
-              'SC_SPELL_LEVEL': max(1, min(9, a.spell_level)), 'SC_BOSS': f'"{a.boss}"', 'SC_MINUTE': a.minute, 'SC_ABILITY': a.ability, 'SC_BOSS_HP': a.boss_hp,
+              'SC_SPELL_LEVEL': max(1, min(9, a.spell_level)), 'SC_BOSS': f'"{a.boss}"', 'SC_MINUTE': a.minute, 'SC_ABILITY': a.ability, 'SC_BOSS_HP': a.boss_hp, 'SC_ORBIT': a.orbit,
               'SC_START': cfg['start'], 'SC_FRAMES': cfg['frames'], 'SC_EVERY': max(1, cfg['every'])}
     base = Path(os.environ['LOCALAPPDATA']) / 'FirstGame-Tests' / 'scene'
     base.mkdir(parents=True, exist_ok=True)

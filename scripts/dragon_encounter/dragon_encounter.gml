@@ -92,8 +92,29 @@ function dragon_encounter_begin(_b,_kind) {
             if(phase>=3)bc_in_out(_b,"dragon_meteor_ring",pl.x,pl.y-10,125,300,c.warning+1.2,1.15,.35,c.damage,false,"all");
         }
     }
+    dragon_enc_hazards(_b,_kind,c); // the hit geometry runs as shared bv2 hazards (merged 27.11.)
     dragon_state(_b,"windup",c.warning);
 }
+/// Hit geometry of the running attack as shared bv2 hazards (boss paths merged 27.11.): the same shape, warning, active
+/// time, height, damage and hit cadence (.35 s) as the former own hit test in dragon_encounter_step. Tagged enc, so a
+/// repositioning clears only them. Looks and ignition: scripts/hazard_looks. Projectiles stay in hostile_bullets.
+function dragon_enc_hazards(_b,_kind,_c) {
+    var g=_b.enc_geometry,col=dragon_hazard_color(_kind),h=undefined;
+    switch(_kind) {
+        case "arc":h=bv2_sector(_b,"dragon_arc",g.x,g.y,g.radius,g.angle,g.span,_c.warning,_c.active,_c.damage,_c.height);break;
+        case "beam":if(!(variable_instance_exists(_b,"enc_sweep") && is_struct(_b.enc_sweep)))h=bv2_hazard(_b,"dragon_beam_line",telegraph_make("line",g.x,g.y,g.radius,_c.warning,g.angle,0,g.width),_c.active,_c.damage,_c.height,false,undefined);break;
+        case "slam":case "vortex":{
+            var o={x:g.x,y:g.y},r0=dragon_ring_geometry(_kind,o,0,_c.active);r0.duration=_c.warning;r0.elapsed=0;
+            h=bv2_hazard(_b,"dragon_"+_kind,r0,_c.active,_c.damage,_c.height,false,undefined);
+            if(is_struct(h) && !h.expired){h.ring_fn=_kind;h.ring_origin=o;h.ring_max=_kind=="slam" ? 320 : 310;h.warn_g=telegraph_make(g.shape,g.x,g.y,g.radius,_c.warning,g.angle,g.span,g.width);if(_kind=="slam"){h.core_r=80;h.core_t=.12;}}
+        }break;
+        case "meteor":case "stomp":
+            for(var i=0;i<array_length(_b.enc_zones);i++){var z=_b.enc_zones[i],zh=bv2_zone(_b,_kind=="meteor" ? "dragon_meteor" : "dragon_magma",z.x,z.y,_c.radius,z.warning,.55,_c.damage,_c.height);if(is_struct(zh)){zh.enc=true;zh.col=col;z.h=zh;}}
+            break;
+    }
+    if(is_struct(h)){bv2_cadence(h,.35,false);h.enc=true;h.col=col;}
+}
+function dragon_hazard_color(_kind) {return (_kind=="void" || _kind=="volley") ? make_color_rgb(181,104,251) : (_kind=="wind" ? make_color_rgb(130,225,211) : ((_kind=="tail" || _kind=="bite") ? make_color_rgb(236,214,170) : make_color_rgb(255,115,58)));}
 function dragon_encounter_bullets(_b,_count,_spacing,_speed,_damage,_parallel=false) {
     _speed*=_b.v2_scaling.projectile_speed;
     var g=_b.enc_geometry;
@@ -107,24 +128,17 @@ function dragon_encounter_bullets(_b,_count,_spacing,_speed,_damage,_parallel=fa
     }
     fg_sfx(_b.boss_cast=="wind" ? "dragon_wind" : "dragon_void");
 }
-function dragon_encounter_zones(_b,_dt) {
-    var pl=ObjectPlayer,c=_b.enc_cfg,played=false;
-    for(var i=0;i<array_length(_b.enc_zones);i++) {
-        var z=_b.enc_zones[i];z.age=_b.dragon_state_age+( _b.boss_state=="active" ? c.warning : 0);z.g.elapsed=z.age;
-        if(telegraph_ready(z.g) && !z.erupted) {z.erupted=true;if(!played){fg_sfx(_b.boss_cast=="meteor" ? "dragon_meteor" : "dragon_magma");played=true;}light_flash(z.x,z.y,300,make_color_rgb(255,121,44),1.3,.32,.06);}
-        if(z.erupted && z.age<z.warning+.55 && !z.hit && telegraph_contains(z.g,pl.x,pl.y-10))if(player_receive_damage(pl,c.damage,c.height))z.hit=true;
-    }
-}
 function dragon_encounter_step(_b,_dt) {
     if(global.game_paused || global.game_over || _b.dragon_dying)return;
     if(_b.hp<=0){dragon_die(_b);return;}
-    if(_b.v2_enabled)_b.v2_clock+=_dt; // drives the shared bv2 pattern hazards of this encounter
+    if(!variable_instance_exists(_b,"v2_clock"))_b.v2_clock=0;
+    _b.v2_clock+=_dt; // the one clock of this boss: drives every bv2 hazard of the encounter (warning, hit, expiry)
     _b.dragon_clock+=_dt;_b.dragon_state_age+=_dt;_b.dragon_hit_age+=_dt;
     if(!variable_instance_exists(_b,"dragon_melee_cd")){_b.dragon_melee_cd=0;_b.dragon_close_t=0;}
     _b.dragon_melee_cd=max(0,_b.dragon_melee_cd-_dt);
     _b.dragon_close_t=(instance_exists(ObjectPlayer) && point_distance(_b.x,_b.y,ObjectPlayer.x,ObjectPlayer.y)<dragon_melee_config().range) ? _b.dragon_close_t+_dt : 0;
     if(_b.hp<_b.dragon_last_hp)_b.dragon_hit_age=0;_b.dragon_last_hp=_b.hp;
-    if(boss_navigation_step(_b,_dt)){_b.enc_zones=[];_b.dragon_magma=[];return;}
+    if(boss_navigation_step(_b,_dt)){_b.enc_zones=[];_b.dragon_magma=[];bv2_clear_enc(_b);return;}
     if(_b.v2_enabled && bc_catchup_step(_b,"dragon",_dt))return; // rare announced dive towards a far-away player
     _b.boss_timer=max(0,_b.boss_timer-_dt);
     if(_b.boss_state=="windup") {
@@ -152,27 +166,19 @@ function dragon_encounter_step(_b,_dt) {
         }
     }
     if(_b.boss_state=="windup" || _b.boss_state=="active") {
-        var kind=_b.boss_cast,c=_b.enc_cfg,g=_b.enc_geometry,pl=ObjectPlayer;
-        if(kind=="meteor" || kind=="stomp")dragon_encounter_zones(_b,_dt);
+        // Hit tests run in bv2_hazards_step (shared hazards from dragon_enc_hazards); here only the attack's own logic.
+        var kind=_b.boss_cast,c=_b.enc_cfg,g=_b.enc_geometry;
         if(_b.boss_state=="active") {
-            var age=_b.dragon_state_age,hit=false;
+            var age=_b.dragon_state_age;
             if(is_struct(_b.enc_combo) && !_b.enc_combo_fired) {
                 var original=_b.enc_geometry;_b.enc_geometry=_b.enc_combo;dragon_encounter_bullets(_b,3,24,190,18*_b.v2_scaling.damage);_b.enc_geometry=original;_b.enc_combo_fired=true;
             }
             var swept=variable_instance_exists(_b,"enc_sweep") && is_struct(_b.enc_sweep);
             if(kind=="beam" && swept)_b.dragon_angle=_b.enc_sweep.g.angle; // the bv2 hazard owns the hitbox
-            else if(kind=="beam" || kind=="arc" || kind=="tail" || kind=="bite")hit=telegraph_contains(g,pl.x,pl.y-10);
-            if(kind=="sweep") {_b.dragon_angle=_b.dragon_base_angle-55+110*clamp(age/c.active,0,1);hit=dragon_player_in_fire(_b,pl);}
-            if(kind=="slam" || kind=="vortex") {
-                var ring=dragon_ring_geometry(kind,g,age,c.active);hit=telegraph_contains(ring,pl.x,pl.y-10);
-                if(kind=="slam" && age<.12 && point_distance(g.x,g.y,pl.x,pl.y-10)<80)hit=true;
-                if(_b.enc_hits==0){fg_sfx(kind=="slam" ? "dragon_slam" : "dragon_vortex");_b.enc_hits++;}
-            }
             if((kind=="void" || kind=="volley" || kind=="wind") && age>=_b.enc_waves*.48 && _b.enc_waves<(_b.boss_phase>=4 ? 3 : 2)) {
                 var count=(kind=="volley" ? (_b.enc_waves==0 ? 3 : 5) : 3)+_b.v2_scaling.projectiles;
                 dragon_encounter_bullets(_b,count,kind=="void" ? 18 : 13,kind=="wind" ? 170 : 220,c.damage,kind=="volley" && _b.enc_waves==0);_b.enc_waves++;
             }
-            if(hit && age>=_b.dragon_next_hit)if(player_receive_damage(pl,c.damage,c.height))_b.dragon_next_hit=age+.35;
         }
     }
     if(_b.boss_state=="recovery") {
@@ -190,30 +196,11 @@ function dragon_ring_geometry(_kind,_g,_age,_active) {
 }
 function dragon_encounter_draw(_b) {
     if(_b.dragon_dying || !variable_instance_exists(_b,"enc_geometry"))return;
-    var kind=_b.boss_cast,g=_b.enc_geometry,c=_b.enc_cfg,age=_b.dragon_state_age,col=(kind=="void" || kind=="volley") ? make_color_rgb(181,104,251) : (kind=="wind" ? make_color_rgb(130,225,211) : ((kind=="tail" || kind=="bite") ? make_color_rgb(236,214,170) : make_color_rgb(255,115,58)));
-    var swept=variable_instance_exists(_b,"enc_sweep") && is_struct(_b.enc_sweep);
-    if(_b.boss_state=="windup" && !array_contains(["meteor","stomp","void","volley","wind"],kind) && !(kind=="beam" && swept)) {
-        g.elapsed=age;telegraph_draw(g,col,(kind=="tail" || kind=="bite") ? 0 : 1);
-    }
-    // Energy gathering at the mouth for fire attacks: embers converge, the mouth glows (light in atmosphere_draw).
+    // Warning and active surfaces of every dragon attack are drawn by bv2_hazards_draw (scripts/hazard_looks) since the
+    // merge of 27.11.; here only what belongs to the dragon's body: energy gathering at the mouth and the wind gust.
+    var kind=_b.boss_cast,g=_b.enc_geometry,c=_b.enc_cfg,age=_b.dragon_state_age;
     if(_b.boss_state=="windup" && (kind=="beam" || kind=="arc" || kind=="sweep")){var m=dragon_mouth(_b,false);vfx_charge(m.x,m.y,clamp(age/max(.1,c.warning),0,1),1,70,11);}
-    if(_b.boss_state=="active") {
-        if(age<.08 && (kind=="tail" || kind=="bite"))telegraph_flash(g,col);
-        if((kind=="beam" && !swept) || kind=="sweep") {var fire=dragon_attack_geometry(_b);vfx_beam_stream({shape:"line",x:fire.x,y:fire.y,angle:_b.dragon_angle,radius:fire.length,width:fire.width,inner:0,span:0},1,age,c.active,5);}
-        if(kind=="arc")vfx_fire_cone(g.x,g.y,g.angle,g.span,g.radius,age,c.active); // fills exactly the telegraphed sector
-        if(kind=="vortex" || kind=="slam") {
-            var ring=dragon_ring_geometry(kind,g,age,c.active),r=ring.radius; // the hit test uses the same function
-            if(kind=="vortex")dragon_fx_sprite(6,.25+frac(age)*.35,g.x,g.y,r,_b.dragon_clock*100);
-            else {for(var dust=0;dust<12;dust++){var angle=dust*30;class_fx_sprite(7,clamp(age/c.active,0,1),g.x+lengthdir_x(r-20,angle),g.y+lengthdir_y(r-20,angle),28,angle);}if(age<.4)class_fx_sprite(7,age/.4,g.x,g.y,90);}
-            hz_area_draw(ring,kind=="slam" ? 5 : 1,col,age,c.active,kind=="slam" ? 2 : 8);
-        }
-        if(kind=="wind")dragon_fx_sprite(3,.25+frac(age)*.4,g.x+lengthdir_x(160,g.angle),g.y+lengthdir_y(160,g.angle),150,g.angle);
-    }
-    if(_b.boss_state=="windup" || _b.boss_state=="active")for(var i=0;i<array_length(_b.enc_zones);i++) {
-        var z=_b.enc_zones[i];
-        if(!z.erupted) {telegraph_draw(z.g,col,kind=="void" ? 4 : 1);if(kind=="meteor"){var p=telegraph_progress(z.g);dragon_fx_sprite(2,.2,z.x-50*(1-p),z.y-300*(1-p),36,285);}}
-        else if(z.age<z.warning+.8){hz_area_draw(z.g,1,col,z.age-z.warning,.45,i);dragon_fx_sprite(kind=="meteor" ? 2 : 5,.375+clamp((z.age-z.warning)/.65,0,.624),z.x,z.y,c.radius);}
-    }
+    if(_b.boss_state=="active" && kind=="wind")dragon_fx_sprite(3,.25+frac(age)*.4,g.x+lengthdir_x(160,g.angle),g.y+lengthdir_y(160,g.angle),150,g.angle);
     draw_set_alpha(1);draw_set_color(c_white);
 }
 /// Dragon effects as pixel composites on the world grid (render_pipeline) instead of the scaled painted sheet.
@@ -305,6 +292,8 @@ function dragon_melee_try(_b) {
     _b.boss_cast=kind;_b.dragon_pose_locked=false;_b.enc_cfg=c;_b.enc_hits=0;_b.enc_waves=0;_b.dragon_next_hit=0;
     _b.enc_zones=[];_b.dragon_magma=[];_b.enc_lanes=[];_b.enc_combo=undefined;_b.enc_combo_fired=false;_b.enc_sweep=undefined;
     _b.enc_geometry=telegraph_make("sector",ox,oy,k.radius,k.warning,point_direction(ox,oy,pl.x,pl.y-10),k.span);
+    var mh=bv2_sector(_b,"dragon_"+kind,ox,oy,k.radius,_b.enc_geometry.angle,k.span,k.warning,k.active,c.damage,k.height); // shared hazard (merged 27.11.)
+    if(is_struct(mh)){bv2_cadence(mh,.35,false);mh.enc=true;mh.col=dragon_hazard_color(kind);}
     _b.dragon_melee_cd=m.cooldown;_b.dragon_close_t=0;
     fg_sfx("dragon_charge");
     dragon_state(_b,"windup",k.warning);

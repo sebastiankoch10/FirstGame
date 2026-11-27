@@ -1,6 +1,6 @@
 ---
 tags: [system, telegraph, vfx, bosse]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # Telegraphs & Gefahrenflächen
 
@@ -9,6 +9,7 @@ Ein gemeinsamer Renderer für alle gegnerischen Warnungen und Gefahrenflächen (
 
 ## Wichtige Dateien
 - `scripts/attack_telegraph`: Geometrie `telegraph_make` und Treffertest `telegraph_contains` (Kreis, Ring mit Lücke, Kegel, Linie bzw. Rechteck, Schachbrett `checker`). Gezeichnet wird hier nichts mehr.
+- `scripts/hazard_looks` (seit 27.11.): je Gefahrenart Ankündigung (`hz_look_warning`), aktive Darstellung (`hz_look_active`) und Zündung (`hz_look_activate`); wachsende Ringe `hz_ring_at`; `bv2_clear_enc`, `bv2_cadence`. Fällt eine Art nicht darunter, zeichnet der allgemeine Renderer in `hazard_fx`.
 - `scripts/hazard_fx`:
   - **Geometrie-Helfer:** `geo_fill`, `geo_fill_band` (Füllung vom Ursprung aus), `geo_edge` (1 oder 2 px), `geo_sample` (gleichmäßige Punkte in der Form), `geo_area`, `geo_checker_cells` (nur sichtbare Zellen, einmal je Bild zwischengespeichert).
   - **Warnungen:**

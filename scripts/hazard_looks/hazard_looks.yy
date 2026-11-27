@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"hazard_looks",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"hazard_looks",
+  "parent":{
+    "name":"Kampf_und_Klassen",
+    "path":"folders/Skripte/Kampf_und_Klassen.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

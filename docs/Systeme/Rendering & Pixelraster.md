@@ -1,6 +1,6 @@
 ---
 tags: [system, darstellung]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # Rendering & Pixelraster
 
@@ -24,6 +24,8 @@ Jedes Grafikpixel erscheint gleich groß: Die Welt wird in eine 960×540-Fläche
 
 ## Abhängigkeiten
 [[Licht, Wetter & Effekte]] (Lichtfläche bleibt eigene, gefilterte Fläche) · [[UI, HUD & Menüs]] (GUI-Raum 1280×720) · [[Speichern & Einstellungen]] · [[Tests & QA]] (Aufnahmen sind 960×540)
+
+- **Seit 27.11.:** `render_present` setzt die Bildfläche jedes Bild auf 960×540 zurück, falls GameMaker sie nach einer Fenstergrößen-Änderung im laufenden Raum ans Fenster angepasst hat (gefunden in Recorder-Aufnahmen: Welt 4:3 gestreckt in 1280×720). Die Level-Suite prüft das Raster in allen drei Leveln.
 
 ## Bekannte Probleme
 - Ohne kompilierte Shader entfällt die Nachbearbeitung (Meldung `FX_POST disabled`). Auf Rechnern ohne Shader-Unterstützung sieht das Spiel dann wie vor dem Overhaul aus, nur mit verstärkbarem Licht.

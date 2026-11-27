@@ -116,6 +116,7 @@
     {"id":{"name":"Grass","path":"tilesets/Grass/Grass.yy",},},
     {"id":{"name":"handle_chest_selection","path":"scripts/handle_chest_selection/handle_chest_selection.yy",},},
     {"id":{"name":"hazard_fx","path":"scripts/hazard_fx/hazard_fx.yy",},},
+    {"id":{"name":"hazard_looks","path":"scripts/hazard_looks/hazard_looks.yy",},},
     {"id":{"name":"hotbar_assign","path":"scripts/hotbar_assign/hotbar_assign.yy",},},
     {"id":{"name":"hud","path":"scripts/hud/hud.yy",},},
     {"id":{"name":"icon_fg_defense","path":"sprites/icon_fg_defense/icon_fg_defense.yy",},},

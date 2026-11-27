@@ -49,7 +49,7 @@ function qa_boss_suite_step() {
     repeat(global.qa_batch){
         qa_world_tick();var b=global.qa_boss_instance;
         if(instance_exists(b) && !array_contains(global.qa_boss_phases,b.boss_phase))array_push(global.qa_boss_phases,b.boss_phase);
-        global.qa_boss_max_overlap=max(global.qa_boss_max_overlap,array_length(global.bv2_hazards)+array_length(global.hostile_bullets)+array_length(global.boss_zones));
+        global.qa_boss_max_overlap=max(global.qa_boss_max_overlap,array_length(global.bv2_hazards)+array_length(global.hostile_bullets));
         var reason="";
         if(global.qa_boss_start_hp<=0)reason="initialization_failed";
         else if(global.game_over)reason="player_death";

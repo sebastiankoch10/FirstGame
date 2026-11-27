@@ -23,7 +23,7 @@ function boss_system_reset() {
     global.boss_spawn_times=[60,180,300,600,900,1200,1500,1800];
     global.boss_spawned=array_create(8,false);global.bv2_hazards=[];
     global.boss_rng=irandom(2147483645)+1;
-    global.hostile_bullets=[]; global.boss_zones=[]; global.active_boss=noone;
+    global.hostile_bullets=[]; global.active_boss=noone;
     global.boss_index=0; global.boss_exists=false;
     global.boss_victory_name=""; global.boss_victory_time=0;
     global.boss_dev_enabled=boss_dev_allowed();
@@ -76,7 +76,7 @@ function boss_configure(_b,_d) {
     _b.boss_rotation=0; _b.boss_fan_uses=0; _b.boss_cast="";
     _b.boss_cast_angle=0; _b.boss_fan_count=1;
     _b.boss_wave_left=0; _b.boss_wave_timer=0;
-    _b.boss_completed=false;
+    _b.boss_completed=false;_b.v2_clock=0; // one hazard clock per boss (boss_v2_init resets it for main bosses)
     _b.body_radius=_d.main ? (_d.tier>=5 ? 132 : 88) : 44;
     _b.visual_height=_d.main ? (_d.tier>=5 ? 310 : 220) : 108;
     if(_d.id=="storm_warden") {_b.body_radius=108;_b.visual_height=300;}
@@ -96,9 +96,6 @@ function boss_cleanup(_owner,_keep_actors=false) {
     if(_keep_actors)bv2_clear_owner(_owner);else boss_v2_cleanup(_owner);
     if(variable_global_exists("hostile_bullets")) {
         for(var i=array_length(global.hostile_bullets)-1;i>=0;i--) if(global.hostile_bullets[i].owner==_owner) array_delete(global.hostile_bullets,i,1);
-    }
-    if(variable_global_exists("boss_zones")) {
-        for(var i=array_length(global.boss_zones)-1;i>=0;i--) if(global.boss_zones[i].owner==_owner) array_delete(global.boss_zones,i,1);
     }
     if(variable_global_exists("active_boss") && global.active_boss==_owner) {global.active_boss=noone; global.boss_exists=false;}
 }
@@ -121,11 +118,12 @@ function boss_complete(_b) {
     if(!instance_exists(_b)) return;
     boss_reward_once(_b);with(_b) instance_destroy();
 }
+/// Miniboss zone (lightning, lob). Since 27.11. a shared bv2 hazard on the boss's own clock: the same circle, warning,
+/// 0.12 s hit window, one hit, height (lightning all, lob ground); looks and ignition in scripts/hazard_looks.
 function boss_zone_add(_boss,_kind,_x,_y,_radius,_warning,_damage) {
-    if(array_length(global.boss_zones)>=64) return false;
-    array_push(global.boss_zones,{owner:_boss,kind:_kind,x:clamp(_x,24,room_width-24),y:clamp(_y,24,room_height-24),
-        sx:_boss.x,sy:_boss.y-20,radius:_radius,age:0,warning:_warning,active:0.12,fade:0.28,
-        damage:_damage,hit:false});
+    var h=bv2_zone(_boss,"mini_"+_kind,clamp(_x,24,room_width-24),clamp(_y,24,room_height-24),_radius,_warning,.12,_damage,_kind=="lightning" ? "all" : "ground");
+    if(!is_struct(h) || h.expired) return false;
+    h.col=make_color_rgb(255,67,104);h.src_x=_boss.x;h.src_y=_boss.y-20;
     return true;
 }
 function boss_fan_pattern(_boss,_angle,_count,_spacing,_speed,_damage) {
@@ -169,6 +167,9 @@ function boss_attack_begin(_b,_pattern) {
         _b.boss_fan_uses++;
         _b.boss_fan_count=min(5,1+2*min(2,_b.boss_fan_uses-1));
         if(_b.boss_phase==2) _b.boss_fan_count=max(5,_b.boss_fan_count);
+        // announcement of the fan / ring as a shared hazard without hit (marker), same sector as before
+        var ring=_pattern=="ring",mk=bv2_hazard(_b,"mini_cast",telegraph_make("sector",_b.x,_b.y-20,500,_b.boss_timer,_b.boss_cast_angle+(ring ? 180 : 0),ring ? 288 : max(10,(_b.boss_fan_count-1)*14)),0,0,"all",false,undefined);
+        if(is_struct(mk)){mk.marker=true;mk.col=make_color_rgb(255,93,135);}
     }
 }
 function boss_step(_b,_dt) {
@@ -181,6 +182,7 @@ function boss_step(_b,_dt) {
     if(_b.dragon_enabled) {dragon_step(_b,_dt);return;}
     if(_b.v2_enabled) {if(_b.hp<=0){if(!_b.v2_dying)boss_v2_die(_b);return;}bv2_encounter_step(_b,_dt);return;}
     if(_b.hp<=0) {boss_complete(_b); return;}
+    _b.v2_clock+=_dt; // drives the miniboss's shared hazards (zones, announcements)
     if(_b.boss_data.main && _b.boss_phase==1 && _b.hp<_b.max_hp*0.5) {
         boss_cleanup(_b.id); global.active_boss=_b; global.boss_exists=true;
         fg_sfx("boss_phase");
@@ -261,22 +263,6 @@ function boss_hazards_step(_dt) {
         }
         if(remove){if(spit){var splash=bv2_zone(b.owner,"swamp_spit",b.x,b.y,max(35,b.splash_radius),0,.18,b.damage,"all");splash.poison=b.poison;}array_delete(global.hostile_bullets,i,1);}
     }
-    for(var i=array_length(global.boss_zones)-1;i>=0;i--) {
-        var z=global.boss_zones[i];
-        if(!instance_exists(z.owner)) {array_delete(global.boss_zones,i,1); continue;}
-        var old_age=z.age; z.age+=_dt;
-        if(old_age<z.warning && z.age>=z.warning) {
-            fg_sfx(z.kind=="lightning" ? "lightning" : "explosion");
-            light_pulse(z.x,z.y,z.kind=="lightning" ? 700 : 390,z.kind=="lightning" ? make_color_rgb(184,213,255) : make_color_rgb(255,139,72),1.5,0.32);
-        }
-        if(z.age>=z.warning && z.age<z.warning+z.active && !z.hit && instance_exists(pl)) {
-            // Center must be inside the exact marked circle; no hidden radius padding.
-            if(point_distance(pl.x,pl.y-10,z.x,z.y)<=z.radius) {
-                player_receive_damage(pl,z.damage,z.kind=="lightning" ? "all" : "ground"); z.hit=true;
-            }
-        }
-        if(z.age>=z.warning+z.active+z.fade) array_delete(global.boss_zones,i,1);
-    }
 }
 function boss_world_step(_dt) {
     if(global.game_paused || global.game_over || !global.round_active) return;
@@ -292,32 +278,9 @@ function boss_world_step(_dt) {
     if(instance_exists(ObjectPlayer))bv2_status_step(ObjectPlayer,combat_dt);
     if(global.boss_dev_enabled) boss_dev_controls();
 }
+/// Shared hostile projectiles of every boss (zones and announcements are bv2 hazards since 27.11.).
 function boss_hazards_draw() {
-    if(!variable_global_exists("boss_zones")) return;
-    for(var i=0;i<array_length(global.boss_zones);i++) {
-        var z=global.boss_zones[i],warning=z.age<z.warning;
-        if(warning) {
-            var progress=clamp(z.age/z.warning,0,1);
-            var warning_g=telegraph_make("circle",z.x,z.y,z.radius,z.warning);warning_g.elapsed=z.age;telegraph_draw(warning_g,make_color_rgb(255,67,104));
-            if(z.kind=="lob") {
-                var xx=lerp(z.sx,z.x,progress),ground_y=lerp(z.sy,z.y,progress);
-                var height=sin(progress*pi)*125;
-                draw_set_alpha(0.5); draw_set_color(c_black); draw_ellipse(xx-11,ground_y-4,xx+11,ground_y+4,false);
-                draw_set_alpha(1); draw_set_color(make_color_rgb(204,96,235));
-                draw_circle(xx,ground_y-height,11,false); draw_set_color(c_white); draw_circle(xx-3,ground_y-height-3,3,false);
-            }
-        } else {
-            var fade=1-clamp((z.age-z.warning)/(z.active+z.fade),0,1);
-            draw_set_alpha(fade*0.65); draw_set_color(make_color_rgb(255,85,126));
-            draw_circle(z.x,z.y,z.radius,false); draw_set_alpha(fade); draw_set_color(make_color_rgb(255,233,235));
-            draw_circle(z.x,z.y,z.radius,true);
-            if(z.kind=="lightning") {
-                draw_line_width(z.x-6,z.y-145,z.x+8,z.y-83,5);
-                draw_line_width(z.x+8,z.y-83,z.x-7,z.y-46,5);
-                draw_line_width(z.x-7,z.y-46,z.x,z.y,5);
-            }
-        }
-    }
+    if(!variable_global_exists("hostile_bullets")) return;
     draw_set_alpha(1);
     for(var i=0;i<array_length(global.hostile_bullets);i++) {
         var b=global.hostile_bullets[i];
@@ -330,14 +293,6 @@ function boss_hazards_draw() {
         if(variable_struct_exists(b,"dragon_void")){dragon_fx_sprite(b.wind ? 3 : (b.volley ? 7 : 4),.125+frac(b.age)*.25,b.x,b.y,b.wind ? 42 : 24,point_direction(0,0,b.vx,b.vy));continue;}
         draw_set_color(make_color_rgb(255,81,136)); draw_circle(b.x,b.y,b.radius+2,false);
         draw_set_color(make_color_rgb(255,234,243)); draw_circle(b.x,b.y,b.radius-1,false);
-    }
-    if(instance_exists(global.active_boss)) {
-        var b=global.active_boss;
-        if(b.boss_state=="windup" && (b.boss_cast=="fan" || b.boss_cast=="ring")) {
-            var ring=b.boss_cast=="ring",duration=ring ? 1 : .75;
-            var warning_g=telegraph_make("sector",b.x,b.y-20,500,duration,b.boss_cast_angle+(ring ? 180 : 0),ring ? 288 : max(10,(b.boss_fan_count-1)*14));
-            warning_g.elapsed=max(0,duration-b.boss_timer);telegraph_draw(warning_g,make_color_rgb(255,93,135));
-        }
     }
     draw_set_alpha(1); draw_set_color(c_white);
 }

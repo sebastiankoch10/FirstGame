@@ -1,4 +1,5 @@
-/// Shared bounded hazards. One clock drives telegraph, activation, contact and expiry.
+/// Shared bounded hazards. One clock drives telegraph, activation, contact and expiry. Since 27.11. every boss and
+/// miniboss attack runs here (dragon encounter and miniboss zones merged); looks and ignition: scripts/hazard_looks.
 function bv2_hazard(_b,_kind,_g,_active,_damage,_height,_once,_extra) {
     _g.height=_height; // the renderer shows how the hazard is solved (ground: jump or dodge, high: slide or dodge, all: dodge only)
     if(!variable_global_exists("bv2_hazards"))global.bv2_hazards=[];
@@ -17,6 +18,8 @@ function bv2_bullet(_b,_kind,_x,_y,_angle,_speed,_damage,_radius=10,_life=5) {
     array_push(global.hostile_bullets,b);return b;
 }
 function bv2_hazard_hit(_h,_pl) {
+    // impact core: the first core_t seconds also hit inside core_r around the centre (dragon slam)
+    if(variable_struct_exists(_h,"core_r") && _h.age-_h.warning<_h.core_t && point_distance(_h.g.x,_h.g.y,_pl.x,_pl.y-10)<_h.core_r)return true;
     var inside=telegraph_contains(_h.g,_pl.x,_pl.y-10);
     // moving rings: also count the band swept since the last step (no tunnelling at low frame rates)
     if(!inside && variable_struct_exists(_h,"sweep_prev") && _h.g.shape=="ring"){var d=point_distance(_h.g.x,_h.g.y,_pl.x,_pl.y-10),lo=min(_h.sweep_prev,_h.g.radius)-(_h.g.radius-_h.g.inner),hi=max(_h.sweep_prev,_h.g.radius);inside=d>=lo && d<=hi;}
@@ -39,14 +42,18 @@ function bv2_hazards_step(_dt) {
         if(h.age>=h.warning && h.age<h.warning+h.active) {
             var p=clamp((h.age-h.warning)/max(.001,h.active),0,1);
             if(h.expand_from>=0 && h.expand_to>=0){var width=variable_struct_exists(h,"ring_width") ? h.ring_width : 40,prev=h.g.radius;h.g.radius=lerp(h.expand_from,h.expand_to,p);h.g.inner=max(0,h.g.radius-width);h.sweep_prev=prev;}
+            if(variable_struct_exists(h,"ring_fn")){var ring=hz_ring_at(h,h.age-h.warning);h.g.radius=ring.radius;h.g.inner=ring.inner;} // expanding ring with its own formula
             bc_hazard_update(h,p);
             if(variable_struct_exists(h,"wave_from_x")){var dist=p*h.wave_length;h.g.x=h.wave_from_x+lengthdir_x(dist,h.wave_angle);h.g.y=h.wave_from_y+lengthdir_y(dist,h.wave_angle);h.g.radius=h.wave_thickness;h.g.width=h.wave_width;h.g.angle=h.wave_angle;}
             if(!h.activated){
                 h.activated=true;var el=hz_element_of(h.kind),big=geo_area(h.g)>40000;
-                // impact light on the damage event: lightning lifts the whole scene briefly, big areas flash, small ones pulse
-                if(el==3)light_flash(h.g.x,h.g.y,min(420,h.g.radius*2+80),make_color_rgb(190,215,255),1.6,.3,.45);
-                else if(big)light_flash(h.g.x,h.g.y,min(420,h.g.radius*1.6),bv2_element_color(h.kind),1.2,.32,.12);
-                else light_pulse(h.g.x,h.g.y,min(360,h.g.radius*2),bv2_element_color(h.kind),.9,.22);
+                // impact light on the damage event: lightning lifts the whole scene briefly, big areas flash, small ones pulse;
+                // attacks with their own ignition (sound, light) handle it in hz_look_activate
+                if(!hz_look_activate(h)) {
+                    if(el==3)light_flash(h.g.x,h.g.y,min(420,h.g.radius*2+80),make_color_rgb(190,215,255),1.6,.3,.45);
+                    else if(big)light_flash(h.g.x,h.g.y,min(420,h.g.radius*1.6),bv2_element_color(h.kind),1.2,.32,.12);
+                    else light_pulse(h.g.x,h.g.y,min(360,h.g.radius*2),bv2_element_color(h.kind),.9,.22);
+                }
                 bc_hazard_activated(h);
             }
             if(instance_exists(ObjectPlayer) && (!h.hit_once || !h.hit) && h.age>=h.next_hit && bv2_hazard_hit(h,ObjectPlayer)) {
@@ -106,11 +113,12 @@ function vfx_element_burst(_x,_y,_r,_q,_el) {
 function bv2_hazards_draw() {
     if(!variable_global_exists("bv2_hazards"))return;
     for(var i=0;i<array_length(global.bv2_hazards);i++) {
-        var h=global.bv2_hazards[i],g=h.g,col=bv2_element_color(h.kind);
+        var h=global.bv2_hazards[i],g=h.g,col=variable_struct_exists(h,"col") ? h.col : bv2_element_color(h.kind);
         var el=hz_element_of(h.kind);
-        if(h.age<h.warning) {if(!bc_hazard_telegraph(h,col))telegraph_draw(g,col,el);continue;}
+        if(h.age<h.warning) {if(!hz_look_warning(h,col))telegraph_draw(g,col,el);continue;}
         var age=h.age-h.warning;if(age>h.active+.3)continue;
-        if(bc_hazard_active_draw(h,age,col)){draw_set_alpha(1);continue;}
+        if(h.active<=0)continue; // announcement only (marker)
+        if(hz_look_active(h,age,col)){draw_set_alpha(1);continue;}
         // Phase 2A: the whole active area as one coherent element surface over the exact hit geometry (WYSIWYG).
         if(g.shape=="line" && h.active>=.35)vfx_beam_stream(g,el,age,h.active,i);else hz_area_draw(g,el,col,age,h.active,i);
         draw_set_alpha(1);continue;

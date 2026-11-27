@@ -56,24 +56,19 @@ def apply_injections(code, path):
         code = _replace(code, 'e.boss_minion=true;e.boss_owner=_b;', 'e.boss_minion=true;e.boss_owner=_b;e.qa_source=qa_source_snapshot(_b,"brood");')
     elif p.endswith("scripts/dragon_encounter/dragon_encounter.gml"):
         code = _replace(code, 'owner:_b,x:g.x+', 'owner:_b,qa_source:qa_source_snapshot(_b,_b.boss_cast),x:g.x+')
-        code = _replace(code, 'player_receive_damage(pl,c.damage,c.height)', 'qa_receive_from(pl,c.damage,c.height,qa_source_snapshot(_b,_b.boss_cast))', count=2)
+        # 27.11.: every dragon hit runs through the shared bv2 hazards (anchor in boss_hazards_v2 above)
         code = _replace(code, '\n    _b.enc_cfg=c;_b.enc_hits=0;', '\n    qa_source_seen(qa_source_snapshot(_b,_kind),c.warning);_b.enc_cfg=c;_b.enc_hits=0;')
         # Dragon melee (bite / tail sweep) announces its sector the same way.
         code = _replace(code, '_b.dragon_pose_locked=false;_b.enc_cfg=c;_b.enc_hits=0;', '_b.dragon_pose_locked=false;qa_source_seen(qa_source_snapshot(_b,kind),c.warning);_b.enc_cfg=c;_b.enc_hits=0;')
         code = _replace(code, '_b.enc_geometry.elapsed=_b.dragon_state_age;', '_b.enc_geometry.elapsed=_b.dragon_state_age;qa_source_seen(qa_source_snapshot(_b,_b.boss_cast),_b.enc_cfg.warning,!array_contains(["meteor","stomp","void","volley","wind"],_b.boss_cast) && telegraph_contains(_b.enc_geometry,ObjectPlayer.x,ObjectPlayer.y-10),false);')
-        code = _replace(code, 'z.g.elapsed=z.age;', 'z.g.elapsed=z.age;qa_source_seen(qa_source_snapshot(_b,_b.boss_cast),z.warning,telegraph_contains(z.g,pl.x,pl.y-10),z.erupted);')
-        code = _replace(code, 'var age=_b.dragon_state_age,hit=false;', 'var age=_b.dragon_state_age,hit=false;qa_source_seen(qa_source_snapshot(_b,kind),c.warning,false,true);')
-        code = _replace(code, 'if(hit && age>=_b.dragon_next_hit)', 'qa_source_seen(qa_source_snapshot(_b,kind),c.warning,hit,true);if(hit && age>=_b.dragon_next_hit)')
     elif p.endswith("scripts/boss_combat/boss_combat.gml"):
-        code = _replace(code, 'owner:_boss,kind:_kind,x:', 'owner:_boss,qa_source:qa_source_snapshot(_boss,_kind),kind:_kind,x:')
         code = _replace(code, 'owner:_boss,x:_boss.x,y:_boss.y-20,', 'owner:_boss,qa_source:qa_source_snapshot(_boss,"projectile"),x:_boss.x,y:_boss.y-20,')
         code = _replace(code, '_b.boss_cast=_pattern; _b.boss_state="windup";', '_b.boss_cast=_pattern; _b.boss_state="windup";qa_boss_note(_b,_pattern);')
         code = _replace(code, 'var burn_actual=min(max(0,_b.hp),_b.burn_dps*_dt);_b.hp-=burn_actual;', 'var burn_before=_b.hp,burn_actual=min(max(0,_b.hp),_b.burn_dps*_dt);_b.hp-=burn_actual;qa_damage_out(_b,_b.burn_dps*_dt,ObjectPlayer,variable_instance_exists(_b,"burn_spell_id") ? _b.burn_spell_id : 0,burn_before,_b.hp,false,true);')
         code = _replace(code, 'var b=global.hostile_bullets[i];\n        if(!instance_exists(b.owner))', 'var b=global.hostile_bullets[i];qa_source_seen(qa_struct_source(b),-1,false,true);\n        if(!instance_exists(b.owner))')
         code = _replace(code, 'player_receive_damage(pl,b.damage,"high")', 'qa_receive_from(pl,b.damage,"high",qa_struct_source(b))')
         code = _replace(code, 'splash.poison=b.poison;', 'splash.poison=b.poison;splash.qa_source=variable_clone(b.qa_source);')
-        code = _replace(code, 'var old_age=z.age; z.age+=_dt;', 'var old_age=z.age; z.age+=_dt;qa_source_seen(qa_struct_source(z),z.warning,instance_exists(pl) && point_distance(pl.x,pl.y-10,z.x,z.y)<=z.radius,z.age>=z.warning);')
-        code = _replace(code, 'player_receive_damage(pl,z.damage,z.kind=="lightning" ? "all" : "ground")', 'qa_receive_from(pl,z.damage,z.kind=="lightning" ? "all" : "ground",qa_struct_source(z))')
+        # 27.11.: miniboss zones and every dragon hit are bv2 hazards; the boss_hazards_v2 anchors above observe them
         code = _replace(code, 'if(_b.mini_auto_timer<=0 && instance_exists(ObjectPlayer)){boss_fan_pattern', 'if(_b.mini_auto_timer<=0 && instance_exists(ObjectPlayer)){var qa_old_attack=variable_instance_exists(_b,"qa_attack") ? _b.qa_attack : undefined;qa_boss_note(_b,"automatic_projectile",0);boss_fan_pattern')
         code = _replace(code, 'fg_sfx("magic_projectile");_b.mini_auto_timer=1.6;', 'fg_sfx("magic_projectile");if(!is_undefined(qa_old_attack))_b.qa_attack=qa_old_attack;_b.mini_auto_timer=1.6;')
         code = _replace(code, '    if(_b.dragon_enabled) {dragon_step(_b,_dt);return;}', '    if(variable_global_exists("qa_bench_freeze") && global.qa_bench_freeze)return;\n    if(_b.dragon_enabled) {dragon_step(_b,_dt);return;}')

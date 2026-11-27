@@ -152,30 +152,7 @@ function qa_bot_step(_policy) {
             candidate_score-=qa_mark_penalty(g,px,py-10)*_policy.avoid*urgency;
             if(telegraph_contains(g,pl.x,pl.y-10)){danger_here=max(danger_here,2);if(candidate==0)qa_bot_plan(g,max(0,h.warning-h.age),h.height,_policy);}
         }
-        for(var i=0;i<array_length(global.boss_zones);i++) {
-            var z=global.boss_zones[i];if(!qa_visible_point(z.x,z.y,z.radius) || z.age>=z.warning+z.active || !qa_bot_observed(z,_policy.reaction))continue;
-            var zg=telegraph_make("circle",z.x,z.y,z.radius,z.warning);
-            candidate_score-=qa_mark_penalty(zg,px,py-10)*_policy.avoid;
-            if(point_distance(pl.x,pl.y-10,z.x,z.y)<z.radius+12){danger_here=max(danger_here,2);if(candidate==0)qa_bot_plan(zg,max(0,z.warning-z.age),z.kind=="lightning" ? "all" : "ground",_policy);}
-        }
-        for(var i=0;i<instance_number(ObjectBossMonster);i++) {
-            var dragon=instance_find(ObjectBossMonster,i);
-            if(!dragon.dragon_enabled || !variable_instance_exists(dragon,"enc_geometry"))continue;
-            if(dragon.boss_state!="windup" && dragon.boss_state!="active")continue;
-            var kind=dragon.boss_cast,dg=dragon.enc_geometry;
-            // Same visibility gates as dragon_encounter_draw: ordinary wind,
-            // void and volley casts have no invisible floor mark to inspect.
-            if(!array_contains(["meteor","stomp","void","volley","wind"],kind) && qa_visible_point(dg.x,dg.y,dg.radius) && qa_bot_observed(dg,_policy.reaction)) {
-                candidate_score-=qa_mark_penalty(dg,px,py-10)*_policy.avoid;
-                if(telegraph_contains(dg,pl.x,pl.y-10)){danger_here=max(danger_here,2);if(candidate==0)qa_bot_plan(dg,max(0,dragon.enc_cfg.warning-dragon.dragon_state_age),dragon.enc_cfg.height,_policy);}
-            }
-            for(var j=0;j<array_length(dragon.enc_zones);j++) {
-                var dz=dragon.enc_zones[j];
-                if(!qa_visible_point(dz.x,dz.y,dragon.enc_cfg.radius) || !qa_bot_observed(dz,_policy.reaction))continue;
-                candidate_score-=qa_mark_penalty(dz.g,px,py-10)*_policy.avoid;
-                if(telegraph_contains(dz.g,pl.x,pl.y-10)){danger_here=max(danger_here,2);if(candidate==0)qa_bot_plan(dz.g,max(0,dz.warning-dz.age),dragon.enc_cfg.height,_policy);}
-            }
-        }
+        // Miniboss zones and every dragon attack are bv2 hazards since 27.11. (boss paths merged): the loop above sees them.
         // Stable per-run tie jitter is bot-owned and never consumes gameplay RNG.
         candidate_score+=qa_bot_random()*5;
         if(candidate_score>best_score){best_score=candidate_score;best_angle=angle;}
@@ -253,7 +230,7 @@ function qa_state_hash() {
         motion:pl.motion_state,jump_time:pl.jump_time,dodge_timer:pl.dodge_timer,dodge_cooldown:pl.dodge_cooldown,mobility_cooldown:pl.mobility_cooldown,
         weapon_cooldown:pl.weapon_cooldown,class_pending:pl.class_pending,class_combo:pl.class_combo_index,sword_clock:pl.sword_combo_clock,bot_rng:global.qa_bot_rng,
         choice_rng:global.choice_rng,boss_rng:global.boss_rng,active:global.active_spells,passive:global.passive_spells,offers:global.qa_choices,
-        class_effects:global.class_effects,spell_fields:global.spell_fields,hostile_bullets:global.hostile_bullets,boss_zones:global.boss_zones,bv2_hazards:global.bv2_hazards,enemies:[],coins_pos:[],shots:[]};
+        class_effects:global.class_effects,spell_fields:global.spell_fields,hostile_bullets:global.hostile_bullets,bv2_hazards:global.bv2_hazards,enemies:[],coins_pos:[],shots:[]};
     var types=[ObjectMonster,ObjectBossMonster];for(var t=0;t<2;t++)for(var i=0;i<instance_number(types[t]);i++){var e=instance_find(types[t],i);array_push(s.enemies,{t:t,x:e.x,y:e.y,hp:e.hp,slow:e.slow_time,burn:e.burn_time});}
     for(var i=0;i<instance_number(ObjectCoin);i++){var c=instance_find(ObjectCoin,i);array_push(s.coins_pos,[c.x,c.y,c.magnetized]);}
     var kinds=[ObjectFireball,ObjectIceball,ObjectLightningball];for(var t=0;t<3;t++)for(var i=0;i<instance_number(kinds[t]);i++){var p=instance_find(kinds[t],i);array_push(s.shots,[t,p.x,p.y,p.lifetime]);}

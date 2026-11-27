@@ -4,6 +4,12 @@ updated: 2026-11-27
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen). Ältere Einträge: [[LOG_2026]]
 
+### 2026-11-27 · Claude · Block 2: Boss-Codepfade auf bv2 zusammengeführt, Bildflächen-Korrektur
+- Drache (`dragon_encounter`: `dragon_enc_hazards`, Melee) und Minibosse (`boss_combat`: Zonen, Ankündigung `mini_cast`) laufen über die gemeinsamen `bv2`-Gefahren auf der Uhr je Boss; neue Stelle für Looks und Zündung: `scripts/hazard_looks`; `boss_hazards_v2` mit Kernbereich, Ring-Funktion, Farb-Override und Look-Hooks.
+- Orakel (`tests/boss_harness.gml`) ohne Drachen-Sonderzweig, sieht Projektile aller Bosse; `boss_v2_harness`, Telemetrie-Anker, Bot-Simulationen (`QA/tools/*_mc_harness.gml`) angepasst.
+- `render_present` setzt die Bildfläche auf 960×540 zurück (Fenstergröße im laufenden Raum); Recorder liefert 960×540, neue Option `--orbit`.
+- Doku: Bosse, Telegraphs, Rendering, Technische Architektur, DECISIONS, Bugs & Ideen.
+
 ### 2026-11-27 · Claude · „Mach das alles“, Block 1: Roadmap 14 (Welt-Feedback, Startwaffen), Drachen-Befunde, Leistung
 - Neu `scripts/fx_world`: Treffer, Tode, Münzen, Pickups, Level-up, pixelgenaues Pflanzenwiegen, Startwaffen-Partikel; Partikelfarben aus Tabellen (`fxp_lut`), Gedränge-Entlastung, Trefferaufblitzen auf der Spieluhr (`fx_flash_tick`), Sternenorb neu (`vfx_star_orb`).
 - Drache: Fächer von Leere und Wind treffen die Zielposition auch bei gerader Projektilzahl; Sequenzen neu zusammengestellt (`bc_sequences`); Salven-Bahnen folgen der Projektilzahl.

@@ -53,7 +53,7 @@ SPRITE_RULES = [
 SCRIPT_RULES = [
     (r'^(gameplay|gameplay_polish|reset_round|player_artpack|apply_passives|hud|progression_audit|render_pipeline|render_fx|fx_character)$', 'Skripte/Kern_und_Spieler'),
     (r'^(review_center|review_registry_data)$', 'Skripte/Entwicklung_Review'),
-    (r'^(hazard_fx|fx_attacks)$', 'Skripte/Kampf_und_Klassen'),
+    (r'^(hazard_fx|fx_attacks|hazard_looks)$', 'Skripte/Kampf_und_Klassen'),
     (r'^(master_combat|class_weapons|combat_feedback|attack_telegraph|attack_timeline)$', 'Skripte/Kampf_und_Klassen'),
     (r'^(spell|spell_v2|spell_v2_catalog|spell_vfx|spell_world_v2|spell_choices_v2|spell_ui_v2|cast_spell|get_spell_data|hotbar_assign|run_spell_stats|handle_chest_selection)$',
      'Skripte/Zauber'),

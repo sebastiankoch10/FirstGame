@@ -68,7 +68,7 @@ function bt_dragon_abilities() {
         // Since 24.11.2026 the fire beam is a sweeping bv2 hazard (docs/Design/Boss-Design.md): stand on its announced start edge.
         var swept=kind=="beam" && variable_instance_exists(b,"enc_sweep") && is_struct(b.enc_sweep);
         if(swept){var sg=b.enc_sweep.g;pl.x=sg.x+lengthdir_x(100,b.enc_sweep.sweep_from);pl.y=sg.y+lengthdir_y(100,b.enc_sweep.sweep_from)+10;}
-        boss_step(b,c.warning-.001);if(swept)bv2_hazards_step(0);bt_check(pl.hp==hp0,"Dragon "+kind+" does not damage during preparation");boss_step(b,.0011);if(swept)bv2_hazards_step(0);
+        boss_step(b,c.warning-.001);bv2_hazards_step(0);bt_check(pl.hp==hp0,"Dragon "+kind+" does not damage during preparation");boss_step(b,.0011);bv2_hazards_step(0); // every dragon hit runs in the shared hazards since 27.11.
         if(array_contains(["wind","void","volley"],kind)){bt_check(array_length(global.hostile_bullets)>0,"Dragon "+kind+" releases visible actual projectiles");var bullet=global.hostile_bullets[0];pl.x=bullet.x;pl.y=bullet.y+10;boss_hazards_step(.001);}
         bt_check(pl.hp<hp0,"Dragon "+kind+" causes real active HP loss");array_push(outcomes,{ability:ability,key:kind,damage:hp0-pl.hp,warning:c.warning});
     }
@@ -142,7 +142,7 @@ function bt_testmode_tests() {
     bt_check(boss_test_start("storm_warden",15,"Mage",1337,-1),"Direct Drache / minute15 / all-nine test starts through production API");var b=global.active_boss;bt_check(instance_exists(b) && b.v2_unlocked==9 && global.current_level>1 && array_length(global.active_spells)>1,"Boss test supplies an evolved player and the correct unlocked dragon pool");
     global.boss_test.invulnerable=true;var hp0=ObjectPlayer.hp;player_receive_damage(ObjectPlayer,20,"all");bt_check(ObjectPlayer.hp==hp0,"Development invulnerability is scoped to the active test");boss_test_end();reset_round();bt_check(!global.boss_test.active && global.current_level==1,"Ending boss test restores normal round progression");
     hp0=ObjectPlayer.hp;player_receive_damage(ObjectPlayer,5,"all");bt_check(ObjectPlayer.hp<hp0,"Test invulnerability cannot leak into a normal round");
-    bt_reset();var mini=boss_spawn("mini_sentinel");mini.boss_timer=100;mini.boss_state="recovery";mini.mini_auto_timer=.001;boss_step(mini,.01);bt_check(array_length(global.hostile_bullets)==1 && array_length(global.boss_zones)==0,"Waldwaechter uses one ordinary automatic projectile without a floor warning");
+    bt_reset();var mini=boss_spawn("mini_sentinel");mini.boss_timer=100;mini.boss_state="recovery";mini.mini_auto_timer=.001;boss_step(mini,.01);bt_check(array_length(global.hostile_bullets)==1 && array_length(global.bv2_hazards)==0,"Waldwaechter uses one ordinary automatic projectile without a floor warning");
 }
 function bt_warning_fps_tests() {
     var samples=[];

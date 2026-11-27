@@ -38,6 +38,10 @@ function render_room_start() {
 /// Post-Draw: application surface -> window (letterboxed, centred).
 function render_present() {
     if(!surface_exists(application_surface))return;
+    // GameMaker resizes the application surface to the window when the window size changes after the room started
+    // (window_set_size, fullscreen toggle): the world was then drawn 4:3-stretched into 1280x720 until the next room
+    // (found 27.11. in scene recordings). Restore the world grid; the new size applies from the next frame.
+    if(surface_get_width(application_surface)!=VIEW_W || surface_get_height(application_surface)!=VIEW_H)surface_resize(application_surface,VIEW_W,VIEW_H);
     var sw=surface_get_width(application_surface),sh=surface_get_height(application_surface);
     var ww=max(1,window_get_width()),wh=max(1,window_get_height());
     var s=min(ww/sw,wh/sh),dw=round(sw*s),dh=round(sh*s),dx=(ww-dw) div 2,dy=(wh-dh) div 2,whole=abs(s-round(s))<.001;
