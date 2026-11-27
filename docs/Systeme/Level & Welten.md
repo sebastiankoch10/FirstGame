@@ -1,6 +1,6 @@
 ---
 tags: [system, level]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # Level & Welten
 
@@ -19,6 +19,8 @@ Drei Welten: Wald (`Room1`, handgebauter Master-Wald), Verfluchter Sumpf, Aschen
 
 ## Abhängigkeiten
 [[Gegner & Spawns]] · [[Licht, Wetter & Effekte]] · [[Audio]] · [[Spieler & Bewegung]] · [[Rendering & Pixelraster]]
+
+- **Pflanzen wiegen seit 27.11. pixelgenau** (`fx_sway_draw` aus `level_prop_draw`, `master_scenery_draw` und `ObjectEnvironmentDecoration`): waagerechte Streifen um ganze Pixel verschoben, Fuß fest, statt das Sprite zu drehen; Schatten der Requisiten als weiches Sprite (`fx_soft_shadow`).
 
 ## Bekannte Probleme
 - Die Layoutdaten sind generiert: Änderungen nur über `build_level.py`, sonst gehen sie beim nächsten Erzeugen verloren.

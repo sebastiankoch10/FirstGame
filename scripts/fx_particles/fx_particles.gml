@@ -38,6 +38,13 @@ function fxp_ramp(_el) {
     ];
     return ramps[clamp(_el,0,8)];
 }
+/// Colour lookup table of a ramp (32 steps, built once per element): drawing reads lut[t*31] instead of mixing two
+/// colours per particle and frame (profile 27.11.: fxp_draw 1.3-1.8 ms in the horde).
+function fxp_lut(_el) {
+    static luts=undefined;
+    if(is_undefined(luts)){luts=array_create(9);for(var e=0;e<9;e++){var r=fxp_ramp(e),l=array_create(32);for(var i=0;i<32;i++)l[i]=fxp_ramp_color(r,i/31);luts[e]=l;}}
+    return luts[clamp(_el,0,8)];
+}
 function fxp_ramp_color(_ramp,_t) {
     var n=array_length(_ramp)-1,f=clamp(_t,0,.9999)*n,i=floor(f);
     return merge_color(_ramp[i],_ramp[min(n,i+1)],f-i);
@@ -46,7 +53,7 @@ function fxp_ramp_color(_ramp,_t) {
 function fxp_add(_x,_y,_vx,_vy,_life,_el,_size=1,_kind=FXP_PIXEL,_layer=FXP_EMIT,_grav=0,_drag=0,_t0=0,_alpha=1) {
     fxp_init();
     if(array_length(global.fxp)>=fxp_cap())array_delete(global.fxp,0,1);
-    array_push(global.fxp,{x:_x,y:_y,vx:_vx,vy:_vy,life:_life,total:_life,ramp:fxp_ramp(_el),size:_size,kind:_kind,layer:_layer,
+    array_push(global.fxp,{x:_x,y:_y,vx:_vx,vy:_vy,life:_life,total:_life,ramp:fxp_lut(_el),size:_size,kind:_kind,layer:_layer,
         grav:_grav,drag:_drag,t0:_t0,alpha:_alpha,seed:vfx_random(100)});
     return true;
 }
@@ -68,21 +75,21 @@ function fxp_draw(_layer) {
     for(var i=0;i<array_length(p);i++) {
         var q=p[i];if(q.layer!=_layer)continue;
         if(q.x<r.left-24 || q.x>r.right+24 || q.y<r.top-24 || q.y>r.bottom+24)continue;
-        var life=1-q.life/q.total,col=fxp_ramp_color(q.ramp,q.t0+(1-q.t0)*life),a=q.alpha*(life<.85 ? 1 : (1-life)/.15),px=round(q.x),py=round(q.y);
+        var life=1-q.life/q.total,col=q.ramp[min(31,floor((q.t0+(1-q.t0)*life)*31.99))],a=q.alpha*(life<.85 ? 1 : (1-life)/.15),px=round(q.x),py=round(q.y);
         draw_set_color(col);drawn++;
         switch(q.kind) {
             case FXP_STREAK:{
                 // velocity-aligned speed line, 1 px, length from speed (shrinks as it slows)
                 var sp=point_distance(0,0,q.vx,q.vy),len=clamp(sp*.035,1,18)*(1-life*.6),ux=q.vx/max(1,sp),uy=q.vy/max(1,sp);
                 draw_set_alpha(a);draw_line(px,py,round(q.x-ux*len),round(q.y-uy*len));
-                if(q.size>1 && life<.5){draw_set_color(fxp_ramp_color(q.ramp,0));draw_point(px,py);}
+                if(q.size>1 && life<.5){draw_set_color(q.ramp[0]);draw_point(px,py);}
             }break;
             case FXP_SHARD:{
                 // crystal shard: a pixel diamond that tumbles (alternates its long axis)
                 var s=max(1,round(q.size*(1-life*.5))),flip=(floor(t*14+q.seed) mod 2)==0;draw_set_alpha(a);
                 if(flip){draw_rectangle(px,py-s,px,py+s,false);draw_point(px-1,py);draw_point(px+1,py);}
                 else{draw_rectangle(px-s,py,px+s,py,false);draw_point(px,py-1);draw_point(px,py+1);}
-                draw_set_color(fxp_ramp_color(q.ramp,0));draw_point(px,py);
+                draw_set_color(q.ramp[0]);draw_point(px,py);
             }break;
             case FXP_EMBER:{
                 // flickering ember: 1-2 px, brightness jumps
@@ -97,7 +104,7 @@ function fxp_draw(_layer) {
             case FXP_FLASH:{
                 // impact core: a white-hot disc that shrinks within a few frames
                 var s=max(1,round(q.size*(1-life)));draw_set_alpha(a);draw_circle(px,py,s,false);
-                draw_set_color(fxp_ramp_color(q.ramp,0));draw_circle(px,py,max(1,s-2),false);
+                draw_set_color(q.ramp[0]);draw_circle(px,py,max(1,s-2),false);
             }break;
             default:{var s=max(1,round(q.size*(1-life*.5)));draw_set_alpha(a);draw_rectangle(px,py,px+s-1,py+s-1,false);}break;
         }

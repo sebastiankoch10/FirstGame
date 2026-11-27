@@ -1,6 +1,6 @@
 ---
 tags: [system, klassen]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # Klassen & Startwaffen
 
@@ -22,6 +22,7 @@ Drei Klassen mit eigener automatischer Startwaffe: Schwertmeister (`Sword`), Ark
 
 - **Grundpfeile seit 26.11. neutral** (`vfx_arrow_shot`, `vfx_arrow_fall`, `vfx_arrow_hit`, silberne Stufen-Spur in `projectile_draw`).
 - **Spieler-Zielmarken** `vfx_player_target_mark` statt Gegner-Telegraph (Sternenorb, Hagel); die Kegelwarnung des Magierbogens ist entfernt.
+- **Grafik-Overhaul (27.11.):** `vfx_star_orb` als durchscheinender Körper mit gegenläufigen Pixelringen, Spiralarmen und Kern (vorher flache Vollscheibe); Partikel aller Klasseneffekte über `fx_class_effect_particles` (Aufruf in `class_effects_step`), Projektilspuren `fx_projectile_trail` (Stab: Arkanfunken, Pfeil: nur ein feiner Luftstrich, G16), Speed-Lines beim Schwerthieb `fx_sword_swing` ([[Licht, Wetter & Effekte]]).
 
 ## Abhängigkeiten
 [[Spieler & Bewegung]] · [[Talente]] (Klassenbäume) · [[Ausrüstung]] (Waffenschaden %) · [[Licht, Wetter & Effekte]] · [[Progression & Level-up]] (Waffenkarten)

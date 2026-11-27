@@ -65,6 +65,7 @@ function apply_attack_damage(_target, _amount, _source, _sid=0) {
     _target.damage_number_y = -20;
 
     hit_reaction(_target,_source,_sid);
+    fx_hit(_target,_source,_sid,critical); // overhaul hit sparks (visual only)
     damage_number_add(_target,hp_before-_target.hp,_sid);
     return true;
 }
@@ -138,7 +139,7 @@ function spell_projectile_step() {
     }
     ds_list_destroy(hits);lifetime--;if(lifetime<=0)instance_destroy();depth=-y;
     spell_vfx_trail(x,y,direction,spell_id==SPELL.FIREBALL ? "fire" : (spell_id==SPELL.ICEBALL ? "ice" : (spell_id==0 ? projectile_kind : "arcane")));
-    if(spell_id==SPELL.FIREBALL || spell_id==SPELL.ICEBALL)fxp_trail(x,y,direction,spell_id==SPELL.FIREBALL ? 1 : 2,projectile_speed*60,1+.25*vfx_spell_band(spell_id)); // graphics overhaul
+    fx_projectile_trail(id); // graphics overhaul: element trail of every projectile (fx_world)
 }
 
 function spell_ui_layout() {

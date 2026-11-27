@@ -72,6 +72,7 @@ function class_effects_step(_dt) {
     if(global.game_paused || !instance_exists(ObjectPlayer) || !variable_global_exists("class_effects"))return;
     for(var i=array_length(global.class_effects)-1;i>=0;i--) {
         var f=global.class_effects[i];f.age+=_dt;
+        fx_class_effect_particles(f,_dt); // graphics overhaul (visual only)
         if(f.kind=="mage_arc" && f.age>=.09 && f.ticks==0) {
             var zone=telegraph_make("sector",f.x,f.y,f.radius,1,f.angle,120),targets=spell_targets(f.x,f.y,f.radius);
             for(var j=0;j<array_length(targets);j++)if(telegraph_contains(zone,targets[j].x,targets[j].y-10))apply_attack_damage(targets[j],f.damage,ObjectPlayer,0);
@@ -92,7 +93,8 @@ function class_effects_step(_dt) {
         if(f.age>=f.duration)array_delete(global.class_effects,i,1);
     }
 }
-function class_fx_burst(_x,_y,_radius,_row) {class_fx_add("burst"+string(_row),_x,_y,0,_radius,.4);light_pulse(_x,_y,min(360,_radius*2),_row<4 ? make_color_rgb(166,116,255) : make_color_rgb(166,235,119),1,.3);}
+// light .55 instead of 1: with the overbright world light (graphics overhaul) the full pulse washed the fight out (visual-qa 27.11.)
+function class_fx_burst(_x,_y,_radius,_row) {class_fx_add("burst"+string(_row),_x,_y,0,_radius,.4);light_pulse(_x,_y,min(360,_radius*2),_row<4 ? make_color_rgb(166,116,255) : make_color_rgb(166,235,119),.55,.3);}
 /// Class effect sheet rows as pixel composites (render_pipeline): 0 arcane bolt, 4 arrow, 7 dust; others keep the
 /// old sprite (no class uses them any more).
 function class_fx_sprite(_row,_progress,_x,_y,_radius,_angle=0,_alpha=1) {
@@ -150,7 +152,8 @@ function class_effects_draw() {
         }
         if(f.kind=="mage_star" || f.kind=="mage_star_nova") {
             var flight=clamp(f.age/.85,0,1),xx=lerp(f.sx,f.x,flight),ground_y=lerp(f.sy,f.y,flight),height=sin(pi*flight)*180;
-            if(f.age<1){var shrink=f.age>.85 ? 1-(f.age-.85)/.15*.7 : 1;vfx_star_orb(xx,ground_y-height,(20+tier*4)*shrink,f.age);var pal=vfx_palette(4);for(var trail=1;trail<=5;trail++){var prev=max(0,flight-trail*.018),tx=lerp(f.sx,f.x,prev),ty=lerp(f.sy,f.y,prev)-sin(pi*prev)*180;vfx_px(tx-1,ty-1,trail<3 ? 3 : 2,trail<3 ? pal[1] : pal[0],1-trail*.15);}}
+            // the orb grows out of the staff instead of covering the figure at launch (visual-qa 27.11.)
+            if(f.age<1){var shrink=(f.age>.85 ? 1-(f.age-.85)/.15*.7 : 1)*clamp(flight*6,.3,1);vfx_star_orb(xx,ground_y-height,(20+tier*4)*shrink,f.age);var pal=vfx_palette(4);for(var trail=1;trail<=5;trail++){var prev=max(0,flight-trail*.018),tx=lerp(f.sx,f.x,prev),ty=lerp(f.sy,f.y,prev)-sin(pi*prev)*180;vfx_px(tx-1,ty-1,trail<3 ? 3 : 2,trail<3 ? pal[1] : pal[0],1-trail*.15);}}
             if(f.age<.85)vfx_player_target_mark(f.x,f.y,f.radius,f.age/.85,make_color_rgb(186,150,255));
         }
         if(f.kind=="ranger_rain") {
@@ -238,13 +241,20 @@ function vfx_magic_circle(_x,_y,_r,_p,_age,_tier) {
 }
 /// Falling star of the Arkanistin: layered pixel orb with a turning sparkle cross.
 function vfx_star_orb(_x,_y,_r,_age) {
-    var pal=vfx_palette(4),x0=round(_x),y0=round(_y),r=max(2,round(_r));
-    if(vfx_quality()>0)vfx_glow_disc(x0,y0,r*1.6,pal[1],.18);
-    draw_set_alpha(1);draw_set_color(pal[0]);draw_circle(x0,y0,r,false);
-    draw_set_color(pal[1]);draw_circle(x0-1,y0-1,max(1,r-2),false);
-    draw_set_color(pal[2]);draw_circle(x0-round(r*.3),y0-round(r*.3),max(1,round(r*.35)),false);
-    var s=r+4+2*sin(_age*20);
-    vfx_pixel_line(x0-s,y0,x0+s,y0,1,pal[2],.9);vfx_pixel_line(x0,y0-s,x0,y0+s,1,pal[2],.9);
+    // Graphics overhaul (27.11.): a translucent body with structure instead of a flat opaque disc (it read as a pink
+    // blob under the brighter light): dark shell, counter-rotating pixel rims, three spiral arms into a hot core, and a
+    // pulsing star glint. Trail and sparks come from fx_class_effect_particles.
+    var pal=vfx_palette(4),x0=round(_x),y0=round(_y),r=max(2,round(_r)),t=_age;
+    if(vfx_quality()>0)vfx_glow_disc(x0,y0,r*1.7,pal[1],.07);
+    draw_set_alpha(.5);draw_set_color(pal[0]);draw_circle(x0,y0,r,false);
+    draw_set_alpha(.3);draw_set_color(pal[1]);draw_circle(x0,y0,max(1,round(r*.7)),false);
+    vfx_pixel_ring(x0,y0,r,pal[1],.95,t*140,3,1);
+    vfx_pixel_ring(x0,y0,max(2,r-3),pal[2],.65,-t*210,5,1);
+    for(var arm=0;arm<3;arm++)for(var k=0;k<6;k++){var q=k/6,a=arm*120+t*260+q*150,d=r*(.86-.7*q);vfx_px(x0+lengthdir_x(d,a),y0+lengthdir_y(d,a),k<3 ? 2 : 1,pal[2],1);}
+    draw_set_alpha(.85);draw_set_color(pal[1]);draw_circle(x0,y0,max(1,round(r*.22)),false); // core not burnt out: light violet, white only in the centre
+    draw_set_color(c_white);draw_rectangle(x0-1,y0-1,x0,y0,false);
+    var s=round(r*.8)+round(1.5*sin(t*20)); // glint inside the body (a cross beyond it read like a crosshair)
+    vfx_pixel_line(x0-s,y0,x0+s,y0,1,pal[2],.6);vfx_pixel_line(x0,y0-s,x0,y0+s,1,pal[2],.6);
     draw_set_alpha(1);draw_set_color(c_white);
 }
 /// Class detonation (row 2: circle, row 3: star implosion): rings collapse, then a shock ring and sparks run out.

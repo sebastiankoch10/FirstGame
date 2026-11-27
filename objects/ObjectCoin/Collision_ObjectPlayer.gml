@@ -8,5 +8,6 @@ if (variable_instance_exists(id, "coin_value")) {
 global.coin_xp_earned+=coin_value;
 if(magnet_generation>0) {global.magnet_metrics.collected++;global.magnet_metrics.xp+=coin_value;}
 fg_sfx("coin");
+fx_coin_pickup(x,y);
 instance_destroy();
 

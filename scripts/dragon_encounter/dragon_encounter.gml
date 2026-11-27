@@ -38,7 +38,9 @@ function dragon_encounter_begin(_b,_kind) {
     var origin=(_kind=="slam" || _kind=="vortex") ? {x:_b.x,y:_b.y-10} : mouth;
     _b.enc_geometry=telegraph_make(c.shape,origin.x,origin.y,_kind=="beam" ? _b.dragon_beam_length : c.radius,c.warning,_b.dragon_angle,c.span,c.width);
     _b.enc_cfg=c;_b.enc_hits=0;_b.enc_waves=0;_b.dragon_next_hit=0;_b.enc_zones=[];_b.dragon_magma=[];_b.enc_lanes=[];_b.enc_combo=undefined;_b.enc_combo_fired=false;
-    if(_kind=="volley")for(var lane=-1;lane<=1;lane++)array_push(_b.enc_lanes,telegraph_make("line",origin.x+lengthdir_x(lane*46,_b.dragon_angle+90),origin.y+lengthdir_y(lane*46,_b.dragon_angle+90),880,c.warning,_b.dragon_angle,0,26));
+    // volley lanes: one telegraph per parallel bullet of the first wave, same offsets as dragon_encounter_bullets (WYSIWYG;
+    // before 27.11. always 3 lanes, so with 4+ bullets from minute 15 the bullets flew beside the announced lanes)
+    if(_kind=="volley"){var lanes=3+_b.v2_scaling.projectiles;for(var lane=0;lane<lanes;lane++){var lo=(lane-(lanes-1)*.5)*46;array_push(_b.enc_lanes,telegraph_make("line",origin.x+lengthdir_x(lo,_b.dragon_angle+90),origin.y+lengthdir_y(lo,_b.dragon_angle+90),880,c.warning,_b.dragon_angle,0,26));}}
     if(_kind=="vortex" && _b.boss_phase==4)_b.enc_combo=telegraph_make("sector",mouth.x,mouth.y,780,c.warning,_b.dragon_angle,65);
     _b.dragon_target_x=pl.x;_b.dragon_target_y=pl.y-10;
     if(_kind=="meteor" || _kind=="stomp") {
@@ -95,9 +97,12 @@ function dragon_encounter_begin(_b,_kind) {
 function dragon_encounter_bullets(_b,_count,_spacing,_speed,_damage,_parallel=false) {
     _speed*=_b.v2_scaling.projectile_speed;
     var g=_b.enc_geometry;
+    // aimed fan: with an even count no bullet flew at the aimed point, so standing still was always safe (fixed 27.11.);
+    // the fan is shifted by half a spacing, alternating per wave, so one bullet always flies at the target
+    var shift=(!_parallel && (_count mod 2)==0) ? ((_b.enc_waves mod 2)==0 ? .5 : -.5)*_spacing : 0;
     for(var i=0;i<_count;i++) {
         if(array_length(global.hostile_bullets)>=256)break;
-        var dir=g.angle+(_parallel ? 0 : (i-(_count-1)*.5)*_spacing),off=_parallel ? (i-(_count-1)*.5)*46 : 0;
+        var dir=g.angle+(_parallel ? 0 : (i-(_count-1)*.5)*_spacing+shift),off=_parallel ? (i-(_count-1)*.5)*46 : 0;
         array_push(global.hostile_bullets,{owner:_b,x:g.x+lengthdir_x(off,g.angle+90),y:g.y+lengthdir_y(off,g.angle+90),vx:lengthdir_x(_speed,dir),vy:lengthdir_y(_speed,dir),radius:13,age:0,life:4,damage:_damage,dragon_void:true,wind:_b.boss_cast=="wind",volley:_b.boss_cast=="volley"});
     }
     fg_sfx(_b.boss_cast=="wind" ? "dragon_wind" : "dragon_void");

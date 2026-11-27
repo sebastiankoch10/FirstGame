@@ -123,7 +123,7 @@ hud_step(simulation_dt);
 effects_step();
 feedback_step(simulation_dt);weather_step(simulation_dt);
 spell_v2_step(simulation_dt);equipment_step(simulation_dt);spell_vfx_step(simulation_dt);
-fxp_step(simulation_dt);atmos_step(simulation_dt);fx_step(simulation_dt);fx_attacks_step(simulation_dt);fx_char_step(simulation_dt); // graphics overhaul: particles, atmosphere, post events (visual only)
+fxp_step(simulation_dt);atmos_step(simulation_dt);fx_step(simulation_dt);fx_attacks_step(simulation_dt);fx_char_step(simulation_dt);fx_world_step(simulation_dt); // graphics overhaul: particles, atmosphere, post events (visual only)
 class_effects_step(simulation_dt);
 chain_visual_step(simulation_dt);
 

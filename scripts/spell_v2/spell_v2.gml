@@ -21,7 +21,7 @@ function progression_try_level() {
     if(global.game_paused || global.game_over || global.round_seconds<global.next_levelup_time || spell_build_complete() || global.coins<global.coins_needed)return false;
     global.coins-=global.coins_needed;global.current_level++;global.coins_needed=progression_cost(global.current_level);
     talent_on_level(global.current_level);
-    fg_sfx("level_up");handle_chest_selection("levelup");return true;
+    fg_sfx("level_up");fx_levelup();handle_chest_selection("levelup");return true;
 }
 function spell_v2_init() {global.spell_fields=[];global.spell_bursts=[];global.spell_links=[];global.spell_trace_id=0;}
 function spell_link(_ax,_ay,_bx,_by,_element) {

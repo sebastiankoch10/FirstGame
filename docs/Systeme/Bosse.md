@@ -1,6 +1,6 @@
 ---
 tags: [system, bosse]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # Bosse
 
@@ -39,6 +39,8 @@ Zwei Minibosse in Minute 1 und 3. Ab Minute 5 alle 5 Minuten ein zufälliger Hau
   - Das Orakel der Boss-Suite sieht jetzt Fächer, Biss, Schweif, Stampf- und Meteorzonen und den Ring. Ergebnis: in allen 18 Drachenfällen 0 Bilder ohne erreichbare sichere Position.
   - Seit dem Nachtrag vom 26.11. sieht das Orakel auch die Projektile des Drachen (Wind, Leere, Salve; `hostile_bullets`). Es nutzt dieselbe Trefferregel wie `boss_hazards_step`: Abstand zur Flugbahn ≤ Projektilradius + Kontaktradius.
   - Ergebnis: In allen 18 Drachenfällen und 11 Sequenzen gibt es 0 Bilder ohne erreichbare sichere Position.
+  - **27.11.:** Gezielte Fächer (Leere, Wind) mit gerader Projektilzahl (ab Minute 15) ließen die Zielposition frei; jetzt um eine halbe Teilung versetzt, abwechselnd je Welle (`dragon_encounter_bullets`). Das Orakel muss in diesen Fällen jetzt ausweichen (31–122 Bilder) bei 0 unsicheren Bildern. Die Salven-Bahnen (`enc_lanes`, nicht gezeichnet) folgen der echten Projektilzahl.
+  - **27.11.:** Sequenzen neu zusammengestellt (`bc_sequences`): „Inferno“ ist keine Kopie von „Feuersturm“ mehr, Leere und Salve kommen in je zwei Sequenzen vor, Stampfen in fünf statt sieben; je Phase bleibt eine Sequenz aus den Fähigkeiten 1–3 für den Boss in Minute 5 ([[DECISIONS]]).
 
     | Fall | Projektile im Blick (max., Bilder) | Ausweichbewegung (Bilder) |
     |---|---|---|

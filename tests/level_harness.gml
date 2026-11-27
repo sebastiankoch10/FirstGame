@@ -156,6 +156,7 @@ function lv_controller_tick() {
         if(f==40)lv_capture("start-"+lv.id);
         if(f==41 && room==Room1)lv_scenery_grid_check();
         lv_coin_cull_check(f);
+        if(f==45)lv_check(surface_exists(application_surface) && surface_get_width(application_surface)==VIEW_W && surface_get_height(application_surface)==VIEW_H,"world drawn on the "+string(VIEW_W)+"x"+string(VIEW_H)+" grid (application surface "+string(surface_get_width(application_surface))+"x"+string(surface_get_height(application_surface))+")");
         if(f==44 && gen && array_length(ObjectLevelWorld.data.sites)>0) {
             // Scenic preview at the first landmark: the level-select image is a real native frame.
             var site=ObjectLevelWorld.data.sites[0];lv_place(site.x,site.y+190);

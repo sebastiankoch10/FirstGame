@@ -15,16 +15,16 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
   - Seit 26.11. sieht das Orakel auch Wind, Leere und Salve (Projektile): 0 unsichere Bilder in allen Fällen ([[Bosse]]).
   - Vorschlag: die Altangriffe des Drachen einzeln auf `bv2_sector`/`bv2_zone`/Ring umziehen, je Angriff mit dem vorhandenen Orakel-Fall als Absicherung; zuerst Fächer und Bodenschlag (rein geometrisch), zuletzt die Projektile.
   → [[Bosse]]
-- **Drachen-Projektile verfehlen eine stillstehende Figur?** (Prüffrage aus dem Orakel-Nachtrag 26.11.)
-  - Befund: In den Fällen Leere (P1, P3) und Wind (P3) sieht das Orakel 12–16 Projektile, aber keine Flugbahn kreuzt die stillstehende Testfigur in 330 px Abstand; es bewegt sich 0 Bilder.
-  - Ursache nicht geprüft. Verdacht: Die Zielrichtung folgt dem Kopf in 32 festen Drehstufen (`dragon_parts`), die Mittelachse des Fächers läge dann bis zu etwa 5,6° neben der Figur.
-  - Nächster Schritt: im Boss-Test (F5, Fähigkeit 7) prüfen, ob die Leere eine ruhende Figur trifft. Das ist eine Frage der Lesbarkeit, keine Unfairness.
-  → [[Bosse]]
 - **Pausenansicht in Review- und Testszenarien:** Die Zeile „Klasse | Leben“ des Pausen-Inventars (unten, etwa y 673) liegt auf den Statuszeilen von Review- und Boss-Testmodus. Nur Lesbarkeit; im normalen Spiel ohne Statuszeilen tritt es nicht auf. → [[UI, HUD & Menüs]]
-- **Grafik-Overhaul, Leistung im Münz-Belastungstest** (`perf`, Szenario `horde_coins`: Horde plus 2.500 liegende Münzen, 26.11. nachts, je zwei Läufe direkt hintereinander):
-  - Bildzeit im Mittel vorher 17,2–17,5 ms, nachher 18,4–18,6 ms (etwa 57 → 54 FPS). Horde ohne Münzen und Bosskämpfe sind gleich (16,7–17,3 ms).
-  - Mit Profil-Hüllen ist kein Unterschied messbar (17,9 gegen 17,5 ms). Ursache offen, Verdacht: Treiberkosten der Nachbearbeitung bei vielen kleinen Zeichenaufrufen.
-  - Nächster Schritt: GPU-Zeit messen oder die Nachbearbeitung probeweise abschalten (`global.fx.off`). → [[Rendering & Pixelraster]]
+- **Münz-Belastungstest unter 60 FPS** (`perf`, Szenario `horde_coins`: Horde plus 2.500 liegende Münzen; schon vor dem Overhaul 57–62 FPS):
+  - Stand 27.11.: 18,2–18,4 ms je Bild (fps_real 56), Horde ohne Münzen 16,9 ms. Vor dem Overhaul 17,2–17,5 ms.
+  - Geprüft 27.11.: Ohne Nachbearbeitung nur 0,3–0,6 ms schneller; halb so viele aktive Münzen (Rand 96 statt 260 px) brachten nichts messbares (zurückgenommen). Der Rest liegt also nicht bei den aktiven Münzen, Verdacht: die Verwaltung der etwa 2.200 deaktivierten Instanzen (`instance_activate_region` alle 10 Bilder) oder Tiefensortierung.
+  - Vorschlag: Münzen als Datenfeld statt als Instanzen (ein Zeichendurchgang, keine Kollisionsereignisse); größerer Umbau, nur auf Auftrag. → [[Progression & Level-up]]
+- **Befunde der visual-qa vom 27.11. (schon vorher vorhanden, nicht Teil des Overhaul-Blocks):**
+  - Schadenszahlen stapeln sich und überdecken Lebensleisten (z. B. Waldläufer, Bosskampf). → [[UI, HUD & Menüs]]
+  - Arkanistin: Der Bogen ist fast deckend (etwa 0,68), und der Kreis mit gepunktetem Rand ähnelt der Formsprache gegnerischer Warnungen ([[Kampf & Begegnungen]] 5.7, 8). → [[Klassen & Startwaffen]]
+  - Pflanzenwiegen: Bei schwachem Wind springt die Spitze nur zwischen 0 und 1 Pixel; ob das als Wiegen oder als Zucken wirkt, ist UNKLAR. Nächster Schritt: Aufnahme mit starkem Wind. → [[Level & Welten]]
+  - Der Szenen-Recorder speichert Bilder mit 1280×720 statt 960×540 (gleichmäßig hochskaliert, jede dritte Pixelspalte doppelt); schon in einer Aufnahme vom 26.11. Das Spiel selbst ist nicht betroffen: Die Level-Suite prüft seit 27.11. in allen drei Leveln die Bildfläche 960×540 (PASS). Der Fehler liegt im Aufnahmeweg des Recorders und erschwert die Beurteilung des Pixelrasters in Aufnahmen. → [[Tests & QA]]
 - **Diktieren im Urteilsdialog ungetestet** (seit 26.11. abends): Die Windows-Spracheingabe (Win+H) sollte direkt ins Kommentarfeld schreiben (`keyboard_string`); automatisch nicht prüfbar, bisher nicht ausprobiert. → [[Review-Center]]
 - **Grafik-Overhaul, Restpunkte der visual-qa-Zweitmeinung (26.11.):**
   - Rauch über einem waagerechten Feuerstrahl könnte die Fläche nach oben verlassen; nicht geprüft, weil die Aufnahme nur senkrechte und schräge Strahlen zeigt.
@@ -32,7 +32,6 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
   - Der getönte Strahlbereich ist auf hell beleuchtetem Boden nur über Farbton und Rand vom Boden abgesetzt (Tönung inzwischen 0,65).
   → [[Visuelles Leitbild & Animation]] 7
 - **Gegnerzustand per Existenzprüfung:** `ObjectMonster` unterscheidet Art und Zustand über etwa 12 `variable_instance_exists`-Abfragen je Gegner und Bild (`boss_twin`, `boss_minion`, `lvl_kind`, `hit_stun`, `lvl_hover` …). Das ist fehleranfällig bei neuen Gegnerarten und kostet Zeit. Vorschlag: alle Felder in `ObjectMonster/Create_0` mit Standardwerten anlegen und die Abfragen schrittweise durch Feldvergleiche ersetzen, abgesichert durch Level- und Regression-Suite. → [[Gegner & Spawns]]
-- **Sequenz-Vielfalt des Drachen** (Datenbefund, Designfrage): „Feuersturm“ (Phase 3) und „Inferno“ (Phase 4) sind identisch, und drei weitere Sequenzen sind Umstellungen derselben drei Fähigkeiten (Feueratem, Fächer, Stampfen). Feueratem kommt in 8, Stampfen in 7 von 11 Sequenzen vor, Salve und Leere nur je einmal. Entscheidung über die Zusammenstellung beim Nutzer nach dem Spieltest. → [[Boss-Design]]
 - **Drachenkopf bei steilen Winkeln:** Die Kopfansichten entstehen durch Drehen der Seitenansicht; nach unten gerichtet wirkt der Kopf flach. Besser: eigene Draufsicht-Variante des Kopfes; Anforderungen in [[Assets & Pipeline]] 7.4. → [[Bosse]]
 
 - **Performance bei vielen Gegnern** (26.11., `tests/tools/profile_perf.py`): Szenerie-Kollision mit Zellindex, Skelett-Sprite gecacht, Texturen im Menü vorgeladen. 148 Gegner unbegrenzt etwa 73–75 FPS (vorher 64–66), Bosskämpfe mit 60 Gegnern 87–100. Bewusst nicht optimiert, weil Pixel oder Review-Inhalte betroffen wären: Schatten in `enemy_draw` (4 Ellipsen je Gegner, etwa 0,5 ms) und `bv2_hazards_draw` im Drachenkampf (etwa 2,4 ms). Weitere Optimierung nur bei Bedarf; das Verhalten darf sich nicht ändern. → [[Gegner & Spawns]]

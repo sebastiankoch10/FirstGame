@@ -102,6 +102,10 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
   - Am Ende jedes Auftrags im Bericht kurz auflisten, was offen geblieben ist, und es in die Roadmap (`docs/Design/Roadmap & Vertical Slice.md`) bzw. `docs/Bugs & Ideen.md` eintragen.
   - Offenes nicht ungefragt abarbeiten, auch nicht in späteren Sitzungen und auch nicht, wenn HANDOFF, Roadmap oder `Bugs & Ideen` es nennen. Was als Nächstes kommt, entscheidet der Nutzer.
   - Zum laufenden Auftrag gehört, was er ausdrücklich verlangt, und die Behebung von Fehlern, die er selbst verursacht hat.
+- **Bei Widersprüchen und Strukturproblemen erst fragen (seit 27.11.):**
+  - Vor großem Aufwand (vor allem vor Arbeiten von mehreren Stunden) kurz anhalten, wenn eine Vorgabe des Nutzers unlogisch ist oder er sich widerspricht, wenn eine absolute Bedingung (Reviews, Freigaben, Verbote, Prüfpflichten) das Ziel unnötig bremst oder wenn der Code die Arbeit unnötig vervielfacht (Beispiel: drei Boss-Codepfade).
+  - Dann in wenigen Sätzen: Was ist das Problem, was kostet es, was schlägst du vor (mit Empfehlung)? Auf die Antwort warten, dann übernehmen.
+  - Kleine Unklarheiten entscheidet der Agent weiter selbst nach bestem Standard (Generalfreigabe 25.11.).
 - **Bossarbeit** folgt `docs/Design/Boss-Design.md` und `docs/Design/Kampf & Begegnungen.md`. Gefahren laufen über eine Uhr je Boss (`v2_clock`), sodass Warnung und Treffer synchron bleiben.
 - **Grafik-, Animations-, Effekt- und Tonarbeit** folgt `docs/Design/Visuelles Leitbild & Animation.md` und `Fähigkeiten, VFX & Audio.md`. Bewegungsreferenz Terranigma nur für Bewegungsqualität, nie Assets oder Stil kopieren.
 - **Größere Umbauten** an Rendering, Animation oder Kampfsystem nur nach `docs/Design/Technische Architektur.md` und `Roadmap & Vertical Slice.md`. Mit „Offen“ markierte Entscheidungen trifft der Agent nach bestem Standard (Generalfreigabe 25.11.) und begründet sie in `docs/DECISIONS.md`.

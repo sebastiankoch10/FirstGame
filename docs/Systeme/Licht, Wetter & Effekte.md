@@ -1,6 +1,6 @@
 ---
 tags: [system, effekte]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # Licht, Wetter & Effekte
 
@@ -16,6 +16,8 @@ Verstärkbares Weltlicht, Wetter, Atmosphäre je Level, Kampf-Feedback, Zauber- 
   - `scripts/fx_particles`: gemeinsames Pixel-Partikelsystem (`fxp_add`, `fxp_step`, `fxp_draw(FXP_LIT|FXP_EMIT)`). Pool 420 / 1.000 / 1.800, Farbverläufe `fxp_ramp`, Formen Pixel, Speed-Line, Splitter, Glut, Rauch, Kernblitz. Bausteine `fxp_impact`, `fxp_trail`, `fxp_aura`, `fxp_gather`, `fxp_flame_line`; Bodenmale `fxp_decal`, `fxp_decals_glow`.
   - `scripts/atmos_fx`: Schwebeteilchen je Level (`atmos_profile`, `atmos_step`, `atmos_draw`), Lichtstrahlen (`atmos_shafts`, Lichtfleck über `atmos_lights`, Dunst über `atmos_haze_draw`), Glühwürmchen mit eigenem kleinen Licht.
   - `scripts/fx_attacks`: Angriffsdekor auf der Weltebene unter der Gefahrenfläche (`fx_fire_beams`, `fx_attacks_step`, `fx_attacks_draw`, `fx_attacks_lights`). Bisher nur der Drachen-Feueratem.
+  - `scripts/fx_world` (seit 27.11.): Welt-Feedback auf den Pixelpartikeln. `fx_hit` (aus `apply_attack_damage`), `fx_enemy_death` (aus `ObjectMonster` Step, Aussehen nach Status: Glut, Splitter, Funken), Münzen (`fx_coin_glint` zentral aus `fx_world_step`, `fx_coin_trail`, `fx_coin_pickup`), Pickups (Truhe, Magnetkugel, Beute; Licht über `fx_world_lights`), `fx_levelup` (aus `progression_try_level`, spielt nach der Wahl), Startwaffen (`fx_projectile_trail`, `fx_sword_swing`, `fx_class_effect_particles`) und `fx_sway_draw` (Pflanzen wiegen pixelgenau in Streifen statt per Drehung; Niedrig ohne Wiegen). Budgets je Bild, Gedränge-Entlastung `fx_crowd_k` ab etwa 60 Gegnern.
+  - Partikelfarben seit 27.11. aus Tabellen (`fxp_lut`, 32 Stufen je Element) statt Mischung je Partikel und Bild.
   - Nachbearbeitung und Ebenen: [[Rendering & Pixelraster]] (`scripts/render_fx`).
 - `scripts/weather`: Nebel, Regen und Wind je Level.
 - `scripts/spell_vfx`: begrenzter Partikelpool (420), Spuren, Feld-Emitter, dauerhafte Zauberlichter.

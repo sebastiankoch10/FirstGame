@@ -38,9 +38,9 @@ function master_scenery_draw() {
     var sway=master_prop<8 ? sin(global.weather.clock*1.25+x*.013)*global.weather.wind*.8 : 0;
     var alpha=1;
     if(master_prop<4 && instance_exists(ObjectPlayer) && abs(ObjectPlayer.x-x)<85 && ObjectPlayer.y<y && ObjectPlayer.y>y-180)alpha=.42;
-    if(master_prop<4)master_shadow_draw(x-12,y+4,44*image_xscale,11*image_yscale,.35);
-    else if(master_prop>=8 && master_prop!=14 && master_prop!=15)master_shadow_draw(x-8,y+3,(master_prop==9 ? 73 : (master_prop==10 ? 65 : 30))*image_xscale,9*image_yscale,.34);
-    draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,sway,c_white,alpha);
+    if(master_prop<4)fx_soft_shadow(x-12,y+4,44*image_xscale,11*image_yscale,.35);
+    else if(master_prop>=8 && master_prop!=14 && master_prop!=15)fx_soft_shadow(x-8,y+3,(master_prop==9 ? 73 : (master_prop==10 ? 65 : 30))*image_xscale,9*image_yscale,.34);
+    fx_sway_draw(sprite_index,0,x,y,image_xscale,image_yscale,sprite_get_yoffset(sprite_index)*image_yscale*dsin(sway),c_white,alpha); // pixel-grid sway
     if(master_prop==11) {
         draw_set_color(make_color_rgb(255,219,129));draw_set_alpha(.65+.15*sin(current_time/90+x));
         draw_circle(x,y-78*image_yscale,2,false);draw_set_color(c_white);draw_set_alpha(1);

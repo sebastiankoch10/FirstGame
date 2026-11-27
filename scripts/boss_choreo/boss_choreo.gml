@@ -250,9 +250,12 @@ function bc_sequences(_kind,_phase) {
     if(_kind!="dragon")return [];
     switch(_phase) {
         case 1:return [{name:"Feuerschneise",steps:["beam","arc"]},{name:"Glutboden",steps:["stomp","beam"]}];
-        case 2:return [{name:"Glutfaecher",steps:["arc","stomp","beam"]},{name:"Sternenbahn",steps:["meteor","beam","wind"]},{name:"Erdbeben",steps:["slam","stomp","arc"]}];
-        case 3:return [{name:"Feuersturm",steps:["beam","stomp","vortex"]},{name:"Meteorhagel",steps:["meteor","volley","slam"]},{name:"Feuerwand",steps:["stomp","arc","beam"]}];
-        default:return [{name:"Inferno",steps:["beam","stomp","vortex"]},{name:"Sturmauge",steps:["wind","void","meteor"]},{name:"Letzte Glut",steps:["arc","beam","stomp"]}];
+        // 27.11.: no two identical sequences (Inferno was a copy of Feuersturm), void and volley in two sequences each, stomp
+        // in five instead of seven; each phase keeps one sequence of abilities 1-3 for the minute-5 boss, told apart by
+        // repetition and length instead of being a permutation of the same three steps
+        case 2:return [{name:"Glutfaecher",steps:["arc","stomp","beam"]},{name:"Sternenbahn",steps:["meteor","beam","wind"]},{name:"Erdbeben",steps:["slam","wind","stomp"]}];
+        case 3:return [{name:"Feuersturm",steps:["beam","stomp","vortex"]},{name:"Meteorhagel",steps:["meteor","volley","slam"]},{name:"Feuerwand",steps:["beam","arc","beam"]}];
+        default:return [{name:"Inferno",steps:["vortex","void","volley"]},{name:"Sturmauge",steps:["wind","void","meteor"]},{name:"Letzte Glut",steps:["arc","beam","arc","stomp"]}];
     }
 }
 function bc_seq_available(_b,_kind,_phase=-1) {

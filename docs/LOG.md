@@ -4,6 +4,12 @@ updated: 2026-11-27
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen). Ältere Einträge: [[LOG_2026]]
 
+### 2026-11-27 · Claude · „Mach das alles“, Block 1: Roadmap 14 (Welt-Feedback, Startwaffen), Drachen-Befunde, Leistung
+- Neu `scripts/fx_world`: Treffer, Tode, Münzen, Pickups, Level-up, pixelgenaues Pflanzenwiegen, Startwaffen-Partikel; Partikelfarben aus Tabellen (`fxp_lut`), Gedränge-Entlastung, Trefferaufblitzen auf der Spieluhr (`fx_flash_tick`), Sternenorb neu (`vfx_star_orb`).
+- Drache: Fächer von Leere und Wind treffen die Zielposition auch bei gerader Projektilzahl; Sequenzen neu zusammengestellt (`bc_sequences`); Salven-Bahnen folgen der Projektilzahl.
+- Münzen: schneller Pfad im Step (`ObjectCoin`), Glitzern zentral. Leistung: Horde 16,9 ms wie vor dem Overhaul, Münz-Stresstest 18,2–18,4 ms (offen).
+- Geänderte Dateien: `spell`, `spell_v2`, `class_weapons`, `master_combat`, `fx_particles`, `fx_character`, `atmosphere`, `level_world`, `master_world`, `reset_round`, `dragon_encounter`, `boss_choreo`, Objekte `ObjectCoin`, `ObjectMonster`, `ObjectController`, `ObjectEnvironmentDecoration`; Level-Suite prüft das 960×540-Raster; Regel „bei Widersprüchen erst fragen“ (AGENTS.md, DECISIONS).
+
 ### 2026-11-27 · Claude · Arbeitsweise und Review-Center neu, Grafik-Overhaul abgeschlossen, Designentscheidung „Die Attacke ist die Warnung“
 - Review-Center: neuer Status `withdrawn` (zurückgezogen, vom Agenten nach Design-Kanon entschieden, keine Freigabe); alle 43 offenen Einträge zurückgezogen und im Archiv startbar. `review.py` mit `withdraw`, `bump --request` (ohne Prüfwunsch → `withdrawn`), Pflichtfeld `requested` für neue Einträge; `review_center.gml` zeigt den Status im Archiv und kürzt lange Listentitel vor der Spalte Lv/Rev.; `review_e2e.py` und `tests/review_harness.gml` prüfen den neuen Ablauf.
 - Regeln: AGENTS.md (Review-Workflow neu gefasst, „Offenes melden statt abarbeiten“), CLAUDE.md, `.claude/agents/*`, `.codex/agents/*`, Systemnotizen Review-Center, Tests & QA, UI, Zauber & Passiva.

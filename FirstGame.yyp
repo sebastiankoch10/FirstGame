@@ -109,6 +109,7 @@
     {"id":{"name":"fx_attacks","path":"scripts/fx_attacks/fx_attacks.yy",},},
     {"id":{"name":"fx_character","path":"scripts/fx_character/fx_character.yy",},},
     {"id":{"name":"fx_particles","path":"scripts/fx_particles/fx_particles.yy",},},
+    {"id":{"name":"fx_world","path":"scripts/fx_world/fx_world.yy",},},
     {"id":{"name":"gameplay","path":"scripts/gameplay/gameplay.yy",},},
     {"id":{"name":"gameplay_polish","path":"scripts/gameplay_polish/gameplay_polish.yy",},},
     {"id":{"name":"get_spell_data","path":"scripts/get_spell_data/get_spell_data.yy",},},

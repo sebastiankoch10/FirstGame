@@ -5,7 +5,7 @@ coin_value = 1;
 collect_radius = 96;
 collect_speed = combat_config().normal_coin_speed/60;
 
-speed=0;hspeed=0;vspeed=0;
+speed=0;hspeed=0;vspeed=0;depth=-y; // the step only updates the depth while the coin moves
 
 magnetized=false;coin_collected=false;
 

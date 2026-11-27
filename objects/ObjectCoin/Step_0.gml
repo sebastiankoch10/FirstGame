@@ -1,6 +1,10 @@
+if(global.game_paused || !instance_exists(ObjectPlayer)) exit;
+// Fast path (perf 27.11.): a coin that is not pulled and lies outside the pickup square cannot move or be collected
+// this frame, exactly as in the full test below (dist > radius >= 16); speed and depth stay as set when it last moved.
+var pr=max(16,ObjectPlayer.pickup_radius);
+if(!magnetized && (abs(ObjectPlayer.x-x)>pr || abs(ObjectPlayer.y-y)>pr)) exit;
 speed=0;hspeed=0;vspeed=0;
 depth=-y;
-if(global.game_paused || !instance_exists(ObjectPlayer)) exit;
 var dist=point_distance(x,y,ObjectPlayer.x,ObjectPlayer.y);
 collect_radius=ObjectPlayer.pickup_radius;
 if((magnetized || dist<=collect_radius) && dist>0) {
@@ -11,4 +15,5 @@ if((magnetized || dist<=collect_radius) && dist>0) {
     x+=lengthdir_x(step_distance,dir);y+=lengthdir_y(step_distance,dir);
 }
 
+if(magnetized)fx_coin_trail(id); // overhaul magnet trail (visual only); glints come from fx_world_step
 if(point_distance(x,y,ObjectPlayer.x,ObjectPlayer.y)<=16) event_perform(ev_collision,ObjectPlayer);

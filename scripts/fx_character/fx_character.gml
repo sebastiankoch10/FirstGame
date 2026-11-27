@@ -38,7 +38,9 @@ function fx_char_begin(_pl,_spr,_xs) {
     var key=fx_char_key(),tex=sprite_get_texture(_spr,0),tw=texture_get_texel_width(tex),th=texture_get_texel_height(tex);
     var ox=clamp(round(key.dx*1.3),-1,1)*sign(_xs==0 ? 1 : _xs),oy=clamp(round(key.dy*1.3),-1,1);
     if(ox==0 && oy==0)oy=-1;
-    var flash=variable_instance_exists(_pl,"hud_hit_flash") ? clamp(_pl.hud_hit_flash/.2,0,1)*.7*fx_flash_k() : 0;
+    // one short white flash per hit burst: a new hit (timer jumps up) starts a 0.12 s flash at most every 0.4 s; with a
+    // crowd hitting continuously the old timer kept the figure nearly white (recording 27.11.)
+    var flash=variable_instance_exists(_pl,"fx_flash_left") ? clamp(_pl.fx_flash_left/.12,0,1)*.55*fx_flash_k() : 0; // timer runs on the game clock (fx_flash_tick)
     shader_set(sh_fx_char);
     shader_set_uniform_f(u_step,ox*tw,oy*th);
     shader_set_uniform_f(u_rim,color_get_red(key.col)/255,color_get_green(key.col)/255,color_get_blue(key.col)/255,.55*key.k);
@@ -72,8 +74,18 @@ function fx_char_dust_el() {
     if(room==Room1 || !variable_global_exists("selected_level"))return 5;
     var id_=level_def().id;return id_=="swamp" ? 6 : (id_=="ashfrost" ? 8 : 5);
 }
+/// One short white flash per hit burst on the game clock: a new hit (the HUD timer jumps up) starts 0.12 s, at most every
+/// 0.4 s. With a crowd hitting continuously the old HUD timer kept the figure nearly white (recording 27.11.).
+function fx_flash_tick(_pl,_dt) {
+    if(!variable_instance_exists(_pl,"fx_flash_prev")){_pl.fx_flash_prev=0;_pl.fx_flash_left=0;_pl.fx_flash_cd=0;}
+    _pl.fx_flash_left=max(0,_pl.fx_flash_left-_dt);_pl.fx_flash_cd=max(0,_pl.fx_flash_cd-_dt);
+    var hf=variable_instance_exists(_pl,"hud_hit_flash") ? _pl.hud_hit_flash : 0;
+    if(hf>_pl.fx_flash_prev+.01 && _pl.fx_flash_cd<=0){_pl.fx_flash_left=.12;_pl.fx_flash_cd=.4;}
+    _pl.fx_flash_prev=hf;
+}
 function fx_char_step(_dt) {
     if(_dt<=0 || !instance_exists(ObjectPlayer))return;
+    fx_flash_tick(ObjectPlayer.id,_dt);
     var pl=ObjectPlayer.id,el=fx_char_dust_el();
     with(pl) {
         if(!variable_instance_exists(id,"fx_prev")){fx_prev={x:x,y:y,ms:motion_state,dodge:0,acc:0};}

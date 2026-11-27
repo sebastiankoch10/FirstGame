@@ -25,6 +25,7 @@ if (damage_number_timer > 0) {
 // Monster stirbt, wenn HP <= 0
 if (hp <= 0) {
     // Explicit self: the bare name resolves to the master_skeleton script asset (always truthy).
+    fx_enemy_death(id); // overhaul death burst (visual only)
     if(elite_is(id))elite_on_death(id);
     if(variable_instance_exists(id,"lvl_kind"))level_enemy_death(id);
     else if(self.master_skeleton)master_skeleton_remains(id);

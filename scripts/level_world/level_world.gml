@@ -266,9 +266,10 @@ function level_prop_draw() {
         if(abs(pl.x-x)<prop_fade_w && pl.y<y-4 && pl.y>y-prop_fade_h)alpha=.42;
     }
     prop_alpha=lerp(prop_alpha,alpha,.25);
-    if(prop_shadow)master_shadow_draw(x-6,y+3,max(14,sprite_get_width(sprite_index)*.18),max(5,sprite_get_width(sprite_index)*.05),.32);
+    if(prop_shadow)fx_soft_shadow(x-6,y+3,max(14,sprite_get_width(sprite_index)*.18),max(5,sprite_get_width(sprite_index)*.05),.32);
     var sway=prop_sway>0 && variable_global_exists("weather") ? sin(global.weather.clock*1.6+x*.017)*(1+global.weather.wind*2.2) : 0;
-    draw_sprite_ext(sprite_index,0,x,y,image_xscale,1,sway,c_white,prop_alpha);
+    // sway on the pixel grid (strips shifted by whole pixels, base fixed) instead of rotating the sprite
+    fx_sway_draw(sprite_index,0,x,y,image_xscale,1,sprite_get_yoffset(sprite_index)*dsin(sway),c_white,prop_alpha);
 }
 function level_coin_hidden(_coin) {
     if(!variable_global_exists("level_occluders"))return false;
