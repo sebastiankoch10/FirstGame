@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, qualitaet, abnahme, qa]
-updated: 2026-11-26
+updated: 2026-11-27
 status: verbindlich (Abnahme aller neuen und überarbeiteten Inhalte)
 ---
 # Qualitätsstandard und Abnahme
@@ -15,8 +15,9 @@ Rang 2 unter [[Leitbild]]. Gilt für Entwickler-Agenten (Claude, Codex) und die 
 | **technisch implementiert** | Code und Ressourcen existieren, der Build läuft | Entwickler-Agent |
 | **funktional geprüft** | Native Tests bestehen (PASS), Gameplay-Werte stimmen (Treffer, Schaden, Timing) | Entwickler- oder QA-Agent mit Testnachweis |
 | **visuell geprüft** | Laufzeitaufnahmen bzw. Kontaktbögen angesehen, die messbaren Kriterien unten erfüllt | Agent mit Bildnachweis |
-| **reviewbereit** | Szenario im Review-Center registriert und startbar ([[Review-Center]]) | Entwickler-Agent |
-| **künstlerisch abgenommen** (= persönlich freigegeben) | Der Nutzer hat Aussehen, Bewegung und Ton im Spiel (F5, Review-Center) beurteilt und mit dem grünen Haken freigegeben; gilt nur für die freigegebene Revision | **nur der Nutzer** (Klick im Spiel) |
+| **nach Kanon entschieden** (seit 27.11.) | Der Agent hat den Inhalt nach [[Leitbild]], Fachdokument und diesem Standard beurteilt, mit technischer QA und bei sichtbaren Inhalten einer visual-qa-Zweitmeinung. Im Review-Center kein Eintrag oder Status „zurückgezogen“. **Keine Freigabe.** | Entwickler-Agent mit Nachweis |
+| **reviewbereit** | Szenario auf ausdrücklichen Wunsch des Nutzers (seit 27.11.) im Review-Center registriert und startbar ([[Review-Center]]) | Entwickler-Agent |
+| **künstlerisch abgenommen** (= persönlich freigegeben) | Der Nutzer hat Aussehen, Bewegung und Ton im Spiel (F5, Review-Center) beurteilt und mit „Gut“ freigegeben; gilt nur für die freigegebene Revision | **nur der Nutzer** (Klick im Spiel) |
 | **vollständig** | alle Punkte der Checkliste, inklusive künstlerischer Abnahme und Doku | **nur der Nutzer** |
 
 - Testergebnisse immer als **PASS / FAIL / BLOCKED / NOT RUN**.
@@ -92,9 +93,10 @@ Rang 2 unter [[Leitbild]]. Gilt für Entwickler-Agenten (Claude, Codex) und die 
    - prüft die Kriterien Q1–Q11 und die typspezifischen Punkte gegen die Nachweise;
    - meldet Befunde mit Datei, Zeile bzw. Bild und Reproduktion.
    - Er setzt höchstens „visuell geprüft“.
-3. **Nutzer:** spielt mit F5 das Szenario im Review-Center und gibt mit dem grünen Haken im Escape-Menü frei („künstlerisch abgenommen“) oder verlässt es ohne Freigabe bzw. schickt Korrekturen. Ablauf und Revisionsschutz: AGENTS.md „Review-Workflow“, [[Review-Center]] (seit 26.11.).
+3. **Ohne Prüfwunsch des Nutzers** (seit 27.11. der Normalfall): Der Entwickler-Agent entscheidet nach dem Kanon und berichtet den Status „nach Kanon entschieden“ mit den Nachweisen aus 1 und 2. Er legt keinen Review-Eintrag an.
+4. **Nutzer:** bestimmt, was er im Review-Center sehen will, spielt mit F5 das Szenario und urteilt im Escape-Menü mit „Gut“ („künstlerisch abgenommen“) oder „Nicht gut“ mit Kommentar. Ablauf und Revisionsschutz: AGENTS.md „Review-Workflow“, [[Review-Center]] (seit 26.11.).
    - Korrekturen fließen als Entscheidung in das Designdokument ein.
-4. **Abweichungen vom Standard** sind erlaubt, wenn sie begründet und im Designdokument als Ausnahme vermerkt sind.
+5. **Abweichungen vom Standard** sind erlaubt, wenn sie begründet und im Designdokument als Ausnahme vermerkt sind.
 
 ## 5. Werkzeuge für messbare Prüfungen
 

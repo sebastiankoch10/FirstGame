@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, kampf, gegner, bosse, lesbarkeit]
-updated: 2026-11-26
+updated: 2026-11-27
 status: verbindlich (Fachgebiet Kampf, Begegnungen, Lesbarkeit)
 ---
 # Kampf & Begegnungen
@@ -59,7 +59,7 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
 
 | | Physisch (Hieb, Klaue, Biss, Ansturm, Schweif) | Magisch (Strahl, Feld, Meteor, Nova) |
 |---|---|---|
-| Typische Ankündigung | **Körperbewegung**: Ausholen, Gewichtsverlagerung, kurzer Ton-Cue. Bodenmarkierung nur bei großer Reichweite. | Warnfläche mit Countdown, Aufladen, Lichtaufbau |
+| Typische Ankündigung | **Körperbewegung**: Ausholen, Gewichtsverlagerung, kurzer Ton-Cue. ~~Bodenmarkierung nur bei großer Reichweite.~~ Bei großer Reichweite zeigt die Attacke selbst ihre Bahn (seit 27.11., 5.0). | ~~Warnfläche mit Countdown~~ Vorzeichen aus dem Element in der späteren Trefferform (seit 27.11., 5.0), Aufladen, Lichtaufbau |
 | Tempo | schnell, kurze aktive Fenster, verlangt Reaktion | oft mehrphasig, verzögert, verkettet; darf auch schnell sein |
 | Fläche | klein bis mittel, folgt dem Körperteil (Schweifbahn, Klauenbogen) | mittel bis riesig, Muster, Zonen |
 | Gegenspiel | rechtzeitig ausweichen, Sprung oder Slide nach Höhe | Position planen, sichere Fläche erreichen |
@@ -67,6 +67,19 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
 
 ## 5. Warnungen (Telegraphs): globale Regeln
 
+0. **Die Attacke ist die Warnung** (Designentscheidung des Nutzers, 27.11.2026; Soll, die Umsetzung kommt als eigener Auftrag; Ist: Markerwarnungen nach 3).
+   - **Vorbild:** das Flair der Boss-, Dungeon- und Raidkämpfe aus Final Fantasy XIV, besonders der Ultimate-Kämpfe. Gemeint sind Prinzip und Gefühl, keine Kopie konkreter Kämpfe oder Assets.
+   - **Die Attacke kündigt sich selbst an:** Körper (Kopf, Ausholen, Ansetzen) und Elemente, die sich in der späteren Trefferform aufbauen, steigern (vibrieren, verdichten, aufleuchten) und dann auslösen.
+   - **Keine Marker, die genauso viel zeigen wie die Attacke selbst**, z. B. Kegel plus wanderndes Rechteck beim Drachenatem oder sich füllende Schachbrettfelder.
+   - **Beispiele:**
+     - Schachbrett: In den Feldern bauen sich kleine Flammen auf, vibrieren und explodieren gleich. Danach passiert dasselbe invertiert mit Eis.
+     - Drachenatem: Man sieht den Kopf, das Ansetzen und die Flammen und weicht den Flammen aus.
+   - **Fairness bleibt Bedingung:**
+     - Form der Vorzeichen = Trefferfläche (G15, 3a).
+     - Genug Vorlaufzeit; sichere Bereiche sind erkennbar.
+     - Ablauf, Timing und Trefferflächen bleiben unverändert (eine Uhr je Besitzer, 1).
+   - **Weiter gültig:** 1, 2, 3a, das Prinzip von 3b (nächste Mechanik oben, Sicheres sieht sicher aus), 4–6 und die Phasen in 8. **Ersetzt** sind die eigenständigen Markerformen in 3, 3b, 4, 7, 8 und Abschnitt 8 (jeweils durchgestrichen).
+   - **Offen** (Entscheidung im Umsetzungsauftrag): wie ein Strahlschwenk ohne Fächer-Marker vorab lesbar wird (Kopfdrehung, Ansetzrichtung); wie Bodenhöhe (überspringbar) an den Vorzeichen erkennbar bleibt; welche Teile der Vorzeichen auf der unbearbeiteten Lesbarkeitsebene liegen ([[Visuelles Leitbild & Animation]] 7.3).
 1. **Synchron (G1):** Warnung, Hitbox, Schaden, Effekt und Ton laufen über dieselbe Uhr des Besitzers.
    - Bei 100 % wird die Attacke im selben Update aktiv, ohne versteckte Wartezeit.
    - Vor 100 % gibt es keinen Schaden aus der angekündigten Fläche.
@@ -75,15 +88,15 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
 2. **Nicht jeder Angriff braucht eine Bodenwarnung.**
    - Normale Projektile haben eine sichtbare Flugbahn und Höhe (Schatten), aber keine Bodenwarnung.
    - Schnelle physische Angriffe werden über den Körper angekündigt.
-3. **Flächen- und Spezialangriffe** (Formsprache seit 26.11., Phase 2A, Renderer `scripts/hazard_fx`):
-   - **Ganze Fläche ab 0 %:** eine dezente, transparente Grundfärbung zeigt den vollständigen künftigen Gefahrenbereich, dazu ein 1-px-Rand. Der Rand unterstützt, ist aber nie das einzige Element.
-   - **Integrierter Countdown statt Uhrzeiger:**
-     - Dieselbe Form füllt sich vom Ursprung aus: Kreis und Kegel vom Zentrum bzw. von der Spitze, Strahl und Rechteck entlang der Länge, Ring über die Bandbreite.
-     - Die Füllfront ist ein schmales, helleres Band.
-     - Weil die Grundfärbung von Anfang an die ganze Fläche zeigt, erzeugt die Füllung keine scheinbar sicheren Bereiche.
-   - **Zeitabhängige Intensität:** Grundfärbung und Sättigung nehmen mit dem Fortschritt zu.
-     - In den letzten 25 % (Commitment) wird der Rand hell und pulsiert.
-     - Bei 100 % blitzt die ganze Fläche auf, im selben Update wie der Schaden.
+3. **Flächen- und Spezialangriffe** (Formsprache seit 26.11., Phase 2A, Renderer `scripts/hazard_fx`; *als Soll ersetzt am 27.11. durch 0, bleibt Ist bis zur Umsetzung*):
+   - ~~**Ganze Fläche ab 0 %:** eine dezente, transparente Grundfärbung zeigt den vollständigen künftigen Gefahrenbereich, dazu ein 1-px-Rand. Der Rand unterstützt, ist aber nie das einzige Element.~~
+   - ~~**Integrierter Countdown statt Uhrzeiger:**~~
+     - ~~Dieselbe Form füllt sich vom Ursprung aus: Kreis und Kegel vom Zentrum bzw. von der Spitze, Strahl und Rechteck entlang der Länge, Ring über die Bandbreite.~~
+     - ~~Die Füllfront ist ein schmales, helleres Band.~~
+     - ~~Weil die Grundfärbung von Anfang an die ganze Fläche zeigt, erzeugt die Füllung keine scheinbar sicheren Bereiche.~~
+   - ~~**Zeitabhängige Intensität:** Grundfärbung und Sättigung nehmen mit dem Fortschritt zu.~~ Seit 27.11.: Die Vorzeichen selbst steigern sich bis zur Auslösung (0).
+     - ~~In den letzten 25 % (Commitment) wird der Rand hell und pulsiert.~~
+     - Bei 100 % löst die Attacke im selben Update wie der Schaden aus (bisher: die ganze Fläche blitzt auf).
    - **Innere Energie:** spärliche Elementpartikel innerhalb der Form, die zur Mitte hin driften, gegen Ende dichter (Verdichtung).
    - Keine großen, deckenden Vollflächen. Farben unterscheiden sich nach Element und Boss; die zeitliche Sprache ist überall gleich.
 3a. **WYSIWYG – gemeinsame Schadensgeometrie (verbindlich):**
@@ -96,14 +109,14 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
    - **Abklingen:** Nach der aktiven Zeit wird die Fläche entsättigt und grau, Partikel steigen auf und verblassen (etwa 0,3 s). So sieht eine abgeklungene Fläche nicht mehr gefährlich aus.
 3b. **Überlappende Mechaniken, zeitliche Priorität** (wie in Final Fantasy XIV):
    - Alle Gegnerwarnungen eines Bildes werden gesammelt und nach verbleibender Zeit bis zum Einschlag sortiert gezeichnet (`telegraph_flush`). Die nächste Mechanik liegt immer oben.
-   - Warnungen, die mehr als 0,45 s nach der nächsten einschlagen, erscheinen nur als dünner Umriss: keine Füllung, kein Countdown, keine Partikel. Was gerade sicher ist, sieht sicher aus. Sobald eine Mechanik an der Reihe ist, bekommt sie ihre volle Darstellung. So bleibt erkennbar, was zuerst und was danach kommt (Aufnahme 26.11.: Eine gefüllte Vorschau der zweiten Schachbrettwelle ließ die sicheren Felder der ersten unsicher wirken).
+   - Warnungen, die mehr als 0,45 s nach der nächsten einschlagen, erscheinen ~~nur als dünner Umriss: keine Füllung, kein Countdown, keine Partikel~~ gedämpft (seit 27.11.: ihre Vorzeichen bauen sich erst leise auf, Details im Umsetzungsauftrag zu 0). Was gerade sicher ist, sieht sicher aus. Sobald eine Mechanik an der Reihe ist, bekommt sie ihre volle Darstellung. So bleibt erkennbar, was zuerst und was danach kommt (Aufnahme 26.11.: Eine gefüllte Vorschau der zweiten Schachbrettwelle ließ die sicheren Felder der ersten unsicher wirken).
    - Große Muster (spielfeldweite Bretter, breite Ringe ab 160.000 px²) werden um 25–30 % schwächer gefüllt, damit der Bildschirm nicht überflutet.
    - Countdown und Intensität laufen pro Mechanik unabhängig.
    - Keine additive Mischung von Warnflächen.
    - Warnungen werden nach allen Spieler- und Welteffekten gezeichnet; eigene Effekte verdecken sie nicht.
 4. **Strahlen:**
    - Konzeptionell unbegrenzte Reichweite (Geometrie, kein weltlanges Sprite).
-   - Der Schwenk-Sektor wird angekündigt; der Schwenk ist erkennbar und nicht schneller als nötig.
+   - ~~Der Schwenk-Sektor wird angekündigt;~~ Die Schwenkrichtung ist an Kopf und Ansetzen erkennbar (seit 27.11., 0; offen, siehe dort); der Schwenk ist erkennbar und nicht schneller als nötig.
    - Pro Überstreichen trifft ein Strahl höchstens einmal.
 5. **Zielpunkte** werden zu einem nachvollziehbaren Zeitpunkt festgelegt (Zielerfassung, Ankündigung, Festlegung, Angriff).
    - Eine kontrollierte Nachführung ist nur erlaubt, wenn sie angekündigt und ausweichbar ist.
@@ -120,10 +133,10 @@ Diese Einteilung ist eine Richtlinie, keine starre Regel. Entscheidend sind Abwe
 
    Später kürzere Warnzeiten sind erlaubt, solange sie lesbar bleiben.
 7. **Gegnerwarnung und Spielereffekt haben verschiedene Formsprachen.**
-   - Getönte Fläche mit Füll-Countdown ist ausschließlich Gegnern, Eliten, Minibossen, Bossen und Levelgefahren vorbehalten.
+   - ~~Getönte Fläche mit Füll-Countdown ist ausschließlich Gegnern, Eliten, Minibossen, Bossen und Levelgefahren vorbehalten.~~ Seit 27.11.: Vorzeichen in der Trefferform (0) sind ausschließlich Gegnern, Eliten, Minibossen, Bossen und Levelgefahren vorbehalten.
    - Eigene Fähigkeiten zeigen nie solche Warnungen (seit 26.11.: Kegelwarnung des Magierbogens entfernt). Zielhilfen sind `vfx_player_target_mark`: dünne, drehende Runenstriche in Spielerfarbe, ohne Füllung und ohne Countdown, etwa für Sternenorb und Pfeilhagel.
 8. **Mehrphasige Angriffe** (Phase 2A): Anticipation → Energy Gathering → Shape Formation → Commitment → Execution/Impact → Recovery/Dissipation.
-   - **Zuordnung auf der Warnuhr:** Sammeln am Ursprung (`vfx_charge`: Partikel strömen zum Maul bzw. zur Hand, der Kern wächst, das Licht steigt), Formbildung mit Füll-Countdown, Commitment in den letzten 25 %, Einschlag bei 100 % mit Lichtimpuls.
+   - **Zuordnung auf der Warnuhr:** Sammeln am Ursprung (`vfx_charge`: Partikel strömen zum Maul bzw. zur Hand, der Kern wächst, das Licht steigt), Formbildung ~~mit Füll-Countdown~~ durch die Vorzeichen selbst (seit 27.11., 0), Commitment in den letzten 25 %, Einschlag bei 100 % mit Lichtimpuls.
    - Nicht jede Fähigkeit braucht alle Phasen. Schnelle physische Angriffe (Biss, Hieb, Schweif) bleiben direkt und werden über den Körper angekündigt.
    - Elementprofile (`vfx_palette`, `hz_particles`): Feuer (aufsteigende Glut, Flackern, warmes Licht), Eis (Kristallfunken, kühle Lichtimpulse), Blitz (Funken, kurze verästelte Bögen, weiß-blauer Lichtblitz), Arkan (wirbelnde Punkte, Runen), Gift (aufsteigende Blasen, klar begrenzt).
 9. **Strahlen** (`vfx_beam_stream`): zusammenhängender, flackernder Strom statt eines gestreckten Sprites.
@@ -216,7 +229,7 @@ Rangfolge, was bei Konflikten sichtbar bleiben muss (1 = höchste):
 
 1. **Spielerfigur und ihr Bodenkreis/Schatten:** immer erkennbar, auch unter Effekten.
 2. **Tödliche Bossmechaniken:** aktive Gefahrenflächen, Strahlen, Einschläge.
-3. **Angekündigte Gefahren:** Warnumrisse, Countdown-Rand, nächste Gefahr.
+3. **Angekündigte Gefahren:** ~~Warnumrisse, Countdown-Rand~~ Vorzeichen der Attacken (seit 27.11., 5.0), nächste Gefahr.
 4. **Angriffsvorbereitung von Gegnern:** Ausholen, Aufladen, Augenleuchten.
 5. **Gegnerprojektile.**
 6. **Gegner:** Silhouetten, Lebensleisten nur bei Bedarf.
@@ -228,7 +241,7 @@ Rangfolge, was bei Konflikten sichtbar bleiben muss (1 = höchste):
 - **Zeichenreihenfolge folgt der Rangfolge.** Gegnerwarnungen und Bossgefahren liegen über den eigenen Effekten.
   - Ist: `ObjectController/Draw_73` zeichnet Zauber vor den Bossgefahren. Bossgefahren liegen also schon darüber.
 - **Eigene Bodeneffekte** bleiben halbtransparent und unter einer Deckkraft-Obergrenze (Richtwerte in [[Fähigkeiten, VFX & Audio]]). Sie benutzen nie die Formsprache gegnerischer Warnungen.
-- **Farben haben Bedeutung.** Elementfarben gelten für Freund und Feind. Unterschieden werden beide durch die Formsprache (Umriss plus Rand-Countdown = Gefahr) und die Intensität, nicht nur durch die Farbe.
+- **Farben haben Bedeutung.** Elementfarben gelten für Freund und Feind. Unterschieden werden beide durch die Formsprache (~~Umriss plus Rand-Countdown = Gefahr~~ seit 27.11.: Vorzeichen in der Trefferform = Gefahr) und die Intensität, nicht nur durch die Farbe.
 - **Endgame-Effekte** dürfen beeindrucken, aber sichere Flächen bleiben erkennbar.
   - **Vorschlag:** Bei aktiven Bossgefahren werden eigene Effekte automatisch gedämpft (Deckkraft, Partikelzahl).
 - **Ist-Mangel:** Die Darstellung ist derzeit horizontal um 33 % gestreckt. Kreise erscheinen als Ellipsen, und Entfernungen in x und y wirken verschieden.

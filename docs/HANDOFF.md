@@ -1,40 +1,41 @@
 ---
 tags: [handoff, status]
-updated: 2026-11-26
+updated: 2026-11-27
 agent: Claude
 ---
 # Übergabe (wird nach jeder Aufgabe überschrieben, max. ~40 Zeilen)
 
-**Zuletzt dran:** Claude, 2026-11-26 nachts. **Grafik-Overhaul HD-2D** (Maßstab Octopath Traveler), Schritte 0–3 und die Ergänzung „Figuren und Gefahrenflächen“. **Status: ANGEHALTEN, wartet auf das Urteil des Nutzers zum Schaustück im Review-Center.** Erst nach „Gut“ ausrollen (Roadmap 14).
+**Zuletzt dran:** Claude, 2026-11-27. **Arbeitsweise und Review-Center neu gefasst, Grafik-Overhaul abgeschlossen, Designentscheidung „Die Attacke ist die Warnung“ festgehalten.** Kein laufender Auftrag; was als Nächstes kommt, entscheidet der Nutzer.
 
-## Stand des Overhauls
-- **Regeln:** [[Visuelles Leitbild & Animation]] 7 (Angriffsaufbau, zwei Ebenen, Licht, Pixel, Figuren 7.5), Leitbild G10, [[DECISIONS]] 26.11. abends.
-- **Referenzen:** `FirstGame_ArtPack/reference/octopath/` (24 Bilder, nur lokal, gitignored, nie committen).
-- **Umgesetzt:**
-  - `render_fx`: Nachbearbeitung nur der Weltebene; eine Schutzmaske hält Gegner scharf.
-  - Verstärkbares Licht in `atmosphere`; dazu `fx_particles`, `atmos_fx`, `fx_attacks` sowie `fx_character` mit `sh_fx_char`.
-  - Neue Gefahrenfläche bisher nur für Feuerstrahlen (`vfx_beam_fire_hd`, Schalter `FX_HD_HAZARDS`).
-- **Schaustück (Review, offen):**
-  - neu: `vfx.overhaul.dragon_breath`, `.sword_fireball`, `.mage_lightning`, `.ranger_ice`, `char.overhaul.sword`, `light.overhaul.forest|swamp|ashfrost`;
-  - per bump: `boss.dragon.beam` Rev. 3, `boss.twins.checker` Rev. 2.
-- **Vorher/Nachher-Aufnahmen:** `%LOCALAPPDATA%\FirstGame-Tests\overhaul\1-vorher|2-nachher` (je 8 Szenen).
-- **Tests:** QA Stufe 3 PASS (Regression 811, Feature 219, Boss 190, Level 174, Klassen 151, Visual 77, Review 18). perf: Boss und Horde wie vorher; **Münz-Belastungstest 1,2 ms langsamer (FAIL, [[Bugs & Ideen]])**. visual-qa zum Feueratem: Rand PASS.
+## Neue Regeln (verbindlich seit 27.11.)
+- **Offenes melden statt abarbeiten:** am Auftragsende auflisten, in Roadmap bzw. [[Bugs & Ideen]] eintragen, nicht ungefragt fortsetzen (AGENTS.md „Regeln“).
+- **Review-Center nur auf Wunsch des Nutzers:**
+  - Neue Einträge brauchen `requested`; sonst entscheidet der Agent nach dem Kanon (Status „nach Kanon entschieden“ in [[Qualitätsstandard]]).
+  - Alle 43 früher offenen Einträge sind `withdrawn` (zurückgezogen, keine Freigabe) und im Archiv startbar.
+  - `bump` ohne `--request` landet ebenfalls in `withdrawn` (AGENTS.md „Review-Workflow“, [[Review-Center]]).
 
-## Nach dem Urteil (je Sitzung Stand hier)
-1. Kommentare aus `review.py status` umsetzen.
-2. Ausrollen:
-   - übrige 15 Zauber und Passiva;
-   - Startwaffen;
-   - alle Boss-, Miniboss- und Gegnerangriffe samt Gefahrenflächen (je Gefahr eine visual-qa-Zweitmeinung);
-   - Treffer und Tode, Münzen, Pickups, Level-up, Vegetation.
-3. Neue Figurengrafik nur mit Quelle: [[Assets & Pipeline]] 7.8.
+## Stand
+- **Grafik-Overhaul HD-2D:** Richtung vom Nutzer bestätigt (keine künstlerische Abnahme einzelner Inhalte), Ausrollen beendet ([[Visuelles Leitbild & Animation]] 7.4).
+- **Herausgelöst als eigene Aufträge:** Gegner-, Miniboss- und Bossangriffe samt Gefahrenflächen (Roadmap 15), Zauber und Passiva (Roadmap 16).
+- **Die Attacke ist die Warnung:** nur festgehalten (Leitbild G19, [[Kampf & Begegnungen]] 5.0, [[Boss-Design]] B2). Der Code zeigt weiter die Markerwarnungen.
+- **Tests 27.11.:** QA Stufe 2 PASS (docs, anchors, Regression 811, Review 23). Archiv-Bildschirm angesehen: `[-]`-Einträge, Statustext, lange Titel gekürzt.
 
-## Sonst offen
-- Diktieren mit Win+H im Urteilsdialog beim ersten echten Urteil ausprobieren (nicht automatisch prüfbar).
-- Zusammenstellung der Drachen-Sequenzen nach dem Spieltest; drei Boss-Codepfade zusammenführen ([[Bugs & Ideen]]).
+## Offen (nur zur Information, nicht ungefragt abarbeiten)
+- **Roadmap 14 (Rest Overhaul):**
+  - Startwaffen;
+  - Gegnertreffer und -tode, Münzen, Pickups, Level-up, Vegetation;
+  - Figuren-Effekte von Arkanistin und Waldläufer;
+  - neue Figurengrafik nach [[Assets & Pipeline]] 7.8.
+- **Roadmap 15 und 16:** Aufträge des Nutzers.
+- **[[Bugs & Ideen]]:**
+  - Münz-Belastungstest 1,2 ms langsamer;
+  - visual-qa-Restpunkte;
+  - Diktieren mit Win+H ungetestet;
+  - Drachen-Sequenzen;
+  - Prüffrage Leere/Wind.
 
 ## Bekannte Bugs / Risiken
 - Ohne Shader-Unterstützung entfällt die Nachbearbeitung (Meldung `FX_POST disabled`), das Spiel läuft weiter.
-- `record_scene` nie parallel starten: Alle Aufnahmen nutzen denselben Speicherordner für Einzelbilder.
-- Prüffrage: Verfehlen Leere und Wind (P3) eine ruhende Figur? Hauptmenü ruckelt in den ersten etwa 3 s.
+- `record_scene` nie parallel starten (gemeinsamer Speicherordner für Einzelbilder).
+- Das Hauptmenü ruckelt in den ersten etwa 3 s.
 - GML: reservierte Namen siehe AGENTS.md (`all`, `real`); Array-Literale nicht direkt indizieren.

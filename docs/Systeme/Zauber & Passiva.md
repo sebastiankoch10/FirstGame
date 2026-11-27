@@ -1,6 +1,6 @@
 ---
 tags: [system, zauber]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # Zauber & Passiva
 
@@ -36,7 +36,7 @@ updated: 2026-11-26
 - **Grafik-Overhaul (26.11. abends, Schaustück):** Feuerball, Eisball und Kettenblitz nutzen die neuen Bausteine.
   - Spuren über `fxp_trail` in `spell_projectile_step`.
   - Einschläge über `fxp_impact` in `spell_projectile_hit` bzw. `chain_segment_add`. Im Endgame-Band kommen Farbumschlag (Feuerball) bzw. Farbversatz (Blitz) dazu.
-  - Die übrigen 15 Zauber folgen nach dem Urteil des Nutzers ([[Visuelles Leitbild & Animation]] 7.4).
+  - Die übrigen 15 Zauber und die Passiva kommen als eigener Auftrag des Nutzers ([[Roadmap & Vertical Slice]] 16, seit 27.11.).
 
 ## Abhängigkeiten
 [[Progression & Level-up]] · [[Licht, Wetter & Effekte]] (`spell_vfx`) · [[UI, HUD & Menüs]] · [[Bosse]] · [[Klassen & Startwaffen]]

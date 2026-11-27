@@ -3,7 +3,7 @@
   python tests/tools/review/review_e2e.py
 
 Everything runs in an isolated copy named FirstGameReviewE2E (save folder %LOCALAPPDATA%\\FirstGameReviewE2E) with a
-copy of review/registry.json plus two test entries. The real save folder %LOCALAPPDATA%\\FirstGame and the project
+copy of review/registry.json plus three test entries (one, two: verdicts; three: withdrawn by the agent). The real save folder %LOCALAPPDATA%\\FirstGame and the project
 registry are hashed before and after and must stay unchanged. Evidence (screenshots, logs, result JSON) stays in
 %LOCALAPPDATA%\\FirstGame-Tests\\review-e2e\\<stamp>\\ ; the summary goes to tests/reports/review-e2e-result.json.
 """
@@ -43,7 +43,7 @@ def tree_hash(path: Path) -> str:
 def test_entry(eid: str, cls: str) -> dict:
     return {'id': eid, 'title': f'TEST {eid} (technisch)', 'category': 'TEST (technisch)', 'content': 'Technischer Test des Freigabe-Ablaufs',
             'goal': 'Nur fuer den automatischen End-to-End-Test.', 'task': 'review_e2e.py', 'revision': 1, 'status': 'pending',
-            'created': time.strftime('%Y-%m-%d'), 'approved_at': None,
+            'created': time.strftime('%Y-%m-%d'), 'approved_at': None, 'requested': 'E2E-Test (technisch), kein Nutzerauftrag',
             'scenario': {'type': 'boss', 'boss': 'storm_warden', 'minute': 15, 'class': cls, 'ability': 1, 'seed': 1337, 'build': 'balanced', 'gear': 2}}
 
 
@@ -71,7 +71,12 @@ def main() -> None:
     p = project / 'objects/ObjectMainMenu/Draw_64.gml'
     p.write_text(p.read_text(encoding='utf-8') + '\nrv_menu_capture();\n', encoding='utf-8')
     reg = json.loads((ROOT / 'review/registry.json').read_text(encoding='utf-8'))
-    reg['entries'] += [test_entry('test.e2e.one', 'Sword'), test_entry('test.e2e.two', 'Ranger')]
+    reg['entries'] += [test_entry('test.e2e.one', 'Sword'), test_entry('test.e2e.two', 'Ranger'), test_entry('test.e2e.three', 'Mage')]
+    # since 27.11. a new entry needs the explicit request of the user: check rejects one without "requested"
+    bad = json.loads(json.dumps(reg)); bad['entries'][-1].pop('requested')
+    bad_reg = work / 'registry-no-request.json'; bad_reg.write_text(json.dumps(bad, indent=2), encoding='utf-8')
+    r = subprocess.run(REVIEW + ['check', '--registry', str(bad_reg)], capture_output=True, text=True, encoding='utf-8', errors='replace')
+    check(r.returncode == 1 and 'requested' in r.stdout, 'check rejects a new entry without the request of the user')
     tmp_reg = work / 'registry-copy.json'
     tmp_reg.write_text(json.dumps(reg, indent=2), encoding='utf-8')
     data = project / 'scripts/review_registry_data/review_registry_data.gml'
@@ -112,7 +117,21 @@ def main() -> None:
         st = review('status', '--registry', str(tmp_reg), '--save-dir', str(TEST_SAVE))
         check('NICHT GUT: test.e2e.two' in st and 'GUT MIT WUNSCH: test.e2e.one' in st, 'status lists the work orders from the comments')
         out3 = review('sync', '--registry', str(tmp_reg), '--save-dir', str(TEST_SAVE), '--out', str(data))
-        review('bump', 'test.e2e.two', '--reason', 'E2E: wesentliche Aenderung simuliert', '--registry', str(tmp_reg), '--out', str(data))
+        review('bump', 'test.e2e.two', '--reason', 'E2E: wesentliche Aenderung simuliert', '--request', 'E2E: simulierter Pruefwunsch',
+               '--registry', str(tmp_reg), '--out', str(data))
+        out4 = review('withdraw', 'test.e2e.three', '--reason', 'E2E: vom Agenten nach Design-Kanon entschieden', '--registry', str(tmp_reg), '--out', str(data))
+        check('test.e2e.three' in out4 and 'Zurueckgezogen' in out4, 'withdraw reports the entry')
+        review('bump', 'test.e2e.three', '--reason', 'E2E: Aenderung ohne Pruefwunsch', '--registry', str(tmp_reg), '--out', str(data))
+        reg3 = json.loads(tmp_reg.read_text(encoding='utf-8'))
+        e2b = next(e for e in reg3['entries'] if e['id'] == 'test.e2e.two')
+        e3 = next(e for e in reg3['entries'] if e['id'] == 'test.e2e.three')
+        check(e2b['status'] == 'pending' and e2b['revision'] == 2 and e2b.get('requested') == 'E2E: simulierter Pruefwunsch',
+              'bump with the request of the user: new revision open again')
+        check(e3['status'] == 'withdrawn' and e3['revision'] == 2 and e3.get('withdrawn', {}).get('by') == 'agent' and not e3.get('approvals'),
+              'bump without request: new revision withdrawn (agent decision), no verdict written')
+        st2 = review('status', '--registry', str(tmp_reg), '--save-dir', str(TEST_SAVE))
+        n_wd = sum(1 for e in reg3['entries'] if e['status'] == 'withdrawn')  # real withdrawn entries plus test.e2e.three
+        check(f'zurueckgezogen {n_wd} ' in st2, f'status counts the withdrawn entries ({n_wd})')
         exe = rn.build_copy('review-e2e', work, project, NAME)
         code, texts, started = rn.run_exe(work, exe, TAG, 600, log_name='phase-c')
         res, exc, fails = rn.parse_result(texts, TAG)

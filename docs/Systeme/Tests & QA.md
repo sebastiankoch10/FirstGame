@@ -1,6 +1,6 @@
 ---
 tags: [system, qa]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # Tests & QA
 
@@ -67,7 +67,7 @@ Native GameMaker-Tests in isolierten Kopien unter `%LOCALAPPDATA%\FirstGame-Test
 - `run_boss_v2_smoke.py`: doppelt zu `regression`
 - `run_player_animation_legacy.py`: vor v3
 
-- **Review-Center End-to-End** (seit 26.11.): `python tests/tools/review/review_e2e.py`. Zwei Builds und drei Starts mit Testurteilen: Dialog per Esc abbrechen, „Gut“ mit Kommentar (Umlaut) und „Nicht gut / komplett weg“ mit Kommentar per Klick und Enter, Persistenz nach Neustart, Sync genau einmal, Revision erneut offen, Archiv startbar, echter Speicherordner und Registry unverändert. Ergebnis in `tests/reports/review-e2e-result.json`, Nachweise unter `%LOCALAPPDATA%\FirstGame-Tests\review-e2e\`. Die Feature-Suite prüft seit 26.11. auch das Inventar (Ziehen, Tausch, ungültige Plätze, Abbruch, Rechtsklick, voller Rucksack, Vergleich).
+- **Review-Center End-to-End** (seit 26.11.): `python tests/tools/review/review_e2e.py`. Zwei Builds und drei Starts mit Testurteilen: Dialog per Esc abbrechen, „Gut“ mit Kommentar (Umlaut) und „Nicht gut / komplett weg“ mit Kommentar per Klick und Enter, Persistenz nach Neustart, Sync genau einmal, Revision mit Prüfwunsch erneut offen, seit 27.11. auch Zurückziehen (`withdraw`), `bump` ohne Prüfwunsch (Status `withdrawn`), zurückgezogener Eintrag nur im Archiv und von dort startbar, `check` lehnt neue Einträge ohne `requested` ab; echter Speicherordner und Registry unverändert. Ergebnis in `tests/reports/review-e2e-result.json`, Nachweise unter `%LOCALAPPDATA%\FirstGame-Tests\review-e2e\`. Die Feature-Suite prüft seit 26.11. auch das Inventar (Ziehen, Tausch, ungültige Plätze, Abbruch, Rechtsklick, voller Rucksack, Vergleich).
 
 - **Seit 26.11.:**
   - `record_scene.py --boss-hp` (Bossphase in Aufnahmen).

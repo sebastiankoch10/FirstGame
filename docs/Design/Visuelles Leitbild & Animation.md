@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, grafik, animation, referenz]
-updated: 2026-11-26
+updated: 2026-11-27
 status: verbindlich (Fachgebiet Art Direction, Darstellung, Animationsqualität)
 ---
 # Visuelles Leitbild & Animation
@@ -58,8 +58,9 @@ Rang 2 unter [[Leitbild]]. Die Technik (wie es gebaut wird) steht in [[Technisch
 - **Die Beobachtungen des Nutzers** (Energie sammelt sich, Funken strömen zum Ursprung, Form füllt und verdichtet sich, innere Bewegung, Fokussierung, eindeutige sichere Bereiche, clean) sind die verbindliche Grundlage.
 - **Umsetzung:**
   - `vfx_charge` (Sammeln am Ursprung).
-  - Füll-Countdown und Verdichtung (`tg_render`).
-  - Fokus-Umriss: Ein heller, ungefüllter Umriss läuft von außen auf die echte Kante zusammen (`tg_scaled`). Die getönte Fläche bleibt exakt die Schadensfläche.
+  - ~~Füll-Countdown~~ und Verdichtung (`tg_render`).
+  - ~~Fokus-Umriss: Ein heller, ungefüllter Umriss läuft von außen auf die echte Kante zusammen (`tg_scaled`).~~ Die getönte Fläche bleibt exakt die Schadensfläche.
+  - *Seit 27.11. gilt [[Kampf & Begegnungen]] 5.0 (Die Attacke ist die Warnung):* Füll-Countdown und Fokus-Umriss sind als eigenständige Marker ersetzt; Sammeln, Verdichtung und Elementpartikel bleiben als Vorzeichen der Attacke selbst. Ist bis zur Umsetzung unverändert.
   - Elementpartikel innerhalb der Form.
 
 ## 3. Verbindliche Bewegungsreferenz: Terranigma
@@ -313,10 +314,11 @@ Ziel: dasselbe HD-2D-Niveau wie Licht und Effekte. Die vorhandenen Sprites bleib
 
 Wo echte neue Pixel-Grafik nötig wäre (z. B. eigene Lichtseiten-Schattierung, Normal Maps, neue Posen), wird nichts vorgetäuscht; die Anforderungen stehen in [[Assets & Pipeline]] 7.8.
 
-### 7.4 Ist-Stand (26.11. abends)
+### 7.4 Ist-Stand (26.11. abends, Abschluss 27.11.)
+- **27.11. (Nutzer):** Das Schaustück gefällt, die Richtung ist bestätigt. Das ist keine künstlerische Abnahme einzelner Inhalte; die Review-Einträge des Schaustücks sind zurückgezogen. Das Ausrollen ist beendet und läuft nicht automatisch weiter. Zauber und Passiva sowie Gegner-, Miniboss- und Bossangriffe samt Gefahrenflächen sind herausgelöst und kommen als eigene Aufträge. Offenes: [[Roadmap & Vertical Slice]] 14–16.
 - **Grundlage umgesetzt:**
   - `scripts/render_fx` mit den Shadern `sh_fx_bright`, `sh_fx_blur` und `sh_fx_composite`;
   - `scripts/fx_particles` (gemeinsames Partikelsystem), `scripts/atmos_fx` (Atmosphäre), `scripts/fx_attacks` (Angriffsdekor);
   - verstärkbares Licht in `atmosphere_draw`.
-- **Schaustück** (Review, wartet auf das Urteil des Nutzers): Drachen-Feueratem im Wald mit neu gestalteter Gefahrenfläche (`vfx_beam_fire_hd`), Feuerball (Schwertmeister), Kettenblitz (Arkanistin), Eisball (Waldläufer), Schwertmeister mit den Figuren-Effekten (`scripts/fx_character`, Shader `sh_fx_char`), Licht und Atmosphäre der drei Level.
-- **Noch nicht umgestellt** (nach dem Urteil, Level für Level und Boss für Boss): alle übrigen Zauber und Passiva, die Startwaffen, alle übrigen Boss-, Miniboss- und Gegnerangriffe samt ihrer Gefahrenflächen, Gegnertreffer und -tode, Figuren-Effekte für Arkanistin und Waldläufer im Review, Münzen, Pickups, Level-up, sanft bewegte Vegetation. Liste in [[Roadmap & Vertical Slice]].
+- **Schaustück** (Richtung bestätigt 27.11.): Drachen-Feueratem im Wald mit neu gestalteter Gefahrenfläche (`vfx_beam_fire_hd`), Feuerball (Schwertmeister), Kettenblitz (Arkanistin), Eisball (Waldläufer), Schwertmeister mit den Figuren-Effekten (`scripts/fx_character`, Shader `sh_fx_char`), Licht und Atmosphäre der drei Level.
+- **Noch nicht umgestellt** (nur auf Auftrag des Nutzers, Roadmap 14–16): alle übrigen Zauber und Passiva, die Startwaffen, alle übrigen Boss-, Miniboss- und Gegnerangriffe samt ihrer Gefahrenflächen, Gegnertreffer und -tode, Figuren-Effekte für Arkanistin und Waldläufer im Review, Münzen, Pickups, Level-up, sanft bewegte Vegetation. Liste in [[Roadmap & Vertical Slice]].

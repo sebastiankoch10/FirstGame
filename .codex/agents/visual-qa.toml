@@ -21,4 +21,5 @@ Checks:
 Report per finding: image (path, frame), location, observation, severity, suggestion. Mark assumptions as such.
 Judge motion and timing only from several consecutive frames; otherwise NOT RUN.
 This is a technical second opinion. Only the user grants "künstlerisch abgenommen" / approval, in the Review Center.
+Since 27.11. the agent decides visible content by the design canon without a Review Center entry (entries only on the user's request). Check strictly and report anything unclear as UNKLAR, not PASS.
 """

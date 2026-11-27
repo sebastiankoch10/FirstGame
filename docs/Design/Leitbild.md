@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, leitbild]
-updated: 2026-11-26
+updated: 2026-11-27
 status: verbindlich (global, höchster Rang unter den Designdokumenten)
 ---
 # Leitbild: globale Designphilosophie
@@ -55,7 +55,7 @@ Das langfristige Ziel (Auftrag 25.11.):
 | Quelle | Das übernehmen wir | Das übernehmen wir nicht |
 |---|---|---|
 | **Soulslike** | Erkennbare Angriffsvorbereitung durch Körperbewegung, Bedeutung von Timing, Konsequenz bei Fehlern, lernbare Gegner, das Gefühl, einen Gegner zu meistern | Bestrafung durch Unlesbarkeit, lange Eingabesperren |
-| **Final Fantasy XIV** | Räumlich strukturierte, mehrphasige Mechaniken, wechselnde sichere und gefährliche Flächen, überlappende Muster, Vorausplanung, klar kommunizierte Gefahrenbereiche | Fremde Effekte oder Assets, geschlossene Arena (unsere Welt ist offen), Gruppenrollen |
+| **Final Fantasy XIV** | Räumlich strukturierte, mehrphasige Mechaniken, wechselnde sichere und gefährliche Flächen, überlappende Muster, Vorausplanung, klar kommunizierte Gefahrenbereiche; seit 27.11. das **Flair** der Boss-, Dungeon- und Raidkämpfe, besonders der Ultimate-Kämpfe: Die Attacke kündigt sich selbst an (G19) | Fremde Effekte oder Assets, Kopien konkreter Kämpfe, geschlossene Arena (unsere Welt ist offen), Gruppenrollen |
 | **Path of Exile** | Build-Tiefe, Synergien, skalierende Fähigkeiten, bedeutsame Talente, spürbare mechanische und visuelle Progression | Bildschirmfüllende Spielereffekte, die Gegnerinformationen verdecken |
 | **Survivors** (Basis) | Horden, Kiting, Flächenschaden, automatische Angriffe, kurze Runs | Gegnermassen als einzige Schwierigkeitsquelle |
 
@@ -84,7 +84,7 @@ Diese Regeln gelten für alle Klassen, Gegner, Bosse und Fähigkeiten, auch kün
 
 | Nr. | Grundsatz | Detail |
 |---|---|---|
-| G1 | **Ankündigung = Wahrheit.** Animation, Warnfläche, Hitbox, Schadenszeitpunkt, Effekt und Ton hängen an derselben Zeitquelle (eine Uhr je Besitzer). Bei 100 % Warnung beginnt sofort die aktive Phase. Pause hält alles gemeinsam an. | [[Kampf & Begegnungen]], [[Technische Architektur]] |
+| G1 | **Ankündigung = Wahrheit.** Animation, ~~Warnfläche~~ Vorzeichen (seit 27.11., G19), Hitbox, Schadenszeitpunkt, Effekt und Ton hängen an derselben Zeitquelle (eine Uhr je Besitzer). Am Ende der Vorlaufzeit (100 %) beginnt sofort die aktive Phase. Pause hält alles gemeinsam an. | [[Kampf & Begegnungen]], [[Technische Architektur]] |
 | G2 | **Kein unvermeidbarer Schaden.** Keine zufälligen Kombinationen, die alle sicheren Positionen schließen. | [[Kampf & Begegnungen]] |
 | G3 | **Kiting bleibt legitim**, aber keine einfache Strategie neutralisiert alle Mechaniken. | [[Boss-Design]] |
 | G4 | **Trefferhöhen statt pauschaler Unverwundbarkeit:** Boden, hoch, alle; Sprung, Slide und Ausweichen wirken gezielt. | [[Kampf & Begegnungen]] |
@@ -98,10 +98,11 @@ Diese Regeln gelten für alle Klassen, Gegner, Bosse und Fähigkeiten, auch kün
 | G12 | **Keine Balancing-Zahlenänderungen ohne Auftrag** (HP, Schaden, XP, Klassenwerte, Skalierung, Drop-Raten). Darstellung darf sich ändern, Hitbox-Radien und Werte nicht. | `AGENTS.md` |
 | G13 | **Performance-Budgets** gelten für jede neue Funktion (Partikel, Lichter, Stimmen, Instanzen). | [[Technische Architektur]] |
 | G14 | **Bestehendes Drachenmodell und Originalquellen bleiben erhalten.** Erweitern statt ersetzen. | [[Assets & Pipeline]] |
-| G15 | **Sichtbare Gefahr = Schadensfläche (WYSIWYG).** Warnung, aktive Fläche, Partikel und Treffertest nutzen dieselbe Geometrie. Gefahrenflächen sind zusammenhängend, ohne scheinbar sichere Lücken; die nächste Mechanik liegt immer oben (Auftrag 26.11., Phase 2A). | [[Kampf & Begegnungen]] |
+| G15 | **Sichtbare Gefahr = Schadensfläche (WYSIWYG).** Warnung (seit 27.11.: die Vorzeichen der Attacke, G19), aktive Fläche, Partikel und Treffertest nutzen dieselbe Geometrie. Gefahrenflächen sind zusammenhängend, ohne scheinbar sichere Lücken; die nächste Mechanik liegt immer oben (Auftrag 26.11., Phase 2A). | [[Kampf & Begegnungen]] |
 | G16 | **Grundangriffe sehen aus wie das, was sie mechanisch sind.** Ein Grundpfeil ist ein physischer Pfeil. Element- oder Spezialoptik entsteht erst durch echte Element- oder Spezialmechanik. Gilt für alle Klassen (Auftrag 26.11., Phase 2B). | [[Fähigkeiten, VFX & Audio]] |
 | G17 | **Progression ist qualitativ.** Grundstufe kompakt und hochwertig; höhere Stufen bekommen neue Komponenten und Phasen, nicht nur Größe oder Partikelzahl. Gegnerische Gefahren bleiben auch im Endgame lesbar (Phase 2B). | [[Fähigkeiten, VFX & Audio]] |
-| G18 | **Persönliche Freigabe nur durch den Nutzer** im Review-Center. Technische QA ist keine Freigabe; freigegebene Inhalte sind Qualitätsreferenz (Phase 1). | AGENTS.md „Review-Workflow“, [[Review-Center]] |
+| G18 | **Persönliche Freigabe nur durch den Nutzer** im Review-Center. Technische QA ist keine Freigabe; freigegebene Inhalte sind Qualitätsreferenz (Phase 1). Seit 27.11. kommen Inhalte nur auf ausdrücklichen Wunsch des Nutzers ins Review-Center; sonst entscheidet der Agent nach diesem Kanon (Status „zurückgezogen“, keine Freigabe). | AGENTS.md „Review-Workflow“, [[Review-Center]] |
+| G19 | **Die Attacke ist die Warnung** (Designentscheidung des Nutzers 27.11.; Soll, Umsetzung als eigener Auftrag). Gegnerische Attacken kündigen sich durch sich selbst an: Körper, Ansetzen und Elemente, die sich in der späteren Trefferform aufbauen, steigern und auslösen. Keine zusätzlichen Marker, die genauso viel zeigen wie die Attacke selbst. Fairness bleibt Bedingung: Form der Vorzeichen = Trefferfläche, genug Vorlaufzeit, sichere Bereiche erkennbar; Ablauf, Timing und Trefferflächen bleiben unverändert. Vorbild ist das Flair von Final Fantasy XIV (Prinzip und Gefühl, keine Kopie). | [[Kampf & Begegnungen]] 5.0, [[Boss-Design]] B2 |
 
 ## 6. Aufgelöste Widersprüche (Audit 25.11.2026)
 
@@ -110,7 +111,7 @@ Diese Regeln gelten für alle Klassen, Gegner, Bosse und Fähigkeiten, auch kün
 | „Angriffe optisch viel zu klein, mehr visuelle Präsenz“ (Auftrag 22.11.); Zaubermeisterin „größer, eindrucksvoller“ | **Präsenz durch Klarheit, Kontrast, Timing und Ton statt Fläche.** Stufe 1 ist kompakt, aber sofort erkennbar. Die Größe wächst mit der Progression. | Auftrag 25.11. hat Vorrang. Die Erkennbarkeit aus dem 22.11. bleibt Pflicht. |
 | „Zeitweise ein Großteil des Bildschirms von Projektilen bedeckt“ (Auftrag 22.11.) | **Kurze Dichte-Spitzen erlaubt, nie dauerhaft.** Ein erreichbarer Weg bleibt immer sichtbar. | `Boss-Design` F und Auftrag 25.11. (keine Schwierigkeit aus unlesbarem Chaos) |
 | „Während Sprung und Slide unverwundbar“ (Auftrag 22.11., früh) | **Trefferhöhen** (Boden/hoch/alle). Nur die Ausweichrolle hat kurze, getrennt konfigurierbare Unverwundbarkeit. | Auftrag 22.11. (später), so umgesetzt |
-| Warnfläche füllt sich vollständig radial (Auftrag 22.11., `CLASS_DRAGON_REPORT.md`) | **Dezente Warnung:** voller Umriss ab 0 %, Countdown am Rand, kontrollierte Intensivierung, Aufleuchten beim Einschlag. Normale Projektile bekommen keine Bodenwarnung. | Boss-System-2.0-Auftrag („teilweise zu präsent“), Bossphilosophie 23.11., Auftrag 25.11. |
+| Warnfläche füllt sich vollständig radial (Auftrag 22.11., `CLASS_DRAGON_REPORT.md`) | ~~**Dezente Warnung:** voller Umriss ab 0 %, Countdown am Rand, kontrollierte Intensivierung, Aufleuchten beim Einschlag.~~ *Ersetzt am 27.11. durch G19 (Die Attacke ist die Warnung).* Normale Projektile bekommen keine Bodenwarnung. | Boss-System-2.0-Auftrag („teilweise zu präsent“), Bossphilosophie 23.11., Auftrag 25.11.; Nutzerentscheidung 27.11. |
 | Drache: „sehr viele Sprites und Animationen sind ausdrücklich gewünscht“ | **Artikulierter Körper statt immer mehr Sprites.** Mehr Frames sind nur dort erwünscht, wo sie Qualität bringen. | Auftrag 25.11. |
 | Anforderungen an Kleidung, Haare und „dieselbe Figur in jeder Animation“ nur für Zaubermeisterin und Waldläufer | **Global** (G7), auch für den Schwertkämpfer und künftige Klassen | Auftrag 25.11. |
 | Visuelle Waffenstufen nach Spielerstufe 1/34/68, bewusst getrennt vom Waffenschaden (Auftrag 22.11.) | **Bleibt vorerst.** Soll: an die echte Waffenprogression koppeln, sobald das geplante Waffen-Upgrade-System existiert. | Auftrag 25.11. (Intensität folgt tatsächlichem Fortschritt) |
@@ -122,7 +123,7 @@ Diese Regeln gelten für alle Klassen, Gegner, Bosse und Fähigkeiten, auch kün
   - Umbenannt am 25.11. (Nutzerentscheidung).
   - Frühere Namen in älteren Texten: Schwertkämpfer, Zaubermeisterin.
 - **Gegnerränge:** normaler Gegner, Elite (noch nicht im Spiel), Miniboss (Minute 1 und 3), Hauptboss (ab Minute 5, alle 5 Minuten).
-- **Warnung (Telegraph):** angekündigte Trefferfläche mit Countdown.
+- **Warnung (Telegraph):** ~~angekündigte Trefferfläche mit Countdown~~ Oberbegriff für alles, was eine Attacke vor dem Treffer ankündigt. Seit 27.11. sind das die **Vorzeichen** der Attacke selbst (G19), keine eigenständigen Marker.
 - **Aktive Phase:** Zeitraum, in dem eine Attacke Schaden verursachen kann.
 - **Trefferhöhe:** `ground`, `high`, `all`.
 - **Stufen:** Spielerstufe (XP), Zauberstufe 1–9, Talentrang, Gegenstandsstufe (Item-Level).

@@ -1,6 +1,6 @@
 ---
 tags: [system, ui]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # UI, HUD & Menüs
 
@@ -17,7 +17,7 @@ Hauptmenü, Charakter- und Levelauswahl, Pause, Level-up-Wahl, HUD, Charakterbil
 - `scripts/spell_ui_v2`: Level-up-Karten, Tooltips, Pausen-Inventar mit Run-Statistiken.
 - Weitere Bildschirme: der Charakterbildschirm in `scripts/talents` und `scripts/equipment`, die Levelvorschau in `scripts/level_worlds`. Objekte: `ObjectOverlay`, `ObjectSpellHUD`.
 
-- **Review-Center** (seit 26.11.): Hauptmenüpunkt „Review-Center (N offen)“, Listenbildschirm mit Reitern und Detailfeld; im Szenario erweitert sich das Pausenmenü um Review-Aktionen und die Urteilszeilen „Gut“ (grün) und „Nicht gut“ (rot) mit Kommentardialog. Siehe [[Review-Center]].
+- **Review-Center** (seit 26.11.): Hauptmenüpunkt „Review-Center (N offen)“, Listenbildschirm mit Reitern und Detailfeld; im Szenario erweitert sich das Pausenmenü um Review-Aktionen und die Urteilszeilen „Gut“ (grün) und „Nicht gut“ (rot) mit Kommentardialog. Seit 27.11. zeigt der Reiter „Archiv“ auch zurückgezogene Einträge (Präfix `[-]`, Status „Zurueckgezogen - vom Agenten nach Design-Kanon entschieden“). Siehe [[Review-Center]].
 
 - Einstellungen seit 26.11. mit „Lichtblitze“ (Index 6). „Zurueck“ liegt jetzt auf 7, im Pausenmenü auf 7 bzw. 8.
 

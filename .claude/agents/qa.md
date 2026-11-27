@@ -58,7 +58,9 @@ Verwende genau diese Stufen und vergib nie die letzte:
 2. zur Laufzeit überprüft (native Suite oder Szenario gelaufen);
 3. visuell technisch geprüft (Aufnahmen tatsächlich geöffnet);
 4. spielerisch durch automatisierte Tests analysiert (Bots, Orakel, Kennzahlen);
-5. **persönlich vom Game Designer freigegeben**: nur der Nutzer, per grünem Haken im Review-Center. Nie behaupten, eine Animation sei künstlerisch fertig oder eine Begegnung endgültig abgenommen.
+5. **persönlich vom Game Designer freigegeben**: nur der Nutzer, per Urteil „Gut“ im Review-Center. Nie behaupten, eine Animation sei künstlerisch fertig oder eine Begegnung endgültig abgenommen.
+
+**Review-Center seit 27.11.:** Neue Einträge gibt es nur auf ausdrücklichen Wunsch des Nutzers (Feld `requested`, `review.py check` prüft es). Sonst entscheidet der Agent nach dem Design-Kanon; deine Befunde sind dann die einzige unabhängige Prüfung. Der Status `withdrawn` („zurückgezogen, vom Agenten nach Design-Kanon entschieden“) ist keine Freigabe und nie Stufe 5.
 
 **Schwerpunkte nach Diff**
 - Bewegung mit Trefferhöhen

@@ -98,12 +98,16 @@ Abgelesen aus den Skripten. Alle Builds sind isolierte Kopien unter `%LOCALAPPDA
   - Spiel starten, Testläufe und Simulationen sind ohne Rückfrage erlaubt.
 - **Speicherplatz:** Testartefakte nicht anhäufen. `tests/tools/clean_test_artifacts.py` läuft nach `qa.py` und `record_scene.py` automatisch; Aufnahmen, die nicht mehr gebraucht werden, löschen.
 - **Arbeitsweise des Nutzers:** Änderungen direkt im Projekt. Test-Builds nie im Projektordner ablegen und danach löschen.
+- **Offenes melden statt abarbeiten (seit 27.11.):**
+  - Am Ende jedes Auftrags im Bericht kurz auflisten, was offen geblieben ist, und es in die Roadmap (`docs/Design/Roadmap & Vertical Slice.md`) bzw. `docs/Bugs & Ideen.md` eintragen.
+  - Offenes nicht ungefragt abarbeiten, auch nicht in späteren Sitzungen und auch nicht, wenn HANDOFF, Roadmap oder `Bugs & Ideen` es nennen. Was als Nächstes kommt, entscheidet der Nutzer.
+  - Zum laufenden Auftrag gehört, was er ausdrücklich verlangt, und die Behebung von Fehlern, die er selbst verursacht hat.
 - **Bossarbeit** folgt `docs/Design/Boss-Design.md` und `docs/Design/Kampf & Begegnungen.md`. Gefahren laufen über eine Uhr je Boss (`v2_clock`), sodass Warnung und Treffer synchron bleiben.
 - **Grafik-, Animations-, Effekt- und Tonarbeit** folgt `docs/Design/Visuelles Leitbild & Animation.md` und `Fähigkeiten, VFX & Audio.md`. Bewegungsreferenz Terranigma nur für Bewegungsqualität, nie Assets oder Stil kopieren.
 - **Größere Umbauten** an Rendering, Animation oder Kampfsystem nur nach `docs/Design/Technische Architektur.md` und `Roadmap & Vertical Slice.md`. Mit „Offen“ markierte Entscheidungen trifft der Agent nach bestem Standard (Generalfreigabe 25.11.) und begründet sie in `docs/DECISIONS.md`.
 
-## Review-Workflow (Development Review Center, verbindlich seit 26.11.)
-Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft neue Inhalte im Spiel (Hauptmenü → Review-Center) und urteilt im Escape-Menü mit **„Gut“** oder **„Nicht gut“**, jeweils mit Kommentar (seit 26.11. abends). Bei „Nicht gut“ wählt er „komplett weg“ oder „anders umsetzen“.
+## Review-Workflow (Development Review Center, verbindlich seit 26.11., neu gefasst 27.11.)
+Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft Inhalte im Spiel (Hauptmenü → Review-Center) und urteilt im Escape-Menü mit **„Gut“** oder **„Nicht gut“**, jeweils mit Kommentar. Bei „Nicht gut“ wählt er „komplett weg“ oder „anders umsetzen“.
 1. **Vor der Arbeit:** `python tests/tools/review/review.py sync`. Claude erledigt das per SessionStart-Hook, Codex führt den Befehl selbst aus.
    - Der Befehl überträgt neue Urteile aus `%LOCALAPPDATA%\FirstGame\` in `review/registry.json`: „Gut“ wird Status `processed`, „Nicht gut“ wird Status `rejected` (Feld `feedback`).
    - `status` zeigt Offenes und alle Kommentare: „NICHT GUT“ und „GUT MIT WUNSCH“.
@@ -112,24 +116,27 @@ Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft neue Inhalte im Spie
      - „Nicht gut, anders umsetzen“: nach dem Kommentar überarbeiten, dann `bump`.
      - „Gut“ mit Wunsch (z. B. „genau so, nur schneller“): umsetzen, dann `bump`, weil sich ein freigegebener Inhalt sichtbar ändert.
      - Ist ein Kommentar unklar, beim Nutzer nachfragen, statt zu raten.
-2. **Freigegebene Inhalte sind die verbindliche Qualitätsreferenz.**
+2. **Neue Einträge nur auf ausdrücklichen Wunsch des Nutzers (seit 27.11.).**
+   - Sonst beurteilt und entscheidet der Agent Inhalte selbst nach dem Design-Kanon (`docs/Design/`, Statusskala in `Qualitätsstandard.md`). Technische QA und visual-qa laufen wie bisher.
+   - Ein gewünschter Eintrag trägt das Feld `requested` (Datum und Wortlaut des Wunsches); `review.py check` lehnt neue Einträge ohne dieses Feld ab.
+   - Das Szenario startet mit den echten Systemen, mit realistischer Ausrüstung, Level und Talenten (Konfiguration siehe Systemnotiz); danach `review.py build` und QA.
+   - Keine Einträge für nicht Umgesetztes. Ein Eintrag für eine Einzelattacke gibt nicht den ganzen Boss frei.
+3. **Freigegebene Inhalte sind die verbindliche Qualitätsreferenz.**
    - Ohne nachvollziehbaren Grund nicht wesentlich verändern.
    - Erlaubt: Fehlerkorrekturen, Performance, interne Refactorings ohne sichtbare Wirkung, ausdrücklich neue Anforderungen.
-   - Ändert sich ein freigegebener Inhalt sichtbar oder spielerisch wesentlich: `review.py bump ID --reason "…"` (neue Revision, wieder offen). Nie eine alte Freigabe übertragen.
-3. **Nach der Arbeit:** Für jede Änderung an den folgenden Inhalten einen Eintrag in `review/registry.json` anlegen oder per `bump` erneuern:
-   - Charaktergrafik und Animation, Ausrüstung und Waffen
-   - Gegner, Bosse, Bossattacken und Fähigkeiten
-   - VFX und Telegraphs, Licht, UI
-   - Combat Feeling, wesentliches Balancing, visuelle Progression
-4. **Danach `review.py build` und QA.** Das Szenario muss mit den echten Systemen starten, mit realistischer Ausrüstung, Level und Talenten (Konfiguration siehe Systemnotiz).
-   - Keine Einträge für nicht Umgesetztes.
-   - Ein Eintrag für eine Einzelattacke gibt nicht den ganzen Boss frei.
+   - Ändert sich ein freigegebener oder bewerteter Inhalt sichtbar oder spielerisch wesentlich: `review.py bump ID --reason "…"`. Nie eine alte Freigabe übertragen.
+     - Ohne `--request` bekommt die neue Revision den Status `withdrawn` (Agent entscheidet nach Kanon).
+     - Mit `--request "Datum: Wortlaut"` ist sie wieder offen; nur wenn der Nutzer sie sehen will.
+4. **Status `withdrawn`** bedeutet „zurückgezogen, vom Agenten nach Design-Kanon entschieden“.
+   - Das ist keine Freigabe und wird nie als Urteil des Nutzers ausgegeben.
+   - Das Szenario bleibt im Reiter „Archiv“ startbar; ein Urteil, das der Nutzer dort abgibt, überträgt `sync` wie jedes andere.
+   - Am 27.11. wurden alle damals offenen 43 Einträge so zurückgezogen (Nutzerauftrag). Weitere offene Einträge zieht der Agent nur auf Auftrag zurück: `review.py withdraw ID|--all-open --reason "…"`.
 5. **Persönliche Urteile („Gut“ und „Nicht gut“) setzt ausschließlich der Nutzer im Spiel.** Agenten schreiben nie in `review_approvals.*` und simulieren keine Freigabe.
    - Technische QA ist keine Freigabe.
    - Tests nutzen nur gekennzeichnete Testfreigaben in Testkopien (`review_e2e.py`). `--include-test` ist nur mit einer Registry-Kopie erlaubt.
-6. **Entfernen aus der offenen Liste geschieht nur über den Status.**
+6. **Entfernen aus der offenen Liste geschieht nur über den Status** (`processed`, `rejected`, `superseded`, `withdrawn`).
    - Die produktive Implementierung wird dabei nie gelöscht.
-   - Verarbeitete Szenarien bleiben startbar (Reiter „Archiv“).
+   - Verarbeitete und zurückgezogene Szenarien bleiben startbar (Reiter „Archiv“).
 
 ## Code-Konventionen (GML)
 - **Stil:** dichtes GML, kurze Hilfsfunktionen.
@@ -188,7 +195,7 @@ Details: `docs/Systeme/Review-Center.md`. Der Nutzer prüft neue Inhalte im Spie
 ### Schreiben: am Ende jeder abgeschlossenen Aufgabe, nicht nach jeder Nachricht
 `docs/` ist der Obsidian-Vault des Nutzers. Nach jeder abgeschlossenen Aufgabe kurz die betroffenen Systemnotizen, HANDOFF und LOG aktualisieren und neue Notizen im Index verlinken:
 - a) `docs/HANDOFF.md` **überschreiben**, höchstens 40 Zeilen:
-  - Stand, zuletzt gearbeitet an, halb fertig, Bugs, nächste Schritte
+  - Stand, zuletzt gearbeitet an, halb fertig, Bugs, offene Punkte (nur zur Information; was als Nächstes kommt, entscheidet der Nutzer)
   - `Zuletzt dran: Claude/Codex, Datum`
 - b) **Oben** in `docs/LOG.md` 2–5 Zeilen: `### Datum · Agent · Thema`, dazu die geänderten Dateien.
 - c) Nur bei echten Entscheidungen eine Zeile in `docs/DECISIONS.md`.

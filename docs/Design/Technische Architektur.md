@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, architektur, rendering, animation, performance]
-updated: 2026-11-25
+updated: 2026-11-27
 status: verbindlich als Zielarchitektur; Entscheidungen mit „Offen“ brauchen die Zustimmung des Nutzers
 ---
 # Technische Architektur
@@ -157,6 +157,7 @@ Ausbaustufe (Soll):
   - Prioritätsebene;
   - Nutzung für Elite- und normale Gegner mit großen Flächen.
 - Keine zweite, parallele Warnlogik (Auftrag 22.11.).
+- **Soll seit 27.11.:** Die Darstellung wechselt von Markern zu den Vorzeichen der Attacke selbst ([[Kampf & Begegnungen]] 5.0, Leitbild G19). Uhr, Geometrie und Treffertest bleiben; die Vorzeichen lesen dieselbe Uhr und dasselbe Geometrie-Struct.
 
 ### 4.6 Projektile
 - **Ist:** Spielerprojektile als Objekte, Bossprojektile als Structs (`bv2_bullet`).

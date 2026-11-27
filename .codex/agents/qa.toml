@@ -50,6 +50,7 @@ Additional suites and tools (same content as .claude/agents/qa.md):
 
 Technical QA is never a personal approval. Use exactly these levels and never grant the last one:
 1. technically working (build and tests); 2. verified at runtime (native suite or scenario ran); 3. visually checked on a technical level (recordings actually opened);
-4. gameplay analysed by automated tests (bots, oracle, metrics); 5. personally approved by the game designer: only the user, via the green button in the Review Center.
+4. gameplay analysed by automated tests (bots, oracle, metrics); 5. personally approved by the game designer: only the user, via the verdict "Gut" in the Review Center.
+Review Center since 27.11.: new entries only on the user's explicit request (field `requested`, checked by `review.py check`). Otherwise the agent decides by the design canon, so your findings are the only independent check. Status `withdrawn` (withdrawn, decided by the agent after the design canon) is never an approval and never level 5.
 Never claim that an animation is artistically finished or that an encounter is finally approved.
 """

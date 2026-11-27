@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, bosse]
-updated: 2026-11-26
+updated: 2026-11-27
 status: verbindlich (Fachgebiet Hauptbosse); bis 24.11. unter DESIGN/BOSS_DESIGN.md
 ---
 # Boss-Design: Bosskampf-Philosophie und Umsetzungsstand
@@ -11,7 +11,7 @@ status: verbindlich (Fachgebiet Hauptbosse); bis 24.11. unter DESIGN/BOSS_DESIGN
 
 ## Leitbild
 
-FirstGame ist ein Survivors-Spiel mit anspruchsvollen, mechanisch durchdachten Action-RPG-Bosskämpfen. Bezugspunkt ist die **spielerische Struktur** anspruchsvoller Final-Fantasy-XIV-Begegnungen, nicht deren Effekte. Die Schwierigkeit entsteht aus Bewegung, räumlichem Denken, Timing und erlernbaren Mustern. Sie entsteht nicht aus hohen Schadenswerten, Zufallsspam oder künstlich begrenzter Spielerreichweite.
+FirstGame ist ein Survivors-Spiel mit anspruchsvollen, mechanisch durchdachten Action-RPG-Bosskämpfen. Bezugspunkt ist die **spielerische Struktur** anspruchsvoller Final-Fantasy-XIV-Begegnungen, nicht deren Effekte. Seit 27.11. zählt auch ihr **Flair** dazu, besonders das der Ultimate-Kämpfe: Die Attacke kündigt sich selbst an (B2). Die Schwierigkeit entsteht aus Bewegung, räumlichem Denken, Timing und erlernbaren Mustern. Sie entsteht nicht aus hohen Schadenswerten, Zufallsspam oder künstlich begrenzter Spielerreichweite.
 
 Die Leitfragen für den Spieler:
 - Wo stehe ich?
@@ -76,11 +76,20 @@ Regeln:
 - Kein Teleport direkt auf den Spieler; die Aufholattacke ist lernbar und ausweichbar.
 - Die Boss-Richtungsanzeige funktioniert weiter.
 
+## B2 – Die Attacke ist die Warnung (Designentscheidung des Nutzers, 27.11.2026)
+**Soll, noch nicht umgesetzt;** die Umsetzung kommt als eigener Auftrag. Die globale Regel steht in [[Kampf & Begegnungen]] 5.0 und Leitbild G19, hier nur die Bossbesonderheiten.
+- Bossattacken kündigen sich durch Körper, Ansetzen und die Elemente der Attacke selbst an. Marker, die genauso viel zeigen wie die Attacke, entfallen (z. B. Kegel plus wanderndes Rechteck beim Drachenatem, sich füllende Schachbrettfelder).
+- **Beispiele des Nutzers:**
+  - Schachbrett: In den Feldern bauen sich kleine Flammen auf, vibrieren und explodieren gleich; danach dasselbe invertiert mit Eis.
+  - Drachenatem: Kopf, Ansetzen und Flammen sind zu sehen, ausgewichen wird den Flammen.
+- **Fairness:** Form der Vorzeichen = Trefferfläche, genug Vorlaufzeit, sichere Bereiche erkennbar. Ablauf, Timing, Trefferflächen und die Uhr je Boss (`v2_clock`) bleiben unverändert; das Ausweich-Orakel der Boss-Suite gilt weiter.
+- Ersetzt sind die Markerregeln in C, D, F, H und H2 (jeweils durchgestrichen). Die Beschreibung im Umsetzungsstand bleibt Ist bis zur Umsetzung.
+
 ## C – Extrem weit reichende Strahlen
 
 - Feuer-, Eis- und Energiestrahlen haben konzeptionell unbegrenzte Reichweite. Sie reichen mindestens über den gesamten relevanten Spielbereich, auch außerhalb der Kamera.
 - Umsetzung über Strahlgeometrie bzw. Kollisionsrechnung, nicht über weltlange Sprites.
-- Ablauf: Ausrichtung → Ankündigung von Winkel und Richtung → dezenter Countdown → Positionieren → aktiver Strahl direkt bei Ablauf → begrenzte Dauer → Abschlussanimation.
+- Ablauf: Ausrichtung → ~~Ankündigung von Winkel und Richtung → dezenter Countdown~~ Ansetzen (Kopf, Einatmen, Glut im Maul; Richtung daran lesbar, seit 27.11., B2) → Positionieren → aktiver Strahl direkt bei Ablauf → begrenzte Dauer → Abschlussanimation.
 - Strahlen dürfen schwenken (z. B. links nach rechts, kurzer Stillstand und dann Schwenk, zwei Schwenks, begrenzter Sektor). Der Schwenk passt zur Animation, ist erkennbar und nicht unvorhersehbar schnell.
 - Kein permanentes perfektes Nachverfolgen; es sind bewusst designte Muster.
 
@@ -90,8 +99,8 @@ Meteore, Magma, Säure, Wurzeln, Explosionen und Einschlagkreise treffen nur ihr
 
 Ablauf:
 1. Ziel festlegen.
-2. Dezente Zone zeigen.
-3. Zeitabhängiger Countdown.
+2. ~~Dezente Zone zeigen.~~ Vorzeichen in der Trefferform aufbauen (seit 27.11., B2).
+3. ~~Zeitabhängiger Countdown.~~ Die Vorzeichen steigern sich bis zur Auslösung.
 4. Ausweichen möglich.
 5. Kurzes Aufleuchten.
 6. Einschlag.
@@ -117,7 +126,7 @@ Alle Muster sind an die offene Top-down-Welt angepasst; es gibt keine geschlosse
 
 ## F – Gezielte Zwickmühlen statt Zufallsspam, aber niemals grundsätzlich unfair
 
-- Es soll regelmäßig Positionsdruck geben (Strahl blockiert eine Seite, Bodenexplosion bedroht den Standort, eine zweite Warnung markiert die nächste Gefahr).
+- Es soll regelmäßig Positionsdruck geben (Strahl blockiert eine Seite, Bodenexplosion bedroht den Standort, ~~eine zweite Warnung markiert die nächste Gefahr~~ die Vorzeichen der nächsten Gefahr bauen sich schon auf).
 - Kein Kampf, in dem dauerhaft fast der ganze Bildschirm gefährlich ist. Im Wechsel: freie Bewegung, einzelne Angriffe, Spezialangriffe, kurze Kombinationen, Erholung.
 - Sichere Bereiche müssen realistisch erreichbar sein. Dabei zählen Tempo, Weglänge, Hindernisse, Reaktionszeit, Sprung, Slide, Dodge, gleichzeitige Gegner, Vorbereitungs- und Aktivzeit sowie die Hitbox. Erreichbarkeit „nur mit perfektem Vorwissen“ gilt nicht.
 - Zielbereiche werden zu einem nachvollziehbaren Zeitpunkt festgelegt; Felder springen nicht ohne neue Warnung auf den Spieler.
@@ -190,17 +199,17 @@ Große Bosse haben Körper, deren Teile gezielt für Angriffe und Bewegungen ein
 
 ## H – Technische Grundarchitektur
 
-- **Angriffe als geplante, mehrstufige Sequenzen:** positionieren → Zonen ankündigen → Countdown → aktivieren → nächste Zonen ankündigen → alte deaktivieren → zweite Aktivierung → Abschluss → Bewegungspause. Zeitlich präzise.
+- **Angriffe als geplante, mehrstufige Sequenzen:** positionieren → ~~Zonen ankündigen → Countdown~~ Vorzeichen aufbauen (seit 27.11., B2) → aktivieren → nächste Zonen ankündigen → alte deaktivieren → zweite Aktivierung → Abschluss → Bewegungspause. Zeitlich präzise.
 - **Weiterhin genau neun Fähigkeiten je Hauptboss.** Eine Fähigkeit darf mehrere Schritte haben.
 - **Freischaltung:** Minute 5 → 1–3, Minute 10 → 1–6, ab Minute 15 → 1–9. Früh freigeschaltete Fähigkeiten dürfen später komplexere Varianten bekommen.
-- **Warnungen zeigen** Fläche, Zeitpunkt, die danach sicheren Flächen und die bereits vorbereitete nächste Gefahr. Sie bleiben dezent, ohne grelle Vollflächen.
+- **~~Warnungen~~ Die Vorzeichen zeigen** (seit 27.11., B2) Fläche, Zeitpunkt, die danach sicheren Flächen und die bereits vorbereitete nächste Gefahr. Sie bleiben dezent, ohne grelle Vollflächen.
 - **Überlappende Phasen** (A aktiv, B angekündigt, A endet, B aktiv) sind ausdrücklich möglich. Es dürfen nie versehentlich alle sicheren Positionen gleichzeitig verschwinden.
 
 ### H2 – Choreografierte Angriffssequenzen (bestätigte Designentscheidung des Nutzers, 26.11.2026)
 - **Ergänzen, nicht ersetzen:** Dynamische Auswahl (Rotation, Distanzdruck, Nahangriff, Aufholattacke) und HP-Phasen bleiben. Zusätzlich gibt es feste, lernbare Sequenzen aus den vorhandenen neun Fähigkeiten, also keine neuen Angriffe.
 - **Lernbar:** Je Phase 2–3 Sequenzen mit fester Reihenfolge. Der Boss spielt sie der Reihe nach, immer nach zwei regulären Angriffen. So erkennt man nach einigen Begegnungen „Strahl → Schachbrett → Ringe“ wieder.
 - **Fair:**
-  - Jeder Schritt ist die vollständige Fähigkeit mit Warnung, Countdown und Aktivierung.
+  - Jeder Schritt ist die vollständige Fähigkeit mit ~~Warnung, Countdown~~ Vorzeichen (seit 27.11., B2) und Aktivierung.
   - Der nächste Schritt beginnt erst, wenn alle Gefahren des vorigen vorbei sind, plus eine Pause von 0,5 s.
   - Nach dem letzten Schritt ruht der Boss 2,2 s.
   - Es gibt immer eine machbare Überlebensstrategie; die Boss-Suite prüft das für jede Sequenz mit dem Ausweich-Orakel.

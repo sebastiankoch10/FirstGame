@@ -66,18 +66,19 @@ function review_local_verdict(_id,_rev) {
 function review_local_approved(_id,_rev) {var v=review_local_verdict(_id,_rev);return is_struct(v) && review_s(v,"verdict","good")=="good";}
 function review_local_rejected(_id,_rev) {var v=review_local_verdict(_id,_rev);return is_struct(v) && review_s(v,"verdict","good")=="bad";}
 /// open | local (good in game, waiting for the agent sync) | local_bad (not good, waiting) | approved | processed |
-/// rejected (not good, synced: the agent reworks or removes it) | superseded
+/// rejected (not good, synced: the agent reworks or removes it) | superseded | withdrawn (taken off the open list by the
+/// agent, decided by the design canon; not a personal approval; still startable from the archive)
 function review_state(_e) {
     var v=review_local_verdict(_e.id,_e.revision);
     if(_e.status=="superseded")return "superseded";
     // a newer verdict in the game overrides the synced one until the next sync
     if(is_struct(v) && _e.status!="processed" && _e.status!="rejected")return review_s(v,"verdict","good")=="bad" ? "local_bad" : "local";
-    if(_e.status=="processed" || _e.status=="approved" || _e.status=="rejected")return _e.status;
+    if(_e.status=="processed" || _e.status=="approved" || _e.status=="rejected" || _e.status=="withdrawn")return _e.status;
     return "open";
 }
 /// Review Center tabs: 0 Offen, 1 Freigegeben, 2 Nicht gut, 3 Archiv.
 function review_filter_match(_f,_st) {
-    switch(_f){case 0:return _st=="open";case 1:return _st=="local" || _st=="approved";case 2:return _st=="local_bad" || _st=="rejected";default:return _st=="processed" || _st=="superseded";}
+    switch(_f){case 0:return _st=="open";case 1:return _st=="local" || _st=="approved";case 2:return _st=="local_bad" || _st=="rejected";default:return _st=="processed" || _st=="superseded" || _st=="withdrawn";}
 }
 function review_open_count() {var e=review_entries(),n=0;for(var i=0;i<array_length(e);i++)if(review_state(e[i])=="open")n++;return n;}
 /// Writes the user's verdict for the running scenario: _verdict "good" | "bad", _decision "keep" (good) or
@@ -388,9 +389,13 @@ function review_center_draw() {
         spell_ui_panel(G.lx,yy+2,G.lw,G.row-4,k==ui.sel);
         var e=row.entry,bad=row.state=="local_bad" || row.state=="rejected";
         var col=row.state=="local" ? make_color_rgb(126,224,140) : (bad ? make_color_rgb(236,120,104) : (row.state=="open" ? c_white : make_color_rgb(150,160,170)));
-        draw_set_color(col);draw_text_transformed(G.lx+12,yy+G.row*.5,(row.state=="local" || row.state=="approved" || row.state=="processed" ? "[OK] " : (bad ? "[X] " : ""))+e.title,.82,.82,0);
+        var lbl=(row.state=="local" || row.state=="approved" || row.state=="processed" ? "[OK] " : (bad ? "[X] " : (row.state=="withdrawn" ? "[-] " : "")))+e.title;
+        var rt="Lv "+string(review_level(e))+"  Rev. "+string(e.revision),maxw=(G.lw-34-string_width(rt)*.72)/.82;
+        // long titles are cut before the level/revision column (full title in the detail panel)
+        if(string_width(lbl)>maxw){while(string_length(lbl)>4 && string_width(lbl+"...")>maxw)lbl=string_copy(lbl,1,string_length(lbl)-1);lbl+="...";}
+        draw_set_color(col);draw_text_transformed(G.lx+12,yy+G.row*.5,lbl,.82,.82,0);
         draw_set_halign(fa_right);draw_set_color(make_color_rgb(150,168,182));
-        draw_text_transformed(G.lx+G.lw-10,yy+G.row*.5,"Lv "+string(review_level(e))+"  Rev. "+string(e.revision),.72,.72,0);draw_set_halign(fa_left);
+        draw_text_transformed(G.lx+G.lw-10,yy+G.row*.5,rt,.72,.72,0);draw_set_halign(fa_left);
     }
     if(n>vis){var bh=G.lh*vis/n,by=G.ly+(G.lh-bh)*ui.scroll/max(1,n-vis);draw_set_color(make_color_rgb(70,86,100));draw_rectangle(G.lx+G.lw+6,G.ly,G.lx+G.lw+10,G.ly+G.lh,false);draw_set_color(make_color_rgb(170,190,206));draw_rectangle(G.lx+G.lw+6,by,G.lx+G.lw+10,by+bh,false);}
     // detail panel
@@ -400,7 +405,7 @@ function review_center_draw() {
         var e=rows[ui.sel].entry,s=e.scenario,yy=G.dy-24,tw=G.dw-32;
         draw_set_color(make_color_rgb(238,207,133));draw_text_ext_transformed(G.dx+16,yy,e.title,20,tw/.95,.95,.95,0);yy+=string_height_ext(e.title,20,tw/.95)*.95+10;
         var st=rows[ui.sel].state,stt=st=="open" ? "Offen - wartet auf deine Pruefung" : (st=="local" ? "Von dir als gut bewertet - wartet auf den Agenten" : (st=="processed" ? "Freigegeben und verarbeitet"
-            : (st=="local_bad" ? "Von dir als nicht gut bewertet - wartet auf den Agenten" : (st=="rejected" ? "Nicht gut - der Agent setzt es um oder entfernt es" : (st=="superseded" ? "Durch neue Revision ersetzt" : "Freigegeben")))));
+            : (st=="local_bad" ? "Von dir als nicht gut bewertet - wartet auf den Agenten" : (st=="rejected" ? "Nicht gut - der Agent setzt es um oder entfernt es" : (st=="superseded" ? "Durch neue Revision ersetzt" : (st=="withdrawn" ? "Zurueckgezogen - vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)" : "Freigegeben"))))));
         var lv=review_local_verdict(e.id,e.revision);
         if(is_struct(lv))stt+=" | Dein Urteil: "+(review_s(lv,"verdict","good")=="good" ? "gut" : (review_s(lv,"decision","change")=="remove" ? "nicht gut, komplett weg" : "nicht gut, anders umsetzen"))+(review_s(lv,"comment","")!="" ? " - \""+review_ascii(lv.comment)+"\"" : "");
         var lines=[["Kategorie",e.category],["Inhalt",e.content],["Status",stt],["Spieler",review_class_name(review_s(s,"class","Sword"))+", Level "+string(review_level(e))+(s.type=="boss" ? ", Minute "+string(review_minute(s)) : "")],

@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "checks": 18,
+  "checks": 23,
   "failures": [],
   "phases": {
     "a": {
@@ -24,11 +24,11 @@
       },
       "phase": "c",
       "passed": true,
-      "checks": 5.0,
+      "checks": 9.0,
       "failures": []
     }
   },
-  "evidence": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\review-e2e\\20261127-002118",
+  "evidence": "C:\\Users\\sebas\\AppData\\Local\\FirstGame-Tests\\review-e2e\\20261127-070431",
   "captures": [
     "a0-main-menu.png",
     "a1-review-center.png",
@@ -39,7 +39,7 @@
     "a5-verdict-saved.png",
     "b1-approved-tab.png",
     "b2-not-good-tab.png",
-    "c1-review-center.png"
+    "c1-archive.png"
   ],
   "test_type": "native Windows build, scripted input, technical test approvals only"
 }

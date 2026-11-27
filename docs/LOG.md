@@ -1,8 +1,14 @@
 ---
 tags: [log]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # Änderungslog (neueste Einträge oben, je 2–5 Zeilen). Ältere Einträge: [[LOG_2026]]
+
+### 2026-11-27 · Claude · Arbeitsweise und Review-Center neu, Grafik-Overhaul abgeschlossen, Designentscheidung „Die Attacke ist die Warnung“
+- Review-Center: neuer Status `withdrawn` (zurückgezogen, vom Agenten nach Design-Kanon entschieden, keine Freigabe); alle 43 offenen Einträge zurückgezogen und im Archiv startbar. `review.py` mit `withdraw`, `bump --request` (ohne Prüfwunsch → `withdrawn`), Pflichtfeld `requested` für neue Einträge; `review_center.gml` zeigt den Status im Archiv und kürzt lange Listentitel vor der Spalte Lv/Rev.; `review_e2e.py` und `tests/review_harness.gml` prüfen den neuen Ablauf.
+- Regeln: AGENTS.md (Review-Workflow neu gefasst, „Offenes melden statt abarbeiten“), CLAUDE.md, `.claude/agents/*`, `.codex/agents/*`, Systemnotizen Review-Center, Tests & QA, UI, Zauber & Passiva.
+- Overhaul: Richtung bestätigt, Ausrollen beendet; Zauber/Passiva und Gegnerangriffe herausgelöst (Roadmap 14–16, Visuelles Leitbild 7.4).
+- Design (nur festgehalten): Leitbild G19, Kampf & Begegnungen 5.0, Boss-Design B2; ersetzte Marker-Regeln durchgestrichen (auch Visuelles Leitbild 3a, Technische Architektur 4.5, Qualitätsstandard Status „nach Kanon entschieden“); DECISIONS, Bugs & Ideen.
 
 ### 2026-11-26 nachts · Claude · Grafik-Overhaul HD-2D, Schritte 0–3 (Grundlage und Schaustück) plus Ergänzung Figuren und Gefahrenflächen
 - Neu:

@@ -1,6 +1,6 @@
 ---
 tags: [design, verbindlich, vfx, audio, faehigkeiten, progression]
-updated: 2026-11-26
+updated: 2026-11-27
 status: verbindlich (Fachgebiet Fähigkeiten-Inszenierung, Effekte, visuelle Progression, Ton)
 ---
 # Fähigkeiten, VFX & Audio
@@ -84,7 +84,7 @@ Aufbau eines Angriffs in fünf Phasen (Sammeln, Zünden, Tragen, Einschlagen, Na
 - **Pixelpartikel** (`scripts/fx_particles`): Pool 420 / 1.000 / 1.800 je Effektqualität; Farbverlauf über die Lebenszeit je Element (heißer Kern, Körper, dunkler Rand, Rauch); Formen Pixel, Speed-Line, Kristallsplitter, flackernde Glut, Rauchwolke, Kernblitz. Ebene „beleuchtet“ (Staub, Asche, Rauch, Bodenmale) oder „selbstleuchtend“ (Feuer, Funken, Magie).
 - **Zusammengesetzte Bausteine:** `fxp_impact` (Einschlag), `fxp_trail` (Spur), `fxp_aura` (Aura), `fxp_gather` (Einströmen), `fxp_flame_line` (Flammen entlang eines Strahls), `fxp_decal` (Brand- und Frostmal).
 - **Nachbearbeitung** (`scripts/render_fx`): `fx_shock` (Druckwelle), `fx_heat_line` / `fx_heat_disc` (Hitzeflimmern), `fx_scene_tint` (Farbumschlag), `fx_aberration` (Farbversatz). Alle rein visuell, skaliert über „Effektqualität“ und „Lichtblitze“.
-- **Angriffsdekor** (`scripts/fx_attacks`) liegt auf der Weltebene unter der Gefahrenfläche; die Gefahrenfläche selbst (Warnung, Strahl mit Rändern) bleibt unverändert.
+- **Angriffsdekor** (`scripts/fx_attacks`) liegt auf der Weltebene; Funken in deckenden Gefahrenflächen liegen auf der Ebene `FXP_TOP` über der Füllung und unter jeder Warnung. ~~Die Gefahrenfläche selbst (Warnung, Strahl mit Rändern) bleibt unverändert.~~ Gefahrenflächen dürfen seit der Ergänzung vom 26.11. abends neu gestaltet werden (Feuerstrahl: `vfx_beam_fire_hd`); seit 27.11. gilt dafür [[Kampf & Begegnungen]] 5.0.
 
 ### Dynamisches Licht für mächtige Angriffe (Phase 2A, seit 26.11.)
 - **Seit 26.11. abends (Grafik-Overhaul) verstärkbares Weltlicht** ([[Visuelles Leitbild & Animation]] 7): Die Umgebung ist dunkler, und jede Flamme, jeder Zauber und jedes Projektil beleuchtet Boden und Figuren farbig. Besondere Angriffe heben sich zusätzlich durch Blitz, Farbumschlag, Glühen und Druckwelle ab. *Ersetzt: „Die normale Beleuchtung bleibt zurückhaltend“.*

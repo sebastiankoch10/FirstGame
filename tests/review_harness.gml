@@ -4,8 +4,9 @@
 //            Esc, then give verdicts through real scripted clicks, typing and Enter: entry one "Gut" with a comment,
 //            entry two "Nicht gut" (komplett weg) with a comment -> TEST verdicts only.
 //   phase b: same exe restarted -> verdicts, decision and comments persisted, entries listed under their tabs.
-//   phase c: rebuilt after review.py sync/bump on a registry copy -> processed entry archived, bumped entry open again,
-//            archived scenario still starts the productive boss attack.
+//   phase c: rebuilt after review.py sync/bump/withdraw on a registry copy -> processed entry archived, bumped entry (with
+//            the request of the user) open again, withdrawn entry (agent decision) only in the archive and still starts
+//            the productive boss attack.
 global.rv_press = []; global.rv_click = false; global.rv_gx = -100; global.rv_gy = -100;
 function gp_key_down(_key) {return false;}
 function gp_key_pressed(_key) {return array_contains(global.rv_press, _key);}
@@ -64,9 +65,12 @@ function rv_menu_tick() {
                 rv_check(menu_mode == "review", "Review-Center screen opens");
                 if (global.rv_target == "test.e2e.one") {
                     rv_check(rv_row_of("test.e2e.one") >= 0 && rv_row_of("test.e2e.two") >= 0, "test entries listed as open");
-                    var reg = review_entries(), open_id = undefined; // first real open entry: real approvals move entries out of this tab
-                    for (var i = 0; i < array_length(reg); i++) if (string_copy(reg[i].id, 1, 5) != "test." && review_state(reg[i]) == "open") {open_id = reg[i].id; break;}
-                    rv_check(!is_undefined(open_id) && rv_row_of(open_id) >= 0, "registry entries are listed dynamically");
+                    // a real registry entry is listed under the tab of its state (since 27.11. most real entries are withdrawn -> Archiv)
+                    var reg = review_entries(), real_id = undefined, real_tab = -1;
+                    for (var i = 0; i < array_length(reg) && is_undefined(real_id); i++) if (string_copy(reg[i].id, 1, 5) != "test.")
+                        for (var f = 0; f < 4; f++) if (review_filter_match(f, review_state(reg[i]))) {real_id = reg[i].id; real_tab = f; break;}
+                    global.review_ui.filter = max(0, real_tab); var listed = !is_undefined(real_id) && rv_row_of(real_id) >= 0; global.review_ui.filter = 0;
+                    rv_check(listed, "registry entries are listed dynamically");
                 } else rv_check(rv_row_of("test.e2e.one") < 0, "approved entry left the open list at once");
                 if (global.rv_frame == 10) global.rv_shot = "a1-review-center";
                 if (global.rv_frame < 14) return;
@@ -106,12 +110,17 @@ function rv_menu_tick() {
                 rv_check(is_struct(e1) && e1.status == "processed" && review_state(e1) == "processed", "synced approval -> processed");
                 rv_check(is_struct(e2) && e2.revision == 2 && review_state(e2) == "open", "bumped revision is open again");
                 rv_check(review_local_rejected("test.e2e.two", 1) && !is_struct(review_local_verdict("test.e2e.two", 2)), "old verdict not transferred to the new revision");
+                var e3 = review_find("test.e2e.three");
+                rv_check(is_struct(e3) && e3.status == "withdrawn" && e3.revision == 2 && review_state(e3) == "withdrawn", "withdrawn entry has the state withdrawn");
+                rv_check(!is_struct(review_local_verdict("test.e2e.three", 2)), "withdrawing wrote no verdict");
                 menu_mode = "main"; var labels = menu_labels("main");
                 for (var i = 0; i < array_length(labels); i++) if (string_pos("Review-Center", labels[i]) == 1) menu_activate(i);
                 rv_check(rv_row_of("test.e2e.one") < 0 && rv_row_of("test.e2e.two") >= 0, "open list: processed entry gone, new revision present");
-                global.rv_shot = "c1-review-center"; rv_next(1); return;
+                rv_check(rv_row_of("test.e2e.three") < 0, "open list: withdrawn entry gone");
+                global.review_ui.filter = 3; rv_check(rv_row_of("test.e2e.three") >= 0 && rv_row_of("test.e2e.one") >= 0, "archive lists the withdrawn and the processed entry");
+                global.rv_shot = "c1-archive"; rv_next(1); return;
             }
-            if (global.rv_step == 1 && global.rv_frame > 6) {review_start("test.e2e.one"); rv_next(2); return;} // archived scenario stays startable
+            if (global.rv_step == 1 && global.rv_frame > 6) {review_start("test.e2e.three"); rv_next(2); return;} // withdrawn scenario stays startable from the archive
             if (global.rv_step == 2 && global.rv_frame > 400) {rv_check(false, "archived scenario did not start"); global.rv_done = true;}
             return;
     }

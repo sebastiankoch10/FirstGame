@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "about": "Development Review Center - einzige Quelle fuer Review-Szenarien. Pflege: tests/tools/review/review.py (build, sync, bump, status). Regeln: AGENTS.md Abschnitt Review-Workflow, docs/Systeme/Review-Center.md. Persoenliche Freigaben setzt ausschliesslich der Nutzer im Spiel.",
+  "about": "Development Review Center - einzige Quelle fuer Review-Szenarien. Pflege: tests/tools/review/review.py (build, sync, bump, withdraw, status). Regeln: AGENTS.md Abschnitt Review-Workflow, docs/Systeme/Review-Center.md. Seit 27.11. neue Eintraege nur auf ausdruecklichen Wunsch des Nutzers (Feld requested); Status withdrawn = zurueckgezogen, vom Agenten nach Design-Kanon entschieden, keine Freigabe. Persoenliche Freigaben setzt ausschliesslich der Nutzer im Spiel.",
   "entries": [
     {
       "id": "boss.dragon.beam",
@@ -10,7 +10,7 @@
       "goal": "Ausholbewegung: Kopf und Hals ziehen sich beim Aufladen zurueck und stossen vor dem Zuenden vor. Glut stroemt zum Maul, lebendiger Feuerstrom ohne Spritewiederholung, klar erkennbare Seitengrenzen, Strom und Treffer schwenken gemeinsam, Reichweite ueber den Bildrand. Die Attacke wiederholt sich; Esc -> Attacke erneut ausloesen.",
       "task": "Phase 2A",
       "revision": 3,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -58,7 +58,13 @@
           "result": "processed",
           "superseded_by": 3
         }
-      ]
+      ],
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "boss.twins.ring",
@@ -68,7 +74,7 @@
       "goal": "Lesbarkeit der Ringzonen, sichere Luecken, Countdown, Treffer. Die Attacke wiederholt sich automatisch.",
       "task": "Phase 1 Review-Center (Systemvalidierung)",
       "revision": 2,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -88,7 +94,13 @@
           "until": "2026-11-26T07:37:49",
           "reason": "Phase 2A: neue Warnsprache und zusammenhaengende Ringflaeche"
         }
-      ]
+      ],
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "char.motion.sword",
@@ -98,7 +110,7 @@
       "goal": "Bewegungsgefuehl, Richtungswechsel, Sprung: Haare und Umhang schwingen beim Absprung zurueck, haengen beim Steigen nach, heben sich beim Fallen, Landung mit Stauchung. Ausweichrolle (Strg), Schwertkette. Ausruestung angelegt (Ruestung ist unsichtbar, nur die Waffe ist zu sehen), Alternativen im Rucksack ([T]).",
       "task": "Phase 1 Review-Center",
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -122,6 +134,12 @@
           }
         ],
         "invulnerable": true
+      },
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
       }
     },
     {
@@ -142,9 +160,15 @@
         "gear": 2
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "tg.rect",
@@ -164,9 +188,15 @@
         "gear": 2
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "tg.overlap",
@@ -190,9 +220,15 @@
         }
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "vfx.dragon.arc",
@@ -212,9 +248,15 @@
         "gear": 2
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "vfx.witch.area",
@@ -234,9 +276,15 @@
         "gear": 2
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "light.lightning",
@@ -260,9 +308,15 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "player.target_marks",
@@ -281,9 +335,15 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "boss.twins.checker",
@@ -304,7 +364,7 @@
         "boss_hp": 0.7
       },
       "revision": 2,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "approvals": [
@@ -336,7 +396,13 @@
             "at": "2026-11-26T17:12:59"
           }
         }
-      ]
+      ],
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "boss.dragon.stomp_checker",
@@ -357,9 +423,15 @@
         "boss_hp": 0.7
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "boss.dragon.fire_rings",
@@ -380,9 +452,15 @@
         "boss_hp": 0.7
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "boss.pressure.dragon",
@@ -402,9 +480,15 @@
         "gear": 2
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "boss.pressure.behemoth",
@@ -424,9 +508,15 @@
         "gear": 2
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "boss.combo.twins",
@@ -451,9 +541,15 @@
         }
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "class.ranger.arrows",
@@ -471,9 +567,15 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "spell.seal.l1",
@@ -497,9 +599,15 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "spell.seal.l5",
@@ -523,9 +631,15 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "spell.seal.l9",
@@ -549,9 +663,15 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "ui.inventory",
@@ -599,9 +719,15 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "char.equipment.mage",
@@ -735,9 +861,15 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "enemy.motion.ashfrost",
@@ -755,9 +887,15 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "spell.spikes.phases",
@@ -785,9 +923,15 @@
         }
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "spell.starfall.phases",
@@ -815,9 +959,15 @@
         }
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "spell.seed.phases",
@@ -845,9 +995,15 @@
         }
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "enemy.motion.forest",
@@ -865,9 +1021,15 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "ui.font.magnet",
@@ -886,9 +1048,15 @@
         "magnet_orb": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "char.armor.hidden",
@@ -898,7 +1066,7 @@
       "goal": "Druecke T und wechsle Helm, Brust, Haende und Fuesse: die Figur bleibt gleich, kein Helm, keine Reste. Wechsle die Waffe: sie aendert sich sofort an der Figur. Laufe in alle Richtungen, springe und greife an.",
       "task": "Nutzerentscheidung 26.11. abends",
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -930,6 +1098,12 @@
           }
         ],
         "invulnerable": true
+      },
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
       }
     },
     {
@@ -949,9 +1123,15 @@
         "invulnerable": true
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "combat.hitstop",
@@ -973,9 +1153,15 @@
         }
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "boss.dragon.seq_p1",
@@ -997,9 +1183,15 @@
         "sequence": 0
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "boss.dragon.seq_p3",
@@ -1021,9 +1213,15 @@
         "sequence": 0
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "boss.twins.motion",
@@ -1043,9 +1241,15 @@
         "gear": 2
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "boss.behemoth.motion",
@@ -1065,9 +1269,15 @@
         "gear": 2
       },
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
-      "approved_at": null
+      "approved_at": null,
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
+      }
     },
     {
       "id": "vfx.overhaul.dragon_breath",
@@ -1077,7 +1287,7 @@
       "goal": "Massstab Octopath Traveler: Wirkt der Feueratem wie echtes Feuer im Raum? Leuchten Boden, Baeume und Figur im Feuerlicht? Ist die Trefferbreite (Rand) mindestens so klar wie vorher?",
       "task": "Grafik-Overhaul 26.11. (Schaustueck)",
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -1090,6 +1300,12 @@
         "build": "balanced",
         "gear": 2,
         "arena": 0
+      },
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
       }
     },
     {
@@ -1100,7 +1316,7 @@
       "goal": "Ist der Einschlag wuchtig und lebendig (viele Pixel, Aufblitzen, Druckwelle), ohne die Figur zu verdecken?",
       "task": "Grafik-Overhaul 26.11. (Schaustueck)",
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -1123,6 +1339,12 @@
         },
         "invulnerable": true,
         "gear": 2
+      },
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
       }
     },
     {
@@ -1133,7 +1355,7 @@
       "goal": "Knistert der Blitz sichtbar, leuchtet er die Umgebung aus, und bleibt er trotzdem kurz und lesbar?",
       "task": "Grafik-Overhaul 26.11. (Schaustueck)",
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -1156,6 +1378,12 @@
         },
         "invulnerable": true,
         "gear": 2
+      },
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
       }
     },
     {
@@ -1166,7 +1394,7 @@
       "goal": "Splittert das Eis wie Glas (Referenz Dagger Dance), ohne zu ueberladen?",
       "task": "Grafik-Overhaul 26.11. (Schaustueck)",
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -1189,6 +1417,12 @@
         },
         "invulnerable": true,
         "gear": 2
+      },
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
       }
     },
     {
@@ -1199,7 +1433,7 @@
       "goal": "Laufe zu Fackeln und Gegnern, springe (Leertaste) und rolle (Strg): Wirkt die Figur wie im Licht stehend (Massstab Octopath)? Bleibt sie gut lesbar?",
       "task": "Grafik-Overhaul 26.11. (Schaustueck)",
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -1214,6 +1448,12 @@
           "count": 10,
           "radius": 260
         }
+      },
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
       }
     },
     {
@@ -1224,7 +1464,7 @@
       "goal": "Laufe herum: Wirkt der Wald tief und atmosphaerisch (Massstab Octopath)? Ist nichts zu dunkel oder zu unscharf?",
       "task": "Grafik-Overhaul 26.11. (Schaustueck)",
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -1234,6 +1474,12 @@
         "arena": 0,
         "gear": 1,
         "invulnerable": true
+      },
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
       }
     },
     {
@@ -1244,7 +1490,7 @@
       "goal": "Laufe herum: Passt die Stimmung zum Sumpf? Ist nichts zu dunkel?",
       "task": "Grafik-Overhaul 26.11. (Schaustueck)",
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -1254,6 +1500,12 @@
         "arena": 1,
         "gear": 1,
         "invulnerable": true
+      },
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
       }
     },
     {
@@ -1264,7 +1516,7 @@
       "goal": "Laufe herum: Wirken die Ruinen kalt und verbrannt zugleich? Ist nichts zu dunkel?",
       "task": "Grafik-Overhaul 26.11. (Schaustueck)",
       "revision": 1,
-      "status": "pending",
+      "status": "withdrawn",
       "created": "2026-11-26",
       "approved_at": null,
       "scenario": {
@@ -1274,6 +1526,12 @@
         "arena": 2,
         "gear": 1,
         "invulnerable": true
+      },
+      "withdrawn": {
+        "at": "2026-11-27T06:42:00",
+        "by": "agent",
+        "reason": "Nutzerauftrag 27.11.: offene Liste geleert; Inhalte beurteilt der Agent nach dem Design-Kanon (technische QA und visual-qa wie bisher)",
+        "meaning": "zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)"
       }
     }
   ]

@@ -1,6 +1,6 @@
 ---
 tags: [bugs, ideen, backlog]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # Bugs & Ideen
 
@@ -25,6 +25,7 @@ Nur Notizen, **nichts davon wurde behoben**. Gefunden beim Lesen von Code und Do
   - Bildzeit im Mittel vorher 17,2–17,5 ms, nachher 18,4–18,6 ms (etwa 57 → 54 FPS). Horde ohne Münzen und Bosskämpfe sind gleich (16,7–17,3 ms).
   - Mit Profil-Hüllen ist kein Unterschied messbar (17,9 gegen 17,5 ms). Ursache offen, Verdacht: Treiberkosten der Nachbearbeitung bei vielen kleinen Zeichenaufrufen.
   - Nächster Schritt: GPU-Zeit messen oder die Nachbearbeitung probeweise abschalten (`global.fx.off`). → [[Rendering & Pixelraster]]
+- **Diktieren im Urteilsdialog ungetestet** (seit 26.11. abends): Die Windows-Spracheingabe (Win+H) sollte direkt ins Kommentarfeld schreiben (`keyboard_string`); automatisch nicht prüfbar, bisher nicht ausprobiert. → [[Review-Center]]
 - **Grafik-Overhaul, Restpunkte der visual-qa-Zweitmeinung (26.11.):**
   - Rauch über einem waagerechten Feuerstrahl könnte die Fläche nach oben verlassen; nicht geprüft, weil die Aufnahme nur senkrechte und schräge Strahlen zeigt.
   - Die 1-px-Ränder der Gefahrenflächen sind feiner als die Weltgrafik; das war schon vorher so.

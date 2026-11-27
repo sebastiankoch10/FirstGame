@@ -1,11 +1,16 @@
 ---
 tags: [system, review, qa, entwicklung]
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 # Review-Center (Development Review Center)
 
 ## Zweck
 Dynamische To-do-Liste im Hauptmenü („Review-Center (N offen)“). Jeder Eintrag startet ein spielbares Szenario mit den echten Spielsystemen.
+
+**Seit 27.11. (Nutzerauftrag):** Die offene Liste enthält nur, was der Nutzer ausdrücklich prüfen will.
+- Neue Einträge legen Agenten nur auf ausdrücklichen Wunsch an (Feld `requested` mit Datum und Wortlaut; `review.py check` lehnt neue Einträge ohne dieses Feld ab).
+- Sonst beurteilt der Agent Inhalte selbst nach dem Design-Kanon; technische QA und visual-qa wie bisher.
+- Alle 43 bis dahin offenen Einträge stehen im Status `withdrawn` („zurückgezogen, vom Agenten nach Design-Kanon entschieden“) im Reiter „Archiv“ und bleiben startbar. Das ist keine Freigabe.
 
 **Urteil seit 26.11. abends:** Im Escape-Menü stehen zwei Zeilen:
 - „Gut – freigeben“ (grüner Haken): Kommentarfeld für Wünsche, z. B. „genau so, nur etwas schneller“.
@@ -22,7 +27,7 @@ Agenten lesen Urteile und Kommentare beim nächsten Auftrag automatisch ein. Ver
 ## Datenfluss und Speicherorte
 | Was | Wo | Wer schreibt |
 |---|---|---|
-| Szenarien (einzige Quelle) | `review/registry.json` im Projekt | Agenten, nur über `tests/tools/review/review.py` (`build`, `bump`, `sync`) |
+| Szenarien (einzige Quelle) | `review/registry.json` im Projekt | Agenten, nur über `tests/tools/review/review.py` (`build`, `bump`, `withdraw`, `sync`) |
 | Spieldaten | `scripts/review_registry_data` (generiert, nicht von Hand ändern) | `review.py build` |
 | Persönliche Urteile | `%LOCALAPPDATA%\FirstGame\review_approvals.json` plus Protokoll `review_approvals.log` (nur anhängen). Je Datensatz `verdict` (good/bad), `decision` (keep/remove/change), `comment`, `at` | ausschließlich das Spiel, beim Speichern des Nutzers |
 | Testfreigaben | Speicherordner der Testkopie, z. B. `%LOCALAPPDATA%\FirstGameReviewE2E\` (Feld `test: true`) | nur technische Tests |
@@ -39,9 +44,13 @@ Agenten lesen Urteile und Kommentare beim nächsten Auftrag automatisch ein. Ver
   - `processed`: verarbeitet, archiviert, bleibt für Regressionstests startbar.
   - `superseded`: durch eine neue Revision ersetzt.
   - `rejected` (seit 26.11.): „Nicht gut“, mit `feedback` (Entscheidung, Kommentar). Der Agent entfernt den Inhalt oder setzt ihn um und erhöht dann die Revision (`bump`); Urteil und Kommentar wandern dabei in `revisions`.
-  - Reiter im Spiel: „Offen“, „Freigegeben“ (auch eigene, noch nicht synchronisierte), „Nicht gut“, „Archiv“.
+  - `withdrawn` (seit 27.11.): aus der offenen Liste genommen, vom Agenten nach Design-Kanon entschieden, mit Datensatz `withdrawn` (`at`, `by: agent`, `reason`). Keine Freigabe, nichts gelöscht, Szenario im Archiv startbar (Liste: Präfix `[-]`; lange Titel werden in der Liste gekürzt, voller Titel im Detailfeld). Ein Urteil, das der Nutzer dort trotzdem abgibt, überträgt `sync` wie jedes andere.
+  - Reiter im Spiel: „Offen“, „Freigegeben“ (auch eigene, noch nicht synchronisierte), „Nicht gut“, „Archiv“ (verarbeitet, ersetzt, zurückgezogen).
   - Verlauf und Kommentare gehen nicht in die generierten Spieldaten (`game_entry` in `review.py`), weil freier Text Apostrophe enthalten kann.
-- **Revisionen:** Eine Freigabe gilt nur für die freigegebene Revision. `review.py bump ID --reason …` erhöht die Revision bei wesentlichen Änderungen. Der Eintrag ist danach wieder offen; alte Freigaben werden nicht übertragen.
+- **Revisionen:** Eine Freigabe gilt nur für die freigegebene Revision. `review.py bump ID --reason …` erhöht die Revision bei wesentlichen Änderungen; alte Freigaben werden nie übertragen.
+  - Ohne `--request` bekommt die neue Revision den Status `withdrawn` (Agent entscheidet nach Kanon).
+  - Mit `--request "Datum: Wortlaut"` (der Nutzer will sie sehen) ist sie wieder offen.
+- **Zurückziehen:** `review.py withdraw ID --reason …` oder `withdraw --all-open --reason …` nimmt offene Einträge aus der Liste.
 
 ## Wichtige Dateien
 - `scripts/review_center`:
@@ -52,8 +61,8 @@ Agenten lesen Urteile und Kommentare beim nächsten Auftrag automatisch ein. Ver
   - Urteilsdialog: `review_feedback_open`, `review_feedback_step` (aufgerufen aus `round_menu_step`), `review_feedback_draw`, `review_ascii`. Esc-Sperre im `ObjectController`-Step.
   - Listenbildschirm: `review_center_step`, `review_center_draw`.
   - Abschalten für öffentliche Builds: `#macro REVIEW_CENTER_ENABLED`.
-- `tests/tools/review/review.py`: `status`, `sync`, `build`, `bump`, `check`.
-- `tests/tools/review/review_e2e.py` und `tests/review_harness.gml`: End-to-End-Test mit Testurteilen (Dialog abbrechen, „Gut“ mit Kommentar und Umlaut, „Nicht gut / komplett weg“ mit Kommentar, Neustart, Sync, Bump).
+- `tests/tools/review/review.py`: `status`, `sync`, `build`, `bump` (`--request`), `withdraw` (`--all-open`), `check` (Pflichtfeld `requested` ab 27.11.).
+- `tests/tools/review/review_e2e.py` und `tests/review_harness.gml`: End-to-End-Test mit Testurteilen (Dialog abbrechen, „Gut“ mit Kommentar und Umlaut, „Nicht gut / komplett weg“ mit Kommentar, Neustart, Sync, Bump mit Prüfwunsch, Zurückziehen und Bump ohne Prüfwunsch, Start aus dem Archiv, `check` ohne `requested`).
 - Claude: Der SessionStart-Hook führt `review.py sync --brief` aus (`.claude/settings.json`). Codex führt den Befehl laut AGENTS.md selbst aus.
 
 ## Szenario-Konfiguration (`scenario`)

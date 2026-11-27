@@ -8,11 +8,18 @@ review_approvals.log. This tool imports those approvals into the registry.
   python tests/tools/review/review.py status            open / approved / processed entries and unread approvals
   python tests/tools/review/review.py sync              import approvals (idempotent), mark them processed, regenerate
   python tests/tools/review/review.py build             validate the registry and regenerate the GML data script
-  python tests/tools/review/review.py bump ID --reason "..."   new revision after a substantial change (re-review)
+  python tests/tools/review/review.py bump ID --reason "..." [--request "..."]   new revision after a substantial change
+  python tests/tools/review/review.py withdraw ID|--all-open --reason "..."       take entries off the open list
   python tests/tools/review/review.py check             validation only (exit 1 on errors)
 
 Options: --registry PATH, --save-dir PATH, --out PATH (GML), --include-test (only for technical tests on a registry copy).
 Personal approvals come exclusively from the user's click in the game. Agents never write approvals.
+
+Since 27.11. (AGENTS.md, Review-Workflow) the open list holds only what the user explicitly asked to review:
+- New entries created on or after REQUEST_SINCE need the field "requested" (date and wording of the user's request).
+- bump without --request gives the new revision the status "withdrawn" (decided by the agent after the design canon,
+  not a personal approval, still startable from the archive); with --request it is open again for the user.
+- withdraw takes open entries off the list with the status "withdrawn". Nothing is deleted, nothing counts as "Gut".
 """
 from __future__ import annotations
 
@@ -28,7 +35,9 @@ ROOT = Path(__file__).resolve().parents[3]
 REGISTRY = ROOT / 'review' / 'registry.json'
 OUT = ROOT / 'scripts' / 'review_registry_data' / 'review_registry_data.gml'
 SAVE_DIR = Path(os.environ.get('LOCALAPPDATA', '')) / 'FirstGame'
-STATUSES = ('pending', 'approved', 'processed', 'superseded', 'rejected')
+STATUSES = ('pending', 'approved', 'processed', 'superseded', 'rejected', 'withdrawn')
+REQUEST_SINCE = '2026-11-27'  # entries created from this day on exist only on the user's explicit request
+WITHDRAWN_TEXT = 'zurueckgezogen, vom Agenten nach Design-Kanon entschieden (keine persoenliche Freigabe)'
 DECISION_TEXT = {'keep': 'so behalten', 'remove': 'KOMPLETT WEG', 'change': 'ANDERS UMSETZEN'}
 TYPES = ('boss', 'scene', 'showroom')
 REQUIRED = ('id', 'title', 'category', 'content', 'goal', 'task', 'revision', 'status', 'created', 'scenario')
@@ -71,6 +80,10 @@ def validate(reg: dict) -> list[str]:
             errors.append(f'{where}: boss scenario needs "boss"')
         if not isinstance(e.get('revision'), int) or e['revision'] < 1:
             errors.append(f'{where}: revision must be an integer >= 1')
+        if str(e.get('created', '')) >= REQUEST_SINCE and not str(e.get('requested') or '').strip():
+            errors.append(f'{where}: new entries (created >= {REQUEST_SINCE}) only on the explicit request of the user: field "requested" missing')
+        if e.get('status') == 'withdrawn' and not isinstance(e.get('withdrawn'), dict):
+            errors.append(f'{where}: status withdrawn needs the record "withdrawn" (at, by, reason)')
         if "'" in json.dumps(game_entry(e), ensure_ascii=False):
             errors.append(f"{where}: no apostrophes (') allowed outside the history; the GML data uses a verbatim '...' string")
     return errors
@@ -150,7 +163,8 @@ def sync(reg: dict, save_dir: Path, include_test: bool) -> tuple[list[str], list
         at = a.get('at') or a.get('approved_at')
         rec = {'uid': a['uid'], 'revision': a.get('revision'), 'approved_at': at, 'source': a.get('source'),
                'test': bool(a.get('test')), 'imported_at': now(), 'verdict': verdict, 'decision': decision, 'comment': comment}
-        if a.get('revision') == e['revision'] and e['status'] in ('pending', 'approved', 'processed', 'rejected'):
+        # a withdrawn entry stays startable from the archive; a verdict the user gives there is valid like any other
+        if a.get('revision') == e['revision'] and e['status'] in ('pending', 'approved', 'processed', 'rejected', 'withdrawn'):
             say = f' | Kommentar: "{comment}"' if comment else ''
             if verdict == 'bad':
                 e['status'] = 'rejected'
@@ -178,7 +192,23 @@ def sync(reg: dict, save_dir: Path, include_test: bool) -> tuple[list[str], list
     return processed, rejected, notes
 
 
-def bump(reg: dict, rid: str, reason: str) -> str:
+def withdraw_entry(e: dict, reason: str) -> None:
+    e['status'] = 'withdrawn'
+    e['withdrawn'] = {'at': now(), 'by': 'agent', 'reason': reason, 'meaning': WITHDRAWN_TEXT}
+
+
+def withdraw(reg: dict, rid: str | None, all_open: bool, reason: str) -> list[str]:
+    """Take open entries off the open list. Not a deletion and not a verdict: the scenario stays startable in the archive,
+    the history stays, and a later verdict of the user is still imported by sync."""
+    targets = [e for e in reg['entries'] if e['status'] == 'pending' and (all_open or e['id'] == rid)]
+    if rid and not all_open and not targets:
+        raise SystemExit(f'{rid}: kein offener Eintrag mit dieser ID')
+    for e in targets:
+        withdraw_entry(e, reason)
+    return [f"{e['id']} Rev. {e['revision']}: {e['title']}" for e in targets]
+
+
+def bump(reg: dict, rid: str, reason: str, request: str = '') -> str:
     e = next((x for x in reg['entries'] if x['id'] == rid), None)
     if e is None:
         raise SystemExit(f'Unbekannte ID {rid}')
@@ -190,11 +220,18 @@ def bump(reg: dict, rid: str, reason: str) -> str:
         e['revisions'][-1]['feedback'] = e.pop('feedback')  # the user's verdict and comment belong to the old revision
     if e['status'] in ('approved', 'processed'):
         e['revisions'][-1]['status'] = 'superseded'
+    if request:
+        e['revisions'][-1]['request'] = request
     e['revision'] += 1
-    e['status'] = 'pending'
     e['approved_at'] = None
     e.pop('processed_at', None)
-    return f"{rid}: jetzt Rev. {e['revision']} (offen). Grund: {reason}"
+    e.pop('withdrawn', None)
+    if request:  # the user asked to see it: open again
+        e['status'] = 'pending'
+        e['requested'] = request
+        return f"{rid}: jetzt Rev. {e['revision']} (offen, Pruefwunsch des Nutzers: {request}). Grund: {reason}"
+    withdraw_entry(e, 'Neue Revision ohne Pruefwunsch des Nutzers: ' + reason)
+    return f"{rid}: jetzt Rev. {e['revision']} ({WITHDRAWN_TEXT}; alte Freigabe gilt nicht weiter). Grund: {reason}"
 
 
 def status(reg: dict, save_dir: Path) -> None:
@@ -203,7 +240,8 @@ def status(reg: dict, save_dir: Path) -> None:
     unread = [a for a in approvals if a.get('uid') not in seen and not a.get('test')]
     groups = {s: [e for e in reg['entries'] if e['status'] == s] for s in STATUSES}
     print(f"Review-Registry: {len(reg['entries'])} Eintraege | offen {len(groups['pending'])} | freigegeben {len(groups['approved'])} | "
-          f"verarbeitet {len(groups['processed'])} | nicht gut {len(groups['rejected'])} | ersetzt {len(groups['superseded'])}")
+          f"verarbeitet {len(groups['processed'])} | nicht gut {len(groups['rejected'])} | ersetzt {len(groups['superseded'])} | "
+          f"zurueckgezogen {len(groups['withdrawn'])} (Archiv, vom Agenten nach Design-Kanon entschieden)")
     print(f"Speicherort der Urteile: {save_dir} | neue, noch nicht synchronisierte Urteile: {len(unread)}")
     for a in unread:
         print(f"  NEU: {a.get('id')} Rev. {a.get('revision')} ({'nicht gut' if a.get('verdict') == 'bad' else 'gut'}) am {a.get('at') or a.get('approved_at')}  -> python tests/tools/review/review.py sync")
@@ -221,9 +259,11 @@ def status(reg: dict, save_dir: Path) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('cmd', choices=['status', 'sync', 'build', 'bump', 'check'])
+    ap.add_argument('cmd', choices=['status', 'sync', 'build', 'bump', 'withdraw', 'check'])
     ap.add_argument('id', nargs='?')
     ap.add_argument('--reason', default='')
+    ap.add_argument('--request', default='', help='bump: the user explicitly asked to review the new revision (date and wording)')
+    ap.add_argument('--all-open', action='store_true', help='withdraw: every open entry')
     ap.add_argument('--registry', type=Path, default=REGISTRY)
     ap.add_argument('--save-dir', type=Path, default=SAVE_DIR)
     ap.add_argument('--out', type=Path, default=OUT)
@@ -247,10 +287,20 @@ def main() -> None:
     if args.cmd == 'bump':
         if not args.id or not args.reason:
             raise SystemExit('bump braucht ID und --reason')
-        msg = bump(reg, args.id, args.reason)
+        msg = bump(reg, args.id, args.reason, args.request.strip())
         save_atomic(args.registry, json.dumps(reg, indent=2, ensure_ascii=False) + '\n')
         build(reg, args.out)
         print(msg)
+        return
+    if args.cmd == 'withdraw':
+        if not (args.id or args.all_open) or not args.reason:
+            raise SystemExit('withdraw braucht ID oder --all-open und --reason')
+        done = withdraw(reg, args.id, args.all_open, args.reason)
+        if done:
+            save_atomic(args.registry, json.dumps(reg, indent=2, ensure_ascii=False) + '\n')
+            build(reg, args.out)
+        print(f'Zurueckgezogen ({WITHDRAWN_TEXT}): {len(done)}')
+        print('\n'.join('  ' + d for d in done))
         return
     before = json.dumps(reg, sort_keys=True)
     processed, rejected, notes = sync(reg, args.save_dir, args.include_test)
@@ -273,7 +323,8 @@ def main() -> None:
     else:
         open_n = sum(1 for e in reg['entries'] if e['status'] == 'pending')
         print(f"Review-Center: {open_n} offen, {sum(1 for e in reg['entries'] if e['status'] == 'processed')} freigegeben und verarbeitet, "
-              f"{sum(1 for e in reg['entries'] if e['status'] == 'rejected')} nicht gut"
+              f"{sum(1 for e in reg['entries'] if e['status'] == 'rejected')} nicht gut, "
+              f"{sum(1 for e in reg['entries'] if e['status'] == 'withdrawn')} zurueckgezogen (keine Freigabe)"
               f"{' | NEU verarbeitet: ' + str(len(processed)) if processed else ''}{' | NEU nicht gut: ' + str(len(rejected)) if rejected else ''}"
               f" (Details und Kommentare: python tests/tools/review/review.py status)")
 
